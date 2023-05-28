@@ -2,19 +2,20 @@ import Logo from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 import { screen } from '@testing-library/react'
 import 'jest-styled-components'
+import theme from 'styles/theme'
 
 describe('<Logo />', () => {
   it('renderizar logo branca por padrão', () => {
     renderWithTheme(<Logo />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyle({
-      color: '#fafafa'
+      color: theme.colors.white
     })
   })
 
   it('renderizar logo preta quando a cor for passada', () => {
     renderWithTheme(<Logo color='black' />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyle({
-      color: '#030517'
+      color: theme.colors.black
     })
   })
 
