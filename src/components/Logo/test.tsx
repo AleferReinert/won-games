@@ -5,35 +5,35 @@ import 'jest-styled-components'
 import theme from 'styles/theme'
 
 describe('<Logo />', () => {
-  it('renderizar logo branca por padrão', () => {
+  it('Logo branca como padrão', () => {
     renderWithTheme(<Logo />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyle({
       color: theme.colors.white
     })
   })
 
-  it('renderizar logo preta quando a cor for passada', () => {
+  it('Logo preta', () => {
     renderWithTheme(<Logo color='black' />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyle({
       color: theme.colors.black
     })
   })
 
-  it('renderizar logo em tamanho normal', () => {
+  it('Logo com tamanho normal', () => {
     renderWithTheme(<Logo />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyle({
       width: '11rem'
     })
   })
 
-  it('renderizar logo em tamanho maior', () => {
+  it('Logo com tamanho maior', () => {
     renderWithTheme(<Logo size='large' />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyle({
       width: '20rem'
     })
   })
 
-  it('renderizar logo sem texto no mobile', () => {
+  it('Logo sem texto no mobile', () => {
     renderWithTheme(<Logo hideOnMobile />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyleRule(
       'width',
