@@ -1,7 +1,6 @@
 import Logo from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 import { screen } from '@testing-library/react'
-import 'jest-styled-components'
 import theme from 'styles/theme'
 
 describe('<Logo />', () => {
