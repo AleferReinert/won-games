@@ -45,4 +45,17 @@ describe('<Button />', () => {
     expect(screen.getByText(/lorem ipsum/i)).toBeInTheDocument()
     expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
+
+  it('Botão renderizado como link', () => {
+    renderWithTheme(
+      <Button as='a' href='/link'>
+        lorem ipsum
+      </Button>
+    )
+
+    expect(screen.getByRole('link', { name: /lorem ipsum/i })).toHaveAttribute(
+      'href',
+      '/link'
+    )
+  })
 })
