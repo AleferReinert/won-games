@@ -6,7 +6,7 @@ type ButtonTypes =
   | ButtonHTMLAttributes<HTMLButtonElement>
 
 export type ButtonProps = {
-  size?: 'small' | 'medium' | 'large'
+  size?: 'xsmall' | 'small' | 'medium' | 'large'
   fullWidth?: boolean
   icon?: ReactNode
   as?: React.ElementType
