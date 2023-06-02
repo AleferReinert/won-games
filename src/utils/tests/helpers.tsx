@@ -1,8 +1,6 @@
 import { ThemeProvider } from 'styled-components'
 import { RenderResult, render } from '@testing-library/react'
 import theme from 'styles/theme'
-import { ReactNode } from 'react'
 
-export const renderWithTheme = (children: ReactNode): RenderResult => {
+export const renderWithTheme = (children: React.ReactNode): RenderResult =>
   render(<ThemeProvider theme={theme}>{children}</ThemeProvider>)
-}
