@@ -31,6 +31,11 @@ const GlobalStyles = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
     }
 
+    button {
+        cursor: pointer;
+        border: 0;
+    }
+
     ${({ theme }) => css`
       html {
         font-size: 62.5%;
