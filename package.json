@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "@next/font": "13.1.6",
+    "@next/font": "13.4.4",
     "@styled-icons/material-outlined": "^10.47.0",
     "@styled-icons/remix-fill": "^10.46.0",
     "@types/react-slick": "^0.23.10",
