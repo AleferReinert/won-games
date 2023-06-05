@@ -18,21 +18,21 @@ const settings: SliderSettings = {
   centerPadding: '100px',
   responsive: [
     {
-      breakpoint: 1375,
+      breakpoint: 1170,
       settings: {
         arrows: false,
         slidesToShow: 3.2
       }
     },
     {
-      breakpoint: 1024,
+      breakpoint: 960,
       settings: {
         arrows: false,
         slidesToShow: 2.2
       }
     },
     {
-      breakpoint: 570,
+      breakpoint: 600,
       settings: {
         arrows: false,
         slidesToShow: 1.2
