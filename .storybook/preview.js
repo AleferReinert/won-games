@@ -23,13 +23,25 @@ export const parameters = {
       ...MINIMAL_VIEWPORTS,
       ...customViewports
     }
+  },
+  backgrounds: {
+    values: [
+      {
+        name: 'Won Dark',
+        value: theme.colors.mainBg
+      },
+      {
+        name: 'Won Light',
+        value: theme.colors.white
+      }
+    ]
   }
 }
 
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
+      <GlobalStyles removeBg />
       <Story />
     </ThemeProvider>
   )

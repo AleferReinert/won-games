@@ -52,9 +52,6 @@ export default {
   args: { items },
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'dark'
-    },
     viewport: {
       defaultViewport: 'desktop'
     }

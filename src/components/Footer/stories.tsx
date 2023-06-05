@@ -3,7 +3,12 @@ import Footer from '.'
 
 export default {
   title: 'Footer',
-  component: Footer
+  component: Footer,
+  parameters: {
+    backgrounds: {
+      default: 'Won Light'
+    }
+  }
 } as ComponentMeta<typeof Footer>
 
 export const Default: ComponentStory<typeof Footer> = () => (

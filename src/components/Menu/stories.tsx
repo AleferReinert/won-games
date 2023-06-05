@@ -9,8 +9,5 @@ export default {
 export const Default: ComponentStory<typeof Menu> = (args) => <Menu {...args} />
 
 Default.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'dark'
-  }
+  layout: 'fullscreen'
 }
