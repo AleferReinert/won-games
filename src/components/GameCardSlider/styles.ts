@@ -10,11 +10,11 @@ export const Wrapper = styled.div<WrapperProps>`
         overflow: hidden;
     `}
 
-    .slick-track {
+    div.slick-track {
       display: flex;
     }
 
-    .slick-list {
+    div.slick-list {
       margin: 0 -${theme.spacings.xxsmall};
       display: flex;
     }

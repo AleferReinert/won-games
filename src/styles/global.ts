@@ -50,6 +50,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: ${theme.font.family};
         font-size: ${theme.font.sizes.medium};
         background-color: ${theme.colors.darkBg};
+        overflow-x: hidden;
       }
     `}    
 `
