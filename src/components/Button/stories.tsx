@@ -5,6 +5,11 @@ import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart
 export default {
   title: 'Button',
   component: Button,
+  parameters: {
+    backgrounds: {
+      default: 'Won Light'
+    }
+  },
   argTypes: {
     children: {
       type: 'string'
@@ -42,4 +47,14 @@ AsLink.args = {
   children: 'Buy now',
   as: 'a',
   href: '/link'
+}
+
+export const Minimal: ComponentStory<typeof Button> = (args) => (
+  <Button {...args} />
+)
+
+Minimal.args = {
+  minimal: true,
+  children: 'Buy now',
+  icon: <AddShoppingCart />
 }

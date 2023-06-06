@@ -58,4 +58,19 @@ describe('<Button />', () => {
       '/link'
     )
   })
+
+  it('Botão minimal (sem background)', () => {
+    renderWithTheme(
+      <Button icon={<AddShoppingCart data-testid='icon' />} minimal>
+        lorem ipsum
+      </Button>
+    )
+
+    expect(screen.getByRole('button', { name: /lorem ipsum/i })).toHaveStyle({
+      backgroundColor: 'transparent'
+    })
+    expect(screen.getByRole('button', { name: /lorem ipsum/i })).toHaveStyle({
+      color: theme.colors.primary
+    })
+  })
 })

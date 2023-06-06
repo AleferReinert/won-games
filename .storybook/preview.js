@@ -1,8 +1,8 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import GlobalStyles from 'styles/global'
 import { ThemeProvider } from 'styled-components'
-import theme from 'styles/theme'
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
+import theme from 'styles/theme'
 
 const customViewports = {
   desktop: {
@@ -28,11 +28,11 @@ export const parameters = {
     values: [
       {
         name: 'Won Dark',
-        value: theme.colors.mainBg
+        value: theme.colors.darkBg
       },
       {
         name: 'Won Light',
-        value: theme.colors.white
+        value: theme.colors.lightBg
       }
     ]
   }
@@ -41,7 +41,7 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
-      <GlobalStyles removeBg />
+      <GlobalStyles />
       <Story />
     </ThemeProvider>
   )
