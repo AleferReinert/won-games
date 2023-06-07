@@ -7,7 +7,7 @@ export default {
   component: Button,
   parameters: {
     backgrounds: {
-      default: 'Won Light'
+      default: 'Light'
     }
   },
   argTypes: {

@@ -6,7 +6,7 @@ export default {
   component: Footer,
   parameters: {
     backgrounds: {
-      default: 'Won Light'
+      default: 'Light'
     }
   }
 } as ComponentMeta<typeof Footer>

@@ -4,7 +4,7 @@ import Radio from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 import theme from 'styles/theme'
 
-describe('<Checkbox />', () => {
+describe('<Radio />', () => {
   it('Com label branca', () => {
     const { container } = renderWithTheme(
       <Radio label='Radio' labelFor='check' value='anyValue' />

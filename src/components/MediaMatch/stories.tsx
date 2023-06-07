@@ -6,7 +6,7 @@ export default {
   component: MediaMatch,
   parameters: {
     backgrounds: {
-      default: 'Won Light'
+      default: 'Light'
     }
   }
 } as ComponentMeta<typeof MediaMatch>
