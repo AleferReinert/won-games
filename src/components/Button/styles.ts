@@ -40,7 +40,7 @@ const wrapperModifiers = {
   minimal: (theme: DefaultTheme) => css`
     background: transparent;
     color: ${theme.colors.primary};
-    transition: color 0.1s ease-in-out;
+    transition: color ${theme.transition.fast};
 
     &:hover {
       background: transparent;

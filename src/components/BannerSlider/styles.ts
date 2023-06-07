@@ -23,7 +23,7 @@ export const Wrapper = styled.div`
           line-height: 0;
           width: 0.9rem;
           height: 0.9rem;
-          transition: background-color 0.15s ease-in-out;
+          transition: background-color ${theme.transition.fast};
         }
 
         &.slick-active button,
