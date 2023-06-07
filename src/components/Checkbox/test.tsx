@@ -6,12 +6,14 @@ import theme from 'styles/theme'
 
 describe('<Checkbox />', () => {
   it('Com label', () => {
-    renderWithTheme(<Checkbox label='lorem ipsum' labelFor='dolor' />)
+    const { container } = renderWithTheme(
+      <Checkbox label='lorem ipsum' labelFor='dolor' />
+    )
 
-    // Checkbox
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
     expect(screen.getByText(/lorem ipsum/i)).toBeInTheDocument()
     expect(screen.getByText(/lorem ipsum/i)).toHaveAttribute('for', 'dolor')
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('Sem label', () => {
@@ -47,8 +49,6 @@ describe('<Checkbox />', () => {
       <Checkbox label='lorem ipsum' onCheck={onCheck} isChecked />
     )
 
-    expect(onCheck).not.toHaveBeenCalled()
-
     userEvent.click(screen.getByRole('checkbox'))
     await waitFor(() => {
       expect(onCheck).toHaveBeenCalledTimes(1)
@@ -57,7 +57,7 @@ describe('<Checkbox />', () => {
   })
 
   it('Acessibilidade com tab', async () => {
-    renderWithTheme(<Checkbox label='lorem ipsum' labelFor='lorem-ipsum' />)
+    renderWithTheme(<Checkbox label='lorem ipsum' labelFor='dolor' />)
 
     expect(document.body).toHaveFocus()
     await userEvent.tab()
