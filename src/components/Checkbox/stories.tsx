@@ -6,9 +6,13 @@ export default {
   component: Checkbox,
   argTypes: {
     onCheck: { action: 'checked' }
+  },
+  args: {
+    label: 'Action',
+    labelFor: 'action'
   }
 } as ComponentMeta<typeof Checkbox>
 
 export const Default: ComponentStory<typeof Checkbox> = (args) => (
-  <Checkbox {...args} isChecked label='Action' labelFor='action' />
+  <Checkbox {...args} />
 )
