@@ -34,7 +34,7 @@ describe('<Heading />', () => {
     })
   })
 
-  it('Heading em tamanho menor', () => {
+  it('Heading small', () => {
     renderWithTheme(<Heading size='small'>Lorem ipsum</Heading>)
     expect(
       screen.getByRole('heading', { name: /lorem ipsum/i })
@@ -51,7 +51,7 @@ describe('<Heading />', () => {
     })
   })
 
-  it('Heading com borda em cor secundária', () => {
+  it('Heading com bordas em cor secundária', () => {
     renderWithTheme(
       <Heading lineColor='secondary' lineLeft lineBottom>
         Lorem ipsum
@@ -69,5 +69,12 @@ describe('<Heading />', () => {
         modifier: '::after'
       }
     )
+  })
+
+  it('Heading huge', () => {
+    renderWithTheme(<Heading size='huge'>Heading large</Heading>)
+    expect(
+      screen.getByRole('heading', { name: /heading large/i })
+    ).toHaveStyleRule('font-size', theme.font.sizes.huge)
   })
 })

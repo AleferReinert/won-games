@@ -40,4 +40,9 @@ describe('<Logo />', () => {
       { media: '(max-width: 768px)' }
     )
   })
+
+  it('Logo com id', () => {
+    const { container } = renderWithTheme(<Logo id='a' />)
+    expect(container.querySelector('#gradient-a')).toBeInTheDocument()
+  })
 })

@@ -3,10 +3,6 @@ import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
-export default function Index(props: HomeTemplateProps) {
-  return <Home {...props} />
-}
-
 export function getServerSideProps() {
   return {
     props: {
@@ -21,4 +17,8 @@ export function getServerSideProps() {
       freeGames: gamesMock
     }
   }
+}
+
+export default function Index(props: HomeTemplateProps) {
+  return <Home {...props} />
 }
