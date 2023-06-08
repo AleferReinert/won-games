@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import MediaMatch from '.'
 
 export default {
-  title: 'MediaMatch',
+  title: 'Utils/MediaMatch',
   component: MediaMatch,
   parameters: {
     backgrounds: {

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Banner from '.'
 
 export default {
-  title: 'Banner',
+  title: 'Banners/Banner',
   component: Banner,
   argTypes: {
     ribbon: {

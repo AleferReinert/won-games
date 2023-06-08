@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Checkbox from '.'
 
 export default {
-  title: 'Checkbox',
+  title: 'Forms/Checkbox',
   component: Checkbox,
   argTypes: {
     onCheck: { action: 'checked' }

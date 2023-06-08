@@ -4,7 +4,7 @@ import { Settings } from 'react-slick'
 import styled from 'styled-components'
 
 export default {
-  title: 'Slider',
+  title: 'Utils/Slider',
   component: Slider
 } as ComponentMeta<typeof Slider>
 

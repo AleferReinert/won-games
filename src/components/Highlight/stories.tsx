@@ -3,7 +3,7 @@ import Highlight from '.'
 import item from './mock'
 
 export default {
-  title: 'Highlight',
+  title: 'Banners/Highlight',
   component: Highlight,
   args: { ...item }
 } as ComponentMeta<typeof Highlight>

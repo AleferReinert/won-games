@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Radio from '.'
 
 export default {
-  title: 'Radio',
+  title: 'Forms/Radio',
   component: Radio,
   argTypes: {
     onCheck: { action: 'checked' }
