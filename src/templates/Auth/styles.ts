@@ -18,6 +18,7 @@ export const BannerBlock = styled.div`
     background-position: center center;
     position: relative;
     display: none;
+    height: 100vh;
 
     &::after {
       content: '';
@@ -51,7 +52,6 @@ export const BannerContent = styled.div`
     z-index: ${theme.layers.base};
     display: grid;
     justify-content: space-between;
-    height: 100vh;
   `}
 `
 
@@ -80,13 +80,17 @@ export const BannerFooter = styled.footer`
 export const AuthBlock = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
-    padding: 0 ${theme.spacings.small};
+    padding: ${theme.spacings.small};
     display: grid;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 
     ${LogoStyles.Wrapper} {
       margin: 0 auto ${theme.spacings.xxlarge};
+    }
+
+    ${HeadingStyles.Wrapper} {
+      margin-bottom: ${theme.spacings.medium};
     }
   `}
 `
