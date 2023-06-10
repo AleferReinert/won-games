@@ -53,6 +53,10 @@ export const Input = styled.input`
     border: 0;
     outline: none;
     width: 100%;
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px ${theme.colors.lightGray} inset;
+    }
   `}
 `
 

@@ -28,6 +28,10 @@ exports[`<TextField /> Com mensagem de erro 1`] = `
   width: 100%;
 }
 
+.c8:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #EAEAEA inset;
+}
+
 .c2 {
   font-size: 1.4rem;
   color: #030517;

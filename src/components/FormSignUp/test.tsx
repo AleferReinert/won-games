@@ -2,25 +2,22 @@ import { screen } from '@testing-library/react'
 import FormSignIn from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 
-describe('<FormSignIn />', () => {
+describe('<FormSignUp />', () => {
   it('Renderizar formulário', () => {
     const { container } = renderWithTheme(<FormSignIn />)
 
+    expect(screen.getByPlaceholderText(/name/i)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/e-mail/i)).toBeInTheDocument()
-    expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Confirm password')).toBeInTheDocument()
+    expect(screen.getByText(/already have an account\?/i)).toBeInTheDocument()
     expect(
       screen.getByRole('link', {
-        name: /forgot your password\?/i
-      })
-    ).toBeInTheDocument()
-    expect(screen.getByText(/don't have an account\?/i)).toBeInTheDocument()
-    expect(
-      screen.getByRole('link', {
-        name: /sign up/i
+        name: /sign in/i
       })
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('button', { name: /sign in now/i })
+      screen.getByRole('button', { name: /sign up now/i })
     ).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
