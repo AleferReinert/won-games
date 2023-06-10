@@ -46,10 +46,6 @@ exports[`<FormSignIn /> Renderizar formulário 1`] = `
   width: 100%;
 }
 
-.c0 .c1 {
-  margin-bottom: 0.8rem;
-}
-
 .c6 {
   font-size: 1.2rem;
   color: #030517;
@@ -58,28 +54,6 @@ exports[`<FormSignIn /> Renderizar formulário 1`] = `
   display: block;
   -webkit-text-decoration: none;
   text-decoration: none;
-}
-
-.c8 {
-  font-size: 1.4rem;
-  color: #030517;
-  text-align: center;
-  margin-top: 1.6rem;
-}
-
-.c8 a {
-  color: #3CD3C1;
-  margin-left: 0.8rem;
-  -webkit-transition: color,border,0.1s ease-in-out;
-  transition: color,border,0.1s ease-in-out;
-  border-bottom: 0.1rem solid #3CD3C1;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c8 a:hover {
-  color: #29b3a3;
-  border-bottom-color: #29b3a3;
 }
 
 .c4 {
@@ -117,6 +91,32 @@ exports[`<FormSignIn /> Renderizar formulário 1`] = `
 
 .c7:hover {
   background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
+}
+
+.c0 .c1 {
+  margin-bottom: 0.8rem;
+}
+
+.c8 {
+  font-size: 1.4rem;
+  color: #030517;
+  text-align: center;
+  margin-top: 1.6rem;
+}
+
+.c8 a {
+  color: #3CD3C1;
+  margin-left: 0.8rem;
+  -webkit-transition: color,border,0.1s ease-in-out;
+  transition: color,border,0.1s ease-in-out;
+  border-bottom: 0.1rem solid #3CD3C1;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c8 a:hover {
+  color: #29b3a3;
+  border-bottom-color: #29b3a3;
 }
 
 <div

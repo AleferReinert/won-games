@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import * as TextFieldStyles from 'components/TextField/styles'
 import { darken } from 'polished'
 
-export const Wrapper = styled.div`
+export const FormWrapper = styled.div`
   ${({ theme }) => css`
     ${TextFieldStyles.Wrapper} {
       margin-bottom: ${theme.spacings.xxsmall};
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const SignLink = styled.div`
+export const FormLink = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.small};
     color: ${theme.colors.black};

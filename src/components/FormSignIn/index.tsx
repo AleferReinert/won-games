@@ -3,10 +3,11 @@ import * as S from './styles'
 import { Email, Lock } from '@styled-icons/material-outlined'
 import Button from 'components/Button'
 import Link from 'next/link'
+import { FormWrapper, FormLink } from 'components/Form'
 
 const FormSignIn = () => {
   return (
-    <S.Wrapper>
+    <FormWrapper>
       <form>
         <TextField
           name='email'
@@ -24,12 +25,12 @@ const FormSignIn = () => {
         <Button fullWidth size='large'>
           Sign in now
         </Button>
-        <S.SignLink>
+        <FormLink>
           Don&apos;t have an account?
           <Link href='/sign-up'>Sign up</Link>
-        </S.SignLink>
+        </FormLink>
       </form>
-    </S.Wrapper>
+    </FormWrapper>
   )
 }
 
