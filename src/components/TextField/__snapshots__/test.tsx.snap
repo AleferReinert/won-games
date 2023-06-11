@@ -103,6 +103,7 @@ exports[`<TextField /> Com mensagem de erro 1`] = `
         </svg>
       </span>
       <input
+        autocomplete="off"
         class="c8"
         type="text"
         value=""

@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import * as HeadingStyles from 'components/Heading/styles'
-import * as LogoStyles from 'components/Logo/styles'
 import media from 'styled-media-query'
 
 export const Wrapper = styled.div`
@@ -12,13 +11,12 @@ export const Wrapper = styled.div`
 
 export const BannerBlock = styled.div`
   ${({ theme }) => css`
-    padding: 0 ${theme.spacings.xxlarge};
     background: url('img/auth-bg.jpg') no-repeat;
     background-size: cover;
     background-position: center center;
     position: relative;
     display: none;
-    height: 100vh;
+    height: 100%;
 
     &::after {
       content: '';
@@ -36,10 +34,6 @@ export const BannerBlock = styled.div`
       margin-bottom: ${theme.spacings.xsmall};
     }
 
-    ${LogoStyles.Wrapper} {
-      margin-top: ${theme.spacings.xxlarge};
-    }
-
     ${media.greaterThan('medium')`
         display: block;
     `}
@@ -52,6 +46,14 @@ export const BannerContent = styled.div`
     z-index: ${theme.layers.base};
     display: grid;
     justify-content: space-between;
+    padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge}
+      ${theme.spacings.small};
+    height: 100%;
+
+    a {
+      width: fit-content;
+      height: fit-content;
+    }
   `}
 `
 
@@ -72,7 +74,6 @@ export const BannerFooter = styled.footer`
     text-align: center;
     font-size: ${theme.font.sizes.xsmall};
     color: ${theme.colors.white};
-    margin-bottom: ${theme.spacings.small};
     align-self: end;
   `}
 `
@@ -85,12 +86,8 @@ export const AuthBlock = styled.div`
     align-items: center;
     min-height: 100vh;
 
-    ${LogoStyles.Wrapper} {
-      margin: 0 auto ${theme.spacings.xxlarge};
-    }
-
     ${HeadingStyles.Wrapper} {
-      margin-bottom: ${theme.spacings.medium};
+      margin: ${theme.spacings.xxlarge} 0 ${theme.spacings.medium};
     }
   `}
 `
@@ -99,4 +96,10 @@ export const AuthContent = styled.div`
   max-width: 38rem;
   margin: 0 auto;
   width: 100%;
+
+  > a:first-child {
+    width: fit-content;
+    display: block;
+    margin: 0 auto;
+  }
 `

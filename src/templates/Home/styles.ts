@@ -12,13 +12,6 @@ const Sections = styled.section`
       margin-bottom: ${theme.spacings.medium};
     }
 
-    ${HeadingStyles.Wrapper} {
-      ${media.lessThan('medium')`
-            margin-left: calc(-${theme.grid.gutter} / 2);
-            margin-right: calc(-${theme.grid.gutter} / 2);
-        `}
-    }
-
     ${GameCardSliderStyles.Wrapper} {
       ${media.lessThan('huge')`
             margin-right: calc(-${theme.grid.gutter} / 2);
@@ -54,11 +47,11 @@ export const SectionNews = styled(Sections)`
         padding-bottom: 10rem;
         background-color: ${theme.colors.lightBg};
         clip-path:polygon(0 0,100% 15%, 100% 100%, 0 85%);
-    `}
 
-    ${HeadingStyles} {
-      color: ${theme.colors.black};
-    }
+        ${HeadingStyles.Wrapper} {
+            color: ${theme.colors.black};
+        }
+    `}
   `}
 `
 

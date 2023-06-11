@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
+import Link from 'next/link'
 
 export const Wrapper = styled.menu`
   ${({ theme }) => css`
@@ -7,14 +8,13 @@ export const Wrapper = styled.menu`
     align-items: center;
     padding: ${theme.spacings.small} 0;
     justify-content: space-between;
-    position: relative;
   `}
 `
 export const LogoWrapper = styled.div`
   ${media.lessThan('medium')`
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     `}
 `
 
@@ -50,7 +50,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
     opacity: ${isOpen ? 1 : 0};
     pointer-events: ${isOpen ? 'all' : 'none'};
     background: ${theme.colors.white};
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -61,6 +61,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
     flex-direction: column;
     justify-content: space-between;
     transition: opacity ${theme.transition.default};
+    z-index: ${theme.layers.menu};
 
     > svg {
       position: absolute;
@@ -148,7 +149,7 @@ export const RegisterBox = styled.div`
     }
   `}
 `
-export const CreateAccount = styled.a`
+export const CreateAccount = styled(Link)`
   ${({ theme }) => css`
     text-decoration: none;
     color: ${theme.colors.primary};

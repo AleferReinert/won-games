@@ -43,7 +43,7 @@ const Home = ({
 
       <S.SectionNews>
         <Container>
-          <Heading lineLeft lineColor='secondary' color='black'>
+          <Heading lineLeft lineColor='secondary'>
             New Releases
           </Heading>
           <GameCardSlider items={newGames} arrowColor='black' />
