@@ -3,7 +3,7 @@ import FormSignIn from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 describe('<FormSignUp />', () => {
-  it('Renderizar formulário', () => {
+  it('should render a sign up form', () => {
     const { container } = renderWithTheme(<FormSignIn />)
 
     expect(screen.getByPlaceholderText(/name/i)).toBeInTheDocument()

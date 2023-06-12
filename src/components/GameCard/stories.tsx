@@ -1,16 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import GameCard from '.'
+import mockGameCard from './mock'
 
 export default {
   title: 'GameCard',
   component: GameCard,
-  args: {
-    title: 'Population Zero',
-    developer: 'Other Ocean',
-    img: '/img/population-zero.jpg',
-    price: 'R$ 215,00',
-    promotionalPrice: 'R$ 185,00'
-  },
+  args: mockGameCard,
   argTypes: {
     onFav: { action: 'clicked' },
     ribbon: {
@@ -34,5 +29,6 @@ export const WithRibbon: ComponentStory<typeof GameCard> = (args) => (
 WithRibbon.args = {
   ribbon: '20% off',
   ribbonSize: 'small',
-  ribbonColor: 'primary'
+  ribbonColor: 'primary',
+  promotionalPrice: '$185.00'
 }

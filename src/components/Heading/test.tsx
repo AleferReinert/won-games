@@ -4,60 +4,66 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import theme from 'styles/theme'
 
 describe('<Heading />', () => {
-  it('Heading branco como padrão', () => {
-    renderWithTheme(<Heading>Lorem ipsum</Heading>)
-    expect(screen.getByRole('heading', { name: /lorem ipsum/i })).toHaveStyle({
-      color: theme.colors.white
-    })
+  it('should render white color as default ', () => {
+    renderWithTheme(<Heading>Most populars</Heading>)
+    expect(screen.getByRole('heading', { name: /most populars/i })).toHaveStyle(
+      {
+        color: theme.colors.white
+      }
+    )
   })
 
-  it('Heading preto', () => {
-    renderWithTheme(<Heading color='black'>Lorem ipsum</Heading>)
-    expect(screen.getByRole('heading', { name: /lorem ipsum/i })).toHaveStyle({
-      color: theme.colors.black
-    })
+  it('should render black color', () => {
+    renderWithTheme(<Heading color='black'>Most populars</Heading>)
+    expect(screen.getByRole('heading', { name: /most populars/i })).toHaveStyle(
+      {
+        color: theme.colors.black
+      }
+    )
   })
 
-  it('Heading com borda na esquerda', () => {
-    renderWithTheme(<Heading lineLeft>Lorem ipsum</Heading>)
-    expect(screen.getByRole('heading', { name: /lorem ipsum/i })).toHaveStyle({
-      'border-left': `0.7rem solid ${theme.colors.primary}`
-    })
+  it('should render line left', () => {
+    renderWithTheme(<Heading lineLeft>Most populars</Heading>)
+    expect(screen.getByRole('heading', { name: /most populars/i })).toHaveStyle(
+      {
+        'border-left': `0.7rem solid ${theme.colors.primary}`
+      }
+    )
   })
 
-  it('Heading com borda em baixo', () => {
-    renderWithTheme(<Heading lineBottom>Lorem ipsum</Heading>)
+  it('should render line bottom', () => {
+    renderWithTheme(<Heading lineBottom>Most populars</Heading>)
     expect(
-      screen.getByRole('heading', { name: /lorem ipsum/i })
+      screen.getByRole('heading', { name: /most populars/i })
     ).toHaveStyleRule('border-bottom', `0.5rem solid ${theme.colors.primary}`, {
       modifier: '::after'
     })
   })
 
-  it('Heading small', () => {
-    renderWithTheme(<Heading size='small'>Lorem ipsum</Heading>)
+  it('should render a small size', () => {
+    renderWithTheme(<Heading size='small'>Most populars</Heading>)
     expect(
-      screen.getByRole('heading', { name: /lorem ipsum/i })
+      screen.getByRole('heading', { name: /most populars/i })
     ).toHaveStyleRule('font-size', theme.font.sizes.medium)
     expect(
-      screen.getByRole('heading', { name: /lorem ipsum/i })
+      screen.getByRole('heading', { name: /most populars/i })
     ).toHaveStyleRule('width', `3rem`, {
       modifier: '::after'
     })
     expect(
-      screen.getByRole('heading', { name: /lorem ipsum/i })
+      screen.getByRole('heading', { name: /most populars/i })
     ).toHaveStyleRule('border-bottom-width', `0.4rem`, {
       modifier: '::after'
     })
   })
 
-  it('Heading com bordas em cor secundária', () => {
+  it('should render lines with secondary color', () => {
     renderWithTheme(
       <Heading lineColor='secondary' lineLeft lineBottom>
-        Lorem ipsum
+        Most Populars
       </Heading>
     )
-    const heading = screen.getByRole('heading', { name: /lorem ipsum/i })
+    const heading = screen.getByRole('heading', { name: /most populars/i })
 
     expect(heading).toHaveStyle({
       'border-left': `0.7rem solid ${theme.colors.secondary}`
@@ -71,10 +77,10 @@ describe('<Heading />', () => {
     )
   })
 
-  it('Heading huge', () => {
-    renderWithTheme(<Heading size='huge'>Heading large</Heading>)
+  it('should render a huge size', () => {
+    renderWithTheme(<Heading size='huge'>Most populars</Heading>)
     expect(
-      screen.getByRole('heading', { name: /heading large/i })
+      screen.getByRole('heading', { name: /most populars/i })
     ).toHaveStyleRule('font-size', theme.font.sizes.huge)
   })
 })

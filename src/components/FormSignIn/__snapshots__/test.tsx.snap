@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FormSignIn /> Renderizar formulário 1`] = `
+exports[`<FormSignIn /> should render a sign in form 1`] = `
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;

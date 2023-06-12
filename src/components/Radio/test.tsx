@@ -5,7 +5,7 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import theme from 'styles/theme'
 
 describe('<Radio />', () => {
-  it('Com label branca', () => {
+  it('should render with white label', () => {
     const { container } = renderWithTheme(
       <Radio label='Radio' labelFor='check' value='anyValue' />
     )
@@ -15,28 +15,19 @@ describe('<Radio />', () => {
     expect(container.firstChild).toMatchSnapshot()
   })
 
-  it('Com label preta', () => {
+  it('should render with black label', () => {
     renderWithTheme(<Radio label='Radio' labelColor='black' />)
     const label = screen.getByText('Radio')
     expect(label).toBeInTheDocument()
     expect(label).toHaveStyle({ color: theme.colors.black })
   })
 
-  it('Sem label', () => {
+  it('should render without label', () => {
     renderWithTheme(<Radio />)
     expect(screen.queryByLabelText(/Radio/i)).not.toBeInTheDocument()
   })
 
-  it('Label preta', () => {
-    renderWithTheme(
-      <Radio label='lorem ipsum' labelFor='dolor' labelColor='black' />
-    )
-    expect(screen.queryByText(/lorem ipsum/i)).toHaveStyle({
-      color: theme.colors.black
-    })
-  })
-
-  it('Função oncheck ao mudar status', async () => {
+  it('should dispatch onCheck when label status changes', async () => {
     const onCheck = jest.fn()
     renderWithTheme(
       <Radio
@@ -56,7 +47,7 @@ describe('<Radio />', () => {
     expect(onCheck).toHaveBeenCalledWith('anyValue')
   })
 
-  it('Acessibilidade com tab', async () => {
+  it('Should be accessible with tab', async () => {
     renderWithTheme(<Radio label='Radio' labelFor='Radio' />)
 
     expect(document.body).toHaveFocus()

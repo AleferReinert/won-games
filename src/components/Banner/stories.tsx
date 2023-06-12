@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Banner from '.'
+import mockBanner from './mock'
 
 export default {
   title: 'Banners/Banner',
@@ -9,13 +10,7 @@ export default {
       type: 'string'
     }
   },
-  args: {
-    img: 'https://source.unsplash.com/user/willianjusten/1042x580',
-    title: 'Defy death',
-    subtitle: 'Play the new <strong>CrashLands</strong> season',
-    buttonLabel: 'Buy now',
-    buttonLink: '/games/defy-death'
-  },
+  args: mockBanner,
   parameters: {
     layout: 'fullscreen'
   }

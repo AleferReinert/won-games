@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Radio /> Com label branca 1`] = `
+exports[`<Radio /> should render with white label 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;

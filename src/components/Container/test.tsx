@@ -3,7 +3,7 @@ import { Container } from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 describe('<Container />', () => {
-  it('descrição do teste', () => {
+  it('should render a container', () => {
     const { container } = renderWithTheme(
       <Container>
         <span>Lorem ipsum</span>

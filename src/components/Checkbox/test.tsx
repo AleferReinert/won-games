@@ -5,7 +5,7 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import theme from 'styles/theme'
 
 describe('<Checkbox />', () => {
-  it('Com label', () => {
+  it('should render with label', () => {
     const { container } = renderWithTheme(
       <Checkbox label='lorem ipsum' labelFor='dolor' />
     )
@@ -16,12 +16,12 @@ describe('<Checkbox />', () => {
     expect(container.firstChild).toMatchSnapshot()
   })
 
-  it('Sem label', () => {
+  it('should render without label', () => {
     renderWithTheme(<Checkbox />)
     expect(screen.queryByLabelText(/lorem ipsum/i)).not.toBeInTheDocument()
   })
 
-  it('Label preta', () => {
+  it('should render with black label', () => {
     renderWithTheme(
       <Checkbox label='lorem ipsum' labelFor='dolor' labelColor='black' />
     )
@@ -30,7 +30,7 @@ describe('<Checkbox />', () => {
     })
   })
 
-  it('Função oncheck ao mudar status', async () => {
+  it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
     renderWithTheme(<Checkbox label='lorem ipsum' onCheck={onCheck} />)
 
@@ -43,7 +43,7 @@ describe('<Checkbox />', () => {
     expect(onCheck).toHaveBeenCalledWith(true)
   })
 
-  it('Verifica se está checado', async () => {
+  it('should call onCheck with false if the Checkbox is already checked', async () => {
     const onCheck = jest.fn()
     renderWithTheme(
       <Checkbox label='lorem ipsum' onCheck={onCheck} isChecked />
@@ -56,7 +56,7 @@ describe('<Checkbox />', () => {
     expect(onCheck).toHaveBeenCalledWith(false)
   })
 
-  it('Acessibilidade com tab', async () => {
+  it('should be accessible with tab', async () => {
     renderWithTheme(<Checkbox label='lorem ipsum' labelFor='dolor' />)
 
     expect(document.body).toHaveFocus()

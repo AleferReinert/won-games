@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import Slider from '.'
 
 describe('<Slider />', () => {
-  it('Renderizar items', () => {
+  it('should render the items', () => {
     const { container } = render(
       <Slider settings={{ slidesToScroll: 1, infinite: false }}>
         <p>Item 1</p>

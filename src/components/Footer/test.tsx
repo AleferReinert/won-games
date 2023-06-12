@@ -3,7 +3,7 @@ import Footer from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 describe('<Footer />', () => {
-  it('Renderizar as 4 colunas', () => {
+  it('should render the four columns', () => {
     renderWithTheme(<Footer />)
     expect(
       screen.getByRole('heading', { name: /contact/i })

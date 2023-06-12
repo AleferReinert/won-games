@@ -12,7 +12,7 @@ const props = {
 }
 
 describe('<Showcase />', () => {
-  it('Renderizar com todos componentes', () => {
+  it('should render a title, highlight and games', () => {
     renderWithTheme(<Showcase {...props} />)
 
     expect(
@@ -26,7 +26,7 @@ describe('<Showcase />', () => {
     ).toBeInTheDocument()
   })
 
-  it('Renderizar sem title', () => {
+  it('should render without title', () => {
     renderWithTheme(
       <Showcase highlight={props.highlight} games={props.games} />
     )
@@ -42,7 +42,7 @@ describe('<Showcase />', () => {
     ).toBeInTheDocument()
   })
 
-  it('Renderizar sem highlight', () => {
+  it('should render without highlight', () => {
     renderWithTheme(<Showcase title={props.title} games={props.games} />)
 
     expect(
@@ -56,7 +56,7 @@ describe('<Showcase />', () => {
     ).toBeInTheDocument()
   })
 
-  it('Renderizar sem games', () => {
+  it('should render without games', () => {
     renderWithTheme(
       <Showcase title={props.title} highlight={props.highlight} />
     )

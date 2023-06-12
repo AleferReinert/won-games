@@ -37,7 +37,7 @@ jest.mock('components/Showcase', () => {
 })
 
 describe('<Home />', () => {
-  it('Renderizar banner e showcases', () => {
+  it('should render banner and five showcases', () => {
     renderWithTheme(<Home {...props} />)
 
     expect(screen.getByTestId('Mock BannerSlider')).toBeInTheDocument()

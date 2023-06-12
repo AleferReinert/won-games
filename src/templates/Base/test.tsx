@@ -21,10 +21,9 @@ jest.mock('components/Footer', () => {
 })
 
 describe('<Base />', () => {
-  it('Renderizar Menu, Footer e children', () => {
-    const { debug } = renderWithTheme(<Base>children</Base>)
+  it('should render the Menu, Footer and children', () => {
+    renderWithTheme(<Base>children</Base>)
 
-    debug()
     expect(screen.getByTestId('Mock Menu')).toBeInTheDocument()
     expect(screen.getByText('children')).toBeInTheDocument()
     expect(screen.getByTestId('Mock Footer')).toBeInTheDocument()

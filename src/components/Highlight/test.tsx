@@ -2,51 +2,41 @@ import { screen } from '@testing-library/react'
 import Highlight from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 import * as S from './styles'
-
-const props = {
-  title: 'lorem ipsum',
-  description: 'dolor sit amet',
-  buttonLabel: 'buy now',
-  buttonLink: '/link',
-  backgroundImage: '/img/red-dead-img.jpg'
-}
+import props from './mock'
 
 describe('<Highlight />', () => {
-  it('Renderizar titulo, botão e descrição', () => {
+  it('should render title, description and link', () => {
     renderWithTheme(<Highlight {...props} />)
 
-    // Titulo
     expect(
-      screen.getByRole('heading', { name: /lorem ipsum/i })
+      screen.getByRole('heading', { name: props.title })
     ).toBeInTheDocument()
-
-    // Descrição curta
-    expect(screen.getByText(/dolor sit amet/i)).toBeInTheDocument()
-
-    // Botão
-    expect(screen.getByRole('link', { name: /buy now/i })).toHaveAttribute(
-      'href',
-      '/link'
-    )
+    expect(screen.getByText(props.description)).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: props.buttonLabel })
+    ).toHaveAttribute('href', props.buttonLink)
   })
 
-  it('Imagem de fundo', () => {
+  it('should render a background image', () => {
     const { container } = renderWithTheme(<Highlight {...props} />)
+
     expect(container.firstChild).toHaveStyle({
       backgroundImage: `url(${props.backgroundImage})`
     })
   })
 
-  it('Imagem flutuante', () => {
-    renderWithTheme(<Highlight {...props} floatImage='/float-image.png' />)
+  it('should render a flot image', () => {
+    renderWithTheme(<Highlight {...props} floatImage={props.floatImage} />)
+
     expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
       'src',
-      '/float-image.png'
+      props.floatImage
     )
   })
 
-  it('Texto alinhado a direita por padrão', () => {
+  it('should render text align right as default', () => {
     const { container } = renderWithTheme(<Highlight {...props} />)
+
     expect(container.firstChild).toHaveStyleRule(
       'grid-template-areas',
       "'floatImage content'"
@@ -56,10 +46,11 @@ describe('<Highlight />', () => {
     })
   })
 
-  it('Texto alinhado a esquerda', () => {
+  it('should render text align left', () => {
     const { container } = renderWithTheme(
       <Highlight {...props} alignment='left' />
     )
+
     expect(container.firstChild).toHaveStyleRule(
       'grid-template-areas',
       "'content floatImage'"

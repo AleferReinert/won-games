@@ -5,7 +5,7 @@ import theme from 'styles/theme'
 import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
 
 describe('<Button />', () => {
-  it('Botão médio como padrão', () => {
+  it('should render a medium size as default', () => {
     renderWithTheme(<Button>lorem ipsum</Button>)
     expect(screen.getByRole('button', { name: /lorem ipsum/i })).toHaveStyle({
       height: '4rem',
@@ -14,7 +14,7 @@ describe('<Button />', () => {
     })
   })
 
-  it('Botão pequeno', () => {
+  it('should render a small size', () => {
     renderWithTheme(<Button size='small'>lorem ipsum</Button>)
     expect(screen.getByRole('button', { name: /lorem ipsum/i })).toHaveStyle({
       height: '3rem',
@@ -22,7 +22,7 @@ describe('<Button />', () => {
     })
   })
 
-  it('Botão grande', () => {
+  it('should render a large size', () => {
     renderWithTheme(<Button size='large'>lorem ipsum</Button>)
     expect(screen.getByRole('button', { name: /lorem ipsum/i })).toHaveStyle({
       height: '5rem',
@@ -31,14 +31,14 @@ describe('<Button />', () => {
     })
   })
 
-  it('Botão full', () => {
+  it('should render a full size', () => {
     renderWithTheme(<Button fullWidth>lorem ipsum</Button>)
     expect(screen.getByRole('button', { name: /lorem ipsum/i })).toHaveStyle({
       width: '100%'
     })
   })
 
-  it('Botão com icone', () => {
+  it('should render with icon', () => {
     renderWithTheme(
       <Button icon={<AddShoppingCart data-testid='icon' />}>lorem ipsum</Button>
     )
@@ -46,7 +46,7 @@ describe('<Button />', () => {
     expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 
-  it('Botão renderizado como link', () => {
+  it('should render a button as link', () => {
     renderWithTheme(
       <Button as='a' href='/link'>
         lorem ipsum

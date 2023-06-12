@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TextField /> Com mensagem de erro 1`] = `
+exports[`<TextField /> should render with error message 1`] = `
 .c4 {
   display: -webkit-box;
   display: -webkit-flex;

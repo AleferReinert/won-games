@@ -21,12 +21,12 @@ describe('<MediaMatch />', () => {
     mobileHeading = screen.getByTestId('mobile')
   })
 
-  it('Oculta sempre', () => {
+  it('hidden on mobile and desktop', () => {
     expect(desktopHeading.parentElement).toHaveStyleRule('display', 'none')
     expect(mobileHeading.parentElement).toHaveStyleRule('display', 'none')
   })
 
-  it('Exibe ou esconde conforme a midia passada', () => {
+  it('should display only between media', () => {
     expect(desktopHeading.parentElement).toHaveStyleRule('display', 'block', {
       media: '(min-width: 768px)'
     })

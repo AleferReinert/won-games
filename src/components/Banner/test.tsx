@@ -2,34 +2,22 @@ import { screen } from '@testing-library/react'
 import Banner from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 import theme from 'styles/theme'
-
-const props = {
-  img: 'https://source.unsplash.com/user/willianjusten/1042x580',
-  title: 'Defy death',
-  subtitle: 'Play the new <strong>CrashLands</strong> season',
-  buttonLabel: 'Buy now',
-  buttonLink: '/games/defy-death'
-}
+import props from './mock'
 
 describe('<Banner />', () => {
-  it('Renderizar banner', () => {
-    renderWithTheme(<Banner {...props} />)
+  it('should render title, subtitle and img', () => {
+    const { container } = renderWithTheme(<Banner {...props} />)
 
-    // Titulo
     expect(
       screen.getByRole('heading', {
-        name: /Defy death/i
+        name: props.title
       })
     ).toBeInTheDocument()
-
-    // Subtitulo
-    expect(screen.getByText(/Play the new/i)).toBeInTheDocument()
-
-    // Imagem
-    expect(screen.getByRole('img', { name: /Defy death/i }))
+    expect(container).toHaveTextContent(props.subtitle.slice(0, 12))
+    expect(screen.getByRole('img', { name: props.title }))
   })
 
-  it('Renderizar o Ribbon', () => {
+  it('should render the Ribbon', () => {
     renderWithTheme(
       <Banner
         {...props}
