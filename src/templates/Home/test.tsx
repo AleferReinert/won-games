@@ -2,56 +2,65 @@ import 'match-media-mock'
 import { screen } from '@testing-library/react'
 import Home from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
-
 import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
 const props = {
   banners: bannersMock,
-  newGames: [gamesMock[0]],
+  newGames: gamesMock,
   mostPopularHighlight: highlightMock,
-  mostPopularsGames: [gamesMock[0]],
-  comingSoonGames: [gamesMock[0]],
+  mostPopularsGames: gamesMock,
+  comingSoonGames: gamesMock,
   comingSoonHighlight: highlightMock,
-  comingSoonMoreGames: [gamesMock[0]],
+  comingSoonMoreGames: gamesMock,
   freeHighlight: highlightMock,
-  freeGames: [gamesMock[0]]
+  freeGames: gamesMock
 }
+
+jest.mock('components/Menu', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid='Mock Menu'></div>
+    }
+  }
+})
+
+jest.mock('components/BannerSlider', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid='Mock BannerSlider'></div>
+    }
+  }
+})
+
+jest.mock('components/Showcase', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid='Mock Showcase'></div>
+    }
+  }
+})
+
+jest.mock('components/Footer', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid='Mock Footer'></div>
+    }
+  }
+})
 
 describe('<Home />', () => {
   it('Renderizar todos componentes', () => {
     renderWithTheme(<Home {...props} />)
 
-    // Topo
-    expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
-
-    // Rodapé
-    expect(
-      screen.getByRole('heading', { name: /contact/i })
-    ).toBeInTheDocument()
-
-    // Headings
-    expect(
-      screen.getByRole('heading', { name: /new releases/i })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /most populars/i })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /coming soon/i })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { name: /free games/i })
-    ).toBeInTheDocument()
-
-    // Banner
-    expect(screen.getAllByText(/defy death 1/i)).toHaveLength(1)
-
-    // 5 sections com 1 card cada
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(5)
-
-    // Highlights
-    expect(screen.getAllByText(/read dead/i)).toHaveLength(3)
+    expect(screen.getByTestId('Mock Menu')).toBeInTheDocument()
+    expect(screen.getByTestId('Mock BannerSlider')).toBeInTheDocument()
+    expect(screen.getAllByTestId('Mock Showcase')).toHaveLength(5)
+    expect(screen.getByTestId('Mock Footer')).toBeInTheDocument()
   })
 })
