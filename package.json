@@ -32,7 +32,7 @@
     "react-dom": "18.2.0",
     "react-slick": "^0.29.0",
     "storybook": "^7.0.20",
-    "styled-components": "^5.3.6",
+    "styled-components": "^5.3.11",
     "styled-media-query": "^2.1.2",
     "upgrade": "^1.1.0"
   },
