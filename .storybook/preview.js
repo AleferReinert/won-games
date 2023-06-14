@@ -3,6 +3,7 @@ import GlobalStyles from 'styles/global'
 import { ThemeProvider } from 'styled-components'
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport'
 import theme from 'styles/theme'
+import * as nextImage from 'next/image'
 
 const customViewports = {
   desktop: {
@@ -46,3 +47,8 @@ export const decorators = [
     </ThemeProvider>
   )
 ]
+
+Object.defineProperty(nextImage, 'default', {
+  configurable: true,
+  value: (props) => <img {...props} />
+})
