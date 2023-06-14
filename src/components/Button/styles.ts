@@ -7,7 +7,7 @@ type WrapperProps = { hasIcon: boolean } & Pick<
   'size' | 'fullWidth' | 'minimal'
 >
 
-const wrapperModifiers = {
+export const wrapperModifiers = {
   xsmall: () => css`
     height: 2.2rem;
   `,

@@ -1,22 +1,29 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 import * as RibbonStyles from 'components/Ribbon/styles'
+import * as ButtonStyles from 'components/Button/styles'
 
 export const Wrapper = styled.div`
-  position: relative;
+  ${({ theme }) => css`
+    position: relative;
 
-  ${media.lessThan('medium')`
-    ${RibbonStyles.Wrapper} {
-        right: 0;
-    
-        &::after {
-            display: none;
+    ${media.lessThan('medium')`
+        ${RibbonStyles.Wrapper} {
+            right: 0;
+        
+            &::after {
+                display: none;
+            }
         }
-    }
-  `}
+    `}
 
-  ${media.greaterThan('medium')`
-    box-shadow: 0 0.4rem 0.5rem rgba(0,0,0,0.2);
+    ${media.greaterThan('medium')`
+        box-shadow: 0 0.4rem 0.5rem rgba(0,0,0,0.2);
+
+        ${ButtonStyles.Wrapper} {
+            ${ButtonStyles.wrapperModifiers.large(theme)}
+        }
+    `}
   `}
 `
 
@@ -27,7 +34,7 @@ type ImageProps = {
 export const Image = styled.div<ImageProps>`
   ${({ theme, src }) => css`
     width: 100%;
-    height: 23rem;
+    aspect-ratio: 16/9;
     background-color: ${theme.colors.lightGray};
     background-image: url(${src});
     background-position: center center;
@@ -42,10 +49,11 @@ export const Image = styled.div<ImageProps>`
 export const Caption = styled.div`
   ${({ theme }) => css`
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.35);
     padding: ${theme.spacings.small};
 
     ${media.greaterThan('medium')`
+    background-color: rgba(0, 0, 0, 0.7);
       border-radius: 0 0 ${theme.border.radius} ${theme.border.radius};
       padding: ${theme.spacings.large};
       position: absolute;

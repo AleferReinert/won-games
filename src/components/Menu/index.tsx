@@ -29,7 +29,7 @@ const Menu = ({ username }: MenuProps) => {
 
       <MediaMatch greaterThan='medium'>
         <S.MenuNav>
-          <S.MenuLink href='#'>Home</S.MenuLink>
+          <S.MenuLink href='/'>Home</S.MenuLink>
           <S.MenuLink href='#'>Explore</S.MenuLink>
         </S.MenuNav>
       </MediaMatch>
@@ -52,7 +52,11 @@ const Menu = ({ username }: MenuProps) => {
         )}
       </S.MenuGroup>
 
-      <S.MenuFull aria-hidden={!isOPen} isOpen={isOPen}>
+      <S.MenuFull
+        aria-label='menu mobile'
+        aria-hidden={!isOPen}
+        isOpen={isOPen}
+      >
         <CloseIcon aria-label='Close menu' onClick={() => setIsOpen(false)} />
 
         <S.MenuNav>

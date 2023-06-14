@@ -8,6 +8,8 @@ export const Wrapper = styled.menu`
     align-items: center;
     padding: ${theme.spacings.small} 0;
     justify-content: space-between;
+    position: relative;
+    z-index: ${theme.layers.menu};
   `}
 `
 export const LogoWrapper = styled.div`
@@ -97,13 +99,13 @@ export const MenuFull = styled.nav<MenuFullProps>`
   `}
 `
 
-export const MenuNav = styled.div`
+export const MenuNav = styled.nav`
   ${({ theme }) => css`
     margin-left: ${theme.spacings.small};
   `}
 `
 
-export const MenuLink = styled.a`
+export const MenuLink = styled(Link)`
   ${({ theme }) => css`
     position: relative;
     font-size: ${theme.font.sizes.medium};

@@ -13,7 +13,7 @@ describe('<Menu />', () => {
   it('should handle the open/close mobile menu', () => {
     renderWithTheme(<Menu />)
 
-    const fullMenuElement = screen.getByRole('navigation', { hidden: true })
+    const fullMenuElement = screen.getByLabelText(/menu mobile/i)
 
     // check if it's hidden
     expect(fullMenuElement.getAttribute('aria-hidden')).toBe('true')
