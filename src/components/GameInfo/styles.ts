@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import * as HeadingStyles from 'components/Heading/styles'
 import * as RibbonStyles from 'components/Ribbon/styles'
 import * as ButtonStyles from 'components/Button/styles'
-import media from 'styled-media-query'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -12,7 +11,7 @@ export const Wrapper = styled.div`
 
     ${HeadingStyles.Wrapper} {
       font-size: ${theme.font.sizes.xlarge};
-      margin-bottom: ${theme.spacings.xsmall};
+      margin-bottom: ${theme.spacings.small};
     }
 
     ${RibbonStyles.Wrapper} {
@@ -27,7 +26,7 @@ export const Wrapper = styled.div`
       }
     }
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
 
         ${HeadingStyles.Wrapper} {
             font-size: ${theme.font.sizes.xxlarge};
@@ -47,8 +46,9 @@ export const Description = styled.p`
     font-size: ${theme.font.sizes.small};
     margin-bottom: ${theme.spacings.small};
 
-    ${media.greaterThan('medium')`
-        max-width: 60%;
+    ${theme.media().greaterThan('small')`
+        font-size: ${theme.font.sizes.large};
+        max-width: 80rem;
     `}
   `}
 `
@@ -59,7 +59,7 @@ export const ButtonsWrapper = styled.div`
     flex-direction: column;
     row-gap: ${theme.spacings.xxsmall};
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
         flex-direction: row;
         justify-content: end;
         column-gap: ${theme.spacings.xxsmall};

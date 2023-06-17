@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import * as HeadingStyles from 'components/Heading/styles'
-import media from 'styled-media-query'
 
 export const Wrapper = styled.footer`
   ${HeadingStyles.Wrapper} {
@@ -15,7 +14,7 @@ export const Content = styled.div`
     gap: ${theme.grid.gutter};
     margin-top: ${theme.spacings.medium};
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
         grid-template-columns: repeat(4, 1fr);
     `}
   `}

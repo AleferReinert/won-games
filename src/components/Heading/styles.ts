@@ -1,5 +1,4 @@
 import styled, { DefaultTheme, css } from 'styled-components'
-import media from 'styled-media-query'
 import { HeadingProps, LineColors } from '.'
 
 export const wrapperModifiers = {
@@ -14,7 +13,7 @@ export const wrapperModifiers = {
   medium: (theme: DefaultTheme) => css`
     font-size: ${theme.font.sizes.xlarge};
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
         font-size: ${theme.font.sizes.xxlarge};
     `}
   `,

@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components'
 import * as HeadingStyles from 'components/Heading/styles'
 import * as HighlightStyles from 'components/Highlight/styles'
 import * as GameCardSliderStyles from 'components/GameCardSlider/styles'
-import media from 'styled-media-query'
-import { Container } from 'components/Container'
 
-export const Wrapper = styled(Container).attrs({ as: 'section' })`
+export const Wrapper = styled.section`
   ${({ theme }) => css`
+    overflow: hidden;
+
     ${HeadingStyles.Wrapper},
     ${HighlightStyles.Wrapper},
     ${GameCardSliderStyles.Wrapper} {
@@ -14,7 +14,7 @@ export const Wrapper = styled(Container).attrs({ as: 'section' })`
     }
 
     ${GameCardSliderStyles.Wrapper} {
-      ${media.lessThan('huge')`
+      ${theme.media().lessThan('huge')`
             margin-right: calc(-${theme.grid.gutter} / 2);
         `}
     }

@@ -1,17 +1,19 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import MediaMatch from '.'
+import theme from 'styles/theme'
+import { renderWithTheme } from 'utils/tests/helpers'
 
 describe('<MediaMatch />', () => {
   let desktopHeading: Element
   let mobileHeading: Element
 
   beforeEach(() => {
-    render(
+    renderWithTheme(
       <>
-        <MediaMatch greaterThan='medium'>
+        <MediaMatch greaterThan='small'>
           <h1 data-testid='desktop'>Desktop</h1>
         </MediaMatch>
-        <MediaMatch lessThan='medium'>
+        <MediaMatch lessThan='small'>
           <h1 data-testid='mobile'>Mobile</h1>
         </MediaMatch>
       </>
@@ -28,11 +30,11 @@ describe('<MediaMatch />', () => {
 
   it('should display only between media', () => {
     expect(desktopHeading.parentElement).toHaveStyleRule('display', 'block', {
-      media: '(min-width: 768px)'
+      media: `(min-width: ${theme.breakpoint.small})`
     })
 
     expect(mobileHeading.parentElement).toHaveStyleRule('display', 'block', {
-      media: '(max-width: 768px)'
+      media: `(max-width: ${theme.breakpoint.small})`
     })
   })
 })

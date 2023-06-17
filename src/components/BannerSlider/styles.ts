@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
 import * as BannerStyles from 'components/Banner/styles'
 
 export const Wrapper = styled.div`
@@ -33,7 +32,7 @@ export const Wrapper = styled.div`
       }
     }
 
-    ${media.greaterThan('large')`
+    ${theme.media().greaterThan('large')`
         ${BannerStyles.Wrapper} {
             max-width: 104rem;
             margin: 0 auto;

@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
-
 import * as HeadingStyles from 'components/Heading/styles'
 
 export const Wrapper = styled.div`
@@ -8,7 +6,7 @@ export const Wrapper = styled.div`
     color: ${theme.colors.white};
     font-size: ${theme.font.sizes.medium};
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
       background-color: ${theme.colors.white};
       padding: ${theme.spacings.large};
       color: ${theme.colors.black};
@@ -25,9 +23,28 @@ export const Wrapper = styled.div`
       margin: ${theme.spacings.xsmall} 0;
       ${HeadingStyles.wrapperModifiers.lineLeft(theme, 'secondary')};
 
-      ${media.greaterThan('medium')`
+      ${theme.media().greaterThan('small')`
         color: ${theme.colors.black};
       `}
+    }
+
+    h1 {
+      font-size: ${theme.font.sizes.xxlarge};
+    }
+    h2 {
+      font-size: ${theme.font.sizes.xlarge};
+    }
+    h3 {
+      font-size: ${theme.font.sizes.large};
+    }
+    h4 {
+      font-size: ${theme.font.sizes.medium};
+    }
+    h5 {
+      font-size: ${theme.font.sizes.small};
+    }
+    h6 {
+      font-size: ${theme.font.sizes.xsmall};
     }
 
     p {
@@ -50,6 +67,12 @@ export const Wrapper = styled.div`
 
     hr {
       margin: ${theme.spacings.small} 0;
+    }
+
+    .description__copyrights {
+      font-size: ${theme.font.sizes.small};
+      color: ${theme.colors.gray};
+      margin-top: ${theme.spacings.small};
     }
   `}
 `

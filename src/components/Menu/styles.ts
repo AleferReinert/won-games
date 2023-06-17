@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
 import Link from 'next/link'
 
 export const Wrapper = styled.menu`
@@ -13,11 +12,13 @@ export const Wrapper = styled.menu`
   `}
 `
 export const LogoWrapper = styled.div`
-  ${media.lessThan('medium')`
+  ${({ theme }) => css`
+    ${theme.media().lessThan('small')`
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
     `}
+  `}
 `
 
 export const MenuGroup = styled.div`

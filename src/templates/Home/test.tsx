@@ -1,12 +1,12 @@
 import 'match-media-mock'
 import { screen } from '@testing-library/react'
-import Home from '.'
+import Home, { HomeTemplateProps } from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
 import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
-const props = {
+const props: HomeTemplateProps = {
   banners: bannersMock,
   newGames: gamesMock,
   mostPopularHighlight: highlightMock,

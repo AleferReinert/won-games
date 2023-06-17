@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
 import * as RibbonStyles from 'components/Ribbon/styles'
 import * as ButtonStyles from 'components/Button/styles'
 
@@ -7,7 +6,7 @@ export const Wrapper = styled.div`
   ${({ theme }) => css`
     position: relative;
 
-    ${media.lessThan('medium')`
+    ${theme.media().lessThan('small')`
         ${RibbonStyles.Wrapper} {
             right: 0;
         
@@ -17,7 +16,7 @@ export const Wrapper = styled.div`
         }
     `}
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
         box-shadow: 0 0.4rem 0.5rem rgba(0,0,0,0.2);
 
         ${ButtonStyles.Wrapper} {
@@ -40,7 +39,7 @@ export const Image = styled.div<ImageProps>`
     background-position: center center;
     background-size: cover;
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
         height: 58rem;
     `}
   `}
@@ -52,7 +51,7 @@ export const Caption = styled.div`
     background-color: rgba(0, 0, 0, 0.35);
     padding: ${theme.spacings.small};
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
     background-color: rgba(0, 0, 0, 0.7);
       border-radius: 0 0 ${theme.border.radius} ${theme.border.radius};
       padding: ${theme.spacings.large};
@@ -69,7 +68,7 @@ export const Title = styled.h2`
     font-weight: ${theme.font.bold};
     color: ${theme.colors.white};
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
       font-size: ${theme.font.sizes.xxlarge};
     `}
   `}
@@ -87,7 +86,7 @@ export const Subtitle = styled.p`
       font-weight: ${theme.font.bold};
     }
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
       font-size: ${theme.font.sizes.large};
     `}
   `}

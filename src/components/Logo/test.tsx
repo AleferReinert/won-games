@@ -37,7 +37,7 @@ describe('<Logo />', () => {
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyleRule(
       'width',
       '5.8rem',
-      { media: '(max-width: 768px)' }
+      { media: `(max-width: ${theme.breakpoint.small})` }
     )
   })
 

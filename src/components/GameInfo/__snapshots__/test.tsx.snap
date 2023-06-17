@@ -146,7 +146,7 @@ exports[`<GameInfo /> should render title, description, price and buttons 1`] = 
 
 .c0 .c1 {
   font-size: 2.0rem;
-  margin-bottom: 1.6rem;
+  margin-bottom: 2.4rem;
 }
 
 .c0 .c4 {
@@ -204,7 +204,8 @@ exports[`<GameInfo /> should render title, description, price and buttons 1`] = 
 
 @media (min-width:768px) {
   .c3 {
-    max-width: 60%;
+    font-size: 1.8rem;
+    max-width: 80rem;
   }
 }
 

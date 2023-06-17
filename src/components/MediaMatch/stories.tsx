@@ -12,11 +12,11 @@ export default {
 } as ComponentMeta<typeof MediaMatch>
 
 export const Desktop: ComponentStory<typeof MediaMatch> = () => (
-  <MediaMatch greaterThan='medium'>Apenas desktop</MediaMatch>
+  <MediaMatch greaterThan='small'>Apenas desktop</MediaMatch>
 )
 
 export const Mobile: ComponentStory<typeof MediaMatch> = () => (
-  <MediaMatch lessThan='medium'>Apenas mobile</MediaMatch>
+  <MediaMatch lessThan='small'>Apenas mobile</MediaMatch>
 )
 
 Mobile.parameters = {

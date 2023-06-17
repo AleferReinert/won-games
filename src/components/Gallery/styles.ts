@@ -1,12 +1,7 @@
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
-    ${media.lessThan('huge')`
-        overflow: hidden;
-    `}
-
     div.slick-track {
       display: flex;
     }
@@ -14,6 +9,11 @@ export const Wrapper = styled.div`
     div.slick-list {
       margin: 0 -${theme.spacings.xxsmall};
       display: flex;
+      overflow: visible;
+
+      ${theme.media().greaterThan('huge')`
+        overflow: hidden;
+      `}
     }
 
     .slick-arrow {
@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
       color: ${theme.colors.white};
 
       &.slick-disabled {
-        visibility: hidden;
+        display: none !important;
       }
     }
 
@@ -64,6 +64,10 @@ export const Modal = styled.div`
     align-items: center;
     z-index: ${theme.layers.modal};
     padding: ${theme.spacings.small};
+
+    div.slick-list {
+      overflow: hidden;
+    }
 
     // Hidden modal
     &[aria-hidden='true'] {

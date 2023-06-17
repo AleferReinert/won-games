@@ -1,15 +1,10 @@
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
 import { GameCardSliderProps } from '.'
 
 type WrapperProps = Pick<GameCardSliderProps, 'arrowColor'>
 
 export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, arrowColor }) => css`
-    ${media.lessThan('huge')`
-        overflow: hidden;
-    `}
-
     div.slick-track {
       display: flex;
     }
@@ -17,6 +12,11 @@ export const Wrapper = styled.div<WrapperProps>`
     div.slick-list {
       margin: 0 -${theme.spacings.xxsmall};
       display: flex;
+      overflow: visible;
+
+      ${theme.media().greaterThan('huge')`
+        overflow: hidden;
+      `}
     }
 
     .slick-arrow {

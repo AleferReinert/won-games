@@ -3,10 +3,15 @@ import * as S from './styles'
 import GameCard, { GameCardProps } from 'components/GameCard'
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
+import theme from 'styles/theme'
 
 export type GameCardSliderProps = {
   items: GameCardProps[]
   arrowColor?: 'white' | 'black'
+}
+
+const BreakpointToNumber = (breakpoint: string) => {
+  return Number(breakpoint.replace('px', ''))
 }
 
 const settings: SliderSettings = {
@@ -15,34 +20,26 @@ const settings: SliderSettings = {
   slidesToShow: 4,
   infinite: false,
   lazyLoad: 'ondemand',
-  centerPadding: '100px',
   responsive: [
     {
-      breakpoint: 1375,
+      breakpoint: BreakpointToNumber(theme.breakpoint.huge),
       settings: {
         arrows: false,
-        slidesToShow: 3.2
+        slidesToShow: 3.25
       }
     },
     {
-      breakpoint: 960,
+      breakpoint: BreakpointToNumber(theme.breakpoint.medium),
       settings: {
         arrows: false,
-        slidesToShow: 2.2
+        slidesToShow: 2.25
       }
     },
     {
-      breakpoint: 650,
+      breakpoint: BreakpointToNumber(theme.breakpoint.small),
       settings: {
         arrows: false,
-        slidesToShow: 1.2
-      }
-    },
-    {
-      breakpoint: 375,
-      settings: {
-        arrows: false,
-        slidesToShow: 1.1
+        slidesToShow: 1.25
       }
     }
   ]

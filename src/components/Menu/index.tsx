@@ -27,7 +27,7 @@ const Menu = ({ username }: MenuProps) => {
         <Logo hideOnMobile />
       </S.LogoWrapper>
 
-      <MediaMatch greaterThan='medium'>
+      <MediaMatch greaterThan='small'>
         <S.MenuNav>
           <S.MenuLink href='/'>Home</S.MenuLink>
           <S.MenuLink href='#'>Explore</S.MenuLink>
@@ -44,7 +44,7 @@ const Menu = ({ username }: MenuProps) => {
         </S.IconWrapper>
 
         {!username && (
-          <MediaMatch greaterThan='medium'>
+          <MediaMatch greaterThan='small'>
             <Link href='/sign-in'>
               <Button size='small'>Sign in</Button>
             </Link>

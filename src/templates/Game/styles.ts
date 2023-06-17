@@ -1,12 +1,12 @@
+import { Container } from 'components/Container'
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
 
 type CoverProps = {
   src: string
 }
 
 export const Cover = styled.div<CoverProps>`
-  ${({ src }) => css`
+  ${({ theme, src }) => css`
     background-image: url(${src});
     background-position: top center;
     background-size: cover;
@@ -26,9 +26,55 @@ export const Cover = styled.div<CoverProps>`
       bottom: 0;
     }
 
-    ${media.greaterThan('medium')`
-        height: 70rem;
+    ${theme.media().greaterThan('small')`
+        height: 58rem;
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+    `}
+  `}
+`
+
+export const GameInfoWrapper = styled(Container)`
+  ${({ theme }) => css`
+    margin-top: 20rem;
+
+    ${theme.media().greaterThan('small')`
+        margin-top: 30rem;
+    `}
+  `}
+`
+
+export const GalleryWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: calc(${theme.spacings.large} * 2);
+    overflow: hidden;
+    display: none;
+
+    ${theme.media().greaterThan('small')`
+        display: block;
+    `}
+  `}
+`
+
+export const TextContentWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: ${theme.spacings.large};
+
+    ${theme.media().greaterThan('small')`
+        margin-top: calc(${theme.spacings.large} * 2);
+    `}
+  `}
+`
+
+export const GameDetailsWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: ${theme.spacings.xxlarge};
+    margin-bottom: ${theme.spacings.xxlarge};
+
+    ${theme.media().greaterThan('small')`
+        margin-top: calc(${theme.spacings.large} * 2);
+        padding-bottom: calc(${theme.spacings.large} * 2);
+        border-bottom: 1px solid ${theme.colors.gray};
+        margin-bottom: calc(${theme.spacings.large} * 2);
     `}
   `}
 `

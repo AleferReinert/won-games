@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
 
 export const Wrapper = styled.div``
 
@@ -10,15 +9,15 @@ export const Content = styled.div`
     gap: ${theme.spacings.xsmall};
     margin-top: ${theme.spacings.large};
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
         grid-template-columns: repeat(3, 1fr);
     `}
 
-    ${media.greaterThan('large')`
+    ${theme.media().greaterThan('large')`
         grid-template-columns: repeat(4, 1fr);
     `}
 
-    ${media.greaterThan('huge')`
+    ${theme.media().greaterThan('huge')`
         grid-template-columns: repeat(6, 1fr);
     `}
   `}
@@ -41,13 +40,13 @@ export const Description = styled.p`
   `}
 `
 
-export const IconsWrapper = styled.div`
+export const IconsWrapper = styled.span`
   ${({ theme }) => css`
     display: flex;
     gap: ${theme.spacings.xsmall};
     color: ${theme.colors.white};
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('small')`
         gap: ${theme.spacings.small};
     `}
   `}

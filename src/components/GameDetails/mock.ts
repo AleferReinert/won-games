@@ -1,6 +1,6 @@
 import { GameDetailsProps } from '.'
 
-const mock: GameDetailsProps = {
+const gameDetailsMock: GameDetailsProps = {
   developer: 'Gearbox Software',
   releaseDate: '2019-09-13T23:00:00',
   platforms: ['windows', 'linux', 'mac'],
@@ -9,4 +9,4 @@ const mock: GameDetailsProps = {
   categories: ['Action', 'Adventure']
 }
 
-export default mock
+export default gameDetailsMock

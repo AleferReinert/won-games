@@ -1,4 +1,6 @@
-export default {
+import { generateMedia } from 'styled-media-query'
+
+const theme = {
   grid: {
     container: '130rem',
     gutter: '3.2rem'
@@ -54,5 +56,15 @@ export default {
   transition: {
     default: '0.3s ease-in-out',
     fast: '0.1s ease-in-out'
-  }
-} as const
+  },
+  breakpoint: {
+    huge: '1440px',
+    large: '1170px',
+    medium: '960px',
+    small: '768px',
+    xsmall: '450px'
+  },
+  media: () => generateMedia(theme.breakpoint)
+}
+
+export default theme

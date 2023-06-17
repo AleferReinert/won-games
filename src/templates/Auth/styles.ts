@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
 import * as HeadingStyles from 'components/Heading/styles'
-import media from 'styled-media-query'
 
 export const Wrapper = styled.div`
-  ${media.greaterThan('medium')`
+  ${({ theme }) => css`
+    ${theme.media().greaterThan('medium')`
       display: grid;
       grid-template-columns: 1fr 1fr;
+  `}
   `}
 `
 
@@ -34,7 +35,7 @@ export const BannerBlock = styled.div`
       margin-bottom: ${theme.spacings.xsmall};
     }
 
-    ${media.greaterThan('medium')`
+    ${theme.media().greaterThan('medium')`
         display: block;
     `}
   `}

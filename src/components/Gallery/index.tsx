@@ -10,16 +10,14 @@ import * as S from './styles'
 import SlickSlider from 'react-slick'
 
 const commomSettings: SliderSettings = {
-  prevArrow: <ArrowLeft aria-label='previous image' />,
-  nextArrow: <ArrowRight aria-label='next image' />,
   infinite: false,
   lazyLoad: 'ondemand'
 }
 
 const thumbsSettings: SliderSettings = {
   ...commomSettings,
+  arrows: false,
   slidesToShow: 4,
-  centerPadding: '100px',
   responsive: [
     {
       breakpoint: 1375,
@@ -38,7 +36,12 @@ const thumbsSettings: SliderSettings = {
   ]
 }
 
-const modalSettings: SliderSettings = { ...commomSettings, initialSlide: 2 }
+const modalSettings: SliderSettings = {
+  ...commomSettings,
+  initialSlide: 2,
+  prevArrow: <ArrowLeft aria-label='previous image' />,
+  nextArrow: <ArrowRight aria-label='next image' />
+}
 
 export type GalleryImageProps = {
   src: string
