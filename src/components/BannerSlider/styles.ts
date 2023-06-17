@@ -40,7 +40,7 @@ export const Wrapper = styled.div`
 
         .slick-dots {
             position: absolute;
-            right: 0;
+            right: 2.5rem;
             top: 0;
             bottom: 0;
             flex-direction: column;
@@ -48,6 +48,12 @@ export const Wrapper = styled.div`
             li {
                 margin: ${theme.spacings.xxsmall} 0;
             }
+        }
+    `}
+
+    ${theme.media().greaterThan('huge')`
+        .slick-dots {
+            right: 0;
         }
     `}
   `}

@@ -8,7 +8,14 @@ export const Wrapper = styled.section`
 `
 
 export const Children = styled.main`
-  flex: 1 0 auto;
+  ${({ theme }) => css`
+    flex: 1 0 auto;
+    margin-top: ${theme.spacings.large};
+
+    ${theme.media().greaterThan('large')`
+        margin-top: ${theme.spacings.xxlarge};
+    `}
+  `}
 `
 
 export const SectionFooter = styled.div`

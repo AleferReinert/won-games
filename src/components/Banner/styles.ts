@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   ${({ theme }) => css`
     position: relative;
 
-    ${theme.media().lessThan('small')`
+    ${theme.media().lessThan('smallLess')`
         ${RibbonStyles.Wrapper} {
             right: 0;
         

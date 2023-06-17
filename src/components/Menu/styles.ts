@@ -13,7 +13,7 @@ export const Wrapper = styled.menu`
 `
 export const LogoWrapper = styled.div`
   ${({ theme }) => css`
-    ${theme.media().lessThan('small')`
+    ${theme.media().lessThan('smallLess')`
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -40,12 +40,26 @@ export const IconWrapper = styled.div`
     cursor: pointer;
     width: 2.4rem;
     height: 2.4rem;
+
+    ${theme.media().greaterThan('small')`
+        display: none;
+    `}
   `}
 `
 
 type MenuFullProps = {
   isOpen: boolean
 }
+
+export const MenuNav = styled.nav`
+  ${({ theme }) => css`
+    margin-left: ${theme.spacings.small};
+
+    ${theme.media().lessThan('smallLess')`
+        display: none;
+    `}
+  `}
+`
 
 export const MenuFull = styled.nav<MenuFullProps>`
   // Verifica se menu está aberto ou fechado
@@ -97,12 +111,6 @@ export const MenuFull = styled.nav<MenuFullProps>`
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
       transition: transform ${theme.transition.default};
     }
-  `}
-`
-
-export const MenuNav = styled.nav`
-  ${({ theme }) => css`
-    margin-left: ${theme.spacings.small};
   `}
 `
 

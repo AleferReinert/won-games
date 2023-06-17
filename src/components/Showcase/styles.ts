@@ -14,7 +14,7 @@ export const Wrapper = styled.section`
     }
 
     ${GameCardSliderStyles.Wrapper} {
-      ${theme.media().lessThan('huge')`
+      ${theme.media().lessThan('hugeLess')`
             margin-right: calc(-${theme.grid.gutter} / 2);
         `}
     }

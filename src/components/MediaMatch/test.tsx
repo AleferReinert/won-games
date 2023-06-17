@@ -13,7 +13,7 @@ describe('<MediaMatch />', () => {
         <MediaMatch greaterThan='small'>
           <h1 data-testid='desktop'>Desktop</h1>
         </MediaMatch>
-        <MediaMatch lessThan='small'>
+        <MediaMatch lessThan='smallLess'>
           <h1 data-testid='mobile'>Mobile</h1>
         </MediaMatch>
       </>
@@ -34,7 +34,7 @@ describe('<MediaMatch />', () => {
     })
 
     expect(mobileHeading.parentElement).toHaveStyleRule('display', 'block', {
-      media: `(max-width: ${theme.breakpoint.small})`
+      media: `(max-width: ${theme.breakpoint.smallLess})`
     })
   })
 })

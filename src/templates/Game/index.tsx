@@ -62,7 +62,7 @@ const Game = ({
         highlight={upcomingHighlight}
         games={upcomingGames}
       />
-      <Showcase title='You make like this games' games={recommendedGames} />
+      <Showcase title='You make like these games' games={recommendedGames} />
     </Base>
   )
 }

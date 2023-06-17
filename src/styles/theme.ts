@@ -62,7 +62,12 @@ const theme = {
     large: '1170px',
     medium: '960px',
     small: '768px',
-    xsmall: '450px'
+    xsmall: '450px',
+    hugeLess: '1439px',
+    largeLess: '1169px',
+    mediumLess: '959px',
+    smallLess: '767px',
+    xsmallLess: '449px'
   },
   media: () => generateMedia(theme.breakpoint)
 }

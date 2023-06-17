@@ -1,6 +1,8 @@
 import Banner, { BannerProps } from 'components/Banner'
 import * as S from './styles'
 import Slider, { SliderSettings } from 'components/Slider'
+import { BreakpointToNumber } from 'utils/tests/helpers'
+import theme from 'styles/theme'
 
 export type BannerSliderProps = {
   items: BannerProps[]
@@ -16,7 +18,7 @@ const settings: SliderSettings = {
   autoplaySpeed: 5000,
   responsive: [
     {
-      breakpoint: 1170,
+      breakpoint: BreakpointToNumber(theme.breakpoint.largeLess),
       settings: {
         vertical: false,
         verticalSwiping: false

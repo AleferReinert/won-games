@@ -17,22 +17,18 @@ const Menu = ({ username }: MenuProps) => {
   const [isOPen, setIsOpen] = useState(false)
   return (
     <S.Wrapper>
-      <MediaMatch lessThan='medium'>
-        <S.IconWrapper onClick={() => setIsOpen(true)}>
-          <MenuIcon aria-label='Open menu' />
-        </S.IconWrapper>
-      </MediaMatch>
+      <S.IconWrapper onClick={() => setIsOpen(true)}>
+        <MenuIcon aria-label='Open menu' />
+      </S.IconWrapper>
 
       <S.LogoWrapper>
         <Logo hideOnMobile />
       </S.LogoWrapper>
 
-      <MediaMatch greaterThan='small'>
-        <S.MenuNav>
-          <S.MenuLink href='/'>Home</S.MenuLink>
-          <S.MenuLink href='#'>Explore</S.MenuLink>
-        </S.MenuNav>
-      </MediaMatch>
+      <S.MenuNav>
+        <S.MenuLink href='/'>Home</S.MenuLink>
+        <S.MenuLink href='#'>Explore</S.MenuLink>
+      </S.MenuNav>
 
       <S.MenuGroup>
         <S.IconWrapper>

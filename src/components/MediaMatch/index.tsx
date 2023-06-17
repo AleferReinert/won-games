@@ -1,6 +1,16 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
-type breakpoint = 'huge' | 'large' | 'medium' | 'small' | 'xsmall'
+type breakpoint =
+  | 'huge'
+  | 'large'
+  | 'medium'
+  | 'small'
+  | 'xsmall'
+  | 'hugeLess'
+  | 'largeLess'
+  | 'mediumLess'
+  | 'smallLess'
+  | 'xsmallLess'
 
 export type MediaMatchProps = {
   lessThan?: breakpoint

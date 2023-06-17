@@ -16,7 +16,7 @@ export const Desktop: ComponentStory<typeof MediaMatch> = () => (
 )
 
 export const Mobile: ComponentStory<typeof MediaMatch> = () => (
-  <MediaMatch lessThan='small'>Apenas mobile</MediaMatch>
+  <MediaMatch lessThan='smallLess'>Apenas mobile</MediaMatch>
 )
 
 Mobile.parameters = {

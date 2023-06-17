@@ -11,7 +11,7 @@ const wrapperModifiers = {
     height: 5.9rem;
   `,
   hideOnMobile: (theme: DefaultTheme) => css`
-    ${theme.media().lessThan('small')`
+    ${theme.media().lessThan('smallLess')`
         width: 5.8rem;
         height: 4.5rem;
         overflow: hidden;
