@@ -5,7 +5,7 @@ import Wishlist, { WishlistTemplateProps } from 'templates/Wishlist'
 export async function getStaticProps() {
   return {
     props: {
-      wishlistGames: gamesMock,
+      //   wishlistGames: gamesMock,
       recommendedHighlight: highlightMock,
       recommendedGames: gamesMock
     }

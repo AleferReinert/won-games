@@ -2,13 +2,15 @@
 
 exports[`<Empty /> should render img, title and description without link 1`] = `
 .c0 {
-  padding: 3.2rem;
+  margin: 3.2rem;
   text-align: center;
 }
 
 .c1 {
-  max-width: 38rem;
+  max-width: 34rem;
   width: 100%;
+  margin-bottom: 2.4rem;
+  margin-right: -0.3rem;
 }
 
 .c2 {
@@ -20,7 +22,7 @@ exports[`<Empty /> should render img, title and description without link 1`] = `
   color: #FAFAFA;
   font-size: 1.4rem;
   font-weight: 300;
-  margin-bottom: 1.6rem;
+  margin-bottom: 2.4rem;
 }
 
 @media (min-width:960px) {
@@ -37,17 +39,13 @@ exports[`<Empty /> should render img, title and description without link 1`] = `
 
 <body>
   <div>
-    <section
+    <div
       class="c0"
     >
       <img
         alt="A person on a couch playing video games"
         class="c1"
-        data-nimg="fill"
-        decoding="async"
-        loading="lazy"
         src="/img/empty.svg"
-        style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
       />
       <h2
         class="c2"
@@ -59,7 +57,7 @@ exports[`<Empty /> should render img, title and description without link 1`] = `
       >
         my description
       </p>
-    </section>
+    </div>
   </div>
 </body>
 `;
