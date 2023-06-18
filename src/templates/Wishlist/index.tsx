@@ -5,6 +5,7 @@ import Heading from 'components/Heading'
 import { HighlightProps } from 'components/Highlight'
 import Showcase from 'components/Showcase'
 import { Container } from 'components/Container'
+import Divider from 'components/Divider'
 
 export type WishlistTemplateProps = {
   wishlistGames?: GameCardProps[]
@@ -34,6 +35,7 @@ const Wishlist = ({
             />
           ))}
         </S.WrapperWishlistGames>
+        <Divider />
       </Container>
 
       <Showcase

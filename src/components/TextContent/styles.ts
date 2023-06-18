@@ -6,13 +6,6 @@ export const Wrapper = styled.div`
     color: ${theme.colors.white};
     font-size: ${theme.font.sizes.medium};
 
-    ${theme.media().greaterThan('small')`
-      background-color: ${theme.colors.white};
-      padding: ${theme.spacings.large};
-      color: ${theme.colors.black};
-      font-size: ${theme.font.sizes.xlarge};
-    `}
-
     h1,
     h2,
     h3,
@@ -67,6 +60,9 @@ export const Wrapper = styled.div`
 
     hr {
       margin: ${theme.spacings.small} 0;
+      border: 0;
+      height: 1px;
+      background-color: ${theme.colors.darkGray};
     }
 
     .description__copyrights {
@@ -74,5 +70,16 @@ export const Wrapper = styled.div`
       color: ${theme.colors.gray};
       margin-top: ${theme.spacings.small};
     }
+
+    ${theme.media().greaterThan('small')`
+      background-color: ${theme.colors.white};
+      padding: ${theme.spacings.large};
+      color: ${theme.colors.black};
+      font-size: ${theme.font.sizes.xlarge};
+
+      hr {
+        background-color: ${theme.colors.lightGray};
+      }
+    `}
   `}
 `

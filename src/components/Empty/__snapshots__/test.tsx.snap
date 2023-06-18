@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Empty /> should render img, title and description without link 1`] = `
+.c0 {
+  padding: 3.2rem;
+  text-align: center;
+}
+
+.c1 {
+  max-width: 38rem;
+  width: 100%;
+}
+
+.c2 {
+  color: #F231A5;
+  font-size: 2.0rem;
+}
+
+.c3 {
+  color: #FAFAFA;
+  font-size: 1.4rem;
+  font-weight: 300;
+  margin-bottom: 1.6rem;
+}
+
+@media (min-width:960px) {
+  .c2 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (min-width:960px) {
+  .c3 {
+    font-size: 1.6rem;
+  }
+}
+
+<body>
+  <div>
+    <section
+      class="c0"
+    >
+      <img
+        alt="A person on a couch playing video games"
+        class="c1"
+        data-nimg="fill"
+        decoding="async"
+        loading="lazy"
+        src="/img/empty.svg"
+        style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+      />
+      <h2
+        class="c2"
+      >
+        my title
+      </h2>
+      <p
+        class="c3"
+      >
+        my description
+      </p>
+    </section>
+  </div>
+</body>
+`;

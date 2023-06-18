@@ -68,13 +68,9 @@ export const TextContentWrapper = styled.div`
 export const GameDetailsWrapper = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.xxlarge};
-    margin-bottom: ${theme.spacings.xxlarge};
 
     ${theme.media().greaterThan('small')`
-        margin-top: calc(${theme.spacings.large} * 2);
-        padding-bottom: calc(${theme.spacings.large} * 2);
-        border-bottom: 1px solid ${theme.colors.gray};
-        margin-bottom: calc(${theme.spacings.large} * 2);
+        margin-top: calc(${theme.spacings.medium} * 2);
     `}
   `}
 `
