@@ -37,7 +37,7 @@
     "upgrade": "^1.1.0"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^13.1.6",
+    "@next/eslint-plugin-next": "^13.4.7",
     "@storybook/addon-essentials": "^6.5.16",
     "@storybook/builder-webpack5": "^6.5.16",
     "@storybook/manager-webpack5": "^6.5.16",
