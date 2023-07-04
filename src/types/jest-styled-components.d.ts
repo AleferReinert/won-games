@@ -4,12 +4,13 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import { Plugin, NewPlugin } from 'pretty-format'
+import { NewPlugin } from 'pretty-format'
+import { css } from 'styled-components'
 
 declare global {
   namespace jest {
     interface AsymmetricMatcher {
-      $$typeof: symbol
+      $$typeof: Symbol
       sample?: string | RegExp | object | Array<any> | Function
     }
 
@@ -17,7 +18,7 @@ declare global {
 
     interface Options {
       media?: string
-      modifier?: string
+      modifier?: string | ReturnType<typeof css>
       supports?: string
     }
 
@@ -27,4 +28,13 @@ declare global {
   }
 }
 
-export declare const styleSheetSerializer: Exclude<Plugin, NewPlugin>
+export interface StyledComponentsSerializerOptions {
+  addStyles?: boolean
+  classNameFormatter?: (index: number) => string
+}
+
+export declare const styleSheetSerializer: NewPlugin & {
+  setStyleSheetSerializerOptions: (
+    options?: StyledComponentsSerializerOptions
+  ) => void
+}

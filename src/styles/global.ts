@@ -16,33 +16,18 @@ const GlobalStyles = createGlobalStyle`
         src: url('/fonts/poppins-v20-latin-regular.woff2') format('woff2');
     }
     @font-face {
+    font-display: swap; 
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/poppins-v20-latin-500.woff2') format('woff2'); 
+    }
+    @font-face {
         font-display: swap;
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 600;
         src: url('/fonts/poppins-v20-latin-600.woff2') format('woff2');
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-
-        &::before,
-        &::after {
-            box-sizing: inherit;
-        }
-    }
-
-    button {
-        cursor: pointer;
-        border: 0;
-    }
-
-    label {
-        cursor: pointer;
     }
 
     ${({ theme }) => css`
@@ -55,6 +40,34 @@ const GlobalStyles = createGlobalStyle`
         font-size: ${theme.font.sizes.medium};
         background-color: ${theme.colors.darkBg};
         overflow-x: hidden;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        &::before,
+        &::after {
+          box-sizing: inherit;
+        }
+      }
+
+      button {
+        cursor: pointer;
+        border: 0;
+        font-family: inherit;
+      }
+
+      label {
+        cursor: pointer;
+      }
+
+      button:focus,
+      svg:focus {
+        outline: none;
       }
     `}    
 `

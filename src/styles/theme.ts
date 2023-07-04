@@ -1,5 +1,3 @@
-import { generateMedia } from 'styled-media-query'
-
 const theme = {
   grid: {
     container: '130rem',
@@ -13,6 +11,7 @@ const theme = {
       "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
     light: 300,
     normal: 400,
+    semibold: 500,
     bold: 600,
     sizes: {
       xxsmall: '1rem',
@@ -20,7 +19,7 @@ const theme = {
       small: '1.4rem',
       medium: '1.6rem',
       large: '1.8rem',
-      xlarge: '2.0rem',
+      xlarge: '2rem',
       xxlarge: '2.8rem',
       huge: '5.2rem'
     }
@@ -58,18 +57,13 @@ const theme = {
     fast: '0.1s ease-in-out'
   },
   breakpoint: {
-    huge: '1440px',
-    large: '1170px',
-    medium: '960px',
+    xlarge: '1920px',
+    large: '1366px',
+    medium: '1024px',
     small: '768px',
-    xsmall: '450px',
-    hugeLess: '1439px',
-    largeLess: '1169px',
-    mediumLess: '959px',
-    smallLess: '767px',
-    xsmallLess: '449px'
-  },
-  media: () => generateMedia(theme.breakpoint)
+    xsmall: '360px',
+    xxsmall: '320px'
+  }
 }
 
 export default theme

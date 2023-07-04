@@ -3,6 +3,5 @@ export default {
   description: `Come seen John's new adventures`,
   buttonLabel: 'Buy now',
   buttonLink: '/link',
-  backgroundImage: '/img/red-dead-img.jpg',
-  floatImage: '/img/red-dead-float.png'
+  backgroundImage: '/img/red-dead-img.jpg'
 }

@@ -1,9 +1,21 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import {{pascalCase name}} from '.'
+import type { StoryObj, Meta } from '@storybook/react'
+import { within } from '@storybook/testing-library'
+import { expect } from '@storybook/jest'
+import {{pascalCase name}}Component from './{{pascalCase name}}'
 
-export default {
+const meta: Meta<typeof {{pascalCase name}}Component> =  {
   title: '{{pascalCase name}}',
-  component: {{pascalCase name}}
-} as ComponentMeta<typeof {{pascalCase name}}>
+  component: {{pascalCase name}}Component
+} 
 
-export const Default: ComponentStory<typeof {{pascalCase name}}> = (args) => <{{pascalCase name}} {...args} />
+export default meta
+
+type Story = StoryObj<typeof {{pascalCase name}}Component>
+
+export const {{pascalCase name}}: Story = {
+    play: ({canvasElement}) => {
+        const canvas = within(canvasElement)
+
+        //expect()
+    }
+}

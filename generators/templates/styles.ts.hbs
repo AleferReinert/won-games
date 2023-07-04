@@ -1,7 +1,12 @@
 import styled, { css } from 'styled-components'
+import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.div``
 export const Example = styled.div`
     ${({theme}) => css`
+
+        ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+            
+        }
     `}
 `

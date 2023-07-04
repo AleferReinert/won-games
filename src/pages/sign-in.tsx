@@ -1,5 +1,5 @@
-import FormSignIn from 'components/FormSignIn'
-import Auth from 'templates/Auth'
+import Auth from 'templates/Auth/Auth'
+import FormSignIn from 'components/FormSignIn/FormSignIn'
 
 export default function SignIn() {
   return (

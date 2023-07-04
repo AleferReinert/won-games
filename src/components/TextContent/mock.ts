@@ -1,5 +1,4 @@
 export default {
-  title: 'Description',
   content: `
   <img alt="" src="/img/games/cyberpunk-1.jpg" />
 <h1>Heading</h1>

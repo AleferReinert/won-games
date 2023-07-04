@@ -1,11 +1,11 @@
+import Wishlist, { WishlistTemplateProps } from 'templates/Wishlist/Wishlist'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/GameCardSlider/mock'
-import Wishlist, { WishlistTemplateProps } from 'templates/Wishlist'
 
 export async function getStaticProps() {
   return {
     props: {
-      //   wishlistGames: gamesMock,
+      wishlistGames: gamesMock,
       recommendedHighlight: highlightMock,
       recommendedGames: gamesMock
     }
