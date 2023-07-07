@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { cssMediaQuery } from 'utils/tests/helpers'
 import * as ButtonStyles from 'components/Button/Button.styles'
 import * as HeadingStyles from 'components/Heading/Heading.styles'
-import * as RibbonStyles from 'components/Ribbon/Ribbon.styles'
+import * as PriceStyles from 'components/Price/Price.styles'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -15,16 +15,10 @@ export const Wrapper = styled.div`
       margin-bottom: ${theme.spacings.small};
     }
 
-    ${RibbonStyles.Wrapper} {
-      border-radius: ${theme.border.radius};
-      font-size: ${theme.font.sizes.large};
-      padding-left: ${theme.spacings.xsmall};
-      padding-right: ${theme.spacings.xsmall};
+    ${PriceStyles.Wrapper} {
+      position: absolute;
       top: ${theme.spacings.medium};
-
-      &::after {
-        display: none;
-      }
+      right: -1rem;
     }
 
     ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
@@ -32,10 +26,12 @@ export const Wrapper = styled.div`
         font-size: ${theme.font.sizes.xxlarge};
       }
 
-      ${RibbonStyles.Wrapper} {
+      ${PriceStyles.Wrapper} {
         right: ${theme.spacings.xlarge};
-        padding-left: ${theme.spacings.small};
-        padding-right: ${theme.spacings.small};
+
+        > div {
+          ${PriceStyles.priceModifiers.large(theme)}
+        }
       }
     }
   `}

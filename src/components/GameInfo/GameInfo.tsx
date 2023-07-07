@@ -4,7 +4,7 @@ import {
 } from '@styled-icons/material-outlined'
 import Button from 'components/Button/Button'
 import Heading from 'components/Heading/Heading'
-import Ribbon from 'components/Ribbon/Ribbon'
+import Price from 'components/Price/Price'
 import * as S from './GameInfo.styles'
 
 export type GameInfoProps = {
@@ -20,7 +20,7 @@ const GameInfo = ({ title, description, price }: GameInfoProps) => {
 
       <S.Description>{description}</S.Description>
 
-      <Ribbon color='secondary'>{'$' + price}</Ribbon>
+      <Price price={price} />
 
       <S.ButtonsWrapper>
         <Button icon={<AddShoppingCart />} full>

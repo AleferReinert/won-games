@@ -34,7 +34,7 @@ const theme = {
     lightGray: '#EAEAEA',
     gray: '#8F8F8F',
     darkGray: '#2E2F42',
-    error: '#ff6347'
+    error: '#FF5F5F'
   },
   spacings: {
     xxsmall: '0.8rem',

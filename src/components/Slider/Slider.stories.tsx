@@ -30,7 +30,6 @@ const meta: Meta<typeof SliderComponent> = {
     }
   },
   render: (args) => {
-    console.log(meta.argTypes?.settings?.table)
     return (
       <SliderComponent settings={args.settings}>
         <Slide data-testid='slide'>1</Slide>

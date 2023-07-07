@@ -40,7 +40,7 @@ export const Default: Story = {
       name: mockGameCard.developer
     })
     const favIcon = canvas.getByRole('img', { name: /add to wishlist/i })
-    const price = canvas.getByLabelText(/price/i)
+    const price = canvas.getByLabelText('price')
     const buttonAddToCart = canvas.getByRole('button', { name: /add to cart/i })
 
     // render items

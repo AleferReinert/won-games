@@ -8,13 +8,13 @@
     "start": "next start",
     "lint": "eslint src --max-warnings=0",
     "prepare": "husky install",
-    "test": "jest --passWithNoTests",
-    "test:watch": "yarn test --watch",
+    "test-jest": "jest --passWithNoTests",
+    "test-jest:watch": "yarn test --watch",
     "generate": "yarn plop --plopfile ./generators/plopfile.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test-storybook": "test-storybook",
-    "test-storybook:watch": "test-storybook --watch",
+    "test": "test-storybook",
+    "test:watch": "test-storybook --watch",
     "chromatic": "npx chromatic --project-token=chpt_098ffb1a1695a39"
   },
   "husky": {
@@ -24,8 +24,7 @@
   },
   "lint-staged": {
     "src/**/*": [
-      "yarn lint --fix",
-      "yarn test"
+      "yarn lint --fix"
     ]
   },
   "dependencies": {
@@ -34,6 +33,7 @@
     "@storybook/addon-interactions": "^7.0.24",
     "@storybook/jest": "^0.1.0",
     "@styled-icons/fa-brands": "^10.47.0",
+    "@styled-icons/material": "^10.47.0",
     "@styled-icons/material-outlined": "^10.47.0",
     "@styled-icons/remix-fill": "^10.46.0",
     "@testing-library/dom": ">=7.21.4",

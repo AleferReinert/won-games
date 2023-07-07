@@ -7,6 +7,7 @@ import Button from 'components/Button/Button'
 import Ribbon from 'components/Ribbon/Ribbon'
 import Image from 'next/image'
 import * as S from './GameCard.styles'
+import Price from 'components/Price/Price'
 
 type CommomProps = {
   title: string
@@ -71,17 +72,11 @@ const GameCard = ({
         </S.FavButton>
 
         <S.BuyBox>
-          {!!promotionalPrice && (
-            <>
-              <S.Price isPromotional aria-label='price'>
-                {price}
-              </S.Price>
-              <S.Price aria-label='promotional price'>
-                {promotionalPrice}
-              </S.Price>
-            </>
+          {promotionalPrice ? (
+            <Price price={price} promotionalPrice={promotionalPrice} />
+          ) : (
+            <Price price={price} />
           )}
-          {!promotionalPrice && <S.Price aria-label='price'>{price}</S.Price>}
           <Button
             icon={<AddShoppingCart />}
             size='xsmall'
