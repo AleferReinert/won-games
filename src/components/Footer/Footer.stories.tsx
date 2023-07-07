@@ -24,7 +24,7 @@ export const Footer: Story = {
     const titles = ['Contact', 'Follow Us', 'Links', 'Location']
     const email = canvas.getByRole('link', { name: /email/i })
     const phone = canvas.getByRole('link', { name: /phone/i })
-    const address = canvas.getByLabelText(/address/i)
+    const address = canvasElement.getElementsByTagName('address')[0]
     const copyright = canvas.getByLabelText(/copyright/i)
 
     expect(logo).toBeInTheDocument()

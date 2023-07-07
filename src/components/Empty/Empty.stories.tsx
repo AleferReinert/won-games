@@ -20,17 +20,17 @@ export default meta
 type Story = StoryObj<typeof Empty>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, args }) => {
     const canvas = within(canvasElement)
     const img = canvas.getByRole('img')
-    const title = canvas.getByRole('heading', { name: /no results found/i })
+    const title = canvas.getByRole('heading')
     const description = canvas.getByText(
       /sorry, we couldn't find any results for your search./i
     )
 
     expect(img).toBeInTheDocument()
-    expect(title).toBeInTheDocument()
-    expect(description).toBeInTheDocument()
+    expect(title).toHaveTextContent(args.title)
+    expect(description).toHaveTextContent(args.description)
   }
 }
 

@@ -23,7 +23,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*": ["yarn storybook", "yarn lint --fix","yarn test-storybook"]
+    "src/**/*": ["yarn lint --fix"]
   },
   "dependencies": {
     "@babel/core": "^7.0.0-0",

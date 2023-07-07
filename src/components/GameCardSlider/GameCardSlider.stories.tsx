@@ -1,10 +1,10 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import { jsMediaQuery } from 'utils/tests/helpers'
 import GameCardSliderComponent from './GameCardSlider'
 import items from './mock'
 import theme from 'styles/theme'
-import { jsMediaQuery } from 'utils/tests/helpers'
 
 const meta: Meta<typeof GameCardSliderComponent> = {
   title: 'Components/GameCardSlider',

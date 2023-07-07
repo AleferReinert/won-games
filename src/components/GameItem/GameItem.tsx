@@ -2,7 +2,7 @@ import { FileDownload } from '@styled-icons/material/FileDownload'
 import Price from 'components/Price/Price'
 import * as S from './GameItem.styles'
 
-type ConditionalProps =
+type ConditionalPaymentProps =
   | {
       creditCardBrand?: undefined
       creditCardNumber?: undefined
@@ -16,14 +16,12 @@ type ConditionalProps =
       purchaseDate: string
     }
 
-type CommomProps = {
+export type GameItemProps = {
   img: string
   title: string
   price: string
   downloadLink?: string
 }
-
-type GameItemProps = CommomProps & ConditionalProps
 
 const GameItem = ({
   img,
@@ -34,7 +32,7 @@ const GameItem = ({
   creditCardBrand,
   creditCardFlag,
   purchaseDate
-}: GameItemProps) => {
+}: GameItemProps & ConditionalPaymentProps) => {
   return (
     <S.Wrapper>
       <S.Img src={img} alt={title} />

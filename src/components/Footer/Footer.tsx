@@ -91,7 +91,7 @@ const Footer = () => {
           >
             Location
           </Heading>
-          <S.Address aria-label='address'>
+          <S.Address>
             <span>Rua 7 de maio, 555</span>
             <span>Centro, CEP 89123-456</span>
             <span>São Paulo, Brasil</span>

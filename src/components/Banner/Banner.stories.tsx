@@ -2,13 +2,16 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import Banner from './Banner'
-import bannerMock from './mock'
 
 const meta: Meta<typeof Banner> = {
   title: 'Components/Banner',
   component: Banner,
   args: {
-    ...bannerMock,
+    img: 'https://source.unsplash.com/user/willianjusten/1042x580',
+    title: 'Defy death',
+    description: 'Play the new <strong>CrashLands</strong> season',
+    buttonLabel: 'Buy now',
+    buttonLink: '/games/defy-death',
     ribbon: '',
     ribbonColor: 'secondary',
     ribbonSize: 'large'
@@ -25,15 +28,15 @@ const meta: Meta<typeof Banner> = {
 type Story = StoryObj<typeof Banner>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, args }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: /defy death/i })
-    const subtitle = canvas.getByText(/play the new/i)
-    const button = canvas.getByRole('link', { name: /buy now/i })
-    const image = canvas.getByRole('img', { name: /defy death/i })
+    const title = canvas.getByRole('heading', { name: args.title })
+    const Description = canvas.getByText(/play the new/i)
+    const button = canvas.getByRole('link', { name: args.buttonLabel })
+    const image = canvas.getByRole('img', { name: args.title })
 
     expect(title).toBeInTheDocument()
-    expect(subtitle).toBeInTheDocument()
+    expect(Description).toBeInTheDocument()
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('href', '/games/defy-death')
     expect(image).toHaveAttribute(

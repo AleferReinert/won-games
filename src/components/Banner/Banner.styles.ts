@@ -75,7 +75,7 @@ export const Title = styled.h2`
   `}
 `
 
-export const Subtitle = styled.p`
+export const Description = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.white};
     font-size: ${theme.font.sizes.small};

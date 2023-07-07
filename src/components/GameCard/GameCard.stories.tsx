@@ -34,11 +34,9 @@ type Story = StoryObj<typeof GameCardComponent>
 export const Default: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement)
-    const img = canvas.getByRole('img', { name: mockGameCard.title })
-    const title = canvas.getByRole('heading', { name: mockGameCard.title })
-    const developer = canvas.getByRole('heading', {
-      name: mockGameCard.developer
-    })
+    const img = canvas.getByRole('img', { name: args.title })
+    const title = canvas.getByRole('heading', { name: args.title })
+    const developer = canvas.getByRole('heading', { name: args.developer })
     const favIcon = canvas.getByRole('img', { name: /add to wishlist/i })
     const price = canvas.getByLabelText('price')
     const buttonAddToCart = canvas.getByRole('button', { name: /add to cart/i })

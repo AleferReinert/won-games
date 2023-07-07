@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { cssMediaQuery } from 'utils/tests/helpers'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.li`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     padding: ${theme.spacings.xxsmall};

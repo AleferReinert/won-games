@@ -7,7 +7,7 @@ import * as S from './Banner.styles'
 export type BannerProps = {
   img: string
   title: string
-  subtitle: string
+  description: string
   buttonLabel: string
   buttonLink: string
   ribbon?: React.ReactNode
@@ -18,7 +18,7 @@ export type BannerProps = {
 const Banner = ({
   img,
   title,
-  subtitle,
+  description,
   buttonLabel,
   buttonLink,
   ribbon,
@@ -35,7 +35,7 @@ const Banner = ({
       <S.Image src={img} role='img' aria-label={title} />
       <S.Caption>
         <S.Title>{title}</S.Title>
-        <S.Subtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
+        <S.Description dangerouslySetInnerHTML={{ __html: description }} />
         <Button as='a' href={buttonLink}>
           {buttonLabel}
         </Button>

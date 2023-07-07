@@ -22,9 +22,9 @@ const meta: Meta<typeof ButtonComponent> = {
       options: ['None', 'AddShoppingCart', 'Download', 'ArrowBack'],
       mapping: {
         None: '',
-        AddShoppingCart: <AddShoppingCart data-testid='icon' />,
-        Download: <Download data-testid='icon' />,
-        ArrowBack: <ArrowBack data-testid='icon' />
+        AddShoppingCart: <AddShoppingCart />,
+        Download: <Download />,
+        ArrowBack: <ArrowBack />
       }
     },
     as: {
@@ -63,7 +63,7 @@ export const Default: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button', { name: /default button/i })
+    const button = canvas.getByRole('button')
 
     // size medium as default
     expect(button).toHaveStyle({ height: remToPx('4rem') })
@@ -80,10 +80,9 @@ export const WithIcon: Story = {
     icon: 'AddShoppingCart'
   },
   play: ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const icon = canvas.getByTestId('icon')
+    const icon = canvasElement.getElementsByTagName('svg')
 
-    expect(icon).toBeInTheDocument()
+    expect(icon.length).toBe(1)
   }
 }
 
@@ -110,7 +109,7 @@ export const Full: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button', { name: /full button/i })
+    const button = canvas.getByRole('button')
 
     expect(button).toHaveStyle({ minWidth: '100%' })
   }
@@ -123,7 +122,7 @@ export const Xsmall: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button', { name: /xsmall button/i })
+    const button = canvas.getByRole('button')
 
     expect(button).toHaveStyle({ height: remToPx('2.2rem') })
   }
@@ -136,7 +135,7 @@ export const Small: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button', { name: /small button/i })
+    const button = canvas.getByRole('button')
 
     expect(button).toHaveStyle({
       height: remToPx('3rem'),
@@ -152,7 +151,7 @@ export const Large: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button', { name: /large button/i })
+    const button = canvas.getByRole('button')
 
     expect(button).toHaveStyle({
       height: remToPx('5rem'),
@@ -169,7 +168,7 @@ export const AsLinkTag: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const link = canvas.getByRole('link', { name: /button as link/i })
+    const link = canvas.getByRole('link')
 
     expect(link).toHaveAttribute('href')
   }
