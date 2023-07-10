@@ -4,7 +4,7 @@ import { expect } from '@storybook/jest'
 import { remToPx } from 'polished'
 import { hexToRGBA, jsMediaQuery } from 'utils/tests/helpers'
 import Heading from './Heading'
-import theme from '../../styles/theme'
+import theme from 'styles/theme'
 
 const meta: Meta<typeof Heading> = {
   title: 'Components/Heading',
@@ -12,7 +12,9 @@ const meta: Meta<typeof Heading> = {
   argTypes: {
     children: {
       type: 'string'
-    }
+    },
+    lineColor: { if: { arg: 'line' } },
+    lineBottomSize: { if: { arg: 'line' } }
   }
 }
 
@@ -26,7 +28,8 @@ export const Playground: Story = {
     color: 'white',
     size: 'medium',
     line: 'left',
-    lineColor: 'primary'
+    lineColor: 'primary',
+    lineBottomSize: 'large'
   }
 }
 
@@ -36,9 +39,9 @@ export const Default: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: /default heading/i })
+    const title = canvas.getByRole('heading')
 
-    // color white and size medium as default
+    // color white and size xlarge as default
     expect(title).toHaveStyle({ color: theme.colors.white })
     jsMediaQuery.lessThan(theme.breakpoint.small, () => {
       expect(title).toHaveStyle({ fontSize: remToPx(theme.font.sizes.xlarge) })
@@ -61,7 +64,7 @@ export const Black: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: /black heading/i })
+    const title = canvas.getByRole('heading')
 
     expect(title).toHaveStyle({ color: theme.colors.black })
   }
@@ -74,9 +77,35 @@ export const Small: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: /small heading/i })
+    const title = canvas.getByRole('heading')
+
+    expect(title).toHaveStyle({ fontSize: remToPx(theme.font.sizes.small) })
+  }
+}
+
+export const Medium: Story = {
+  args: {
+    children: 'Medium heading',
+    size: 'medium'
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const title = canvas.getByRole('heading')
 
     expect(title).toHaveStyle({ fontSize: remToPx(theme.font.sizes.medium) })
+  }
+}
+
+export const Large: Story = {
+  args: {
+    children: 'Large heading',
+    size: 'large'
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const title = canvas.getByRole('heading')
+
+    expect(title).toHaveStyle({ fontSize: remToPx(theme.font.sizes.large) })
   }
 }
 
@@ -100,9 +129,7 @@ export const lineLeft: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', {
-      name: /line left/i
-    })
+    const title = canvas.getByRole('heading')
 
     expect(title).toHaveStyle({
       borderLeft: `${remToPx('0.7rem')} solid ${theme.colors.primary}`
@@ -117,9 +144,7 @@ export const LineBottom: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', {
-      name: /line bottom/i
-    })
+    const title = canvas.getByRole('heading')
 
     // line color primary as default
     expect(window.getComputedStyle(title, '::after').borderBottom).toBe(
@@ -136,9 +161,7 @@ export const LineLeftSecondary: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', {
-      name: /line left secondary/i
-    })
+    const title = canvas.getByRole('heading')
 
     expect(title).toHaveStyle({
       borderLeft: `${remToPx('0.7rem')} solid ${theme.colors.secondary}`
@@ -154,12 +177,61 @@ export const LineBottomSecondary: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', {
-      name: /line bottom secondary/i
-    })
+    const title = canvas.getByRole('heading')
 
     expect(window.getComputedStyle(title, '::after').borderBottom).toBe(
       `${remToPx('0.5rem')} solid ${hexToRGBA(theme.colors.secondary)}`
     )
+  }
+}
+
+export const LineBottomSmall: Story = {
+  args: {
+    children: 'Line bottom small',
+    line: 'bottom',
+    lineBottomSize: 'small'
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const title = canvas.getByRole('heading')
+    const titleAfter = window.getComputedStyle(title, '::after')
+
+    expect(titleAfter.width).toBe(remToPx('2.5rem'))
+    expect(titleAfter.borderBottomWidth).toBe(remToPx('0.3rem'))
+    expect(titleAfter.bottom).toBe(remToPx('-0.4rem'))
+  }
+}
+
+export const LineBottomMedium: Story = {
+  args: {
+    children: 'Line bottom medium',
+    line: 'bottom',
+    lineBottomSize: 'medium'
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const title = canvas.getByRole('heading')
+    const titleAfter = window.getComputedStyle(title, '::after')
+
+    expect(titleAfter.width).toBe(remToPx('4rem'))
+    expect(titleAfter.borderBottomWidth).toBe(remToPx('0.4rem'))
+    expect(titleAfter.bottom).toBe(remToPx('-0.4rem'))
+  }
+}
+
+export const LineBottomLarge: Story = {
+  args: {
+    children: 'Line bottom large',
+    line: 'bottom'
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const title = canvas.getByRole('heading')
+    const titleAfter = window.getComputedStyle(title, '::after')
+
+    // Border large as default
+    expect(titleAfter.width).toBe(remToPx('5rem'))
+    expect(titleAfter.borderBottomWidth).toBe(remToPx('0.5rem'))
+    expect(titleAfter.bottom).toBe(remToPx('-0.8rem'))
   }
 }

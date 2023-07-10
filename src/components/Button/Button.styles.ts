@@ -47,11 +47,17 @@ export const wrapperModifiers = {
     &:hover {
       color: ${lighten(0.1, theme.colors.primary)};
     }
+  `,
+  disabled: (theme: DefaultTheme) => css`
+    &:disabled {
+      background: ${theme.colors.gray};
+      cursor: default;
+    }
   `
 }
 
 export const ButtonStyle = css<ButtonProps>`
-  ${({ theme, size, full, icon, variant }) => css`
+  ${({ theme, size, full, icon, variant, disabled }) => css`
     cursor: pointer;
     border: 0;
     border-radius: ${theme.border.radius};
@@ -64,9 +70,10 @@ export const ButtonStyle = css<ButtonProps>`
     padding: 0 ${theme.spacings.xxsmall};
 
     ${!!size && wrapperModifiers[size](theme)}
-    ${!!full && wrapperModifiers.full()}
+    ${full && wrapperModifiers.full()}
     ${!!icon && wrapperModifiers.icon(theme)}
     ${!!variant && wrapperModifiers[variant](theme)}
+    ${disabled && wrapperModifiers.disabled(theme)}
   `}
 `
 export const Wrapper = styled.button`

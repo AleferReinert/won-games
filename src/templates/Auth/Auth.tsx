@@ -28,12 +28,7 @@ const Auth = ({ title, children }: AuthProps) => {
       <S.AuthBlock>
         <S.AuthContent>
           <Logo color='black' size='large' />
-          <Heading
-            line='left'
-            lineColor='secondary'
-            size='medium'
-            color='black'
-          >
+          <Heading line='left' lineColor='secondary' color='black'>
             {title}
           </Heading>
           {children}

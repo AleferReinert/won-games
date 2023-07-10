@@ -1,11 +1,11 @@
 import type { StoryObj, Meta } from '@storybook/react'
+import { jsMediaQuery } from 'utils/tests/helpers'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import ShowcaseComponent from './Showcase'
-import highlightMock from '../../components/Highlight/mock'
-import gamesMock from '../../components/GameCardSlider/mock'
-import theme from '../../styles/theme'
-import { jsMediaQuery } from 'utils/tests/helpers'
+import highlightMock from 'components/Highlight/mock'
+import gamesMock from 'components/GameCardSlider/mock'
+import theme from 'styles/theme'
 
 const meta: Meta<typeof ShowcaseComponent> = {
   title: 'Components/Showcase',

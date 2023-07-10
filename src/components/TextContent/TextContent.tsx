@@ -1,5 +1,5 @@
-import * as S from './TextContent.styles'
 import Heading from 'components/Heading/Heading'
+import * as S from './TextContent.styles'
 
 export type TextContentProps = {
   title?: string

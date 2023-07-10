@@ -1,8 +1,8 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import TextContentComponent from './TextContent'
 import { jsMediaQuery } from 'utils/tests/helpers'
+import TextContentComponent from './TextContent'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof TextContentComponent> = {

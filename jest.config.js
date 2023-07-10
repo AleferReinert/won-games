@@ -1,11 +1,11 @@
 const config = {
-  //   collectCoverage: true,
-  //   collectCoverageFrom: [
-  //     'src/**/*.ts(x)?',
-  //     '!src/**/*.stories.tsx',
-  //     '!src/pages/**/*.tsx',
-  //     '!src/styles/**/*.styles.ts'
-  //   ],
+  //     collectCoverage: true,
+  //     collectCoverageFrom: [
+  //       'src/**/*.ts(x)?',
+  //       '!src/**/*.stories.tsx',
+  //       '!src/pages/**/*.tsx',
+  //       '!src/styles/**/*.styles.ts'
+  //     ],
   modulePaths: ['<rootDir>/src/', '<rootDir>/.jest'],
   setupFilesAfterEnv: ['<rootDir>/.jest/setup.js'],
   testEnvironment: 'jsdom',

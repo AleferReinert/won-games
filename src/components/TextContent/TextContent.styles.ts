@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import * as HeadingStyles from 'components/Heading/Heading.styles'
 import { cssMediaQuery } from 'utils/tests/helpers'
+import * as HeadingStyles from 'components/Heading/Heading.styles'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     h6 {
       color: ${theme.colors.white};
       margin: ${theme.spacings.xsmall} 0;
-      ${HeadingStyles.wrapperModifiers.left(theme, 'secondary')};
+      ${HeadingStyles.lineModifiers.left(theme, 'secondary')};
 
       ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
         color: ${theme.colors.black};

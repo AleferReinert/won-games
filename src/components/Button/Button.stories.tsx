@@ -6,10 +6,10 @@ import {
   Download,
   ArrowBack
 } from '@styled-icons/material-outlined'
-import React from 'react'
 import ButtonComponent from './Button'
 import { remToPx } from 'polished'
-import theme from '../../styles/theme'
+import { hexToRGBA } from 'utils/tests/helpers'
+import theme from 'styles/theme'
 
 const meta: Meta<typeof ButtonComponent> = {
   title: 'Components/Button',
@@ -156,6 +156,22 @@ export const Large: Story = {
     expect(button).toHaveStyle({
       height: remToPx('5rem'),
       fontSize: remToPx(theme.font.sizes.medium)
+    })
+  }
+}
+
+export const Disabled: Story = {
+  args: {
+    children: 'disabled button',
+    disabled: true
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const button = canvas.getByRole('button')
+
+    expect(button).toHaveStyle({
+      backgroundColor: hexToRGBA(theme.colors.gray),
+      cursor: 'default'
     })
   }
 }

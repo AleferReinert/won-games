@@ -36,4 +36,5 @@ public/sw.js
 public/workbox-*.js
 
 # storybook
+/src/stories
 /storybook-static

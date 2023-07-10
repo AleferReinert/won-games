@@ -11,7 +11,7 @@ const Footer = () => {
         <S.Column>
           <Heading
             color='black'
-            size='small'
+            size='medium'
             line='bottom'
             lineColor='secondary'
           >
@@ -28,7 +28,7 @@ const Footer = () => {
         <S.Column>
           <Heading
             color='black'
-            size='small'
+            size='medium'
             line='bottom'
             lineColor='secondary'
           >
@@ -69,7 +69,7 @@ const Footer = () => {
         <S.Column>
           <Heading
             color='black'
-            size='small'
+            size='medium'
             line='bottom'
             lineColor='secondary'
           >
@@ -85,7 +85,7 @@ const Footer = () => {
         <S.Column>
           <Heading
             color='black'
-            size='small'
+            size='medium'
             line='bottom'
             lineColor='secondary'
           >

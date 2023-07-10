@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from '../../utils/tests/helpers'
+import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.section`
   display: flex;
