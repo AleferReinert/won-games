@@ -4,7 +4,7 @@ import { cssMediaQuery } from 'utils/tests/helpers'
 export const Wrapper = styled.li`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
-    padding: ${theme.spacings.xxsmall};
+    padding: ${theme.spacings.xsmall};
     display: grid;
     grid-template-columns: min-content auto;
     grid-template-rows: auto auto;
@@ -12,7 +12,6 @@ export const Wrapper = styled.li`
     border-bottom: 0.1rem solid ${theme.colors.lightGray};
 
     ${cssMediaQuery.greaterThan(theme.breakpoint.xsmall)} {
-      padding: ${theme.spacings.xsmall};
       column-gap: ${theme.spacings.xsmall};
     }
 

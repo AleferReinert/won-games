@@ -1,12 +1,12 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import BaseComponent from './Base'
+import BaseTemplate from './Base'
 import React from 'react'
 
-const meta: Meta<typeof BaseComponent> = {
+const meta: Meta<typeof BaseTemplate> = {
   title: 'Templates/Base',
-  component: BaseComponent,
+  component: BaseTemplate,
   args: {
     children: (
       <div style={{ color: 'white', textAlign: 'center' }}>
@@ -15,6 +15,7 @@ const meta: Meta<typeof BaseComponent> = {
     )
   },
   parameters: {
+    layout: 'fullscreen',
     options: {
       showPanel: false
     }
@@ -23,7 +24,7 @@ const meta: Meta<typeof BaseComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof BaseComponent>
+type Story = StoryObj<typeof BaseTemplate>
 
 export const Base: Story = {
   play: ({ canvasElement }) => {

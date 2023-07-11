@@ -22,8 +22,11 @@ const Highlight = ({
   alignment = 'right'
 }: HighlightProps) => {
   return (
-    <S.Wrapper backgroundImage={backgroundImage} alignment={alignment}>
-      {/* {!!floatImage && <S.FloatImage src={floatImage} alt={title} />} */}
+    <S.Wrapper
+      backgroundImage={backgroundImage}
+      alignment={alignment}
+      data-testid='highlightComponent'
+    >
       <S.FloatImage>
         {!!floatImage && <Image src={floatImage} alt={title} fill />}
       </S.FloatImage>

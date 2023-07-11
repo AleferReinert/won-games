@@ -4,6 +4,7 @@ import { expect } from '@storybook/jest'
 import CartListComponent from './CartList'
 import mockGameItems from './mock'
 import theme from 'styles/theme'
+
 const meta: Meta<typeof CartListComponent> = {
   title: 'Components/CartList',
   component: CartListComponent,

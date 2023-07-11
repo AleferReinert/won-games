@@ -10,23 +10,21 @@ module.exports = function (plop) {
         message: 'component name?'
       }
     ],
-
-    // actions to perform
     actions: [
       {
         type: 'add',
         path: '../src/components/{{pascalCase  name}}/{{pascalCase  name}}.tsx',
-        templateFile: 'templates/index.tsx.hbs'
+        templateFile: 'templates/component/index.tsx.hbs'
       },
       {
         type: 'add',
         path: '../src/components/{{pascalCase  name}}/{{pascalCase  name}}.stories.tsx',
-        templateFile: 'templates/stories.tsx.hbs'
+        templateFile: 'templates/component/stories.tsx.hbs'
       },
       {
         type: 'add',
         path: '../src/components/{{pascalCase  name}}/{{pascalCase  name}}.styles.ts',
-        templateFile: 'templates/styles.ts.hbs'
+        templateFile: 'templates/component/styles.ts.hbs'
       }
     ]
   })

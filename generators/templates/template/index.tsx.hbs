@@ -1,0 +1,18 @@
+import Base from 'templates/Base/Base'
+import Container from 'components/Container/Container'
+import Heading from 'components/Heading/Heading'
+import * as S from './{{pascalCase name}}.styles'
+
+const {{pascalCase name}} = () => {
+  return (
+    <Base>
+      <Container>
+        <Heading line='left' lineColor='secondary'>
+          {{pascalCase name}}
+        </Heading>
+      </Container>
+    </Base>
+  )
+}
+
+export default {{pascalCase name}}

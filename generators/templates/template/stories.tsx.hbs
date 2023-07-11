@@ -1,0 +1,27 @@
+import type { StoryObj, Meta } from '@storybook/react'
+import { within } from '@storybook/testing-library'
+import { expect } from '@storybook/jest'
+import {{pascalCase name}}Template from './{{pascalCase name}}'
+
+const meta: Meta<typeof {{pascalCase name}}Template> =  {
+  title: 'Templates/{{pascalCase name}}',
+  component: {{pascalCase name}}Template,
+  parameters: {
+    layout: 'fullscreen',
+    options: {
+      showPanel: false
+    }
+  }
+} 
+
+export default meta
+
+type Story = StoryObj<typeof {{pascalCase name}}Template>
+
+export const {{pascalCase name}}: Story = {
+    play: ({canvasElement}) => {
+        const canvas = within(canvasElement)
+
+        //expect()
+    }
+}

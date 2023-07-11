@@ -22,7 +22,7 @@ export const Playground: Story = {
     downloadLink: '/link',
     creditCardNumber: '**** **** **** 4326',
     creditCardBrand: 'mastercard',
-    creditCardFlag: '/img/mastercard.png',
+    creditCardFlag: '/img/creditCards/mastercard.png',
     purchaseDate: 'Purchase made on 07/06/2023 at 00:42'
   }
 }

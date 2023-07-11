@@ -1,7 +1,6 @@
 import { Preview } from '@storybook/react'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { ThemeProvider } from 'styled-components'
-import Container from '../src/components/Container/Container'
 import React from 'react'
 import GlobalStyles from '../src/styles/global'
 import theme from '../src/styles/theme'
@@ -76,7 +75,6 @@ const preview: Preview = {
     controls: {
       hideNoControlsWarning: true
     },
-    layout: 'fullscreen',
     options: {
       showPanel: true,
       panelDirection: 'right'
@@ -88,11 +86,7 @@ export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Container>
-        <div style={{ marginTop: '1.6rem', marginBottom: '1.6rem' }}>
-          <Story />
-        </div>
-      </Container>
+      <Story />
     </ThemeProvider>
   )
 ]

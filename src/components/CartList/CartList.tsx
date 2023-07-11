@@ -1,14 +1,14 @@
 import GameItem, { GameItemProps } from 'components/GameItem/GameItem'
 import * as S from './CartList.styles'
 
-type CartList = {
+export type CartListProps = {
   gameItems: GameItemProps[]
   total: string
 }
 
-const CartList = ({ gameItems, total }: CartList) => {
+const CartList = ({ gameItems, total }: CartListProps) => {
   return (
-    <>
+    <S.Wrapper aria-label='cart list'>
       <S.List>
         {gameItems.map((game, index) => (
           <GameItem key={index} {...game} />
@@ -18,7 +18,7 @@ const CartList = ({ gameItems, total }: CartList) => {
         Total:
         <S.PriceTotal aria-label='total price'>{total}</S.PriceTotal>
       </S.Footer>
-    </>
+    </S.Wrapper>
   )
 }
 

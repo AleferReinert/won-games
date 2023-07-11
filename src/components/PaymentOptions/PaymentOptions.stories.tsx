@@ -2,6 +2,7 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { userEvent, waitFor, within } from '@storybook/testing-library'
 import { expect, jest } from '@storybook/jest'
 import PaymentOptionsComponent from './PaymentOptions'
+import creditCardsMock from './mock'
 
 const meta: Meta<typeof PaymentOptionsComponent> = {
   title: 'Components/PaymentOptions',
@@ -44,18 +45,7 @@ export const Default: Story = {
 
 export const WithCreditCards: Story = {
   args: {
-    creditCards: [
-      {
-        flag: 'visa',
-        number: '**** **** **** 7937',
-        img: 'img/creditCards/visa.png'
-      },
-      {
-        flag: 'mastercard',
-        number: '**** **** **** 0805',
-        img: 'img/creditCards/mastercard.png'
-      }
-    ]
+    creditCards: creditCardsMock
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -71,7 +61,7 @@ export const WithCreditCards: Story = {
 
 export const WithCreditCardSelected: Story = {
   args: {
-    ...WithCreditCards.args,
+    creditCards: creditCardsMock,
     handlePayment: jest.fn()
   },
   play: async ({ canvasElement, args }) => {

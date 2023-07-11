@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components'
 import { Container } from 'components/Container/Container.styles'
 import { cssMediaQuery } from 'utils/tests/helpers'
-import theme from 'styles/theme'
 
 type CoverProps = {
   src: string
 }
 
 export const Cover = styled.div<CoverProps>`
-  ${({ src }) => css`
+  ${({ theme, src }) => css`
     background-image: url(${src});
     background-position: top center;
     background-size: cover;
@@ -36,11 +35,13 @@ export const Cover = styled.div<CoverProps>`
 `
 
 export const GameInfoWrapper = styled(Container)`
-  margin-top: 20rem;
+  ${({ theme }) => css`
+    margin-top: 20rem;
 
-  ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
-    margin-top: 30rem;
-  }
+    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+      margin-top: 30rem;
+    }
+  `}
 `
 
 export const GalleryWrapper = styled.div`

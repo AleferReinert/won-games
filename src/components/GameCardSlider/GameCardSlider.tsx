@@ -51,7 +51,7 @@ const GameCardSlider = ({
   arrowColor = 'white'
 }: GameCardSliderProps) => {
   return (
-    <S.Wrapper arrowColor={arrowColor}>
+    <S.Wrapper arrowColor={arrowColor} data-testid='gameCardSliderComponent'>
       <Slider settings={settings}>
         {items.map((item, index) => (
           <GameCard key={index} {...item} />

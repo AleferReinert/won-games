@@ -12,7 +12,7 @@ type CreditCardProps = {
   img: string
 }
 
-type PaymentOptionsProps = {
+export type PaymentOptionsProps = {
   creditCards?: CreditCardProps[]
   handlePayment: () => void
 }
@@ -24,7 +24,7 @@ const PaymentOptions = ({
   const [buttonDisabled, setButtonDisabled] = useState(true)
 
   return (
-    <S.Wrapper>
+    <S.Wrapper data-testid='paymentOptions'>
       <S.Content>
         <Heading
           size='large'

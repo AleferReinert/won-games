@@ -1,20 +1,26 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import AuthComponent from './Auth'
+import AuthTemplate from './Auth'
 
-const meta: Meta<typeof AuthComponent> = {
+const meta: Meta<typeof AuthTemplate> = {
   title: 'Templates/Auth',
-  component: AuthComponent,
+  component: AuthTemplate,
   args: {
     title: 'Required title',
     children: 'Required children'
+  },
+  parameters: {
+    layout: 'fullscreen',
+    options: {
+      showPanel: false
+    }
   }
 }
 
 export default meta
 
-type Story = StoryObj<typeof AuthComponent>
+type Story = StoryObj<typeof AuthTemplate>
 
 export const Auth: Story = {
   play: ({ canvasElement }) => {

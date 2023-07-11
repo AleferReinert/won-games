@@ -1,7 +1,7 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import GameComponent from './Game'
+import GameTemplate from './Game'
 import gameInfoMock from 'components/GameInfo/mock'
 import galleryMock from 'components/Gallery/mock'
 import textContentMock from 'components/TextContent/mock'
@@ -9,9 +9,9 @@ import gameDetailsMock from 'components/GameDetails/mock'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 
-const meta: Meta<typeof GameComponent> = {
+const meta: Meta<typeof GameTemplate> = {
   title: 'Templates/Game',
-  component: GameComponent,
+  component: GameTemplate,
   args: {
     cover: '/img/games/cyberpunk-1.jpg',
     gameInfo: gameInfoMock,
@@ -23,6 +23,7 @@ const meta: Meta<typeof GameComponent> = {
     recommendedGames: gamesMock
   },
   parameters: {
+    layout: 'fullscreen',
     options: {
       showPanel: false
     }
@@ -31,7 +32,7 @@ const meta: Meta<typeof GameComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof GameComponent>
+type Story = StoryObj<typeof GameTemplate>
 
 export const Game: Story = {
   play: ({ canvasElement, args }) => {
@@ -41,7 +42,13 @@ export const Game: Story = {
     const gallery = canvas.queryByTestId('galleryComponent')
     const description = canvas.getByTestId('textContentComponent')
     const details = canvas.getByTestId('gameDetailsComponent')
-    const showcases = canvas.getAllByTestId('showcaseComponent')
+    const upcomingTitle = canvas.getByRole('heading', { name: /upcoming/i })
+    const upcomingHighlight = canvas.getByTestId('highlightComponent')
+    const upcomingGames = canvas.getAllByTestId('gameCardSliderComponent')[0]
+    const recommendedTitle = canvas.getByRole('heading', {
+      name: /you make like these games/i
+    })
+    const recommendedGames = canvas.getAllByTestId('gameCardSliderComponent')[1]
 
     expect(cover).toHaveAttribute('src')
     expect(gameInfo).toBeInTheDocument()
@@ -51,6 +58,10 @@ export const Game: Story = {
 
     expect(description).toBeInTheDocument()
     expect(details).toBeInTheDocument()
-    expect(showcases.length).toBe(2)
+    expect(upcomingTitle).toBeInTheDocument()
+    expect(upcomingHighlight).toBeInTheDocument()
+    expect(upcomingGames).toBeInTheDocument()
+    expect(recommendedTitle).toBeInTheDocument()
+    expect(recommendedGames).toBeInTheDocument()
   }
 }

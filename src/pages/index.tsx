@@ -1,19 +1,19 @@
+import HighlightStory from 'components/Highlight/Highlight.stories'
 import Home, { HomeTemplateProps } from 'templates/Home/Home'
 import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
-import highlightMock from 'components/Highlight/mock'
 
 export function getServerSideProps() {
   return {
     props: {
       banners: bannersMock,
       newGames: gamesMock,
-      mostPopularHighlight: highlightMock,
+      mostPopularHighlight: HighlightStory.args,
       mostPopularsGames: gamesMock,
       comingSoonGames: gamesMock,
-      comingSoonHighlight: highlightMock,
+      comingSoonHighlight: HighlightStory.args,
       comingSoonMoreGames: gamesMock,
-      freeHighlight: highlightMock,
+      freeHighlight: HighlightStory.args,
       freeGames: gamesMock
     }
   }

@@ -11,12 +11,17 @@ export const Wrapper = styled.footer`
 export const Content = styled.div`
   ${({ theme }) => css`
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: ${theme.grid.gutter};
     margin-top: ${theme.spacings.medium};
 
+    ${cssMediaQuery.greaterThan(theme.breakpoint.xsmall)} {
+      grid-template-columns: repeat(2, 1fr);
+      overflow-wrap: anywhere;
+    }
+
     ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
       grid-template-columns: repeat(4, 1fr);
+      overflow-wrap: normal;
     }
   `}
 `
