@@ -32,16 +32,11 @@ yarn storybook
 
 Executar os testes:
 ```
-yarn test-storybook --watch
+yarn test-storybook
 ```
 
-Criar componente:
+Criar componente ou template:
 ```
-yarn generate-component
-```
-
-Criar template:
-```
-yarn generate-template
+yarn plop
 ```
 
