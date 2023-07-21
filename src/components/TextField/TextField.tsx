@@ -3,7 +3,6 @@ import { useState, InputHTMLAttributes, ReactNode } from 'react'
 
 export type TextFieldProps = {
   onInput?: (value: string) => void
-  id: string
   name: string
   label?: string
   icon?: ReactNode
@@ -16,7 +15,6 @@ export type TextFieldProps = {
 const TextField = ({
   onInput,
   name,
-  id,
   label,
   icon,
   iconPosition = 'left',
@@ -36,7 +34,7 @@ const TextField = ({
 
   return (
     <S.Wrapper disabled={disabled}>
-      {!!label && <S.Label htmlFor={id}>{label}</S.Label>}
+      {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
       <S.InputWrapper iconPosition={iconPosition} errorMessage={errorMessage}>
         {!!icon && <S.Icon>{icon}</S.Icon>}
         <S.Input
@@ -46,7 +44,7 @@ const TextField = ({
           disabled={disabled}
           autoComplete='off'
           name={name}
-          id={id}
+          id={name}
           {...props}
         />
       </S.InputWrapper>

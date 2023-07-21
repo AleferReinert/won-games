@@ -135,15 +135,21 @@ export const IconRight: Story = {
 
 export const Disabled: Story = {
   args: {
-    disabled: true
+    disabled: true,
+    label: 'Disabled'
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
+    const label = canvas.getByText(/disabled/i)
     const textField = canvas.getByRole('textbox')
 
+    expect(label).toHaveStyle({
+      color: theme.colors.gray,
+      cursor: 'default'
+    })
     expect(textField).toBeDisabled()
-    expect(textField).toHaveStyle({ cursor: 'not-allowed' })
-    expect(textField.parentElement).toHaveStyle({ cursor: 'not-allowed' })
+    expect(textField).toHaveStyle({ cursor: 'default' })
+    expect(textField.parentElement).toHaveStyle({ cursor: 'default' })
 
     // not be acessible with tab
     expect(document.body).toHaveFocus()

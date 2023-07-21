@@ -9,14 +9,12 @@ const FormSignIn = () => {
     <S.FormWrapper>
       <form>
         <TextField
-          id='email'
           name='email'
           type='email'
           placeholder='E-mail'
           icon={<Email />}
         />
         <TextField
-          id='password'
           name='password'
           type='password'
           placeholder='Password'

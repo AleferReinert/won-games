@@ -13,7 +13,7 @@
     "plop": "plop --plopfile ./generators/plopfile.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "test-storybook",
+    "test-storybook": "test-storybook",
     "test:watch": "test-storybook --watch"
   },
   "husky": {

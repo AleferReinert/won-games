@@ -8,10 +8,10 @@ const modifiers = {
   `,
   disabled: (theme: DefaultTheme) => css`
     ${InputWrapper} {
-      cursor: not-allowed;
+      cursor: default;
 
       ${Input} {
-        cursor: not-allowed;
+        cursor: default;
         color: ${lighten(0.15, theme.colors.gray)};
 
         &::placeholder {
@@ -22,6 +22,11 @@ const modifiers = {
       svg {
         color: ${lighten(0.15, theme.colors.gray)};
       }
+    }
+
+    ${Label} {
+      cursor: default;
+      color: ${theme.colors.gray};
     }
   `,
   errorMessage: (theme: DefaultTheme) => css`

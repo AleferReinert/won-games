@@ -8,28 +8,20 @@ const FormSignUp = () => {
   return (
     <S.FormWrapper>
       <form>
+        <TextField name='name' placeholder='Name' icon={<AccountCircle />} />
         <TextField
-          id='name'
-          name='name'
-          placeholder='Name'
-          icon={<AccountCircle />}
-        />
-        <TextField
-          id='email'
           name='email'
           type='email'
           placeholder='E-mail'
           icon={<Email />}
         />
         <TextField
-          id='password'
           name='password'
           type='password'
           placeholder='Password'
           icon={<Lock />}
         />
         <TextField
-          id='confirm-password'
           name='confirm-password'
           type='password'
           placeholder='Confirm password'
