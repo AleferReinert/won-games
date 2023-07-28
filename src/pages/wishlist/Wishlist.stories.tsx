@@ -1,13 +1,13 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import WishlistTemplate from './Wishlist'
+import WishlistPage from '.'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
 
-const meta: Meta<typeof WishlistTemplate> = {
-  title: 'Templates/Wishlist',
-  component: WishlistTemplate,
+const meta: Meta<typeof WishlistPage> = {
+  title: 'Pages/Wishlist',
+  component: WishlistPage,
   args: {
     recommendedHighlight: highlightMock,
     recommendedGames: gamesMock
@@ -22,7 +22,7 @@ const meta: Meta<typeof WishlistTemplate> = {
 
 export default meta
 
-type Story = StoryObj<typeof WishlistTemplate>
+type Story = StoryObj<typeof WishlistPage>
 
 export const Default: Story = {
   args: {

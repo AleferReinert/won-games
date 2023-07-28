@@ -6,6 +6,8 @@ import Empty from 'components/Empty/Empty'
 import Product, { ProductProps } from 'components/Product/Product'
 import Heading from 'components/Heading/Heading'
 import Showcase from 'components/Showcase/Showcase'
+import highlightMock from 'components/Highlight/mock'
+import productsMock from 'components/ProductSlider/mock'
 import * as S from './Wishlist.styles'
 
 export type WishlistTemplateProps = {
@@ -14,11 +16,21 @@ export type WishlistTemplateProps = {
   recommendedGames: ProductProps[]
 }
 
-const Wishlist = ({
-  wishlistGames = [],
-  recommendedHighlight,
-  recommendedGames
-}: WishlistTemplateProps) => {
+export async function getStaticProps() {
+  return {
+    props: {
+      wishlistGames: [],
+      recommendedHighlight: highlightMock,
+      recommendedGames: productsMock
+    }
+  }
+}
+
+const Wishlist = (props: WishlistTemplateProps) => {
+  const emptyWishlist =
+    typeof props.wishlistGames === 'undefined' ||
+    props.wishlistGames.length === 0
+
   return (
     <Base>
       <Container>
@@ -26,33 +38,33 @@ const Wishlist = ({
           Wishlist
         </Heading>
 
-        {wishlistGames.length > 0 ? (
-          <S.WrapperWishlistGames>
-            {wishlistGames?.map((game, index) => (
-              <Product
-                key={'wishlist-' + index}
-                title={game.title}
-                developer={game.developer}
-                img={game.img}
-                price={game.price}
-              />
-            ))}
-          </S.WrapperWishlistGames>
-        ) : (
+        {emptyWishlist ? (
           <Empty
             title='Your wishlist is empty'
             description='Games added to your wishlist will appear here.'
             link='/'
             label='Go back to store'
           />
+        ) : (
+          <S.WrapperWishlistGames>
+            {props.wishlistGames?.map((item, index) => (
+              <Product
+                key={'wishlist-' + index}
+                title={item.title}
+                developer={item.developer}
+                img={item.img}
+                price={item.price}
+              />
+            ))}
+          </S.WrapperWishlistGames>
         )}
         <Divider />
       </Container>
 
       <Showcase
         title='You make like these games'
-        highlight={recommendedHighlight}
-        games={recommendedGames}
+        highlight={props.recommendedHighlight}
+        games={props.recommendedGames}
       />
     </Base>
   )

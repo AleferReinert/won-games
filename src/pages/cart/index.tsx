@@ -1,4 +1,8 @@
+import { CartItemProps } from 'components/CartItem/CartItem'
+import { CreditCardProps } from 'components/CreditCard/CreditCard'
+import { HighlightProps } from 'components/Highlight/Highlight'
 import { Info } from '@styled-icons/material-outlined/Info'
+import { ProductProps } from 'components/Product/Product'
 import Base from 'templates/Base/Base'
 import CartItemList from 'components/CartItemList/CartItemList'
 import Container from 'components/Container/Container'
@@ -8,15 +12,11 @@ import Divider from 'components/Divider/Divider'
 import Empty from 'components/Empty/Empty'
 import Link from 'next/link'
 import Showcase from 'components/Showcase/Showcase'
-import * as S from './Cart.styles'
 import highlightMock from 'components/Highlight/mock'
 import productSliderMock from 'components/ProductSlider/mock'
 import cartItemsMock from 'components/CartItemList/mock'
 import creditCardsMock from 'components/PaymentOptions/mock'
-import { CartItemProps } from 'components/CartItem/CartItem'
-import { CreditCardProps } from 'components/CreditCard/CreditCard'
-import { HighlightProps } from 'components/Highlight/Highlight'
-import { ProductProps } from 'components/Product/Product'
+import * as S from './Cart.styles'
 
 type CartPageProps = {
   cartItems: CartItemProps[]
@@ -40,6 +40,8 @@ export async function getServerSideProps() {
 
 const Cart = (props: CartPageProps) => {
   const handlePayment = () => ({})
+  const emptyCart =
+    typeof props.cartItems === 'undefined' || props.cartItems.length === 0
 
   return (
     <Base>
@@ -48,7 +50,14 @@ const Cart = (props: CartPageProps) => {
           My cart
         </Heading>
 
-        {props.cartItems.length ? (
+        {emptyCart ? (
+          <Empty
+            title='Your cart is empty'
+            description='Go back to the store and explore great games and offers.'
+            label='Home'
+            link='/'
+          />
+        ) : (
           <>
             <S.Content>
               <CartItemList cartItems={props.cartItems} total={props.total} />
@@ -68,13 +77,6 @@ const Cart = (props: CartPageProps) => {
               does not occurred after your purchase.
             </S.Info>
           </>
-        ) : (
-          <Empty
-            title='Your cart is empty'
-            description='Go back to the store and explore great games and offers.'
-            label='Home'
-            link='/'
-          />
         )}
         <Divider />
       </Container>
