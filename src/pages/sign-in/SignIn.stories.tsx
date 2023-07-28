@@ -1,18 +1,18 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import SignInComponent from './index'
+import SignInPage from './index'
 
-const meta: Meta<typeof SignInComponent> = {
+const meta: Meta<typeof SignInPage> = {
   title: 'Pages/SignIn',
-  component: SignInComponent,
+  component: SignInPage,
   parameters: {
     layout: 'fullscreen'
   }
 }
 export default meta
 
-type Story = StoryObj<typeof SignInComponent>
+type Story = StoryObj<typeof SignInPage>
 
 export const SignIn: Story = {
   play: ({ canvasElement }) => {

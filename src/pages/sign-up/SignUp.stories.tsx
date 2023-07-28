@@ -1,27 +1,18 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import FormSignUpComponent from './FormSignUp'
+import SignUpPage from './index'
 
-const meta: Meta<typeof FormSignUpComponent> = {
-  title: 'Components/FormSignUp',
-  component: FormSignUpComponent,
+const meta: Meta<typeof SignUpPage> = {
+  title: 'Pages/SignUp',
+  component: SignUpPage,
   parameters: {
-    backgrounds: {
-      default: 'Light'
-    }
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ maxWidth: '38rem', margin: '0 auto' }}>
-        <Story />
-      </div>
-    )
-  ]
+    layout: 'fullscreen'
+  }
 }
 export default meta
 
-type Story = StoryObj<typeof FormSignUpComponent>
+type Story = StoryObj<typeof SignUpPage>
 
 export const FormSignUp: Story = {
   play: ({ canvasElement }) => {
