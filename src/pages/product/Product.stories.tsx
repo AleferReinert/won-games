@@ -1,7 +1,8 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import GamePage from './[slug]'
+import BaseTemplate from 'templates/Base/Base'
+import ProductPage from './[slug]'
 import productHeaderMock from 'components/ProductHeader/mock'
 import galleryMock from 'components/Gallery/mock'
 import textContentMock from 'components/TextContent/mock'
@@ -9,9 +10,9 @@ import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
 
-const meta: Meta<typeof GamePage> = {
-  title: 'Pages/Game',
-  component: GamePage,
+const meta: Meta<typeof ProductPage> = {
+  title: 'Pages/Product',
+  component: ProductPage,
   args: {
     cover: '/img/games/cyberpunk-1.jpg',
     productHeader: productHeaderMock,
@@ -22,6 +23,13 @@ const meta: Meta<typeof GamePage> = {
     upcomingGames: gamesMock,
     recommendedGames: gamesMock
   },
+  decorators: [
+    (Story) => (
+      <BaseTemplate>
+        <Story />
+      </BaseTemplate>
+    )
+  ],
   parameters: {
     layout: 'fullscreen',
     options: {
@@ -32,9 +40,9 @@ const meta: Meta<typeof GamePage> = {
 
 export default meta
 
-type Story = StoryObj<typeof GamePage>
+type Story = StoryObj<typeof ProductPage>
 
-export const Game: Story = {
+export const Product: Story = {
   play: ({ canvasElement, args }) => {
     const canvas = within(canvasElement)
     const cover = canvas.getByLabelText(/cover/i)

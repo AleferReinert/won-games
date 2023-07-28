@@ -1,16 +1,18 @@
+import type { ReactElement } from 'react'
+import type { NextPageWithLayout } from '../_app'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import Base from 'templates/Base/Base'
 import Container from 'components/Container/Container'
 import Divider from 'components/Divider/Divider'
 import Empty from 'components/Empty/Empty'
-import Product, { ProductProps } from 'components/Product/Product'
 import Heading from 'components/Heading/Heading'
+import Product, { ProductProps } from 'components/Product/Product'
 import Showcase from 'components/Showcase/Showcase'
+import * as S from './Wishlist.styles'
 import highlightMock from 'components/Highlight/mock'
 import productsMock from 'components/ProductSlider/mock'
-import * as S from './Wishlist.styles'
 
-export type WishlistTemplateProps = {
+export type WishlistPageProps = {
   wishlistGames?: ProductProps[]
   recommendedHighlight: HighlightProps
   recommendedGames: ProductProps[]
@@ -26,13 +28,13 @@ export async function getStaticProps() {
   }
 }
 
-const Wishlist = (props: WishlistTemplateProps) => {
+const WishlistPage = (props: WishlistPageProps & NextPageWithLayout) => {
   const emptyWishlist =
     typeof props.wishlistGames === 'undefined' ||
     props.wishlistGames.length === 0
 
   return (
-    <Base>
+    <>
       <Container>
         <Heading line='left' lineColor='secondary'>
           Wishlist
@@ -66,8 +68,12 @@ const Wishlist = (props: WishlistTemplateProps) => {
         highlight={props.recommendedHighlight}
         games={props.recommendedGames}
       />
-    </Base>
+    </>
   )
 }
 
-export default Wishlist
+WishlistPage.getLayout = function getLayout(page: ReactElement) {
+  return <Base>{page}</Base>
+}
+
+export default WishlistPage

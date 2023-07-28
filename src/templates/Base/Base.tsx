@@ -7,7 +7,7 @@ export type BaseTemplateProps = {
   children: React.ReactNode
 }
 
-const Base = ({ children }: BaseTemplateProps) => {
+const BaseTemplate = ({ children }: BaseTemplateProps) => {
   return (
     <S.Wrapper>
       <Container>
@@ -23,4 +23,4 @@ const Base = ({ children }: BaseTemplateProps) => {
   )
 }
 
-export default Base
+export default BaseTemplate

@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react'
+import type { NextPageWithLayout } from '../_app'
 import Gallery, { GalleryImageProps } from 'components/Gallery/Gallery'
 import ProductHeader, {
   ProductHeaderProps
@@ -12,7 +14,7 @@ import Container from 'components/Container/Container'
 import Divider from 'components/Divider/Divider'
 import Showcase from 'components/Showcase/Showcase'
 import TextContent from 'components/TextContent/TextContent'
-import * as S from './Game.styles'
+import * as S from './Product.styles'
 import productHeaderMock from 'components/ProductHeader/mock'
 import galleryMock from 'components/Gallery/mock'
 import textContentMock from 'components/TextContent/mock'
@@ -20,7 +22,7 @@ import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
 
-type GamePageProps = {
+type ProductPageProps = {
   cover: string
   productHeader: ProductHeaderProps
   gallery?: GalleryImageProps[]
@@ -53,9 +55,9 @@ export async function getStaticProps() {
   }
 }
 
-const Game = (props: GamePageProps) => {
+const ProductPage = (props: ProductPageProps & NextPageWithLayout) => {
   return (
-    <Base>
+    <>
       <S.Cover src={props.cover} aria-label='cover' role='img' />
       <S.ProductHeaderWrapper>
         <ProductHeader {...props.productHeader} />
@@ -91,8 +93,12 @@ const Game = (props: GamePageProps) => {
         title='You make like these games'
         games={props.recommendedGames}
       />
-    </Base>
+    </>
   )
 }
 
-export default Game
+ProductPage.getLayout = function getLayout(page: ReactElement) {
+  return <Base>{page}</Base>
+}
+
+export default ProductPage

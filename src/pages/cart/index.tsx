@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react'
+import type { NextPageWithLayout } from '../_app'
 import { CartItemProps } from 'components/CartItem/CartItem'
 import { CreditCardProps } from 'components/CreditCard/CreditCard'
 import { HighlightProps } from 'components/Highlight/Highlight'
@@ -38,13 +40,13 @@ export async function getServerSideProps() {
   }
 }
 
-const Cart = (props: CartPageProps) => {
+const CartPage = (props: CartPageProps & NextPageWithLayout) => {
   const handlePayment = () => ({})
   const emptyCart =
     typeof props.cartItems === 'undefined' || props.cartItems.length === 0
 
   return (
-    <Base>
+    <>
       <Container>
         <Heading line='left' lineColor='secondary'>
           My cart
@@ -86,8 +88,12 @@ const Cart = (props: CartPageProps) => {
         highlight={props.recommendedHighlight}
         games={props.recommendedGames}
       />
-    </Base>
+    </>
   )
 }
 
-export default Cart
+CartPage.getLayout = function getLayout(page: ReactElement) {
+  return <Base>{page}</Base>
+}
+
+export default CartPage

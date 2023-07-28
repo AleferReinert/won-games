@@ -2,13 +2,21 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import {{pascalCase name}}Page from './index'
+import BaseTemplate from 'templates/Base/Base'
 
 const meta: Meta<typeof {{pascalCase name}}Page> =  {
   title: 'Pages/{{pascalCase name}}',
   component: {{pascalCase name}}Page,
+  decorators: [
+    (Story) => (
+      <BaseTemplate>
+        <Story />
+      </BaseTemplate>
+    )
+  ],
   parameters: {
     layout: 'fullscreen'
-  }
+  },
 } 
 
 export default meta

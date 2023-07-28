@@ -1,6 +1,7 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import BaseTemplate from 'templates/Base/Base'
 import CartPage from '.'
 import highlightMock from 'components/Highlight/mock'
 import productSliderMock from 'components/ProductSlider/mock'
@@ -17,6 +18,13 @@ const meta: Meta<typeof CartPage> = {
     recommendedHighlight: highlightMock,
     recommendedGames: productSliderMock
   },
+  decorators: [
+    (Story) => (
+      <BaseTemplate>
+        <Story />
+      </BaseTemplate>
+    )
+  ],
   parameters: {
     layout: 'fullscreen',
     options: {

@@ -2,12 +2,12 @@ import Logo from 'components/Logo/Logo'
 import Heading from 'components/Heading/Heading'
 import * as S from './Auth.styles'
 
-type AuthProps = {
+type AuthTemplateProps = {
   title: string
   children: React.ReactNode
 }
 
-const Auth = ({ title, children }: AuthProps) => {
+const AuthTemplate = ({ title, children }: AuthTemplateProps) => {
   return (
     <S.Wrapper>
       <S.BannerBlock>
@@ -38,4 +38,4 @@ const Auth = ({ title, children }: AuthProps) => {
   )
 }
 
-export default Auth
+export default AuthTemplate

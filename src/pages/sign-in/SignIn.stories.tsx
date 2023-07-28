@@ -1,13 +1,24 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import AuthTemplate from 'templates/Auth/Auth'
 import SignInPage from './index'
 
 const meta: Meta<typeof SignInPage> = {
   title: 'Pages/SignIn',
   component: SignInPage,
+  decorators: [
+    (Story) => (
+      <AuthTemplate title='Sign In'>
+        <Story />
+      </AuthTemplate>
+    )
+  ],
   parameters: {
-    layout: 'fullscreen'
+    layout: 'fullscreen',
+    options: {
+      showPanel: false
+    }
   }
 }
 export default meta
