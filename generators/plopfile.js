@@ -36,11 +36,6 @@ module.exports = function (plop) {
       actions: [
         {
           type: 'add',
-          path: '../src/pages/{{camelCase  name}}.tsx',
-          templateFile: 'templates/template/page.tsx.hbs'
-        },
-        {
-          type: 'add',
           path: '../src/templates/{{pascalCase  name}}/{{pascalCase  name}}.tsx',
           templateFile: 'templates/template/index.tsx.hbs'
         },
@@ -53,6 +48,32 @@ module.exports = function (plop) {
           type: 'add',
           path: '../src/templates/{{pascalCase  name}}/{{pascalCase  name}}.styles.ts',
           templateFile: 'templates/template/styles.ts.hbs'
+        }
+      ]
+    }),
+    plop.setGenerator('page', {
+      prompts: [
+        {
+          type: 'input',
+          name: 'name',
+          message: 'page name?'
+        }
+      ],
+      actions: [
+        {
+          type: 'add',
+          path: '../src/pages/{{dashCase name}}/index.tsx',
+          templateFile: 'templates/page/index.tsx.hbs'
+        },
+        {
+          type: 'add',
+          path: '../src/pages/{{dashCase name}}/{{pascalCase  name}}.stories.tsx',
+          templateFile: 'templates/page/stories.tsx.hbs'
+        },
+        {
+          type: 'add',
+          path: '../src/pages/{{dashCase name}}/{{pascalCase  name}}.styles.ts',
+          templateFile: 'templates/page/styles.ts.hbs'
         }
       ]
     })

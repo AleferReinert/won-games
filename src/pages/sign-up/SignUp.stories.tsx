@@ -14,7 +14,7 @@ export default meta
 
 type Story = StoryObj<typeof SignUpPage>
 
-export const FormSignUp: Story = {
+export const SignUp: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const textFields = ['Name', 'E-mail', 'Password', 'Confirm password']

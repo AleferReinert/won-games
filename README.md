@@ -35,7 +35,7 @@ Executar os testes:
 yarn test-storybook
 ```
 
-Criar componente ou template:
+Criar componente, template ou página:
 ```
 yarn plop
 ```
