@@ -1,4 +1,18 @@
-import Game, { GameTemplateProps } from 'templates/Game/Game'
+import Gallery, { GalleryImageProps } from 'components/Gallery/Gallery'
+import ProductHeader, {
+  ProductHeaderProps
+} from 'components/ProductHeader/ProductHeader'
+import ProductDetails, {
+  ProductDetailsProps
+} from 'components/ProductDetails/ProductDetails'
+import { ProductProps } from 'components/Product/Product'
+import { HighlightProps } from 'components/Highlight/Highlight'
+import Base from 'templates/Base/Base'
+import Container from 'components/Container/Container'
+import Divider from 'components/Divider/Divider'
+import Showcase from 'components/Showcase/Showcase'
+import TextContent from 'components/TextContent/TextContent'
+import * as S from './Game.styles'
 import productHeaderMock from 'components/ProductHeader/mock'
 import galleryMock from 'components/Gallery/mock'
 import textContentMock from 'components/TextContent/mock'
@@ -6,8 +20,15 @@ import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
 
-export default function Index(props: GameTemplateProps) {
-  return <Game {...props} />
+type GamePageProps = {
+  cover: string
+  productHeader: ProductHeaderProps
+  gallery?: GalleryImageProps[]
+  description: string
+  details: ProductDetailsProps
+  upcomingHighlight: HighlightProps
+  upcomingGames: ProductProps[]
+  recommendedGames: ProductProps[]
 }
 
 export async function getStaticPaths() {
@@ -31,3 +52,47 @@ export async function getStaticProps() {
     }
   }
 }
+
+const Game = (props: GamePageProps) => {
+  return (
+    <Base>
+      <S.Cover src={props.cover} aria-label='cover' role='img' />
+      <S.ProductHeaderWrapper>
+        <ProductHeader {...props.productHeader} />
+      </S.ProductHeaderWrapper>
+
+      {!!props.gallery && (
+        <S.GalleryWrapper>
+          <Container>
+            <Gallery items={props.gallery} />
+          </Container>
+        </S.GalleryWrapper>
+      )}
+
+      <S.TextContentWrapper>
+        <Container>
+          <TextContent title='About game' content={props.description} />
+        </Container>
+      </S.TextContentWrapper>
+
+      <Container>
+        <S.ProductDetailsWrapper>
+          <ProductDetails {...props.details} />
+        </S.ProductDetailsWrapper>
+        <Divider />
+      </Container>
+
+      <Showcase
+        title='Upcoming'
+        highlight={props.upcomingHighlight}
+        games={props.upcomingGames}
+      />
+      <Showcase
+        title='You make like these games'
+        games={props.recommendedGames}
+      />
+    </Base>
+  )
+}
+
+export default Game

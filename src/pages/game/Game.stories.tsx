@@ -1,7 +1,7 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import GameTemplate from './Game'
+import GamePage from './[slug]'
 import productHeaderMock from 'components/ProductHeader/mock'
 import galleryMock from 'components/Gallery/mock'
 import textContentMock from 'components/TextContent/mock'
@@ -9,9 +9,9 @@ import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
 
-const meta: Meta<typeof GameTemplate> = {
-  title: 'Templates/Game',
-  component: GameTemplate,
+const meta: Meta<typeof GamePage> = {
+  title: 'Pages/Game',
+  component: GamePage,
   args: {
     cover: '/img/games/cyberpunk-1.jpg',
     productHeader: productHeaderMock,
@@ -32,7 +32,7 @@ const meta: Meta<typeof GameTemplate> = {
 
 export default meta
 
-type Story = StoryObj<typeof GameTemplate>
+type Story = StoryObj<typeof GamePage>
 
 export const Game: Story = {
   play: ({ canvasElement, args }) => {

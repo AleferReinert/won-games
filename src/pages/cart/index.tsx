@@ -18,7 +18,7 @@ import { CreditCardProps } from 'components/CreditCard/CreditCard'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { ProductProps } from 'components/Product/Product'
 
-type CartProps = {
+type CartPageProps = {
   cartItems: CartItemProps[]
   total: string
   creditCards: CreditCardProps[]
@@ -38,7 +38,7 @@ export async function getServerSideProps() {
   }
 }
 
-const Cart = (props: CartProps) => {
+const Cart = (props: CartPageProps) => {
   const handlePayment = () => ({})
 
   return (
