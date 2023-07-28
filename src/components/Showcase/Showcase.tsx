@@ -1,8 +1,8 @@
 import * as S from './Showcase.styles'
 import Heading from 'components/Heading/Heading'
 import Highlight, { HighlightProps } from 'components/Highlight/Highlight'
-import GameCardSlider from 'components/GameCardSlider/GameCardSlider'
-import { GameCardProps } from 'components/GameCard/GameCard'
+import ProductSlider from 'components/ProductSlider/ProductSlider'
+import { ProductProps } from 'components/Product/Product'
 import { Container } from 'components/Container/Container.styles'
 
 type CommomProps = {
@@ -13,11 +13,11 @@ type CommomProps = {
 type ConditionalProps =
   | {
       highlight: HighlightProps
-      games?: GameCardProps[]
+      games?: ProductProps[]
     }
   | {
       highlight?: HighlightProps
-      games: GameCardProps[]
+      games: ProductProps[]
     }
 
 export type ShowcaseProps = CommomProps & ConditionalProps
@@ -39,7 +39,7 @@ const Showcase = ({
 
         {!!highlight && <Highlight {...highlight} />}
 
-        {!!games && <GameCardSlider items={games} arrowColor={arrowColor} />}
+        {!!games && <ProductSlider items={games} arrowColor={arrowColor} />}
       </Container>
     </S.Wrapper>
   )

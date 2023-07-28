@@ -1,14 +1,11 @@
 import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.article`
-  ${({ theme }) => css`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    background-color: ${theme.colors.white};
-  `}
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 `
 
 export const ImageBox = styled.div`
@@ -42,14 +39,11 @@ export const ImageBox = styled.div`
 `
 
 export const Content = styled.div`
-  ${({ theme }) => css`
-    padding: ${theme.spacings.xsmall};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    height: 100%;
-  `}
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  height: 100%;
 `
 
 export const Info = styled.div`
@@ -80,9 +74,9 @@ export const FavButton = styled.button`
     border: 0;
     color: ${theme.colors.primary};
     position: absolute;
-    right: ${theme.spacings.xsmall};
+    right: 0;
     cursor: pointer;
-    top: 1.2rem;
+    top: 0;
   `}
 `
 

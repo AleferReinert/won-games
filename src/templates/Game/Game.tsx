@@ -1,9 +1,11 @@
 import Gallery, { GalleryImageProps } from 'components/Gallery/Gallery'
-import GameInfo, { GameInfoProps } from 'components/GameInfo/GameInfo'
-import GameDetails, {
-  GameDetailsProps
-} from 'components/GameDetails/GameDetails'
-import { GameCardProps } from 'components/GameCard/GameCard'
+import ProductHeader, {
+  ProductHeaderProps
+} from 'components/ProductHeader/ProductHeader'
+import ProductDetails, {
+  ProductDetailsProps
+} from 'components/ProductDetails/ProductDetails'
+import { ProductProps } from 'components/Product/Product'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import Base from 'templates/Base/Base'
 import Container from 'components/Container/Container'
@@ -14,18 +16,18 @@ import * as S from './Game.styles'
 
 export type GameTemplateProps = {
   cover: string
-  gameInfo: GameInfoProps
+  productHeader: ProductHeaderProps
   gallery?: GalleryImageProps[]
   description: string
-  details: GameDetailsProps
+  details: ProductDetailsProps
   upcomingHighlight: HighlightProps
-  upcomingGames: GameCardProps[]
-  recommendedGames: GameCardProps[]
+  upcomingGames: ProductProps[]
+  recommendedGames: ProductProps[]
 }
 
 const Game = ({
   cover,
-  gameInfo,
+  productHeader,
   gallery,
   description,
   details,
@@ -36,9 +38,9 @@ const Game = ({
   return (
     <Base>
       <S.Cover src={cover} aria-label='cover' role='img' />
-      <S.GameInfoWrapper>
-        <GameInfo {...gameInfo} />
-      </S.GameInfoWrapper>
+      <S.ProductHeaderWrapper>
+        <ProductHeader {...productHeader} />
+      </S.ProductHeaderWrapper>
 
       {!!gallery && (
         <S.GalleryWrapper>
@@ -55,9 +57,9 @@ const Game = ({
       </S.TextContentWrapper>
 
       <Container>
-        <S.GameDetailsWrapper>
-          <GameDetails {...details} />
-        </S.GameDetailsWrapper>
+        <S.ProductDetailsWrapper>
+          <ProductDetails {...details} />
+        </S.ProductDetailsWrapper>
         <Divider />
       </Container>
 

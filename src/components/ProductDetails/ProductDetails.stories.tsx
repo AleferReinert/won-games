@@ -2,13 +2,13 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { pxToNumber } from 'utils/tests/helpers'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import GameDetailsComponent from './GameDetails'
+import ProductDetailsComponent from './ProductDetails'
 import mock from './mock'
 import theme from 'styles/theme'
 
-const meta: Meta<typeof GameDetailsComponent> = {
-  title: 'Components/GameDetails',
-  component: GameDetailsComponent,
+const meta: Meta<typeof ProductDetailsComponent> = {
+  title: 'Components/ProductDetails',
+  component: ProductDetailsComponent,
   args: mock,
   argTypes: {
     releaseDate: {
@@ -29,9 +29,9 @@ const meta: Meta<typeof GameDetailsComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof GameDetailsComponent>
+type Story = StoryObj<typeof ProductDetailsComponent>
 
-export const GameDetails: Story = {
+export const ProductDetails: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const viewport = canvasElement.clientWidth

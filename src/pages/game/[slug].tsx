@@ -1,10 +1,10 @@
 import Game, { GameTemplateProps } from 'templates/Game/Game'
-import gameInfoMock from 'components/GameInfo/mock'
+import productHeaderMock from 'components/ProductHeader/mock'
 import galleryMock from 'components/Gallery/mock'
 import textContentMock from 'components/TextContent/mock'
-import gameDetailsMock from 'components/GameDetails/mock'
+import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
-import gamesMock from 'components/GameCardSlider/mock'
+import gamesMock from 'components/ProductSlider/mock'
 
 export default function Index(props: GameTemplateProps) {
   return <Game {...props} />
@@ -21,10 +21,10 @@ export async function getStaticProps() {
   return {
     props: {
       cover: '/img/games/cyberpunk-1.jpg',
-      gameInfo: gameInfoMock,
+      productHeader: productHeaderMock,
       gallery: galleryMock,
       description: textContentMock.content,
-      details: gameDetailsMock,
+      details: productDetailsMock,
       upcomingHighlight: highlightMock,
       upcomingGames: gamesMock,
       recommendedGames: gamesMock

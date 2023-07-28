@@ -4,7 +4,7 @@ import { expect } from '@storybook/jest'
 import Empty from './Empty'
 
 const meta: Meta<typeof Empty> = {
-  title: 'Components/Empty',
+  title: 'Components/Atoms/Empty',
   component: Empty,
   args: {
     title: 'No results found',

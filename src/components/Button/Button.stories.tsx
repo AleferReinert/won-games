@@ -12,7 +12,7 @@ import { hexToRGBA } from 'utils/tests/helpers'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof ButtonComponent> = {
-  title: 'Components/Button',
+  title: 'Components/Atoms/Button',
   component: ButtonComponent,
   argTypes: {
     size: {
@@ -45,17 +45,6 @@ const meta: Meta<typeof ButtonComponent> = {
 export default meta
 
 type Story = StoryObj<typeof ButtonComponent>
-
-export const Playground: Story = {
-  args: {
-    children: 'custom button',
-    size: 'medium',
-    variant: 'primary',
-    full: false,
-    icon: 'None',
-    as: 'button'
-  }
-}
 
 export const Default: Story = {
   args: {

@@ -2,13 +2,13 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import { jsMediaQuery } from 'utils/tests/helpers'
-import GameCardSliderComponent from './GameCardSlider'
+import ProductSliderComponent from './ProductSlider'
 import items from './mock'
 import theme from 'styles/theme'
 
-const meta: Meta<typeof GameCardSliderComponent> = {
-  title: 'Components/GameCardSlider',
-  component: GameCardSliderComponent,
+const meta: Meta<typeof ProductSliderComponent> = {
+  title: 'Components/ProductSlider',
+  component: ProductSliderComponent,
   args: { items },
   argTypes: {
     items: {
@@ -18,7 +18,7 @@ const meta: Meta<typeof GameCardSliderComponent> = {
 }
 export default meta
 
-type Story = StoryObj<typeof GameCardSliderComponent>
+type Story = StoryObj<typeof ProductSliderComponent>
 
 export const Default: Story = {
   play: ({ canvasElement }) => {

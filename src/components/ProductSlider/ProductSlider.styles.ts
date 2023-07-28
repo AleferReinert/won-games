@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
-import { GameCardSliderProps } from './GameCardSlider'
+import { ProductSliderProps } from './ProductSlider'
 import { cssMediaQuery } from 'utils/tests/helpers'
 
-type WrapperProps = Pick<GameCardSliderProps, 'arrowColor'>
+type WrapperProps = Pick<ProductSliderProps, 'arrowColor'>
 
 export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, arrowColor }) => css`

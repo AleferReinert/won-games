@@ -5,7 +5,7 @@ import ProfileMenuComponent from './ProfileMenu'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof ProfileMenuComponent> = {
-  title: 'Components/ProfileMenu',
+  title: 'Components/Atoms/ProfileMenu',
   component: ProfileMenuComponent
 }
 
@@ -13,31 +13,18 @@ export default meta
 
 type Story = StoryObj<typeof ProfileMenuComponent>
 
-export const Default: Story = {
+export const ProfileMenu: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const items = canvas.getAllByRole('link')
-    const icons = canvas.getAllByTitle(/my/i)
-    const iconSignOut = canvas.getByTitle(/sign out/i)
+    const icons = canvas.getAllByRole('img')
+    const activeLink = canvas.getByRole('link', { name: /my profile/i })
 
-    // Render 4 links
+    // Render 4 items
     expect(items.length).toBe(4)
+    expect(icons.length).toBe(4)
 
-    // Render 4 icons with title
-    expect(icons.length).toBe(3)
-    expect(iconSignOut).toBeInTheDocument()
-  }
-}
-
-export const ActiveLink: Story = {
-  args: {
-    activeLink: 'profile/orders'
-  },
-  play: ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const activeLink = canvas.getByRole('link', { name: /my orders/i })
-
-    // Styles to active link
+    // My profile active as default
     expect(activeLink).toHaveStyle({
       color: theme.colors.white,
       backgroundColor: theme.colors.primary

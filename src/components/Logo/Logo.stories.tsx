@@ -6,21 +6,13 @@ import Logo from './Logo'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof Logo> = {
-  title: 'Components/Logo',
+  title: 'Components/Atoms/Logo',
   component: Logo
 }
 
 export default meta
 
 type Story = StoryObj<typeof Logo>
-
-export const Playground: Story = {
-  args: {
-    color: 'white',
-    size: 'medium',
-    withoutText: false
-  }
-}
 
 export const Default: Story = {
   play: ({ canvasElement }) => {

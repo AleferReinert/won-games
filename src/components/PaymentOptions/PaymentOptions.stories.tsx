@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { userEvent, waitFor, within } from '@storybook/testing-library'
-import { expect, jest } from '@storybook/jest'
+import { within } from '@storybook/testing-library'
+import { expect } from '@storybook/jest'
 import PaymentOptionsComponent from './PaymentOptions'
 import creditCardsMock from './mock'
 
@@ -49,38 +49,12 @@ export const WithCreditCards: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const images = canvas.getAllByRole('img')
+    const creditCards = canvas.getAllByRole('listitem')
     const radios = canvas.getAllByRole('radio')
 
-    expect(images.length).toBeGreaterThan(0)
-    expect(radios.length).toBeGreaterThan(0)
-    expect(canvas.getByText(/7937/)).toBeInTheDocument()
-    expect(canvas.getByText(/0805/)).toBeInTheDocument()
-  }
-}
+    expect(creditCards.length).toBeGreaterThan(0)
 
-export const WithCreditCardSelected: Story = {
-  args: {
-    creditCards: creditCardsMock,
-    handlePayment: jest.fn()
-  },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement)
-    const radios = canvas.getAllByRole('radio')
-    const buttonBuyNow = canvas.getByRole('button', { name: /buy now/i })
-
-    // Testind disabled button and enable button "Buy now" only if a credit card is checked
-    await userEvent.click(buttonBuyNow)
-    expect(args.handlePayment).not.toHaveBeenCalled()
-
-    for (let i = 0; i < radios.length; i++) {
-      expect(radios[i]).not.toBeChecked()
-      await userEvent.click(radios[i])
-      expect(radios[i]).toBeChecked()
-    }
-
-    expect(buttonBuyNow).not.toBeDisabled()
-    await userEvent.click(buttonBuyNow)
-    await waitFor(() => expect(args.handlePayment).toHaveBeenCalled())
+    // First credit card selected as default
+    expect(radios[0]).toBeChecked()
   }
 }

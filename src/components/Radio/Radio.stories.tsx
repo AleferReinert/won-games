@@ -5,7 +5,7 @@ import Radio from './Radio'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof Radio> = {
-  title: 'Components/Radio',
+  title: 'Components/Atoms/Radio',
   component: Radio,
   args: {
     name: 'category'

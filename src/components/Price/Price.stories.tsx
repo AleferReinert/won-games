@@ -6,7 +6,7 @@ import PriceComponent from './Price'
 import { remToPx } from 'polished'
 
 const meta: Meta<typeof PriceComponent> = {
-  title: 'Components/Price',
+  title: 'Components/Atoms/Price',
   component: PriceComponent,
   args: {
     price: '$215.00'

@@ -3,7 +3,7 @@ import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import WishlistTemplate from './Wishlist'
 import highlightMock from 'components/Highlight/mock'
-import gamesMock from 'components/GameCardSlider/mock'
+import gamesMock from 'components/ProductSlider/mock'
 
 const meta: Meta<typeof WishlistTemplate> = {
   title: 'Templates/Wishlist',
@@ -32,14 +32,14 @@ export const Default: Story = {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading', { name: 'Wishlist' })
     const games = within(title.parentElement!).queryAllByTestId(
-      'gameCardComponent'
+      'productComponent'
     )
     const empty = canvas.queryByTestId('emptyComponent')
     const recommendedTitle = canvas.getByRole('heading', {
       name: /you make like these games/i
     })
     const recommendedHighlight = canvas.getByTestId('highlightComponent')
-    const recommendedGames = canvas.getByTestId('gameCardSliderComponent')
+    const recommendedGames = canvas.getByTestId('productSliderComponent')
 
     expect(title).toBeInTheDocument()
     expect(empty).not.toBeInTheDocument()
@@ -56,7 +56,7 @@ export const Empty: Story = {
     const title = canvas.getByRole('heading', { name: 'Wishlist' })
     const empty = canvas.queryByTestId('emptyComponent')
     const games = within(title.parentElement!).queryAllByTestId(
-      'gameCardComponent'
+      'productComponent'
     )
 
     expect(empty).toBeInTheDocument()

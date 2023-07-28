@@ -1,13 +1,31 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import { remToPx } from 'polished'
 import ContainerComponent from './Container'
 import theme from 'styles/theme'
-import { remToPx } from 'polished'
+
+const children = (
+  <div
+    style={{
+      background: theme.colors.lightBg,
+      width: '100%',
+      height: '100vh',
+      alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex'
+    }}
+  >
+    children
+  </div>
+)
 
 const meta: Meta<typeof ContainerComponent> = {
-  title: 'Components/Container',
-  component: ContainerComponent
+  title: 'Components/Atoms/Container',
+  component: ContainerComponent,
+  args: {
+    children: children
+  }
 }
 
 export default meta
@@ -15,26 +33,12 @@ export default meta
 type Story = StoryObj<typeof ContainerComponent>
 
 export const Container: Story = {
-  render: () => (
-    <ContainerComponent>
-      <div
-        style={{
-          background: theme.colors.lightBg,
-          width: '100%',
-          height: '100vh',
-          alignItems: 'center',
-          justifyContent: 'center',
-          display: 'flex'
-        }}
-      >
-        container
-      </div>
-    </ContainerComponent>
-  ),
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const container = canvas.getByText(/container/i).parentElement
+    const children = canvas.getByText(/children/i)
+    const container = children.parentElement
 
+    expect(children).toBeInTheDocument()
     expect(container).toHaveStyle({
       maxWidth: remToPx(theme.grid.container)
     })

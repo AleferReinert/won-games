@@ -6,7 +6,7 @@ import Ribbon from './Ribbon'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof Ribbon> = {
-  title: 'Components/Ribbon',
+  title: 'Components/Atoms/Ribbon',
   component: Ribbon,
   args: {
     children: 'New release'
@@ -15,10 +15,10 @@ const meta: Meta<typeof Ribbon> = {
     (Story) => (
       <div
         style={{
-          width: '50rem',
-          aspectRatio: '16/9',
+          width: '30rem',
           position: 'relative',
-          background: theme.colors.darkGray
+          aspectRatio: '16/9',
+          background: '#eee'
         }}
       >
         <Story />
@@ -29,13 +29,6 @@ const meta: Meta<typeof Ribbon> = {
 export default meta
 
 type Story = StoryObj<typeof Ribbon>
-
-export const Playground: Story = {
-  args: {
-    color: 'primary',
-    size: 'large'
-  }
-}
 
 export const Default: Story = {
   play: ({ canvasElement }) => {

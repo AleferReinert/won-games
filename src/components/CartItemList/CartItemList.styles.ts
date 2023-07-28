@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { cssMediaQuery } from 'utils/tests/helpers'
 import { tint } from 'polished'
 
-export const Wrapper = styled.ul``
+export const Wrapper = styled.div``
 
 export const List = styled.ul``
 

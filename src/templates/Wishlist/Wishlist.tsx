@@ -3,15 +3,15 @@ import Base from 'templates/Base/Base'
 import Container from 'components/Container/Container'
 import Divider from 'components/Divider/Divider'
 import Empty from 'components/Empty/Empty'
-import GameCard, { GameCardProps } from 'components/GameCard/GameCard'
+import Product, { ProductProps } from 'components/Product/Product'
 import Heading from 'components/Heading/Heading'
 import Showcase from 'components/Showcase/Showcase'
 import * as S from './Wishlist.styles'
 
 export type WishlistTemplateProps = {
-  wishlistGames?: GameCardProps[]
+  wishlistGames?: ProductProps[]
   recommendedHighlight: HighlightProps
-  recommendedGames: GameCardProps[]
+  recommendedGames: ProductProps[]
 }
 
 const Wishlist = ({
@@ -29,7 +29,7 @@ const Wishlist = ({
         {wishlistGames.length > 0 ? (
           <S.WrapperWishlistGames>
             {wishlistGames?.map((game, index) => (
-              <GameCard
+              <Product
                 key={'wishlist-' + index}
                 title={game.title}
                 developer={game.developer}

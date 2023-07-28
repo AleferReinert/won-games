@@ -1,7 +1,7 @@
 import Cart, { CartTemplateProps } from 'templates/Cart/Cart'
 import highlightMock from 'components/Highlight/mock'
-import gameCardSliderMock from 'components/GameCardSlider/mock'
-import gameItemsMock from 'components/CartList/mock'
+import productSliderMock from 'components/ProductSlider/mock'
+import gameItemsMock from 'components/CartItemList/mock'
 import creditCardsMock from 'components/PaymentOptions/mock'
 
 export async function getServerSideProps() {
@@ -11,7 +11,7 @@ export async function getServerSideProps() {
       total: '$530',
       creditCards: creditCardsMock,
       recommendedHighlight: highlightMock,
-      recommendedGames: gameCardSliderMock
+      recommendedGames: productSliderMock
     }
   }
 }

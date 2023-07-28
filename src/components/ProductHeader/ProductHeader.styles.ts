@@ -6,8 +6,6 @@ import * as PriceStyles from 'components/Price/Price.styles'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-    padding: ${theme.spacings.medium} ${theme.spacings.small};
     position: relative;
 
     ${HeadingStyles.Wrapper} {

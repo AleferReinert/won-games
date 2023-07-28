@@ -1,7 +1,7 @@
 import HighlightStory from 'components/Highlight/Highlight.stories'
 import Home, { HomeTemplateProps } from 'templates/Home/Home'
 import bannersMock from 'components/BannerSlider/mock'
-import gamesMock from 'components/GameCardSlider/mock'
+import gamesMock from 'components/ProductSlider/mock'
 
 export function getServerSideProps() {
   return {

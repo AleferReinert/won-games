@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components'
+import { cssMediaQuery } from 'utils/tests/helpers'
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 import * as HighlightStyles from 'components/Highlight/Highlight.styles'
-import * as GameCardSliderStyles from 'components/GameCardSlider/GameCardSlider.styles'
-import { cssMediaQuery } from 'utils/tests/helpers'
+import * as ProductSliderStyles from 'components/ProductSlider/ProductSlider.styles'
 
 export const Wrapper = styled.section`
   ${({ theme }) => css`
     ${HeadingStyles.Wrapper},
     ${HighlightStyles.Wrapper},
-    ${GameCardSliderStyles.Wrapper} {
+    ${ProductSliderStyles.Wrapper} {
       margin-bottom: ${theme.spacings.medium};
     }
 
-    ${GameCardSliderStyles.Wrapper} {
+    ${ProductSliderStyles.Wrapper} {
       margin-right: calc(-${theme.grid.gutter} / 2);
 
       ${cssMediaQuery.greaterThan(theme.breakpoint.xlarge)} {

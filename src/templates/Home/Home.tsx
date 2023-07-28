@@ -1,5 +1,5 @@
 import { BannerProps } from 'components/Banner/Banner'
-import { GameCardProps } from 'components/GameCard/GameCard'
+import { ProductProps } from 'components/Product/Product'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import Base from 'templates/Base/Base'
 import BannerSlider from 'components/BannerSlider/BannerSlider'
@@ -9,14 +9,14 @@ import * as S from './Home.styles'
 
 export type HomeTemplateProps = {
   banners: BannerProps[]
-  newGames: GameCardProps[]
+  newGames: ProductProps[]
   mostPopularHighlight: HighlightProps
-  mostPopularsGames: GameCardProps[]
-  comingSoonGames: GameCardProps[]
+  mostPopularsGames: ProductProps[]
+  comingSoonGames: ProductProps[]
   comingSoonHighlight: HighlightProps
-  comingSoonMoreGames: GameCardProps[]
+  comingSoonMoreGames: ProductProps[]
   freeHighlight: HighlightProps
-  freeGames: GameCardProps[]
+  freeGames: ProductProps[]
 }
 
 const Home = ({

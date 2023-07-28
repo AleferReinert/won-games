@@ -34,7 +34,7 @@ export const Cover = styled.div<CoverProps>`
   `}
 `
 
-export const GameInfoWrapper = styled(Container)`
+export const ProductHeaderWrapper = styled(Container)`
   ${({ theme }) => css`
     margin-top: 20rem;
 
@@ -66,7 +66,7 @@ export const TextContentWrapper = styled.div`
   `}
 `
 
-export const GameDetailsWrapper = styled.div`
+export const ProductDetailsWrapper = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.xxlarge};
 

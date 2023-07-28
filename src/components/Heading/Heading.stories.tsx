@@ -7,7 +7,7 @@ import Heading from './Heading'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof Heading> = {
-  title: 'Components/Heading',
+  title: 'Components/Atoms/Heading',
   component: Heading,
   argTypes: {
     children: {
@@ -21,17 +21,6 @@ const meta: Meta<typeof Heading> = {
 export default meta
 
 type Story = StoryObj<typeof Heading>
-
-export const Playground: Story = {
-  args: {
-    children: 'Custom heading',
-    color: 'white',
-    size: 'medium',
-    line: 'left',
-    lineColor: 'primary',
-    lineBottomSize: 'large'
-  }
-}
 
 export const Default: Story = {
   args: {

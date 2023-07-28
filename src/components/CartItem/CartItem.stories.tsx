@@ -1,11 +1,11 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import GameItemComponent from './GameItem'
+import CartItemComponent from './CartItem'
 
-const meta: Meta<typeof GameItemComponent> = {
-  title: 'Components/GameItem',
-  component: GameItemComponent,
+const meta: Meta<typeof CartItemComponent> = {
+  title: 'Components/CartItem',
+  component: CartItemComponent,
   args: {
     title: 'Population Zero',
     img: '/img/population-zero.jpg',
@@ -15,17 +15,7 @@ const meta: Meta<typeof GameItemComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof GameItemComponent>
-
-export const Playground: Story = {
-  args: {
-    downloadLink: '/link',
-    creditCardNumber: '**** **** **** 4326',
-    creditCardBrand: 'mastercard',
-    creditCardFlag: '/img/creditCards/mastercard.png',
-    purchaseDate: 'Purchase made on 07/06/2023 at 00:42'
-  }
-}
+type Story = StoryObj<typeof CartItemComponent>
 
 export const Default: Story = {
   play: ({ canvasElement }) => {
@@ -58,7 +48,7 @@ export const Payment: Story = {
   args: {
     creditCardNumber: '**** **** **** 4326',
     creditCardBrand: 'mastercard',
-    creditCardFlag: '/img/mastercard.png',
+    creditCardFlag: '/img/creditCards/mastercard.png',
     purchaseDate: 'Purchase made on 07/06/2023 at 00:42'
   },
   play: ({ canvasElement, args }) => {

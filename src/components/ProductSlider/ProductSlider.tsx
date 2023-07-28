@@ -1,13 +1,13 @@
-import GameCard, { GameCardProps } from 'components/GameCard/GameCard'
+import Product, { ProductProps } from 'components/Product/Product'
 import Slider, { SliderSettings } from 'components/Slider/Slider'
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 import { pxToNumber } from 'utils/tests/helpers'
 import theme from 'styles/theme'
-import * as S from './GameCardSlider.styles'
+import * as S from './ProductSlider.styles'
 
-export type GameCardSliderProps = {
-  items: GameCardProps[]
+export type ProductSliderProps = {
+  items: ProductProps[]
   arrowColor?: 'white' | 'black'
 }
 
@@ -46,19 +46,16 @@ const settings: SliderSettings = {
   ]
 }
 
-const GameCardSlider = ({
-  items,
-  arrowColor = 'white'
-}: GameCardSliderProps) => {
+const ProductSlider = ({ items, arrowColor = 'white' }: ProductSliderProps) => {
   return (
-    <S.Wrapper arrowColor={arrowColor} data-testid='gameCardSliderComponent'>
+    <S.Wrapper arrowColor={arrowColor} data-testid='productSliderComponent'>
       <Slider settings={settings}>
         {items.map((item, index) => (
-          <GameCard key={index} {...item} />
+          <Product key={index} {...item} />
         ))}
       </Slider>
     </S.Wrapper>
   )
 }
 
-export default GameCardSlider
+export default ProductSlider

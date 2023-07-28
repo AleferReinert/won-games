@@ -7,7 +7,7 @@ import {
 import * as S from './ProfileMenu.styles'
 
 export type ProfileMenuProps = {
-  activeLink?: 'profile/me' | 'profile/cards' | 'profile/orders'
+  activeLink: 'profile/me' | 'profile/cards' | 'profile/orders'
 }
 
 const items = [
@@ -33,7 +33,7 @@ const items = [
   }
 ]
 
-const ProfileMenu = ({ activeLink }: ProfileMenuProps) => {
+const ProfileMenu = ({ activeLink = 'profile/me' }: ProfileMenuProps) => {
   return (
     <S.Wrapper>
       {items.map((item, index) => (

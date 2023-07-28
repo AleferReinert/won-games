@@ -8,7 +8,7 @@ import theme from 'styles/theme'
 import { hexToRGBA } from 'utils/tests/helpers'
 
 const meta: Meta<typeof TextField> = {
-  title: 'Components/TextField',
+  title: 'Components/Atoms/TextField',
   component: TextField,
   args: {
     name: 'email',
@@ -40,16 +40,6 @@ const meta: Meta<typeof TextField> = {
 export default meta
 
 type Story = StoryObj<typeof TextField>
-
-export const Playground: Story = {
-  args: {
-    label: 'E-mail',
-    icon: 'Email',
-    iconPosition: 'left',
-    placeholder: 'email@example.com',
-    disabled: false
-  }
-}
 
 export const Default: Story = {
   play: async ({ canvasElement }) => {

@@ -1,6 +1,6 @@
-import { GameDetailsProps } from './GameDetails'
+import { ProductDetailsProps } from './ProductDetails'
 
-const gameDetailsMock: GameDetailsProps = {
+const productDetailsMock: ProductDetailsProps = {
   developer: 'Gearbox Software',
   releaseDate: '2019-09-13T23:00:00',
   platforms: ['windows', 'linux', 'mac'],
@@ -9,4 +9,4 @@ const gameDetailsMock: GameDetailsProps = {
   categories: ['Action', 'Adventure']
 }
 
-export default gameDetailsMock
+export default productDetailsMock

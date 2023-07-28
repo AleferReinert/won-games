@@ -3,13 +3,17 @@ import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.li`
   ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-    padding: ${theme.spacings.xsmall};
+    border-bottom: 0.1rem solid ${theme.colors.lightGray};
+    list-style: none;
+  `}
+`
+
+export const Content = styled.div`
+  ${({ theme }) => css`
     display: grid;
     grid-template-columns: min-content auto;
     grid-template-rows: auto auto;
     column-gap: ${theme.spacings.xxsmall};
-    border-bottom: 0.1rem solid ${theme.colors.lightGray};
 
     ${cssMediaQuery.greaterThan(theme.breakpoint.xsmall)} {
       column-gap: ${theme.spacings.xsmall};
@@ -18,7 +22,6 @@ export const Wrapper = styled.li`
     ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
       grid-template-columns: min-content auto auto;
       grid-template-rows: none;
-      padding: ${theme.spacings.small};
       column-gap: ${theme.spacings.small};
     }
   `}

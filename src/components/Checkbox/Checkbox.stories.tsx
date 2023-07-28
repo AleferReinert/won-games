@@ -5,7 +5,7 @@ import Checkbox from './Checkbox'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Checkbox',
+  title: 'Components/Atoms/Checkbox',
   component: Checkbox,
   args: {
     name: 'category'

@@ -3,7 +3,7 @@ import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import HomeTemplate from './Home'
 import bannersMock from 'components/BannerSlider/mock'
-import gamesMock from 'components/GameCardSlider/mock'
+import gamesMock from 'components/ProductSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
 const meta: Meta<typeof HomeTemplate> = {
@@ -42,14 +42,14 @@ export const Home: Story = {
       /coming soon/i,
       /free games/i
     ]
-    const gameCardSliders = canvas.getAllByTestId('gameCardSliderComponent')
+    const productSliders = canvas.getAllByTestId('productSliderComponent')
     const highlights = canvas.getAllByTestId('highlightComponent')
 
     expect(bannerSlider).toBeInTheDocument()
     for (const title of titles) {
       expect(canvas.getByRole('heading', { name: title })).toBeInTheDocument()
     }
-    expect(gameCardSliders.length).toBe(5)
+    expect(productSliders.length).toBe(5)
     expect(highlights.length).toBe(3)
   }
 }

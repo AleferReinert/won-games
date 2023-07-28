@@ -4,7 +4,7 @@ import { expect } from '@storybook/jest'
 import DividerComponent from './Divider'
 
 const meta: Meta<typeof DividerComponent> = {
-  title: 'Components/Divider',
+  title: 'Components/Atoms/Divider',
   component: DividerComponent
 }
 

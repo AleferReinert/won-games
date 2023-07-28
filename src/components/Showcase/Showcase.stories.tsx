@@ -4,7 +4,7 @@ import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import ShowcaseComponent from './Showcase'
 import highlightMock from 'components/Highlight/mock'
-import gamesMock from 'components/GameCardSlider/mock'
+import gamesMock from 'components/ProductSlider/mock'
 import theme from 'styles/theme'
 
 const meta: Meta<typeof ShowcaseComponent> = {

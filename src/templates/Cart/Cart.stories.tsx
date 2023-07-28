@@ -3,19 +3,19 @@ import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import CartTemplate from './Cart'
 import highlightMock from 'components/Highlight/mock'
-import gameCardSliderMock from 'components/GameCardSlider/mock'
-import gameItemsMock from 'components/CartList/mock'
+import productSliderMock from 'components/ProductSlider/mock'
+import cartItemsMock from 'components/CartItemList/mock'
 import creditCardsMock from 'components/PaymentOptions/mock'
 
 const meta: Meta<typeof CartTemplate> = {
   title: 'Templates/Cart',
   component: CartTemplate,
   args: {
-    gameItems: gameItemsMock,
+    cartItems: cartItemsMock,
     total: '$530',
     creditCards: creditCardsMock,
     recommendedHighlight: highlightMock,
-    recommendedGames: gameCardSliderMock
+    recommendedGames: productSliderMock
   },
   parameters: {
     layout: 'fullscreen',
@@ -40,7 +40,7 @@ export const Default: Story = {
       name: /you make like these games/i
     })
     const recommendedHighlight = canvas.getByTestId('highlightComponent')
-    const recommendedGames = canvas.getByTestId('gameCardSliderComponent')
+    const recommendedGames = canvas.getByTestId('productSliderComponent')
 
     expect(title).toBeInTheDocument()
     expect(cartList).toBeInTheDocument()
@@ -54,7 +54,7 @@ export const Default: Story = {
 
 export const Empty: Story = {
   args: {
-    gameItems: []
+    cartItems: []
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

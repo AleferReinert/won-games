@@ -1,8 +1,10 @@
-import { GameCardProps } from 'components/GameCard/GameCard'
+import { ProductProps } from 'components/Product/Product'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { Info } from '@styled-icons/material-outlined/Info'
 import Base from 'templates/Base/Base'
-import CartList, { CartListProps } from 'components/CartList/CartList'
+import CartItemList, {
+  CartItemListProps
+} from 'components/CartItemList/CartItemList'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
 import PaymentOptions, {
@@ -16,12 +18,12 @@ import * as S from './Cart.styles'
 
 export type CartTemplateProps = {
   recommendedHighlight: HighlightProps
-  recommendedGames: GameCardProps[]
-} & CartListProps &
+  recommendedGames: ProductProps[]
+} & CartItemListProps &
   PaymentOptionsProps
 
 const Cart = ({
-  gameItems,
+  cartItems,
   total,
   creditCards,
   recommendedHighlight,
@@ -36,10 +38,10 @@ const Cart = ({
           My cart
         </Heading>
 
-        {gameItems.length ? (
+        {cartItems.length ? (
           <>
             <S.Content>
-              <CartList gameItems={gameItems} total={total} />
+              <CartItemList cartItems={cartItems} total={total} />
 
               <PaymentOptions
                 creditCards={creditCards}

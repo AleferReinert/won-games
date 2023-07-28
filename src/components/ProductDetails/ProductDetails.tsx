@@ -1,11 +1,11 @@
 import { Windows, Linux, Apple } from '@styled-icons/fa-brands'
 import Heading from 'components/Heading/Heading'
-import * as S from './GameDetails.styles'
+import * as S from './ProductDetails.styles'
 
 type Platform = 'windows' | 'linux' | 'mac'
 type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
 
-export type GameDetailsProps = {
+export type ProductDetailsProps = {
   developer: string
   releaseDate: string
   platforms: Platform[]
@@ -14,14 +14,14 @@ export type GameDetailsProps = {
   categories: string[]
 }
 
-const GameDetails = ({
+const ProductDetails = ({
   developer,
   releaseDate,
   platforms,
   publisher,
   rating,
   categories
-}: GameDetailsProps) => {
+}: ProductDetailsProps) => {
   const platformIcons = {
     windows: <Windows title='Windows' />,
     linux: <Linux title='Linux' />,
@@ -29,7 +29,7 @@ const GameDetails = ({
   }
 
   return (
-    <S.Wrapper data-testid='gameDetailsComponent'>
+    <S.Wrapper data-testid='productDetailsComponent'>
       <Heading line='left' lineColor='secondary'>
         Game details
       </Heading>
@@ -85,4 +85,4 @@ const GameDetails = ({
   )
 }
 
-export default GameDetails
+export default ProductDetails

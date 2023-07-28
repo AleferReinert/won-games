@@ -1,13 +1,13 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { userEvent, within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import GameCardComponent from './GameCard'
-import mockGameCard from './mock'
+import ProductComponent from './Product'
+import mockProduct from './mock'
 
-const meta: Meta<typeof GameCardComponent> = {
-  title: 'Components/GameCard',
-  component: GameCardComponent,
-  args: mockGameCard,
+const meta: Meta<typeof ProductComponent> = {
+  title: 'Components/Product',
+  component: ProductComponent,
+  args: mockProduct,
   argTypes: {
     onFav: {
       action: 'clicked',
@@ -29,7 +29,7 @@ const meta: Meta<typeof GameCardComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof GameCardComponent>
+type Story = StoryObj<typeof ProductComponent>
 
 export const Default: Story = {
   play: async ({ canvasElement, args }) => {

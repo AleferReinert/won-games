@@ -1,20 +1,20 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import GameInfoComponent from './GameInfo'
-import mockGameInfo from './mock'
+import ProductHeaderComponent from './ProductHeader'
+import mockProductHeader from './mock'
 
-const meta: Meta<typeof GameInfoComponent> = {
-  title: 'Components/GameInfo',
-  component: GameInfoComponent,
-  args: mockGameInfo
+const meta: Meta<typeof ProductHeaderComponent> = {
+  title: 'Components/ProductHeader',
+  component: ProductHeaderComponent,
+  args: mockProductHeader
 }
 
 export default meta
 
-type Story = StoryObj<typeof GameInfoComponent>
+type Story = StoryObj<typeof ProductHeaderComponent>
 
-export const GameInfo: Story = {
+export const ProductHeader: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading', { name: /borderlands 3/i })
