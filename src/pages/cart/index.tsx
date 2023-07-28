@@ -1,34 +1,44 @@
-import { ProductProps } from 'components/Product/Product'
-import { HighlightProps } from 'components/Highlight/Highlight'
 import { Info } from '@styled-icons/material-outlined/Info'
 import Base from 'templates/Base/Base'
-import CartItemList, {
-  CartItemListProps
-} from 'components/CartItemList/CartItemList'
+import CartItemList from 'components/CartItemList/CartItemList'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
-import PaymentOptions, {
-  PaymentOptionsProps
-} from 'components/PaymentOptions/PaymentOptions'
+import PaymentOptions from 'components/PaymentOptions/PaymentOptions'
 import Divider from 'components/Divider/Divider'
 import Empty from 'components/Empty/Empty'
 import Link from 'next/link'
 import Showcase from 'components/Showcase/Showcase'
 import * as S from './Cart.styles'
+import highlightMock from 'components/Highlight/mock'
+import productSliderMock from 'components/ProductSlider/mock'
+import cartItemsMock from 'components/CartItemList/mock'
+import creditCardsMock from 'components/PaymentOptions/mock'
+import { CartItemProps } from 'components/CartItem/CartItem'
+import { CreditCardProps } from 'components/CreditCard/CreditCard'
+import { HighlightProps } from 'components/Highlight/Highlight'
+import { ProductProps } from 'components/Product/Product'
 
-export type CartTemplateProps = {
+type CartProps = {
+  cartItems: CartItemProps[]
+  total: string
+  creditCards: CreditCardProps[]
   recommendedHighlight: HighlightProps
   recommendedGames: ProductProps[]
-} & CartItemListProps &
-  PaymentOptionsProps
+}
 
-const Cart = ({
-  cartItems,
-  total,
-  creditCards,
-  recommendedHighlight,
-  recommendedGames
-}: CartTemplateProps) => {
+export async function getServerSideProps() {
+  return {
+    props: {
+      cartItems: cartItemsMock,
+      total: '$530',
+      creditCards: creditCardsMock,
+      recommendedHighlight: highlightMock,
+      recommendedGames: productSliderMock
+    }
+  }
+}
+
+const Cart = (props: CartProps) => {
   const handlePayment = () => ({})
 
   return (
@@ -38,13 +48,13 @@ const Cart = ({
           My cart
         </Heading>
 
-        {cartItems.length ? (
+        {props.cartItems.length ? (
           <>
             <S.Content>
-              <CartItemList cartItems={cartItems} total={total} />
+              <CartItemList cartItems={props.cartItems} total={props.total} />
 
               <PaymentOptions
-                creditCards={creditCards}
+                creditCards={props.creditCards}
                 handlePayment={handlePayment}
               />
             </S.Content>
@@ -71,8 +81,8 @@ const Cart = ({
 
       <Showcase
         title='You make like these games'
-        highlight={recommendedHighlight}
-        games={recommendedGames}
+        highlight={props.recommendedHighlight}
+        games={props.recommendedGames}
       />
     </Base>
   )

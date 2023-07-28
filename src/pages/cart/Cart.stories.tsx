@@ -1,15 +1,15 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import CartTemplate from './Cart'
+import CartPage from '.'
 import highlightMock from 'components/Highlight/mock'
 import productSliderMock from 'components/ProductSlider/mock'
 import cartItemsMock from 'components/CartItemList/mock'
 import creditCardsMock from 'components/PaymentOptions/mock'
 
-const meta: Meta<typeof CartTemplate> = {
-  title: 'Templates/Cart',
-  component: CartTemplate,
+const meta: Meta<typeof CartPage> = {
+  title: 'Pages/Cart',
+  component: CartPage,
   args: {
     cartItems: cartItemsMock,
     total: '$530',
@@ -27,7 +27,7 @@ const meta: Meta<typeof CartTemplate> = {
 
 export default meta
 
-type Story = StoryObj<typeof CartTemplate>
+type Story = StoryObj<typeof CartPage>
 
 export const Default: Story = {
   play: ({ canvasElement }) => {
