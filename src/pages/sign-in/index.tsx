@@ -1,0 +1,39 @@
+import { Email, Lock } from '@styled-icons/material-outlined'
+import Auth from 'templates/Auth/Auth'
+import Button from 'components/Button/Button'
+import Link from 'next/link'
+import TextField from 'components/TextField/TextField'
+import * as S from './SignIn.styles'
+
+export default function SignIn() {
+  return (
+    <Auth title='Sign in'>
+      <S.FormWrapper>
+        <form>
+          <TextField
+            name='email'
+            type='email'
+            placeholder='E-mail'
+            icon={<Email />}
+          />
+          <TextField
+            name='password'
+            type='password'
+            placeholder='Password'
+            icon={<Lock />}
+          />
+          <S.ForgotPassword href='/link'>
+            Forgot your password?
+          </S.ForgotPassword>
+          <Button full size='large'>
+            Sign in now
+          </Button>
+          <S.FormLink>
+            Don&apos;t have an account?
+            <Link href='/sign-up'>Sign up</Link>
+          </S.FormLink>
+        </form>
+      </S.FormWrapper>
+    </Auth>
+  )
+}

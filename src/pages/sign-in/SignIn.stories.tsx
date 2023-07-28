@@ -1,29 +1,20 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import FormSignInComponent from './FormSignIn'
+import SignInComponent from './index'
 
-const meta: Meta<typeof FormSignInComponent> = {
-  title: 'Components/FormSignIn',
-  component: FormSignInComponent,
+const meta: Meta<typeof SignInComponent> = {
+  title: 'Pages/SignIn',
+  component: SignInComponent,
   parameters: {
-    backgrounds: {
-      default: 'Light'
-    }
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ maxWidth: '38rem', margin: '0 auto' }}>
-        <Story />
-      </div>
-    )
-  ]
+    layout: 'fullscreen'
+  }
 }
 export default meta
 
-type Story = StoryObj<typeof FormSignInComponent>
+type Story = StoryObj<typeof SignInComponent>
 
-export const FormSignIn: Story = {
+export const SignIn: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const email = canvas.getByPlaceholderText(/e-mail/i)
