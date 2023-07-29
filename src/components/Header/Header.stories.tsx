@@ -73,7 +73,6 @@ export const Default: Story = {
 }
 
 export const Authenticated: Story = {
-  name: 'Authenticated',
   args: {
     username: 'John Steven'
   },

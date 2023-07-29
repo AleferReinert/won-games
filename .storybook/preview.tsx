@@ -1,8 +1,8 @@
 import { Preview } from '@storybook/react'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { ThemeProvider } from 'styled-components'
-import React from 'react'
 import GlobalStyles from '../src/styles/global'
+import React from 'react'
 import theme from '../src/styles/theme'
 
 const customViewports = {

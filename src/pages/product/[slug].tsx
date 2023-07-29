@@ -12,15 +12,15 @@ import { HighlightProps } from 'components/Highlight/Highlight'
 import Base from 'templates/Base/Base'
 import Container from 'components/Container/Container'
 import Divider from 'components/Divider/Divider'
+import Heading from 'components/Heading/Heading'
 import Showcase from 'components/Showcase/Showcase'
-import TextContent from 'components/TextContent/TextContent'
 import * as S from './Product.styles'
 import productHeaderMock from 'components/ProductHeader/mock'
 import galleryMock from 'components/Gallery/mock'
-import textContentMock from 'components/TextContent/mock'
 import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
+import descriptionMock from './mock'
 
 type ProductPageProps = {
   cover: string
@@ -46,7 +46,7 @@ export async function getStaticProps() {
       cover: '/img/games/cyberpunk-1.jpg',
       productHeader: productHeaderMock,
       gallery: galleryMock,
-      description: textContentMock.content,
+      description: descriptionMock.content,
       details: productDetailsMock,
       upcomingHighlight: highlightMock,
       upcomingGames: gamesMock,
@@ -71,11 +71,17 @@ const ProductPage = (props: ProductPageProps & NextPageWithLayout) => {
         </S.GalleryWrapper>
       )}
 
-      <S.TextContentWrapper>
+      <S.Description>
         <Container>
-          <TextContent title='About game' content={props.description} />
+          <Heading line='left' lineColor='secondary'>
+            About game
+          </Heading>
+          <div
+            data-testid='description'
+            dangerouslySetInnerHTML={{ __html: props.description }}
+          />
         </Container>
-      </S.TextContentWrapper>
+      </S.Description>
 
       <Container>
         <S.ProductDetailsWrapper>

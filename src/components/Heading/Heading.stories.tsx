@@ -111,7 +111,7 @@ export const Huge: Story = {
   }
 }
 
-export const lineLeft: Story = {
+export const LineLeft: Story = {
   args: {
     children: 'Line left',
     line: 'left'

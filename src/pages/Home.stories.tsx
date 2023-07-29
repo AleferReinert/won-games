@@ -1,13 +1,14 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import HomeTemplate from './Home'
+import BaseTemplate from 'templates/Base/Base'
+import HomeTemplate from './index'
 import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/ProductSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
 const meta: Meta<typeof HomeTemplate> = {
-  title: 'Templates/Home',
+  title: 'Pages/Home',
   component: HomeTemplate,
   args: {
     banners: bannersMock,
@@ -20,6 +21,13 @@ const meta: Meta<typeof HomeTemplate> = {
     freeHighlight: highlightMock,
     freeGames: gamesMock
   },
+  decorators: [
+    (Story) => (
+      <BaseTemplate>
+        <Story />
+      </BaseTemplate>
+    )
+  ],
   parameters: {
     layout: 'fullscreen',
     options: {

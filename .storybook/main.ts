@@ -1,15 +1,21 @@
 import type { StorybookConfig } from '@storybook/nextjs'
 
 const config: StorybookConfig = {
-  framework: '@storybook/nextjs',
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-onboarding',
+    '@storybook/addon-interactions'
+  ],
+  framework: {
+    name: '@storybook/nextjs',
+    options: {}
+  },
   staticDirs: ['../public'],
-  //   logLevel: 'debug',
   webpackFinal: (config) => {
     config.resolve?.modules?.push(`${process.cwd()}/src`)
     return config
   }
 }
-
 export default config

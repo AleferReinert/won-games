@@ -68,7 +68,7 @@ export const Large: Story = {
   }
 }
 
-export const withoutText: Story = {
+export const WithoutText: Story = {
   args: {
     withoutText: true
   },
