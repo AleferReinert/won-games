@@ -25,7 +25,6 @@ export const Wrapper = styled.div`
 
 export const Nav = styled.nav`
   ${({ theme }) => css`
-    background-color: ${theme.colors.white};
     display: flex;
     text-align: center;
     border-bottom: 0.1rem solid ${theme.colors.primary};
@@ -71,6 +70,8 @@ export const Item = styled(Link)<ItemProps>`
     ${active && itemModifiers.active(theme)}
 
     ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+      flex: none;
+
       &:not(:last-child) {
         border-bottom: 0.1rem solid ${theme.colors.lightGray};
       }
