@@ -1,8 +1,29 @@
-import Link from 'next/link'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { cssMediaQuery } from 'utils/tests/helpers'
+import Link from 'next/link'
+import * as HeadingStyles from 'components/Heading/Heading.styles'
 
-export const Wrapper = styled.nav`
+export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: ${theme.spacings.medium};
+
+    @media (min-width: ${theme.breakpoint.medium}) {
+      display: grid;
+      gap: ${theme.spacings.small};
+      grid-template-columns: 30rem auto;
+    }
+
+    @media (min-width: ${theme.breakpoint.large}) {
+      gap: ${theme.spacings.large};
+    }
+
+    @media (min-width: ${theme.breakpoint.xlarge}) {
+      gap: ${theme.spacings.xxlarge};
+    }
+  `}
+`
+
+export const Nav = styled.nav`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     display: flex;
@@ -64,6 +85,18 @@ export const Text = styled.span`
     ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
       display: inline-flex;
       margin-left: ${theme.spacings.xxsmall};
+    }
+  `}
+`
+
+export const Children = styled.div`
+  ${({ theme }) => css`
+    ${HeadingStyles.Wrapper} {
+      display: none;
+
+      @media (min-width: ${theme.breakpoint.medium}) {
+        display: block;
+      }
     }
   `}
 `
