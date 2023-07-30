@@ -6,35 +6,33 @@ import * as S from './Profile.styles'
 
 const ProfilePage = () => {
   return (
-    <>
-      <S.Wrapper>
-        <S.Form>
-          <TextField name='name' label='Name' initialValue='John Cage' />
-          <TextField
-            type='email'
-            name='email'
-            label='E-mail'
-            initialValue='john.cage@gmail.com'
-            disabled
-          />
-          <TextField
-            type='password'
-            name='password'
-            label='Password'
-            placeholder='Type your password'
-          />
-          <TextField
-            type='password'
-            name='password'
-            label='New password'
-            placeholder='New password'
-          />
-        </S.Form>
-        <S.Footer>
-          <Button>Save</Button>
-        </S.Footer>
-      </S.Wrapper>
-    </>
+    <S.Wrapper>
+      <S.Form>
+        <TextField name='name' label='Name' initialValue='John Cage' />
+        <TextField
+          type='email'
+          name='email'
+          label='E-mail'
+          initialValue='john.cage@gmail.com'
+          disabled
+        />
+        <TextField
+          type='password'
+          name='password'
+          label='Password'
+          placeholder='Type your password'
+        />
+        <TextField
+          type='password'
+          name='password'
+          label='New password'
+          placeholder='New password'
+        />
+      </S.Form>
+      <S.Footer>
+        <Button>Save</Button>
+      </S.Footer>
+    </S.Wrapper>
   )
 }
 
