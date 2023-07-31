@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
+
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 import * as HighlightStyles from 'components/Highlight/Highlight.styles'
 import * as ProductSliderStyles from 'components/ProductSlider/ProductSlider.styles'
@@ -15,7 +15,7 @@ export const Wrapper = styled.section`
     ${ProductSliderStyles.Wrapper} {
       margin-right: calc(-${theme.grid.gutter} / 2);
 
-      ${cssMediaQuery.greaterThan(theme.breakpoint.xlarge)} {
+      @media (min-width: ${theme.breakpoint.xlarge}) {
         margin-right: 0;
       }
     }

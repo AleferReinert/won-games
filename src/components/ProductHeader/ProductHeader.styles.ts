@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
+
 import * as ButtonStyles from 'components/Button/Button.styles'
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 import * as PriceStyles from 'components/Price/Price.styles'
@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
       right: -1rem;
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       ${HeadingStyles.Wrapper} {
         font-size: ${theme.font.sizes.xxlarge};
       }
@@ -40,7 +40,7 @@ export const Description = styled.p`
     font-size: ${theme.font.sizes.small};
     margin-bottom: ${theme.spacings.small};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       font-size: ${theme.font.sizes.large};
       max-width: 80rem;
     }
@@ -53,7 +53,7 @@ export const ButtonsWrapper = styled.div`
     flex-direction: column;
     row-gap: ${theme.spacings.xxsmall};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       flex-direction: row;
       justify-content: end;
       column-gap: ${theme.spacings.xxsmall};

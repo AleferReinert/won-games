@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import * as HeadingStyles from 'components/Heading/Heading.styles'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.footer`
   ${HeadingStyles.Wrapper} {
@@ -14,12 +13,12 @@ export const Content = styled.div`
     gap: ${theme.grid.gutter};
     margin-top: ${theme.spacings.medium};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.xsmall)} {
+    @media (min-width: ${theme.breakpoint.xsmall}) {
       grid-template-columns: repeat(2, 1fr);
       overflow-wrap: anywhere;
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       grid-template-columns: repeat(4, 1fr);
       overflow-wrap: normal;
     }

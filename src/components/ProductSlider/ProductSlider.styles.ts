@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import { ProductSliderProps } from './ProductSlider'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 type WrapperProps = Pick<ProductSliderProps, 'arrowColor'>
 
@@ -16,7 +15,7 @@ export const Wrapper = styled.div<WrapperProps>`
       display: flex;
       overflow: hidden;
 
-      ${cssMediaQuery.lessThan(theme.breakpoint.large)} {
+      @media (max-width: calc(${theme.breakpoint.large} -1px)) {
         overflow: visible;
       }
     }
@@ -37,7 +36,7 @@ export const Wrapper = styled.div<WrapperProps>`
     .slick-prev {
       left: calc(-${theme.spacings.large} - 1.5rem);
 
-      ${cssMediaQuery.lessThan(theme.breakpoint.xlarge)} {
+      @media (max-width: calc(${theme.breakpoint.xlarge} -1px)) {
         left: -${theme.spacings.medium};
       }
     }
@@ -45,7 +44,7 @@ export const Wrapper = styled.div<WrapperProps>`
     .slick-next {
       right: calc(-${theme.spacings.large} - 1.5rem);
 
-      ${cssMediaQuery.lessThan(theme.breakpoint.xlarge)} {
+      @media (max-width: calc(${theme.breakpoint.xlarge} -1px)) {
         right: -${theme.spacings.medium};
       }
     }

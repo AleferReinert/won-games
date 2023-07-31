@@ -13,11 +13,6 @@ Instalar dependências:
 yarn install
 ```
 
-Construir Storybook:
-```
-yarn build-storybook
-```
-
 ## Desenvolvimento
 
 Rodar projeto:

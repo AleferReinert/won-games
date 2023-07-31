@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
+
 import { darken } from 'polished'
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 import * as TextFieldStyles from 'components/TextField/TextField.styles'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
@@ -38,7 +38,7 @@ export const BannerBlock = styled.div`
       margin-bottom: ${theme.spacings.xsmall};
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       display: block;
     }
   `}

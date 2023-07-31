@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
+
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
     ${HeadingStyles.Wrapper} {
-      ${cssMediaQuery.lessThan(theme.breakpoint.small)} {
+      @media (max-width: calc(${theme.breakpoint.small} -1px)) {
         display: none;
       }
     }
@@ -18,15 +18,15 @@ export const Content = styled.div`
     gap: ${theme.spacings.xsmall};
     margin-top: ${theme.spacings.large};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       grid-template-columns: repeat(4, 1fr);
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.large)} {
+    @media (min-width: ${theme.breakpoint.large}) {
       grid-template-columns: repeat(6, 1fr);
     }
   `}
@@ -55,7 +55,7 @@ export const IconsWrapper = styled.span`
     gap: ${theme.spacings.xsmall};
     color: ${theme.colors.white};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       gap: ${theme.spacings.small};
     }
   `}

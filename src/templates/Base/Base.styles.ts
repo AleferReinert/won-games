@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.section`
   display: flex;
@@ -13,7 +12,7 @@ export const Children = styled.main`
     flex: 1 0 auto;
     margin-top: ${theme.spacings.large};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.large)} {
+    @media (min-width: ${theme.breakpoint.large}) {
       margin-top: ${theme.spacings.xxlarge};
     }
   `}
@@ -27,7 +26,7 @@ export const SectionFooter = styled.div`
     background-color: ${theme.colors.white};
     clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       padding-top: calc(${theme.spacings.xxlarge} * 2);
       clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0 100%);
     }

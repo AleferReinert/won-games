@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import { HighlightProps } from './Highlight'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 type WrapperProps = Pick<HighlightProps, 'backgroundImage' | 'alignment'>
 
@@ -39,7 +38,7 @@ export const Wrapper = styled.div<WrapperProps>`
       background-color: rgba(0, 0, 0, 0.6);
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       height: 32rem;
     }
 
@@ -60,7 +59,7 @@ export const FloatImage = styled.div`
       height: auto !important;
       position: static !important;
 
-      ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+      @media (min-width: ${theme.breakpoint.small}) {
         max-height: 32rem;
       }
     }
@@ -74,7 +73,7 @@ export const Content = styled.div`
     color: ${theme.colors.white};
     align-self: start;
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       padding: ${theme.spacings.large};
       align-self: end;
     }
@@ -86,7 +85,7 @@ export const Title = styled.h3`
     font-size: ${theme.font.sizes.large};
     font-weight: ${theme.font.bold};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       font-size: ${theme.font.sizes.xxlarge};
     }
   `}
@@ -98,7 +97,7 @@ export const Description = styled.p`
     font-weight: ${theme.font.light};
     margin-bottom: ${theme.spacings.xsmall};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       margin-bottom: ${theme.spacings.medium};
       font-size: ${theme.font.sizes.large};
     }

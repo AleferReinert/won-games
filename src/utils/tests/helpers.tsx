@@ -10,16 +10,6 @@ export const pxToNumber = (themeBreakpoint: string) => {
   return Number(themeBreakpoint.replace('px', ''))
 }
 
-// Return a css media query with breakpoints of the theme
-export const cssMediaQuery = {
-  lessThan: (themeBreakpoint: string) => {
-    return `@media (max-width: ${pxToNumber(themeBreakpoint) - 1}px)`
-  },
-  greaterThan: (themeBreakpoint: string) => {
-    return `@media (min-width: ${pxToNumber(themeBreakpoint)}px)`
-  }
-}
-
 /* Return a function in
  */
 export const jsMediaQuery = {

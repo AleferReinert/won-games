@@ -5,6 +5,13 @@ import theme from 'styles/theme'
 import type { NextPage } from 'next'
 import type { ReactElement, ReactNode } from 'react'
 import type { AppProps } from 'next/app'
+import { Poppins } from '@next/font/google'
+
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600'],
+  subsets: ['latin'],
+  display: 'swap'
+})
 
 export type NextPageWithLayout<P = NonNullable<unknown>, IP = P> = NextPage<
   P,
@@ -34,7 +41,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
       </Head>
       <GlobalStyles />
-      {getLayout(<Component {...pageProps} />)}
+      {getLayout(<Component className={poppins.className} {...pageProps} />)}
     </ThemeProvider>
   )
 }

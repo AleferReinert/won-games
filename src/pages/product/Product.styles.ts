@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Container } from 'components/Container/Container.styles'
-import { cssMediaQuery } from 'utils/tests/helpers'
+
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 
 type CoverProps = {
@@ -28,7 +28,7 @@ export const Cover = styled.div<CoverProps>`
       bottom: 0;
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       height: 58rem;
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
     }
@@ -39,7 +39,7 @@ export const ProductHeaderWrapper = styled(Container)`
   ${({ theme }) => css`
     margin-top: 20rem;
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       margin-top: 30rem;
     }
   `}
@@ -51,7 +51,7 @@ export const GalleryWrapper = styled.div`
     overflow: hidden;
     display: none;
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       display: block;
     }
   `}
@@ -73,7 +73,7 @@ export const Description = styled.div`
       margin: ${theme.spacings.xsmall} 0;
       ${HeadingStyles.lineModifiers.left(theme, 'secondary')};
 
-      ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+      @media (min-width: ${theme.breakpoint.small}) {
         color: ${theme.colors.black};
       }
     }
@@ -128,7 +128,7 @@ export const Description = styled.div`
       margin-top: ${theme.spacings.small};
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       background-color: ${theme.colors.white};
       padding: ${theme.spacings.large};
       color: ${theme.colors.black};
@@ -146,7 +146,7 @@ export const ProductDetailsWrapper = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.xxlarge};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       margin-top: calc(${theme.spacings.medium} * 2);
     }
   `}

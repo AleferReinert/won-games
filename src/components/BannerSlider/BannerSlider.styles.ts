@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import * as BannerStyles from 'components/Banner/Banner.styles'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -33,7 +32,7 @@ export const Wrapper = styled.div`
       }
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.large)} {
+    @media (min-width: ${theme.breakpoint.large}) {
       ${BannerStyles.Wrapper} {
         max-width: 104rem;
         margin: 0 auto;
@@ -52,7 +51,7 @@ export const Wrapper = styled.div`
       }
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.xlarge)} {
+    @media (min-width: ${theme.breakpoint.xlarge}) {
       .slick-dots {
         right: 0;
       }

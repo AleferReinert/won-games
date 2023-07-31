@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -22,7 +21,7 @@ export const Title = styled.h2`
     color: ${theme.colors.primary};
     font-size: ${theme.font.sizes.xlarge};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       font-size: ${theme.font.sizes.xxlarge};
     }
   `}
@@ -35,7 +34,7 @@ export const Message = styled.p`
     font-weight: ${theme.font.light};
     margin-bottom: ${theme.spacings.small};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       font-size: ${theme.font.sizes.medium};
     }
   `}

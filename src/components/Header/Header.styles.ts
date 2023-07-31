@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
+
 import * as LogoStyles from 'components/Logo/Logo.styles'
 import * as MenuMobileStyles from 'components/MenuMobile/MenuMobile.styles'
 
@@ -27,7 +27,7 @@ export const Wrapper = styled.header`
 
 export const OpenMenu = styled.div`
   ${({ theme }) => css`
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       display: none;
     }
   `}
@@ -35,7 +35,7 @@ export const OpenMenu = styled.div`
 
 export const LogoWrapper = styled.div`
   ${({ theme }) => css`
-    ${cssMediaQuery.lessThan(theme.breakpoint.small)} {
+    @media (max-width: calc(${theme.breakpoint.small} -1px)) {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
@@ -49,7 +49,7 @@ export const MenuDesktop = styled.nav`
   ${({ theme }) => css`
     margin-left: ${theme.spacings.small};
 
-    ${cssMediaQuery.lessThan(theme.breakpoint.small)} {
+    @media (max-width: calc(${theme.breakpoint.small} -1px)) {
       display: none;
     }
   `}
@@ -112,7 +112,7 @@ export const IconWrapper = styled.div`
 
 export const ButtonSignIn = styled.div`
   ${({ theme }) => css`
-    ${cssMediaQuery.lessThan(theme.breakpoint.small)} {
+    @media (max-width: calc(${theme.breakpoint.small} -1px)) {
       display: none;
     }
   `}

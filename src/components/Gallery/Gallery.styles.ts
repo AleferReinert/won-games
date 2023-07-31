@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -12,7 +11,7 @@ export const Wrapper = styled.div`
       display: flex;
       overflow: visible;
 
-      ${cssMediaQuery.greaterThan(theme.breakpoint.xlarge)} {
+      @media (min-width: ${theme.breakpoint.xlarge}) {
         overflow: hidden;
       }
     }
@@ -111,7 +110,7 @@ export const ContentModal = styled.div`
     max-width: 80%;
     max-height: 100%;
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.xlarge)} {
+    @media (min-width: ${theme.breakpoint.xlarge}) {
       max-width: ${theme.grid.container};
     }
   `}

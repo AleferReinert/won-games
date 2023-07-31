@@ -1,13 +1,12 @@
 import styled, { css } from 'styled-components'
 import * as RibbonStyles from 'components/Ribbon/Ribbon.styles'
 import * as ButtonStyles from 'components/Button/Button.styles'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
     position: relative;
 
-    ${cssMediaQuery.lessThan(theme.breakpoint.small)} {
+    @media (max-width: calc(${theme.breakpoint.small} - 1px)) {
       ${RibbonStyles.Wrapper} {
         right: 0;
 
@@ -17,7 +16,7 @@ export const Wrapper = styled.div`
       }
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       box-shadow: 0 0.4rem 0.5rem rgba(0, 0, 0, 0.2);
 
       ${ButtonStyles.Wrapper} {
@@ -40,7 +39,7 @@ export const Image = styled.div<ImageProps>`
     background-position: center center;
     background-size: cover;
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       height: 58rem;
     }
   `}
@@ -52,7 +51,7 @@ export const Caption = styled.div`
     background-color: rgba(0, 0, 0, 0.35);
     padding: ${theme.spacings.small};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       background-color: rgba(0, 0, 0, 0.7);
       border-radius: 0 0 ${theme.border.radius} ${theme.border.radius};
       padding: ${theme.spacings.large};
@@ -69,7 +68,7 @@ export const Title = styled.h2`
     font-weight: ${theme.font.bold};
     color: ${theme.colors.white};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       font-size: ${theme.font.sizes.xxlarge};
     }
   `}
@@ -87,7 +86,7 @@ export const Description = styled.p`
       font-weight: ${theme.font.bold};
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       font-size: ${theme.font.sizes.large};
     }
   `}

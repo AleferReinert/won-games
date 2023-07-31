@@ -1,5 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
+
 import Link from 'next/link'
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 
@@ -29,7 +29,7 @@ export const Nav = styled.nav`
     text-align: center;
     border-bottom: 0.1rem solid ${theme.colors.primary};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       flex-direction: column;
       text-align: left;
       align-items: normal;
@@ -69,7 +69,7 @@ export const Item = styled(Link)<ItemProps>`
 
     ${active && itemModifiers.active(theme)}
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       flex: none;
 
       &:not(:last-child) {
@@ -83,7 +83,7 @@ export const Text = styled.span`
   ${({ theme }) => css`
     display: none;
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       display: inline-flex;
       margin-left: ${theme.spacings.xxsmall};
     }

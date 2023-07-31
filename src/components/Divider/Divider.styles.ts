@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Divider = styled.hr`
   ${({ theme }) => css`
@@ -8,11 +7,11 @@ export const Divider = styled.hr`
     height: 1px;
     background-color: ${theme.colors.darkGray};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       margin: calc(${theme.spacings.large} * 2) 0;
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.xlarge)} {
+    @media (min-width: ${theme.breakpoint.xlarge}) {
       margin: calc(${theme.spacings.xlarge} * 2) 0;
     }
   `}

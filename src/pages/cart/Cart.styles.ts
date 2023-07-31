@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Content = styled.div`
   ${({ theme }) => css`
@@ -7,7 +6,7 @@ export const Content = styled.div`
     display: grid;
     gap: ${theme.spacings.medium};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.medium)} {
+    @media (min-width: ${theme.breakpoint.medium}) {
       gap: ${theme.spacings.xsmall};
       grid-template-columns: auto 39rem;
     }

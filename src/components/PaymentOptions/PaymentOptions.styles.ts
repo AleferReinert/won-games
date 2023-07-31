@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.form`
   ${({ theme }) => css`
@@ -58,7 +57,7 @@ export const Buttons = styled.div`
       width: 100%;
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       flex-direction: row;
       gap: 0;
       justify-content: space-between;

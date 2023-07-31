@@ -7,7 +7,6 @@ import Document, {
   NextScript
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-import StyledComponentsRegistry from '../../lib/registry'
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -43,10 +42,8 @@ export default class MyDocument extends Document {
       <Html lang='pt-br'>
         <Head />
         <body>
-          <StyledComponentsRegistry>
-            <Main />
-            <NextScript />
-          </StyledComponentsRegistry>
+          <Main />
+          <NextScript />
         </body>
       </Html>
     )

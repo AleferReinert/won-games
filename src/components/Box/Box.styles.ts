@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import { BoxProps } from './Box'
 import { DefaultTheme } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 const wrapperModifiers = {
   xsmall: (theme: DefaultTheme) => css`
@@ -10,14 +9,14 @@ const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
     padding: ${theme.spacings.xsmall};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       padding: ${theme.spacings.small};
     }
   `,
   medium: (theme: DefaultTheme) => css`
     padding: ${theme.spacings.small};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       padding: ${theme.spacings.medium};
     }
   `

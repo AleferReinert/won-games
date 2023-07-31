@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
+
 import { tint } from 'polished'
 
 export const Wrapper = styled.div``
@@ -15,11 +15,11 @@ export const Footer = styled.div`
     font-size: ${theme.font.sizes.xlarge};
     font-weight: ${theme.font.semibold};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.xsmall)} {
+    @media (min-width: ${theme.breakpoint.xsmall}) {
       padding: ${theme.spacings.xsmall};
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       padding: ${theme.spacings.small};
     }
   `}

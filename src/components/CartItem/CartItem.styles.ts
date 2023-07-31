@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const Wrapper = styled.li`
   ${({ theme }) => css`
@@ -15,11 +14,11 @@ export const Content = styled.div`
     grid-template-rows: auto auto;
     column-gap: ${theme.spacings.xxsmall};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.xsmall)} {
+    @media (min-width: ${theme.breakpoint.xsmall}) {
       column-gap: ${theme.spacings.xsmall};
     }
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       grid-template-columns: min-content auto auto;
       grid-template-rows: none;
       column-gap: ${theme.spacings.small};
@@ -43,7 +42,7 @@ export const Title = styled.h2`
     grid: 1;
     justify-content: space-between;
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       justify-content: start;
     }
   `}
@@ -69,7 +68,7 @@ export const PaymentInfo = styled.div`
     gap: ${theme.spacings.xxsmall};
     margin-top: ${theme.spacings.xsmall};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       margin-top: 0;
       grid-column: 3;
       text-align: right;
@@ -86,7 +85,7 @@ export const CreditCard = styled.div`
     align-items: center;
     gap: ${theme.spacings.xxsmall};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       align-self: flex-end;
     }
   `}

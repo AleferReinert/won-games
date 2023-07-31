@@ -1,6 +1,5 @@
 import styled, { DefaultTheme, css } from 'styled-components'
 import { HeadingProps, LineColors } from './Heading'
-import { cssMediaQuery } from 'utils/tests/helpers'
 
 export const sizeModifiers = {
   small: (theme: DefaultTheme) => css`
@@ -15,7 +14,7 @@ export const sizeModifiers = {
   xlarge: (theme: DefaultTheme) => css`
     font-size: ${theme.font.sizes.xlarge};
 
-    ${cssMediaQuery.greaterThan(theme.breakpoint.small)} {
+    @media (min-width: ${theme.breakpoint.small}) {
       font-size: ${theme.font.sizes.xxlarge};
     }
   `,
