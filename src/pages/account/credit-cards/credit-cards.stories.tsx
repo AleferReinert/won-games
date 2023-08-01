@@ -30,8 +30,8 @@ type Story = StoryObj<typeof CreditCardsPage>
 export const CreditCards: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const visa = canvas.getByTitle(/visa/i)
-    const mastercard = canvas.getByTitle(/mastercard/i)
+    const visa = canvas.getByRole('img', { name: /visa/i })
+    const mastercard = canvas.getByRole('img', { name: /mastercard/i })
 
     expect(visa).toBeInTheDocument()
     expect(mastercard).toBeInTheDocument()

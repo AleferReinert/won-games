@@ -1,4 +1,7 @@
+import type { ReactElement } from 'react'
+import DefaultTemplate from 'templates/Default/Default'
 import HomePage, { HomeTemplateProps } from './home'
+
 import HighlightMock from 'components/Highlight/mock'
 import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/ProductSlider/mock'
@@ -21,4 +24,8 @@ export function getServerSideProps() {
 
 export default function Index(props: HomeTemplateProps) {
   return <HomePage {...props} />
+}
+
+Index.getLayout = function getLayout(page: ReactElement) {
+  return <DefaultTemplate>{page}</DefaultTemplate>
 }

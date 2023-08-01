@@ -15,7 +15,7 @@ export const CreditCards = styled.div`
   `}
 `
 
-export const Item = styled.label`
+export const Item = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightGray};
     padding: ${theme.spacings.xsmall};
