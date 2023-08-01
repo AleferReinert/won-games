@@ -1,7 +1,7 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import BaseTemplate from 'templates/Base/Base'
+import DefaultTemplate from 'templates/Default/Default'
 import WishlistPage from '.'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
@@ -21,9 +21,9 @@ const meta: Meta<typeof WishlistPage> = {
   },
   decorators: [
     (Story) => (
-      <BaseTemplate>
+      <DefaultTemplate>
         <Story />
-      </BaseTemplate>
+      </DefaultTemplate>
     )
   ]
 }

@@ -5,7 +5,7 @@ import { CreditCardProps } from 'components/CreditCard/CreditCard'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { Info } from '@styled-icons/material-outlined/Info'
 import { ProductProps } from 'components/Product/Product'
-import Base from 'templates/Base/Base'
+import Base from 'templates/Default/Default'
 import CartItemList from 'components/CartItemList/CartItemList'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
@@ -18,7 +18,7 @@ import highlightMock from 'components/Highlight/mock'
 import productSliderMock from 'components/ProductSlider/mock'
 import cartItemsMock from 'components/CartItemList/mock'
 import creditCardsMock from 'components/PaymentOptions/mock'
-import * as S from './Cart.styles'
+import * as S from './cart.styles'
 
 type CartPageProps = {
   cartItems: CartItemProps[]

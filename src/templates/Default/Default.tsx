@@ -1,13 +1,13 @@
 import Container from 'components/Container/Container'
 import Header from 'components/Header/Header'
 import Footer from 'components/Footer/Footer'
-import * as S from './Base.styles'
+import * as S from './Default.styles'
 
-export type BaseTemplateProps = {
+export type DefaultTemplateProps = {
   children: React.ReactNode
 }
 
-const BaseTemplate = ({ children }: BaseTemplateProps) => {
+const DefaultTemplate = ({ children }: DefaultTemplateProps) => {
   return (
     <S.Wrapper>
       <Container>
@@ -23,4 +23,4 @@ const BaseTemplate = ({ children }: BaseTemplateProps) => {
   )
 }
 
-export default BaseTemplate
+export default DefaultTemplate

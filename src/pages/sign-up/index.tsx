@@ -5,7 +5,7 @@ import Auth from 'templates/Auth/Auth'
 import Button from 'components/Button/Button'
 import Link from 'next/link'
 import TextField from 'components/TextField/TextField'
-import * as S from './SignUp.styles'
+import * as S from './sign-up.styles'
 
 const SignUpPage: NextPageWithLayout = () => {
   return (

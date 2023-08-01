@@ -2,7 +2,7 @@ import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
-import * as S from './Profile.styles'
+import * as S from './profile.styles'
 
 const ProfilePage = () => {
   return (

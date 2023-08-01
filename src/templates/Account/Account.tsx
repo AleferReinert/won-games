@@ -4,7 +4,7 @@ import {
   ExitToApp,
   FormatListBulleted
 } from '@styled-icons/material-outlined'
-import Base from 'templates/Base/Base'
+import DefaultTemplate from 'templates/Default/Default'
 import Box from 'components/Box/Box'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
@@ -14,17 +14,17 @@ const nav = [
   {
     icon: <AccountCircle title='My profile' />,
     title: 'My profile',
-    link: 'profile/me'
+    link: '/account/profile'
   },
   {
     icon: <CreditCard title='My cards' />,
     title: 'My cards',
-    link: 'profile/cards'
+    link: '/account/credit-cards'
   },
   {
     icon: <FormatListBulleted title='My orders' />,
     title: 'My orders',
-    link: 'profile/orders'
+    link: '/account/orders'
   },
   {
     icon: <ExitToApp title='Sign out' />,
@@ -40,7 +40,7 @@ type AccountTemplateProps = {
 
 const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
   return (
-    <Base>
+    <DefaultTemplate>
       <Container>
         <Heading line='left' lineColor='secondary'>
           My account
@@ -71,7 +71,7 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
           </S.Children>
         </S.Wrapper>
       </Container>
-    </Base>
+    </DefaultTemplate>
   )
 }
 

@@ -1,22 +1,17 @@
 import type { ReactElement } from 'react'
-import type { NextPageWithLayout } from '../_app'
-import Base from 'templates/Base/Base'
-import * as S from './{{pascalCase name}}.styles'
+import {{template}}Template from 'templates/{{template}}/{{template}}'
+import * as S from './{{dashCase name}}.styles'
 
-type {{pascalCase name}}PageProps = {}
-
-const {{pascalCase name}}Page = (props: {{pascalCase name}}PageProps & NextPageWithLayout) =>  {
+const {{pascalCase name}}Page = () =>  {
   return (
-    <>
-      <S.Wrapper>
-        {{name}}
-      </S.Wrapper>
-    </>
+    <S.Wrapper>
+    {{name}}
+    </S.Wrapper>
   )
 }
 
 {{pascalCase name}}Page.getLayout = function getLayout(page: ReactElement) {
-  return <Base>{page}</Base>
+  return <{{template}}Template>{page}</{{template}}Template>
 }
 
 export default {{pascalCase name}}Page

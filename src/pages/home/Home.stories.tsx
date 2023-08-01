@@ -1,7 +1,7 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import BaseTemplate from 'templates/Base/Base'
+import DefaultTemplate from 'templates/Default/Default'
 import HomeTemplate from './index'
 import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/ProductSlider/mock'
@@ -23,9 +23,9 @@ const meta: Meta<typeof HomeTemplate> = {
   },
   decorators: [
     (Story) => (
-      <BaseTemplate>
+      <DefaultTemplate>
         <Story />
-      </BaseTemplate>
+      </DefaultTemplate>
     )
   ],
   parameters: {

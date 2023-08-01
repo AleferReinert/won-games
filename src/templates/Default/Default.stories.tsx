@@ -1,12 +1,12 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import BaseTemplate from './Base'
+import DefaultTemplate from './Default'
 import React from 'react'
 
-const meta: Meta<typeof BaseTemplate> = {
-  title: 'Templates/Base',
-  component: BaseTemplate,
+const meta: Meta<typeof DefaultTemplate> = {
+  title: 'Templates/Default',
+  component: DefaultTemplate,
   args: {
     children: (
       <div style={{ color: 'white', textAlign: 'center' }}>
@@ -24,9 +24,9 @@ const meta: Meta<typeof BaseTemplate> = {
 
 export default meta
 
-type Story = StoryObj<typeof BaseTemplate>
+type Story = StoryObj<typeof DefaultTemplate>
 
-export const Base: Story = {
+export const Default: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const header = canvasElement.getElementsByTagName('header')[0]

@@ -3,10 +3,10 @@ import { BannerProps } from 'components/Banner/Banner'
 import { ProductProps } from 'components/Product/Product'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import BannerSlider from 'components/BannerSlider/BannerSlider'
-import BaseTemplate from 'templates/Base/Base'
+import DefaultTemplate from 'templates/Default/Default'
 import Container from 'components/Container/Container'
 import Showcase from 'components/Showcase/Showcase'
-import * as S from './Home.styles'
+import * as S from './home.styles'
 
 export type HomeTemplateProps = {
   banners: BannerProps[]
@@ -64,7 +64,7 @@ const HomePage = ({
 }
 
 HomePage.getLayout = function getLayout(page: ReactElement) {
-  return <BaseTemplate>{page}</BaseTemplate>
+  return <DefaultTemplate>{page}</DefaultTemplate>
 }
 
 export default HomePage

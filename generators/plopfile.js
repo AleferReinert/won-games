@@ -4,7 +4,7 @@ module.exports = function (plop) {
       {
         type: 'input',
         name: 'name',
-        message: 'component name?'
+        message: 'Component name?'
       }
     ],
     actions: [
@@ -30,7 +30,7 @@ module.exports = function (plop) {
         {
           type: 'input',
           name: 'name',
-          message: 'template name?'
+          message: 'Template name?'
         }
       ],
       actions: [
@@ -56,7 +56,17 @@ module.exports = function (plop) {
         {
           type: 'input',
           name: 'name',
-          message: 'page name?'
+          message: 'Page name?'
+        },
+        {
+          type: 'list',
+          message: 'Choose a template:',
+          name: 'template',
+          choices: [
+            { value: 'Default' },
+            { value: 'Account' },
+            { value: 'Auth' }
+          ]
         }
       ],
       actions: [
@@ -67,12 +77,12 @@ module.exports = function (plop) {
         },
         {
           type: 'add',
-          path: '../src/pages/{{dashCase name}}/{{pascalCase  name}}.stories.tsx',
+          path: '../src/pages/{{dashCase name}}/{{dashCase  name}}.stories.tsx',
           templateFile: 'templates/page/stories.tsx.hbs'
         },
         {
           type: 'add',
-          path: '../src/pages/{{dashCase name}}/{{pascalCase  name}}.styles.ts',
+          path: '../src/pages/{{dashCase name}}/{{dashCase  name}}.styles.ts',
           templateFile: 'templates/page/styles.ts.hbs'
         }
       ]
