@@ -2,6 +2,7 @@ import { FileDownload } from '@styled-icons/material/FileDownload'
 import Price from 'components/Price/Price'
 import * as S from './CartItem.styles'
 import Box from 'components/Box/Box'
+import CreditCard from 'components/CreditCard/CreditCard'
 
 type ConditionalPaymentProps =
   | {
@@ -22,7 +23,7 @@ export type CartItemProps = {
   title: string
   price: string
   downloadLink?: string
-}
+} & ConditionalPaymentProps
 
 const CartItem = ({
   img,
@@ -33,35 +34,35 @@ const CartItem = ({
   creditCardBrand,
   creditCardFlag,
   purchaseDate
-}: CartItemProps & ConditionalPaymentProps) => {
+}: CartItemProps) => {
   return (
     <S.Wrapper>
       <Box>
         <S.Content>
           <S.Img src={img} alt={title} />
-          <div>
-            <S.Title>
-              {title}
+          <S.InfoWrapper>
+            <S.TitleWrapper>
+              <S.Title>{title}</S.Title>
               {!!downloadLink && (
                 <S.DownloadLink href={downloadLink} title='Download' download>
                   <FileDownload />
                 </S.DownloadLink>
               )}
-            </S.Title>
+            </S.TitleWrapper>
             <Price price={price} />
-          </div>
+          </S.InfoWrapper>
 
           {!!creditCardBrand && (
             <S.PaymentInfo>
               <S.PurchaseDate aria-label='purchase date'>
                 {purchaseDate}
               </S.PurchaseDate>
-              <S.CreditCard>
-                <S.CreditCardNumber aria-label='credit card number'>
-                  {creditCardNumber}
-                </S.CreditCardNumber>
-                <S.CreditCardFlag src={creditCardFlag} alt={creditCardBrand} />
-              </S.CreditCard>
+              <CreditCard
+                flagImg={creditCardFlag}
+                flagName={creditCardBrand}
+                number={creditCardNumber}
+                color='gray'
+              />
             </S.PaymentInfo>
           )}
         </S.Content>

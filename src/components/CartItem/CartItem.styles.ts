@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-
+import * as CreditCardsStyles from 'components/CreditCard/CreditCard.styles'
 export const Wrapper = styled.li`
   ${({ theme }) => css`
     border-bottom: 0.1rem solid ${theme.colors.lightGray};
@@ -31,20 +31,31 @@ export const Img = styled.img`
   aspect-ratio: 16/9;
 `
 
-export const Title = styled.h2`
+export const InfoWrapper = styled.div`
+  overflow: hidden;
+`
+
+export const TitleWrapper = styled.div`
   ${({ theme }) => css`
-    font-size: ${theme.font.sizes.medium};
     line-height: 2.4rem;
     margin-bottom: 0.2rem;
     transform: translateY(-0.4rem);
     display: flex;
     gap: ${theme.spacings.xxsmall};
-    grid: 1;
     justify-content: space-between;
 
     @media (min-width: ${theme.breakpoint.small}) {
       justify-content: start;
     }
+  `}
+`
+
+export const Title = styled.h2`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.medium};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   `}
 `
 
@@ -75,24 +86,12 @@ export const PaymentInfo = styled.div`
       flex-direction: column-reverse;
       gap: 0;
       justify-content: space-between;
+
+      ${CreditCardsStyles.Wrapper} {
+        ${CreditCardsStyles.wrapperModifiers.right()}
+      }
     }
   `}
 `
-
-export const CreditCard = styled.div`
-  ${({ theme }) => css`
-    display: inline-flex;
-    align-items: center;
-    gap: ${theme.spacings.xxsmall};
-
-    @media (min-width: ${theme.breakpoint.small}) {
-      align-self: flex-end;
-    }
-  `}
-`
-
-export const CreditCardNumber = styled.div``
-
-export const CreditCardFlag = styled.img``
 
 export const PurchaseDate = styled.div``

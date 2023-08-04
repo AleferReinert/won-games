@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { CreditCardProps } from './CreditCard'
 
-const wrapperModifiers = {
+export const wrapperModifiers = {
   left: () => css`
     flex-direction: row;
   `,

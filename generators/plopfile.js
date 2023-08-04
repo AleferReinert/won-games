@@ -1,5 +1,5 @@
 module.exports = function (plop) {
-  plop.setGenerator('component', {
+  plop.setGenerator('Component', {
     prompts: [
       {
         type: 'input',
@@ -25,7 +25,7 @@ module.exports = function (plop) {
       }
     ]
   }),
-    plop.setGenerator('template', {
+    plop.setGenerator('Template', {
       prompts: [
         {
           type: 'input',
@@ -51,7 +51,7 @@ module.exports = function (plop) {
         }
       ]
     }),
-    plop.setGenerator('page', {
+    plop.setGenerator('Page', {
       prompts: [
         {
           type: 'input',

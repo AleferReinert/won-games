@@ -2,15 +2,12 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import CartItemComponent from './CartItem'
+import cartItemMock from './mock'
 
 const meta: Meta<typeof CartItemComponent> = {
   title: 'Components/CartItem',
   component: CartItemComponent,
-  args: {
-    title: 'Population Zero',
-    img: '/img/population-zero.jpg',
-    price: '$215.00'
-  }
+  args: cartItemMock[0]
 }
 
 export default meta
@@ -51,17 +48,16 @@ export const Payment: Story = {
     creditCardFlag: '/img/creditCards/mastercard.png',
     purchaseDate: 'Purchase made on 07/06/2023 at 00:42'
   },
-  play: ({ canvasElement, args }) => {
+  play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const creditCardNumber = canvas.getByLabelText('credit card number')
-    const creditCardFlag = canvas.getByRole('img', {
-      name: args.creditCardBrand
-    })
+    const creditCardFlag = canvas.getByRole('img', { name: 'mastercard' })
     const purchaseDate = canvas.getByLabelText('purchase date')
 
-    expect(creditCardNumber).toHaveTextContent(args.creditCardNumber!)
-
-    expect(creditCardFlag).toHaveAttribute('src', args.creditCardFlag)
-    expect(purchaseDate).toHaveTextContent(args.purchaseDate!)
+    expect(creditCardNumber).toHaveTextContent('**** **** **** 4326')
+    expect(creditCardFlag).toHaveAttribute('src')
+    expect(purchaseDate).toHaveTextContent(
+      'Purchase made on 07/06/2023 at 00:42'
+    )
   }
 }

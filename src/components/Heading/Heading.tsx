@@ -10,6 +10,7 @@ export type HeadingProps = {
   line?: 'left' | 'bottom'
   lineColor?: LineColors
   lineBottomSize?: 'small' | 'medium' | 'large'
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 }
 
 const Heading = ({
@@ -18,7 +19,8 @@ const Heading = ({
   size = 'xlarge',
   line,
   lineColor = 'primary',
-  lineBottomSize = 'large'
+  lineBottomSize = 'large',
+  as = 'h2'
 }: HeadingProps) => {
   return (
     <S.Wrapper
@@ -27,6 +29,7 @@ const Heading = ({
       size={size}
       lineColor={lineColor}
       lineBottomSize={lineBottomSize}
+      as={as}
     >
       {children}
     </S.Wrapper>

@@ -19,7 +19,7 @@ const CreditCard = ({
   return (
     <S.Wrapper color={color} direction={direction}>
       <Image src={flagImg} width='36' height='22' alt={flagName} />
-      <S.Number>{number}</S.Number>
+      <S.Number aria-label='credit card number'>{number}</S.Number>
     </S.Wrapper>
   )
 }

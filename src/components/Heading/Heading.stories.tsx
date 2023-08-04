@@ -27,8 +27,7 @@ export const Default: Story = {
     children: 'Default heading'
   },
   play: ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading')
+    const title = canvasElement.getElementsByTagName('h2')[0]
 
     // color white and size xlarge as default
     expect(title).toHaveStyle({ color: theme.colors.white })
@@ -222,5 +221,19 @@ export const LineBottomLarge: Story = {
     expect(titleAfter.width).toBe(remToPx('5rem'))
     expect(titleAfter.borderBottomWidth).toBe(remToPx('0.5rem'))
     expect(titleAfter.bottom).toBe(remToPx('-0.8rem'))
+  }
+}
+
+export const AsH1: Story = {
+  name: 'As <h1 />',
+  args: {
+    children: 'Line bottom large',
+    line: 'bottom',
+    as: 'h1'
+  },
+  play: ({ canvasElement }) => {
+    const h1 = canvasElement.getElementsByTagName('h1')[0]
+
+    expect(h1).toBeInTheDocument()
   }
 }

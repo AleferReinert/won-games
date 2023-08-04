@@ -42,7 +42,7 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
   return (
     <DefaultTemplate>
       <Container>
-        <Heading line='left' lineColor='secondary'>
+        <Heading as='h1' line='left' lineColor='secondary'>
           My account
         </Heading>
 
@@ -66,8 +66,8 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
               <Heading color='black' line='bottom' size='large'>
                 {activeLink}
               </Heading>
-              {children}
             </Box>
+            {children}
           </S.Children>
         </S.Wrapper>
       </Container>

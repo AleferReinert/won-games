@@ -1,7 +1,7 @@
 import styled, { css, DefaultTheme } from 'styled-components'
-
 import Link from 'next/link'
 import * as HeadingStyles from 'components/Heading/Heading.styles'
+import * as BoxStyles from 'components/Box/Box.styles'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -92,6 +92,16 @@ export const Text = styled.span`
 
 export const Children = styled.div`
   ${({ theme }) => css`
+    > ${BoxStyles.Wrapper} {
+      &:first-child {
+        display: flex;
+        padding-bottom: 0;
+      }
+      &:last-child {
+        padding-top: 0;
+      }
+    }
+
     ${HeadingStyles.Wrapper} {
       display: none;
 

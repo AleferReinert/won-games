@@ -57,14 +57,13 @@ export const lineModifiers = {
       content: '';
       position: absolute;
       left: 0;
-      /* bottom: 0.6rem; */
       border-bottom-style: solid;
       border-bottom-color: ${theme.colors[lineColor]};
     }
   `
 }
 
-export const Wrapper = styled.h2<HeadingProps>`
+export const Wrapper = styled.div<HeadingProps>`
   ${({ theme, color, line, lineColor, lineBottomSize, size }) => css`
     color: ${theme.colors[color!]};
 
