@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import * as S from './credit-cards.styles'
+import Box from 'components/Box/Box'
 import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
 import creditCardsMock from 'components/PaymentOptions/mock'
-import Box from 'components/Box/Box'
+import * as S from './credit-cards.styles'
 
 export function getServerSideProps() {
   return {

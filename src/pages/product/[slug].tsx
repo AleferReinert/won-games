@@ -14,13 +14,13 @@ import Container from 'components/Container/Container'
 import Divider from 'components/Divider/Divider'
 import Heading from 'components/Heading/Heading'
 import Showcase from 'components/Showcase/Showcase'
-import * as S from './product.styles'
 import productHeaderMock from 'components/ProductHeader/mock'
 import galleryMock from 'components/Gallery/mock'
 import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
 import descriptionMock from './mock'
+import * as S from './product.styles'
 
 type ProductPageProps = {
   cover: string

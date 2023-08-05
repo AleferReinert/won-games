@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { within, userEvent } from '@storybook/testing-library'
+import { within, userEvent, waitFor } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import GalleryComponents from './Gallery'
 import items from './mock'
@@ -52,17 +52,17 @@ export const Tests: Story = {
 
     // Open image2 on thumb2 clicked
     await userEvent.click(thumb2)
-    const originalImage2 = await canvas.getByRole('img', {
+    const originalImage2 = canvas.getByRole('img', {
       name: items[1].label
     }).parentElement?.parentElement
-    expect(originalImage2).toHaveClass('slick-active')
+    await waitFor(() => expect(originalImage2).toHaveClass('slick-active'))
     await userEvent.click(buttonCloseModal)
 
     // Open image1 on thumb1 clicked
     await userEvent.click(thumb1)
     const originalImage1 = canvas.getByRole('img', { name: items[0].label })
       .parentElement?.parentElement
-    expect(originalImage1).toHaveClass('slick-active')
+    await waitFor(() => expect(originalImage1).toHaveClass('slick-active'))
     await userEvent.click(buttonCloseModal)
   }
 }

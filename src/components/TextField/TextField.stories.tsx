@@ -1,11 +1,10 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { userEvent, within } from '@storybook/testing-library'
+import { within, userEvent } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import { Email, Person } from '@styled-icons/material-outlined'
-import TextField from './TextField'
-import React from 'react'
-import theme from 'styles/theme'
 import { hexToRGBA } from 'utils/tests/helpers'
+import TextField from './TextField'
+import theme from 'styles/theme'
 
 const meta: Meta<typeof TextField> = {
   title: 'Components/Atoms/TextField',

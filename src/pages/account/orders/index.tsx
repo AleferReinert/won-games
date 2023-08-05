@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import * as S from './orders.styles'
 import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import Box from 'components/Box/Box'
 import itemsMock from './mock'
+import * as S from './orders.styles'
 
 export function getServerSideProps() {
   return {
