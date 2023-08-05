@@ -3956,7 +3956,7 @@
     "@storybook/client-logger" "7.2.1"
     "@storybook/preview-api" "7.2.1"
 
-"@storybook/core-common@7.1.1", "@storybook/core-common@^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0":
+"@storybook/core-common@7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@storybook/core-common/-/core-common-7.1.1.tgz#da694694e264c5a82b4a8f590959e6ad3a3694f6"
   integrity sha512-DO7ZS6YDITykvqMHeOWSmnsPYk2w7gka9GtO2LPbEm0f6p5kG2nohBO5+nsI3PuXpKiHXOB7vKJjwfQqxvPj5A==
@@ -3984,7 +3984,7 @@
     resolve-from "^5.0.0"
     ts-dedent "^2.0.0"
 
-"@storybook/core-common@7.2.1":
+"@storybook/core-common@7.2.1", "@storybook/core-common@^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0":
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/@storybook/core-common/-/core-common-7.2.1.tgz#38159ea9cc6bbfe7103a0f5ad3fcbd47950a4990"
   integrity sha512-g1MQ04lgL16Ct89tPj6RSw72yd+a+ZJ4ceH3Ev+SmnU8efBLPmr6+G5Bx7+rY1W2c6NdpFgtSidjgOGqQ8gppw==
@@ -4312,7 +4312,7 @@
     semver "^7.3.7"
     webpack "5"
 
-"@storybook/preview-api@7.1.1", "@storybook/preview-api@^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0":
+"@storybook/preview-api@7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@storybook/preview-api/-/preview-api-7.1.1.tgz#5093b5a05ec75394193b05a45358193c0dff5e86"
   integrity sha512-uI8TVuoFfg3EBdaKdRVUa17JfGdmK78JI3+byLZLkzl6nR+q846BWHgi8eJmU8MHmO5CFaqT2kts/e8T34JDgw==
@@ -4333,7 +4333,7 @@
     ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
-"@storybook/preview-api@7.2.1":
+"@storybook/preview-api@7.2.1", "@storybook/preview-api@^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0":
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/@storybook/preview-api/-/preview-api-7.2.1.tgz#0de54f11237d837db918d672e7f4c2bc34abf8f7"
   integrity sha512-WKecuOdeh9+og6bPR9KoQf/JCeSRPCcfZv9uNfJzAp3IiTnS3UpfCz+HBZzZJQrisgbd7OulNY400HQUmxY2Ag==
