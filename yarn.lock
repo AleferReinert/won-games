@@ -3041,10 +3041,10 @@
   resolved "https://registry.npmjs.org/@next/env/-/env-13.1.6.tgz"
   integrity sha512-s+W9Fdqh5MFk6ECrbnVmmAOwxKQuhGMT7xXHrkYIBMBcTiOqNWhv5KbJIboKR5STXxNXl32hllnvKaffzFaWQg==
 
-"@next/eslint-plugin-next@^13.1.6":
-  version "13.1.6"
-  resolved "https://registry.npmjs.org/@next/eslint-plugin-next/-/eslint-plugin-next-13.1.6.tgz"
-  integrity sha512-o7cauUYsXjzSJkay8wKjpKJf2uLzlggCsGUkPu3lP09Pv97jYlekTC20KJrjQKmSv5DXV0R/uks2ZXhqjNkqAw==
+"@next/eslint-plugin-next@^13.4.16":
+  version "13.4.16"
+  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-13.4.16.tgz#444c0ec4bf70ec8646e5339053cfeb59ec5d40c6"
+  integrity sha512-QuFtQl+oSEEQb0HMYBdvBoUaTiMxbY3go/MFkF3zOnfY0t84+IbAX78cw8ZCfr6cA6UcTq3nMIlCrHwDC/moxg==
   dependencies:
     glob "7.1.7"
 
