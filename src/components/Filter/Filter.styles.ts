@@ -122,9 +122,11 @@ export const ButtonWrapper = styled.div`
     right: 0;
     padding: ${theme.spacings.small};
     box-shadow: 0 -0.2rem 0.4rem 0 rgba(3, 5, 23, 0.1);
+    background-color: ${theme.colors.white};
 
     @media (min-width: ${theme.breakpoint.medium}) {
       position: static;
+      background-color: transparent;
     }
   `}
 `
