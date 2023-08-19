@@ -52,6 +52,7 @@ const customViewports = {
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen',
     nextRouter: {
       Provider: RouterContext.Provider
     },
