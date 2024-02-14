@@ -49,7 +49,7 @@ const Filter = ({ items, initialValues = {}, onFilter }: FilterProps) => {
         <FilterListIcon aria-hidden='true' />
       </S.OpenFilter>
 
-      <S.Wrapper isOpen={isOpen}>
+      <S.Wrapper isOpen={isOpen} data-testid='filterComponent'>
         <S.CloseFilter onClick={() => setIsOpen(false)} title='Close filters'>
           <CloseIcon />
         </S.CloseFilter>

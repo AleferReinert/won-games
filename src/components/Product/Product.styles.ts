@@ -4,8 +4,6 @@ export const Wrapper = styled.article`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
 `
 
 export const ImageBox = styled.div`

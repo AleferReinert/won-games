@@ -8,6 +8,7 @@ export const OpenFilter = styled.button`
     color: ${theme.colors.white};
     width: 2.4rem;
     background: transparent;
+    margin-bottom: ${theme.spacings.small};
 
     @media (min-width: ${theme.breakpoint.medium}) {
       display: none;
@@ -40,6 +41,7 @@ export const Wrapper = styled.div<WrapperProps>`
     transition: opacity ${theme.transition.default};
     display: grid;
     grid-template-rows: max-content auto max-content;
+    z-index: ${theme.layers.menu};
 
     ${checkboxStyles.Wrapper},
     ${radioStyles.Wrapper} {

@@ -5,7 +5,7 @@ import { CreditCardProps } from 'components/CreditCard/CreditCard'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { Info } from '@styled-icons/material-outlined/Info'
 import { ProductProps } from 'components/Product/Product'
-import Base from 'templates/Default/Default'
+import Default from 'templates/Default/Default'
 import CartItemList from 'components/CartItemList/CartItemList'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
@@ -93,7 +93,7 @@ const CartPage = (props: CartPageProps & NextPageWithLayout) => {
 }
 
 CartPage.getLayout = function getLayout(page: ReactElement) {
-  return <Base>{page}</Base>
+  return <Default>{page}</Default>
 }
 
 export default CartPage

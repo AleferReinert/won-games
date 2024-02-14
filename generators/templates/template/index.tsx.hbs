@@ -1,17 +1,21 @@
-import Base from 'templates/Base/Base'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
 import * as S from './{{pascalCase name}}.styles'
 
-const {{pascalCase name}}Template = () => {
+type {{pascalCase name}}TemplateProps = {
+  children: React.ReactNode
+}
+
+const {{pascalCase name}}Template = ({ children }: {{pascalCase name}}TemplateProps) => {
   return (
-    <Base>
+    <S.Wrapper>
       <Container>
         <Heading line='left' lineColor='secondary'>
           {{pascalCase name}}
         </Heading>
+        {children}
       </Container>
-    </Base>
+    </S.Wrapper>
   )
 }
 
