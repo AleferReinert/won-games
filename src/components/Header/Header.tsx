@@ -5,14 +5,18 @@ import { useState } from 'react'
 import Button from 'components/Button/Button'
 import Link from 'next/link'
 import Logo from 'components/Logo/Logo'
-import * as S from './Header.styles'
 import MenuMobile from 'components/MenuMobile/MenuMobile'
+import * as S from './Header.styles'
 
 type MenuProps = {
   username?: string
 }
 
-const Header = ({ username }: MenuProps) => {
+type HeaderProps = {
+  cartItems?: number
+}
+
+const Header = ({ username, cartItems }: MenuProps & HeaderProps) => {
   const [menuMobile, setMenuMobile] = useState(false)
 
   return (
@@ -38,7 +42,12 @@ const Header = ({ username }: MenuProps) => {
         </S.IconWrapper>
 
         <S.IconWrapper>
-          <ShoppingCartIcon aria-label='open shopping cart' />
+          <S.ButtonCart>
+            <S.BadgeCart aria-label='Cart items'>
+              {cartItems && cartItems > 0 ? cartItems : 0}
+            </S.BadgeCart>
+            <ShoppingCartIcon title='Shopping cart' />
+          </S.ButtonCart>
         </S.IconWrapper>
 
         {!username && (
