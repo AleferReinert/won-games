@@ -22,7 +22,7 @@ export const Wrapper = styled.div<WrapperProps>`
     display: inline-block;
     position: relative;
 
-    ${Content} {
+    ${Children} {
       ${state && wrapperModifiers.open()}
       ${!state && wrapperModifiers.close()}
     }
@@ -37,26 +37,27 @@ export const Button = styled.button`
     background: transparent;
   `}
 `
-export const Content = styled.div`
+export const Children = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     position: absolute;
     top: 100%;
-    right: 0;
+    right: -0.9rem;
     margin-top: ${theme.spacings.xsmall};
     border-radius: ${theme.border.radius};
     font-size: ${theme.font.sizes.medium};
     transition: ${theme.transition.default};
+    width: max-content;
     ${wrapperModifiers.close()}
 
     &:before {
       display: block;
       content: '';
-      border: 1.2rem solid transparent;
+      border: 1rem solid transparent;
       border-bottom-color: ${theme.colors.white};
       position: absolute;
-      top: -2.4rem;
-      right: 2rem;
+      top: -2rem;
+      right: 1rem;
     }
   `}
 `

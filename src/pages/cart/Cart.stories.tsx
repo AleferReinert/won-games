@@ -41,7 +41,7 @@ export const Default: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading', { name: /my cart/i })
-    const cartList = canvas.getByLabelText(/cart list/i)
+    const cartList = canvas.getAllByLabelText(/cart list/i)
     const paymentOptions = canvas.getByTestId('paymentOptions')
     const info = canvas.getByText(/your purchase is protected/i)
     const recommendedTitle = canvas.getByRole('heading', {
@@ -51,7 +51,7 @@ export const Default: Story = {
     const recommendedGames = canvas.getByTestId('productSliderComponent')
 
     expect(title).toBeInTheDocument()
-    expect(cartList).toBeInTheDocument()
+    expect(cartList).toHaveLength(2)
     expect(paymentOptions).toBeInTheDocument()
     expect(info).toBeInTheDocument()
     expect(recommendedTitle).toBeInTheDocument()
@@ -66,14 +66,14 @@ export const Empty: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const cartList = canvas.queryByLabelText(/cart list/i)
+    const cartList = canvas.getAllByLabelText(/cart list/i)
     const paymentOptions = canvas.queryByTestId('paymentOptions')
     const info = canvas.queryByText(/your purchase is protected/i)
-    const emptyComponent = canvas.getByTestId('emptyComponent')
+    const emptyComponent = canvas.getAllByTestId('emptyComponent')
 
-    expect(cartList).not.toBeInTheDocument()
+    expect(cartList).toHaveLength(1)
     expect(paymentOptions).not.toBeInTheDocument()
     expect(info).not.toBeInTheDocument()
-    expect(emptyComponent).toBeInTheDocument()
+    expect(emptyComponent).toHaveLength(2)
   }
 }

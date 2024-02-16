@@ -14,6 +14,7 @@ export const Footer = styled.div`
     justify-content: space-between;
     font-size: ${theme.font.sizes.xlarge};
     font-weight: ${theme.font.semibold};
+    align-items: center;
 
     @media (min-width: ${theme.breakpoint.xsmall}) {
       padding: ${theme.spacings.xsmall};

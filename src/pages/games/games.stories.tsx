@@ -31,7 +31,7 @@ export const WithGames: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
 
-    expect(canvas.getByTestId('filterComponent'))
+    expect(canvas.getAllByTestId('filterComponent'))
     expect(canvas.getAllByTestId('productComponent'))
     expect(canvas.getByRole('button', { name: /show more/i }))
   }
@@ -42,7 +42,7 @@ export const Empty: Story = {
     const canvas = within(canvasElement)
 
     expect(canvas.getByTestId('filterComponent'))
-    expect(canvas.getByTestId('emptyComponent'))
+    expect(canvas.getAllByTestId('emptyComponent')).toHaveLength(2)
     expect(canvas.queryAllByTestId('productComponent')).toStrictEqual([])
     expect(
       canvas.queryByRole('button', { name: /show more/i })

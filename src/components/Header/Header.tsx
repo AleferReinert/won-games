@@ -1,8 +1,8 @@
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
-import { ShoppingCart as ShoppingCartIcon } from '@styled-icons/material-outlined/ShoppingCart'
 import { Search as SearchIcon } from '@styled-icons/material-outlined/Search'
 import { useState } from 'react'
 import Button from 'components/Button/Button'
+import CartDropdown from 'components/CartDropdown/CartDropdown'
 import Link from 'next/link'
 import Logo from 'components/Logo/Logo'
 import MenuMobile from 'components/MenuMobile/MenuMobile'
@@ -12,11 +12,7 @@ type MenuProps = {
   username?: string
 }
 
-type HeaderProps = {
-  cartItems?: number
-}
-
-const Header = ({ username, cartItems }: MenuProps & HeaderProps) => {
+const Header = ({ username }: MenuProps) => {
   const [menuMobile, setMenuMobile] = useState(false)
 
   return (
@@ -42,12 +38,7 @@ const Header = ({ username, cartItems }: MenuProps & HeaderProps) => {
         </S.IconWrapper>
 
         <S.IconWrapper>
-          <S.ButtonCart>
-            <S.BadgeCart aria-label='Cart items'>
-              {cartItems && cartItems > 0 ? cartItems : 0}
-            </S.BadgeCart>
-            <ShoppingCartIcon title='Shopping cart' />
-          </S.ButtonCart>
+          <CartDropdown />
         </S.IconWrapper>
 
         {!username && (

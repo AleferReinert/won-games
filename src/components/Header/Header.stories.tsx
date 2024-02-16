@@ -21,17 +21,14 @@ export const Default: Story = {
     const logo = canvas.getByRole('img', { name: /won games/i })
     const menuDesktop = ['Home', 'Explore']
     const searchIcon = canvas.getByLabelText(/search/i)
-    const shoppingCartIcon = canvas.getByTitle(/shopping cart/i)
-    const badgeCart = canvas.getByLabelText(/cart items/i)
+    const cartDropdownComponent = canvas.getByTestId('cartDropdownComponent')
     const signInButton = canvas.queryByRole('link', { name: /sign in/i })
     const menuMobile = canvas.getByLabelText(/menu mobile/i)
     const closeMenuIcon = canvas.getByLabelText(/close menu/i)
 
     expect(logo).toBeInTheDocument()
     expect(searchIcon).toBeInTheDocument()
-    expect(shoppingCartIcon).toBeInTheDocument()
-    expect(badgeCart).toBeInTheDocument()
-    expect(badgeCart).toHaveTextContent('0')
+    expect(cartDropdownComponent).toBeInTheDocument()
     expect(menuMobile).not.toBeVisible()
     expect(menuMobile).toHaveStyle({ pointerEvents: 'none' })
 
@@ -84,29 +81,5 @@ export const Authenticated: Story = {
     const signInButton = canvas.queryByRole('link', { name: /sign in/i })
 
     expect(signInButton).not.toBeInTheDocument()
-  }
-}
-
-export const WithCartItems: Story = {
-  args: {
-    cartItems: 12
-  },
-  play: ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const badgeCart = canvas.getByLabelText(/cart items/i)
-
-    expect(badgeCart).toHaveTextContent('12')
-  }
-}
-
-export const WithNegativeCartItems: Story = {
-  args: {
-    cartItems: -2
-  },
-  play: ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const badgeCart = canvas.getByLabelText(/cart items/i)
-
-    expect(badgeCart).toHaveTextContent('0')
   }
 }

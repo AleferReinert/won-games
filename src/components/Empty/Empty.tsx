@@ -1,9 +1,11 @@
 import Button from 'components/Button/Button'
 import * as S from './Empty.styles'
 
-type CommomProps = {
+export type EmptyCommomProps = {
   title: string
   description: string
+  invertedColors?: boolean
+  small?: boolean
 }
 
 type ConditionalProps =
@@ -16,11 +18,24 @@ type ConditionalProps =
       link: string
     }
 
-export type EmptyProps = CommomProps & ConditionalProps
+export type EmptyProps = EmptyCommomProps & ConditionalProps
 
-const Empty = ({ title, description, label, link }: EmptyProps) => {
+const Empty = ({
+  title,
+  description,
+  label,
+  link,
+  invertedColors = false,
+  small = false
+}: EmptyProps) => {
   return (
-    <S.Wrapper data-testid='emptyComponent'>
+    <S.Wrapper
+      data-testid='emptyComponent'
+      title={title}
+      description={description}
+      invertedColors={invertedColors}
+      small={small}
+    >
       <S.Img
         src='/img/empty.svg'
         alt='A person on a couch playing video games'

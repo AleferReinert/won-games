@@ -15,20 +15,20 @@ type Story = StoryObj<typeof DropdownComponent>
 export const Dropdown: Story = {
   args: {
     button: 'My account',
-    content: 'content'
+    children: 'children'
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const button = canvas.queryByRole('button', { name: /my account/i })
-    const content = canvas.getByText('content')
+    const children = canvas.getByText('children')
 
     expect(button).toBeInTheDocument()
-    expect(content).not.toBeVisible()
+    expect(children).not.toBeVisible()
 
     userEvent.click(button!)
 
     waitFor(() => {
-      expect(content).toBeVisible()
+      expect(children).toBeVisible()
     })
   }
 }

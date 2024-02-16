@@ -42,7 +42,7 @@ export const Default: Story = {
     const games = within(title.parentElement!).queryAllByTestId(
       'productComponent'
     )
-    const empty = canvas.queryByTestId('emptyComponent')
+    const emptyComponent = canvas.getAllByTestId('emptyComponent')
     const recommendedTitle = canvas.getByRole('heading', {
       name: /you make like these games/i
     })
@@ -50,7 +50,7 @@ export const Default: Story = {
     const recommendedGames = canvas.getByTestId('productSliderComponent')
 
     expect(title).toBeInTheDocument()
-    expect(empty).not.toBeInTheDocument()
+    expect(emptyComponent).toHaveLength(1)
     expect(games.length).toBeGreaterThan(0)
     expect(recommendedTitle).toBeInTheDocument()
     expect(recommendedHighlight).toBeInTheDocument()
@@ -62,12 +62,12 @@ export const Empty: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading', { name: 'Wishlist' })
-    const empty = canvas.queryByTestId('emptyComponent')
+    const emptyComponent = canvas.getAllByTestId('emptyComponent')
     const games = within(title.parentElement!).queryAllByTestId(
       'productComponent'
     )
 
-    expect(empty).toBeInTheDocument()
+    expect(emptyComponent).toHaveLength(2)
     expect(games.length).toBe(0)
   }
 }

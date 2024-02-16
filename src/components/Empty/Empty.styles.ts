@@ -1,9 +1,30 @@
 import styled, { css } from 'styled-components'
+import { EmptyCommomProps } from './Empty'
 
-export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    margin: ${theme.spacings.medium};
+export const Wrapper = styled.div<EmptyCommomProps>`
+  ${({ theme, invertedColors, small }) => css`
+    padding: ${theme.spacings.medium};
     text-align: center;
+
+    ${invertedColors &&
+    css`
+      background: ${theme.colors.white};
+
+      ${Message} {
+        color: ${theme.colors.black};
+      }
+    `}
+
+    ${small &&
+    css`
+      ${Img} {
+        max-width: 14rem;
+      }
+
+      ${Title} {
+        font-size: ${theme.font.sizes.large};
+      }
+    `}
   `}
 `
 
