@@ -10,12 +10,12 @@ export type EmptyCommomProps = {
 
 type ConditionalProps =
   | {
-      label?: never
-      link?: never
+      buttonText?: never
+      buttonUrl?: never
     }
   | {
-      label: string
-      link: string
+      buttonText: string
+      buttonUrl?: string
     }
 
 export type EmptyProps = EmptyCommomProps & ConditionalProps
@@ -23,8 +23,8 @@ export type EmptyProps = EmptyCommomProps & ConditionalProps
 const Empty = ({
   title,
   description,
-  label,
-  link,
+  buttonText,
+  buttonUrl,
   invertedColors = false,
   small = false
 }: EmptyProps) => {
@@ -42,9 +42,10 @@ const Empty = ({
       />
       <S.Title>{title}</S.Title>
       <S.Message>{description}</S.Message>
-      {!!label && (
-        <Button as='a' href={link}>
-          {label}
+
+      {!!buttonText && (
+        <Button as='a' href={buttonUrl}>
+          {buttonText}
         </Button>
       )}
     </S.Wrapper>

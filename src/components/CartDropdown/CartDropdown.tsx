@@ -2,8 +2,8 @@ import { CartItemProps } from 'components/CartItem/CartItem'
 import { ShoppingCart as ShoppingCartIcon } from '@styled-icons/material-outlined/ShoppingCart'
 import CartItemList from 'components/CartItemList/CartItemList'
 import Dropdown from 'components/Dropdown/Dropdown'
-import * as S from './CartDropdown.styles'
 import Link from 'next/link'
+import * as S from './CartDropdown.styles'
 
 type CartDropdownProps = {
   cartItems?: CartItemProps[]
@@ -16,12 +16,14 @@ const CartDropdown = ({ cartItems, total }: CartDropdownProps) => {
       <div id='desktop'>
         <Dropdown
           button={
-            <S.ButtonCart>
-              <S.BadgeCart aria-label='Cart items'>
-                {cartItems && cartItems.length > 0 ? cartItems.length : 0}
-              </S.BadgeCart>
-              <ShoppingCartIcon title='Shopping cart' />
-            </S.ButtonCart>
+            <>
+              <S.ButtonCart role='button'>
+                <S.BadgeCart aria-label='Cart items'>
+                  {cartItems && cartItems.length > 0 ? cartItems.length : 0}
+                </S.BadgeCart>
+                <ShoppingCartIcon title='Shopping cart' />
+              </S.ButtonCart>
+            </>
           }
         >
           <CartItemList cartItems={cartItems} total={total} button />

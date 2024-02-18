@@ -12,9 +12,6 @@ const meta: Meta<typeof Empty> = {
   args: {
     title: 'No results found',
     description: `Sorry, we couldn't find any results for your search.`
-  },
-  argTypes: {
-    link: { if: { arg: 'label' } }
   }
 }
 
@@ -44,8 +41,8 @@ export const Default: Story = {
 
 export const WithButton: Story = {
   args: {
-    label: 'Go back to store',
-    link: '/link'
+    buttonText: 'Go back to store',
+    buttonUrl: '/link'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
