@@ -1,13 +1,21 @@
 import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
-  ${() => css`
+  ${({ theme }) => css`
     button {
       display: flex;
 
       svg {
         width: 2.4rem;
+        margin-bottom: -0.1rem;
       }
+    }
+
+    display: none;
+    line-height: 0;
+
+    @media (min-width: ${theme.breakpoint.small}) {
+      display: block;
     }
   `}
 `

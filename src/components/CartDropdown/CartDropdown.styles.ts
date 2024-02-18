@@ -1,6 +1,35 @@
 import styled, { css } from 'styled-components'
+import * as cartItemListStyles from '../CartItemList/CartItemList.styles'
 
-export const Wrapper = styled.div``
+export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    ${cartItemListStyles.Wrapper} {
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    }
+
+    #desktop {
+      display: none;
+    }
+
+    #mobile {
+      display: block;
+
+      svg {
+        color: ${theme.colors.white};
+      }
+    }
+
+    @media (min-width: ${theme.breakpoint.small}) {
+      #desktop {
+        display: block;
+      }
+
+      #mobile {
+        display: none;
+      }
+    }
+  `}
+`
 
 export const ButtonCart = styled.button`
   ${({ theme }) => css`

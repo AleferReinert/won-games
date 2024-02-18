@@ -1,8 +1,8 @@
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 import Button from 'components/Button/Button'
 import Link from 'next/link'
-import * as S from './MenuMobile.styles'
 import { Dispatch, SetStateAction } from 'react'
+import * as S from './MenuMobile.styles'
 
 type MenuMobileProps = {
   username?: string
@@ -22,12 +22,12 @@ const MenuMobile = ({
       </S.CloseMenu>
 
       <S.MenuNav>
-        <S.MenuLink href='#'>Home</S.MenuLink>
-        <S.MenuLink href='#'>Explore</S.MenuLink>
+        <S.MenuLink href='/'>Home</S.MenuLink>
+        <S.MenuLink href='/games'>Explore</S.MenuLink>
         {!!username && (
           <>
-            <S.MenuLink href='#'>My account</S.MenuLink>
-            <S.MenuLink href='#'>Wishlist</S.MenuLink>
+            <S.MenuLink href='/account/profile'>My account</S.MenuLink>
+            <S.MenuLink href='/wishlist'>Wishlist</S.MenuLink>
           </>
         )}
       </S.MenuNav>

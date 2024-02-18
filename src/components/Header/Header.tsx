@@ -6,6 +6,7 @@ import CartDropdown from 'components/CartDropdown/CartDropdown'
 import Link from 'next/link'
 import Logo from 'components/Logo/Logo'
 import MenuMobile from 'components/MenuMobile/MenuMobile'
+import UserDropdown from 'components/UserDropdown/UserDropdown'
 import * as S from './Header.styles'
 
 type MenuProps = {
@@ -29,7 +30,7 @@ const Header = ({ username }: MenuProps) => {
 
       <S.MenuDesktop>
         <S.MenuLink href='/'>Home</S.MenuLink>
-        <S.MenuLink href='#'>Explore</S.MenuLink>
+        <S.MenuLink href='/games'>Explore</S.MenuLink>
       </S.MenuDesktop>
 
       <S.NavRight>
@@ -41,16 +42,22 @@ const Header = ({ username }: MenuProps) => {
           <CartDropdown />
         </S.IconWrapper>
 
-        {!username && (
+        {!username ? (
           <S.ButtonSignIn>
             <Button size='small' href='/sign-in' as={Link}>
               Sign in
             </Button>
           </S.ButtonSignIn>
+        ) : (
+          <UserDropdown username={username} />
         )}
       </S.NavRight>
 
-      <MenuMobile menuMobile={menuMobile} setMenuMobile={setMenuMobile} />
+      <MenuMobile
+        menuMobile={menuMobile}
+        setMenuMobile={setMenuMobile}
+        username={username}
+      />
     </S.Wrapper>
   )
 }

@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 import * as HighlightStyles from 'components/Highlight/Highlight.styles'
 
