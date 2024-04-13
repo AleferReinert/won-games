@@ -10,7 +10,7 @@ import Image from 'next/image'
 import * as S from './Product.styles'
 import Price from 'components/Price/Price'
 
-type CommomProps = {
+type ProductCommomProps = {
   title: string
   developer: string
   img: string
@@ -29,7 +29,7 @@ type ConditionalProps =
       ribbon: React.ReactNode
     }
 
-export type ProductProps = CommomProps & ConditionalProps
+export type ProductProps = ProductCommomProps & ConditionalProps
 
 const Product = ({
   title,

@@ -7,6 +7,8 @@ import Showcase from 'components/Showcase/Showcase'
 import * as S from './home.styles'
 
 export type HomeTemplateProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any
   banners: BannerProps[]
   newGames: ProductProps[]
   mostPopularHighlight: HighlightProps

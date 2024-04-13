@@ -1,23 +1,40 @@
 import type { ReactElement } from 'react'
-import DefaultTemplate from 'templates/Default/Default'
-import * as S from './games.styles'
-import Filter from 'components/Filter/Filter'
+import { NextPageWithLayout } from 'pages/_app'
+import { KeyboardArrowDown } from '@styled-icons/material-outlined'
+import { initializeApollo } from 'utils/apollo'
+import { QUERY_GAMES } from 'graphql/queries/games'
 import Container from 'components/Container/Container'
+import DefaultTemplate from 'templates/Default/Default'
+import Empty from 'components/Empty/Empty'
+import Filter from 'components/Filter/Filter'
 import filterMock from '../../components/Filter/mock'
 import Product, { ProductProps } from 'components/Product/Product'
-import { NextPageWithLayout } from 'pages/_app'
-import productsMock from 'components/ProductSlider/mock'
-import { KeyboardArrowDown } from '@styled-icons/material-outlined'
-import Empty from 'components/Empty/Empty'
+import * as S from './games.styles'
 
 export type GamesPageProps = {
   products?: ProductProps[]
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
+  const apolloClient = initializeApollo()
+  const { data } = await apolloClient.query({ query: QUERY_GAMES })
+
   return {
     props: {
-      products: productsMock
+      revalidate: 60,
+      products: data.games.data.map((game) => ({
+        title: game.attributes.name,
+        developer: game.attributes.developers.data[0].attributes.name,
+        img:
+          game.attributes.cover.data !== null
+            ? 'http://localhost:1337' +
+              game.attributes.cover.data.attributes.url
+            : 'Image not found',
+        price: new Intl.NumberFormat('en', {
+          style: 'currency',
+          currency: 'usd'
+        }).format(game.attributes.price)
+      }))
     }
   }
 }
@@ -25,7 +42,6 @@ export async function getServerSideProps() {
 const GamesPage = (props: GamesPageProps & NextPageWithLayout) => {
   const emptyProducts =
     typeof props.products === 'undefined' || props.products.length === 0
-
   return (
     <Container>
       <S.Wrapper>

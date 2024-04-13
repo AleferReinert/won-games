@@ -1,12 +1,11 @@
 import type { ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import HomePage, { HomeTemplateProps } from './home'
-
 import HighlightMock from 'components/Highlight/mock'
 import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/ProductSlider/mock'
 
-export function getServerSideProps() {
+export async function getServerSideProps() {
   return {
     props: {
       banners: bannersMock,
@@ -23,6 +22,10 @@ export function getServerSideProps() {
 }
 
 export default function Index(props: HomeTemplateProps) {
+  //   if (props.data)
+  //     return (
+  //       <p style={{ color: 'white' }}>{JSON.stringify(props.data, null, 2)}</p>
+  //     )
   return <HomePage {...props} />
 }
 
