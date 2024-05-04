@@ -8,7 +8,7 @@ import Empty from 'components/Empty/Empty'
 import Heading from 'components/Heading/Heading'
 import Product, { ProductProps } from 'components/Product/Product'
 import Showcase from 'components/Showcase/Showcase'
-import * as S from './wishlist.styles'
+import * as S from './Wishlist.styles'
 import highlightMock from 'components/Highlight/mock'
 import productsMock from 'components/ProductSlider/mock'
 
@@ -44,8 +44,6 @@ const WishlistPage = (props: WishlistPageProps & NextPageWithLayout) => {
           <Empty
             title='Your wishlist is empty'
             description='Games added to your wishlist will appear here.'
-            link='/'
-            label='Go back to store'
           />
         ) : (
           <S.WrapperWishlistGames>

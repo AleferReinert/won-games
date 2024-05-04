@@ -4,7 +4,7 @@ import { HighlightProps } from 'components/Highlight/Highlight'
 import BannerSlider from 'components/BannerSlider/BannerSlider'
 import Container from 'components/Container/Container'
 import Showcase from 'components/Showcase/Showcase'
-import * as S from './home.styles'
+import * as S from './Home.styles'
 
 export type HomeTemplateProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

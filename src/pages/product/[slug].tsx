@@ -20,7 +20,7 @@ import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
 import descriptionMock from './mock'
-import * as S from './product.styles'
+import * as S from './Product.styles'
 
 type ProductPageProps = {
   cover: string

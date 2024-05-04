@@ -3,7 +3,7 @@ import AccountTemplate from 'templates/Account/Account'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
 import Box from 'components/Box/Box'
-import * as S from './profile.styles'
+import * as S from './Profile.styles'
 
 const ProfilePage = () => {
   return (

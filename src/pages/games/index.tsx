@@ -10,6 +10,7 @@ import Filter from 'components/Filter/Filter'
 import filterMock from '../../components/Filter/mock'
 import Product, { ProductProps } from 'components/Product/Product'
 import * as S from './games.styles'
+import { GameEntityResponseCollection } from 'graphql/types'
 
 export type GamesPageProps = {
   products?: ProductProps[]
@@ -17,12 +18,15 @@ export type GamesPageProps = {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo()
-  const { data } = await apolloClient.query({ query: QUERY_GAMES })
+  const { data } = await apolloClient.query<GameEntityResponseCollection>({
+    query: QUERY_GAMES,
+    variables: { limit: 2 }
+  })
 
   return {
     props: {
       revalidate: 60,
-      products: data.games.data.map((game) => ({
+      products: data.data.map((game) => ({
         title: game.attributes.name,
         developer: game.attributes.developers.data[0].attributes.name,
         img:

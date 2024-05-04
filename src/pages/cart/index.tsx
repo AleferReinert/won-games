@@ -18,7 +18,7 @@ import highlightMock from 'components/Highlight/mock'
 import productSliderMock from 'components/ProductSlider/mock'
 import cartItemsMock from 'components/CartItemList/mock'
 import creditCardsMock from 'components/PaymentOptions/mock'
-import * as S from './cart.styles'
+import * as S from './Cart.styles'
 
 type CartPageProps = {
   cartItems: CartItemProps[]
@@ -56,8 +56,6 @@ const CartPage = (props: CartPageProps & NextPageWithLayout) => {
           <Empty
             title='Your cart is empty'
             description='Go back to the store and explore great games and offers.'
-            label='Home'
-            link='/'
           />
         ) : (
           <>

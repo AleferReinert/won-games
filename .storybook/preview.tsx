@@ -1,5 +1,5 @@
 import { Preview } from '@storybook/react'
-import { RouterContext } from 'next/dist/shared/lib/router-context'
+import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/global'
 import React from 'react'
@@ -54,7 +54,7 @@ const preview: Preview = {
   parameters: {
     layout: 'fullscreen',
     nextRouter: {
-      Provider: RouterContext.Provider
+      Provider: AppRouterContext.Provider
     },
     viewport: {
       viewports: {
