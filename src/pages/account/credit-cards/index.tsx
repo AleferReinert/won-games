@@ -3,7 +3,7 @@ import AccountTemplate from 'templates/Account/Account'
 import Box from 'components/Box/Box'
 import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
 import creditCardsMock from 'components/PaymentOptions/mock'
-import * as S from './credit-cards.styles'
+import * as S from 'pages/account/credit-cards/credit-cards.styles'
 
 export function getServerSideProps() {
   return {

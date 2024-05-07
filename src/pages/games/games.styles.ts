@@ -41,8 +41,7 @@ export const ShowMore = styled.button`
     }
 
     svg {
-      color: ${theme.colors.primary};
-      width: 3.6rem;
+      fill: ${theme.colors.primary};
       margin-top: -0.3rem;
       transition: ${theme.transition.fast};
     }

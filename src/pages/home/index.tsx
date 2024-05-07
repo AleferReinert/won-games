@@ -38,7 +38,6 @@ const HomePage = ({
           <BannerSlider items={banners} />
         </S.SectionBanner>
       </Container>
-
       <S.SectionNews>
         <Showcase title='New Releases' games={newGames} arrowColor='black' />
       </S.SectionNews>

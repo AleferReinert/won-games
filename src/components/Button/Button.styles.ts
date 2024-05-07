@@ -1,6 +1,7 @@
 import styled, { DefaultTheme, css } from 'styled-components'
 import { ButtonProps } from './Button'
 import { lighten } from 'polished'
+import { Interpolation } from 'styled-components'
 
 export const wrapperModifiers = {
   xsmall: () => css`
@@ -26,14 +27,18 @@ export const wrapperModifiers = {
   icon: (theme: DefaultTheme) => css`
     gap: ${theme.spacings.xxsmall};
 
-    svg {
+    /* svg {
       height: 60%;
       max-height: 1.8rem;
-    }
+    } */
   `,
   primary: (theme: DefaultTheme) => css`
     background: linear-gradient(180deg, #ff5f5f 0%, #f062c0 50%);
     color: ${theme.colors.white};
+
+    svg {
+      fill: ${theme.colors.white};
+    }
 
     &:hover {
       background: linear-gradient(180deg, #e35565 0%, #d958a6 50%);
@@ -76,10 +81,9 @@ export const ButtonStyle = css<ButtonProps>`
     ${disabled && wrapperModifiers.disabled(theme)}
   `}
 `
-export const Wrapper = styled.button`
-  ${ButtonStyle}
+export const Wrapper = styled.button<ButtonProps>`
+  ${ButtonStyle as Interpolation<ButtonProps>}
 `
-
-export const WrapperAsLink = styled.button`
-  ${ButtonStyle}
+export const WrapperAsLink = styled.button<ButtonProps>`
+  ${ButtonStyle as Interpolation<ButtonProps>}
 `

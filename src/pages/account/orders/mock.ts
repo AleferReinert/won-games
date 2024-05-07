@@ -2,7 +2,7 @@ export default [
   {
     title: 'Population Zero',
     img: '/img/population-zero.jpg',
-    price: '$215.00',
+    price: 215.0,
     downloadLink: '/link',
     creditCardNumber: '**** **** **** 8734',
     creditCardBrand: 'mastercard',
@@ -12,7 +12,7 @@ export default [
   {
     title: 'Borderlands 2',
     img: '/img/population-zero.jpg',
-    price: '$315.00',
+    price: 315.0,
     downloadLink: '/link',
     creditCardNumber: '**** **** **** 4326',
     creditCardBrand: 'mastercard',
@@ -22,7 +22,7 @@ export default [
   {
     title: 'Diablo 1',
     img: '/img/population-zero.jpg',
-    price: '$79.00',
+    price: 79.0,
     downloadLink: '/link',
     creditCardNumber: '**** **** **** 1923',
     creditCardBrand: 'visa',

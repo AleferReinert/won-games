@@ -113,32 +113,4 @@ export const Wrapper = styled.section`
   .slick-arrow.slick-hidden {
     display: none;
   }
-
-  // to storybook
-  /* .slick-slider {
-    display: grid;
-    grid-gap: 0.5rem;
-    grid-template-columns: 8rem auto 8rem;
-    grid-template-rows: repeat(2, auto);
-  }
-  .slick-dots {
-    text-align: center;
-    grid-column: 1/4;
-  }
-
-  .slick-dots li {
-    display: inline-block;
-  }
-
-  .slick-dots button {
-    margin: 0 0.2rem;
-    width: 2rem;
-  }
-
-  .slick-arrow {
-    height: min-content;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  } */
 `

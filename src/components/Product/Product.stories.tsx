@@ -34,31 +34,33 @@ type Story = StoryObj<typeof ProductComponent>
 export const Default: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement)
-    const img = canvas.getByRole('img', { name: args.title })
-    const title = canvas.getByRole('heading', { name: args.title })
-    const developer = canvas.getByRole('heading', { name: args.developer })
+    const title = canvas.getByRole('heading', { name: 'Population Zero' })
+    const developer = canvas.getByRole('heading', { name: 'Other Ocean' })
+    const img = canvas.getByRole('img', { name: 'Population Zero' })
+    const slug = canvas.getByRole('link')
     const favIcon = canvas.getByRole('img', { name: /add to wishlist/i })
     const price = canvas.getByLabelText('price')
     const buttonAddToCart = canvas.getByRole('button', { name: /add to cart/i })
 
     // render items
-    expect(img).toBeInTheDocument()
     expect(title).toBeInTheDocument()
     expect(developer).toBeInTheDocument()
+    expect(img.getAttribute('src')).toMatch(/\/img\/population-zero.jpg/)
+    expect(slug).toHaveAttribute('href', '/product/population-zero')
     expect(favIcon).toBeInTheDocument()
-    expect(price).toBeInTheDocument()
+    expect(price).toContainHTML('$215.00')
     expect(buttonAddToCart).toBeInTheDocument()
 
     // function called when favIcon clicked
     await userEvent.click(favIcon)
-    expect(args.onFav).toBeCalled()
+    expect(args.onFav).toHaveBeenCalled()
   }
 }
 
 export const WithDiscount: Story = {
   args: {
     ribbon: '20% off',
-    promotionalPrice: '$185.00'
+    promotionalPrice: 185.0
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

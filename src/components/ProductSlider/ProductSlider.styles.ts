@@ -25,7 +25,7 @@ export const Wrapper = styled.div<WrapperProps>`
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);
-      color: ${theme.colors[arrowColor!]};
+      fill: ${theme.colors[arrowColor!]};
       cursor: pointer;
 
       &.slick-disabled {

@@ -1,7 +1,7 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import SignUpPage from './index'
+import SignUpPage from '.'
 import AuthTemplate from 'templates/Auth/Auth'
 
 const meta: Meta<typeof SignUpPage> = {

@@ -109,10 +109,13 @@ export const NavRight = styled.nav`
 
 export const IconWrapper = styled.div`
   ${({ theme }) => css`
-    color: ${theme.colors.white};
     cursor: pointer;
     width: 2.4rem;
     height: 2.4rem;
+
+    svg {
+      fill: ${theme.colors.white};
+    }
   `}
 `
 

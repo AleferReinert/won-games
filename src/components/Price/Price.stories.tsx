@@ -9,7 +9,7 @@ const meta: Meta<typeof PriceComponent> = {
   title: 'Components/Atoms/Price',
   component: PriceComponent,
   args: {
-    price: '$215.00'
+    price: 215
   }
 }
 
@@ -31,7 +31,7 @@ export const Default: Story = {
 
 export const Promotional: Story = {
   args: {
-    promotionalPrice: '$185.00'
+    promotionalPrice: 185
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -61,7 +61,7 @@ export const Promotional: Story = {
 
 export const Large: Story = {
   args: {
-    promotionalPrice: '$185.00',
+    promotionalPrice: 185,
     size: 'large'
   },
   play: ({ canvasElement }) => {
@@ -77,5 +77,17 @@ export const Large: Story = {
       height: remToPx('3.8rem'),
       fontSize: remToPx(theme.font.sizes.xlarge)
     })
+  }
+}
+
+export const Free: Story = {
+  args: {
+    price: 0
+  },
+  play: ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const price = canvas.getByLabelText('price')
+
+    expect(price).toContainHTML('Free')
   }
 }

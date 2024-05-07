@@ -2,7 +2,7 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
 import AccountTemplate from 'templates/Account/Account'
-import CreditCardsPage from './index'
+import CreditCardsPage from '.'
 import creditCardsMock from 'components/PaymentOptions/mock'
 
 const meta: Meta<typeof CreditCardsPage> = {

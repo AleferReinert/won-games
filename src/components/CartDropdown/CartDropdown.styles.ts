@@ -37,7 +37,7 @@ export const ButtonCart = styled.div`
     background: transparent;
 
     svg {
-      color: ${theme.colors.white};
+      fill: ${theme.colors.white};
       width: 2.4rem;
       height: 2.4rem;
     }

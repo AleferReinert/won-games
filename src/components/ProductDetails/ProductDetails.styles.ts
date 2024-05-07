@@ -62,5 +62,9 @@ export const IconsWrapper = styled.span`
 `
 
 export const Icon = styled.span`
-  width: 2rem;
+  svg {
+    fill: #fff;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
 `

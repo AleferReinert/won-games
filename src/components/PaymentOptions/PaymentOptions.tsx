@@ -1,4 +1,4 @@
-import { AddShoppingCart, Add } from '@styled-icons/material-outlined'
+import { ShoppingCart, Add } from '@styled-icons/material-outlined'
 import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
 import { useState } from 'react'
 import Box from 'components/Box/Box'
@@ -53,14 +53,14 @@ const PaymentOptions = ({
           ))}
         </S.CreditCards>
         <S.AddCreditCard>
-          <Add /> Add new credit card
+          <Add size={24} /> Add new credit card
         </S.AddCreditCard>
       </Box>
 
       <S.Buttons>
         <Button variant='link'>Continue shopping</Button>
         <Button
-          icon={<AddShoppingCart />}
+          icon={<ShoppingCart size={24} />}
           disabled={creditCards === undefined || creditCards.length === 0}
           onClick={handlePayment}
         >

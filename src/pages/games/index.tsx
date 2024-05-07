@@ -1,16 +1,16 @@
 import type { ReactElement } from 'react'
-import { NextPageWithLayout } from 'pages/_app'
-import { KeyboardArrowDown } from '@styled-icons/material-outlined'
+import { NextPageWithLayout } from '../_app'
+import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 import { initializeApollo } from 'utils/apollo'
 import { QUERY_GAMES } from 'graphql/queries/games'
 import Container from 'components/Container/Container'
 import DefaultTemplate from 'templates/Default/Default'
 import Empty from 'components/Empty/Empty'
 import Filter from 'components/Filter/Filter'
-import filterMock from '../../components/Filter/mock'
+import filterMock from 'components/Filter/mock'
 import Product, { ProductProps } from 'components/Product/Product'
-import * as S from './games.styles'
-import { GameEntityResponseCollection } from 'graphql/types'
+import * as S from 'pages/games/games.styles'
+import { GameEntity } from 'graphql/generated/types'
 
 export type GamesPageProps = {
   products?: ProductProps[]
@@ -18,26 +18,22 @@ export type GamesPageProps = {
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo()
-  const { data } = await apolloClient.query<GameEntityResponseCollection>({
+  const { data } = await apolloClient.query({
     query: QUERY_GAMES,
-    variables: { limit: 2 }
+    variables: { limit: 9 }
   })
 
   return {
     props: {
       revalidate: 60,
-      products: data.data.map((game) => ({
+      products: data.games.data.map((game: GameEntity) => ({
         title: game.attributes.name,
         developer: game.attributes.developers.data[0].attributes.name,
-        img:
-          game.attributes.cover.data !== null
-            ? 'http://localhost:1337' +
-              game.attributes.cover.data.attributes.url
-            : 'Image not found',
-        price: new Intl.NumberFormat('en', {
-          style: 'currency',
-          currency: 'usd'
-        }).format(game.attributes.price)
+        img: game.attributes.cover.data
+          ? 'http://localhost:1337' + game.attributes.cover.data.attributes.url
+          : '',
+        price: game.attributes.price,
+        slug: game.attributes.slug
       }))
     }
   }
@@ -52,9 +48,10 @@ const GamesPage = (props: GamesPageProps & NextPageWithLayout) => {
         <Filter items={filterMock} onFilter={() => console.log('onfilter')} />
         <div>
           <S.Games>
-            {props.products?.map((item, index) => (
-              <Product key={index} {...item} />
-            ))}
+            {!emptyProducts &&
+              props.products?.map((item, index) => (
+                <Product key={index} {...item} />
+              ))}
           </S.Games>
           {emptyProducts ? (
             <Empty
@@ -64,7 +61,7 @@ const GamesPage = (props: GamesPageProps & NextPageWithLayout) => {
           ) : (
             <S.ShowMore>
               <span>Show more</span>
-              <KeyboardArrowDown />
+              <KeyboardArrowDown size={24} />
             </S.ShowMore>
           )}
         </div>

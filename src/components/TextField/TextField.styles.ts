@@ -20,7 +20,7 @@ const modifiers = {
       }
 
       svg {
-        color: ${lighten(0.15, theme.colors.gray)};
+        fill: ${lighten(0.15, theme.colors.gray)};
       }
     }
 
@@ -39,13 +39,19 @@ export const InputWrapper = styled.div<
 >`
   ${({ theme, errorMessage, iconPosition }) => css`
     display: flex;
+    align-items: center;
     background: ${theme.colors.lightGray};
     border-radius: 0.2rem;
     padding: 0 ${theme.spacings.xxsmall};
     border: 0.1rem solid ${theme.colors.lightGray};
+    margin-bottom: ${theme.spacings.xxsmall};
 
     &:focus-within {
       box-shadow: 0 0 0.5rem ${theme.colors.primary};
+    }
+
+    svg {
+      fill: ${theme.colors.gray};
     }
 
     ${iconPosition === 'right' && modifiers.iconPositionRight()}
@@ -85,13 +91,8 @@ export const Label = styled.label`
 export const Icon = styled.span`
   ${({ theme }) => css`
     display: flex;
-    width: 2rem;
     color: ${theme.colors.gray};
     margin: 0 ${theme.spacings.xxsmall};
-
-    > svg {
-      width: 100%;
-    }
   `}
 `
 export const ErrorMessage = styled.span`

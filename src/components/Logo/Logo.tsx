@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import * as S from './Logo.styles'
 
 export type LogoProps = {
@@ -11,7 +12,11 @@ const Logo = ({
   size = 'medium',
   withoutText = false
 }: LogoProps) => {
-  const id = Math.random().toString()
+  const [id, setId] = useState('')
+
+  useEffect(() => {
+    setId(Math.random().toString())
+  }, [])
 
   return (
     <S.Wrapper

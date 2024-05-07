@@ -22,10 +22,6 @@ export async function getServerSideProps() {
 }
 
 export default function Index(props: HomeTemplateProps) {
-  //   if (props.data)
-  //     return (
-  //       <p style={{ color: 'white' }}>{JSON.stringify(props.data, null, 2)}</p>
-  //     )
   return <HomePage {...props} />
 }
 

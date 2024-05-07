@@ -35,7 +35,7 @@ const Header = ({ username }: MenuProps) => {
 
       <S.NavRight>
         <S.IconWrapper>
-          <SearchIcon aria-label='search' />
+          <SearchIcon title='Search' size={24} />
         </S.IconWrapper>
 
         <S.IconWrapper>

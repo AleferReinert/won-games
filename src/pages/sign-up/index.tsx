@@ -5,30 +5,34 @@ import Auth from 'templates/Auth/Auth'
 import Button from 'components/Button/Button'
 import Link from 'next/link'
 import TextField from 'components/TextField/TextField'
-import * as S from './sign-up.styles'
+import * as S from 'pages/sign-up/sign-up.styles'
 
 const SignUpPage: NextPageWithLayout = () => {
   return (
     <S.FormWrapper>
       <form>
-        <TextField name='name' placeholder='Name' icon={<AccountCircle />} />
+        <TextField
+          name='name'
+          placeholder='Name'
+          icon={<AccountCircle size={24} />}
+        />
         <TextField
           name='email'
           type='email'
           placeholder='E-mail'
-          icon={<Email />}
+          icon={<Email size={24} />}
         />
         <TextField
           name='password'
           type='password'
           placeholder='Password'
-          icon={<Lock />}
+          icon={<Lock size={24} />}
         />
         <TextField
           name='confirm-password'
           type='password'
           placeholder='Confirm password'
-          icon={<Lock />}
+          icon={<Lock size={24} />}
         />
         <Button full size='large'>
           Sign up now

@@ -21,7 +21,7 @@ type ConditionalPaymentProps =
 export type CartItemProps = {
   img: string
   title: string
-  price: string
+  price: number
   downloadLink?: string
 } & ConditionalPaymentProps
 

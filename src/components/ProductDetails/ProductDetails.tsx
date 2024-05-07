@@ -1,4 +1,4 @@
-import { Windows, Linux, Apple } from '@styled-icons/fa-brands'
+import { Windows, Linux, Apple } from '@styled-icons/simple-icons'
 import Heading from 'components/Heading/Heading'
 import * as S from './ProductDetails.styles'
 

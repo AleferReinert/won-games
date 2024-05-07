@@ -24,8 +24,8 @@ export const Default: Story = {}
 export const Tests: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const thumb1 = canvas.getByRole('img', { name: 'Thumb ' + items[0].label })
-    const thumb2 = canvas.getByRole('img', { name: 'Thumb ' + items[1].label })
+    const thumb1 = canvas.getByRole('img', { name: 'Thumb Gallery Image 1' })
+    const thumb2 = canvas.getByRole('img', { name: 'Thumb Gallery Image 2' })
     const modal = canvas.getByLabelText('modal')
     const buttonCloseModal = canvas.getByLabelText(/close modal/i)
 
@@ -52,15 +52,14 @@ export const Tests: Story = {
 
     // Open image2 on thumb2 clicked
     await userEvent.click(thumb2)
-    const originalImage2 = canvas.getByRole('img', {
-      name: items[1].label
-    }).parentElement?.parentElement
+    const originalImage2 = canvas.getByRole('img', { name: 'Gallery Image 2' })
+      .parentElement?.parentElement
     await waitFor(() => expect(originalImage2).toHaveClass('slick-active'))
     await userEvent.click(buttonCloseModal)
 
     // Open image1 on thumb1 clicked
     await userEvent.click(thumb1)
-    const originalImage1 = canvas.getByRole('img', { name: items[0].label })
+    const originalImage1 = canvas.getByRole('img', { name: 'Gallery Image 1' })
       .parentElement?.parentElement
     await waitFor(() => expect(originalImage1).toHaveClass('slick-active'))
     await userEvent.click(buttonCloseModal)

@@ -9,29 +9,32 @@ import Ribbon from 'components/Ribbon/Ribbon'
 import Image from 'next/image'
 import * as S from './Product.styles'
 import Price from 'components/Price/Price'
+import Link from 'next/link'
 
 type ProductCommomProps = {
+  slug: string
   title: string
   developer: string
   img: string
-  price: string
+  price: number
   favorite?: boolean
   onFav?: () => void
 }
 
 type ConditionalProps =
   | {
-      promotionalPrice?: string
+      promotionalPrice?: number
       ribbon?: React.ReactNode
     }
   | {
-      promotionalPrice: string
+      promotionalPrice: number
       ribbon: React.ReactNode
     }
 
 export type ProductProps = ProductCommomProps & ConditionalProps
 
 const Product = ({
+  slug,
   title,
   developer,
   img,
@@ -48,9 +51,21 @@ const Product = ({
           {ribbon}
         </Ribbon>
       )}
-      <S.ImageBox>
-        <Image src={img} alt={title} unoptimized width='292' height='137' />
-      </S.ImageBox>
+      <Link href={`/product/${slug}`} passHref>
+        <S.ImageBox>
+          {img ? (
+            <Image
+              src={img}
+              alt={title}
+              priority={false}
+              width='292'
+              height='137'
+            />
+          ) : (
+            'Image not found'
+          )}
+        </S.ImageBox>
+      </Link>
 
       <Box padding='xsmall'>
         <S.Content>
@@ -61,15 +76,9 @@ const Product = ({
 
           <S.FavButton onClick={onFav}>
             {favorite ? (
-              <Favorite
-                aria-label='Remove from wishlist'
-                title='Remove from wishlist'
-              />
+              <Favorite title='Remove from wishlist' size={24} />
             ) : (
-              <FavoriteBorder
-                aria-label='Add to wishlist'
-                title='Add to wishlist'
-              />
+              <FavoriteBorder title='Add to wishlist' size={24} />
             )}
           </S.FavButton>
 
@@ -79,11 +88,9 @@ const Product = ({
             ) : (
               <Price price={price} />
             )}
-            <Button
-              icon={<AddShoppingCart />}
-              size='xsmall'
-              title='Add to cart'
-            />
+            <Button size='xsmall' title='Add to cart'>
+              <AddShoppingCart />
+            </Button>
           </S.BuyBox>
         </S.Content>
       </Box>

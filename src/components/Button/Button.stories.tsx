@@ -22,9 +22,9 @@ const meta: Meta<typeof ButtonComponent> = {
       options: ['None', 'AddShoppingCart', 'Download', 'ArrowBack'],
       mapping: {
         None: '',
-        AddShoppingCart: <AddShoppingCart />,
-        Download: <Download />,
-        ArrowBack: <ArrowBack />
+        AddShoppingCart: <AddShoppingCart size={24} />,
+        Download: <Download size={24} />,
+        ArrowBack: <ArrowBack size={24} />
       }
     },
     as: {

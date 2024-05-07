@@ -31,9 +31,10 @@ const BannerSlider = ({ items }: BannerSliderProps) => {
   return (
     <S.Wrapper data-testid='bannerSliderComponent'>
       <Slider settings={settings}>
-        {items.map((item, index) => (
-          <Banner key={index} {...item} ribbonColor='secondary' />
-        ))}
+        {items &&
+          items.map((item, index) => (
+            <Banner key={index} {...item} ribbonColor='secondary' />
+          ))}
       </Slider>
     </S.Wrapper>
   )

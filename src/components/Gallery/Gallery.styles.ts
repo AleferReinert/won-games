@@ -17,12 +17,13 @@ export const Wrapper = styled.div`
     }
 
     .slick-arrow {
-      height: 1.8rem;
+      width: 2.4rem;
+      height: 2.4rem;
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);
       cursor: pointer;
-      color: ${theme.colors.white};
+      fill: ${theme.colors.white};
 
       &.slick-disabled {
         display: none !important;

@@ -1,7 +1,7 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import GamesPage from './index'
+import GamesPage from '.'
 import DefaultTemplate from 'templates/Default/Default'
 import productsMock from 'components/ProductSlider/mock'
 

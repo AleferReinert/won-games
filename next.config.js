@@ -5,8 +5,12 @@ const withPWA = require('next-pwa')({
 })
 
 module.exports = withPWA({
+  pageExtensions: ['tsx'],
   reactStrictMode: true,
   compiler: {
     styledComponents: true
+  },
+  images: {
+    domains: ['localhost', 'source.unsplash.com']
   }
 })

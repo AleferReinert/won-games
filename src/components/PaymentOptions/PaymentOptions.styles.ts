@@ -25,6 +25,11 @@ export const Item = styled.label`
     display: flex;
     justify-content: space-between;
     margin-bottom: ${theme.spacings.xxsmall};
+    transition: ${theme.transition.fast};
+
+    &:hover {
+      background-color: ${theme.colors.lightGrayHover};
+    }
   `}
 `
 
@@ -37,7 +42,6 @@ export const AddCreditCard = styled.button`
     width: 100%;
 
     svg {
-      width: 2.4rem;
       margin-right: ${theme.spacings.xxsmall};
     }
   `}

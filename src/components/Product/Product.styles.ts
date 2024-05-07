@@ -67,14 +67,16 @@ export const Developer = styled.h4`
 
 export const FavButton = styled.button`
   ${({ theme }) => css`
-    width: 2rem;
     background: transparent;
     border: 0;
-    color: ${theme.colors.primary};
     position: absolute;
     right: 0;
     cursor: pointer;
     top: 0;
+
+    svg {
+      fill: ${theme.colors.primary};
+    }
   `}
 `
 
@@ -84,5 +86,11 @@ export const BuyBox = styled.div`
     justify-content: flex-end;
     margin-top: ${theme.spacings.xxsmall};
     gap: calc(${theme.spacings.xxsmall} / 2);
+
+    button svg {
+      transform: scale(0.8);
+      width: 2rem;
+      height: 2rem;
+    }
   `}
 `

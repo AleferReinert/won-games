@@ -8,7 +8,7 @@ import Empty from 'components/Empty/Empty'
 import Heading from 'components/Heading/Heading'
 import Product, { ProductProps } from 'components/Product/Product'
 import Showcase from 'components/Showcase/Showcase'
-import * as S from './Wishlist.styles'
+import * as S from 'pages/wishlist/Wishlist.styles'
 import highlightMock from 'components/Highlight/mock'
 import productsMock from 'components/ProductSlider/mock'
 
@@ -54,6 +54,7 @@ const WishlistPage = (props: WishlistPageProps & NextPageWithLayout) => {
                 developer={item.developer}
                 img={item.img}
                 price={item.price}
+                slug={item.slug}
               />
             ))}
           </S.WrapperWishlistGames>

@@ -39,8 +39,8 @@ const thumbsSettings: SliderSettings = {
 const modalSettings: SliderSettings = {
   ...commomSettings,
   initialSlide: 2,
-  prevArrow: <ArrowLeft aria-label='previous image' />,
-  nextArrow: <ArrowRight aria-label='next image' />
+  prevArrow: <ArrowLeft title='Previous' />,
+  nextArrow: <ArrowRight title='Next' />
 }
 
 export type GalleryImageProps = {

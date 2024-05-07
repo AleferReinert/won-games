@@ -21,7 +21,7 @@ const CartDropdown = ({ cartItems, total }: CartDropdownProps) => {
                 <S.BadgeCart aria-label='Cart items'>
                   {cartItems && cartItems.length > 0 ? cartItems.length : 0}
                 </S.BadgeCart>
-                <ShoppingCartIcon title='Shopping cart' />
+                <ShoppingCartIcon title='Shopping cart' size={24} />
               </S.ButtonCart>
             </>
           }
@@ -31,7 +31,7 @@ const CartDropdown = ({ cartItems, total }: CartDropdownProps) => {
       </div>
       <div id='mobile'>
         <Link href='/cart'>
-          <ShoppingCartIcon title='Shopping cart' />
+          <ShoppingCartIcon title='Shopping cart' size={24} />
         </Link>
       </div>
     </S.Wrapper>
