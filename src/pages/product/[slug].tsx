@@ -1,28 +1,28 @@
-import type { ReactElement } from 'react'
-import type { NextPageWithLayout } from '../_app'
+import Container from 'components/Container/Container'
+import Divider from 'components/Divider/Divider'
 import Gallery, { GalleryImageProps } from 'components/Gallery/Gallery'
-import ProductHeader, {
-  ProductHeaderProps
-} from 'components/ProductHeader/ProductHeader'
+import Heading from 'components/Heading/Heading'
+import { HighlightProps } from 'components/Highlight/Highlight'
+import highlightMock from 'components/Highlight/mock'
+import { ProductProps } from 'components/Product/Product'
 import ProductDetails, {
   ProductDetailsProps
 } from 'components/ProductDetails/ProductDetails'
-import { ProductProps } from 'components/Product/Product'
-import { HighlightProps } from 'components/Highlight/Highlight'
-import Base from 'templates/Default/Default'
-import Container from 'components/Container/Container'
-import Divider from 'components/Divider/Divider'
-import Heading from 'components/Heading/Heading'
-import Showcase from 'components/Showcase/Showcase'
-import highlightMock from 'components/Highlight/mock'
+import ProductHeader, {
+  ProductHeaderProps
+} from 'components/ProductHeader/ProductHeader'
 import gamesMock from 'components/ProductSlider/mock'
-import * as S from './Product.styles'
-import { useRouter } from 'next/router'
-import { initializeApollo } from 'utils/apollo'
-import { QUERY_GAME_BY_SLUG } from 'graphql/queries/gameBySlug'
-import { QUERY_GAMES } from 'graphql/queries/games'
+import Showcase from 'components/Showcase/Showcase'
+import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
+import { GET_GAME_BY_SLUG } from 'graphql/queries/getGameBySlug'
+import { Game, GameEntity } from 'graphql/types'
 import { GetStaticProps } from 'next'
-import { Game, GameEntity } from 'graphql/generated/types'
+import { useRouter } from 'next/router'
+import type { ReactElement } from 'react'
+import Base from 'templates/Default/Default'
+import { initializeApollo } from 'utils/apollo'
+import type { NextPageWithLayout } from '../_app'
+import * as S from './Product.styles'
 
 type ProductPageProps = {
   cover: string
@@ -37,9 +37,10 @@ type ProductPageProps = {
 
 const apolloClient = initializeApollo()
 
+// Retorna os slugs dos primeiros 9 jogos
 export async function getStaticPaths() {
   const { data } = await apolloClient.query({
-    query: QUERY_GAMES,
+    query: GET_ALL_GAMES,
     variables: { limit: 9 }
   })
 
@@ -52,11 +53,14 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await apolloClient.query({
-    query: QUERY_GAME_BY_SLUG,
+    query: GET_GAME_BY_SLUG,
     variables: { slug: params?.slug }
   })
 
-  if (data.games.length === 0) return { notFound: true }
+  // Se a url for inválida, redireciona para a página 404
+  if (!data.games.data.length) {
+    return { notFound: true }
+  }
 
   const game: Game = data.games.data[0].attributes
 
@@ -64,27 +68,29 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       game,
       revalidate: 60,
-      cover: 'http://localhost:1337' + game.cover.data?.attributes.url ?? '',
+      cover: game.cover.data
+        ? 'http://localhost:1337' + game.cover.data.attributes.url // todo: create variable for url
+        : '', // todo: add default cover
       productHeader: {
         title: game.name,
         description: game.short_description,
         price: game.price
       },
-      gallery: game.gallery.data.map((image) => ({
-        src: 'http://localhost:1337' + image.attributes.url,
-        label: image.attributes.alternativeText
+      gallery: game.gallery.data.map(({ attributes: image }) => ({
+        src: 'http://localhost:1337' + image.url,
+        label: image.alternativeText
       })),
       description: game.description,
       details: {
         developer: game.developers.data[0].attributes.name,
-        releaseDate: '2019-09-13T23:00:00',
+        releaseDate: game.release_date,
         platforms: game.platforms.data.map(
           (platform) => platform.attributes.name
         ),
         publisher: game.publisher.data.attributes.name,
         rating: game.rating,
         categories: game.categories.data.map(
-          (category) => category.attributes.name
+          ({ attributes: category }) => category.name
         )
       },
       upcomingHighlight: highlightMock,
@@ -96,7 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const ProductPage = (props: ProductPageProps & NextPageWithLayout) => {
   const router = useRouter()
-  if (router.isFallback) return <p>Loading...</p>
+  if (router.isFallback) return <p>Loading...</p> // todo: add loading component
 
   return (
     <>

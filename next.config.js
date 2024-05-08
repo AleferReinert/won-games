@@ -11,6 +11,17 @@ module.exports = withPWA({
     styledComponents: true
   },
   images: {
-    domains: ['localhost', 'source.unsplash.com']
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337'
+      },
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+        port: ''
+      }
+    ]
   }
 })

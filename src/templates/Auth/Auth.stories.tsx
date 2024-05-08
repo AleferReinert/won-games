@@ -1,6 +1,6 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import AuthTemplate from './Auth'
 
 const meta: Meta<typeof AuthTemplate> = {
@@ -41,9 +41,8 @@ export const Auth: Story = {
     const title = canvas.getByRole('heading', { name: /required title/i })
     const children = canvas.getByText(/required children/i)
 
-    // two logos with different ids
-    // expect(logos.length).toBe(2)
-    // expect(logos[0].id).not.toBe(logos[1].id)
+    // Two logos
+    expect(logos.length).toBe(2)
 
     // Fixed elements
     expect(hugeTitle).toBeInTheDocument()

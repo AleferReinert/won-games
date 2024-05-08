@@ -1,8 +1,7 @@
 import { gql } from '@apollo/client'
 
-export const QUERY_GAME_BY_SLUG = gql`
-  # Write your query or mutation here
-  query QueryGamesBySlug($slug: String!) {
+export const GET_GAME_BY_SLUG = gql`
+  query getGameBySlug($slug: String!) {
     games(filters: { slug: { eq: $slug } }) {
       data {
         attributes {

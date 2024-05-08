@@ -1,25 +1,26 @@
-import type { ReactElement } from 'react'
-import { NextPageWithLayout } from '../_app'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
-import { initializeApollo } from 'utils/apollo'
-import { QUERY_GAMES } from 'graphql/queries/games'
 import Container from 'components/Container/Container'
-import DefaultTemplate from 'templates/Default/Default'
 import Empty from 'components/Empty/Empty'
 import Filter from 'components/Filter/Filter'
 import filterMock from 'components/Filter/mock'
 import Product, { ProductProps } from 'components/Product/Product'
+import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
+import { GameEntity } from 'graphql/types'
+import { GetStaticProps } from 'next'
 import * as S from 'pages/games/games.styles'
-import { GameEntity } from 'graphql/generated/types'
+import { type ReactElement } from 'react'
+import DefaultTemplate from 'templates/Default/Default'
+import { initializeApollo } from 'utils/apollo'
+import { NextPageWithLayout } from '../_app'
 
 export type GamesPageProps = {
   products?: ProductProps[]
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query({
-    query: QUERY_GAMES,
+    query: GET_ALL_GAMES,
     variables: { limit: 9 }
   })
 

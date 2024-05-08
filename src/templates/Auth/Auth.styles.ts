@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
-import { darken } from 'polished'
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 import * as TextFieldStyles from 'components/TextField/TextField.styles'
+import { darken } from 'polished'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -53,11 +53,6 @@ export const BannerContent = styled.div`
     padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge}
       ${theme.spacings.small};
     height: 100%;
-
-    a {
-      width: fit-content;
-      height: fit-content;
-    }
   `}
 `
 
