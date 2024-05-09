@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
 import * as BannerStyles from 'components/Banner/Banner.styles'
+import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -34,8 +34,8 @@ export const Wrapper = styled.div`
 
     @media (min-width: ${theme.breakpoint.large}) {
       ${BannerStyles.Wrapper} {
-        max-width: 104rem;
-        margin: 0 auto;
+        max-width: ${theme.grid.container};
+        margin: 0 calc(${theme.grid.gutter} / 2);
       }
 
       .slick-dots {

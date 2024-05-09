@@ -1,25 +1,36 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
+import bannersMock from 'components/BannerSlider/mock'
+import highlightMock from 'components/Highlight/mock'
+import gamesMock from 'components/ProductSlider/mock'
 import DefaultTemplate from 'templates/Default/Default'
 import HomeTemplate from '.'
-import bannersMock from 'components/BannerSlider/mock'
-import gamesMock from 'components/ProductSlider/mock'
-import highlightMock from 'components/Highlight/mock'
 
 const meta: Meta<typeof HomeTemplate> = {
   title: 'Pages/Home',
   component: HomeTemplate,
   args: {
     banners: bannersMock,
-    newGames: gamesMock,
-    mostPopularHighlight: highlightMock,
-    mostPopularsGames: gamesMock,
-    comingSoonGames: gamesMock,
-    comingSoonHighlight: highlightMock,
-    comingSoonMoreGames: gamesMock,
-    freeHighlight: highlightMock,
-    freeGames: gamesMock
+    newsSection: {
+      title: 'New Games',
+      games: gamesMock
+    },
+    mostPopularsSection: {
+      title: 'Most Populars',
+      games: gamesMock,
+      highlight: highlightMock
+    },
+    comingSoonSection: {
+      title: 'Coming Soon',
+      games: gamesMock,
+      highlight: highlightMock
+    },
+    freeSection: {
+      title: 'Free Games',
+      games: gamesMock,
+      highlight: highlightMock
+    }
   },
   decorators: [
     (Story) => (
@@ -45,7 +56,7 @@ export const Home: Story = {
     const canvas = within(canvasElement)
     const bannerSlider = canvas.getByTestId('bannerSliderComponent')
     const titles = [
-      /new releases/i,
+      /new games/i,
       /most populars/i,
       /coming soon/i,
       /free games/i
@@ -57,7 +68,7 @@ export const Home: Story = {
     for (const title of titles) {
       expect(canvas.getByRole('heading', { name: title })).toBeInTheDocument()
     }
-    expect(productSliders.length).toBe(5)
+    expect(productSliders.length).toBe(4)
     expect(highlights.length).toBe(3)
   }
 }

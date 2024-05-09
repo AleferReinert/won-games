@@ -82,13 +82,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       })),
       description: game.description,
       details: {
-        developer: game.developers.data[0].attributes.name,
-        releaseDate: game.release_date,
+        developer: game.developers.data[0]?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
+        releaseDate: game.release_date ?? '',
         platforms: game.platforms.data.map(
           (platform) => platform.attributes.name
         ),
-        publisher: game.publisher.data.attributes.name,
-        rating: game.rating,
+        publisher: game.publisher.data?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
+        rating: game.rating ?? '',
         categories: game.categories.data.map(
           ({ attributes: category }) => category.name
         )
@@ -124,7 +124,7 @@ const ProductPage = (props: ProductPageProps & NextPageWithLayout) => {
           <Heading line='left' lineColor='secondary'>
             About game
           </Heading>
-          <div
+          <S.Content
             data-testid='description'
             dangerouslySetInnerHTML={{ __html: props.description }}
           />

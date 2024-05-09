@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
 import { Container } from 'components/Container/Container.styles'
+import styled, { css } from 'styled-components'
 
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 
@@ -59,9 +59,25 @@ export const GalleryWrapper = styled.div`
 
 export const Description = styled.div`
   ${({ theme }) => css`
+    padding-top: ${theme.spacings.large};
+    padding-bottom: ${theme.spacings.large};
     color: ${theme.colors.white};
+
+    @media (min-width: ${theme.breakpoint.small}) {
+      color: ${theme.colors.black};
+      background-color: ${theme.colors.white};
+      margin-top: calc(${theme.spacings.large} * 2);
+
+      ${HeadingStyles.Wrapper} {
+        color: ${theme.colors.black};
+      }
+    }
+  `}
+`
+
+export const Content = styled.div`
+  ${({ theme }) => css`
     font-size: ${theme.font.sizes.medium};
-    margin-top: ${theme.spacings.large};
 
     h1,
     h2,
@@ -129,11 +145,7 @@ export const Description = styled.div`
     }
 
     @media (min-width: ${theme.breakpoint.small}) {
-      background-color: ${theme.colors.white};
-      padding: ${theme.spacings.large};
-      color: ${theme.colors.black};
       font-size: ${theme.font.sizes.xlarge};
-      margin-top: calc(${theme.spacings.large} * 2);
 
       hr {
         background-color: ${theme.colors.lightGray};

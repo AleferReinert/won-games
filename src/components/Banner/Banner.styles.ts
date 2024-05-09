@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
-import * as RibbonStyles from 'components/Ribbon/Ribbon.styles'
 import * as ButtonStyles from 'components/Button/Button.styles'
+import * as RibbonStyles from 'components/Ribbon/Ribbon.styles'
+import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`

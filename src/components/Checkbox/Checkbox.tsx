@@ -1,5 +1,5 @@
-import * as S from './Checkbox.styles'
 import { InputHTMLAttributes, useState } from 'react'
+import * as S from './Checkbox.styles'
 
 export type CheckboxProps = {
   onCheck?: (status: boolean) => void

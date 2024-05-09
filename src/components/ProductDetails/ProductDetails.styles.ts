@@ -32,6 +32,14 @@ export const Content = styled.div`
   `}
 `
 
+export const Empty = styled.p`
+  ${({ theme }) => css`
+    margin-top: ${theme.spacings.large};
+    color: ${theme.colors.white};
+    font-size: ${theme.font.sizes.medium};
+  `}
+`
+
 export const Block = styled.div``
 
 export const Title = styled.h3`

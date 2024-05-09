@@ -1,12 +1,12 @@
 import {
-  FilterList as FilterListIcon,
-  Close as CloseIcon
+  Close as CloseIcon,
+  FilterList as FilterListIcon
 } from '@styled-icons/material-outlined'
-import { useState } from 'react'
 import Button from 'components/Button/Button'
 import Checkbox from 'components/Checkbox/Checkbox'
 import Heading from 'components/Heading/Heading'
 import Radio from 'components/Radio/Radio'
+import { useState } from 'react'
 import * as S from './Filter.styles'
 
 type FieldProps = {

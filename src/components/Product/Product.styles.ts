@@ -1,9 +1,25 @@
 import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.article`
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => css`
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    flex-direction: column;
+
+    > a {
+      color: ${theme.colors.gray};
+      text-decoration: none;
+
+      > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-style: italic;
+      }
+    }
+  `}
 `
 
 export const ImageBox = styled.div`

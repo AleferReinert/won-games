@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
 import * as checkboxStyles from 'components/Checkbox/Checkbox.styles'
 import * as headingStyles from 'components/Heading/Heading.styles'
 import * as radioStyles from 'components/Radio/Radio.styles'
+import styled, { css } from 'styled-components'
 
 export const OpenFilter = styled.button`
   ${({ theme }) => css`
@@ -9,6 +9,12 @@ export const OpenFilter = styled.button`
     width: 2.4rem;
     background: transparent;
     margin-bottom: ${theme.spacings.small};
+
+    svg {
+      fill: ${theme.colors.white};
+      width: 2.4rem;
+      height: 2.4rem;
+    }
 
     @media (min-width: ${theme.breakpoint.medium}) {
       display: none;
@@ -80,6 +86,7 @@ export const CloseFilter = styled.button`
 
     svg {
       width: 2.4rem;
+      height: 2.4rem;
     }
 
     @media (min-width: ${theme.breakpoint.medium}) {

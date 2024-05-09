@@ -1,10 +1,10 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { pxToNumber } from 'utils/tests/helpers'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
+import theme from 'styles/theme'
+import { pxToNumber } from 'utils/tests/helpers'
 import ProductDetailsComponent from './ProductDetails'
 import mock from './mock'
-import theme from 'styles/theme'
 
 const meta: Meta<typeof ProductDetailsComponent> = {
   title: 'Components/ProductDetails',
@@ -46,7 +46,6 @@ export const ProductDetails: Story = {
       'Publisher',
       'Rating'
     ]
-    const icons = ['Windows', 'Linux', 'Mac']
 
     // title "Game Details" on desktop only
     viewport < breakpointSmall
@@ -63,10 +62,8 @@ export const ProductDetails: Story = {
     // formatted data
     expect(formattedDate).toBeInTheDocument()
 
-    // platform icons
-    for (const icon of icons) {
-      expect(canvas.getByRole('img', { name: icon })).toBeInTheDocument()
-    }
+    // platforms
+    expect(canvas.getByText(/Windows 7/i)).toBeInTheDocument()
 
     // render 18+ when rating BR18
     expect(canvas.getByText('18+')).toBeInTheDocument()

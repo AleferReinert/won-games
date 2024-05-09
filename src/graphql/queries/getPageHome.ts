@@ -1,31 +1,90 @@
 import { gql } from '@apollo/client'
+import { BannerFragment } from 'graphql/fragments/banner'
+import { GameFragment } from 'graphql/fragments/game'
+import { HighlightFragment } from 'graphql/fragments/highlight'
 
 export const GET_PAGE_HOME = gql`
-  query getPageHome {
+  query getPageHome($currentDate: Date!) {
     banners {
+      ...BannerFragment
+    }
+    newGames: games(
+      filters: { release_date: { lte: $currentDate } }
+      sort: "release_date:desc"
+      pagination: { start: 0, limit: 8 }
+    ) {
+      ...GameFragment
+    }
+    comingSoonGames: games(
+      filters: { release_date: { gt: $currentDate } }
+      sort: "release_date:asc"
+      pagination: { start: 0, limit: 8 }
+    ) {
+      ...GameFragment
+    }
+    freeGames: games(
+      filters: { price: { eq: 0 } }
+      sort: "release_date:desc"
+      pagination: { start: 0, limit: 8 }
+    ) {
+      ...GameFragment
+    }
+    sections: home {
       data {
         attributes {
-          image {
-            data {
-              attributes {
-                url
-                alternativeText
+          newGames {
+            title
+            highlight {
+              ...HighlightFragment
+            }
+          }
+          mostPopularGames {
+            title
+            highlight {
+              ...HighlightFragment
+            }
+            games {
+              data {
+                attributes {
+                  name
+                  slug
+                  price
+                  developers {
+                    data {
+                      attributes {
+                        name
+                      }
+                    }
+                  }
+                  cover {
+                    data {
+                      attributes {
+                        url
+                        alternativeText
+                      }
+                    }
+                  }
+                }
               }
             }
           }
-          title
-          subtitle
-          button {
-            label
-            link
+          comingSoonGames {
+            title
+            highlight {
+              ...HighlightFragment
+            }
           }
-          ribbon {
-            text
-            color
-            size
+          freeGames {
+            title
+            highlight {
+              ...HighlightFragment
+            }
           }
         }
       }
     }
   }
+  ${BannerFragment}
+  ${GameFragment}
+  ${HighlightFragment}
 `

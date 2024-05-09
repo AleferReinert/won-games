@@ -33,5 +33,3 @@ export const SectionNews = styled.div`
     }
   `}
 `
-
-export const SectionComingSoon = styled.div``

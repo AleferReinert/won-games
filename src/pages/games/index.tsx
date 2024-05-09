@@ -29,7 +29,9 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: 60,
       products: data.games.data.map((game: GameEntity) => ({
         title: game.attributes.name,
-        developer: game.attributes.developers.data[0].attributes.name,
+        developer: game.attributes.developers.data.length
+          ? game.attributes.developers.data[0].attributes.name
+          : '', // todo: not is possible set this with required in Strapi, create default
         img: game.attributes.cover.data
           ? 'http://localhost:1337' + game.attributes.cover.data.attributes.url
           : '',

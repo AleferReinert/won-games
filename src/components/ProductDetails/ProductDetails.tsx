@@ -1,14 +1,13 @@
-import { Windows, Linux, Apple } from '@styled-icons/simple-icons'
 import Heading from 'components/Heading/Heading'
+import Platforms from 'components/Platforms/Platforms'
 import * as S from './ProductDetails.styles'
 
-type Platform = 'windows' | 'linux' | 'mac'
-type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
+type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18' | '' // todo: remove ''
 
 export type ProductDetailsProps = {
   developer: string
   releaseDate: string
-  platforms: Platform[]
+  platforms: string[]
   publisher: string
   rating: Rating
   categories: string[]
@@ -22,11 +21,13 @@ const ProductDetails = ({
   rating,
   categories
 }: ProductDetailsProps) => {
-  const platformIcons = {
-    windows: <Windows title='Windows' />,
-    linux: <Linux title='Linux' />,
-    mac: <Apple title='Mac' />
-  }
+  const emptyData =
+    !categories.length &&
+    !platforms.length &&
+    !releaseDate &&
+    !developer &&
+    !publisher &&
+    rating === ''
 
   return (
     <S.Wrapper data-testid='productDetailsComponent'>
@@ -34,53 +35,63 @@ const ProductDetails = ({
         Game details
       </Heading>
 
-      <S.Content>
-        <S.Block>
-          <S.Title>Category</S.Title>
-          <S.Description>{categories.join(', ')}</S.Description>
-        </S.Block>
+      {emptyData ? (
+        <S.Empty>There are no details to show.</S.Empty>
+      ) : (
+        <>
+          <S.Content>
+            {categories.length > 0 && (
+              <S.Block>
+                <S.Title>Category</S.Title>
+                <S.Description>{categories.join(', ')}</S.Description>
+              </S.Block>
+            )}
 
-        <S.Block>
-          <S.Title>Platforms</S.Title>
-          <S.Description>
-            <S.IconsWrapper>
-              {platforms.map((icon: Platform, index) => (
-                <S.Icon key={index} title={icon}>
-                  {platformIcons[icon]}
-                </S.Icon>
-              ))}
-            </S.IconsWrapper>
-          </S.Description>
-        </S.Block>
+            {platforms.length > 0 && (
+              <S.Block>
+                <S.Title>Platforms</S.Title>
+                <Platforms platforms={platforms} />
+              </S.Block>
+            )}
 
-        <S.Block>
-          <S.Title>Release date</S.Title>
-          <S.Description>
-            {new Intl.DateTimeFormat('en-US', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric'
-            }).format(new Date(releaseDate))}
-          </S.Description>
-        </S.Block>
+            {releaseDate && (
+              <S.Block>
+                <S.Title>Release date</S.Title>
+                <S.Description>
+                  {new Intl.DateTimeFormat('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                  }).format(new Date(releaseDate))}
+                </S.Description>
+              </S.Block>
+            )}
 
-        <S.Block>
-          <S.Title>Developer</S.Title>
-          <S.Description>{developer}</S.Description>
-        </S.Block>
+            {developer && (
+              <S.Block>
+                <S.Title>Developer</S.Title>
+                <S.Description>{developer}</S.Description>
+              </S.Block>
+            )}
 
-        <S.Block>
-          <S.Title>Publisher</S.Title>
-          <S.Description>{publisher}</S.Description>
-        </S.Block>
+            {publisher && (
+              <S.Block>
+                <S.Title>Publisher</S.Title>
+                <S.Description>{publisher}</S.Description>
+              </S.Block>
+            )}
 
-        <S.Block>
-          <S.Title>Rating</S.Title>
-          <S.Description>
-            {rating === 'BR0' ? 'FREE' : rating.replace('BR', '') + '+'}
-          </S.Description>
-        </S.Block>
-      </S.Content>
+            {rating && (
+              <S.Block>
+                <S.Title>Rating</S.Title>
+                <S.Description>
+                  {rating === 'BR0' ? 'FREE' : rating.replace('BR', '') + '+'}
+                </S.Description>
+              </S.Block>
+            )}
+          </S.Content>
+        </>
+      )}
     </S.Wrapper>
   )
 }

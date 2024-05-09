@@ -1,14 +1,14 @@
-import type { NextPage } from 'next'
-import type { ReactElement, ReactNode } from 'react'
-import type { AppProps } from 'next/app'
-import { StyleSheetManager, ThemeProvider } from 'styled-components'
-import { Poppins } from 'next/font/google'
 import { ApolloProvider } from '@apollo/client'
-import { useApollo } from 'utils/apollo'
 import isPropValid from '@emotion/is-prop-valid'
-import GlobalStyles from 'styles/global'
+import type { NextPage } from 'next'
+import type { AppProps } from 'next/app'
+import { Poppins } from 'next/font/google'
 import Head from 'next/head'
+import type { ReactElement, ReactNode } from 'react'
+import { StyleSheetManager, ThemeProvider } from 'styled-components'
+import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
+import { useApollo } from 'utils/apollo'
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600'],
@@ -20,7 +20,7 @@ export type NextPageWithLayout<P = NonNullable<unknown>, IP = P> = NextPage<
   P,
   IP
 > & {
-  getLayout?: (page: ReactElement) => ReactNode
+  getLayout?: () => ReactNode
 }
 
 type AppPropsWithLayout = AppProps & {
@@ -28,7 +28,7 @@ type AppPropsWithLayout = AppProps & {
 }
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout ?? ((page: ReactElement) => page)
   const client = useApollo(pageProps.initialApolloState)
 
   return (
