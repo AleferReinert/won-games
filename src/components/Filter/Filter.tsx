@@ -9,19 +9,19 @@ import Radio from 'components/Radio/Radio'
 import { useState } from 'react'
 import * as S from './Filter.styles'
 
-type FieldProps = {
+interface FieldProps {
   label: string
   id: string
 }
 
-type ItemProps = {
+interface ItemProps {
   title: string
   name: string
   type: 'checkbox' | 'radio' | string
   fields: FieldProps[]
 }
 
-type InitialValueProps = {
+interface InitialValueProps {
   [field: string]: boolean | string
 }
 

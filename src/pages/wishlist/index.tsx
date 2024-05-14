@@ -1,37 +1,48 @@
-import type { ReactElement } from 'react'
-import type { NextPageWithLayout } from '../_app'
-import { HighlightProps } from 'components/Highlight/Highlight'
-import Base from 'templates/Default/Default'
 import Container from 'components/Container/Container'
 import Divider from 'components/Divider/Divider'
 import Empty from 'components/Empty/Empty'
 import Heading from 'components/Heading/Heading'
 import Product, { ProductProps } from 'components/Product/Product'
-import Showcase from 'components/Showcase/Showcase'
+import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
+import { GET_RECOMMENDED_GAMES } from 'graphql/queries/getRecommendedGames'
+import { Query } from 'graphql/types'
 import * as S from 'pages/wishlist/Wishlist.styles'
-import highlightMock from 'components/Highlight/mock'
-import productsMock from 'components/ProductSlider/mock'
+import type { ReactElement } from 'react'
+import Base from 'templates/Default/Default'
+import { initializeApollo } from 'utils/apollo'
+import { highlightMapper, productMapper } from 'utils/mappers'
+import type { NextPageWithLayout } from '../_app'
 
-export type WishlistPageProps = {
-  wishlistGames?: ProductProps[]
-  recommendedHighlight: HighlightProps
-  recommendedGames: ProductProps[]
+export interface WishlistPageProps {
+  wishlistProducts?: ProductProps[]
+  recommendedSection: ShowcaseProps
 }
 
 export async function getStaticProps() {
+  const apolloClient = initializeApollo()
+  const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
+    query: GET_RECOMMENDED_GAMES
+  })
+
+  const { title, highlight, games } = data.recommended.data.attributes.showcase
+
   return {
     props: {
-      wishlistGames: [],
-      recommendedHighlight: highlightMock,
-      recommendedGames: productsMock
+      wishlistProducts: [],
+      recommendedSection: {
+        title,
+        highlight: highlightMapper(highlight),
+        products: productMapper(games)
+      }
     }
   }
 }
 
-const WishlistPage = (props: WishlistPageProps & NextPageWithLayout) => {
-  const emptyWishlist =
-    typeof props.wishlistGames === 'undefined' ||
-    props.wishlistGames.length === 0
+const WishlistPage = ({
+  wishlistProducts,
+  recommendedSection
+}: WishlistPageProps & NextPageWithLayout) => {
+  const emptyWishlist = !wishlistProducts || !wishlistProducts.length
 
   return (
     <>
@@ -47,14 +58,14 @@ const WishlistPage = (props: WishlistPageProps & NextPageWithLayout) => {
           />
         ) : (
           <S.WrapperWishlistGames>
-            {props.wishlistGames?.map((item, index) => (
+            {wishlistProducts?.map((product, index) => (
               <Product
                 key={'wishlist-' + index}
-                title={item.title}
-                developer={item.developer}
-                img={item.img}
-                price={item.price}
-                slug={item.slug}
+                title={product.title}
+                developer={product.developer}
+                img={product.img}
+                price={product.price}
+                slug={product.slug}
               />
             ))}
           </S.WrapperWishlistGames>
@@ -63,9 +74,9 @@ const WishlistPage = (props: WishlistPageProps & NextPageWithLayout) => {
       </Container>
 
       <Showcase
-        title='You make like these games'
-        highlight={props.recommendedHighlight}
-        games={props.recommendedGames}
+        title={recommendedSection.title}
+        highlight={recommendedSection.highlight}
+        products={recommendedSection.products}
       />
     </>
   )

@@ -12,25 +12,17 @@ const meta: Meta<typeof HomeTemplate> = {
   component: HomeTemplate,
   args: {
     banners: bannersMock,
-    newsSection: {
-      title: 'New Games',
-      games: gamesMock
-    },
-    mostPopularsSection: {
-      title: 'Most Populars',
-      games: gamesMock,
-      highlight: highlightMock
-    },
-    comingSoonSection: {
-      title: 'Coming Soon',
-      games: gamesMock,
-      highlight: highlightMock
-    },
-    freeSection: {
-      title: 'Free Games',
-      games: gamesMock,
-      highlight: highlightMock
-    }
+    newsSectionTitle: 'New Games',
+    newsSectionProducts: gamesMock,
+    mostPopularsSectionTitle: 'Most Populars',
+    mostPopularsSectionHighlight: highlightMock,
+    mostPopularsSectionProducts: gamesMock,
+    comingSoonSectionTitle: 'Coming Soon',
+    comingSoonSectionProducts: gamesMock,
+    comingSoonSectionHighlight: highlightMock,
+    freeSectionTitle: 'Free Games',
+    freeSectionProducts: gamesMock,
+    freeSectionHighlight: highlightMock
   },
   decorators: [
     (Story) => (

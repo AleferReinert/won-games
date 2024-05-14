@@ -44,6 +44,8 @@ export const ShowMore = styled.button`
       fill: ${theme.colors.primary};
       margin-top: -0.3rem;
       transition: ${theme.transition.fast};
+      width: 2.4rem;
+      height: 2.4rem;
     }
 
     &:hover svg {

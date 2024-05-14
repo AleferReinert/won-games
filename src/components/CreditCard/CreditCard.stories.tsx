@@ -1,10 +1,10 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import CreditCardComponent from './CreditCard'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import creditCardMock from 'components/PaymentOptions/mock'
 import theme from 'styles/theme'
 import { hexToRGBA } from 'utils/tests/helpers'
+import CreditCardComponent from './CreditCard'
 
 const meta: Meta<typeof CreditCardComponent> = {
   title: 'Components/Atoms/CreditCard',
@@ -24,11 +24,11 @@ type Story = StoryObj<typeof CreditCardComponent>
 export const Default: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const flagImg = canvas.getByRole('img')
+    const img = canvas.getByRole('img')
     const number = canvas.getByText(/\*\*\*\* \*\*\*\* \*\*\*\*/)
-    const wrapper = flagImg.parentElement
+    const wrapper = img.parentElement
 
-    expect(flagImg).toHaveAccessibleName(/visa/i)
+    expect(img).toHaveAccessibleName(/visa/i)
     expect(number).toBeInTheDocument()
 
     // Direction left and color black as default
@@ -45,8 +45,8 @@ export const Gray: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const flagImg = canvas.getByRole('img')
-    const wrapper = flagImg.parentElement
+    const img = canvas.getByRole('img')
+    const wrapper = img.parentElement
 
     expect(wrapper).toHaveStyle({
       color: hexToRGBA(theme.colors.gray)
@@ -60,8 +60,8 @@ export const Right: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const flagImg = canvas.getByRole('img')
-    const wrapper = flagImg.parentElement
+    const img = canvas.getByRole('img')
+    const wrapper = img.parentElement
 
     expect(wrapper).toHaveStyle({
       flexDirection: 'row-reverse'

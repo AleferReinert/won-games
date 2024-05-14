@@ -1,49 +1,62 @@
-import type { ReactElement } from 'react'
-import type { NextPageWithLayout } from '../_app'
-import { CartItemProps } from 'components/CartItem/CartItem'
-import { CreditCardProps } from 'components/CreditCard/CreditCard'
-import { HighlightProps } from 'components/Highlight/Highlight'
 import { Info } from '@styled-icons/material-outlined/Info'
-import { ProductProps } from 'components/Product/Product'
-import Default from 'templates/Default/Default'
+import { CartItemProps } from 'components/CartItem/CartItem'
 import CartItemList from 'components/CartItemList/CartItemList'
+import cartItemsMock from 'components/CartItemList/mock'
 import Container from 'components/Container/Container'
-import Heading from 'components/Heading/Heading'
-import PaymentOptions from 'components/PaymentOptions/PaymentOptions'
+import { CreditCardProps } from 'components/CreditCard/CreditCard'
 import Divider from 'components/Divider/Divider'
 import Empty from 'components/Empty/Empty'
-import Link from 'next/link'
-import Showcase from 'components/Showcase/Showcase'
-import highlightMock from 'components/Highlight/mock'
-import productSliderMock from 'components/ProductSlider/mock'
-import cartItemsMock from 'components/CartItemList/mock'
+import Heading from 'components/Heading/Heading'
+import PaymentOptions from 'components/PaymentOptions/PaymentOptions'
 import creditCardsMock from 'components/PaymentOptions/mock'
+import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
+import { GET_RECOMMENDED_GAMES } from 'graphql/queries/getRecommendedGames'
+import { Query } from 'graphql/types'
+import Link from 'next/link'
+import type { ReactElement } from 'react'
+import Default from 'templates/Default/Default'
+import { initializeApollo } from 'utils/apollo'
+import { highlightMapper, productMapper } from 'utils/mappers'
+import type { NextPageWithLayout } from '../_app'
 import * as S from './Cart.styles'
 
-type CartPageProps = {
+interface CartPageProps {
   cartItems: CartItemProps[]
   total: string
   creditCards: CreditCardProps[]
-  recommendedHighlight: HighlightProps
-  recommendedGames: ProductProps[]
+  recommendedSection: ShowcaseProps
 }
 
 export async function getServerSideProps() {
+  const apolloClient = initializeApollo()
+  const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
+    query: GET_RECOMMENDED_GAMES
+  })
+
+  const { title, highlight, games } = data.recommended.data.attributes.showcase
+
   return {
     props: {
       cartItems: cartItemsMock,
       total: '$530',
       creditCards: creditCardsMock,
-      recommendedHighlight: highlightMock,
-      recommendedGames: productSliderMock
+      recommendedSection: {
+        title,
+        highlight: highlightMapper(highlight),
+        products: productMapper(games)
+      }
     }
   }
 }
 
-const CartPage = (props: CartPageProps & NextPageWithLayout) => {
+const CartPage = ({
+  cartItems,
+  total,
+  creditCards,
+  recommendedSection
+}: CartPageProps & NextPageWithLayout) => {
   const handlePayment = () => ({})
-  const emptyCart =
-    typeof props.cartItems === 'undefined' || props.cartItems.length === 0
+  const emptyCart = !cartItems || !cartItems.length
 
   return (
     <>
@@ -60,10 +73,10 @@ const CartPage = (props: CartPageProps & NextPageWithLayout) => {
         ) : (
           <>
             <S.Content>
-              <CartItemList cartItems={props.cartItems} total={props.total} />
+              <CartItemList cartItems={cartItems} total={total} />
 
               <PaymentOptions
-                creditCards={props.creditCards}
+                creditCards={creditCards}
                 handlePayment={handlePayment}
               />
             </S.Content>
@@ -82,9 +95,9 @@ const CartPage = (props: CartPageProps & NextPageWithLayout) => {
       </Container>
 
       <Showcase
-        title='You make like these games'
-        highlight={props.recommendedHighlight}
-        games={props.recommendedGames}
+        title={recommendedSection.title}
+        highlight={recommendedSection.highlight}
+        products={recommendedSection.products}
       />
     </>
   )

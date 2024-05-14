@@ -1,9 +1,9 @@
-import type { ReactElement } from 'react'
-import AccountTemplate from 'templates/Account/Account'
 import Box from 'components/Box/Box'
 import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
 import creditCardsMock from 'components/PaymentOptions/mock'
 import * as S from 'pages/account/credit-cards/credit-cards.styles'
+import type { ReactElement } from 'react'
+import AccountTemplate from 'templates/Account/Account'
 
 export function getServerSideProps() {
   return {
@@ -24,8 +24,8 @@ const CreditCardsPage = ({ creditCards }: CreditCardsPageProps) => {
         {creditCards?.map((creditCard, index) => (
           <S.Item role='listitem' key={index}>
             <CreditCard
-              flagImg={creditCard.flagImg}
-              flagName={creditCard.flagName}
+              img={creditCard.img}
+              name={creditCard.name}
               number={creditCard.number}
             />
           </S.Item>

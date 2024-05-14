@@ -1,10 +1,10 @@
-import { ShoppingCart, Add } from '@styled-icons/material-outlined'
-import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
-import { useState } from 'react'
+import { Add, ShoppingCart } from '@styled-icons/material-outlined'
 import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
+import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
 import Heading from 'components/Heading/Heading'
 import Radio from 'components/Radio/Radio'
+import { useState } from 'react'
 import * as S from './PaymentOptions.styles'
 
 export type PaymentOptionsProps = {
@@ -34,12 +34,12 @@ const PaymentOptions = ({
             <S.Item
               role='listitem'
               key={index}
-              title={creditCard.flagName}
+              title={creditCard.name}
               onClick={() => setSelectedCreditCard(index)}
             >
               <CreditCard
-                flagImg={creditCard.flagImg}
-                flagName={creditCard.flagName}
+                img={creditCard.img}
+                name={creditCard.name}
                 number={creditCard.number}
               />
               <S.RadioWrapper>
@@ -53,17 +53,17 @@ const PaymentOptions = ({
           ))}
         </S.CreditCards>
         <S.AddCreditCard>
-          <Add size={24} /> Add new credit card
+          <Add /> Add new credit card
         </S.AddCreditCard>
       </Box>
 
       <S.Buttons>
         <Button variant='link'>Continue shopping</Button>
         <Button
-          icon={<ShoppingCart size={24} />}
           disabled={creditCards === undefined || creditCards.length === 0}
           onClick={handlePayment}
         >
+          <ShoppingCart />
           Buy now
         </Button>
       </S.Buttons>

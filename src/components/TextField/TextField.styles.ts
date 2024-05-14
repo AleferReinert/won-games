@@ -1,6 +1,6 @@
+import { lighten } from 'polished'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { TextFieldProps } from './TextField'
-import { lighten } from 'polished'
 
 const modifiers = {
   iconPositionRight: () => css`
@@ -52,6 +52,8 @@ export const InputWrapper = styled.div<
 
     svg {
       fill: ${theme.colors.gray};
+      width: 2.4rem;
+      height: 2.4rem;
     }
 
     ${iconPosition === 'right' && modifiers.iconPositionRight()}

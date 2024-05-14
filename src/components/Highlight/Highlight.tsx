@@ -1,14 +1,14 @@
 import Button from 'components/Button/Button'
-import * as S from './Highlight.styles'
 import Image from 'next/image'
+import * as S from './Highlight.styles'
 
-export type HighlightProps = {
+export interface HighlightProps {
   title: string
   description: string
   buttonLabel: string
   buttonLink: string
-  backgroundImage: string
-  floatImage?: string
+  background: string
+  float?: string
   alignment?: 'left' | 'right'
 }
 
@@ -17,23 +17,23 @@ const Highlight = ({
   description,
   buttonLabel,
   buttonLink,
-  backgroundImage,
-  floatImage,
+  background,
+  float,
   alignment = 'right'
 }: HighlightProps) => {
   return (
     <S.Wrapper
-      backgroundImage={backgroundImage}
+      background={background}
       alignment={alignment}
       data-testid='highlightComponent'
     >
       <S.FloatImage>
-        {!!floatImage && <Image src={floatImage} alt={title} fill />}
+        {float && <Image src={float} alt={title} fill />}
       </S.FloatImage>
       <S.Content>
         <S.Title>{title}</S.Title>
         <S.Description>{description}</S.Description>
-        <Button as='a' href={buttonLink}>
+        <Button asLink href={buttonLink}>
           {buttonLabel}
         </Button>
       </S.Content>

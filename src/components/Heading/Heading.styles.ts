@@ -1,5 +1,5 @@
 import styled, { DefaultTheme, css } from 'styled-components'
-import { HeadingProps, LineColors } from './Heading'
+import { HeadingProps } from './Heading'
 
 export const sizeModifiers = {
   small: (theme: DefaultTheme) => css`
@@ -45,11 +45,11 @@ export const lineModifiers = {
       bottom: -0.8rem;
     }
   `,
-  left: (theme: DefaultTheme, lineColor: LineColors) => css`
+  left: (theme: DefaultTheme, lineColor: HeadingProps['lineColor']) => css`
     padding-left: 1.2rem;
-    border-left: 0.7rem solid ${theme.colors[lineColor]};
+    border-left: 0.7rem solid ${theme.colors[lineColor ?? 'primary']};
   `,
-  bottom: (theme: DefaultTheme, lineColor: LineColors) => css`
+  bottom: (theme: DefaultTheme, lineColor: HeadingProps['lineColor']) => css`
     position: relative;
     margin-bottom: ${theme.spacings.medium};
 
@@ -58,7 +58,7 @@ export const lineModifiers = {
       position: absolute;
       left: 0;
       border-bottom-style: solid;
-      border-bottom-color: ${theme.colors[lineColor]};
+      border-bottom-color: ${theme.colors[lineColor ?? 'primary']};
     }
   `
 }

@@ -1,24 +1,24 @@
 import Image from 'next/image'
 import * as S from './CreditCard.styles'
 
-export type CreditCardProps = {
-  flagName: string
-  flagImg: string
+export interface CreditCardProps {
+  name: string
   number: string
+  img: string
   color?: 'black' | 'gray'
   direction?: 'left' | 'right'
 }
 
 const CreditCard = ({
-  flagName,
-  flagImg,
+  name,
   number,
+  img,
   color = 'black',
   direction = 'left'
 }: CreditCardProps) => {
   return (
     <S.Wrapper color={color} direction={direction}>
-      <Image src={flagImg} width='36' height='22' alt={flagName} />
+      <Image src={img} width='36' height='22' alt={name} />
       <S.Number aria-label='credit card number'>{number}</S.Number>
     </S.Wrapper>
   )

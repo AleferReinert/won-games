@@ -1,16 +1,14 @@
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 import * as S from './Button.styles'
 
-type ButtonTypes = AnchorHTMLAttributes<HTMLAnchorElement> &
-  ButtonHTMLAttributes<HTMLButtonElement>
-
 export type ButtonProps = {
   size?: 'xsmall' | 'small' | 'medium' | 'large'
   full?: boolean
   icon?: ReactNode
   variant?: 'primary' | 'link'
-  as?: React.ElementType
-} & ButtonTypes
+  asLink?: boolean
+} & AnchorHTMLAttributes<HTMLAnchorElement> &
+  ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button = ({
   children,
@@ -18,24 +16,15 @@ const Button = ({
   full = false,
   icon,
   variant = 'primary',
-  as,
+  asLink = false,
   ...props
 }: ButtonProps) => {
-  const options = { size, full, icon, variant, as, ...props }
-  const content = (
-    <>
-      {!!icon && icon}
-      {!!children && <span>{children}</span>}
-    </>
-  )
+  const options = { size, full, icon, variant, ...props }
+
   return (
-    <>
-      {as == 'a' ? (
-        <S.WrapperAsLink {...options}>{content}</S.WrapperAsLink>
-      ) : (
-        <S.Wrapper {...options}>{content}</S.Wrapper>
-      )}
-    </>
+    <S.Wrapper as={asLink ? 'a' : 'button'} {...options}>
+      {children}
+    </S.Wrapper>
   )
 }
 

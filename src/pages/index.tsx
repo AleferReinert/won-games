@@ -7,8 +7,6 @@ import Showcase from 'components/Showcase/Showcase'
 import { GET_PAGE_HOME } from 'graphql/queries/getPageHome'
 import {
   BannerEntityResponseCollection,
-  ComponentPageHighlight,
-  GameEntity,
   GameEntityResponseCollection,
   GameRelationResponseCollection,
   HomeEntity
@@ -16,124 +14,81 @@ import {
 import { ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import { initializeApollo } from 'utils/apollo'
+import { bannerMapper, highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './Home.styles'
-
-interface SectionProps {
-  title: string
-  highlight?: HighlightProps
-  games?: ProductProps[]
-}
-
-interface GetSectionProps {
-  title: string
-  highlight?: ComponentPageHighlight
-  alignment?: HighlightProps['alignment']
-  games?: GameEntityResponseCollection | GameRelationResponseCollection
-}
 
 export interface HomeTemplateProps {
   banners: BannerProps[]
-  newsSection: SectionProps
-  mostPopularsSection: SectionProps
-  comingSoonSection: SectionProps
-  freeSection: SectionProps
+  newsSectionTitle: string
+  newsSectionProducts: ProductProps[]
+  mostPopularsSectionTitle: string
+  mostPopularsSectionHighlight: HighlightProps
+  mostPopularsSectionProducts: ProductProps[]
+  comingSoonSectionTitle: string
+  comingSoonSectionHighlight: HighlightProps
+  comingSoonSectionProducts: ProductProps[]
+  freeSectionTitle: string
+  freeSectionHighlight: HighlightProps
+  freeSectionProducts: ProductProps[]
 }
 
-interface HomeProps {
+export interface HomeProps {
   banners: BannerEntityResponseCollection
   newGames: GameEntityResponseCollection
   comingSoonGames: GameEntityResponseCollection
   mostPopularGames: GameRelationResponseCollection
   freeGames: GameEntityResponseCollection
-  sections: { data: HomeEntity }
+  showcases: { data: HomeEntity }
 }
 
 export const getStaticProps = async () => {
   const apolloClient = initializeApollo()
-  const urlBase = 'http://localhost:1337'
-  const currentDate = new Date().toISOString().slice(0, 10)
-  const {
-    data: { banners, newGames, comingSoonGames, freeGames, sections }
-  } = await apolloClient.query<HomeProps>({
+  const { data } = await apolloClient.query<HomeProps>({
     query: GET_PAGE_HOME,
-    variables: { limit: 9, currentDate }
+    variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) }
   })
 
-  const getBannersData = (banners: BannerEntityResponseCollection) =>
-    banners.data.map(({ attributes: banner }) => ({
-      img: urlBase + banner.img.data.attributes.url,
-      title: banner.title,
-      description: banner.description,
-      buttonLabel: banner.button.label,
-      buttonLink: banner.button.link,
-      ...(banner.ribbon && {
-        ribbon: banner.ribbon.text,
-        ribbonSize: banner.ribbon.size,
-        ribbonColor: banner.ribbon.color
-      })
-    }))
-
-  // Retorna todas informações necessárias para a seção
-  const getSection = ({
-    title,
-    highlight,
-    alignment = 'right',
-    games
-  }: GetSectionProps) => ({
-    title,
-    highlight: !!highlight && {
-      title: highlight.title,
-      description: highlight.description,
-      buttonLabel: highlight.buttonLabel,
-      buttonLink: highlight.buttonLink,
-      alignment,
-      backgroundImage: urlBase + highlight.background.data.attributes.url,
-      floatImage: urlBase + highlight.float.data.attributes.url
-    },
-    games:
-      games &&
-      games.data.map(({ attributes: game }: GameEntity) => ({
-        title: game.name,
-        slug: game.slug,
-        developer: game.developers.data[0]?.attributes.name || '',
-        price: game.price,
-        img: game.cover.data ? urlBase + game.cover.data.attributes.url : '' // todo add default image
-      }))
-  })
+  const { banners, newGames, comingSoonGames, freeGames, showcases } = data
+  const {
+    newGames: newsSection,
+    mostPopularGames: mostPopularsSection,
+    comingSoonGames: comingSoonSection,
+    freeGames: freeSection
+  } = showcases.data.attributes
 
   return {
     props: {
       revalidate: 60,
-      banners: getBannersData(banners),
-      newsSection: getSection({
-        title: sections.data.attributes.newGames.title,
-        games: newGames
-      }),
-      mostPopularsSection: getSection({
-        title: sections.data.attributes.mostPopularGames.title,
-        highlight: sections.data.attributes.mostPopularGames.highlight,
-        games: sections.data.attributes.mostPopularGames.games
-      }),
-      comingSoonSection: getSection({
-        title: sections.data.attributes.comingSoonGames.title,
-        highlight: sections.data.attributes.comingSoonGames.highlight,
-        alignment: 'left',
-        games: comingSoonGames
-      }),
-      freeSection: getSection({
-        title: sections.data.attributes.freeGames.title,
-        highlight: sections.data.attributes.freeGames.highlight,
-        games: freeGames
-      })
+      banners: bannerMapper(banners),
+      newsSectionTitle: newsSection.title,
+      newsSectionProducts: productMapper(newGames),
+      mostPopularsSectionTile: mostPopularsSection.title,
+      mostPopularsSectionHighlight: highlightMapper(
+        mostPopularsSection.highlight
+      ),
+      mostPopularsSectionProducts: productMapper(mostPopularsSection.games),
+      comingSoonSectionTitle: comingSoonSection.title,
+      comingSoonSectionHighlight: highlightMapper(comingSoonSection.highlight),
+      comingSoonSectionProducts: productMapper(comingSoonGames),
+      freeSectionTitle: freeSection.title,
+      freeSectionHighlight: highlightMapper(freeSection.highlight),
+      freeSectionProducts: productMapper(freeGames)
     }
   }
 }
 export default function Index({
   banners,
-  newsSection,
-  mostPopularsSection,
-  comingSoonSection,
-  freeSection
+  newsSectionTitle,
+  newsSectionProducts,
+  mostPopularsSectionTitle,
+  mostPopularsSectionHighlight,
+  mostPopularsSectionProducts,
+  comingSoonSectionTitle,
+  comingSoonSectionHighlight,
+  comingSoonSectionProducts,
+  freeSectionTitle,
+  freeSectionHighlight,
+  freeSectionProducts
 }: HomeTemplateProps) {
   return (
     <>
@@ -145,28 +100,28 @@ export default function Index({
 
       <S.SectionNews>
         <Showcase
-          title={newsSection.title}
-          games={newsSection.games}
+          title={newsSectionTitle}
+          products={newsSectionProducts}
           arrowColor='black'
         />
       </S.SectionNews>
 
       <Showcase
-        title={mostPopularsSection.title}
-        highlight={mostPopularsSection.highlight}
-        games={mostPopularsSection.games}
+        title={mostPopularsSectionTitle}
+        highlight={mostPopularsSectionHighlight}
+        products={mostPopularsSectionProducts}
       />
 
       <Showcase
-        title={comingSoonSection.title}
-        highlight={comingSoonSection.highlight}
-        games={comingSoonSection.games}
+        title={comingSoonSectionTitle}
+        highlight={comingSoonSectionHighlight}
+        products={comingSoonSectionProducts}
       />
 
       <Showcase
-        title={freeSection.title}
-        highlight={freeSection.highlight}
-        games={freeSection.games}
+        title={freeSectionTitle}
+        highlight={freeSectionHighlight}
+        products={freeSectionProducts}
       />
     </>
   )

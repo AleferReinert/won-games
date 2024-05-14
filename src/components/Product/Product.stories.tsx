@@ -1,6 +1,6 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { userEvent, within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { userEvent, within } from '@storybook/testing-library'
 import ProductComponent from './Product'
 import mockProduct from './mock'
 
@@ -12,10 +12,6 @@ const meta: Meta<typeof ProductComponent> = {
     onFav: {
       action: 'clicked',
       table: { disable: true }
-    },
-    ribbon: {
-      type: 'string',
-      if: { arg: 'promotionalPrice' }
     }
   },
   decorators: [
@@ -59,7 +55,7 @@ export const Default: Story = {
 
 export const WithDiscount: Story = {
   args: {
-    ribbon: '20% off',
+    ribbonText: '20% off',
     promotionalPrice: 185.0
   },
   play: ({ canvasElement }) => {

@@ -1,8 +1,8 @@
 import * as S from './Price.styles'
 
-export type PriceProps = {
+export interface PriceProps {
   price: number
-  promotionalPrice?: number
+  promotionalPrice?: number | null
   size?: 'small' | 'large'
 }
 
@@ -20,7 +20,7 @@ const Price = ({ price, promotionalPrice, size = 'small' }: PriceProps) => {
 
   return (
     <S.Wrapper size={size}>
-      {!!promotionalPrice && (
+      {promotionalPrice && (
         <S.OldPrice aria-label='price'>{formatPrice(price)}</S.OldPrice>
       )}
       <S.Price aria-label={promotionalPrice ? 'promotional price' : 'price'}>

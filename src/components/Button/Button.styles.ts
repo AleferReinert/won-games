@@ -1,7 +1,6 @@
+import { lighten } from 'polished'
 import styled, { DefaultTheme, css } from 'styled-components'
 import { ButtonProps } from './Button'
-import { lighten } from 'polished'
-import { Interpolation } from 'styled-components'
 
 export const wrapperModifiers = {
   xsmall: () => css`
@@ -23,14 +22,6 @@ export const wrapperModifiers = {
   `,
   full: () => css`
     min-width: 100%;
-  `,
-  icon: (theme: DefaultTheme) => css`
-    gap: ${theme.spacings.xxsmall};
-
-    /* svg {
-      height: 60%;
-      max-height: 1.8rem;
-    } */
   `,
   primary: (theme: DefaultTheme) => css`
     background: linear-gradient(180deg, #ff5f5f 0%, #f062c0 50%);
@@ -61,8 +52,8 @@ export const wrapperModifiers = {
   `
 }
 
-export const ButtonStyle = css<ButtonProps>`
-  ${({ theme, size, full, icon, variant, disabled }) => css`
+export const Wrapper = styled.button<ButtonProps>`
+  ${({ theme, size, full, variant, disabled }) => css`
     cursor: pointer;
     border: 0;
     border-radius: ${theme.border.radius};
@@ -73,17 +64,16 @@ export const ButtonStyle = css<ButtonProps>`
     font-size: ${theme.font.sizes.xsmall};
     font-weight: ${theme.font.semibold};
     padding: 0 ${theme.spacings.xxsmall};
+    gap: ${theme.spacings.xxsmall};
+
+    svg {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
 
     ${!!size && wrapperModifiers[size](theme)}
     ${full && wrapperModifiers.full()}
-    ${!!icon && wrapperModifiers.icon(theme)}
     ${!!variant && wrapperModifiers[variant](theme)}
     ${disabled && wrapperModifiers.disabled(theme)}
   `}
-`
-export const Wrapper = styled.button<ButtonProps>`
-  ${ButtonStyle as Interpolation<ButtonProps>}
-`
-export const WrapperAsLink = styled.button<ButtonProps>`
-  ${ButtonStyle as Interpolation<ButtonProps>}
 `

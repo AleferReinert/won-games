@@ -1,13 +1,13 @@
 import styled, { DefaultTheme, css } from 'styled-components'
-import { RibbonColors, RibbonProps } from './Ribbon'
+import { RibbonProps } from './Ribbon'
 
 const WrapperModifiers = {
-  color: (theme: DefaultTheme, color: RibbonColors) => css`
-    background-color: ${theme.colors[color]};
+  color: (theme: DefaultTheme, color: RibbonProps['color']) => css`
+    background-color: ${theme.colors[color ?? 'primary']};
 
     &::after {
-      border-color: ${theme.colors[color]} transparent transparent
-        ${theme.colors[color]};
+      border-color: ${theme.colors[color ?? 'primary']} transparent transparent
+        ${theme.colors[color ?? 'primary']};
       filter: brightness(75%);
     }
   `,
@@ -39,7 +39,7 @@ const WrapperModifiers = {
   `
 }
 
-export const Wrapper = styled.div<Omit<RibbonProps, 'children'>>`
+export const Wrapper = styled.div<Pick<RibbonProps, 'color' | 'size'>>`
   ${({ theme, color, size }) => css`
     display: inline-block;
     color: ${theme.colors.white};
@@ -55,7 +55,7 @@ export const Wrapper = styled.div<Omit<RibbonProps, 'children'>>`
       border-style: solid;
     }
 
-    ${!!size && WrapperModifiers[size](theme)}
-    ${!!color && WrapperModifiers.color(theme, color)}
+    ${size && WrapperModifiers[size](theme)}
+    ${color && WrapperModifiers.color(theme, color)}
   `}
 `

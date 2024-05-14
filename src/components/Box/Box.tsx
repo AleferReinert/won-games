@@ -1,13 +1,12 @@
-import { ReactNode } from 'react'
+import { ComponentProps } from 'react'
 import * as S from './Box.styles'
 
-export type BoxProps = {
-  children: ReactNode
+export interface BoxProps extends ComponentProps<'div'> {
   padding?: 'xsmall' | 'small' | 'medium'
 }
 
-const Box = ({ children, padding = 'small' }: BoxProps) => {
-  return <S.Wrapper padding={padding}>{children}</S.Wrapper>
+const Box = ({ padding = 'small', ...props }: BoxProps) => {
+  return <S.Wrapper padding={padding}>{props.children}</S.Wrapper>
 }
 
 export default Box

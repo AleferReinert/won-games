@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 import { BannerFragment } from 'graphql/fragments/banner'
-import { GameFragment } from 'graphql/fragments/game'
+import { GameEntityFragment } from 'graphql/fragments/game'
 import { HighlightFragment } from 'graphql/fragments/highlight'
 
 export const GET_PAGE_HOME = gql`
@@ -13,23 +13,23 @@ export const GET_PAGE_HOME = gql`
       sort: "release_date:desc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...GameFragment
+      ...GameEntityFragment
     }
     comingSoonGames: games(
       filters: { release_date: { gt: $currentDate } }
       sort: "release_date:asc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...GameFragment
+      ...GameEntityFragment
     }
     freeGames: games(
       filters: { price: { eq: 0 } }
       sort: "release_date:desc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...GameFragment
+      ...GameEntityFragment
     }
-    sections: home {
+    showcases: home {
       data {
         attributes {
           newGames {
@@ -85,6 +85,6 @@ export const GET_PAGE_HOME = gql`
     }
   }
   ${BannerFragment}
-  ${GameFragment}
+  ${GameEntityFragment}
   ${HighlightFragment}
 `

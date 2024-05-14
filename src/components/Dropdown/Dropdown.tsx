@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react'
 import * as S from './Dropdown.styles'
 
-type DropdownProps = {
+interface DropdownProps {
   button: ReactNode
   children: ReactNode
 }

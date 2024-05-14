@@ -1,13 +1,13 @@
-import Product, { ProductProps } from 'components/Product/Product'
-import Slider, { SliderSettings } from 'components/Slider/Slider'
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
-import { pxToNumber } from 'utils/tests/helpers'
+import Product, { ProductProps } from 'components/Product/Product'
+import Slider, { SliderSettings } from 'components/Slider/Slider'
 import theme from 'styles/theme'
+import { pxToNumber } from 'utils/tests/helpers'
 import * as S from './ProductSlider.styles'
 
-export type ProductSliderProps = {
-  items: ProductProps[]
+export interface ProductSliderProps {
+  products: ProductProps[]
   arrowColor?: 'white' | 'black'
 }
 
@@ -46,11 +46,14 @@ const settings: SliderSettings = {
   ]
 }
 
-const ProductSlider = ({ items, arrowColor = 'white' }: ProductSliderProps) => {
+const ProductSlider = ({
+  products,
+  arrowColor = 'white'
+}: ProductSliderProps) => {
   return (
     <S.Wrapper arrowColor={arrowColor} data-testid='productSliderComponent'>
       <Slider settings={settings}>
-        {items.map((item, index) => (
+        {products.map((item, index) => (
           <Product key={index} {...item} />
         ))}
       </Slider>

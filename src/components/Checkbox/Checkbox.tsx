@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useState } from 'react'
+import { ComponentProps, useState } from 'react'
 import * as S from './Checkbox.styles'
 
 export type CheckboxProps = {
@@ -8,7 +8,7 @@ export type CheckboxProps = {
   label?: string
   labelColor?: 'white' | 'black'
   value?: string | string[] | number
-} & InputHTMLAttributes<HTMLInputElement>
+} & ComponentProps<'input'>
 
 const Checkbox = ({
   onCheck,
@@ -24,8 +24,7 @@ const Checkbox = ({
   const onChange = () => {
     const status = !checked
     setChecked(status)
-
-    !!onCheck && onCheck(status)
+    onCheck && onCheck(status)
   }
 
   return (
@@ -38,7 +37,7 @@ const Checkbox = ({
         value={value}
         {...props}
       />
-      {!!label && (
+      {label && (
         <S.Label htmlFor={id} labelColor={labelColor}>
           {label}
         </S.Label>

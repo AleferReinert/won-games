@@ -43,6 +43,8 @@ export const AddCreditCard = styled.button`
 
     svg {
       margin-right: ${theme.spacings.xxsmall};
+      width: 2.4rem;
+      height: 2.4rem;
     }
   `}
 `

@@ -5,23 +5,23 @@ import { ProductProps } from 'components/Product/Product'
 import ProductSlider from 'components/ProductSlider/ProductSlider'
 import * as S from './Showcase.styles'
 
-interface ShowcaseProps {
+export interface ShowcaseProps {
   title?: string
   arrowColor?: 'black' | 'white'
-  games?: ProductProps[]
+  products?: ProductProps[]
   highlight?: HighlightProps
 }
 
 const Showcase = ({
   title,
   highlight,
-  games,
+  products,
   arrowColor = 'white'
 }: ShowcaseProps) => {
   return (
     <S.Wrapper data-testid='showcaseComponent'>
       <Container>
-        {!!title && (
+        {title && (
           <Heading line='left' lineColor='secondary'>
             {title}
           </Heading>
@@ -29,7 +29,9 @@ const Showcase = ({
 
         {highlight && <Highlight {...highlight} />}
 
-        {games && <ProductSlider items={games} arrowColor={arrowColor} />}
+        {products && (
+          <ProductSlider products={products} arrowColor={arrowColor} />
+        )}
       </Container>
     </S.Wrapper>
   )

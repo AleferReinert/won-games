@@ -1,38 +1,33 @@
-import type { ReactElement } from 'react'
-import type { NextPageWithLayout } from '../_app'
-import { Email, Lock, AccountCircle } from '@styled-icons/material-outlined'
-import Auth from 'templates/Auth/Auth'
+import { AccountCircle, Email, Lock } from '@styled-icons/material-outlined'
 import Button from 'components/Button/Button'
-import Link from 'next/link'
 import TextField from 'components/TextField/TextField'
+import Link from 'next/link'
 import * as S from 'pages/sign-up/sign-up.styles'
+import type { ReactElement } from 'react'
+import Auth from 'templates/Auth/Auth'
 
-const SignUpPage: NextPageWithLayout = () => {
+const SignUpPage = () => {
   return (
     <S.FormWrapper>
       <form>
-        <TextField
-          name='name'
-          placeholder='Name'
-          icon={<AccountCircle size={24} />}
-        />
+        <TextField name='name' placeholder='Name' icon={<AccountCircle />} />
         <TextField
           name='email'
           type='email'
           placeholder='E-mail'
-          icon={<Email size={24} />}
+          icon={<Email />}
         />
         <TextField
           name='password'
           type='password'
           placeholder='Password'
-          icon={<Lock size={24} />}
+          icon={<Lock />}
         />
         <TextField
           name='confirm-password'
           type='password'
           placeholder='Confirm password'
-          icon={<Lock size={24} />}
+          icon={<Lock />}
         />
         <Button full size='large'>
           Sign up now

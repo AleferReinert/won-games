@@ -5,7 +5,7 @@ import Filter from 'components/Filter/Filter'
 import filterMock from 'components/Filter/mock'
 import Product, { ProductProps } from 'components/Product/Product'
 import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
-import { GameEntity } from 'graphql/types'
+import { Query } from 'graphql/types'
 import { GetStaticProps } from 'next'
 import * as S from 'pages/games/games.styles'
 import { type ReactElement } from 'react'
@@ -19,7 +19,9 @@ export type GamesPageProps = {
 
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo()
-  const { data } = await apolloClient.query({
+  const {
+    data: { games }
+  } = await apolloClient.query<Pick<Query, 'games'>>({
     query: GET_ALL_GAMES,
     variables: { limit: 9 }
   })
@@ -27,24 +29,24 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       revalidate: 60,
-      products: data.games.data.map((game: GameEntity) => ({
-        title: game.attributes.name,
-        developer: game.attributes.developers.data.length
-          ? game.attributes.developers.data[0].attributes.name
+      products: games.data.map(({ attributes: game }) => ({
+        title: game.name,
+        developer: game.developers.data.length
+          ? game.developers.data[0].attributes.name
           : '', // todo: not is possible set this with required in Strapi, create default
-        img: game.attributes.cover.data
-          ? 'http://localhost:1337' + game.attributes.cover.data.attributes.url
+        img: game.cover.data
+          ? 'http://localhost:1337' + game.cover.data.attributes.url
           : '',
-        price: game.attributes.price,
-        slug: game.attributes.slug
+        price: game.price,
+        slug: game.slug
       }))
     }
   }
 }
 
-const GamesPage = (props: GamesPageProps & NextPageWithLayout) => {
-  const emptyProducts =
-    typeof props.products === 'undefined' || props.products.length === 0
+const GamesPage = ({ products }: GamesPageProps & NextPageWithLayout) => {
+  const emptyProducts = !products || !products.length
+
   return (
     <Container>
       <S.Wrapper>
@@ -52,9 +54,7 @@ const GamesPage = (props: GamesPageProps & NextPageWithLayout) => {
         <div>
           <S.Games>
             {!emptyProducts &&
-              props.products?.map((item, index) => (
-                <Product key={index} {...item} />
-              ))}
+              products?.map((item, index) => <Product key={index} {...item} />)}
           </S.Games>
           {emptyProducts ? (
             <Empty
@@ -64,7 +64,7 @@ const GamesPage = (props: GamesPageProps & NextPageWithLayout) => {
           ) : (
             <S.ShowMore>
               <span>Show more</span>
-              <KeyboardArrowDown size={24} />
+              <KeyboardArrowDown />
             </S.ShowMore>
           )}
         </div>

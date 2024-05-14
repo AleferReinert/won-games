@@ -1,6 +1,6 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import CartItemComponent from './CartItem'
 import cartItemMock from './mock'
 
@@ -43,10 +43,12 @@ export const Download: Story = {
 
 export const Payment: Story = {
   args: {
-    creditCardNumber: '**** **** **** 4326',
-    creditCardBrand: 'mastercard',
-    creditCardFlag: '/img/creditCards/mastercard.png',
-    purchaseDate: 'Purchase made on 07/06/2023 at 00:42'
+    paymentInfo: {
+      creditCardNumber: '**** **** **** 4326',
+      creditCardBrand: 'mastercard',
+      creditCardFlag: '/img/creditCards/mastercard.png',
+      purchaseDate: 'Purchase made on 07/06/2023 at 00:42'
+    }
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

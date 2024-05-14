@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
-import { pxToNumber } from 'utils/tests/helpers'
 import * as LogoStyles from 'components/Logo/Logo.styles'
 import * as MenuMobileStyles from 'components/MenuMobile/MenuMobile.styles'
+import styled, { css } from 'styled-components'
+import { pxToNumber } from 'utils/tests/helpers'
 
 export const Wrapper = styled.header`
   ${({ theme }) => css`
@@ -46,7 +46,7 @@ export const LogoWrapper = styled.div`
       left: 50%;
       transform: translateX(-50%);
 
-      ${LogoStyles.wrapperModifiers.withoutText()}
+      ${LogoStyles.wrapperModifiers.hideText()}
     }
   `}
 `

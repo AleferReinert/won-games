@@ -1,12 +1,12 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
+import cartItemsMock from 'components/CartItemList/mock'
+import highlightMock from 'components/Highlight/mock'
+import creditCardsMock from 'components/PaymentOptions/mock'
+import productSliderMock from 'components/ProductSlider/mock'
 import DefaultTemplate from 'templates/Default/Default'
 import CartPage from '.'
-import highlightMock from 'components/Highlight/mock'
-import productSliderMock from 'components/ProductSlider/mock'
-import cartItemsMock from 'components/CartItemList/mock'
-import creditCardsMock from 'components/PaymentOptions/mock'
 
 const meta: Meta<typeof CartPage> = {
   title: 'Pages/Cart',
@@ -15,8 +15,11 @@ const meta: Meta<typeof CartPage> = {
     cartItems: cartItemsMock,
     total: '$530',
     creditCards: creditCardsMock,
-    recommendedHighlight: highlightMock,
-    recommendedGames: productSliderMock
+    recommendedSection: {
+      title: 'You may like these games',
+      highlight: highlightMock,
+      products: productSliderMock
+    }
   },
   decorators: [
     (Story) => (
@@ -45,7 +48,7 @@ export const Default: Story = {
     const paymentOptions = canvas.getByTestId('paymentOptions')
     const info = canvas.getByText(/your purchase is protected/i)
     const recommendedTitle = canvas.getByRole('heading', {
-      name: /you make like these games/i
+      name: 'You may like these games'
     })
     const recommendedHighlight = canvas.getByTestId('highlightComponent')
     const recommendedGames = canvas.getByTestId('productSliderComponent')

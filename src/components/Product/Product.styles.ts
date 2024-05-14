@@ -92,6 +92,8 @@ export const FavButton = styled.button`
 
     svg {
       fill: ${theme.colors.primary};
+      width: 2.4rem;
+      height: 2.4rem;
     }
   `}
 `

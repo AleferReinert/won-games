@@ -1,15 +1,15 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import { remToPx } from 'polished'
-import Ribbon from './Ribbon'
 import theme from 'styles/theme'
+import Ribbon from './Ribbon'
 
 const meta: Meta<typeof Ribbon> = {
   title: 'Components/Atoms/Ribbon',
   component: Ribbon,
   args: {
-    children: 'New release'
+    text: 'New release'
   },
   decorators: [
     (Story) => (

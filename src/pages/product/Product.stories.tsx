@@ -1,14 +1,14 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import DefaultTemplate from 'templates/Default/Default'
-import ProductPage from 'pages/product/[slug]'
-import productHeaderMock from 'components/ProductHeader/mock'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import galleryMock from 'components/Gallery/mock'
-import descriptionMock from 'pages/product/mock'
-import productDetailsMock from 'components/ProductDetails/mock'
 import highlightMock from 'components/Highlight/mock'
+import productDetailsMock from 'components/ProductDetails/mock'
+import productHeaderMock from 'components/ProductHeader/mock'
 import gamesMock from 'components/ProductSlider/mock'
+import ProductPage from 'pages/product/[slug]'
+import descriptionMock from 'pages/product/mock'
+import DefaultTemplate from 'templates/Default/Default'
 
 const meta: Meta<typeof ProductPage> = {
   title: 'Pages/Product',
@@ -19,9 +19,15 @@ const meta: Meta<typeof ProductPage> = {
     gallery: galleryMock,
     description: descriptionMock.content,
     details: productDetailsMock,
-    upcomingHighlight: highlightMock,
-    upcomingGames: gamesMock,
-    recommendedGames: gamesMock
+    comingSoonSection: {
+      title: 'Coming soon',
+      products: gamesMock,
+      highlight: highlightMock
+    },
+    recommendedSection: {
+      title: 'You may like these games',
+      products: gamesMock
+    }
   },
   decorators: [
     (Story) => (
@@ -53,11 +59,11 @@ export const Product: Story = {
     const descriptionTitle = canvas.getByRole('heading', {
       name: /about game/i
     })
-    const upcomingTitle = canvas.getByRole('heading', { name: /upcoming/i })
-    const upcomingHighlight = canvas.getByTestId('highlightComponent')
-    const upcomingGames = canvas.getAllByTestId('productSliderComponent')[0]
+    const comingSoonTitle = canvas.getByRole('heading', { name: 'Coming soon' })
+    const comingSoonHighlight = canvas.getByTestId('highlightComponent')
+    const comingSoonGames = canvas.getAllByTestId('productSliderComponent')[0]
     const recommendedTitle = canvas.getByRole('heading', {
-      name: /you make like these games/i
+      name: 'You may like these games'
     })
     const recommendedGames = canvas.getAllByTestId('productSliderComponent')[1]
 
@@ -70,9 +76,9 @@ export const Product: Story = {
     expect(descriptionTitle).toBeInTheDocument()
     expect(description).toBeInTheDocument()
     expect(details).toBeInTheDocument()
-    expect(upcomingTitle).toBeInTheDocument()
-    expect(upcomingHighlight).toBeInTheDocument()
-    expect(upcomingGames).toBeInTheDocument()
+    expect(comingSoonTitle).toBeInTheDocument()
+    expect(comingSoonHighlight).toBeInTheDocument()
+    expect(comingSoonGames).toBeInTheDocument()
     expect(recommendedTitle).toBeInTheDocument()
     expect(recommendedGames).toBeInTheDocument()
   }

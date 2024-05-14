@@ -1,9 +1,9 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import { remToPx } from 'polished'
-import Logo from './Logo'
 import theme from 'styles/theme'
+import Logo from './Logo'
 
 const meta: Meta<typeof Logo> = {
   title: 'Components/Atoms/Logo',
@@ -70,7 +70,12 @@ export const Large: Story = {
 
 export const WithoutText: Story = {
   args: {
-    withoutText: true
+    hideText: true
+  },
+  parameters: {
+    backgrounds: {
+      default: 'Light'
+    }
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

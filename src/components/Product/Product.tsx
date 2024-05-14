@@ -1,37 +1,25 @@
 import {
+  AddShoppingCart,
   Favorite,
-  FavoriteBorder,
-  AddShoppingCart
+  FavoriteBorder
 } from '@styled-icons/material-outlined'
 import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
+import Price, { PriceProps } from 'components/Price/Price'
 import Ribbon from 'components/Ribbon/Ribbon'
 import Image from 'next/image'
-import * as S from './Product.styles'
-import Price from 'components/Price/Price'
 import Link from 'next/link'
+import * as S from './Product.styles'
 
-type ProductCommomProps = {
+export interface ProductProps extends PriceProps {
   slug: string
   title: string
   developer: string
   img: string
-  price: number
   favorite?: boolean
+  ribbonText?: string
   onFav?: () => void
 }
-
-type ConditionalProps =
-  | {
-      promotionalPrice?: number
-      ribbon?: React.ReactNode
-    }
-  | {
-      promotionalPrice: number
-      ribbon: React.ReactNode
-    }
-
-export type ProductProps = ProductCommomProps & ConditionalProps
 
 const Product = ({
   slug,
@@ -39,18 +27,15 @@ const Product = ({
   developer,
   img,
   price,
-  promotionalPrice,
+  promotionalPrice = null,
   favorite = false,
-  ribbon,
+  ribbonText,
   onFav
 }: ProductProps) => {
   return (
     <S.Wrapper data-testid='productComponent'>
-      {!!ribbon && (
-        <Ribbon color='primary' size='small'>
-          {ribbon}
-        </Ribbon>
-      )}
+      {ribbonText && <Ribbon text={ribbonText} color='primary' size='small' />}
+
       <Link href={`/product/${slug}`} passHref>
         <S.ImageBox>
           {img ? (
@@ -76,18 +61,14 @@ const Product = ({
 
           <S.FavButton onClick={onFav}>
             {favorite ? (
-              <Favorite title='Remove from wishlist' size={24} />
+              <Favorite title='Remove from wishlist' />
             ) : (
-              <FavoriteBorder title='Add to wishlist' size={24} />
+              <FavoriteBorder title='Add to wishlist' />
             )}
           </S.FavButton>
 
           <S.BuyBox>
-            {promotionalPrice ? (
-              <Price price={price} promotionalPrice={promotionalPrice} />
-            ) : (
-              <Price price={price} />
-            )}
+            <Price price={price} promotionalPrice={promotionalPrice} />
             <Button size='xsmall' title='Add to cart'>
               <AddShoppingCart />
             </Button>

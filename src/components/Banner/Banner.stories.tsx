@@ -1,6 +1,6 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import Banner from './Banner'
 
 const meta: Meta<typeof Banner> = {
@@ -11,17 +11,7 @@ const meta: Meta<typeof Banner> = {
     title: 'Defy death',
     description: 'Play the new <strong>CrashLands</strong> season',
     buttonLabel: 'Buy now',
-    buttonLink: '/games/defy-death',
-    ribbon: '',
-    ribbonColor: 'secondary',
-    ribbonSize: 'large'
-  },
-  argTypes: {
-    ribbon: {
-      type: 'string'
-    },
-    ribbonColor: { if: { arg: 'ribbon' } },
-    ribbonSize: { if: { arg: 'ribbon' } }
+    buttonLink: '/games/defy-death'
   }
 }
 
@@ -48,7 +38,11 @@ export const Default: Story = {
 
 export const WithRibbon: Story = {
   args: {
-    ribbon: 'New release'
+    ribbon: {
+      text: 'New release',
+      color: 'primary',
+      size: 'small'
+    }
   },
   parameters: {
     options: {

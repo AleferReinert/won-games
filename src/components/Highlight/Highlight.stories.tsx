@@ -1,6 +1,6 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import Highlight from './Highlight'
 import highlightMock from './mock'
 
@@ -21,14 +21,14 @@ export const Default: Story = {
     const button = canvas.getByRole('link', { name: /buy now/i })
     const content = title.parentElement
     const highlight = title.parentElement?.parentElement
-    const backgroundImage = window.getComputedStyle(
+    const background = window.getComputedStyle(
       title.parentElement!.parentElement!
     ).backgroundImage
 
     expect(title).toBeInTheDocument()
     expect(description).toBeInTheDocument()
     expect(button).toBeInTheDocument()
-    expect(backgroundImage).toContain('img/red-dead-img.jpg')
+    expect(background).toContain('img/red-dead-img.jpg')
 
     // alignment right as default
     expect(highlight).toHaveStyle({ flexDirection: 'row' })
@@ -51,7 +51,7 @@ export const AlignmentLeft: Story = {
 
 export const WithFloatImage: Story = {
   args: {
-    floatImage: '/img/red-dead-float.png'
+    float: '/img/red-dead-float.png'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

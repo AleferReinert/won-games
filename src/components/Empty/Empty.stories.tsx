@@ -1,10 +1,10 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import { hexToRGBA } from 'utils/tests/helpers'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import { remToPx } from 'polished'
-import Empty from './Empty'
 import theme from 'styles/theme'
+import { hexToRGBA } from 'utils/tests/helpers'
+import Empty from './Empty'
 
 const meta: Meta<typeof Empty> = {
   title: 'Components/Atoms/Empty',
@@ -29,7 +29,8 @@ export const Default: Story = {
       /sorry, we couldn't find any results for your search./i
     )
 
-    expect(img).toBeInTheDocument()
+    expect(img).toHaveAttribute('width', '340')
+    expect(img).toHaveAttribute('height', '176')
     expect(title).toHaveTextContent(args.title)
     expect(description).toHaveTextContent(args.description)
     expect(wrapper).not.toHaveStyle({
@@ -79,7 +80,8 @@ export const Small: Story = {
     const img = canvas.getByRole('img')
     const title = canvas.getByRole('heading')
 
-    expect(img).toHaveStyle({ maxWidth: remToPx('14rem') })
+    expect(img).toHaveAttribute('width', '140')
+    expect(img).toHaveAttribute('height', '72')
     expect(title).toHaveStyle({ fontSize: remToPx(theme.font.sizes.large) })
   }
 }

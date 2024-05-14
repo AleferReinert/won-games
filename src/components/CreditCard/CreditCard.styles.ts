@@ -17,7 +17,7 @@ export const Wrapper = styled.div<Pick<CreditCardProps, 'color' | 'direction'>>`
     align-items: center;
     color: ${theme.colors[color!]};
 
-    ${!!direction && wrapperModifiers[direction]()}
+    ${direction && wrapperModifiers[direction]()}
   `}
 `
 

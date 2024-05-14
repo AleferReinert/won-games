@@ -1,15 +1,11 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import {
-  AddShoppingCart,
-  Download,
-  ArrowBack
-} from '@styled-icons/material-outlined'
-import ButtonComponent from './Button'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
+import { AddShoppingCart } from '@styled-icons/material-outlined'
 import { remToPx } from 'polished'
-import { hexToRGBA } from 'utils/tests/helpers'
 import theme from 'styles/theme'
+import { hexToRGBA } from 'utils/tests/helpers'
+import ButtonComponent from './Button'
 
 const meta: Meta<typeof ButtonComponent> = {
   title: 'Components/Atoms/Button',
@@ -17,19 +13,6 @@ const meta: Meta<typeof ButtonComponent> = {
   argTypes: {
     size: {
       control: 'inline-radio'
-    },
-    icon: {
-      options: ['None', 'AddShoppingCart', 'Download', 'ArrowBack'],
-      mapping: {
-        None: '',
-        AddShoppingCart: <AddShoppingCart size={24} />,
-        Download: <Download size={24} />,
-        ArrowBack: <ArrowBack size={24} />
-      }
-    },
-    as: {
-      control: 'inline-radio',
-      options: ['button', 'a']
     },
     variant: {
       control: 'inline-radio'
@@ -64,15 +47,17 @@ export const Default: Story = {
 }
 
 export const WithIcon: Story = {
-  args: {
-    children: 'button with icon',
-    icon: 'AddShoppingCart'
-  },
   play: ({ canvasElement }) => {
     const icon = canvasElement.getElementsByTagName('svg')
 
     expect(icon.length).toBe(1)
-  }
+  },
+  render: ({ ...args }) => (
+    <ButtonComponent {...args}>
+      <AddShoppingCart />
+      button with icon
+    </ButtonComponent>
+  )
 }
 
 export const Link: Story = {
@@ -168,7 +153,7 @@ export const Disabled: Story = {
 export const AsLinkTag: Story = {
   args: {
     children: 'button as link',
-    as: 'a',
+    asLink: true,
     href: '/'
   },
   play: ({ canvasElement }) => {

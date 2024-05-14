@@ -1,17 +1,17 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
+import theme from 'styles/theme'
 import { jsMediaQuery } from 'utils/tests/helpers'
 import ProductSliderComponent from './ProductSlider'
-import items from './mock'
-import theme from 'styles/theme'
+import products from './mock'
 
 const meta: Meta<typeof ProductSliderComponent> = {
   title: 'Components/ProductSlider',
   component: ProductSliderComponent,
-  args: { items },
+  args: { products },
   argTypes: {
-    items: {
+    products: {
       table: { disable: true }
     }
   }

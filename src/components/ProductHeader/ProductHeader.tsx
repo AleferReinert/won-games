@@ -2,12 +2,12 @@ import {
   AddShoppingCart,
   FavoriteBorder
 } from '@styled-icons/material-outlined'
+import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
 import Heading from 'components/Heading/Heading'
 import Price from 'components/Price/Price'
-import * as S from './ProductHeader.styles'
-import Box from 'components/Box/Box'
 import theme from 'styles/theme'
+import * as S from './ProductHeader.styles'
 
 export type ProductHeaderProps = {
   title: string
@@ -26,14 +26,12 @@ const ProductHeader = ({ title, description, price }: ProductHeaderProps) => {
         <Price price={price} />
 
         <S.ButtonsWrapper>
-          <Button icon={<AddShoppingCart size={24} />} full>
+          <Button full>
+            <AddShoppingCart />
             Add to cart
           </Button>
-          <Button
-            icon={<FavoriteBorder size={24} fill={theme.colors.primary} />}
-            full
-            variant='link'
-          >
+          <Button full variant='link'>
+            <FavoriteBorder fill={theme.colors.primary} />
             Wishlist
           </Button>
         </S.ButtonsWrapper>

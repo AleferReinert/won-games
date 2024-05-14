@@ -1,10 +1,10 @@
 import Banner, { BannerProps } from 'components/Banner/Banner'
 import Slider, { SliderSettings } from 'components/Slider/Slider'
-import { pxToNumber } from 'utils/tests/helpers'
 import theme from 'styles/theme'
+import { pxToNumber } from 'utils/tests/helpers'
 import * as S from './BannerSlider.styles'
 
-export type BannerSliderProps = {
+export interface BannerSliderProps {
   items: BannerProps[]
 }
 

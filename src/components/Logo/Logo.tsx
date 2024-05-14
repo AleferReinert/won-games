@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import * as S from './Logo.styles'
 
-export type LogoProps = {
+export interface LogoProps {
   color?: 'white' | 'black'
   size?: 'small' | 'medium' | 'large'
-  withoutText?: boolean
+  hideText?: boolean
 }
 
 const Logo = ({
   color = 'white',
   size = 'medium',
-  withoutText = false
+  hideText = false
 }: LogoProps) => {
   const [id, setId] = useState('')
 
@@ -22,7 +22,7 @@ const Logo = ({
     <S.Wrapper
       color={color}
       size={size}
-      withoutText={withoutText}
+      hideText={hideText}
       data-testid='logoComponent'
       href='/'
     >

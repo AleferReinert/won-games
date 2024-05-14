@@ -1,39 +1,30 @@
 import { FileDownload } from '@styled-icons/material/FileDownload'
-import Price from 'components/Price/Price'
-import * as S from './CartItem.styles'
 import Box from 'components/Box/Box'
 import CreditCard from 'components/CreditCard/CreditCard'
+import Price from 'components/Price/Price'
+import * as S from './CartItem.styles'
 
-type ConditionalPaymentProps =
-  | {
-      creditCardBrand?: undefined
-      creditCardNumber?: undefined
-      creditCardFlag?: undefined
-      purchaseDate?: undefined
-    }
-  | {
-      creditCardBrand: string
-      creditCardNumber: string
-      creditCardFlag: string
-      purchaseDate: string
-    }
+interface PaymentProps {
+  creditCardBrand: string
+  creditCardNumber: string
+  creditCardFlag: string
+  purchaseDate: string
+}
 
-export type CartItemProps = {
+export interface CartItemProps {
   img: string
   title: string
   price: number
   downloadLink?: string
-} & ConditionalPaymentProps
+  paymentInfo?: PaymentProps
+}
 
 const CartItem = ({
   img,
   title,
   price,
   downloadLink,
-  creditCardNumber,
-  creditCardBrand,
-  creditCardFlag,
-  purchaseDate
+  paymentInfo
 }: CartItemProps) => {
   return (
     <S.Wrapper>
@@ -43,7 +34,7 @@ const CartItem = ({
           <S.InfoWrapper>
             <S.TitleWrapper>
               <S.Title>{title}</S.Title>
-              {!!downloadLink && (
+              {downloadLink && (
                 <S.DownloadLink href={downloadLink} title='Download' download>
                   <FileDownload />
                 </S.DownloadLink>
@@ -52,15 +43,15 @@ const CartItem = ({
             <Price price={price} />
           </S.InfoWrapper>
 
-          {!!creditCardBrand && (
+          {paymentInfo && (
             <S.PaymentInfo>
               <S.PurchaseDate aria-label='purchase date'>
-                {purchaseDate}
+                {paymentInfo.purchaseDate}
               </S.PurchaseDate>
               <CreditCard
-                flagImg={creditCardFlag}
-                flagName={creditCardBrand}
-                number={creditCardNumber}
+                img={paymentInfo.creditCardFlag}
+                name={paymentInfo.creditCardBrand}
+                number={paymentInfo.creditCardNumber}
                 color='gray'
               />
             </S.PaymentInfo>

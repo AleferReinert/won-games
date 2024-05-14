@@ -1,12 +1,12 @@
-import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
 import { Search as SearchIcon } from '@styled-icons/material-outlined/Search'
-import { useState } from 'react'
+import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
 import Button from 'components/Button/Button'
 import CartDropdown from 'components/CartDropdown/CartDropdown'
-import Link from 'next/link'
 import Logo from 'components/Logo/Logo'
 import MenuMobile from 'components/MenuMobile/MenuMobile'
 import UserDropdown from 'components/UserDropdown/UserDropdown'
+import Link from 'next/link'
+import { useState } from 'react'
 import * as S from './Header.styles'
 
 type MenuProps = {
@@ -35,7 +35,7 @@ const Header = ({ username }: MenuProps) => {
 
       <S.NavRight>
         <S.IconWrapper>
-          <SearchIcon title='Search' size={24} />
+          <SearchIcon title='Search' />
         </S.IconWrapper>
 
         <S.IconWrapper>

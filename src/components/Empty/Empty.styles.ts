@@ -1,7 +1,8 @@
+import Image from 'next/image'
 import styled, { css } from 'styled-components'
-import { EmptyCommomProps } from './Empty'
+import { EmptyProps } from './Empty'
 
-export const Wrapper = styled.div<EmptyCommomProps>`
+export const Wrapper = styled.div<EmptyProps>`
   ${({ theme, invertedColors, small }) => css`
     padding: ${theme.spacings.medium};
     text-align: center;
@@ -17,10 +18,6 @@ export const Wrapper = styled.div<EmptyCommomProps>`
 
     ${small &&
     css`
-      ${Img} {
-        max-width: 14rem;
-      }
-
       ${Title} {
         font-size: ${theme.font.sizes.large};
       }
@@ -28,10 +25,8 @@ export const Wrapper = styled.div<EmptyCommomProps>`
   `}
 `
 
-export const Img = styled.img`
+export const Img = styled(Image)`
   ${({ theme }) => css`
-    max-width: 34rem;
-    width: 100%;
     margin-bottom: ${theme.spacings.small};
     margin-right: -0.3rem;
   `}

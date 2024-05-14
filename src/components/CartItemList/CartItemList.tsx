@@ -1,5 +1,5 @@
-import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import Button from 'components/Button/Button'
+import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import Empty from 'components/Empty/Empty'
 import * as S from './CartItemList.styles'
 
@@ -24,14 +24,12 @@ const CartItemList = ({
             ))}
 
             <S.Footer>
-              {button ? '' : 'Total:'}
+              {!button && 'Total:'}
               <S.PriceTotal aria-label='total price'>{total}</S.PriceTotal>
-              {button ? (
-                <Button as='a' href='/cart'>
+              {button && (
+                <Button asLink href='/cart'>
                   Buy it now
                 </Button>
-              ) : (
-                ''
               )}
             </S.Footer>
           </>

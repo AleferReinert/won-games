@@ -1,17 +1,20 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import DefaultTemplate from 'templates/Default/Default'
-import WishlistPage from '.'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
+import DefaultTemplate from 'templates/Default/Default'
+import WishlistPage from '.'
 
 const meta: Meta<typeof WishlistPage> = {
   title: 'Pages/Wishlist',
   component: WishlistPage,
   args: {
-    recommendedHighlight: highlightMock,
-    recommendedGames: gamesMock
+    recommendedSection: {
+      title: 'Recommended',
+      highlight: highlightMock,
+      products: gamesMock
+    }
   },
   parameters: {
     layout: 'fullscreen',
@@ -34,7 +37,7 @@ type Story = StoryObj<typeof WishlistPage>
 
 export const Default: Story = {
   args: {
-    wishlistGames: gamesMock
+    wishlistProducts: gamesMock
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -44,7 +47,7 @@ export const Default: Story = {
     )
     const emptyComponent = canvas.getAllByTestId('emptyComponent')
     const recommendedTitle = canvas.getByRole('heading', {
-      name: /you make like these games/i
+      name: 'Recommended'
     })
     const recommendedHighlight = canvas.getByTestId('highlightComponent')
     const recommendedGames = canvas.getByTestId('productSliderComponent')
