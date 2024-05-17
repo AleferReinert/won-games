@@ -11,7 +11,7 @@
     "plop": "plop --plopfile ./generators/plopfile.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "test-storybook",
+    "test": "test-storybook --watch",
     "chromatic": "chromatic --exit-zero-on-changes",
     "generate": "graphql-codegen"
   },

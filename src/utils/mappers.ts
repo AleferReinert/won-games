@@ -6,12 +6,12 @@ import {
   GameRelationResponseCollection
 } from 'graphql/types'
 
-const urlBase = 'http://localhost:1337'
+export const baseUrl = 'http://localhost:1337'
 
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerEntityResponseCollection) => {
   return banners.data.map(({ attributes: banner }) => ({
-    img: urlBase + banner.img.data.attributes.url,
+    img: baseUrl + banner.img.data.attributes.url,
     title: banner.title,
     description: banner.description,
     buttonLabel: banner.button.label,
@@ -35,8 +35,8 @@ export const highlightMapper = (
     buttonLabel: highlight.buttonLabel,
     buttonLink: highlight.buttonLink,
     alignment: alignment ?? highlight.alignment,
-    background: urlBase + highlight.background.data.attributes.url,
-    float: urlBase + highlight.float.data.attributes.url
+    background: baseUrl + highlight.background.data.attributes.url,
+    float: baseUrl + highlight.float.data.attributes.url
   }
 }
 
@@ -49,6 +49,6 @@ export const productMapper = (
     slug: product.slug,
     developer: product.developers.data[0]?.attributes.name || '',
     price: product.price,
-    img: product.cover.data ? urlBase + product.cover.data.attributes.url : '' // todo add default image
+    img: product.cover.data ? baseUrl + product.cover.data.attributes.url : '' // todo add default image
   }))
 }

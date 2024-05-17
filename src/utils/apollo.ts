@@ -1,12 +1,12 @@
 import {
   ApolloClient,
-  InMemoryCache,
   NormalizedCacheObject,
   createHttpLink
 } from '@apollo/client'
 import { useMemo } from 'react'
+import { apolloCache } from './apolloCache'
 
-let apolloClient: ApolloClient<NormalizedCacheObject>
+let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
 function createApolloClient() {
   return new ApolloClient({
@@ -14,20 +14,17 @@ function createApolloClient() {
     link: createHttpLink({
       uri: 'http://127.0.0.1:1337/graphql'
     }),
-    cache: new InMemoryCache()
+    cache: apolloCache
   })
 }
 
-export function initializeApollo(initialState = {}) {
-  // Verifica se já existe uma instância do Apollo
+export function initializeApollo(initialState = null) {
   const apolloClientGlobal = apolloClient ?? createApolloClient()
 
-  // Recupera os dados do cache
   if (initialState) {
     apolloClientGlobal.cache.restore(initialState)
   }
 
-  // Sempre inicializando no SSR com cache limpo
   if (typeof window === 'undefined') {
     return apolloClientGlobal
   }
@@ -37,7 +34,6 @@ export function initializeApollo(initialState = {}) {
   return apolloClient
 }
 
-export function useApollo(initialState = {}) {
-  const store = useMemo(() => initializeApollo(initialState), [initialState])
-  return store
+export function useApollo(initialState = null) {
+  return useMemo(() => initializeApollo(initialState), [initialState])
 }

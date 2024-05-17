@@ -62,7 +62,7 @@ export const getStaticProps = async () => {
       banners: bannerMapper(banners),
       newsSectionTitle: newsSection.title,
       newsSectionProducts: productMapper(newGames),
-      mostPopularsSectionTile: mostPopularsSection.title,
+      mostPopularsSectionTitle: mostPopularsSection.title,
       mostPopularsSectionHighlight: highlightMapper(
         mostPopularsSection.highlight
       ),
