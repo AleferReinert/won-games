@@ -1,5 +1,5 @@
-import * as S from './Radio.styles'
 import { InputHTMLAttributes } from 'react'
+import * as S from './Radio.styles'
 
 type RadioValue = string | string[] | number
 
@@ -22,7 +22,7 @@ const Radio = ({
   ...props
 }: RadioProps) => {
   const onChange = () => {
-    !!onCheck && onCheck(value)
+    onCheck && onCheck(value)
   }
 
   return (
@@ -35,7 +35,7 @@ const Radio = ({
         name={name}
         {...props}
       />
-      {!!label && (
+      {label && (
         <S.Label htmlFor={id} labelColor={labelColor}>
           {label}
         </S.Label>

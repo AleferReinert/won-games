@@ -134,8 +134,9 @@ export const ButtonWrapper = styled.div`
     background-color: ${theme.colors.white};
 
     @media (min-width: ${theme.breakpoint.medium}) {
-      position: static;
-      background-color: transparent;
+      display: none;
+      /* position: static;
+      background-color: transparent; */
     }
   `}
 `

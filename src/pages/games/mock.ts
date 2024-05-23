@@ -5,7 +5,8 @@ export const mockGames = {
   request: {
     query: GET_ALL_GAMES,
     variables: {
-      limit: productsLimit
+      limit: productsLimit,
+      filters: { price: {}, and: [] }
     }
   },
   result: {
@@ -40,8 +41,9 @@ export const mockMoreGames = {
   request: {
     query: GET_ALL_GAMES,
     variables: {
+      limit: productsLimit,
       start: 1,
-      limit: productsLimit
+      filters: { price: {}, and: [] }
     }
   },
   result: {

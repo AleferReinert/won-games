@@ -2,6 +2,7 @@ import { MockedProvider } from '@apollo/client/testing'
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { waitFor, within } from '@storybook/testing-library'
+import { filterOptionsMock } from 'components/Filter/mock'
 import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
 import DefaultTemplate from 'templates/Default/Default'
 import { apolloCache } from 'utils/apolloCache'
@@ -30,7 +31,7 @@ type Story = StoryObj<typeof GamesPage>
 export const WithGames: Story = {
   render: () => (
     <MockedProvider mocks={[mockGames, mockMoreGames]} cache={apolloCache}>
-      <GamesPage />
+      <GamesPage filterOptions={filterOptionsMock} />
     </MockedProvider>
   ),
 
@@ -79,7 +80,7 @@ export const Empty: Story = {
         }
       ]}
     >
-      <GamesPage />
+      <GamesPage filterOptions={filterOptionsMock} />
     </MockedProvider>
   ),
   play: ({ canvasElement }) => {

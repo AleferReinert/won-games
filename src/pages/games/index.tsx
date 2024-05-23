@@ -2,39 +2,129 @@ import { useQuery } from '@apollo/client'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 import Container from 'components/Container/Container'
 import Empty from 'components/Empty/Empty'
-import Filter from 'components/Filter/Filter'
-import filterMock from 'components/Filter/mock'
+import Filter, { FilterOptionsProps } from 'components/Filter/Filter'
 import Product from 'components/Product/Product'
+import { GET_ALL_CATEGORIES } from 'graphql/queries/getAllCategories'
 import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
+import { GET_ALL_PLATFORMS } from 'graphql/queries/getAllPlatforms'
 import { Query } from 'graphql/types'
-import { GetStaticProps } from 'next'
+import { GetServerSidePropsContext } from 'next'
+import { useRouter } from 'next/router'
 import * as S from 'pages/games/games.styles'
+import { ParsedUrlQueryInput } from 'querystring'
 import { type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import { initializeApollo } from 'utils/apollo'
+import { queryStringToGraphqlFilters } from 'utils/filter'
 import { baseUrl } from 'utils/mappers'
 
-export const productsLimit = 6
+export const productsLimit = 6 // todo: aumentar para 9 quando tiver mais produtos
 
-export const getStaticProps: GetStaticProps = async () => {
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const apolloClient = initializeApollo()
+  const { data: dataPlatforms } = await apolloClient.query<
+    Pick<Query, 'platforms'>
+  >({ query: GET_ALL_PLATFORMS })
+  const { data: dataCategories } = await apolloClient.query<
+    Pick<Query, 'categories'>
+  >({ query: GET_ALL_CATEGORIES })
+
+  const filterOptions: FilterOptionsProps[] = [
+    {
+      title: 'Price',
+      name: 'price',
+      type: 'radio',
+      fields: [
+        { label: 'Under $50', id: 'under-50', value: '50' },
+        { label: 'Under $100', id: 'under-100', value: '100' },
+        { label: 'Under $150', id: 'under-150', value: '150' },
+        { label: 'Under $200', id: 'under-200', value: '200' },
+        { label: 'Free', id: 'free', value: '0' }
+      ]
+    },
+    {
+      title: 'Sort by',
+      name: 'sort',
+      type: 'radio',
+      fields: [
+        {
+          label: 'Low to high',
+          id: 'low-to-high',
+          value: 'price:asc'
+        },
+        {
+          label: 'High to low',
+          id: 'high-to-low',
+          value: 'price:desc'
+        }
+      ]
+    },
+    {
+      title: 'Platforms',
+      name: 'platforms',
+      type: 'checkbox',
+      fields: dataPlatforms.platforms.data.map(({ attributes }) => ({
+        label: attributes.name,
+        id: attributes.slug,
+        value: attributes.slug
+      }))
+    },
+    {
+      title: 'Categories',
+      name: 'categories',
+      type: 'checkbox',
+      fields: dataCategories.categories.data.map(
+        ({ attributes: category }) => ({
+          label: category.name,
+          id: category.slug,
+          value: category.slug
+        })
+      )
+    }
+  ]
+
   await apolloClient.query<Pick<Query, 'games'>>({
     query: GET_ALL_GAMES,
-    variables: { limit: productsLimit }
+    variables: {
+      limit: productsLimit,
+      ...queryStringToGraphqlFilters({
+        queryString: query,
+        filterOptions
+      })
+    }
   })
 
   return {
     props: {
-      revalidate: 60,
-      initialApolloState: apolloClient.cache.extract()
+      initialApolloState: apolloClient.cache.extract(),
+      filterOptions
     }
   }
 }
 
-const GamesPage = () => {
+interface GamesPageProps {
+  filterOptions: FilterOptionsProps[]
+}
+
+const GamesPage = ({ filterOptions }: GamesPageProps) => {
+  const { query, push } = useRouter()
   const { data, fetchMore } = useQuery<Pick<Query, 'games'>>(GET_ALL_GAMES, {
-    variables: { limit: productsLimit } // todo: aumentar para 9 quando tiver mais produtos
+    variables: {
+      limit: productsLimit,
+      ...queryStringToGraphqlFilters({
+        queryString: query,
+        filterOptions
+      })
+    }
   })
+
+  const handleFilter = (values: ParsedUrlQueryInput) => {
+    push({
+      pathname: '/games',
+      query: values
+    })
+    return
+  }
 
   const loadMore = () => {
     fetchMore({
@@ -51,7 +141,11 @@ const GamesPage = () => {
   return (
     <Container>
       <S.Wrapper>
-        <Filter items={filterMock} onFilter={() => console.log('onfilter')} />
+        <Filter
+          filterOptions={filterOptions}
+          initialValues={query}
+          handleFilter={handleFilter}
+        />
 
         <div>
           <S.Games>
@@ -91,5 +185,4 @@ const GamesPage = () => {
 GamesPage.getLayout = function getLayout(page: ReactElement) {
   return <DefaultTemplate>{page}</DefaultTemplate>
 }
-
 export default GamesPage

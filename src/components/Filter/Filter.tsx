@@ -6,41 +6,51 @@ import Button from 'components/Button/Button'
 import Checkbox from 'components/Checkbox/Checkbox'
 import Heading from 'components/Heading/Heading'
 import Radio from 'components/Radio/Radio'
-import { useState } from 'react'
+import { ParsedUrlQueryInput } from 'querystring'
+import { useEffect, useState } from 'react'
 import * as S from './Filter.styles'
 
-interface FieldProps {
-  label: string
-  id: string
-}
-
-interface ItemProps {
+export interface FilterOptionsProps {
   title: string
   name: string
-  type: 'checkbox' | 'radio' | string
-  fields: FieldProps[]
-}
-
-interface InitialValueProps {
-  [field: string]: boolean | string
+  type: 'radio' | 'checkbox'
+  fields: {
+    label: string
+    id: string
+    value: string
+  }[]
 }
 
 export type FilterProps = {
-  items: ItemProps[]
-  initialValues?: InitialValueProps
-  onFilter: (values: InitialValueProps) => void
+  filterOptions: FilterOptionsProps[]
+  initialValues?: ParsedUrlQueryInput
+  handleFilter: (values: ParsedUrlQueryInput) => void
 }
 
-const Filter = ({ items, initialValues = {}, onFilter }: FilterProps) => {
+const Filter = ({
+  filterOptions,
+  initialValues = {},
+  handleFilter
+}: FilterProps) => {
   const [values, setValues] = useState(initialValues)
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleFilter = () => {
-    onFilter(values)
-  }
+  useEffect(() => {
+    handleFilter(values) // items vem daqui
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values])
 
   const handleChange = (name: string, value: boolean | string) => {
-    setValues((s) => ({ ...s, [name]: value }))
+    // Se estiver checado, adiciona o valor a url, se não remove
+    if (value) {
+      setValues((s) => ({ ...s, [name]: value }))
+    } else {
+      setValues((s) => {
+        const values = { ...s }
+        delete values[name]
+        return values
+      })
+    }
   }
 
   return (
@@ -54,7 +64,7 @@ const Filter = ({ items, initialValues = {}, onFilter }: FilterProps) => {
           <CloseIcon />
         </S.CloseFilter>
         <S.Items>
-          {items.map((item, index) => (
+          {filterOptions.map((filter, index) => (
             <S.Item key={index}>
               <Heading
                 line='bottom'
@@ -62,36 +72,40 @@ const Filter = ({ items, initialValues = {}, onFilter }: FilterProps) => {
                 color='black'
                 size='xlarge'
               >
-                {item.title}
+                {filter.title}
               </Heading>
-              {item.type === 'checkbox'
-                ? item.fields.map((field, index) => (
+              {filter.type === 'checkbox'
+                ? filter.fields?.map((field, index) => (
                     <Checkbox
                       key={index}
                       id={field.id}
+                      name={filter.name}
                       label={field.label}
+                      value={field.value}
                       labelColor='black'
-                      isChecked={!!values[field.id]}
-                      onCheck={(v) => handleChange(field.id, v)}
+                      isChecked={values[field.value] === 'true'}
+                      onCheck={(value) => handleChange(field.value, value)}
                     />
                   ))
-                : item.fields.map((field, index) => (
+                : filter.fields?.map((field, index) => (
                     <Radio
                       key={index}
                       id={field.id}
-                      name={item.name}
+                      name={filter.name}
                       label={field.label}
-                      value={field.id}
+                      value={field.value}
                       labelColor='black'
-                      defaultChecked={field.id === values[item.name]}
-                      onChange={() => handleChange(item.name, field.id)}
+                      defaultChecked={
+                        String(field.value) === String(values[filter.name])
+                      }
+                      onChange={() => handleChange(filter.name, field.value)}
                     />
                   ))}
             </S.Item>
           ))}
         </S.Items>
         <S.ButtonWrapper>
-          <Button full size='large' onClick={handleFilter}>
+          <Button full size='large' onClick={() => handleFilter(values)}>
             Filter
           </Button>
         </S.ButtonWrapper>
