@@ -28,7 +28,14 @@ const Highlight = ({
       data-testid='highlightComponent'
     >
       <S.FloatImage>
-        {float && <Image src={float} alt={title} fill />}
+        {float && (
+          <Image
+            src={float}
+            alt={title}
+            fill
+            sizes='(max-width: 768px) 100vw, 50vw'
+          /> // todo: check sizes
+        )}
       </S.FloatImage>
       <S.Content>
         <S.Title>{title}</S.Title>

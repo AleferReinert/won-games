@@ -51,6 +51,7 @@ export const FloatImage = styled.div`
     z-index: ${theme.layers.base};
     align-self: end;
     display: flex;
+    position: relative;
 
     img {
       min-width: 10rem;
