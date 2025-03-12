@@ -21,7 +21,7 @@ const Banner = ({
 }: BannerProps) => {
   return (
     <S.Wrapper>
-      {ribbon && (
+      {ribbon?.text && (
         <Ribbon text={ribbon.text} size={ribbon.size} color={ribbon.color} />
       )}
       <S.Image src={img} role='img' aria-label={title} />

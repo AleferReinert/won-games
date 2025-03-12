@@ -26,11 +26,11 @@ const ProductHeader = ({ title, description, price }: ProductHeaderProps) => {
         <Price price={price} />
 
         <S.ButtonsWrapper>
-          <Button full>
+          <Button $full>
             <AddShoppingCart />
             Add to cart
           </Button>
-          <Button full variant='link'>
+          <Button $full $variant='link'>
             <FavoriteBorder fill={theme.colors.primary} />
             Wishlist
           </Button>

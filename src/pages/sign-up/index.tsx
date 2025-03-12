@@ -29,7 +29,7 @@ const SignUpPage = () => {
           placeholder='Confirm password'
           icon={<Lock />}
         />
-        <Button full size='large'>
+        <Button $full size='large'>
           Sign up now
         </Button>
         <S.FormLink>

@@ -1,6 +1,5 @@
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 import Button from 'components/Button/Button'
-import Link from 'next/link'
 import { Dispatch, SetStateAction } from 'react'
 import * as S from './MenuMobile.styles'
 
@@ -35,13 +34,13 @@ const MenuMobile = ({
       {!username && (
         <S.AuthBox>
           <S.LogInNow>
-            <Button size='large' as={Link} href='/sign-in'>
+            <Button size='large' asLink href='/sign-in'>
               Log in now
             </Button>
           </S.LogInNow>
           <span>or</span>
           <S.SignUp>
-            <Button variant='link' size='large' as={Link} href='/sign-up'>
+            <Button $variant='link' size='large' asLink href='/sign-up'>
               Sign up
             </Button>
           </S.SignUp>

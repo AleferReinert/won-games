@@ -53,7 +53,7 @@ export const wrapperModifiers = {
 }
 
 export const Wrapper = styled.button<ButtonProps>`
-  ${({ theme, size, full, variant, disabled }) => css`
+  ${({ theme, size, $full, $variant, disabled }) => css`
     cursor: pointer;
     border: 0;
     border-radius: ${theme.border.radius};
@@ -72,8 +72,8 @@ export const Wrapper = styled.button<ButtonProps>`
     }
 
     ${!!size && wrapperModifiers[size](theme)}
-    ${full && wrapperModifiers.full()}
-    ${!!variant && wrapperModifiers[variant](theme)}
+    ${$full && wrapperModifiers.full()}
+    ${!!$variant && wrapperModifiers[$variant](theme)}
     ${disabled && wrapperModifiers.disabled(theme)}
   `}
 `

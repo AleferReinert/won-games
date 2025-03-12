@@ -1,6 +1,6 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within, userEvent, waitFor } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { userEvent, waitFor, within } from '@storybook/testing-library'
 import GalleryComponents from './Gallery'
 import items from './mock'
 
@@ -59,8 +59,12 @@ export const Tests: Story = {
 
     // Open image1 on thumb1 clicked
     await userEvent.click(thumb1)
-    const originalImage1 = canvas.getByRole('img', { name: 'Gallery Image 1' })
-      .parentElement?.parentElement
+    const originalImage1 = await waitFor(
+      () =>
+        canvas.getByRole('img', {
+          name: 'Gallery Image 1'
+        }).parentElement?.parentElement
+    )
     await waitFor(() => expect(originalImage1).toHaveClass('slick-active'))
     await userEvent.click(buttonCloseModal)
   }

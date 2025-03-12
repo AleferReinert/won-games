@@ -58,7 +58,7 @@ const PaymentOptions = ({
       </Box>
 
       <S.Buttons>
-        <Button variant='link'>Continue shopping</Button>
+        <Button $variant='link'>Continue shopping</Button>
         <Button
           disabled={creditCards === undefined || creditCards.length === 0}
           onClick={handlePayment}

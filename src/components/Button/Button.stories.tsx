@@ -14,7 +14,7 @@ const meta: Meta<typeof ButtonComponent> = {
     size: {
       control: 'inline-radio'
     },
-    variant: {
+    $variant: {
       control: 'inline-radio'
     }
   },
@@ -63,7 +63,7 @@ export const WithIcon: Story = {
 export const Link: Story = {
   args: {
     children: 'button with variant link',
-    variant: 'link'
+    $variant: 'link'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -79,7 +79,7 @@ export const Link: Story = {
 export const Full: Story = {
   args: {
     children: 'full button',
-    full: true
+    $full: true
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

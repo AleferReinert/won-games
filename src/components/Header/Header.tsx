@@ -5,7 +5,6 @@ import CartDropdown from 'components/CartDropdown/CartDropdown'
 import Logo from 'components/Logo/Logo'
 import MenuMobile from 'components/MenuMobile/MenuMobile'
 import UserDropdown from 'components/UserDropdown/UserDropdown'
-import Link from 'next/link'
 import { useState } from 'react'
 import * as S from './Header.styles'
 
@@ -44,7 +43,7 @@ const Header = ({ username }: MenuProps) => {
 
         {!username ? (
           <S.ButtonSignIn>
-            <Button size='small' href='/sign-in' as={Link}>
+            <Button size='small' href='/sign-in' asLink>
               Sign in
             </Button>
           </S.ButtonSignIn>

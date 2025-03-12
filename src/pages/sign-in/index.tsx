@@ -23,7 +23,7 @@ const SignInPage = () => {
           icon={<Lock />}
         />
         <S.ForgotPassword href='/link'>Forgot your password?</S.ForgotPassword>
-        <Button full size='large'>
+        <Button $full size='large'>
           Sign in now
         </Button>
         <S.FormLink>

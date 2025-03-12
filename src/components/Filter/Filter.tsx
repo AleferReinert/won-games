@@ -105,7 +105,7 @@ const Filter = ({
           ))}
         </S.Items>
         <S.ButtonWrapper>
-          <Button full size='large' onClick={() => handleFilter(values)}>
+          <Button $full size='large' onClick={() => handleFilter(values)}>
             Filter
           </Button>
         </S.ButtonWrapper>

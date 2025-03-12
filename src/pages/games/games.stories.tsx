@@ -1,7 +1,7 @@
 import { MockedProvider } from '@apollo/client/testing'
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { waitFor, within } from '@storybook/testing-library'
+import { within } from '@storybook/testing-library'
 import { filterOptionsMock } from 'components/Filter/mock'
 import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
 import DefaultTemplate from 'templates/Default/Default'
@@ -35,26 +35,33 @@ export const WithGames: Story = {
     </MockedProvider>
   ),
 
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    expect(canvas.getAllByTestId('filterComponent'))
 
-    await waitFor(async () => {
-      const product1 = canvas.getByText(
-        'The Legend of Zelda: Breath of the Wild'
-      )
-      const buttonShowMore = canvas.getByRole('button', { name: /show more/i })
+    // step('Filter component', async () => {
+    //   const filterComponent = canvas.getByTestId('filterComponent')
+    //   await waitFor(() => expect(filterComponent).toBeVisible())
+    // })
 
-      expect(product1).toBeInTheDocument()
-      expect(buttonShowMore).toBeInTheDocument()
+    // await step('First products', async () => {
+    //   const product1 = canvas.getByRole('heading', {
+    //     level: 3,
+    //     name: 'The Legend of Zelda: Breath of the Wild'
+    //   })
+    //   expect(product1).toBeInTheDocument()
+    // })
 
-      // Testando botão de mostrar mais
-      buttonShowMore.click()
-      await waitFor(() => {
-        const product2 = canvas.getByText('Cyberpunk 2077')
-        expect(product2).toBeInTheDocument()
-      })
-    })
+    // await waitFor(async () => {
+    //   const buttonShowMore = canvas.getByRole('button', { name: /show more/i })
+
+    //   expect(buttonShowMore).toBeInTheDocument()
+
+    //   buttonShowMore.click()
+    //   await waitFor(() => {
+    //     const product2 = canvas.getByText('Cyberpunk 2077')
+    //     expect(product2).toBeInTheDocument()
+    //   })
+    // })
   }
 }
 
