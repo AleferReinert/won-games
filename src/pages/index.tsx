@@ -49,12 +49,14 @@ export const getStaticProps = async () => {
   })
 
   const { banners, newGames, comingSoonGames, freeGames, showcases } = data
+
   const {
     newGames: newsSection,
     mostPopularGames: mostPopularsSection,
     comingSoonGames: comingSoonSection,
     freeGames: freeSection
   } = showcases.data.attributes
+  console.log('mostPopularGames: ', showcases.data.attributes.mostPopularGames)
 
   return {
     props: {
@@ -92,37 +94,47 @@ export default function Index({
 }: HomeTemplateProps) {
   return (
     <>
-      <Container>
-        <S.SectionBanner>
-          <BannerSlider items={banners} />
-        </S.SectionBanner>
-      </Container>
+      {banners.length > 0 && (
+        <Container>
+          <S.SectionBanner>
+            <BannerSlider items={banners} />
+          </S.SectionBanner>
+        </Container>
+      )}
 
-      <S.SectionNews>
+      {newsSectionProducts.length > 0 && (
+        <S.SectionNews>
+          <Showcase
+            title={newsSectionTitle}
+            products={newsSectionProducts}
+            arrowColor='black'
+          />
+        </S.SectionNews>
+      )}
+
+      {mostPopularsSectionProducts.length > 0 && (
         <Showcase
-          title={newsSectionTitle}
-          products={newsSectionProducts}
-          arrowColor='black'
+          title={mostPopularsSectionTitle}
+          highlight={mostPopularsSectionHighlight}
+          products={mostPopularsSectionProducts}
         />
-      </S.SectionNews>
+      )}
 
-      <Showcase
-        title={mostPopularsSectionTitle}
-        highlight={mostPopularsSectionHighlight}
-        products={mostPopularsSectionProducts}
-      />
+      {comingSoonSectionProducts.length > 0 && (
+        <Showcase
+          title={comingSoonSectionTitle}
+          highlight={comingSoonSectionHighlight}
+          products={comingSoonSectionProducts}
+        />
+      )}
 
-      <Showcase
-        title={comingSoonSectionTitle}
-        highlight={comingSoonSectionHighlight}
-        products={comingSoonSectionProducts}
-      />
-
-      <Showcase
-        title={freeSectionTitle}
-        highlight={freeSectionHighlight}
-        products={freeSectionProducts}
-      />
+      {freeSectionProducts.length > 0 && (
+        <Showcase
+          title={freeSectionTitle}
+          highlight={freeSectionHighlight}
+          products={freeSectionProducts}
+        />
+      )}
     </>
   )
 }

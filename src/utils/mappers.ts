@@ -16,11 +16,11 @@ export const bannerMapper = (banners: BannerEntityResponseCollection) => {
     description: banner.description,
     buttonLabel: banner.button.label,
     buttonLink: banner.button.link,
-    ...(banner.ribbon && {
-      ribbon: banner.ribbon.text,
-      ribbonSize: banner.ribbon.size,
-      ribbonColor: banner.ribbon.color
-    })
+    ribbon: {
+      text: banner.ribbon.text,
+      color: banner.ribbon.color,
+      size: banner.ribbon.size
+    }
   }))
 }
 
