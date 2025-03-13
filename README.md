@@ -54,4 +54,4 @@ Projeto do curso "React Avançado: Crie aplicações com NextJS, Strapi e mais".
 
 ## URL do Projeto
 
-Storybook: [visualizar no Chromatic]()
+Storybook: [Visualizar no Chromatic](https://main--64ceaf6be6c94aa14b9fe174.chromatic.com)
