@@ -41,7 +41,7 @@ export const Default: Story = {
     // render items
     expect(title).toBeInTheDocument()
     expect(developer).toBeInTheDocument()
-    expect(img.getAttribute('src')).toMatch(/\/img\/population-zero.jpg/)
+    expect(img.getAttribute('src')).toMatch(/\/img\/game-test.jpg/)
     expect(slug).toHaveAttribute('href', '/product/population-zero')
     expect(favIcon).toBeInTheDocument()
     expect(price).toContainHTML('$215.00')

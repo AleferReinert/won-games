@@ -1,3 +1,5 @@
+import { CreditCardProps } from 'components/CreditCard/CreditCard'
+
 export default [
   {
     name: 'Visa',
@@ -9,4 +11,4 @@ export default [
     img: '/img/creditCards/mastercard.png',
     number: '**** **** **** 0805'
   }
-]
+] satisfies CreditCardProps[]

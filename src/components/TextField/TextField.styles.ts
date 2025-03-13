@@ -3,7 +3,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 import { TextFieldProps } from './TextField'
 
 const modifiers = {
-  iconPositionRight: () => css`
+  $iconPositionRight: () => css`
     flex-direction: row-reverse;
   `,
   disabled: (theme: DefaultTheme) => css`
@@ -35,9 +35,9 @@ const modifiers = {
 }
 
 export const InputWrapper = styled.div<
-  Pick<TextFieldProps, 'iconPosition' | 'errorMessage'>
+  Pick<TextFieldProps, '$iconPosition' | 'errorMessage'>
 >`
-  ${({ theme, errorMessage, iconPosition }) => css`
+  ${({ theme, errorMessage, $iconPosition }) => css`
     display: flex;
     align-items: center;
     background: ${theme.colors.lightGray};
@@ -56,7 +56,7 @@ export const InputWrapper = styled.div<
       height: 2.4rem;
     }
 
-    ${iconPosition === 'right' && modifiers.iconPositionRight()}
+    ${$iconPosition === 'right' && modifiers.$iconPositionRight()}
     ${!!errorMessage && modifiers.errorMessage(theme)}
   `}
 `

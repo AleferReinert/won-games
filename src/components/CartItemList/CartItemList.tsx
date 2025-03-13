@@ -36,9 +36,9 @@ const CartItemList = ({
         ) : (
           <Empty
             title='Your cart is empty'
-            description='Go back to the store and explore great games and offers.'
-            invertedColors
-            small
+            $description='Go back to the store and explore great games and offers.'
+            $invertedColors
+            $small
           />
         )}
       </S.List>

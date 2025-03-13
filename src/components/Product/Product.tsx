@@ -52,7 +52,7 @@ const Product = ({
         </S.ImageBox>
       </Link>
 
-      <Box padding='xsmall'>
+      <Box $padding='xsmall'>
         <S.Content>
           <S.Info>
             <S.Title>{title}</S.Title>

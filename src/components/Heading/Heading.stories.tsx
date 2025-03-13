@@ -1,10 +1,10 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import { remToPx } from 'polished'
+import theme from 'styles/theme'
 import { hexToRGBA, jsMediaQuery } from 'utils/tests/helpers'
 import Heading from './Heading'
-import theme from 'styles/theme'
 
 const meta: Meta<typeof Heading> = {
   title: 'Components/Atoms/Heading',
@@ -13,8 +13,8 @@ const meta: Meta<typeof Heading> = {
     children: {
       type: 'string'
     },
-    lineColor: { if: { arg: 'line' } },
-    lineBottomSize: { if: { arg: 'line' } }
+    $lineColor: { if: { arg: '$line' } },
+    $lineBottomSize: { if: { arg: '$line' } }
   }
 }
 
@@ -113,7 +113,7 @@ export const Huge: Story = {
 export const LineLeft: Story = {
   args: {
     children: 'Line left',
-    line: 'left'
+    $line: 'left'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -128,7 +128,7 @@ export const LineLeft: Story = {
 export const LineBottom: Story = {
   args: {
     children: 'Line bottom',
-    line: 'bottom'
+    $line: 'bottom'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -144,15 +144,15 @@ export const LineBottom: Story = {
 export const LineLeftSecondary: Story = {
   args: {
     children: 'Line left secondary',
-    line: 'left',
-    lineColor: 'secondary'
+    $line: 'left',
+    $lineColor: 'secondary'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, args }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
     expect(title).toHaveStyle({
-      borderLeft: `${remToPx('0.7rem')} solid ${theme.colors.secondary}`
+      borderLeft: `${remToPx('0.7rem')} solid ${hexToRGBA(theme.colors.secondary)}`
     })
   }
 }
@@ -160,8 +160,8 @@ export const LineLeftSecondary: Story = {
 export const LineBottomSecondary: Story = {
   args: {
     children: 'Line bottom secondary',
-    line: 'bottom',
-    lineColor: 'secondary'
+    $line: 'bottom',
+    $lineColor: 'secondary'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -176,8 +176,8 @@ export const LineBottomSecondary: Story = {
 export const LineBottomSmall: Story = {
   args: {
     children: 'Line bottom small',
-    line: 'bottom',
-    lineBottomSize: 'small'
+    $line: 'bottom',
+    $lineBottomSize: 'small'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -193,8 +193,8 @@ export const LineBottomSmall: Story = {
 export const LineBottomMedium: Story = {
   args: {
     children: 'Line bottom medium',
-    line: 'bottom',
-    lineBottomSize: 'medium'
+    $line: 'bottom',
+    $lineBottomSize: 'medium'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -210,7 +210,7 @@ export const LineBottomMedium: Story = {
 export const LineBottomLarge: Story = {
   args: {
     children: 'Line bottom large',
-    line: 'bottom'
+    $line: 'bottom'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -228,7 +228,7 @@ export const AsH1: Story = {
   name: 'As <h1 />',
   args: {
     children: 'Line bottom large',
-    line: 'bottom',
+    $line: 'bottom',
     as: 'h1'
   },
   play: ({ canvasElement }) => {

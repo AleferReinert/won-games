@@ -24,8 +24,8 @@ const PaymentOptions = ({
         <Heading
           size='large'
           color='black'
-          line='bottom'
-          lineBottomSize='small'
+          $line='bottom'
+          $lineBottomSize='small'
         >
           Payment
         </Heading>

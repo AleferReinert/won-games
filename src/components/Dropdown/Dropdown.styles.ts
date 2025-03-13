@@ -14,17 +14,17 @@ const wrapperModifiers = {
 }
 
 type WrapperProps = {
-  state?: boolean
+  $state: boolean
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  ${({ state }) => css`
+  ${({ $state }) => css`
     display: inline-block;
     position: relative;
 
     ${Children} {
-      ${state && wrapperModifiers.open()}
-      ${!state && wrapperModifiers.close()}
+      ${$state && wrapperModifiers.open()}
+      ${!$state && wrapperModifiers.close()}
     }
   `}
 `

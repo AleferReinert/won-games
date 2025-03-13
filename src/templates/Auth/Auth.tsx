@@ -1,5 +1,5 @@
-import Logo from 'components/Logo/Logo'
 import Heading from 'components/Heading/Heading'
+import Logo from 'components/Logo/Logo'
 import * as S from './Auth.styles'
 
 type AuthTemplateProps = {
@@ -28,7 +28,7 @@ const AuthTemplate = ({ title, children }: AuthTemplateProps) => {
       <S.AuthBlock>
         <S.AuthContent>
           <Logo color='black' size='large' />
-          <Heading line='left' lineColor='secondary' color='black'>
+          <Heading $line='left' $lineColor='secondary' color='black'>
             {title}
           </Heading>
           {children}

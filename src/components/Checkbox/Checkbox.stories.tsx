@@ -1,8 +1,8 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within, userEvent } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import Checkbox from './Checkbox'
+import type { Meta, StoryObj } from '@storybook/react'
+import { userEvent, within } from '@storybook/testing-library'
 import theme from 'styles/theme'
+import Checkbox from './Checkbox'
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Atoms/Checkbox',
@@ -15,7 +15,7 @@ const meta: Meta<typeof Checkbox> = {
       action: 'checked',
       table: { disable: true }
     },
-    labelColor: {
+    $labelColor: {
       if: { arg: 'label' }
     },
     name: {
@@ -106,7 +106,7 @@ export const WithLabel: Story = {
 export const WithBlackLabel: Story = {
   args: {
     label: 'With Black Label',
-    labelColor: 'black'
+    $labelColor: 'black'
   },
   parameters: {
     backgrounds: {

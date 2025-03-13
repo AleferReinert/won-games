@@ -8,7 +8,7 @@ export type RadioProps = {
   id: string
   name: string
   label?: string
-  labelColor?: 'white' | 'black'
+  $labelColor?: 'white' | 'black'
   value?: RadioValue
 } & InputHTMLAttributes<HTMLInputElement>
 
@@ -17,7 +17,7 @@ const Radio = ({
   id,
   name,
   label,
-  labelColor = 'white',
+  $labelColor = 'white',
   value,
   ...props
 }: RadioProps) => {
@@ -36,7 +36,7 @@ const Radio = ({
         {...props}
       />
       {label && (
-        <S.Label htmlFor={id} labelColor={labelColor}>
+        <S.Label htmlFor={id} $labelColor={$labelColor}>
           {label}
         </S.Label>
       )}

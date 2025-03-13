@@ -1,10 +1,10 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within, userEvent } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { userEvent, within } from '@storybook/testing-library'
 import { Email, Person } from '@styled-icons/material-outlined'
+import theme from 'styles/theme'
 import { hexToRGBA } from 'utils/tests/helpers'
 import TextField from './TextField'
-import theme from 'styles/theme'
 
 const meta: Meta<typeof TextField> = {
   title: 'Components/Atoms/TextField',
@@ -26,7 +26,7 @@ const meta: Meta<typeof TextField> = {
         Person: <Person />
       }
     },
-    iconPosition: { if: { arg: 'icon' } },
+    $iconPosition: { if: { arg: 'icon' } },
     name: { table: { disable: true } },
     id: { table: { disable: true } }
   },
@@ -111,7 +111,7 @@ export const WithIcon: Story = {
 export const IconRight: Story = {
   args: {
     icon: 'Person',
-    iconPosition: 'right'
+    $iconPosition: 'right'
   },
   play: async ({ canvasElement }) => {
     const inputWrapper =

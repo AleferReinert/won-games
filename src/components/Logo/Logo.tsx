@@ -4,13 +4,13 @@ import * as S from './Logo.styles'
 export interface LogoProps {
   color?: 'white' | 'black'
   size?: 'small' | 'medium' | 'large'
-  hideText?: boolean
+  $hideText?: boolean
 }
 
 const Logo = ({
   color = 'white',
   size = 'medium',
-  hideText = false
+  $hideText = false
 }: LogoProps) => {
   const [id, setId] = useState('')
 
@@ -22,7 +22,7 @@ const Logo = ({
     <S.Wrapper
       color={color}
       size={size}
-      hideText={hideText}
+      $hideText={$hideText}
       data-testid='logoComponent'
       href='/'
     >

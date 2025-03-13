@@ -11,7 +11,7 @@ const meta: Meta<typeof Empty> = {
   component: Empty,
   args: {
     title: 'No results found',
-    description: `Sorry, we couldn't find any results for your search.`
+    $description: `Sorry, we couldn't find any results for your search.`
   }
 }
 
@@ -32,7 +32,7 @@ export const Default: Story = {
     expect(img).toHaveAttribute('width', '340')
     expect(img).toHaveAttribute('height', '176')
     expect(title).toHaveTextContent(args.title)
-    expect(description).toHaveTextContent(args.description)
+    expect(description).toHaveTextContent(args.$description)
     expect(wrapper).not.toHaveStyle({
       backgroundColor: hexToRGBA(theme.colors.white)
     })
@@ -55,7 +55,7 @@ export const WithButton: Story = {
 
 export const InvertedColors: Story = {
   args: {
-    invertedColors: true
+    $invertedColors: true
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -73,7 +73,7 @@ export const InvertedColors: Story = {
 
 export const Small: Story = {
   args: {
-    small: true
+    $small: true
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

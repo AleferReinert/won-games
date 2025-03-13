@@ -38,7 +38,7 @@ export const Default: Story = {
 
 export const AlignmentLeft: Story = {
   args: {
-    alignment: 'left'
+    $alignment: 'left'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

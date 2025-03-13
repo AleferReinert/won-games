@@ -4,10 +4,10 @@ import {
   ExitToApp,
   FormatListBulleted
 } from '@styled-icons/material-outlined'
-import DefaultTemplate from 'templates/Default/Default'
 import Box from 'components/Box/Box'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
+import DefaultTemplate from 'templates/Default/Default'
 import * as S from './Account.styles'
 
 const nav = [
@@ -42,7 +42,7 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
   return (
     <DefaultTemplate>
       <Container>
-        <Heading as='h1' line='left' lineColor='secondary'>
+        <Heading as='h1' $line='left' $lineColor='secondary'>
           My account
         </Heading>
 
@@ -63,7 +63,7 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
           </S.Nav>
           <S.Children>
             <Box>
-              <Heading color='black' line='bottom' size='large'>
+              <Heading color='black' $line='bottom' size='large'>
                 {activeLink}
               </Heading>
             </Box>

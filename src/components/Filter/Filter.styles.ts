@@ -22,7 +22,7 @@ export const OpenFilter = styled.button`
   `}
 `
 type WrapperProps = {
-  isOpen: boolean
+  $isOpen: boolean
 }
 
 const wrapperModifiers = {
@@ -37,7 +37,7 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  ${({ theme, isOpen }) => css`
+  ${({ theme, $isOpen }) => css`
     background-color: ${theme.colors.white};
     position: fixed;
     top: 0;
@@ -54,8 +54,8 @@ export const Wrapper = styled.div<WrapperProps>`
       margin-bottom: ${theme.spacings.xxsmall};
     }
 
-    ${isOpen && wrapperModifiers.open()}
-    ${!isOpen && wrapperModifiers.close()}
+    ${$isOpen && wrapperModifiers.open()}
+    ${!$isOpen && wrapperModifiers.close()}
 
     @media (min-width: ${theme.breakpoint.medium}) {
       ${wrapperModifiers.open()}

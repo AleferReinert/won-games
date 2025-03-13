@@ -22,7 +22,7 @@ const Showcase = ({
     <S.Wrapper data-testid='showcaseComponent'>
       <Container>
         {title && (
-          <Heading line='left' lineColor='secondary'>
+          <Heading $line='left' $lineColor='secondary'>
             {title}
           </Heading>
         )}
@@ -30,7 +30,7 @@ const Showcase = ({
         {highlight && <Highlight {...highlight} />}
 
         {products && (
-          <ProductSlider products={products} arrowColor={arrowColor} />
+          <ProductSlider products={products} $arrowColor={arrowColor} />
         )}
       </Container>
     </S.Wrapper>

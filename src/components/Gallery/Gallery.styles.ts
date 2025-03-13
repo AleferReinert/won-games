@@ -53,6 +53,8 @@ export const Wrapper = styled.div`
 
 export const Thumb = styled.button`
   cursor: pointer;
+  position: relative;
+  height: 190px;
 `
 
 export const Modal = styled.div`

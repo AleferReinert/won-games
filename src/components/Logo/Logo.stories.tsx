@@ -70,7 +70,7 @@ export const Large: Story = {
 
 export const WithoutText: Story = {
   args: {
-    hideText: true
+    $hideText: true
   },
   parameters: {
     backgrounds: {

@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components'
 import { ProductSliderProps } from './ProductSlider'
 
-type WrapperProps = Pick<ProductSliderProps, 'arrowColor'>
+type WrapperProps = Pick<ProductSliderProps, '$arrowColor'>
 
 export const Wrapper = styled.div<WrapperProps>`
-  ${({ theme, arrowColor }) => css`
+  ${({ theme, $arrowColor }) => css`
     div.slick-track {
       display: flex;
       gap: ${theme.spacings.xxsmall};
@@ -26,7 +26,7 @@ export const Wrapper = styled.div<WrapperProps>`
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);
-      fill: ${theme.colors[arrowColor!]};
+      fill: ${theme.colors[$arrowColor!]};
       cursor: pointer;
 
       &.slick-disabled {

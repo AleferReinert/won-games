@@ -61,14 +61,14 @@ const CartPage = ({
   return (
     <>
       <Container>
-        <Heading line='left' lineColor='secondary'>
+        <Heading $line='left' $lineColor='secondary'>
           My cart
         </Heading>
 
         {emptyCart ? (
           <Empty
             title='Your cart is empty'
-            description='Go back to the store and explore great games and offers.'
+            $description='Go back to the store and explore great games and offers.'
           />
         ) : (
           <>

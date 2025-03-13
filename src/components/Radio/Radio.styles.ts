@@ -51,9 +51,9 @@ export const Input = styled.input`
   `}
 `
 
-export const Label = styled.label<Pick<RadioProps, 'labelColor'>>`
-  ${({ theme, labelColor }) => css`
-    color: ${theme.colors[labelColor!]};
+export const Label = styled.label<Pick<RadioProps, '$labelColor'>>`
+  ${({ theme, $labelColor }) => css`
+    color: ${theme.colors[$labelColor!]};
     padding-left: ${theme.spacings.xxsmall};
     line-height: 1.8rem;
   `}

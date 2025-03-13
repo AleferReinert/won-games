@@ -45,11 +45,11 @@ export const lineModifiers = {
       bottom: -0.8rem;
     }
   `,
-  left: (theme: DefaultTheme, lineColor: HeadingProps['lineColor']) => css`
+  left: (theme: DefaultTheme, $lineColor: HeadingProps['$lineColor']) => css`
     padding-left: 1.2rem;
-    border-left: 0.7rem solid ${theme.colors[lineColor ?? 'primary']};
+    border-left: 0.7rem solid ${theme.colors[$lineColor ?? 'secondary']};
   `,
-  bottom: (theme: DefaultTheme, lineColor: HeadingProps['lineColor']) => css`
+  bottom: (theme: DefaultTheme, $lineColor: HeadingProps['$lineColor']) => css`
     position: relative;
     margin-bottom: ${theme.spacings.medium};
 
@@ -58,17 +58,17 @@ export const lineModifiers = {
       position: absolute;
       left: 0;
       border-bottom-style: solid;
-      border-bottom-color: ${theme.colors[lineColor ?? 'primary']};
+      border-bottom-color: ${theme.colors[$lineColor ?? 'primary']};
     }
   `
 }
 
 export const Wrapper = styled.div<HeadingProps>`
-  ${({ theme, color, line, lineColor, lineBottomSize, size }) => css`
+  ${({ theme, color, $line, $lineColor, $lineBottomSize, size }) => css`
     color: ${theme.colors[color!]};
 
-    ${line && lineModifiers[line](theme, lineColor!)}
-    ${lineBottomSize && lineModifiers[lineBottomSize]()}
+    ${$lineBottomSize && lineModifiers[$lineBottomSize]()}
+    ${$line && lineModifiers[$line](theme, $lineColor)}
     ${!!size && sizeModifiers[size](theme)}
   `}
 `

@@ -12,8 +12,8 @@ const Footer = () => {
           <Heading
             color='black'
             size='medium'
-            line='bottom'
-            lineColor='secondary'
+            $line='bottom'
+            $lineColor='secondary'
           >
             Contact
           </Heading>
@@ -29,8 +29,8 @@ const Footer = () => {
           <Heading
             color='black'
             size='medium'
-            line='bottom'
-            lineColor='secondary'
+            $line='bottom'
+            $lineColor='secondary'
           >
             Follow Us
           </Heading>
@@ -70,8 +70,8 @@ const Footer = () => {
           <Heading
             color='black'
             size='medium'
-            line='bottom'
-            lineColor='secondary'
+            $line='bottom'
+            $lineColor='secondary'
           >
             Links
           </Heading>
@@ -86,8 +86,8 @@ const Footer = () => {
           <Heading
             color='black'
             size='medium'
-            line='bottom'
-            lineColor='secondary'
+            $line='bottom'
+            $lineColor='secondary'
           >
             Location
           </Heading>

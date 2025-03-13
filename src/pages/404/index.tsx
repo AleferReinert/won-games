@@ -8,7 +8,7 @@ const NotFoundPage = () => {
     <S.Wrapper>
       <Empty
         title='404'
-        description='This page could not be found.'
+        $description='This page could not be found.'
         buttonText='Go back'
         buttonUrl='/'
       />

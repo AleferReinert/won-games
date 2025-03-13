@@ -1,7 +1,7 @@
+import Box from 'components/Box/Box'
+import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
-import Box from 'components/Box/Box'
 import itemsMock from './mock'
 import * as S from './orders.styles'
 
@@ -27,10 +27,12 @@ const OrdersPage = ({ items = [] }: OrdersPageProps) => {
           title={item.title}
           price={item.price}
           downloadLink={item.downloadLink}
-          creditCardNumber={item.creditCardNumber!}
-          creditCardBrand={item.creditCardBrand!}
-          creditCardFlag={item.creditCardFlag!}
-          purchaseDate={item.purchaseDate!}
+          paymentInfo={{
+            creditCardNumber: item.paymentInfo?.creditCardNumber!,
+            creditCardBrand: item.paymentInfo?.creditCardBrand!,
+            creditCardFlag: item.paymentInfo?.creditCardFlag!,
+            purchaseDate: item.paymentInfo?.purchaseDate!
+          }}
         />
       ))}
     </S.Wrapper>

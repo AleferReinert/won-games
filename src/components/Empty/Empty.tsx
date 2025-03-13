@@ -3,37 +3,37 @@ import * as S from './Empty.styles'
 
 export interface EmptyProps {
   title: string
-  description: string
-  invertedColors?: boolean
-  small?: boolean
+  $description: string
+  $invertedColors?: boolean
+  $small?: boolean
   buttonText?: string
   buttonUrl?: string
 }
 
 const Empty = ({
   title,
-  description,
+  $description,
   buttonText,
   buttonUrl,
-  invertedColors = false,
-  small = false
+  $invertedColors = false,
+  $small = false
 }: EmptyProps) => {
   return (
     <S.Wrapper
       data-testid='emptyComponent'
       title={title}
-      description={description}
-      invertedColors={invertedColors}
-      small={small}
+      $description={$description}
+      $invertedColors={$invertedColors}
+      $small={$small}
     >
       <S.Img
         src='/img/empty.svg'
         alt='A person on a couch playing video games'
-        width={small ? 140 : 340}
-        height={small ? 72 : 176}
+        width={$small ? 140 : 340}
+        height={$small ? 72 : 176}
       />
       <S.Title>{title}</S.Title>
-      <S.Message>{description}</S.Message>
+      <S.Message>{$description}</S.Message>
 
       {buttonUrl && (
         <Button asLink href={buttonUrl}>

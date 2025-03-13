@@ -7,7 +7,7 @@ const meta: Meta<typeof Banner> = {
   title: 'Components/Banner',
   component: Banner,
   args: {
-    img: 'https://source.unsplash.com/user/willianjusten/1042x580',
+    img: '/img/background-test.png',
     title: 'Defy death',
     description: 'Play the new <strong>CrashLands</strong> season',
     buttonLabel: 'Buy now',
@@ -29,10 +29,7 @@ export const Default: Story = {
     expect(Description).toBeInTheDocument()
     expect(button).toBeInTheDocument()
     expect(button).toHaveAttribute('href', '/games/defy-death')
-    expect(image).toHaveAttribute(
-      'src',
-      'https://source.unsplash.com/user/willianjusten/1042x580'
-    )
+    expect(image).toHaveAttribute('src', '/img/background-test.png')
   }
 }
 

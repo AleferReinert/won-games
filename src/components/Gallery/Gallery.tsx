@@ -1,12 +1,12 @@
-import Slider, { SliderSettings } from 'components/Slider/Slider'
-import { useState, useEffect, useRef, SetStateAction } from 'react'
 import {
   ArrowBackIos as ArrowLeft,
   ArrowForwardIos as ArrowRight,
   Close
 } from '@styled-icons/material-outlined'
-import SlickSlider from 'react-slick'
+import Slider, { SliderSettings } from 'components/Slider/Slider'
 import Image from 'next/image'
+import { SetStateAction, useEffect, useRef, useState } from 'react'
+import SlickSlider from 'react-slick'
 import * as S from './Gallery.styles'
 
 const commomSettings: SliderSettings = {
@@ -80,7 +80,13 @@ const Gallery = ({ items }: GalleryProps) => {
                 (slider.current!.slickGoTo(index, true), setModal(true))
             }}
           >
-            <Image src={item.src} alt={'Thumb ' + item.label} fill />
+            <Image
+              src={item.src}
+              alt={'Thumb ' + item.label}
+              fill
+              sizes='(max-width: 768px) 100vw, 50vw'
+            />
+            {/* todo: verify sizes */}
           </S.Thumb>
         ))}
       </Slider>
@@ -102,7 +108,8 @@ const Gallery = ({ items }: GalleryProps) => {
                 src={item.src}
                 alt={item.label}
                 fill
-              />
+                sizes='(max-width: 768px) 100vw, 50vw'
+              /> // todo: verify sizes
             ))}
           </Slider>
         </S.ContentModal>

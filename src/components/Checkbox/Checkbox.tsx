@@ -6,7 +6,7 @@ export type CheckboxProps = {
   isChecked?: boolean
   id: string
   label?: string
-  labelColor?: 'white' | 'black'
+  $labelColor?: 'white' | 'black'
   value?: string | string[] | number
 } & ComponentProps<'input'>
 
@@ -15,7 +15,7 @@ const Checkbox = ({
   isChecked = false,
   id,
   label,
-  labelColor = 'white',
+  $labelColor = 'white',
   value,
   ...props
 }: CheckboxProps) => {
@@ -38,7 +38,7 @@ const Checkbox = ({
         {...props}
       />
       {label && (
-        <S.Label htmlFor={id} labelColor={labelColor}>
+        <S.Label htmlFor={id} $labelColor={$labelColor}>
           {label}
         </S.Label>
       )}

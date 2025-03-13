@@ -1,3 +1,5 @@
+import { GalleryImageProps } from './Gallery'
+
 export default [
   {
     src: '/img/games/cyberpunk-1.jpg',
@@ -23,4 +25,4 @@ export default [
     src: '/img/games/cyberpunk-6.jpg',
     label: 'Gallery Image 6'
   }
-]
+] satisfies GalleryImageProps[]

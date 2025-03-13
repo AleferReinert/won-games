@@ -1,6 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import { BoxProps } from './Box'
-import { DefaultTheme } from 'styled-components'
 
 const wrapperModifiers = {
   xsmall: (theme: DefaultTheme) => css`
@@ -23,9 +22,9 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.div<BoxProps>`
-  ${({ theme, padding }) => css`
+  ${({ theme, $padding }) => css`
     background-color: ${theme.colors.white};
 
-    ${wrapperModifiers[padding!](theme)}
+    ${wrapperModifiers[$padding!](theme)}
   `}
 `

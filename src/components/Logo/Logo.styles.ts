@@ -14,7 +14,7 @@ export const wrapperModifiers = {
     width: 20rem;
     height: 6.1rem;
   `,
-  hideText: (size?: LogoProps['size']) => css`
+  $hideText: (size?: LogoProps['size']) => css`
     width: 4.2rem;
     ${size == 'small' &&
     css`
@@ -33,13 +33,13 @@ export const wrapperModifiers = {
 }
 
 export const Wrapper = styled.a<LogoProps>`
-  ${({ theme, color, size, hideText }) => css`
+  ${({ theme, color, size, $hideText }) => css`
     svg {
       color: ${theme.colors[color!]};
       height: inherit;
     }
 
     ${size && wrapperModifiers[size]()}
-    ${hideText && wrapperModifiers.hideText(size)}
+    ${$hideText && wrapperModifiers.$hideText(size)}
   `}
 `

@@ -149,7 +149,7 @@ const ProductPage = ({
 
       <S.Description>
         <Container>
-          <Heading line='left' lineColor='secondary'>
+          <Heading $line='left' $lineColor='secondary'>
             About game
           </Heading>
           <S.Content

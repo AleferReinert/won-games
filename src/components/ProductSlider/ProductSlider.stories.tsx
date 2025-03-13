@@ -40,7 +40,7 @@ export const Default: Story = {
 
 export const ArrowBlack: Story = {
   args: {
-    arrowColor: 'black'
+    $arrowColor: 'black'
   },
   parameters: {
     backgrounds: {

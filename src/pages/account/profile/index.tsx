@@ -1,9 +1,9 @@
-import type { ReactElement } from 'react'
-import AccountTemplate from 'templates/Account/Account'
+import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
-import Box from 'components/Box/Box'
 import * as S from 'pages/account/profile/Profile.styles'
+import type { ReactElement } from 'react'
+import AccountTemplate from 'templates/Account/Account'
 
 const ProfilePage = () => {
   return (
@@ -26,7 +26,7 @@ const ProfilePage = () => {
           />
           <TextField
             type='password'
-            name='password'
+            name='new-password'
             label='New password'
             placeholder='New password'
           />

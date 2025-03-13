@@ -8,7 +8,7 @@ import * as S from './ProductSlider.styles'
 
 export interface ProductSliderProps {
   products: ProductProps[]
-  arrowColor?: 'white' | 'black'
+  $arrowColor?: 'white' | 'black'
 }
 
 const settings: SliderSettings = {
@@ -48,10 +48,10 @@ const settings: SliderSettings = {
 
 const ProductSlider = ({
   products,
-  arrowColor = 'white'
+  $arrowColor = 'white'
 }: ProductSliderProps) => {
   return (
-    <S.Wrapper arrowColor={arrowColor} data-testid='productSliderComponent'>
+    <S.Wrapper $arrowColor={$arrowColor} data-testid='productSliderComponent'>
       <Slider settings={settings}>
         {products.map((item, index) => (
           <Product key={index} {...item} />

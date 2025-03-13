@@ -1,50 +1,52 @@
+import { ProductProps } from 'components/Product/Product'
+
 export default [
   {
     slug: 'population-zero',
     title: 'Population Zero',
     developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x140',
+    img: '/img/game-test.jpg',
     price: 235.0,
     promotionalPrice: 215.0
   },
   {
-    slug: 'population-zero',
-    title: 'Population Zero',
+    slug: 'population-zero-2',
+    title: 'Population Zero 2',
     developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x141',
+    img: '/img/game-test.jpg',
     price: 235.0,
     promotionalPrice: 215.0
   },
   {
-    slug: 'population-zero',
-    title: 'Population Zero',
+    slug: 'population-zero-3',
+    title: 'Population Zero 3',
     developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x142',
+    img: '/img/game-test.jpg',
     price: 235.0,
     promotionalPrice: 215.0
   },
   {
-    slug: 'population-zero',
-    title: 'Population Zero',
+    slug: 'population-zero-4',
+    title: 'Population Zero 4',
     developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x143',
+    img: '/img/game-test.jpg',
     price: 235.0,
     promotionalPrice: 215.0
   },
   {
-    slug: 'population-zero',
-    title: 'Population Zero',
+    slug: 'population-zero-5',
+    title: 'Population Zero 5',
     developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x144',
+    img: '/img/game-test.jpg',
     price: 235.0,
     promotionalPrice: 215.0
   },
   {
-    slug: 'population-zero',
-    title: 'Population Zero',
+    slug: 'population-zero-6',
+    title: 'Population Zero 6',
     developer: 'Rockstar Games',
-    img: 'https://source.unsplash.com/user/willianjusten/300x145',
+    img: '/img/game-test.jpg',
     price: 235.0,
     promotionalPrice: 215.0
   }
-]
+] satisfies ProductProps[]

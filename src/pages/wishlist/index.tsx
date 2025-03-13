@@ -47,14 +47,14 @@ const WishlistPage = ({
   return (
     <>
       <Container>
-        <Heading line='left' lineColor='secondary'>
+        <Heading $line='left' $lineColor='secondary'>
           Wishlist
         </Heading>
 
         {emptyWishlist ? (
           <Empty
             title='Your wishlist is empty'
-            description='Games added to your wishlist will appear here.'
+            $description='Games added to your wishlist will appear here.'
           />
         ) : (
           <S.WrapperWishlistGames>

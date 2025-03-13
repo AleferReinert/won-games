@@ -6,7 +6,7 @@ export type TextFieldProps = {
   name: string
   label?: string
   icon?: ReactNode
-  iconPosition?: 'left' | 'right'
+  $iconPosition?: 'left' | 'right'
   disabled?: boolean
   errorMessage?: string
   initialValue?: string
@@ -17,7 +17,7 @@ const TextField = ({
   name,
   label,
   icon,
-  iconPosition = 'left',
+  $iconPosition = 'left',
   disabled = false,
   errorMessage,
   initialValue = '',
@@ -35,7 +35,7 @@ const TextField = ({
   return (
     <S.Wrapper disabled={disabled}>
       {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
-      <S.InputWrapper iconPosition={iconPosition} errorMessage={errorMessage}>
+      <S.InputWrapper $iconPosition={$iconPosition} errorMessage={errorMessage}>
         {!!icon && <S.Icon>{icon}</S.Icon>}
         <S.Input
           type='text'

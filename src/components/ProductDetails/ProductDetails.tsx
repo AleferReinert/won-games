@@ -31,7 +31,7 @@ const ProductDetails = ({
 
   return (
     <S.Wrapper data-testid='productDetailsComponent'>
-      <Heading line='left' lineColor='secondary'>
+      <Heading $line='left' $lineColor='secondary'>
         Game details
       </Heading>
 

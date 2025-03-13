@@ -3,11 +3,11 @@ import styled, { css } from 'styled-components'
 import { EmptyProps } from './Empty'
 
 export const Wrapper = styled.div<EmptyProps>`
-  ${({ theme, invertedColors, small }) => css`
+  ${({ theme, $invertedColors, $small }) => css`
     padding: ${theme.spacings.medium};
     text-align: center;
 
-    ${invertedColors &&
+    ${$invertedColors &&
     css`
       background: ${theme.colors.white};
 
@@ -16,7 +16,7 @@ export const Wrapper = styled.div<EmptyProps>`
       }
     `}
 
-    ${small &&
+    ${$small &&
     css`
       ${Title} {
         font-size: ${theme.font.sizes.large};

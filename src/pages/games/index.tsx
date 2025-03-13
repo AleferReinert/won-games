@@ -168,7 +168,7 @@ const GamesPage = ({ filterOptions }: GamesPageProps) => {
           {emptyProducts ? (
             <Empty
               title='No results found'
-              description="Sorry, we couldn't find any results for your search."
+              $description="Sorry, we couldn't find any results for your search."
             />
           ) : (
             <S.ShowMore onClick={loadMore}>

@@ -33,7 +33,7 @@ const Filter = ({
   handleFilter
 }: FilterProps) => {
   const [values, setValues] = useState(initialValues)
-  const [isOpen, setIsOpen] = useState(false)
+  const [$isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     handleFilter(values) // items vem daqui
@@ -59,7 +59,7 @@ const Filter = ({
         <FilterListIcon aria-hidden='true' />
       </S.OpenFilter>
 
-      <S.Wrapper isOpen={isOpen} data-testid='filterComponent'>
+      <S.Wrapper $isOpen={$isOpen} data-testid='filterComponent'>
         <S.CloseFilter onClick={() => setIsOpen(false)} title='Close filters'>
           <CloseIcon />
         </S.CloseFilter>
@@ -67,8 +67,8 @@ const Filter = ({
           {filterOptions.map((filter, index) => (
             <S.Item key={index}>
               <Heading
-                line='bottom'
-                lineColor='secondary'
+                $line='bottom'
+                $lineColor='secondary'
                 color='black'
                 size='xlarge'
               >
@@ -82,7 +82,7 @@ const Filter = ({
                       name={filter.name}
                       label={field.label}
                       value={field.value}
-                      labelColor='black'
+                      $labelColor='black'
                       isChecked={values[field.value] === 'true'}
                       onCheck={(value) => handleChange(field.value, value)}
                     />
@@ -94,7 +94,7 @@ const Filter = ({
                       name={filter.name}
                       label={field.label}
                       value={field.value}
-                      labelColor='black'
+                      $labelColor='black'
                       defaultChecked={
                         String(field.value) === String(values[filter.name])
                       }

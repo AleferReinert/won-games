@@ -1,11 +1,11 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { jsMediaQuery } from 'utils/tests/helpers'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import ShowcaseComponent from './Showcase'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import highlightMock from 'components/Highlight/mock'
 import gamesMock from 'components/ProductSlider/mock'
 import theme from 'styles/theme'
+import { jsMediaQuery } from 'utils/tests/helpers'
+import ShowcaseComponent from './Showcase'
 
 const meta: Meta<typeof ShowcaseComponent> = {
   title: 'Components/Showcase',
@@ -17,7 +17,7 @@ const meta: Meta<typeof ShowcaseComponent> = {
         true: highlightMock
       }
     },
-    games: {
+    products: {
       control: 'boolean',
       mapping: {
         true: gamesMock
@@ -34,12 +34,12 @@ export const Playground: Story = {
   args: {
     title: 'Most Populars',
     highlight: highlightMock,
-    games: gamesMock,
+    products: gamesMock,
     arrowColor: 'white'
   }
 }
 
-export const Title: Story = {
+export const TitleOnly: Story = {
   args: {
     title: 'Most populars'
   },
@@ -51,7 +51,7 @@ export const Title: Story = {
   }
 }
 
-export const Highlight: Story = {
+export const HighlightOnly: Story = {
   args: {
     highlight: highlightMock
   },
@@ -64,15 +64,15 @@ export const Highlight: Story = {
   }
 }
 
-export const Games: Story = {
+export const GamesOnly: Story = {
   args: {
-    games: gamesMock
+    products: gamesMock
   },
   play: ({ canvasElement, args }) => {
     const canvas = within(canvasElement)
 
     // should render the games
-    expect(args.games).not.toHaveLength(0)
+    expect(args.products).not.toHaveLength(0)
 
     // arrowColor white as default
     jsMediaQuery.greaterThan(theme.breakpoint.large, () => {
@@ -87,7 +87,7 @@ export const Games: Story = {
 
 export const ArrowColorBlack: Story = {
   args: {
-    games: gamesMock,
+    products: gamesMock,
     arrowColor: 'black'
   },
   parameters: {

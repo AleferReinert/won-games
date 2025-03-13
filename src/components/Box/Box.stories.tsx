@@ -1,9 +1,9 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import BoxComponent from './Box'
-import theme from 'styles/theme'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import { remToPx } from 'polished'
+import theme from 'styles/theme'
+import BoxComponent from './Box'
 
 const meta: Meta<typeof BoxComponent> = {
   title: 'Components/Atoms/Box',
@@ -35,7 +35,7 @@ export const Default: Story = {
 
 export const Xsmall: Story = {
   args: {
-    padding: 'xsmall'
+    $padding: 'xsmall'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
@@ -48,7 +48,7 @@ export const Xsmall: Story = {
 
 export const Medium: Story = {
   args: {
-    padding: 'medium'
+    $padding: 'medium'
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
