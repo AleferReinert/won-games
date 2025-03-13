@@ -7,7 +7,7 @@ import * as S from './Showcase.styles'
 
 export interface ShowcaseProps {
   title?: string
-  arrowColor?: 'black' | 'white'
+  $arrowColor?: 'black' | 'white'
   products?: ProductProps[]
   highlight?: HighlightProps
 }
@@ -16,7 +16,7 @@ const Showcase = ({
   title,
   highlight,
   products,
-  arrowColor = 'white'
+  $arrowColor = 'white'
 }: ShowcaseProps) => {
   return (
     <S.Wrapper data-testid='showcaseComponent'>
@@ -30,7 +30,7 @@ const Showcase = ({
         {highlight && <Highlight {...highlight} />}
 
         {products && (
-          <ProductSlider products={products} $arrowColor={arrowColor} />
+          <ProductSlider products={products} $arrowColor={$arrowColor} />
         )}
       </Container>
     </S.Wrapper>

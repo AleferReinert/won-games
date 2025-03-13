@@ -56,7 +56,6 @@ export const getStaticProps = async () => {
     comingSoonGames: comingSoonSection,
     freeGames: freeSection
   } = showcases.data.attributes
-  console.log('mostPopularGames: ', showcases.data.attributes.mostPopularGames)
 
   return {
     props: {

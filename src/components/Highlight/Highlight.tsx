@@ -7,7 +7,7 @@ export interface HighlightProps {
   description: string
   buttonLabel: string
   buttonLink: string
-  $background: string
+  background: string
   float?: string
   $alignment?: 'left' | 'right'
 }
@@ -17,13 +17,13 @@ const Highlight = ({
   description,
   buttonLabel,
   buttonLink,
-  $background,
+  background,
   float,
   $alignment = 'right'
 }: HighlightProps) => {
   return (
     <S.Wrapper
-      $background={$background}
+      background={background}
       $alignment={$alignment}
       data-testid='highlightComponent'
     >

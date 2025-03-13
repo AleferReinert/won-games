@@ -12,8 +12,10 @@ export interface ProductSliderProps {
 }
 
 const settings: SliderSettings = {
-  prevArrow: <ArrowLeft title='previous games' />,
-  nextArrow: <ArrowRight title='next games' />,
+  prevArrow: <ArrowLeft title='previous games' role='img' />,
+  nextArrow: (
+    <ArrowRight title='next games' role='img' data-testid='next-arrow' />
+  ),
   slidesToShow: 4,
   infinite: false,
   lazyLoad: 'ondemand',
