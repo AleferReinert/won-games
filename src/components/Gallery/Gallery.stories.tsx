@@ -2,12 +2,12 @@ import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { userEvent, waitFor, within } from '@storybook/testing-library'
 import GalleryComponents from './Gallery'
-import items from './mock'
+import { galleryMock } from './mock'
 
 const meta: Meta<typeof GalleryComponents> = {
   title: 'Components/Gallery',
   component: GalleryComponents,
-  args: { items },
+  args: { items: galleryMock },
   argTypes: {
     items: {
       table: { disable: true }

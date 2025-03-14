@@ -1,8 +1,8 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
+import { cartItemListMock } from '../CartItemList/mock'
 import CartDropdownComponent from './CartDropdown'
-import mockcartItems from '../CartItemList/mock'
 
 const meta: Meta<typeof CartDropdownComponent> = {
   title: 'Components/CartDropdown',
@@ -22,7 +22,7 @@ type Story = StoryObj<typeof CartDropdownComponent>
 
 export const Default: Story = {
   args: {
-    cartItems: mockcartItems,
+    cartItems: cartItemListMock,
     total: '$ 350,00'
   },
   play: ({ canvasElement, args }) => {

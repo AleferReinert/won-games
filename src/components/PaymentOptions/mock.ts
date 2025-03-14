@@ -1,6 +1,6 @@
 import { CreditCardProps } from 'components/CreditCard/CreditCard'
 
-export default [
+export const creditCardsMock: CreditCardProps[] = [
   {
     name: 'Visa',
     img: '/img/creditCards/visa.png',
@@ -11,4 +11,4 @@ export default [
     img: '/img/creditCards/mastercard.png',
     number: '**** **** **** 0805'
   }
-] satisfies CreditCardProps[]
+]

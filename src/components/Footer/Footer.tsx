@@ -77,7 +77,7 @@ const Footer = () => {
           </Heading>
           <nav aria-labelledby='footer resources'>
             <Link href='/'>Home</Link>
-            <Link href='/games'>Store</Link>
+            <Link href='/products'>Store</Link>
             <Link href='/search'>Search</Link>
           </nav>
         </S.Column>

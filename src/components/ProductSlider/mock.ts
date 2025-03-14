@@ -1,6 +1,6 @@
 import { ProductProps } from 'components/Product/Product'
 
-export default [
+export const productsMock: ProductProps[] = [
   {
     slug: 'population-zero',
     title: 'Population Zero',
@@ -49,4 +49,4 @@ export default [
     price: 235.0,
     promotionalPrice: 215.0
   }
-] satisfies ProductProps[]
+]

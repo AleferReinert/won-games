@@ -2,8 +2,8 @@ import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import Container from 'components/Container/Container'
-import highlightMock from 'components/Highlight/mock'
-import gamesMock from 'components/ProductSlider/mock'
+import { highlightMock } from 'components/Highlight/mock'
+import { productsMock } from 'components/ProductSlider/mock'
 import ShowcaseComponent from './Showcase'
 
 const meta: Meta<typeof ShowcaseComponent> = {
@@ -19,7 +19,7 @@ const meta: Meta<typeof ShowcaseComponent> = {
     products: {
       control: 'boolean',
       mapping: {
-        true: gamesMock
+        true: productsMock
       }
     }
   },
@@ -40,7 +40,7 @@ export const Playground: Story = {
   args: {
     title: 'Most Populars',
     highlight: highlightMock,
-    products: gamesMock,
+    products: productsMock,
     $arrowColor: 'white'
   }
 }
@@ -72,7 +72,7 @@ export const HighlightOnly: Story = {
 
 export const GamesOnly: Story = {
   args: {
-    products: gamesMock
+    products: productsMock
   },
   parameters: {
     viewport: {
@@ -96,7 +96,7 @@ export const GamesOnly: Story = {
 
 export const ArrowColorBlack: Story = {
   args: {
-    products: gamesMock,
+    products: productsMock,
     $arrowColor: 'black'
   },
   parameters: {

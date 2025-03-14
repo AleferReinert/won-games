@@ -29,7 +29,7 @@ const Header = ({ username }: MenuProps) => {
 
       <S.MenuDesktop>
         <S.MenuLink href='/'>Home</S.MenuLink>
-        <S.MenuLink href='/games'>Explore</S.MenuLink>
+        <S.MenuLink href='/products'>Explore</S.MenuLink>
       </S.MenuDesktop>
 
       <S.NavRight>

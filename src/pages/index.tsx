@@ -106,7 +106,7 @@ export default function Index({
           <Showcase
             title={newsSectionTitle}
             products={newsSectionProducts}
-            arrowColor='black'
+            $arrowColor='black'
           />
         </S.SectionNews>
       )}

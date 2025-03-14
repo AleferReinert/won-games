@@ -1,9 +1,9 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import bannersMock from 'components/BannerSlider/mock'
-import highlightMock from 'components/Highlight/mock'
-import gamesMock from 'components/ProductSlider/mock'
+import { bannersMock } from 'components/BannerSlider/mock'
+import { highlightMock } from 'components/Highlight/mock'
+import { productsMock } from 'components/ProductSlider/mock'
 import DefaultTemplate from 'templates/Default/Default'
 import HomeTemplate from '.'
 
@@ -13,15 +13,15 @@ const meta: Meta<typeof HomeTemplate> = {
   args: {
     banners: bannersMock,
     newsSectionTitle: 'New Games',
-    newsSectionProducts: gamesMock,
+    newsSectionProducts: productsMock,
     mostPopularsSectionTitle: 'Most Populars',
     mostPopularsSectionHighlight: highlightMock,
-    mostPopularsSectionProducts: gamesMock,
+    mostPopularsSectionProducts: productsMock,
     comingSoonSectionTitle: 'Coming Soon',
-    comingSoonSectionProducts: gamesMock,
+    comingSoonSectionProducts: productsMock,
     comingSoonSectionHighlight: highlightMock,
     freeSectionTitle: 'Free Games',
-    freeSectionProducts: gamesMock,
+    freeSectionProducts: productsMock,
     freeSectionHighlight: highlightMock
   },
   decorators: [

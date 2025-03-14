@@ -1,6 +1,6 @@
 import { CartItemProps } from './CartItem'
 
-export default [
+export const cartItemMock: CartItemProps[] = [
   {
     title: 'Population Zero',
     img: '/img/game-test.jpg',
@@ -16,4 +16,4 @@ export default [
     img: '/img/game-test.jpg',
     price: 79.0
   }
-] satisfies CartItemProps[]
+]

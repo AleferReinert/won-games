@@ -1,8 +1,8 @@
-import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
+import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
 
-export const mockGames = {
+export const mockProducts = {
   request: {
-    query: GET_ALL_GAMES,
+    query: GET_ALL_PRODUCTS,
     variables: {
       limit: 3,
       filters: { price: {}, and: [] }
@@ -77,7 +77,7 @@ export const mockGames = {
 
 export const mockMoreGames = {
   request: {
-    query: GET_ALL_GAMES,
+    query: GET_ALL_PRODUCTS,
     variables: {
       limit: 3,
       start: 3,

@@ -1,7 +1,7 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import creditCardMock from 'components/PaymentOptions/mock'
+import { creditCardsMock } from 'components/PaymentOptions/mock'
 import theme from 'styles/theme'
 import { hexToRGBA } from 'utils/tests/helpers'
 import CreditCardComponent from './CreditCard'
@@ -9,7 +9,7 @@ import CreditCardComponent from './CreditCard'
 const meta: Meta<typeof CreditCardComponent> = {
   title: 'Components/Atoms/CreditCard',
   component: CreditCardComponent,
-  args: creditCardMock[0],
+  args: creditCardsMock[0],
   parameters: {
     backgrounds: {
       default: 'Light'

@@ -22,7 +22,7 @@ const MenuMobile = ({
 
       <S.MenuNav>
         <S.MenuLink href='/'>Home</S.MenuLink>
-        <S.MenuLink href='/games'>Explore</S.MenuLink>
+        <S.MenuLink href='/products'>Explore</S.MenuLink>
         {!!username && (
           <>
             <S.MenuLink href='/account/profile'>My account</S.MenuLink>

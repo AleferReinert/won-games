@@ -2,12 +2,12 @@ import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { userEvent, within } from '@storybook/testing-library'
 import ProductComponent from './Product'
-import mockProduct from './mock'
+import { productMock } from './mock'
 
 const meta: Meta<typeof ProductComponent> = {
   title: 'Components/Product',
   component: ProductComponent,
-  args: mockProduct,
+  args: productMock,
   argTypes: {
     onFav: {
       action: 'clicked',

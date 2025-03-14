@@ -1,15 +1,15 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import CartItemListComponent from './CartItemList'
-import mockcartItems from './mock'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import theme from 'styles/theme'
+import CartItemListComponent from './CartItemList'
+import { cartItemListMock } from './mock'
 
 const meta: Meta<typeof CartItemListComponent> = {
   title: 'Components/CartItemList',
   component: CartItemListComponent,
   args: {
-    cartItems: mockcartItems,
+    cartItems: cartItemListMock,
     total: '$530'
   }
 }

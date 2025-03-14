@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
-export const GET_ALL_GAMES = gql`
-  query getAllGames(
+export const GET_ALL_PRODUCTS = gql`
+  query getAllProducts(
     $limit: Int!
     $start: Int
     $filters: GameFiltersInput

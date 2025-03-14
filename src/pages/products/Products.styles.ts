@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const Games = styled.div`
+export const Products = styled.div`
   ${({ theme }) => css`
     display: grid;
     gap: ${theme.spacings.small};

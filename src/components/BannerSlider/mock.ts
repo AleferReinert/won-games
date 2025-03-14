@@ -1,12 +1,12 @@
 import { BannerProps } from 'components/Banner/Banner'
 
-export default [
+export const bannersMock: BannerProps[] = [
   {
     img: '/img/background-test.png',
     title: 'Defy death 1',
     description: 'Play the new <strong>CrashLands</strong> season',
     buttonLabel: 'Buy now',
-    buttonLink: '/games/defy-death',
+    buttonLink: '/products/defy-death',
     ribbon: {
       text: 'Bestselling'
     }
@@ -16,6 +16,6 @@ export default [
     title: 'Defy death 2',
     description: 'Same background to test',
     buttonLabel: 'Buy now',
-    buttonLink: '/games/defy-death'
+    buttonLink: '/products/defy-death'
   }
-] satisfies BannerProps[]
+]

@@ -1,32 +1,32 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import galleryMock from 'components/Gallery/mock'
-import highlightMock from 'components/Highlight/mock'
-import productDetailsMock from 'components/ProductDetails/mock'
-import productHeaderMock from 'components/ProductHeader/mock'
-import gamesMock from 'components/ProductSlider/mock'
+import { galleryMock } from 'components/Gallery/mock'
+import { highlightMock } from 'components/Highlight/mock'
+import { productDetailsMock } from 'components/ProductDetails/mock'
+import { productHeaderMock } from 'components/ProductHeader/mock'
+import { productsMock } from 'components/ProductSlider/mock'
 import ProductPage from 'pages/product/[slug]'
-import descriptionMock from 'pages/product/mock'
+import { productDescriptionMock } from 'pages/product/mock'
 import DefaultTemplate from 'templates/Default/Default'
 
 const meta: Meta<typeof ProductPage> = {
   title: 'Pages/Product',
   component: ProductPage,
   args: {
-    cover: '/img/games/cyberpunk-1.jpg',
+    cover: '/img/products/cyberpunk-1.jpg',
     productHeader: productHeaderMock,
     gallery: galleryMock,
-    description: descriptionMock.content,
+    description: productDescriptionMock.content,
     details: productDetailsMock,
     comingSoonSection: {
       title: 'Coming soon',
-      products: gamesMock,
+      products: productsMock,
       highlight: highlightMock
     },
     recommendedSection: {
       title: 'You may like these games',
-      products: gamesMock
+      products: productsMock
     }
   },
   decorators: [

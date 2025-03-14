@@ -2,7 +2,7 @@ import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import Highlight from './Highlight'
-import highlightMock from './mock'
+import { highlightMock } from './mock'
 
 const meta: Meta<typeof Highlight> = {
   title: 'Components/Highlight',

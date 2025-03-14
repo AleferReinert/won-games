@@ -1,9 +1,9 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
-import OrdersPage from '.'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import AccountTemplate from 'templates/Account/Account'
-import cartItemsMock from './mock'
+import OrdersPage from '.'
+import { cartItemsMock } from './mock'
 
 const meta: Meta<typeof OrdersPage> = {
   title: 'Pages/Account/Orders',

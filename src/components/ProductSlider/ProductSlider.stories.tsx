@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import Container from 'components/Container/Container'
 import ProductSliderComponent from './ProductSlider'
-import products from './mock'
+import { productsMock } from './mock'
 
 const meta: Meta<typeof ProductSliderComponent> = {
   title: 'Components/ProductSlider',
   component: ProductSliderComponent,
-  args: { products },
+  args: { products: productsMock },
   argTypes: {
     products: {
       table: { disable: true }

@@ -1,13 +1,13 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
 import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { within } from '@storybook/testing-library'
 import BannerSliderComponent from './BannerSlider'
-import items from './mock'
+import { bannersMock } from './mock'
 
 const meta: Meta<typeof BannerSliderComponent> = {
   title: 'Components/BannerSlider',
   component: BannerSliderComponent,
-  args: { items },
+  args: { items: bannersMock },
   argTypes: {
     items: {
       table: { disable: true }

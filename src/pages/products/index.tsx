@@ -6,12 +6,12 @@ import Filter, { FilterOptionsProps } from 'components/Filter/Filter'
 import Loading from 'components/Loading/Loading'
 import Product from 'components/Product/Product'
 import { GET_ALL_CATEGORIES } from 'graphql/queries/getAllCategories'
-import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
 import { GET_ALL_PLATFORMS } from 'graphql/queries/getAllPlatforms'
+import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
 import { Query } from 'graphql/types'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
-import * as S from 'pages/games/Games.styles'
+import * as S from 'pages/products/Products.styles'
 import { ParsedUrlQueryInput } from 'querystring'
 import { type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
@@ -85,7 +85,7 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   ]
 
   await apolloClient.query<Pick<Query, 'games'>>({
-    query: GET_ALL_GAMES,
+    query: GET_ALL_PRODUCTS,
     variables: {
       limit: productsLimit,
       ...queryStringToGraphqlFilters({
@@ -103,14 +103,14 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   }
 }
 
-interface GamesPageProps {
+interface ProductsPageProps {
   filterOptions: FilterOptionsProps[]
 }
 
-const GamesPage = ({ filterOptions }: GamesPageProps) => {
+const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const { query, push } = useRouter()
   const { data, fetchMore, loading } = useQuery<Pick<Query, 'games'>>(
-    GET_ALL_GAMES,
+    GET_ALL_PRODUCTS,
     {
       notifyOnNetworkStatusChange: true,
       variables: {
@@ -125,7 +125,7 @@ const GamesPage = ({ filterOptions }: GamesPageProps) => {
 
   const handleFilter = (values: ParsedUrlQueryInput) => {
     push({
-      pathname: '/games',
+      pathname: '/products',
       query: values
     })
     return
@@ -154,7 +154,7 @@ const GamesPage = ({ filterOptions }: GamesPageProps) => {
         />
 
         <div>
-          <S.Games>
+          <S.Products>
             {products.length > 0 &&
               products?.map(({ attributes: product }, index) => (
                 <Product
@@ -170,7 +170,7 @@ const GamesPage = ({ filterOptions }: GamesPageProps) => {
                   slug={product.slug}
                 />
               ))}
-          </S.Games>
+          </S.Products>
           {products.length === 0 ? (
             <Empty
               title='No results found'
@@ -190,7 +190,7 @@ const GamesPage = ({ filterOptions }: GamesPageProps) => {
   )
 }
 
-GamesPage.getLayout = function getLayout(page: ReactElement) {
+ProductsPage.getLayout = function getLayout(page: ReactElement) {
   return <DefaultTemplate>{page}</DefaultTemplate>
 }
-export default GamesPage
+export default ProductsPage

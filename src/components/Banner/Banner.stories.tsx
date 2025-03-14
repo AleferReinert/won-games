@@ -11,7 +11,7 @@ const meta: Meta<typeof Banner> = {
     title: 'Defy death',
     description: 'Play the new <strong>CrashLands</strong> season',
     buttonLabel: 'Buy now',
-    buttonLink: '/games/defy-death'
+    buttonLink: '/products/defy-death'
   }
 }
 
@@ -28,7 +28,7 @@ export const Default: Story = {
     expect(title).toBeInTheDocument()
     expect(Description).toBeInTheDocument()
     expect(button).toBeInTheDocument()
-    expect(button).toHaveAttribute('href', '/games/defy-death')
+    expect(button).toHaveAttribute('href', '/products/defy-death')
     expect(image).toHaveAttribute('src', '/img/background-test.png')
   }
 }

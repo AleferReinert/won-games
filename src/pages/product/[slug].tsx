@@ -9,10 +9,10 @@ import ProductHeader, {
   ProductHeaderProps
 } from 'components/ProductHeader/ProductHeader'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
-import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
-import { GET_COMING_SOON_GAMES } from 'graphql/queries/getComingSoonGames'
-import { GET_GAME_BY_SLUG } from 'graphql/queries/getGameBySlug'
-import { GET_RECOMMENDED_GAMES } from 'graphql/queries/getRecommendedGames'
+import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
+import { GET_COMING_SOON_PRODUCTS } from 'graphql/queries/getComingSoonProducts'
+import { GET_PRODUCT_BY_SLUG } from 'graphql/queries/getProductBySlug'
+import { GET_RECOMMENDED_PRODUCTS } from 'graphql/queries/getRecommendedProducts'
 import { Game, GameEntity, Query } from 'graphql/types'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
@@ -22,7 +22,7 @@ import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './Product.styles'
 
-interface ProductPageProps {
+export interface ProductPageProps {
   cover: string
   productHeader: ProductHeaderProps
   gallery?: GalleryImageProps[]
@@ -36,7 +36,7 @@ interface ProductPageProps {
 export async function getStaticPaths() {
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query({
-    query: GET_ALL_GAMES,
+    query: GET_ALL_PRODUCTS,
     variables: { limit: 9 }
   })
 
@@ -48,12 +48,11 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const baseUrl = 'http://localhost:1337'
   const apolloClient = initializeApollo()
 
   // Retorna os dados do produto
   const { data } = await apolloClient.query({
-    query: GET_GAME_BY_SLUG,
+    query: GET_PRODUCT_BY_SLUG,
     variables: { slug: params?.slug }
   })
   const game: Game = data.games.data[0].attributes
@@ -66,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const {
     data: { comingSoonGames, showcase }
   } = await apolloClient.query({
-    query: GET_COMING_SOON_GAMES,
+    query: GET_COMING_SOON_PRODUCTS,
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) }
   })
   const { comingSoonGames: comingSoonSection } = showcase.data.attributes
@@ -75,7 +74,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data: recommended } = await apolloClient.query<
     Pick<Query, 'recommended'>
   >({
-    query: GET_RECOMMENDED_GAMES
+    query: GET_RECOMMENDED_PRODUCTS
   })
 
   const recommendedSection = recommended.recommended.data.attributes.showcase
@@ -84,14 +83,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       revalidate: 60,
       game,
-      cover: baseUrl + game.cover.data?.attributes.url ?? '', // todo: add default cover
+      cover: process.env.API_URL + game.cover.data?.attributes.url || '', // todo: add default cover
       productHeader: {
         title: game.name,
         description: game.short_description,
         price: game.price
       },
       gallery: game.gallery.data.map(({ attributes: image }) => ({
-        src: baseUrl + image.url,
+        src: process.env.API_URL + image.url,
         label: image.alternativeText
       })),
       description: game.description,

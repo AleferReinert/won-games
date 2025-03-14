@@ -4,12 +4,12 @@ import { within } from '@storybook/testing-library'
 import theme from 'styles/theme'
 import { pxToNumber } from 'utils/tests/helpers'
 import ProductDetailsComponent from './ProductDetails'
-import mock from './mock'
+import { productDetailsMock } from './mock'
 
 const meta: Meta<typeof ProductDetailsComponent> = {
   title: 'Components/ProductDetails',
   component: ProductDetailsComponent,
-  args: mock,
+  args: productDetailsMock,
   argTypes: {
     releaseDate: {
       control: {

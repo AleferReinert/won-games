@@ -1,8 +1,8 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import highlightMock from 'components/Highlight/mock'
-import gamesMock from 'components/ProductSlider/mock'
+import { highlightMock } from 'components/Highlight/mock'
+import { productsMock } from 'components/ProductSlider/mock'
 import DefaultTemplate from 'templates/Default/Default'
 import WishlistPage from '.'
 
@@ -13,7 +13,7 @@ const meta: Meta<typeof WishlistPage> = {
     recommendedSection: {
       title: 'Recommended',
       highlight: highlightMock,
-      products: gamesMock
+      products: productsMock
     }
   },
   parameters: {
@@ -37,12 +37,12 @@ type Story = StoryObj<typeof WishlistPage>
 
 export const Default: Story = {
   args: {
-    wishlistProducts: gamesMock
+    wishlistProducts: productsMock
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading', { name: 'Wishlist' })
-    const games = within(title.parentElement!).queryAllByTestId(
+    const products = within(title.parentElement!).queryAllByTestId(
       'productComponent'
     )
     const emptyComponent = canvas.getAllByTestId('emptyComponent')
@@ -50,14 +50,14 @@ export const Default: Story = {
       name: 'Recommended'
     })
     const recommendedHighlight = canvas.getByTestId('highlightComponent')
-    const recommendedGames = canvas.getByTestId('productSliderComponent')
+    const recommendedProducts = canvas.getByTestId('productSliderComponent')
 
     expect(title).toBeInTheDocument()
     expect(emptyComponent).toHaveLength(1)
-    expect(games.length).toBeGreaterThan(0)
+    expect(products.length).toBeGreaterThan(0)
     expect(recommendedTitle).toBeInTheDocument()
     expect(recommendedHighlight).toBeInTheDocument()
-    expect(recommendedGames).toBeInTheDocument()
+    expect(recommendedProducts).toBeInTheDocument()
   }
 }
 
@@ -66,11 +66,11 @@ export const Empty: Story = {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading', { name: 'Wishlist' })
     const emptyComponent = canvas.getAllByTestId('emptyComponent')
-    const games = within(title.parentElement!).queryAllByTestId(
+    const products = within(title.parentElement!).queryAllByTestId(
       'productComponent'
     )
 
     expect(emptyComponent).toHaveLength(2)
-    expect(games.length).toBe(0)
+    expect(products.length).toBe(0)
   }
 }

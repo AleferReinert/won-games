@@ -1,6 +1,6 @@
 import { CartItemProps } from 'components/CartItem/CartItem'
 
-export default [
+export const cartItemsMock: CartItemProps[] = [
   {
     title: 'Population Zero',
     img: '/img/game-test.jpg',
@@ -37,4 +37,4 @@ export default [
       purchaseDate: 'Purchase made on 21/12/2022 at 13:32'
     }
   }
-] satisfies CartItemProps[]
+]
