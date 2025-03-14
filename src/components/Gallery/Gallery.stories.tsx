@@ -52,8 +52,11 @@ export const Tests: Story = {
 
     // Open image2 on thumb2 clicked
     await userEvent.click(thumb2)
-    const originalImage2 = canvas.getByRole('img', { name: 'Gallery Image 2' })
-      .parentElement?.parentElement
+    const originalImage2 = await waitFor(
+      () =>
+        canvas.getByRole('img', { name: 'Gallery Image 2' }).parentElement
+          ?.parentElement
+    )
     await waitFor(() => expect(originalImage2).toHaveClass('slick-active'))
     await userEvent.click(buttonCloseModal)
 
