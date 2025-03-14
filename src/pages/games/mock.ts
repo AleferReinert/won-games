@@ -1,11 +1,10 @@
 import { GET_ALL_GAMES } from 'graphql/queries/getAllGames'
-import { productsLimit } from '.'
 
 export const mockGames = {
   request: {
     query: GET_ALL_GAMES,
     variables: {
-      limit: productsLimit,
+      limit: 3,
       filters: { price: {}, and: [] }
     }
   },
@@ -29,8 +28,47 @@ export const mockGames = {
               __typename: 'Game'
             },
             __typename: 'GameEntity'
+          },
+          {
+            attributes: {
+              cover: {
+                data: null,
+                __typename: 'UploadFileEntityResponse'
+              },
+              developers: {
+                data: [],
+                __typename: 'DeveloperRelationResponseCollection'
+              },
+              name: 'God of War',
+              price: 30,
+              slug: 'god-of-war',
+              __typename: 'Game'
+            },
+            __typename: 'GameEntity'
+          },
+          {
+            attributes: {
+              cover: {
+                data: null,
+                __typename: 'UploadFileEntityResponse'
+              },
+              developers: {
+                data: [],
+                __typename: 'DeveloperRelationResponseCollection'
+              },
+              name: 'Elden Ring',
+              price: 50,
+              slug: 'elden-ring',
+              __typename: 'Game'
+            },
+            __typename: 'GameEntity'
           }
         ],
+        meta: {
+          pagination: {
+            total: 6
+          }
+        },
         __typename: 'GameEntityResponseCollection'
       }
     }
@@ -41,8 +79,8 @@ export const mockMoreGames = {
   request: {
     query: GET_ALL_GAMES,
     variables: {
-      limit: productsLimit,
-      start: 1,
+      limit: 3,
+      start: 3,
       filters: { price: {}, and: [] }
     }
   },
@@ -66,8 +104,47 @@ export const mockMoreGames = {
               __typename: 'Game'
             },
             __typename: 'GameEntity'
+          },
+          {
+            attributes: {
+              cover: {
+                data: null,
+                __typename: 'UploadFileEntityResponse'
+              },
+              developers: {
+                data: [],
+                __typename: 'DeveloperRelationResponseCollection'
+              },
+              name: 'Red Dead Redemption 2',
+              price: 40,
+              slug: 'red-dead-redemption-2',
+              __typename: 'Game'
+            },
+            __typename: 'GameEntity'
+          },
+          {
+            attributes: {
+              cover: {
+                data: null,
+                __typename: 'UploadFileEntityResponse'
+              },
+              developers: {
+                data: [],
+                __typename: 'DeveloperRelationResponseCollection'
+              },
+              name: 'Horizon Zero Dawn',
+              price: 35,
+              slug: 'horizon-zero-dawn',
+              __typename: 'Game'
+            },
+            __typename: 'GameEntity'
           }
         ],
+        meta: {
+          pagination: {
+            total: 6
+          }
+        },
         __typename: 'GameEntityResponseCollection'
       }
     }

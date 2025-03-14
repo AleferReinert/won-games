@@ -38,22 +38,40 @@ export const WithGames: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     expect(canvas.getAllByTestId('filterComponent'))
-
-    await waitFor(async () => {
-      const product1 = canvas.getByRole('heading', {
+    const product1 = await waitFor(() =>
+      canvas.getByRole('heading', {
         level: 3,
         name: 'The Legend of Zelda: Breath of the Wild'
       })
-      const buttonShowMore = canvas.getByRole('button', { name: /show more/i })
+    )
 
-      expect(product1).toBeInTheDocument()
-      expect(buttonShowMore).toBeInTheDocument()
-
-      buttonShowMore.click()
-      await waitFor(() => {
-        const product2 = canvas.getByText('Cyberpunk 2077')
-        expect(product2).toBeInTheDocument()
+    const buttonShowMore = await waitFor(() =>
+      canvas.queryByRole('button', {
+        name: /show more/i
       })
+    )
+
+    await waitFor(async () => {
+      // primeiros produtos carregados
+      await expect(product1).toBeInTheDocument()
+
+      // botão de show more visivel
+      await expect(buttonShowMore).toBeVisible()
+
+      // carrega mais produtos ao clicar
+      await buttonShowMore?.click()
+      await waitFor(async () => {
+        const product4 = await waitFor(() =>
+          canvas.getByRole('heading', {
+            level: 3,
+            name: 'Cyberpunk 2077'
+          })
+        )
+        expect(product4).toBeInTheDocument()
+      })
+
+      // botão de show more nao visivel após todos os produtos serem carregados
+      await expect(buttonShowMore).not.toBeInTheDocument()
     })
   }
 }

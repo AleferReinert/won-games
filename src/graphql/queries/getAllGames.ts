@@ -33,6 +33,11 @@ export const GET_ALL_GAMES = gql`
           slug
         }
       }
+      meta {
+        pagination {
+          total
+        }
+      }
     }
   }
 `
