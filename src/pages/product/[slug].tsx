@@ -13,11 +13,11 @@ import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
 import { GET_COMING_SOON_PRODUCTS } from 'graphql/queries/getComingSoonProducts'
 import { GET_PRODUCT_BY_SLUG } from 'graphql/queries/getProductBySlug'
 import { GET_RECOMMENDED_PRODUCTS } from 'graphql/queries/getRecommendedProducts'
-import { Game, GameEntity, Query } from 'graphql/types'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
+import { Game, GameEntity, Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './Product.styles'
@@ -80,17 +80,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const recommendedSection = recommended.recommended.data.attributes.showcase
 
   return {
+    revalidate: 60,
     props: {
-      revalidate: 60,
       game,
-      cover: process.env.API_URL + game.cover.data?.attributes.url || '', // todo: add default cover
+      cover:
+        process.env.NEXT_PUBLIC_API_URL + game.cover.data?.attributes.url || '', // todo: add default cover
       productHeader: {
         title: game.name,
         description: game.short_description,
         price: game.price
       },
       gallery: game.gallery.data.map(({ attributes: image }) => ({
-        src: process.env.API_URL + image.url,
+        src: process.env.NEXT_PUBLIC_API_URL + image.url,
         label: image.alternativeText
       })),
       description: game.description,

@@ -5,14 +5,14 @@ import { HighlightProps } from 'components/Highlight/Highlight'
 import { ProductProps } from 'components/Product/Product'
 import Showcase from 'components/Showcase/Showcase'
 import { GET_PAGE_HOME } from 'graphql/queries/getPageHome'
+import { ReactElement } from 'react'
+import DefaultTemplate from 'templates/Default/Default'
 import {
   BannerEntityResponseCollection,
   GameEntityResponseCollection,
   GameRelationResponseCollection,
   HomeEntity
-} from 'graphql/types'
-import { ReactElement } from 'react'
-import DefaultTemplate from 'templates/Default/Default'
+} from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { bannerMapper, highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './Home.styles'

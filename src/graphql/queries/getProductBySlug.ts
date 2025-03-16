@@ -4,6 +4,7 @@ export const GET_PRODUCT_BY_SLUG = gql`
   query getProductBySlug($slug: String!) {
     games(filters: { slug: { eq: $slug } }) {
       data {
+        id
         attributes {
           cover {
             data {

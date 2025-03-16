@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 export const ProductEntityFragment = gql`
   fragment ProductEntityFragment on GameEntityResponseCollection {
     data {
+      id
       attributes {
         slug
         cover {
@@ -26,9 +27,11 @@ export const ProductEntityFragment = gql`
     }
   }
 `
+
 export const ProductRelationFragment = gql`
   fragment GameRelationFragment on GameRelationResponseCollection {
     data {
+      id
       attributes {
         slug
         cover {

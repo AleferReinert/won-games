@@ -4,14 +4,12 @@ import {
   ComponentPageHighlight,
   GameEntityResponseCollection,
   GameRelationResponseCollection
-} from 'graphql/types'
-
-export const baseUrl = 'http://localhost:1337'
+} from 'types/generated'
 
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerEntityResponseCollection) => {
   return banners.data.map(({ attributes: banner }) => ({
-    img: baseUrl + banner.img.data.attributes.url,
+    img: process.env.NEXT_PUBLIC_API_URL + banner.img.data.attributes.url,
     title: banner.title,
     description: banner.description,
     buttonLabel: banner.button.label,
@@ -27,7 +25,7 @@ export const bannerMapper = (banners: BannerEntityResponseCollection) => {
 // Retorna todos dados necessários para o componente Highlight
 export const highlightMapper = (
   highlight: ComponentPageHighlight,
-  alignment?: HighlightProps['alignment']
+  alignment?: HighlightProps['$alignment']
 ) => {
   return {
     title: highlight.title,
@@ -35,8 +33,10 @@ export const highlightMapper = (
     buttonLabel: highlight.buttonLabel,
     buttonLink: highlight.buttonLink,
     alignment: alignment ?? highlight.alignment,
-    background: baseUrl + highlight.background.data.attributes.url,
-    float: baseUrl + highlight.float.data.attributes.url
+    background:
+      process.env.NEXT_PUBLIC_API_URL +
+      highlight.background.data.attributes.url,
+    float: process.env.NEXT_PUBLIC_API_URL + highlight.float.data.attributes.url
   }
 }
 
@@ -49,6 +49,8 @@ export const productMapper = (
     slug: product.slug,
     developer: product.developers.data[0]?.attributes.name || '',
     price: product.price,
-    img: product.cover.data ? baseUrl + product.cover.data.attributes.url : '' // todo add default image
+    img: product.cover.data
+      ? process.env.NEXT_PUBLIC_API_URL + product.cover.data.attributes.url
+      : '' // todo add default image
   }))
 }

@@ -3,11 +3,10 @@ import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { waitFor, within } from '@storybook/testing-library'
 import { filterOptionsMock } from 'components/Filter/mock'
-import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
 import DefaultTemplate from 'templates/Default/Default'
 import { apolloCache } from 'utils/apolloCache'
-import ProductsPage, { productsLimit } from '.'
-import { mockMoreGames, mockProducts } from './mock'
+import ProductsPage from '.'
+import { mockEmptyProducts, mockMoreGames, mockProducts } from './mock'
 
 const meta: Meta<typeof ProductsPage> = {
   title: 'Pages/Products',
@@ -78,27 +77,7 @@ export const WithProducts: Story = {
 
 export const Empty: Story = {
   render: () => (
-    <MockedProvider
-      addTypename={false}
-      mocks={[
-        {
-          request: {
-            query: GET_ALL_PRODUCTS,
-            variables: {
-              limit: productsLimit,
-              filters: { price: {}, and: [] }
-            }
-          },
-          result: {
-            data: {
-              games: {
-                data: []
-              }
-            }
-          }
-        }
-      ]}
-    >
+    <MockedProvider mocks={[mockEmptyProducts]}>
       <ProductsPage filterOptions={filterOptionsMock} />
     </MockedProvider>
   ),

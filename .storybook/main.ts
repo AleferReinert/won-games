@@ -1,4 +1,7 @@
 import type { StorybookConfig } from '@storybook/nextjs'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
