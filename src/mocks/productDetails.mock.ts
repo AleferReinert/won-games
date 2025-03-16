@@ -1,4 +1,4 @@
-import { ProductDetailsProps } from './ProductDetails'
+import { ProductDetailsProps } from '../components/ProductDetails/ProductDetails'
 
 export const productDetailsMock: ProductDetailsProps = {
   developer: 'Gearbox Software',

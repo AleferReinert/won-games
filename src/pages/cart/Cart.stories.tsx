@@ -1,10 +1,10 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import { cartItemListMock } from 'components/CartItemList/mock'
-import { highlightMock } from 'components/Highlight/mock'
-import { creditCardsMock } from 'components/PaymentOptions/mock'
-import { productsMock } from 'components/ProductSlider/mock'
+import { cartItemsMock } from 'mocks/cartItem.mock'
+import { creditCardsMock } from 'mocks/creditCards.mock'
+import { highlightMock } from 'mocks/highlight.mock'
+import { productsMock } from 'mocks/products.mock'
 import DefaultTemplate from 'templates/Default/Default'
 import CartPage from '.'
 
@@ -12,7 +12,7 @@ const meta: Meta<typeof CartPage> = {
   title: 'Pages/Cart',
   component: CartPage,
   args: {
-    cartItems: cartItemListMock,
+    cartItems: cartItemsMock,
     total: '$530',
     creditCards: creditCardsMock,
     recommendedSection: {

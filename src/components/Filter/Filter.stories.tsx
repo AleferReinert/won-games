@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { userEvent, waitFor, within } from '@storybook/testing-library'
 import theme from 'styles/theme'
 import { jsMediaQuery } from 'utils/tests/helpers'
+import { filterMock } from '../../mocks/filter.mock'
 import FilterComponent from './Filter'
-import { filterOptionsMock } from './mock'
 
 const meta: Meta<typeof FilterComponent> = {
   title: 'Components/Filter',
   component: FilterComponent,
   args: {
-    filterOptions: filterOptionsMock
+    filterOptions: filterMock
   }
 }
 

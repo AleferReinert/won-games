@@ -1,4 +1,4 @@
-import { GalleryImageProps } from './Gallery'
+import { GalleryImageProps } from 'components/Gallery/Gallery'
 
 export const galleryMock: GalleryImageProps[] = [
   {

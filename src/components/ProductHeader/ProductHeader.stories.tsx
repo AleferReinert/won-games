@@ -1,8 +1,8 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
+import { productHeaderMock } from '../../mocks/productHeader.mock'
 import ProductHeaderComponent from './ProductHeader'
-import { productHeaderMock } from './mock'
 
 const meta: Meta<typeof ProductHeaderComponent> = {
   title: 'Components/ProductHeader',

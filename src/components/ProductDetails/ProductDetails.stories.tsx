@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import theme from 'styles/theme'
 import { pxToNumber } from 'utils/tests/helpers'
+import { productDetailsMock } from '../../mocks/productDetails.mock'
 import ProductDetailsComponent from './ProductDetails'
-import { productDetailsMock } from './mock'
 
 const meta: Meta<typeof ProductDetailsComponent> = {
   title: 'Components/ProductDetails',

@@ -1,5 +1,4 @@
-export const productDescriptionMock: { content: string } = {
-  content: `
+export const productDescriptionMock: string = `
   <img alt="" src="/img/products/cyberpunk-1.jpg" />
 <h1>Heading</h1>
 <p>
@@ -41,4 +40,3 @@ export const productDescriptionMock: { content: string } = {
   quam illum. Fugiat consectetur assumenda in, vitae nemo, eaque quia
   numquam ad perspiciatis doloribus error eveniet quo officia?
 </p>`
-}

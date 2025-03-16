@@ -2,11 +2,13 @@ import { MockedProvider } from '@apollo/client/testing'
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { waitFor, within } from '@storybook/testing-library'
-import { filterOptionsMock } from 'components/Filter/mock'
+import { emptyProductsMock } from 'mocks/emptyProducts.mock'
+import { filterMock } from 'mocks/filter.mock'
+import { moreProductsResponseMock } from 'mocks/moreProductsResponse.mock'
+import { productsResponseMock } from 'mocks/productsResponse.mock'
 import DefaultTemplate from 'templates/Default/Default'
 import { apolloCache } from 'utils/apolloCache'
 import ProductsPage from '.'
-import { mockEmptyProducts, mockMoreGames, mockProducts } from './mock'
 
 const meta: Meta<typeof ProductsPage> = {
   title: 'Pages/Products',
@@ -29,8 +31,11 @@ type Story = StoryObj<typeof ProductsPage>
 
 export const WithProducts: Story = {
   render: () => (
-    <MockedProvider mocks={[mockProducts, mockMoreGames]} cache={apolloCache}>
-      <ProductsPage filterOptions={filterOptionsMock} />
+    <MockedProvider
+      mocks={[productsResponseMock, moreProductsResponseMock]}
+      cache={apolloCache}
+    >
+      <ProductsPage filterOptions={filterMock} />
     </MockedProvider>
   ),
 
@@ -77,8 +82,8 @@ export const WithProducts: Story = {
 
 export const Empty: Story = {
   render: () => (
-    <MockedProvider mocks={[mockEmptyProducts]}>
-      <ProductsPage filterOptions={filterOptionsMock} />
+    <MockedProvider mocks={[emptyProductsMock]}>
+      <ProductsPage filterOptions={filterMock} />
     </MockedProvider>
   ),
   play: ({ canvasElement }) => {

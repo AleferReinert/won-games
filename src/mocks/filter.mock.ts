@@ -1,6 +1,6 @@
-import { FilterOptionsProps } from './Filter'
+import { FilterOptionsProps } from '../components/Filter/Filter'
 
-export const filterOptionsMock: FilterOptionsProps[] = [
+export const filterMock: FilterOptionsProps[] = [
   {
     title: 'Price',
     name: 'price',

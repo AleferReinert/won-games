@@ -1,13 +1,13 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import { galleryMock } from 'components/Gallery/mock'
-import { highlightMock } from 'components/Highlight/mock'
-import { productDetailsMock } from 'components/ProductDetails/mock'
-import { productHeaderMock } from 'components/ProductHeader/mock'
-import { productsMock } from 'components/ProductSlider/mock'
+import { galleryMock } from 'mocks/gallery.mock'
+import { highlightMock } from 'mocks/highlight.mock'
+import { productDescriptionMock } from 'mocks/productDescription.mock'
+import { productDetailsMock } from 'mocks/productDetails.mock'
+import { productHeaderMock } from 'mocks/productHeader.mock'
+import { productsMock } from 'mocks/products.mock'
 import ProductPage from 'pages/product/[slug]'
-import { productDescriptionMock } from 'pages/product/mock'
 import DefaultTemplate from 'templates/Default/Default'
 
 const meta: Meta<typeof ProductPage> = {
@@ -17,7 +17,7 @@ const meta: Meta<typeof ProductPage> = {
     cover: '/img/products/cyberpunk-1.jpg',
     productHeader: productHeaderMock,
     gallery: galleryMock,
-    description: productDescriptionMock.content,
+    description: productDescriptionMock,
     details: productDetailsMock,
     comingSoonSection: {
       title: 'Coming soon',

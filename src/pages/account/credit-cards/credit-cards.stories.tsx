@@ -1,7 +1,7 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import { creditCardsMock } from 'components/PaymentOptions/mock'
+import { creditCardsMock } from 'mocks/creditCards.mock'
 import AccountTemplate from 'templates/Account/Account'
 import CreditCardsPage from '.'
 

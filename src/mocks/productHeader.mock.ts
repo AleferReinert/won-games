@@ -1,4 +1,4 @@
-import { ProductHeaderProps } from './ProductHeader'
+import { ProductHeaderProps } from '../components/ProductHeader/ProductHeader'
 
 export const productHeaderMock: ProductHeaderProps = {
   title: 'Borderlands 3',

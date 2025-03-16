@@ -1,8 +1,8 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
+import { creditCardsMock } from '../../mocks/creditCards.mock'
 import PaymentOptionsComponent from './PaymentOptions'
-import { creditCardsMock } from './mock'
 
 const meta: Meta<typeof PaymentOptionsComponent> = {
   title: 'Components/PaymentOptions',

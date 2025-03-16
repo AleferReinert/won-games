@@ -1,9 +1,9 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import { bannersMock } from 'components/BannerSlider/mock'
-import { highlightMock } from 'components/Highlight/mock'
-import { productsMock } from 'components/ProductSlider/mock'
+import { bannersMock } from 'mocks/banners.mock'
+import { highlightMock } from 'mocks/highlight.mock'
+import { productsMock } from 'mocks/products.mock'
 import DefaultTemplate from 'templates/Default/Default'
 import HomeTemplate from '.'
 

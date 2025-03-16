@@ -1,16 +1,16 @@
 import { Info } from '@styled-icons/material-outlined/Info'
 import { CartItemProps } from 'components/CartItem/CartItem'
 import CartItemList from 'components/CartItemList/CartItemList'
-import { cartItemListMock } from 'components/CartItemList/mock'
 import Container from 'components/Container/Container'
 import { CreditCardProps } from 'components/CreditCard/CreditCard'
 import Divider from 'components/Divider/Divider'
 import Empty from 'components/Empty/Empty'
 import Heading from 'components/Heading/Heading'
 import PaymentOptions from 'components/PaymentOptions/PaymentOptions'
-import { creditCardsMock } from 'components/PaymentOptions/mock'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { GET_RECOMMENDED_PRODUCTS } from 'graphql/queries/getRecommendedProducts'
+import { cartItemsMock } from 'mocks/cartItem.mock'
+import { creditCardsMock } from 'mocks/creditCards.mock'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
 import Default from 'templates/Default/Default'
@@ -37,7 +37,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      cartItems: cartItemListMock,
+      cartItems: cartItemsMock,
       total: '$530',
       creditCards: creditCardsMock,
       recommendedSection: {

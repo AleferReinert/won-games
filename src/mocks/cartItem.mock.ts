@@ -1,6 +1,6 @@
-import { CartItemProps } from './CartItem'
+import { CartItemProps } from 'components/CartItem/CartItem'
 
-export const cartItemMock: CartItemProps[] = [
+export const cartItemsMock: CartItemProps[] = [
   {
     title: 'Population Zero',
     img: '/img/game-test.jpg',

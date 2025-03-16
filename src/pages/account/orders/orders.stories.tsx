@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import AccountTemplate from 'templates/Account/Account'
 import OrdersPage from '.'
-import { cartItemsMock } from './mock'
+import { cartItemsMock } from '../../../mocks/cartItems.mock'
 
 const meta: Meta<typeof OrdersPage> = {
   title: 'Pages/Account/Orders',

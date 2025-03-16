@@ -1,4 +1,4 @@
-import { HighlightProps } from './Highlight'
+import { HighlightProps } from 'components/Highlight/Highlight'
 
 export const highlightMock: HighlightProps = {
   title: `Read Dead It's Back`,

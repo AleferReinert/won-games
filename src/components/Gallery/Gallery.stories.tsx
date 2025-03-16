@@ -1,8 +1,8 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { userEvent, waitFor, within } from '@storybook/testing-library'
+import { galleryMock } from 'mocks/gallery.mock'
 import GalleryComponents from './Gallery'
-import { galleryMock } from './mock'
 
 const meta: Meta<typeof GalleryComponents> = {
   title: 'Components/Gallery',
