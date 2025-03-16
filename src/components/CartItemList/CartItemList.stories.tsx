@@ -1,7 +1,7 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import { cartItemsMock } from 'mocks/cartItem.mock'
+import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
 import theme from 'styles/theme'
 import CartItemListComponent from './CartItemList'
 
@@ -9,7 +9,7 @@ const meta: Meta<typeof CartItemListComponent> = {
   title: 'Components/CartItemList',
   component: CartItemListComponent,
   args: {
-    cartItems: cartItemsMock,
+    cartItems: cartItemsMinMock,
     total: '$530'
   }
 }

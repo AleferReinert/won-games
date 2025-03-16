@@ -2,7 +2,7 @@ import Box from 'components/Box/Box'
 import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import { cartItemsMock } from '../../../mocks/cartItems.mock'
+import { cartItemsMock } from '../../../mocks/cartItemsFull.mock'
 import * as S from './orders.styles'
 
 export function getServerSideProps() {

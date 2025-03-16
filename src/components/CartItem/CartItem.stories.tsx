@@ -1,13 +1,13 @@
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
-import { cartItemsMock } from 'mocks/cartItem.mock'
+import { cartItemsFullMock } from 'mocks/cartItemsFull.mock'
 import CartItemComponent from './CartItem'
 
 const meta: Meta<typeof CartItemComponent> = {
   title: 'Components/CartItem',
   component: CartItemComponent,
-  args: cartItemsMock[0]
+  args: cartItemsFullMock[0]
 }
 
 export default meta

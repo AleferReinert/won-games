@@ -2,7 +2,7 @@ import { MockedProvider } from '@apollo/client/testing'
 import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
 import { waitFor, within } from '@storybook/testing-library'
-import { emptyProductsMock } from 'mocks/emptyProducts.mock'
+import { emptyProductsResponseMock } from 'mocks/emptyProductsResponse.mock'
 import { filterMock } from 'mocks/filter.mock'
 import { moreProductsResponseMock } from 'mocks/moreProductsResponse.mock'
 import { productsResponseMock } from 'mocks/productsResponse.mock'
@@ -82,7 +82,7 @@ export const WithProducts: Story = {
 
 export const Empty: Story = {
   render: () => (
-    <MockedProvider mocks={[emptyProductsMock]}>
+    <MockedProvider mocks={[emptyProductsResponseMock]}>
       <ProductsPage filterOptions={filterMock} />
     </MockedProvider>
   ),

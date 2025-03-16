@@ -9,7 +9,7 @@ import Heading from 'components/Heading/Heading'
 import PaymentOptions from 'components/PaymentOptions/PaymentOptions'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { GET_RECOMMENDED_PRODUCTS } from 'graphql/queries/getRecommendedProducts'
-import { cartItemsMock } from 'mocks/cartItem.mock'
+import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
@@ -37,7 +37,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      cartItems: cartItemsMock,
+      cartItems: cartItemsMinMock,
       total: '$530',
       creditCards: creditCardsMock,
       recommendedSection: {

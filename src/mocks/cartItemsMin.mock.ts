@@ -1,6 +1,9 @@
 import { CartItemProps } from 'components/CartItem/CartItem'
 
-export const cartItemsMock: CartItemProps[] = [
+export const cartItemsMinMock: Omit<
+  CartItemProps,
+  'paymentInfo' | 'downloadLink'
+>[] = [
   {
     title: 'Population Zero',
     img: '/img/game-test.jpg',

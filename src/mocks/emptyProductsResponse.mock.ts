@@ -2,7 +2,7 @@ import { MockedResponse } from '@apollo/client/testing'
 import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
 import { GameEntityResponseCollection } from 'types/generated'
 
-export const emptyProductsMock: MockedResponse<{
+export const emptyProductsResponseMock: MockedResponse<{
   games: GameEntityResponseCollection
 }> = {
   request: {

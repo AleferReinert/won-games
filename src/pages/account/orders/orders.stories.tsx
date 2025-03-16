@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { within } from '@storybook/testing-library'
 import AccountTemplate from 'templates/Account/Account'
 import OrdersPage from '.'
-import { cartItemsMock } from '../../../mocks/cartItems.mock'
+import { cartItemsFullMock } from '../../../mocks/cartItemsFull.mock'
 
 const meta: Meta<typeof OrdersPage> = {
   title: 'Pages/Account/Orders',
@@ -35,7 +35,7 @@ export const Default: Story = {
 
 export const WithOrders: Story = {
   args: {
-    items: cartItemsMock
+    items: cartItemsFullMock
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
