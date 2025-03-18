@@ -1,1 +1,1 @@
-yarn test-storybook && yarn --no-install lint-staged
+yarn lint && yarn test-storybook
