@@ -6,11 +6,7 @@ const meta: Meta<typeof DefaultTemplate> = {
   title: 'Templates/Default',
   component: DefaultTemplate,
   args: {
-    children: (
-      <div style={{ color: 'white', textAlign: 'center' }}>
-        Required children
-      </div>
-    )
+    children: <div style={{ color: 'white', textAlign: 'center' }}>Required children</div>
   },
   parameters: {
     layout: 'fullscreen',
@@ -25,14 +21,22 @@ export default meta
 type Story = StoryObj<typeof DefaultTemplate>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const header = canvasElement.getElementsByTagName('header')[0]
-    const children = canvas.getByText(/required children/i)
-    const footer = canvasElement.getElementsByTagName('footer')[0]
 
-    expect(header).toBeInTheDocument()
-    expect(children).toBeInTheDocument()
-    expect(footer).toBeInTheDocument()
+    await step('Header', () => {
+      const header = canvas.getByRole('banner')
+      expect(header).toBeVisible()
+    })
+
+    await step('Required children', () => {
+      const children = canvas.getByText(/required children/i)
+      expect(children).toBeVisible()
+    })
+
+    await step('Footer', () => {
+      const footer = canvas.getByRole('contentinfo')
+      expect(footer).toBeVisible()
+    })
   }
 }

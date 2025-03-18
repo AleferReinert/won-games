@@ -10,14 +10,13 @@ type AuthTemplateProps = {
 const AuthTemplate = ({ title, children }: AuthTemplateProps) => {
   return (
     <S.Wrapper>
-      <S.BannerBlock>
+      <S.BannerBlock data-testid='bannerBlock'>
         <S.BannerContent>
           <Logo />
           <div>
             <Heading size='huge'>All your favorites games in one place</Heading>
             <S.Description>
-              <strong>WON</strong> is the best and most complete gaming
-              platform.
+              <strong>WON</strong> is the best and most complete gaming platform.
             </S.Description>
           </div>
           <S.BannerFooter>
@@ -28,7 +27,7 @@ const AuthTemplate = ({ title, children }: AuthTemplateProps) => {
       <S.AuthBlock>
         <S.AuthContent>
           <Logo color='black' size='large' />
-          <Heading $line='left' $lineColor='secondary' color='black'>
+          <Heading $line='left' $lineColor='secondary' color='black' as='h1'>
             {title}
           </Heading>
           {children}

@@ -1,9 +1,4 @@
-import {
-  AccountCircle,
-  CreditCard,
-  ExitToApp,
-  FormatListBulleted
-} from '@styled-icons/material-outlined'
+import { AccountCircle, CreditCard, ExitToApp, FormatListBulleted } from '@styled-icons/material-outlined'
 import Box from 'components/Box/Box'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
@@ -12,28 +7,28 @@ import * as S from './Account.styles'
 
 const nav = [
   {
-    icon: <AccountCircle title='My profile' />,
+    icon: <AccountCircle aria-hidden role='img' />,
     title: 'My profile',
     link: '/account/profile'
   },
   {
-    icon: <CreditCard title='My cards' />,
+    icon: <CreditCard aria-hidden role='img' />,
     title: 'My cards',
     link: '/account/credit-cards'
   },
   {
-    icon: <FormatListBulleted title='My orders' />,
+    icon: <FormatListBulleted aria-hidden role='img' />,
     title: 'My orders',
     link: '/account/orders'
   },
   {
-    icon: <ExitToApp title='Sign out' />,
+    icon: <ExitToApp aria-hidden role='img' />,
     title: 'Sign out',
     link: '/logout'
   }
 ]
 
-type AccountTemplateProps = {
+interface AccountTemplateProps {
   activeLink: 'My profile' | 'My cards' | 'My orders'
   children: React.ReactNode
 }
@@ -50,13 +45,9 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
           <S.Nav>
             {nav.map((item, index) => {
               return (
-                <S.Item
-                  key={index}
-                  href={item.link}
-                  active={activeLink === item.title}
-                >
+                <S.Item key={index} href={item.link} active={activeLink === item.title}>
                   {item.icon}
-                  <S.Text aria-hidden>{item.title}</S.Text>
+                  <S.Text>{item.title}</S.Text>
                 </S.Item>
               )
             })}

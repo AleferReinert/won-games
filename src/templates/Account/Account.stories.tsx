@@ -29,40 +29,39 @@ export default meta
 type Story = StoryObj<typeof AccountTemplate>
 
 export const Account: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const pageTitle = canvasElement.getElementsByTagName('h1')[0]
-    const myProfile = canvas.getByRole('link', { name: /my profile/i })
-    const myCards = canvas.getByRole('link', { name: /my cards/i })
-    const myOrders = canvas.getByRole('link', { name: /my orders/i })
-    const signOut = canvas.getByRole('link', { name: /sign out/i })
-    const myProfileIcon = canvas.getByTitle(/my profile/i)
-    const myCardsIcon = canvas.getByTitle(/my cards/i)
-    const myOrdersIcon = canvas.getByTitle(/my orders/i)
-    const signOutIcon = canvas.getByTitle(/sign out/i)
-    const children = canvas.getByText(/required children/i)
+    const main = within(canvasElement).getByRole('main')
+    const navigation = within(within(main).getByRole('navigation'))
 
-    expect(pageTitle).toBeInTheDocument()
-
-    // Navigation
-    expect(myProfile).toBeInTheDocument()
-    expect(myCards).toBeInTheDocument()
-    expect(myOrders).toBeInTheDocument()
-    expect(signOut).toBeInTheDocument()
-
-    // Icons
-    expect(myProfileIcon).toBeInTheDocument()
-    expect(myCardsIcon).toBeInTheDocument()
-    expect(myOrdersIcon).toBeInTheDocument()
-    expect(signOutIcon).toBeInTheDocument()
-
-    // Active link
-    expect(myProfile).toHaveStyle({
-      color: theme.colors.white,
-      backgroundColor: theme.colors.primary
+    await step('Page title', () => {
+      const title = canvas.getByRole('heading', { level: 1 })
+      expect(title).toHaveTextContent('My account')
     })
 
-    // Children
-    expect(children).toBeInTheDocument()
+    await step('Navigation links', () => {
+      const links = ['My profile', 'My cards', 'My orders', 'Sign out']
+      for (const link of links) {
+        expect(navigation.getByRole('link', { name: link })).toBeVisible()
+      }
+    })
+
+    await step('Navigation icons', () => {
+      const icons = navigation.getAllByRole('img', { hidden: true })
+      expect(icons.length).toBe(4)
+    })
+
+    await step('Required active link', () => {
+      const myProfile = canvas.getByRole('link', { name: /my profile/i })
+      expect(myProfile).toHaveStyle({
+        color: theme.colors.white,
+        backgroundColor: theme.colors.primary
+      })
+    })
+
+    await step('Required children', () => {
+      const children = canvas.getByText(/required children/i)
+      expect(children).toBeInTheDocument()
+    })
   }
 }

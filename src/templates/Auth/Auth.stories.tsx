@@ -22,35 +22,43 @@ export default meta
 type Story = StoryObj<typeof AuthTemplate>
 
 export const Auth: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const logos = canvas.getAllByRole('img', { name: /won games/i })
-    const hugeTitle = canvas.getByRole('heading', {
-      name: /all your favorites games in one place/i
+
+    await step('2 LogoComponents', () => {
+      const logoComponent = canvas.getAllByTestId('LogoComponent')
+      expect(logoComponent.length).toBe(2)
     })
-    const description = canvas.getByText(
-      /is the best and most complete gaming platform\./i
-    )
-    const copyright = canvas.getByText(
-      /Won Games 2023 © Todos os Direitos Reservados/i
-    )
-    const backgroundImage = window.getComputedStyle(
-      hugeTitle.parentElement!.parentElement!.parentElement!
-    ).backgroundImage
-    const title = canvas.getByRole('heading', { name: /required title/i })
-    const children = canvas.getByText(/required children/i)
 
-    // Two logos
-    expect(logos.length).toBe(2)
+    await step('Column left background image', () => {
+      const section = canvas.getByTestId('bannerBlock')
+      const sectionBackground = window.getComputedStyle(section).backgroundImage
+      expect(sectionBackground).toContain('img/auth-bg.jpg')
+    })
 
-    // Fixed elements
-    expect(hugeTitle).toBeInTheDocument()
-    expect(description).toBeInTheDocument()
-    expect(copyright).toBeInTheDocument()
-    expect(backgroundImage).toContain('img/auth-bg.jpg')
+    await step('Column left title', () => {
+      const title = canvas.getByRole('heading', { level: 2 })
+      expect(title).toHaveTextContent('All your favorites games in one place')
+    })
 
-    // Required elements
-    expect(title).toBeInTheDocument()
-    expect(children).toBeInTheDocument()
+    await step('Column left description', () => {
+      const description = canvas.getByText(/is the best and most complete gaming platform\./i)
+      expect(description).toBeVisible()
+    })
+
+    await step('Column left copyright', () => {
+      const copyright = canvas.getByText(/Won Games 2023 © Todos os Direitos Reservados/i)
+      expect(copyright).toBeVisible()
+    })
+
+    await step('Required title', () => {
+      const title = canvas.getByRole('heading', { level: 1 })
+      expect(title).toHaveTextContent('Required title')
+    })
+
+    await step('Required children', () => {
+      const children = canvas.getByText(/required children/i)
+      expect(children).toBeInTheDocument()
+    })
   }
 }

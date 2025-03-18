@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const BannerBlock = styled.div`
+export const BannerBlock = styled.section`
   ${({ theme }) => css`
     background: url('img/auth-bg.jpg') no-repeat;
     background-size: cover;
@@ -50,8 +50,7 @@ export const BannerContent = styled.div`
     z-index: ${theme.layers.base};
     display: grid;
     justify-content: space-between;
-    padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge}
-      ${theme.spacings.small};
+    padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge} ${theme.spacings.small};
     height: 100%;
   `}
 `
@@ -78,7 +77,7 @@ export const BannerFooter = styled.footer`
   `}
 `
 
-export const AuthBlock = styled.div`
+export const AuthBlock = styled.main`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     padding: ${theme.spacings.small};
