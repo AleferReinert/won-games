@@ -1,15 +1,18 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, within } from '@storybook/test'
+import { remToPx } from 'polished'
 import theme from 'styles/theme'
 import PriceComponent from './Price'
-import { remToPx } from 'polished'
 
 const meta: Meta<typeof PriceComponent> = {
   title: 'Components/Atoms/Price',
   component: PriceComponent,
   args: {
     price: 215
+  },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered'
   }
 }
 

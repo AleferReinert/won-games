@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import { cartItemsFullMock } from 'mocks/cartItemsFull.mock'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import { highlightMock } from 'mocks/highlight.mock'

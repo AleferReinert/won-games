@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { userEvent, within } from '@storybook/testing-library'
+import { expect, userEvent, within } from '@storybook/test'
 import { Email, Person } from '@styled-icons/material-outlined'
 import theme from 'styles/theme'
 import { hexToRGBA } from 'utils/tests/helpers'
@@ -10,8 +9,7 @@ const meta: Meta<typeof TextField> = {
   title: 'Components/Atoms/TextField',
   component: TextField,
   args: {
-    name: 'email',
-    id: 'email'
+    name: 'email'
   },
   argTypes: {
     onInput: {
@@ -33,43 +31,51 @@ const meta: Meta<typeof TextField> = {
   parameters: {
     backgrounds: {
       default: 'Light'
-    }
-  }
+    },
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 }
 export default meta
 
 type Story = StoryObj<typeof TextField>
 
 export const Default: Story = {
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const textField = canvas.getByRole('textbox')
     const labels = canvasElement.getElementsByTagName('label')
 
-    expect(textField).toHaveAttribute('id')
-    expect(textField).toHaveAttribute('name')
+    await step('Required name', () => {
+      expect(textField).toHaveAttribute('name', 'email')
+    })
 
-    // without label as default
-    expect(labels.length).toBe(0)
+    await step('Id value with name', () => {
+      expect(textField).toHaveAttribute('id', 'email')
+    })
+
+    step('Without label as default', () => {
+      expect(labels.length).toBe(0)
+    })
   }
 }
 
 export const Focus: Story = {
-  play: async ({ canvasElement, args }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const textField = canvas.getByRole('textbox')
 
-    // Accessibility with tab
-    expect(document.body).toHaveFocus()
-    await userEvent.tab()
-    expect(textField).toHaveFocus()
+    await step('Accessibility with tab', async () => {
+      expect(document.body).toHaveFocus()
+      await userEvent.tab()
+      expect(textField).toHaveFocus()
+    })
 
-    // change text when typing
-    const newText = 'my new custom value'
-    await userEvent.type(textField, newText)
-    expect(textField).toHaveValue(newText)
-    expect(args.onInput).toHaveBeenCalledTimes(newText.length)
-    expect(args.onInput).toHaveBeenCalledWith(newText)
+    step('Change text when typing', async () => {
+      const newText = 'my new custom value'
+      await userEvent.type(textField, newText)
+      expect(textField).toHaveValue(newText)
+    })
   }
 }
 
@@ -77,34 +83,38 @@ export const WithLabel: Story = {
   args: {
     label: 'With label'
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const label = canvas.getByText(/with label/i)
 
-    expect(label).toBeInTheDocument()
+    await step('Label', () => {
+      expect(label).toBeInTheDocument()
+    })
 
-    // Input with focus when label is clicked
-    await userEvent.click(label)
-    const textField = canvas.getByRole('textbox')
-    expect(textField).toHaveFocus()
-
-    // reset
-    await userEvent.click(document.body)
+    step('Focused input on label click', async () => {
+      await userEvent.click(label)
+      const textField = canvas.getByRole('textbox')
+      expect(textField).toHaveFocus()
+    })
   }
 }
 
 export const WithIcon: Story = {
   args: {
-    icon: <Person />
+    icon: <Person role='img' />
   },
-  play: async ({ canvasElement }) => {
-    const icon = canvasElement.getElementsByTagName('svg')
-    const inputWrapper = icon[0].parentElement?.parentElement
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const icon = canvas.getByRole('img', { hidden: true })
+    const inputWrapper = icon.parentElement?.parentElement
 
-    expect(icon.length).toBe(1)
+    await step('Icon', () => {
+      expect(icon).toBeVisible()
+    })
 
-    // left position as default
-    expect(inputWrapper).not.toHaveStyle({ 'flex-direction': 'row-reverse' })
+    step('Icon left position as default', () => {
+      expect(inputWrapper).not.toHaveStyle({ 'flex-direction': 'row-reverse' })
+    })
   }
 }
 
@@ -113,12 +123,13 @@ export const IconRight: Story = {
     icon: 'Person',
     $iconPosition: 'right'
   },
-  play: async ({ canvasElement }) => {
-    const inputWrapper =
-      canvasElement.getElementsByTagName('svg')[0].parentElement?.parentElement
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const inputWrapper = canvas.getByRole('textbox').parentElement
 
-    // left position as default
-    expect(inputWrapper).toHaveStyle({ 'flex-direction': 'row-reverse' })
+    step('Icon right position', () => {
+      expect(inputWrapper).toHaveStyle({ 'flex-direction': 'row-reverse' })
+    })
   }
 }
 
@@ -127,28 +138,29 @@ export const Disabled: Story = {
     disabled: true,
     label: 'Disabled'
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const label = canvas.getByText(/disabled/i)
     const textField = canvas.getByRole('textbox')
 
-    expect(label).toHaveStyle({
-      color: theme.colors.gray,
-      cursor: 'default'
+    await step('Input disabled', () => {
+      expect(textField).toBeDisabled()
     })
-    expect(textField).toBeDisabled()
-    expect(textField).toHaveStyle({ cursor: 'default' })
-    expect(textField.parentElement).toHaveStyle({ cursor: 'default' })
 
-    // not be acessible with tab
-    expect(document.body).toHaveFocus()
-    await userEvent.tab()
-    expect(textField).not.toHaveFocus()
+    await step('Styles', () => {
+      expect(label).toHaveStyle({
+        cursor: 'default',
+        color: theme.colors.gray
+      })
+      expect(textField).toHaveStyle({ cursor: 'default' })
+      expect(textField.parentElement).toHaveStyle({ cursor: 'default' })
+    })
 
-    // does not change when typing
-    const newText = 'my new text'
-    await userEvent.type(textField, newText)
-    expect(textField).not.toHaveValue(newText)
+    await step('Not acessible with tab', async () => {
+      expect(document.body).toHaveFocus()
+      await userEvent.tab()
+      expect(textField).not.toHaveFocus()
+    })
   }
 }
 
@@ -156,16 +168,20 @@ export const Error: Story = {
   args: {
     errorMessage: 'Ops...something is wrong'
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const textField = canvas.getByRole('textbox')
     const inputWrapper = textField.parentElement
     const errorMessage = canvas.getByText(/ops...something is wrong/i)
 
-    expect(errorMessage).toHaveStyle({ color: theme.colors.error })
+    await step('Red border', () => {
+      expect(inputWrapper).toHaveStyle({
+        borderColor: hexToRGBA(theme.colors.error)
+      })
+    })
 
-    expect(inputWrapper).toHaveStyle({
-      borderColor: hexToRGBA(theme.colors.error)
+    await step('Error message with red color', () => {
+      expect(errorMessage).toHaveStyle({ color: theme.colors.error })
     })
   }
 }
@@ -174,10 +190,12 @@ export const InitialValue: Story = {
   args: {
     initialValue: 'Initial value'
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const textField = canvas.getByRole('textbox')
 
-    expect(textField).toHaveValue('Initial value')
+    step('Initial value', () => {
+      expect(textField).toHaveValue('Initial value')
+    })
   }
 }

@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import theme from 'styles/theme'
 import { hexToRGBA } from 'utils/tests/helpers'
@@ -13,8 +12,10 @@ const meta: Meta<typeof CreditCardComponent> = {
   parameters: {
     backgrounds: {
       default: 'Light'
-    }
-  }
+    },
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -22,19 +23,25 @@ export default meta
 type Story = StoryObj<typeof CreditCardComponent>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const img = canvas.getByRole('img')
     const number = canvas.getByText(/\*\*\*\* \*\*\*\* \*\*\*\*/)
     const wrapper = img.parentElement
 
-    expect(img).toHaveAccessibleName(/visa/i)
-    expect(number).toBeInTheDocument()
+    await step('Accessible name', () => {
+      expect(img).toHaveAccessibleName(/visa/i)
+    })
 
-    // Direction left and color black as default
-    expect(wrapper).toHaveStyle({
-      flexDirection: 'row',
-      color: hexToRGBA(theme.colors.black)
+    await step('Number', () => {
+      expect(number).toBeInTheDocument()
+    })
+
+    step('Color black and direction left as default', () => {
+      expect(wrapper).toHaveStyle({
+        color: hexToRGBA(theme.colors.black),
+        flexDirection: 'row'
+      })
     })
   }
 }
@@ -43,13 +50,12 @@ export const Gray: Story = {
   args: {
     color: 'gray'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const img = canvas.getByRole('img')
-    const wrapper = img.parentElement
 
-    expect(wrapper).toHaveStyle({
-      color: hexToRGBA(theme.colors.gray)
+    step('Color gray', () => {
+      const wrapper = canvas.getByRole('img').parentElement
+      expect(wrapper).toHaveStyle({ color: hexToRGBA(theme.colors.gray) })
     })
   }
 }
@@ -58,13 +64,12 @@ export const Right: Story = {
   args: {
     direction: 'right'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const img = canvas.getByRole('img')
-    const wrapper = img.parentElement
 
-    expect(wrapper).toHaveStyle({
-      flexDirection: 'row-reverse'
+    step('Direction right', () => {
+      const wrapper = canvas.getByRole('img').parentElement
+      expect(wrapper).toHaveStyle({ flexDirection: 'row-reverse' })
     })
   }
 }

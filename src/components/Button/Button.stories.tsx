@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import { AddShoppingCart } from '@styled-icons/material-outlined'
 import { remToPx } from 'polished'
 import theme from 'styles/theme'
@@ -19,10 +18,9 @@ const meta: Meta<typeof ButtonComponent> = {
     }
   },
   parameters: {
-    backgrounds: {
-      default: 'Light'
-    }
-  }
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -33,31 +31,33 @@ export const Default: Story = {
   args: {
     children: 'default button'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const button = canvas.getByRole('button')
 
-    // size medium as default
-    expect(button).toHaveStyle({ height: remToPx('4rem') })
-    expect(button).toHaveStyle({ fontSize: remToPx(theme.font.sizes.small) })
+    await step('Size medium as default', () => {
+      expect(button).toHaveStyle({ fontSize: remToPx(theme.font.sizes.small) })
+      expect(button).toHaveStyle({ height: remToPx('4rem') })
+    })
 
-    // variant primary as default
-    expect(button).toHaveStyle({ color: theme.colors.white })
+    await step('Variant primary as default', () => {
+      expect(button).toHaveStyle({ color: theme.colors.white })
+    })
   }
 }
 
 export const WithIcon: Story = {
-  play: ({ canvasElement }) => {
-    const icon = canvasElement.getElementsByTagName('svg')
-
-    expect(icon.length).toBe(1)
+  args: {
+    children: <>{<AddShoppingCart role='img' />} button with icon</>
   },
-  render: ({ ...args }) => (
-    <ButtonComponent {...args}>
-      <AddShoppingCart />
-      button with icon
-    </ButtonComponent>
-  )
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    step('Icon', () => {
+      const icon = canvas.getByRole('img', { hidden: true })
+      expect(icon).toBeVisible()
+    })
+  }
 }
 
 export const Link: Story = {
@@ -65,13 +65,15 @@ export const Link: Story = {
     children: 'button with variant link',
     $variant: 'link'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button')
 
-    expect(button).toHaveStyle({
-      color: theme.colors.primary,
-      backgroundColor: 'rgba(0, 0, 0, 0)'
+    step('Links styles', () => {
+      const button = canvas.getByRole('button')
+      expect(button).toHaveStyle({
+        color: theme.colors.primary,
+        backgroundColor: 'rgba(0, 0, 0, 0)'
+      })
     })
   }
 }
@@ -81,11 +83,13 @@ export const Full: Story = {
     children: 'full button',
     $full: true
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button')
 
-    expect(button).toHaveStyle({ minWidth: '100%' })
+    step('Full width', () => {
+      const button = canvas.getByRole('button')
+      expect(button).toHaveStyle({ minWidth: '100%' })
+    })
   }
 }
 
@@ -94,11 +98,13 @@ export const Xsmall: Story = {
     children: 'xsmall button',
     size: 'xsmall'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button')
 
-    expect(button).toHaveStyle({ height: remToPx('2.2rem') })
+    step('Xsmall styles', () => {
+      const button = canvas.getByRole('button')
+      expect(button).toHaveStyle({ height: remToPx('2.2rem') })
+    })
   }
 }
 
@@ -107,13 +113,15 @@ export const Small: Story = {
     children: 'small button',
     size: 'small'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button')
 
-    expect(button).toHaveStyle({
-      height: remToPx('3rem'),
-      fontSize: remToPx(theme.font.sizes.xsmall)
+    step('Small styles', () => {
+      const button = canvas.getByRole('button')
+      expect(button).toHaveStyle({
+        height: remToPx('3rem'),
+        fontSize: remToPx(theme.font.sizes.xsmall)
+      })
     })
   }
 }
@@ -123,13 +131,15 @@ export const Large: Story = {
     children: 'large button',
     size: 'large'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button')
 
-    expect(button).toHaveStyle({
-      height: remToPx('5rem'),
-      fontSize: remToPx(theme.font.sizes.medium)
+    step('Large styles', () => {
+      const button = canvas.getByRole('button')
+      expect(button).toHaveStyle({
+        fontSize: remToPx(theme.font.sizes.medium),
+        height: remToPx('5rem')
+      })
     })
   }
 }
@@ -139,13 +149,15 @@ export const Disabled: Story = {
     children: 'disabled button',
     disabled: true
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button')
 
-    expect(button).toHaveStyle({
-      backgroundColor: hexToRGBA(theme.colors.gray),
-      cursor: 'default'
+    step('Disabled styles', () => {
+      const button = canvas.getByRole('button')
+      expect(button).toHaveStyle({
+        backgroundColor: hexToRGBA(theme.colors.gray),
+        cursor: 'not-allowed'
+      })
     })
   }
 }
@@ -156,10 +168,12 @@ export const AsLinkTag: Story = {
     asLink: true,
     href: '/'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const link = canvas.getByRole('link')
 
-    expect(link).toHaveAttribute('href')
+    step('Render as <a>', () => {
+      const link = canvas.getByRole('link')
+      expect(link).toHaveAttribute('href')
+    })
   }
 }

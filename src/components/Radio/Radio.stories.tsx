@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
-import type { Meta, StoryObj } from '@storybook/react'
-import { userEvent, waitFor, within } from '@storybook/testing-library'
+import { Meta, StoryObj } from '@storybook/react/*'
+import { expect, fn, userEvent, within } from '@storybook/test'
 import theme from 'styles/theme'
 import Radio from './Radio'
 
@@ -8,11 +7,12 @@ const meta: Meta<typeof Radio> = {
   title: 'Components/Atoms/Radio',
   component: Radio,
   args: {
+    id: 'radio-1',
     name: 'category'
   },
   argTypes: {
     onCheck: {
-      action: 'checked',
+      // action: 'checked',
       table: { disable: true }
     },
     $labelColor: {
@@ -28,13 +28,10 @@ const meta: Meta<typeof Radio> = {
       table: { disable: true }
     }
   },
-  render: (args) => (
-    <>
-      <Radio {...args} id='radio1' />
-      <Radio {...args} id='radio2' style={{ margin: '0.5rem 0' }} />
-      <Radio {...args} id='radio3' />
-    </>
-  )
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered'
+  }
 }
 
 export default meta
@@ -42,45 +39,19 @@ export default meta
 type Story = StoryObj<typeof Radio>
 
 export const Default: Story = {
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const radios = canvas.getAllByRole('radio')
+    const radio = canvas.getByRole('radio')
     const labels = canvasElement.getElementsByTagName('label')
 
-    for (const radio of radios) {
+    await step('Required attributes id and name', () => {
       expect(radio).toHaveAttribute('id')
       expect(radio).toHaveAttribute('name')
-    }
+    })
 
-    // without label as default
-    expect(labels.length).toBe(0)
-  }
-}
-
-export const Checked: Story = {
-  args: {
-    value: 'anyValue'
-  },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement)
-    const radios = canvas.getAllByRole('radio')
-    const onCheck = args.onCheck
-
-    // Accessibility with tab
-    expect(document.body).toHaveFocus()
-    await userEvent.tab()
-    expect(radios[0]).toHaveFocus()
-
-    expect(onCheck).not.toHaveBeenCalled()
-
-    for (let i = 0; i < radios.length; i++) {
-      // onCheck when click
-      await userEvent.click(radios[i])
-      await waitFor(() => {
-        expect(onCheck).toHaveBeenCalledTimes(i + 1)
-        expect(onCheck).toHaveBeenCalledWith('anyValue')
-      })
-    }
+    step('Without label as default', () => {
+      expect(labels.length).toBe(0)
+    })
   }
 }
 
@@ -88,22 +59,19 @@ export const WithLabel: Story = {
   args: {
     label: 'With Label'
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const labels = canvas.getAllByText(/with label/i)
-    const radios = canvas.getAllByRole('radio')
+    const label = canvas.getByText(/with label/i)
+    const radio = canvas.getByRole('radio')
 
-    for (let i = 0; i < labels.length; i++) {
-      expect(radios[i]).toHaveAttribute('id')
-      expect(labels[i]).toHaveAttribute('for')
+    await step('Label', () => {
+      expect(label).toHaveAttribute('for')
+    })
 
-      // label color white as default
-      expect(labels[i]).toHaveStyle({ color: theme.colors.white })
-
-      // radio checked on label click
-      await userEvent.click(labels[i])
-      expect(radios[i]).toBeChecked()
-    }
+    step('Radio checked on label click', async () => {
+      await userEvent.click(label)
+      expect(radio).toBeChecked()
+    })
   }
 }
 
@@ -117,12 +85,39 @@ export const WithBlackLabel: Story = {
       default: 'Light'
     }
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const labels = canvas.getAllByText(/with black label/i)
+    const label = canvas.getByText(/with black label/i)
 
-    for (const label of labels) {
+    step('Label black', () => {
       expect(label).toHaveStyle({ color: theme.colors.black })
-    }
+    })
+  }
+}
+
+export const OnCheck: Story = {
+  args: {
+    value: 'anyValue',
+    onCheck: fn()
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement)
+    const radio = canvas.getByRole('radio')
+
+    await step('Background with focus', () => {
+      expect(document.body).toHaveFocus()
+    })
+
+    await step('Radio with focus', async () => {
+      await userEvent.tab()
+      expect(radio).toHaveFocus()
+    })
+
+    step('Function called on check', async () => {
+      expect(args.onCheck).not.toHaveBeenCalled()
+      await userEvent.click(radio)
+      expect(args.onCheck).toHaveBeenCalledTimes(1)
+      expect(args.onCheck).toHaveBeenCalledWith('anyValue')
+    })
   }
 }

@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { userEvent, within } from '@storybook/testing-library'
+import { expect, fn, userEvent, within } from '@storybook/test'
 import { productMock } from '../../mocks/product.mock'
 import ProductComponent from './Product'
 
@@ -20,7 +19,11 @@ const meta: Meta<typeof ProductComponent> = {
         <Story />
       </div>
     )
-  ]
+  ],
+  parameters: {
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -28,13 +31,13 @@ export default meta
 type Story = StoryObj<typeof ProductComponent>
 
 export const Default: Story = {
-  play: async ({ canvasElement, args }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading', { name: 'Population Zero' })
     const developer = canvas.getByRole('heading', { name: 'Other Ocean' })
     const img = canvas.getByRole('img', { name: 'Population Zero' })
     const slug = canvas.getByRole('link')
-    const favIcon = canvas.getByRole('img', { name: /add to wishlist/i })
+    const icon = canvas.getByRole('img', { name: /add to wishlist/i })
     const price = canvas.getByLabelText('price')
     const buttonAddToCart = canvas.getByRole('button', { name: /add to cart/i })
 
@@ -43,13 +46,13 @@ export const Default: Story = {
     expect(developer).toBeInTheDocument()
     expect(img.getAttribute('src')).toMatch(/\/img\/game-test.jpg/)
     expect(slug).toHaveAttribute('href', '/product/population-zero')
-    expect(favIcon).toBeInTheDocument()
+    expect(icon).toBeInTheDocument()
     expect(price).toContainHTML('$215.00')
     expect(buttonAddToCart).toBeInTheDocument()
 
-    // function called when favIcon clicked
-    await userEvent.click(favIcon)
-    expect(args.onFav).toHaveBeenCalled()
+    // function called when icon clicked
+    // await userEvent.click(icon)
+    // expect(args.onFav).toHaveBeenCalled()
   }
 }
 
@@ -74,8 +77,23 @@ export const Favorited: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const favIcon = canvas.getByRole('img', { name: /remove from wishlist/i })
+    const icon = canvas.getByRole('img', { name: /remove from wishlist/i })
 
-    expect(favIcon).toBeInTheDocument()
+    expect(icon).toBeInTheDocument()
+  }
+}
+
+export const OnFav: Story = {
+  args: {
+    onFav: fn()
+  },
+  play: async ({ canvasElement, args, step }) => {
+    const canvas = within(canvasElement)
+    const icon = canvas.getByRole('img', { name: /add to wishlist/i })
+
+    step('onFav is called when icon is clicked', async () => {
+      await userEvent.click(icon)
+      expect(args.onFav).toHaveBeenCalled()
+    })
   }
 }

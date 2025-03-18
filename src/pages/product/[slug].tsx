@@ -32,7 +32,7 @@ export interface ProductPageProps {
   recommendedSection: ShowcaseProps
 }
 
-// Retorna os slugs dos primeiros 9 jogos
+// Return slugs of first 9 products
 export async function getStaticPaths() {
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query({
@@ -50,18 +50,19 @@ export async function getStaticPaths() {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const apolloClient = initializeApollo()
 
-  // Retorna os dados do produto
+  // Return product data
   const { data } = await apolloClient.query({
     query: GET_PRODUCT_BY_SLUG,
     variables: { slug: params?.slug }
   })
+
+  // Redirect to 404 if product is not found
+  if (!data.games.data.length) {
+    return { notFound: true }
+  }
   const game: Game = data.games.data[0].attributes
 
-  if (!data.games.data.length) {
-    return { notFound: true } // Redireciona para a página 404
-  }
-
-  // Retorne os produtos que estão chegando
+  // Return coming soon section
   const {
     data: { comingSoonGames, showcase }
   } = await apolloClient.query({
@@ -70,7 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   })
   const { comingSoonGames: comingSoonSection } = showcase.data.attributes
 
-  // Retorna os produtos recomendados
+  // Return recommended section
   const { data: recommended } = await apolloClient.query<
     Pick<Query, 'recommended'>
   >({

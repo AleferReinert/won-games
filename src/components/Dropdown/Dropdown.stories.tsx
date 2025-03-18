@@ -1,11 +1,15 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { userEvent, waitFor, within } from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, userEvent, waitFor, within } from '@storybook/test'
 import DropdownComponent from './Dropdown'
 
 const meta: Meta<typeof DropdownComponent> = {
   title: 'Components/Dropdown',
-  component: DropdownComponent
+  component: DropdownComponent,
+  decorators: [(story) => <div style={{ height: '80px' }}>{story()}</div>],
+  parameters: {
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -17,18 +21,27 @@ export const Dropdown: Story = {
     button: 'My account',
     children: 'children'
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.queryByRole('button', { name: /my account/i })
+    const button = canvas.getByRole('button', { name: /my account/i })
     const children = canvas.getByText('children')
 
-    expect(button).toBeInTheDocument()
-    expect(children).not.toBeVisible()
+    await step('Button', () => {
+      expect(button).toBeVisible()
+    })
 
-    userEvent.click(button!)
+    await step('Hidden children', () => {
+      expect(children).not.toBeVisible()
+    })
 
-    waitFor(() => {
-      expect(children).toBeVisible()
+    await step('Show children on click button', async () => {
+      userEvent.click(button)
+      await waitFor(() => expect(children).toBeVisible())
+    })
+
+    await step('Hidden children on second click button', async () => {
+      userEvent.click(button)
+      await waitFor(() => expect(children).not.toBeVisible())
     })
   }
 }

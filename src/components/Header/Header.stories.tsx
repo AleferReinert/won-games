@@ -1,9 +1,8 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { userEvent, waitFor, within } from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, userEvent, waitFor, within } from '@storybook/test'
+import theme from 'styles/theme'
 import { jsMediaQuery } from 'utils/tests/helpers'
 import HeaderComponent from './Header'
-import theme from 'styles/theme'
 
 const meta: Meta<typeof HeaderComponent> = {
   title: 'Components/Header',

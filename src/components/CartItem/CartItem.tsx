@@ -36,7 +36,7 @@ const CartItem = ({
               <S.Title>{title}</S.Title>
               {downloadLink && (
                 <S.DownloadLink href={downloadLink} title='Download' download>
-                  <FileDownload />
+                  <FileDownload title='Download' />
                 </S.DownloadLink>
               )}
             </S.TitleWrapper>

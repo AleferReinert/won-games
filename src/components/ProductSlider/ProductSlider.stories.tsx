@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import Container from 'components/Container/Container'
 import { productsMock } from '../../mocks/products.mock'
 import ProductSliderComponent from './ProductSlider'
@@ -54,15 +53,15 @@ export const ArrowBlack: Story = {
     backgrounds: {
       default: 'Light'
     }
-  },
-  play: async ({ canvasElement }) => {
-    // const canvas = within(canvasElement)
-    // todo: not working in terminal
-    // const nextIcon = await waitFor(() =>
-    //   canvas.getByRole('img', {
-    //     name: /next games/i
-    //   })
-    // )
-    // expect(nextIcon).toHaveStyle({ fill: theme.colors['black'] })
   }
+  // play: async ({ canvasElement }) => {
+  // const canvas = within(canvasElement)
+  // todo: not working in terminal
+  // const nextIcon = await waitFor(() =>
+  //   canvas.getByRole('img', {
+  //     name: /next games/i
+  //   })
+  // )
+  // expect(nextIcon).toHaveStyle({ fill: theme.colors['black'] })
+  // }
 }

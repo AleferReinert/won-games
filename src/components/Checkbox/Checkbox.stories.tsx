@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { userEvent, within } from '@storybook/testing-library'
+import { expect, userEvent, within } from '@storybook/test'
 import theme from 'styles/theme'
 import Checkbox from './Checkbox'
 
@@ -8,7 +7,7 @@ const meta: Meta<typeof Checkbox> = {
   title: 'Components/Atoms/Checkbox',
   component: Checkbox,
   args: {
-    name: 'category'
+    id: 'category'
   },
   argTypes: {
     onCheck: {
@@ -31,13 +30,10 @@ const meta: Meta<typeof Checkbox> = {
       table: { disable: true }
     }
   },
-  render: (args) => (
-    <>
-      <Checkbox {...args} id='checkbox1' />
-      <Checkbox {...args} id='checkbox2' style={{ margin: '0.5rem 0' }} />
-      <Checkbox {...args} id='checkbox3' />
-    </>
-  )
+  parameters: {
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -45,17 +41,18 @@ export default meta
 type Story = StoryObj<typeof Checkbox>
 
 export const Default: Story = {
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const checkboxes = canvas.getAllByRole('checkbox')
-    const labels = canvasElement.getElementsByTagName('label')
+    const checkbox = canvas.getByRole('checkbox')
+    const label = canvasElement.getElementsByTagName('label')
 
-    for (const checkbox of checkboxes) {
+    await step('Id', () => {
       expect(checkbox).toHaveAttribute('id')
-    }
+    })
 
-    // without label as default
-    expect(labels.length).toBe(0)
+    step('Without label as default', () => {
+      expect(label.length).toBe(0)
+    })
   }
 }
 
@@ -63,24 +60,27 @@ export const Checked: Story = {
   args: {
     isChecked: true
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const checkboxes = canvas.getAllByRole('checkbox')
+    const checkbox = canvas.getByRole('checkbox')
 
-    expect(document.body).toHaveFocus()
+    await step('Body with focus', () => {
+      expect(document.body).toHaveFocus()
+    })
 
-    for (const checkbox of checkboxes) {
-      // Accessibility with tab
+    await step('Checkbox with focus', async () => {
       await userEvent.tab()
       expect(checkbox).toHaveFocus()
+    })
 
-      // Checked test
+    await step('Checkbox checked', () => {
       expect(checkbox).toBeChecked()
+    })
+
+    await step('Checkbox not checked', async () => {
       await userEvent.click(checkbox)
       expect(checkbox).not.toBeChecked()
-      await userEvent.click(checkbox)
-      expect(checkbox).toBeChecked()
-    }
+    })
   }
 }
 
@@ -88,18 +88,17 @@ export const WithLabel: Story = {
   args: {
     label: 'With Label'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const labels = canvas.getAllByText(/with label/i)
-    const checkboxes = canvas.getAllByRole('checkbox')
+    const label = canvas.getByText(/with label/i)
 
-    for (let i = 0; i < labels.length; i++) {
-      expect(checkboxes[i]).toHaveAttribute('id')
-      expect(labels[i]).toHaveAttribute('for')
+    await step('Label	with for', () => {
+      expect(label).toHaveAttribute('for')
+    })
 
-      // label white as default
-      expect(labels[i]).toHaveStyle({ color: theme.colors.white })
-    }
+    step('Label	with color white as default', () => {
+      expect(label).toHaveStyle({ color: theme.colors.white })
+    })
   }
 }
 
@@ -113,12 +112,12 @@ export const WithBlackLabel: Story = {
       default: 'Light'
     }
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const labels = canvas.getAllByText(/with black label/i)
+    const label = canvas.getByText(/with black label/i)
 
-    for (const label of labels) {
+    step('Label	with color black', () => {
       expect(label).toHaveStyle({ color: theme.colors.black })
-    }
+    })
   }
 }

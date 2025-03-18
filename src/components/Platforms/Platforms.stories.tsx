@@ -1,11 +1,14 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import PlatformsComponent from './Platforms'
 
 const meta: Meta<typeof PlatformsComponent> = {
   title: 'Components/Atoms/Platforms',
-  component: PlatformsComponent
+  component: PlatformsComponent,
+  parameters: {
+    layout: 'padded'
+  },
+  tags: ['autodocs']
 }
 
 export default meta

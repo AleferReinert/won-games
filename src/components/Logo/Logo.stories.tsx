@@ -1,13 +1,16 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import { remToPx } from 'polished'
 import theme from 'styles/theme'
 import Logo from './Logo'
 
 const meta: Meta<typeof Logo> = {
   title: 'Components/Atoms/Logo',
-  component: Logo
+  component: Logo,
+  parameters: {
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -71,11 +74,6 @@ export const Large: Story = {
 export const WithoutText: Story = {
   args: {
     $hideText: true
-  },
-  parameters: {
-    backgrounds: {
-      default: 'Light'
-    }
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)

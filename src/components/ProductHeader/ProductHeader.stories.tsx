@@ -1,13 +1,21 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
+import Container from 'components/Container/Container'
 import { productHeaderMock } from '../../mocks/productHeader.mock'
 import ProductHeaderComponent from './ProductHeader'
 
 const meta: Meta<typeof ProductHeaderComponent> = {
   title: 'Components/ProductHeader',
   component: ProductHeaderComponent,
-  args: productHeaderMock
+  args: productHeaderMock,
+  decorators: [
+    (Story) => (
+      <Container>
+        <Story />
+      </Container>
+    )
+  ],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -15,18 +23,34 @@ export default meta
 type Story = StoryObj<typeof ProductHeaderComponent>
 
 export const ProductHeader: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: /borderlands 3/i })
-    const description = canvas.getByText(/now is hour to eliminate/i)
-    const price = canvas.getByText('$215.00')
-    const buttonAddToCart = canvas.getByRole('button', { name: /add to cart/i })
-    const buttonWishlist = canvas.getByRole('button', { name: /wishlist/i })
 
-    expect(title).toBeInTheDocument()
-    expect(description).toBeInTheDocument()
-    expect(price).toBeInTheDocument()
-    expect(buttonAddToCart).toBeInTheDocument()
-    expect(buttonWishlist).toBeInTheDocument()
+    await step('Title', () => {
+      const title = canvas.getByRole('heading', { name: /borderlands 3/i })
+      expect(title).toBeInTheDocument()
+    })
+
+    await step('Description', () => {
+      const description = canvas.getByText(/now is hour to eliminate/i)
+      expect(description).toBeInTheDocument()
+    })
+
+    await step('Price', () => {
+      const price = canvas.getByText('$215.00')
+      expect(price).toBeInTheDocument()
+    })
+
+    await step('Button add to cart', () => {
+      const buttonAddToCart = canvas.getByRole('button', {
+        name: /add to cart/i
+      })
+      expect(buttonAddToCart).toBeInTheDocument()
+    })
+
+    await step('Button wishlist', () => {
+      const buttonWishlist = canvas.getByRole('button', { name: /wishlist/i })
+      expect(buttonWishlist).toBeInTheDocument()
+    })
   }
 }

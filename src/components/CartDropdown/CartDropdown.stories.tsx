@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
 import CartDropdownComponent from './CartDropdown'
 
@@ -9,11 +8,12 @@ const meta: Meta<typeof CartDropdownComponent> = {
   component: CartDropdownComponent,
   decorators: [
     (Story) => (
-      <div style={{ textAlign: 'right', padding: '2rem' }}>
+      <div style={{ textAlign: 'right', padding: '2rem', height: '500px' }}>
         <Story />
       </div>
     )
-  ]
+  ],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -25,17 +25,28 @@ export const Default: Story = {
     cartItems: cartItemsMinMock,
     total: '$ 350,00'
   },
-  play: ({ canvasElement, args }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const badge = canvas.getByLabelText(/cart items/i)
-    const icon = canvas.getByRole('img', { name: 'Shopping cart' })
-    const content = canvas.getByText(args.cartItems![0].title)
-    const total = canvas.getByText(args.total!)
 
-    expect(badge).toHaveTextContent(args.cartItems!.length.toString())
-    expect(icon).toBeInTheDocument()
-    expect(content).toBeInTheDocument()
-    expect(total).toBeInTheDocument()
+    await step('Icon', () => {
+      const icon = canvas.getByRole('img', { name: 'Shopping cart' })
+      expect(icon).toBeInTheDocument()
+    })
+
+    await step('Badge with 3', () => {
+      const badge = canvas.getByLabelText(/cart items/i)
+      expect(badge).toHaveTextContent('3')
+    })
+
+    await step('Cart items list', () => {
+      const content = canvas.getByLabelText('cart list')
+      expect(content).toBeInTheDocument()
+    })
+
+    await step('Total', () => {
+      const total = canvas.getByText('$ 350,00')
+      expect(total).toBeInTheDocument()
+    })
   }
 }
 
@@ -43,12 +54,17 @@ export const Empty: Story = {
   args: {
     cartItems: []
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const badge = canvas.getByLabelText(/cart items/i)
     const emptyComponent = canvas.getByTestId('emptyComponent')
 
-    expect(badge).toHaveTextContent('0')
-    expect(emptyComponent).toBeInTheDocument()
+    await step('Badge with 0', () => {
+      expect(badge).toHaveTextContent('0')
+    })
+
+    step('Empty component', () => {
+      expect(emptyComponent).toBeInTheDocument()
+    })
   }
 }

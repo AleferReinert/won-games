@@ -1,6 +1,5 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, within } from '@storybook/test'
 import MenuMobileComponent from './MenuMobile'
 
 const meta: Meta<typeof MenuMobileComponent> = {

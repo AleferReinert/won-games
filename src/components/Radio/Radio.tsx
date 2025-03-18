@@ -4,18 +4,18 @@ import * as S from './Radio.styles'
 type RadioValue = string | string[] | number
 
 export type RadioProps = {
-  onCheck?: (value?: RadioValue) => void
   id: string
   name: string
+  onCheck?: (value?: RadioValue) => void
   label?: string
   $labelColor?: 'white' | 'black'
   value?: RadioValue
 } & InputHTMLAttributes<HTMLInputElement>
 
 const Radio = ({
-  onCheck,
   id,
   name,
+  onCheck,
   label,
   $labelColor = 'white',
   value,

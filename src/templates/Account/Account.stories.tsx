@@ -1,8 +1,7 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
-import AccountTemplate from './Account'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, within } from '@storybook/test'
 import theme from 'styles/theme'
+import AccountTemplate from './Account'
 
 const meta: Meta<typeof AccountTemplate> = {
   title: 'Templates/Account',

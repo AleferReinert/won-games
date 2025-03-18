@@ -47,7 +47,7 @@ export const wrapperModifiers = {
   disabled: (theme: DefaultTheme) => css`
     &:disabled {
       background: ${theme.colors.gray};
-      cursor: default;
+      cursor: not-allowed;
     }
   `
 }

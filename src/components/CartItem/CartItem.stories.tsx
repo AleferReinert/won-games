@@ -1,13 +1,13 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
-import { cartItemsFullMock } from 'mocks/cartItemsFull.mock'
+import { expect, within } from '@storybook/test'
+import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
 import CartItemComponent from './CartItem'
 
 const meta: Meta<typeof CartItemComponent> = {
   title: 'Components/CartItem',
   component: CartItemComponent,
-  args: cartItemsFullMock[0]
+  args: cartItemsMinMock[0],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -15,15 +15,23 @@ export default meta
 type Story = StoryObj<typeof CartItemComponent>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const img = canvas.getByRole('img', { name: 'Population Zero' })
-    const title = canvas.getByRole('heading', { name: 'Population Zero' })
-    const price = canvas.getByLabelText('price')
 
-    expect(img).toBeInTheDocument()
-    expect(title).toBeInTheDocument()
-    expect(price).toHaveTextContent('$215.00')
+    await step('Required product image', () => {
+      const img = canvas.getByRole('img', { name: 'Population Zero' })
+      expect(img).toBeVisible()
+    })
+
+    await step('Required product title', () => {
+      const title = canvas.getByRole('heading', { name: 'Population Zero' })
+      expect(title).toBeVisible()
+    })
+
+    await step('Required product price', () => {
+      const price = canvas.getByLabelText('price')
+      expect(price).toHaveTextContent('$215.00')
+    })
   }
 }
 
@@ -31,13 +39,18 @@ export const Download: Story = {
   args: {
     downloadLink: '/link'
   },
-  play: ({ canvasElement, args }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const downloadLink = canvas.getByRole('link', { name: /download/i })
-    const downloadIcon = downloadLink.getElementsByTagName('svg')[0]
 
-    expect(downloadLink).toHaveAttribute('href', args.downloadLink)
-    expect(downloadIcon).toBeInTheDocument()
+    await step('Icon', () => {
+      const icon = canvas.getByRole('img', { name: /download/i })
+      expect(icon).toBeInTheDocument()
+    })
+
+    await step('Link', () => {
+      const link = canvas.getByRole('link', { name: /download/i })
+      expect(link).toHaveAttribute('href', '/link')
+    })
   }
 }
 
@@ -50,16 +63,27 @@ export const Payment: Story = {
       purchaseDate: 'Purchase made on 07/06/2023 at 00:42'
     }
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const creditCardNumber = canvas.getByLabelText('credit card number')
-    const creditCardFlag = canvas.getByRole('img', { name: 'mastercard' })
-    const purchaseDate = canvas.getByLabelText('purchase date')
 
-    expect(creditCardNumber).toHaveTextContent('**** **** **** 4326')
-    expect(creditCardFlag).toHaveAttribute('src')
-    expect(purchaseDate).toHaveTextContent(
-      'Purchase made on 07/06/2023 at 00:42'
-    )
+    await step('Credit card number', () => {
+      const creditCardNumber = canvas.getByLabelText('credit card number')
+      expect(creditCardNumber).toHaveTextContent('**** **** **** 4326')
+    })
+
+    await step('Credit card flag', () => {
+      const creditCardFlag = canvas.getByRole('img', { name: 'mastercard' })
+      expect(creditCardFlag).toHaveAttribute(
+        'src',
+        expect.stringContaining('/img/creditCards/mastercard.png')
+      )
+    })
+
+    await step('Purchase date', () => {
+      const purchaseDate = canvas.getByLabelText('purchase date')
+      expect(purchaseDate).toHaveTextContent(
+        'Purchase made on 07/06/2023 at 00:42'
+      )
+    })
   }
 }

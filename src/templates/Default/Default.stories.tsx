@@ -1,8 +1,6 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, within } from '@storybook/test'
 import DefaultTemplate from './Default'
-import React from 'react'
 
 const meta: Meta<typeof DefaultTemplate> = {
   title: 'Templates/Default',

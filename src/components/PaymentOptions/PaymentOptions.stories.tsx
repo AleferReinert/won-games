@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import { creditCardsMock } from '../../mocks/creditCards.mock'
 import PaymentOptionsComponent from './PaymentOptions'
 
@@ -11,13 +10,16 @@ const meta: Meta<typeof PaymentOptionsComponent> = {
     creditCards: { table: { disable: true } },
     handlePayment: { action: 'button enabled', table: { disable: true } }
   },
-  decorators: [
-    (Story) => (
-      <div style={{ maxWidth: '39rem' }}>
-        <Story />
-      </div>
-    )
-  ]
+  parameters: {
+    layout: 'centered'
+  }
+  // decorators: [
+  //   (Story) => (
+  //     <div style={{ maxWidth: '39rem' }}>
+  //       <Story />
+  //     </div>
+  //   )
+  // ]
 }
 
 export default meta

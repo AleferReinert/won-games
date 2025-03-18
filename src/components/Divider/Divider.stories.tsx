@@ -1,6 +1,5 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, within } from '@storybook/test'
 import DividerComponent from './Divider'
 
 const meta: Meta<typeof DividerComponent> = {
@@ -13,10 +12,12 @@ export default meta
 type Story = StoryObj<typeof DividerComponent>
 
 export const Divider: Story = {
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const line = canvas.getByLabelText('line')
 
-    expect(line).toBeInTheDocument()
+    step('Line', () => {
+      const line = canvas.getByRole('separator')
+      expect(line).toBeVisible()
+    })
   }
 }

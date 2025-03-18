@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import { remToPx } from 'polished'
 import theme from 'styles/theme'
 import Ribbon from './Ribbon'
@@ -24,26 +23,34 @@ const meta: Meta<typeof Ribbon> = {
         <Story />
       </div>
     )
-  ]
+  ],
+  parameters: {
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 }
 export default meta
 
 type Story = StoryObj<typeof Ribbon>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new release/i)
 
-    expect(ribbon).toBeInTheDocument()
+    await step('Ribbon text', () => {
+      expect(ribbon).toBeInTheDocument()
+    })
 
-    // primary color as default
-    expect(ribbon).toHaveStyle({ backgroundColor: theme.colors.primary })
+    await step('Primary color as default', () => {
+      expect(ribbon).toHaveStyle({ backgroundColor: theme.colors.primary })
+    })
 
-    // size large as default
-    expect(ribbon).toHaveStyle({
-      height: remToPx('3.3rem'),
-      fontSize: remToPx(theme.font.sizes.small)
+    step('Size large as default', () => {
+      expect(ribbon).toHaveStyle({
+        fontSize: remToPx(theme.font.sizes.small),
+        height: remToPx('3.3rem')
+      })
     })
   }
 }
@@ -52,11 +59,13 @@ export const Secondary: Story = {
   args: {
     color: 'secondary'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new release/i)
 
-    expect(ribbon).toHaveStyle({ backgroundColor: theme.colors.secondary })
+    step('Secondary color', () => {
+      expect(ribbon).toHaveStyle({ backgroundColor: theme.colors.secondary })
+    })
   }
 }
 
@@ -64,13 +73,15 @@ export const Small: Story = {
   args: {
     size: 'small'
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new release/i)
 
-    expect(ribbon).toHaveStyle({
-      height: remToPx('2.4rem'),
-      fontSize: remToPx(theme.font.sizes.xxsmall)
+    step('Font 10px and height 24px', () => {
+      expect(ribbon).toHaveStyle({
+        fontSize: remToPx(theme.font.sizes.xxsmall),
+        height: remToPx('2.4rem')
+      })
     })
   }
 }

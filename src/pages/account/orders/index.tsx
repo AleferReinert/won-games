@@ -2,13 +2,13 @@ import Box from 'components/Box/Box'
 import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import { cartItemsMock } from '../../../mocks/cartItemsFull.mock'
+import { cartItemsFullMock } from '../../../mocks/cartItemsFull.mock'
 import * as S from './orders.styles'
 
 export function getServerSideProps() {
   return {
     props: {
-      items: cartItemsMock
+      items: cartItemsFullMock
     }
   }
 }
@@ -28,10 +28,10 @@ const OrdersPage = ({ items = [] }: OrdersPageProps) => {
           price={item.price}
           downloadLink={item.downloadLink}
           paymentInfo={{
-            creditCardNumber: item.paymentInfo?.creditCardNumber!,
-            creditCardBrand: item.paymentInfo?.creditCardBrand!,
-            creditCardFlag: item.paymentInfo?.creditCardFlag!,
-            purchaseDate: item.paymentInfo?.purchaseDate!
+            creditCardNumber: item.paymentInfo?.creditCardNumber || '',
+            creditCardBrand: item.paymentInfo?.creditCardBrand || '',
+            creditCardFlag: item.paymentInfo?.creditCardFlag || '',
+            purchaseDate: item.paymentInfo?.purchaseDate || ''
           }}
         />
       ))}

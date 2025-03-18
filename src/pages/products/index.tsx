@@ -146,8 +146,7 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const products = data?.games.data || []
   const totalProducts = data?.games.meta.pagination.total || 0
   const allProductsLoaded = products.length >= totalProducts
-  console.log('totalProducts: ', totalProducts)
-  console.log('allProductsLoaded: ', allProductsLoaded)
+
   return (
     <Container>
       <S.Wrapper>

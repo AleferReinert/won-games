@@ -1,8 +1,8 @@
 import { Preview } from '@storybook/react'
 import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/global'
-import React from 'react'
 import theme from '../src/styles/theme'
 
 const customViewports = {
@@ -62,6 +62,7 @@ const preview: Preview = {
       }
     },
     backgrounds: {
+      default: 'Dark',
       values: [
         {
           name: 'Dark',

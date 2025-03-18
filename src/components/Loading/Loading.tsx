@@ -1,9 +1,16 @@
+import Image from 'next/image'
+import dotsIcon from './../../../public/img/dots.svg'
 import * as S from './Loading.styles'
 
 const Loading = () => {
   return (
     <S.Wrapper>
-      <img src='/img/dots.svg' alt='Carregando' />
+      <Image
+        src={dotsIcon.src}
+        alt='Carregando'
+        width={dotsIcon.width}
+        height={dotsIcon.height}
+      />
     </S.Wrapper>
   )
 }

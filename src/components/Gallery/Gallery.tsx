@@ -56,6 +56,7 @@ const Gallery = ({ items }: GalleryProps) => {
   const slider = useRef<SlickSlider>(null)
   const [modal, setModal] = useState(false)
   const [mousePosition, setMousePosition] = useState(0)
+
   useEffect(() => {
     const handleKeyUp = ({ key }: KeyboardEvent) => {
       key === 'Escape' && setModal(false)
@@ -82,7 +83,7 @@ const Gallery = ({ items }: GalleryProps) => {
           >
             <Image
               src={item.src}
-              alt={'Thumb ' + item.label}
+              alt={'Thumb ' + (item.label ? item.label : '')}
               fill
               sizes='(max-width: 768px) 100vw, 50vw'
             />
@@ -106,7 +107,7 @@ const Gallery = ({ items }: GalleryProps) => {
               <Image
                 key={'gallery-' + index}
                 src={item.src}
-                alt={item.label}
+                alt={item.label ? item.label : ''}
                 fill
                 sizes='(max-width: 768px) 100vw, 50vw'
               /> // todo: verify sizes

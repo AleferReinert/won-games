@@ -14,12 +14,11 @@ const Button = ({
   children,
   size = 'medium',
   $full = false,
-  icon,
   $variant = 'primary',
   asLink = false,
   ...props
 }: ButtonProps) => {
-  const options = { size, $full, icon, $variant, ...props }
+  const options = { size, $full, $variant, ...props }
 
   return (
     <S.Wrapper as={asLink ? 'a' : 'button'} {...options}>

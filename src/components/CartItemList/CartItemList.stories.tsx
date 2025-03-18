@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
 import theme from 'styles/theme'
 import CartItemListComponent from './CartItemList'
@@ -11,7 +10,8 @@ const meta: Meta<typeof CartItemListComponent> = {
   args: {
     cartItems: cartItemsMinMock,
     total: '$530'
-  }
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -19,18 +19,29 @@ export default meta
 type Story = StoryObj<typeof CartItemListComponent>
 
 export const Default: Story = {
-  play: ({ canvasElement, args }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const cartItems = canvas.getAllByRole('heading')
-    const totalText = canvas.getByText('Total:')
-    const totalPrice = canvas.getByLabelText('total price')
-    const button = canvas.queryByRole('link', { name: /buy it now/i })
 
-    expect(cartItems.length).toBeGreaterThan(0)
-    expect(totalText).toBeInTheDocument
-    expect(totalPrice).toHaveTextContent(args.total!)
-    expect(totalPrice).toHaveStyle({ color: theme.colors.primary })
-    expect(button).not.toBeInTheDocument()
+    await step('Cart Items', () => {
+      const cartItems = canvas.getAllByRole('heading')
+      expect(cartItems.length).toBeGreaterThan(0)
+    })
+
+    await step('Total', () => {
+      const totalText = canvas.getByText('Total:')
+      expect(totalText).toBeVisible()
+    })
+
+    await step('Total price with primary color ', () => {
+      const totalPrice = canvas.getByLabelText('total price')
+      expect(totalPrice).toHaveTextContent('$530')
+      expect(totalPrice).toHaveStyle({ color: theme.colors.primary })
+    })
+
+    step('Hidden button', () => {
+      const button = canvas.queryByRole('link', { name: /buy it now/i })
+      expect(button).not.toBeInTheDocument()
+    })
   }
 }
 
@@ -38,15 +49,23 @@ export const WithButton: Story = {
   args: {
     button: true
   },
-  play: async ({ canvasElement, args }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('link', { name: /buy it now/i })
     const totalText = canvas.queryByText('Total:')
     const totalPrice = canvas.getByLabelText('total price')
 
-    expect(button).toBeInTheDocument()
-    expect(totalText).not.toBeInTheDocument()
-    expect(totalPrice).toHaveTextContent(args.total!)
+    await step('Button', () => {
+      const button = canvas.getByRole('link', { name: /buy it now/i })
+      expect(button).toBeInTheDocument()
+    })
+
+    await step('Hidden total title', () => {
+      expect(totalText).not.toBeInTheDocument()
+    })
+
+    await step('Total price', () => {
+      expect(totalPrice).toHaveTextContent('$530')
+    })
   }
 }
 
@@ -54,10 +73,12 @@ export const Empty: Story = {
   args: {
     cartItems: []
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const emptyText = canvas.getByText('Your cart is empty')
 
-    expect(emptyText).toBeInTheDocument()
+    step('Empty component', () => {
+      const emptyComponent = canvas.getByTestId('emptyComponent')
+      expect(emptyComponent).toBeInTheDocument()
+    })
   }
 }

@@ -1,6 +1,5 @@
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { within } from '@storybook/testing-library'
+import { expect, within } from '@storybook/test'
 import Container from 'components/Container/Container'
 import { highlightMock } from 'mocks/highlight.mock'
 import { productsMock } from 'mocks/products.mock'
@@ -78,20 +77,20 @@ export const GamesOnly: Story = {
     viewport: {
       defaultViewport: 'large'
     }
-  },
-  play: async ({ canvasElement, args }) => {
-    // const canvas = within(canvasElement)
-
-    // should render the games
-    expect(args.products).not.toHaveLength(0)
-
-    // arrowColor white as default
-    // todo: not working in terminal
-    // const nextIcon = await waitFor(() =>
-    //   canvas.getByRole('img', { name: /next games/i })
-    // )
-    // expect(nextIcon).toHaveStyle({ fill: theme.colors.white })
   }
+  // play: async ({ canvasElement, args }) => {
+  // const canvas = within(canvasElement)
+
+  // should render the games
+  // expect(args.products).not.toHaveLength(0)
+
+  // arrowColor white as default
+  // todo: not working in terminal
+  // const nextIcon = await waitFor(() =>
+  //   canvas.getByRole('img', { name: /next games/i })
+  // )
+  // expect(nextIcon).toHaveStyle({ fill: theme.colors.white })
+  // }
 }
 
 export const ArrowColorBlack: Story = {
@@ -106,13 +105,13 @@ export const ArrowColorBlack: Story = {
     backgrounds: {
       default: 'Light'
     }
-  },
-  play: async ({ canvasElement }) => {
-    // todo: not working in terminal
-    // const canvas = within(canvasElement)
-    // const nextIcon = await waitFor(() =>
-    //   canvas.getByRole('img', { name: /next games/i })
-    // )
-    // expect(nextIcon).toHaveStyle({ fill: theme.colors.black })
   }
+  // play: async ({ canvasElement }) => {
+  // todo: not working in terminal
+  // const canvas = within(canvasElement)
+  // const nextIcon = await waitFor(() =>
+  //   canvas.getByRole('img', { name: /next games/i })
+  // )
+  // expect(nextIcon).toHaveStyle({ fill: theme.colors.black })
+  // }
 }

@@ -1,8 +1,7 @@
-import type { StoryObj, Meta } from '@storybook/react'
-import { within } from '@storybook/testing-library'
-import { expect } from '@storybook/jest'
-import NotFoundPage from '.'
+import type { Meta, StoryObj } from '@storybook/react'
+import { expect, within } from '@storybook/test'
 import DefaultTemplate from 'templates/Default/Default'
+import NotFoundPage from '.'
 
 const meta: Meta<typeof NotFoundPage> = {
   title: 'Pages/404',

@@ -1,6 +1,5 @@
-import { expect, jest } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { userEvent, waitFor, within } from '@storybook/testing-library'
+import { expect, fn, userEvent, waitFor, within } from '@storybook/test'
 import theme from 'styles/theme'
 import { jsMediaQuery } from 'utils/tests/helpers'
 import { filterMock } from '../../mocks/filter.mock'
@@ -11,7 +10,20 @@ const meta: Meta<typeof FilterComponent> = {
   component: FilterComponent,
   args: {
     filterOptions: filterMock
-  }
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: '280px' }}>
+        <Story />
+      </div>
+    )
+  ],
+  parameters: [
+    {
+      layout: 'padded'
+    }
+  ],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -20,7 +32,7 @@ type Story = StoryObj<typeof FilterComponent>
 
 export const Mobile: Story = {
   args: {
-    handleFilter: jest.fn()
+    handleFilter: fn()
   },
   parameters: {
     viewport: {
@@ -102,7 +114,7 @@ export const InitialValues: Story = {
       action: 'true',
       sort: 'price:asc'
     },
-    handleFilter: jest.fn()
+    handleFilter: fn()
   },
   parameters: {
     viewport: {
@@ -140,7 +152,7 @@ export const InitialValues: Story = {
 
 export const OnUserChange: Story = {
   args: {
-    handleFilter: jest.fn()
+    handleFilter: fn()
   },
   parameters: {
     viewport: {

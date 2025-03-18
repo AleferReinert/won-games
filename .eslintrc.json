@@ -2,7 +2,6 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true,
     "node": true
   },
   "settings": {
@@ -14,8 +13,8 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@next/next/recommended",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:@next/next/recommended"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -34,5 +33,5 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-non-null-assertion": "off"
   },
-  "ignorePatterns": ["node_modules/", ".next/", "src/graphql/__generated__"]
+  "ignorePatterns": ["node_modules/", ".next/", "src/types/generated.ts"]
 }

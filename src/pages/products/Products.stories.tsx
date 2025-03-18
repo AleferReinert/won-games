@@ -1,7 +1,6 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { expect } from '@storybook/jest'
 import type { Meta, StoryObj } from '@storybook/react'
-import { waitFor, within } from '@storybook/testing-library'
+import { expect, waitFor, within } from '@storybook/test'
 import { emptyProductsResponseMock } from 'mocks/emptyProductsResponse.mock'
 import { filterMock } from 'mocks/filter.mock'
 import { moreProductsResponseMock } from 'mocks/moreProductsResponse.mock'
