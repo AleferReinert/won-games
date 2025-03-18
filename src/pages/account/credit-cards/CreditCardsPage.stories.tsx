@@ -27,12 +27,12 @@ export default meta
 type Story = StoryObj<typeof CreditCardsPage>
 
 export const CreditCards: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const visa = canvas.getByRole('img', { name: /visa/i })
-    const mastercard = canvas.getByRole('img', { name: /mastercard/i })
 
-    expect(visa).toBeInTheDocument()
-    expect(mastercard).toBeInTheDocument()
+    step('CreditCard components', () => {
+      const creditCardComponents = canvas.getAllByTestId('CreditCardComponent')
+      expect(creditCardComponents.length).toBeGreaterThan(0)
+    })
   }
 }

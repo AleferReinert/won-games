@@ -57,7 +57,7 @@ export const Empty: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const badge = canvas.getByLabelText(/cart items/i)
-    const emptyComponent = canvas.getByTestId('emptyComponent')
+    const emptyComponent = canvas.getByTestId('EmptyComponent')
 
     await step('Badge with 0', () => {
       expect(badge).toHaveTextContent('0')

@@ -8,7 +8,7 @@ const meta: Meta<typeof AccountTemplate> = {
   component: AccountTemplate,
   args: {
     activeLink: 'My profile',
-    children: <p>required children</p>
+    children: <p style={{ color: theme.colors.white }}>Required children</p>
   },
   argTypes: {
     activeLink: {

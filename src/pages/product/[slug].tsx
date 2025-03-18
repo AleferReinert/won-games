@@ -2,12 +2,8 @@ import Container from 'components/Container/Container'
 import Divider from 'components/Divider/Divider'
 import Gallery, { GalleryImageProps } from 'components/Gallery/Gallery'
 import Heading from 'components/Heading/Heading'
-import ProductDetails, {
-  ProductDetailsProps
-} from 'components/ProductDetails/ProductDetails'
-import ProductHeader, {
-  ProductHeaderProps
-} from 'components/ProductHeader/ProductHeader'
+import ProductDetails, { ProductDetailsProps } from 'components/ProductDetails/ProductDetails'
+import ProductHeader, { ProductHeaderProps } from 'components/ProductHeader/ProductHeader'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
 import { GET_COMING_SOON_PRODUCTS } from 'graphql/queries/getComingSoonProducts'
@@ -20,16 +16,16 @@ import Base from 'templates/Default/Default'
 import { Game, GameEntity, Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
-import * as S from './Product.styles'
+import * as S from './ProductPage.styles'
 
 export interface ProductPageProps {
   cover: string
   productHeader: ProductHeaderProps
-  gallery?: GalleryImageProps[]
   description: string
   details: ProductDetailsProps
   comingSoonSection: ShowcaseProps
   recommendedSection: ShowcaseProps
+  gallery?: GalleryImageProps[]
 }
 
 // Return slugs of first 9 products
@@ -72,9 +68,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { comingSoonGames: comingSoonSection } = showcase.data.attributes
 
   // Return recommended section
-  const { data: recommended } = await apolloClient.query<
-    Pick<Query, 'recommended'>
-  >({
+  const { data: recommended } = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: GET_RECOMMENDED_PRODUCTS
   })
 
@@ -84,8 +78,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     revalidate: 60,
     props: {
       game,
-      cover:
-        process.env.NEXT_PUBLIC_API_URL + game.cover.data?.attributes.url || '', // todo: add default cover
+      cover: process.env.NEXT_PUBLIC_API_URL + game.cover.data?.attributes.url || '', // todo: add default cover
       productHeader: {
         title: game.name,
         description: game.short_description,
@@ -99,14 +92,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       details: {
         developer: game.developers.data[0]?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
         releaseDate: game.release_date ?? '',
-        platforms: game.platforms.data.map(
-          (platform) => platform.attributes.name
-        ),
+        platforms: game.platforms.data.map((platform) => platform.attributes.name),
         publisher: game.publisher.data?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
         rating: game.rating ?? '',
-        categories: game.categories.data.map(
-          ({ attributes: category }) => category.name
-        )
+        categories: game.categories.data.map(({ attributes: category }) => category.name)
       },
       comingSoonSection: {
         title: comingSoonSection.title,
@@ -153,10 +142,7 @@ const ProductPage = ({
           <Heading $line='left' $lineColor='secondary'>
             About game
           </Heading>
-          <S.Content
-            data-testid='description'
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
+          <S.Content data-testid='description' dangerouslySetInnerHTML={{ __html: description }} />
         </Container>
       </S.Description>
 
@@ -173,10 +159,7 @@ const ProductPage = ({
         products={comingSoonSection.products}
       />
 
-      <Showcase
-        title={recommendedSection.title}
-        products={recommendedSection.products}
-      />
+      <Showcase title={recommendedSection.title} products={recommendedSection.products} />
     </>
   )
 }

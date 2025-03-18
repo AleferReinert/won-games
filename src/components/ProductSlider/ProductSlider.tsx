@@ -13,9 +13,7 @@ export interface ProductSliderProps {
 
 const settings: SliderSettings = {
   prevArrow: <ArrowLeft title='previous games' role='img' />,
-  nextArrow: (
-    <ArrowRight title='next games' role='img' data-testid='next-arrow' />
-  ),
+  nextArrow: <ArrowRight title='next games' role='img' />,
   slidesToShow: 4,
   infinite: false,
   lazyLoad: 'ondemand',
@@ -48,12 +46,9 @@ const settings: SliderSettings = {
   ]
 }
 
-const ProductSlider = ({
-  products,
-  $arrowColor = 'white'
-}: ProductSliderProps) => {
+const ProductSlider = ({ products, $arrowColor = 'white' }: ProductSliderProps) => {
   return (
-    <S.Wrapper $arrowColor={$arrowColor} data-testid='productSliderComponent'>
+    <S.Wrapper $arrowColor={$arrowColor} data-testid='ProductSliderComponent'>
       <Slider settings={settings}>
         {products.map((item, index) => (
           <Product key={index} {...item} />

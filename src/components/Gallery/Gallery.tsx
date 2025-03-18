@@ -1,8 +1,4 @@
-import {
-  ArrowBackIos as ArrowLeft,
-  ArrowForwardIos as ArrowRight,
-  Close
-} from '@styled-icons/material-outlined'
+import { ArrowBackIos as ArrowLeft, ArrowForwardIos as ArrowRight, Close } from '@styled-icons/material-outlined'
 import Slider, { SliderSettings } from 'components/Slider/Slider'
 import Image from 'next/image'
 import { SetStateAction, useEffect, useRef, useState } from 'react'
@@ -67,18 +63,15 @@ const Gallery = ({ items }: GalleryProps) => {
   }, [])
 
   return (
-    <S.Wrapper data-testid='galleryComponent'>
+    <S.Wrapper data-testid='GalleryComponent'>
       <Slider ref={slider} settings={thumbsSettings}>
         {items.map((item, index) => (
           <S.Thumb
             key={'thumb-' + index}
             title='Open modal'
-            onMouseDown={(event: { clientX: SetStateAction<number> }) =>
-              setMousePosition(event.clientX)
-            }
+            onMouseDown={(event: { clientX: SetStateAction<number> }) => setMousePosition(event.clientX)}
             onMouseUp={(event: { clientX: number }) => {
-              event.clientX === mousePosition &&
-                (slider.current!.slickGoTo(index, true), setModal(true))
+              event.clientX === mousePosition && (slider.current!.slickGoTo(index, true), setModal(true))
             }}
           >
             <Image
@@ -93,12 +86,7 @@ const Gallery = ({ items }: GalleryProps) => {
       </Slider>
 
       <S.Modal aria-label='modal' aria-hidden={!modal}>
-        <S.CloseModal
-          aria-label='Close modal'
-          role='button'
-          title='Close'
-          onClick={() => setModal(false)}
-        >
+        <S.CloseModal aria-label='Close modal' role='button' title='Close' onClick={() => setModal(false)}>
           <Close />
         </S.CloseModal>
         <S.ContentModal>

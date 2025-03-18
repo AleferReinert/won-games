@@ -17,7 +17,11 @@ const CreditCard = ({
   direction = 'left'
 }: CreditCardProps) => {
   return (
-    <S.Wrapper color={color} direction={direction}>
+    <S.Wrapper
+      color={color}
+      direction={direction}
+      data-testid='CreditCardComponent'
+    >
       <Image src={img} width='36' height='22' alt={name} />
       <S.Number aria-label='credit card number'>{number}</S.Number>
     </S.Wrapper>

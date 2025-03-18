@@ -25,7 +25,7 @@ const Highlight = ({
     <S.Wrapper
       background={background}
       $alignment={$alignment}
-      data-testid='highlightComponent'
+      data-testid='HighlightComponent'
     >
       <S.FloatImage>
         {float && (

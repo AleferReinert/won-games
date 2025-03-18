@@ -22,7 +22,7 @@ type Story = StoryObj<typeof Empty>
 export const Default: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByTestId('emptyComponent')
+    const wrapper = canvas.getByTestId('EmptyComponent')
     const img = canvas.getByRole('img')
     const title = canvas.getByRole('heading', { name: 'No results found' })
     const description = canvas.getByRole('paragraph')
@@ -70,7 +70,7 @@ export const InvertedColors: Story = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByTestId('emptyComponent')
+    const wrapper = canvas.getByTestId('EmptyComponent')
     const description = canvas.getByRole('paragraph')
 
     await step('Background white', () => {

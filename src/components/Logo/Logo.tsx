@@ -7,11 +7,7 @@ export interface LogoProps {
   $hideText?: boolean
 }
 
-const Logo = ({
-  color = 'white',
-  size = 'medium',
-  $hideText = false
-}: LogoProps) => {
+const Logo = ({ color = 'white', size = 'medium', $hideText = false }: LogoProps) => {
   const [id, setId] = useState('')
 
   useEffect(() => {
@@ -19,13 +15,7 @@ const Logo = ({
   }, [])
 
   return (
-    <S.Wrapper
-      color={color}
-      size={size}
-      $hideText={$hideText}
-      data-testid='logoComponent'
-      href='/'
-    >
+    <S.Wrapper color={color} size={size} $hideText={$hideText} data-testid='LogoComponent' href='/'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
@@ -50,44 +40,11 @@ const Logo = ({
           strokeWidth='1.5'
           d='M7.592 7.103c-5.11 2.755-4.519 5-4.519 7.5M57.274 26.103v1M3.052 18.103v2M57.274 30.103v5'
         />
-        <path
-          stroke='#0A0D27'
-          strokeLinecap='round'
-          strokeWidth='2'
-          d='M13.053 15.103v6M10.04 18.103h6.025'
-        />
-        <ellipse
-          cx='1.506'
-          cy='1.5'
-          fill='#0A0D27'
-          rx='1.506'
-          ry='1.5'
-          transform='matrix(1 0 0 1 43.217 12.16)'
-        />
-        <ellipse
-          cx='1.506'
-          cy='1.5'
-          fill='#0A0D27'
-          rx='1.506'
-          ry='1.5'
-          transform='matrix(1 0 0 1 48.237 16.103)'
-        />
-        <ellipse
-          cx='1.506'
-          cy='1.5'
-          fill='#0A0D27'
-          rx='1.506'
-          ry='1.5'
-          transform='matrix(1 0 0 1 43.217 20.103)'
-        />
-        <ellipse
-          cx='1.506'
-          cy='1.5'
-          fill='#0A0D27'
-          rx='1.506'
-          ry='1.5'
-          transform='matrix(1 0 0 1 38.196 16.103)'
-        />
+        <path stroke='#0A0D27' strokeLinecap='round' strokeWidth='2' d='M13.053 15.103v6M10.04 18.103h6.025' />
+        <ellipse cx='1.506' cy='1.5' fill='#0A0D27' rx='1.506' ry='1.5' transform='matrix(1 0 0 1 43.217 12.16)' />
+        <ellipse cx='1.506' cy='1.5' fill='#0A0D27' rx='1.506' ry='1.5' transform='matrix(1 0 0 1 48.237 16.103)' />
+        <ellipse cx='1.506' cy='1.5' fill='#0A0D27' rx='1.506' ry='1.5' transform='matrix(1 0 0 1 43.217 20.103)' />
+        <ellipse cx='1.506' cy='1.5' fill='#0A0D27' rx='1.506' ry='1.5' transform='matrix(1 0 0 1 38.196 16.103)' />
         <path
           className='text'
           aria-label='won'

@@ -5,7 +5,7 @@ import Heading from 'components/Heading/Heading'
 import Product, { ProductProps } from 'components/Product/Product'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { GET_RECOMMENDED_PRODUCTS } from 'graphql/queries/getRecommendedProducts'
-import * as S from 'pages/wishlist/Wishlist.styles'
+import * as S from 'pages/wishlist/WishlistPage.styles'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
 import { Query } from 'types/generated'
@@ -38,24 +38,18 @@ export async function getStaticProps() {
   }
 }
 
-const WishlistPage = ({
-  wishlistProducts,
-  recommendedSection
-}: WishlistPageProps & NextPageWithLayout) => {
+const WishlistPage = ({ wishlistProducts, recommendedSection }: WishlistPageProps & NextPageWithLayout) => {
   const emptyWishlist = !wishlistProducts || !wishlistProducts.length
 
   return (
-    <>
+    <div data-testid='WishlistPageComponent'>
       <Container>
-        <Heading $line='left' $lineColor='secondary'>
+        <Heading $line='left' $lineColor='secondary' as='h1'>
           Wishlist
         </Heading>
 
         {emptyWishlist ? (
-          <Empty
-            title='Your wishlist is empty'
-            $description='Games added to your wishlist will appear here.'
-          />
+          <Empty title='Your wishlist is empty' $description='Games added to your wishlist will appear here.' />
         ) : (
           <S.WrapperWishlistGames>
             {wishlistProducts?.map((product, index) => (
@@ -78,7 +72,7 @@ const WishlistPage = ({
         highlight={recommendedSection.highlight}
         products={recommendedSection.products}
       />
-    </>
+    </div>
   )
 }
 

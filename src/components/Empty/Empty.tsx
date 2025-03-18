@@ -10,17 +10,10 @@ export interface EmptyProps {
   buttonUrl?: string
 }
 
-const Empty = ({
-  title,
-  $description,
-  buttonText,
-  buttonUrl,
-  $invertedColors = false,
-  $small = false
-}: EmptyProps) => {
+const Empty = ({ title, $description, buttonText, buttonUrl, $invertedColors = false, $small = false }: EmptyProps) => {
   return (
     <S.Wrapper
-      data-testid='emptyComponent'
+      data-testid='EmptyComponent'
       title={title}
       $description={$description}
       $invertedColors={$invertedColors}

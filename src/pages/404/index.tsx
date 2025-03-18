@@ -1,18 +1,17 @@
+import Container from 'components/Container/Container'
 import Empty from 'components/Empty/Empty'
-import * as S from 'pages/404/404.styles'
+import Heading from 'components/Heading/Heading'
 import type { ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 
 const NotFoundPage = () => {
   return (
-    <S.Wrapper>
-      <Empty
-        title='404'
-        $description='This page could not be found.'
-        buttonText='Go back'
-        buttonUrl='/'
-      />
-    </S.Wrapper>
+    <Container>
+      <Heading as='h1' $line='left' $lineColor='secondary'>
+        Página não encontrada
+      </Heading>
+      <Empty title='404' $description='This page could not be found.' buttonText='Go back' buttonUrl='/' />
+    </Container>
   )
 }
 

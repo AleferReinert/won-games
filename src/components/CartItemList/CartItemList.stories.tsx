@@ -77,7 +77,7 @@ export const Empty: Story = {
     const canvas = within(canvasElement)
 
     step('Empty component', () => {
-      const emptyComponent = canvas.getByTestId('emptyComponent')
+      const emptyComponent = canvas.getByTestId('EmptyComponent')
       expect(emptyComponent).toBeInTheDocument()
     })
   }

@@ -1,7 +1,4 @@
-import {
-  Close as CloseIcon,
-  FilterList as FilterListIcon
-} from '@styled-icons/material-outlined'
+import { Close as CloseIcon, FilterList as FilterListIcon } from '@styled-icons/material-outlined'
 import Button from 'components/Button/Button'
 import Checkbox from 'components/Checkbox/Checkbox'
 import Heading from 'components/Heading/Heading'
@@ -27,11 +24,7 @@ export type FilterProps = {
   handleFilter: (values: ParsedUrlQueryInput) => void
 }
 
-const Filter = ({
-  filterOptions,
-  initialValues = {},
-  handleFilter
-}: FilterProps) => {
+const Filter = ({ filterOptions, initialValues = {}, handleFilter }: FilterProps) => {
   const [values, setValues] = useState(initialValues)
   const [$isOpen, setIsOpen] = useState(false)
 
@@ -59,19 +52,14 @@ const Filter = ({
         <FilterListIcon aria-hidden='true' />
       </S.OpenFilter>
 
-      <S.Wrapper $isOpen={$isOpen} data-testid='filterComponent'>
+      <S.Wrapper $isOpen={$isOpen} data-testid='FilterComponent'>
         <S.CloseFilter onClick={() => setIsOpen(false)} title='Close filters'>
           <CloseIcon />
         </S.CloseFilter>
         <S.Items>
           {filterOptions.map((filter, index) => (
             <S.Item key={index}>
-              <Heading
-                $line='bottom'
-                $lineColor='secondary'
-                color='black'
-                size='xlarge'
-              >
+              <Heading $line='bottom' $lineColor='secondary' color='black' size='xlarge'>
                 {filter.title}
               </Heading>
               {filter.type === 'checkbox'
@@ -95,9 +83,7 @@ const Filter = ({
                       label={field.label}
                       value={field.value}
                       $labelColor='black'
-                      defaultChecked={
-                        String(field.value) === String(values[filter.name])
-                      }
+                      defaultChecked={String(field.value) === String(values[filter.name])}
                       onChange={() => handleChange(filter.name, field.value)}
                     />
                   ))}

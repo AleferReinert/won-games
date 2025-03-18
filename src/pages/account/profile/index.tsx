@@ -1,7 +1,7 @@
 import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
-import * as S from 'pages/account/profile/Profile.styles'
+import * as S from 'pages/account/profile/ProfilePage.styles'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
 

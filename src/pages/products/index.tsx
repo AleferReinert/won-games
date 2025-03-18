@@ -10,7 +10,7 @@ import { GET_ALL_PLATFORMS } from 'graphql/queries/getAllPlatforms'
 import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
-import * as S from 'pages/products/Products.styles'
+import * as S from 'pages/products/ProductsPage.styles'
 import { ParsedUrlQueryInput } from 'querystring'
 import { type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
@@ -112,19 +112,16 @@ interface ProductsPageProps {
 
 const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const { query, push } = useRouter()
-  const { data, fetchMore, loading } = useQuery<Pick<Query, 'games'>>(
-    GET_ALL_PRODUCTS,
-    {
-      notifyOnNetworkStatusChange: true,
-      variables: {
-        limit: productsLimit,
-        ...queryStringToGraphqlFilters({
-          queryString: query,
-          filterOptions
-        })
-      }
+  const { data, fetchMore, loading } = useQuery<Pick<Query, 'games'>>(GET_ALL_PRODUCTS, {
+    notifyOnNetworkStatusChange: true,
+    variables: {
+      limit: productsLimit,
+      ...queryStringToGraphqlFilters({
+        queryString: query,
+        filterOptions
+      })
     }
-  )
+  })
 
   const handleFilter = (values: ParsedUrlQueryInput) => {
     push({
@@ -148,13 +145,9 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const allProductsLoaded = products.length >= totalProducts
 
   return (
-    <Container>
+    <Container data-testid='ProductsPage'>
       <S.Wrapper>
-        <Filter
-          filterOptions={filterOptions}
-          initialValues={query}
-          handleFilter={handleFilter}
-        />
+        <Filter filterOptions={filterOptions} initialValues={query} handleFilter={handleFilter} />
 
         <div>
           <S.Products>
@@ -163,14 +156,9 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
                 <Product
                   key={index}
                   title={attributes.name}
-                  developer={
-                    attributes.developers.data[0]?.attributes.name || ''
-                  } //todo: no strapi não da pra colocar required
+                  developer={attributes.developers.data[0]?.attributes.name || ''} //todo: no strapi não da pra colocar required
                   img={
-                    attributes.cover?.data
-                      ? process.env.NEXT_PUBLIC_API_URL +
-                        attributes.cover.data.attributes.url
-                      : ''
+                    attributes.cover?.data ? process.env.NEXT_PUBLIC_API_URL + attributes.cover.data.attributes.url : ''
                   }
                   price={attributes.price}
                   slug={attributes.slug}
@@ -178,10 +166,7 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
               ))}
           </S.Products>
           {products.length === 0 ? (
-            <Empty
-              title='No results found'
-              $description="Sorry, we couldn't find any results for your search."
-            />
+            <Empty title='No results found' $description="Sorry, we couldn't find any results for your search." />
           ) : loading ? (
             <Loading />
           ) : allProductsLoaded ? null : (

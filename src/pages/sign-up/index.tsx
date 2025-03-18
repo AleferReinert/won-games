@@ -2,7 +2,7 @@ import { AccountCircle, Email, Lock } from '@styled-icons/material-outlined'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
 import Link from 'next/link'
-import * as S from 'pages/sign-up/sign-up.styles'
+import * as S from 'pages/sign-up/SignUpPage.styles'
 import type { ReactElement } from 'react'
 import Auth from 'templates/Auth/Auth'
 
@@ -11,25 +11,10 @@ const SignUpPage = () => {
     <S.FormWrapper>
       <form>
         <TextField name='name' placeholder='Name' icon={<AccountCircle />} />
-        <TextField
-          name='email'
-          type='email'
-          placeholder='E-mail'
-          icon={<Email />}
-        />
-        <TextField
-          name='password'
-          type='password'
-          placeholder='Password'
-          icon={<Lock />}
-        />
-        <TextField
-          name='confirm-password'
-          type='password'
-          placeholder='Confirm password'
-          icon={<Lock />}
-        />
-        <Button $full size='large'>
+        <TextField name='email' type='email' placeholder='E-mail' icon={<Email />} />
+        <TextField name='password' type='password' placeholder='Password' icon={<Lock />} />
+        <TextField name='confirm-password' type='password' placeholder='Confirm password' icon={<Lock />} />
+        <Button $full size='large' type='submit'>
           Sign up now
         </Button>
         <S.FormLink>

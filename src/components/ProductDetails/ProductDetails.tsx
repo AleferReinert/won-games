@@ -13,24 +13,11 @@ export type ProductDetailsProps = {
   categories: string[]
 }
 
-const ProductDetails = ({
-  developer,
-  releaseDate,
-  platforms,
-  publisher,
-  rating,
-  categories
-}: ProductDetailsProps) => {
-  const emptyData =
-    !categories.length &&
-    !platforms.length &&
-    !releaseDate &&
-    !developer &&
-    !publisher &&
-    rating === ''
+const ProductDetails = ({ developer, releaseDate, platforms, publisher, rating, categories }: ProductDetailsProps) => {
+  const emptyData = !categories.length && !platforms.length && !releaseDate && !developer && !publisher && rating === ''
 
   return (
-    <S.Wrapper data-testid='productDetailsComponent'>
+    <S.Wrapper data-testid='ProductDetailsComponent'>
       <Heading $line='left' $lineColor='secondary'>
         Game details
       </Heading>
@@ -84,9 +71,7 @@ const ProductDetails = ({
             {rating && (
               <S.Block>
                 <S.Title>Rating</S.Title>
-                <S.Description>
-                  {rating === 'BR0' ? 'FREE' : rating.replace('BR', '') + '+'}
-                </S.Description>
+                <S.Description>{rating === 'BR0' ? 'FREE' : rating.replace('BR', '') + '+'}</S.Description>
               </S.Block>
             )}
           </S.Content>

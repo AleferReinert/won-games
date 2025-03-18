@@ -2,7 +2,7 @@ import { Email, Lock } from '@styled-icons/material-outlined'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
 import Link from 'next/link'
-import * as S from 'pages/sign-in/sign-in.styles'
+import * as S from 'pages/sign-in/SignInPage.styles'
 import type { ReactElement } from 'react'
 import Auth from 'templates/Auth/Auth'
 
@@ -10,20 +10,10 @@ const SignInPage = () => {
   return (
     <S.FormWrapper>
       <form>
-        <TextField
-          name='email'
-          type='email'
-          placeholder='E-mail'
-          icon={<Email />}
-        />
-        <TextField
-          name='password'
-          type='password'
-          placeholder='Password'
-          icon={<Lock />}
-        />
-        <S.ForgotPassword href='/link'>Forgot your password?</S.ForgotPassword>
-        <Button $full size='large'>
+        <TextField name='email' type='email' placeholder='E-mail' icon={<Email />} />
+        <TextField name='password' type='password' placeholder='Password' icon={<Lock />} />
+        <S.ForgotPassword href='/todo'>Forgot your password?</S.ForgotPassword>
+        <Button $full size='large' type='submit'>
           Sign in now
         </Button>
         <S.FormLink>

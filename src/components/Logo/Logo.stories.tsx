@@ -21,7 +21,7 @@ export const Default: Story = {
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const logo = canvas.getByLabelText(/won games/i)
-    const wrapper = canvas.getByTestId('logoComponent')
+    const wrapper = canvas.getByTestId('LogoComponent')
 
     expect(logo).toHaveStyle({ color: theme.colors.white })
     expect(wrapper).toHaveStyle({ width: remToPx('11rem') })
@@ -51,7 +51,7 @@ export const Small: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByTestId('logoComponent')
+    const wrapper = canvas.getByTestId('LogoComponent')
 
     expect(wrapper).toHaveStyle({ width: remToPx('5.8rem') })
   }
@@ -63,7 +63,7 @@ export const Large: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByTestId('logoComponent')
+    const wrapper = canvas.getByTestId('LogoComponent')
 
     expect(wrapper).toHaveStyle({
       width: remToPx('20rem')
@@ -77,7 +77,7 @@ export const WithoutText: Story = {
   },
   play: ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByTestId('logoComponent')
+    const wrapper = canvas.getByTestId('LogoComponent')
     const text = canvas.getByLabelText('won')
 
     expect(wrapper).toBeVisible()

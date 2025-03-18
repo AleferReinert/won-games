@@ -1,7 +1,7 @@
 import Box from 'components/Box/Box'
 import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
 import { creditCardsMock } from 'mocks/creditCards.mock'
-import * as S from 'pages/account/credit-cards/credit-cards.styles'
+import * as S from 'pages/account/credit-cards/CreditCardsPage.styles'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
 
@@ -20,9 +20,9 @@ type CreditCardsPageProps = {
 const CreditCardsPage = ({ creditCards }: CreditCardsPageProps) => {
   return (
     <Box>
-      <S.CreditCards role='list'>
+      <S.CreditCards>
         {creditCards?.map((creditCard, index) => (
-          <S.Item role='listitem' key={index}>
+          <S.Item key={index}>
             <CreditCard
               img={creditCard.img}
               name={creditCard.name}

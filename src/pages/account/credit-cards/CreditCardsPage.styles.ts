@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const CreditCards = styled.div`
+export const CreditCards = styled.ul`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@ export const CreditCards = styled.div`
   `}
 `
 
-export const Item = styled.div`
+export const Item = styled.li`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightGray};
     padding: ${theme.spacings.xsmall};

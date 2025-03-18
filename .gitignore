@@ -39,3 +39,5 @@ public/workbox-*.js
 /src/stories
 /storybook-static
 build-storybook.log
+
+tsconfig.tsbuildinfo

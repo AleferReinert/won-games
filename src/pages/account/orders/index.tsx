@@ -3,7 +3,7 @@ import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
 import { cartItemsFullMock } from '../../../mocks/cartItemsFull.mock'
-import * as S from './orders.styles'
+import * as S from './OrdersPage.styles'
 
 export function getServerSideProps() {
   return {

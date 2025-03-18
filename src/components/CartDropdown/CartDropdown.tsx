@@ -12,7 +12,7 @@ interface CartDropdownProps {
 
 const CartDropdown = ({ cartItems, total }: CartDropdownProps) => {
   return (
-    <S.Wrapper data-testid='cartDropdownComponent'>
+    <S.Wrapper data-testid='CartDropdownComponent'>
       <div id='desktop'>
         <Dropdown
           button={

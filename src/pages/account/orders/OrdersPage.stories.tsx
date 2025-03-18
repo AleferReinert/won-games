@@ -24,11 +24,14 @@ export default meta
 type Story = StoryObj<typeof OrdersPage>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  name: 'Empty (default)',
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const emptyMessage = canvas.getByText(/you have no orders yet/i)
 
-    expect(emptyMessage).toBeInTheDocument()
+    step('Empty message', () => {
+      const emptyMessage = canvas.getByText(/you have no orders yet/i)
+      expect(emptyMessage).toBeInTheDocument()
+    })
   }
 }
 
@@ -36,10 +39,12 @@ export const WithOrders: Story = {
   args: {
     items: cartItemsFullMock
   },
-  play: ({ canvasElement }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const list = canvas.getByRole('list')
 
-    expect(list).toBeInTheDocument()
+    step('CartItem components ', () => {
+      const cartItemComponents = canvas.getAllByTestId('CartItemComponent')
+      expect(cartItemComponents.length).toBeGreaterThan(0)
+    })
   }
 }

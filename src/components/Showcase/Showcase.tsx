@@ -19,7 +19,7 @@ const Showcase = ({
   $arrowColor = 'white'
 }: ShowcaseProps) => {
   return (
-    <S.Wrapper data-testid='showcaseComponent'>
+    <S.Wrapper data-testid='ShowcaseComponent'>
       <Container>
         {title && (
           <Heading $line='left' $lineColor='secondary'>

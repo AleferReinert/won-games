@@ -20,7 +20,7 @@ export const Default: Story = {
     const logo = canvas.getByRole('img', { name: /won games/i })
     const menuDesktop = ['Home', 'Explore']
     const searchIcon = canvas.getByTitle(/search/i)
-    const cartDropdownComponent = canvas.getByTestId('cartDropdownComponent')
+    const cartDropdownComponent = canvas.getByTestId('CartDropdownComponent')
     const signInButton = canvas.queryByRole('link', { name: /sign in/i })
     const menuMobile = canvas.getByLabelText(/menu mobile/i)
     const closeMenuIcon = canvas.getByLabelText(/close menu/i)
@@ -35,9 +35,7 @@ export const Default: Story = {
       expect(openMenuIcon).toBeVisible()
       expect(signInButton).not.toBeInTheDocument()
       for (const link of menuDesktop) {
-        expect(
-          canvas.getAllByRole('link', { name: link, hidden: true })[0]
-        ).not.toBeVisible()
+        expect(canvas.getAllByRole('link', { name: link, hidden: true })[0]).not.toBeVisible()
       }
 
       // open menuMobile on openMenuIcon clicked
@@ -63,9 +61,7 @@ export const Default: Story = {
       expect(openMenuIcon).not.toBeVisible()
       expect(signInButton).toBeInTheDocument()
       for (const link of menuDesktop) {
-        expect(
-          canvas.getAllByRole('link', { name: link, hidden: true })[0]
-        ).toBeVisible()
+        expect(canvas.getAllByRole('link', { name: link, hidden: true })[0]).toBeVisible()
       }
     })
   }

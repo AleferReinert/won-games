@@ -12,42 +12,21 @@ export type PaymentOptionsProps = {
   handlePayment: () => void
 }
 
-const PaymentOptions = ({
-  creditCards,
-  handlePayment
-}: PaymentOptionsProps) => {
+const PaymentOptions = ({ creditCards, handlePayment }: PaymentOptionsProps) => {
   const [selectedCreditCard, setSelectedCreditCard] = useState(0)
 
   return (
-    <S.Wrapper data-testid='paymentOptions'>
+    <S.Wrapper data-testid='PaymentOptionsComponent'>
       <Box>
-        <Heading
-          size='large'
-          color='black'
-          $line='bottom'
-          $lineBottomSize='small'
-        >
+        <Heading size='large' color='black' $line='bottom' $lineBottomSize='small'>
           Payment
         </Heading>
         <S.CreditCards role='list'>
           {creditCards?.map((creditCard, index) => (
-            <S.Item
-              role='listitem'
-              key={index}
-              title={creditCard.name}
-              onClick={() => setSelectedCreditCard(index)}
-            >
-              <CreditCard
-                img={creditCard.img}
-                name={creditCard.name}
-                number={creditCard.number}
-              />
+            <S.Item role='listitem' key={index} title={creditCard.name} onClick={() => setSelectedCreditCard(index)}>
+              <CreditCard img={creditCard.img} name={creditCard.name} number={creditCard.number} />
               <S.RadioWrapper>
-                <Radio
-                  checked={index === selectedCreditCard}
-                  id={'creditCard' + index}
-                  name='creditCard'
-                />
+                <Radio checked={index === selectedCreditCard} id={'creditCard' + index} name='creditCard' />
               </S.RadioWrapper>
             </S.Item>
           ))}
@@ -59,10 +38,7 @@ const PaymentOptions = ({
 
       <S.Buttons>
         <Button $variant='link'>Continue shopping</Button>
-        <Button
-          disabled={creditCards === undefined || creditCards.length === 0}
-          onClick={handlePayment}
-        >
+        <Button disabled={creditCards === undefined || creditCards.length === 0} onClick={handlePayment}>
           <ShoppingCart />
           Buy now
         </Button>

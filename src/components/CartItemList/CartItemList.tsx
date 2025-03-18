@@ -9,13 +9,9 @@ export type CartItemListProps = {
   button?: boolean
 }
 
-const CartItemList = ({
-  cartItems = [],
-  total,
-  button = false
-}: CartItemListProps) => {
+const CartItemList = ({ cartItems = [], total, button = false }: CartItemListProps) => {
   return (
-    <S.Wrapper aria-label='cart list'>
+    <S.Wrapper aria-label='cart list' data-testid='CartItemListComponent'>
       <S.List>
         {cartItems && cartItems.length > 0 ? (
           <>

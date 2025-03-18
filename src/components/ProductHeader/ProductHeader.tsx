@@ -1,7 +1,4 @@
-import {
-  AddShoppingCart,
-  FavoriteBorder
-} from '@styled-icons/material-outlined'
+import { AddShoppingCart, FavoriteBorder } from '@styled-icons/material-outlined'
 import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
 import Heading from 'components/Heading/Heading'
@@ -17,7 +14,7 @@ export type ProductHeaderProps = {
 
 const ProductHeader = ({ title, description, price }: ProductHeaderProps) => {
   return (
-    <S.Wrapper data-testid='productHeaderComponent'>
+    <S.Wrapper data-testid='ProductHeaderComponent'>
       <Box>
         <Heading color='black'>{title}</Heading>
 

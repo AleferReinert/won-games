@@ -27,7 +27,7 @@ const CartItem = ({
   paymentInfo
 }: CartItemProps) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper data-testid='CartItemComponent'>
       <Box>
         <S.Content>
           <S.Img src={img} alt={title} />
