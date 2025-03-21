@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { HighlightProps } from './Highlight'
 
-type WrapperProps = Pick<HighlightProps, 'background' | '$alignment'>
+type WrapperProps = Pick<HighlightProps, '$background' | '$alignment'>
 
 const wrapperModifiers = {
   right: () => css`
@@ -22,11 +22,11 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  ${({ theme, background, $alignment }) => css`
+  ${({ theme, $background, $alignment }) => css`
     position: relative;
     display: flex;
     height: 23rem;
-    background: url(${background}) no-repeat center center;
+    background: url(${$background}) no-repeat center center;
     background-size: cover;
     justify-content: space-between;
 

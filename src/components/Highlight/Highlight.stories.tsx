@@ -6,32 +6,43 @@ import Highlight from './Highlight'
 const meta: Meta<typeof Highlight> = {
   title: 'Components/Highlight',
   component: Highlight,
-  args: highlightMock
+  args: highlightMock,
+  tags: ['autodocs']
 }
 export default meta
 
 type Story = StoryObj<typeof Highlight>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: /read dead it's back/i })
-    const description = canvas.getByText(/come seen john's new adventures/i)
-    const button = canvas.getByRole('link', { name: /buy now/i })
-    const content = title.parentElement
-    const highlight = title.parentElement?.parentElement
-    const background = window.getComputedStyle(
-      title.parentElement!.parentElement!
-    ).backgroundImage
+    const highlightComponent = canvas.getByTestId('HighlightComponent')
+    const title = canvas.getByRole('heading', { level: 3 })
 
-    expect(title).toBeInTheDocument()
-    expect(description).toBeInTheDocument()
-    expect(button).toBeInTheDocument()
-    expect(background).toContain('img/red-dead-img.jpg')
+    await step('Title', () => {
+      expect(title).toHaveTextContent("Read Dead It's Back")
+    })
 
-    // alignment right as default
-    expect(highlight).toHaveStyle({ flexDirection: 'row' })
-    expect(content).toHaveStyle({ textAlign: 'right' })
+    await step('Description', () => {
+      const description = canvas.getByRole('paragraph')
+      expect(description).toHaveTextContent("Come seen John's new adventures")
+    })
+
+    await step('Button link', () => {
+      const button = canvas.getByRole('link', { name: 'Buy now' })
+      expect(button).toHaveAttribute('href', '/highlight-link')
+    })
+
+    await step('Background image', () => {
+      const background = window.getComputedStyle(highlightComponent).backgroundImage
+      expect(background).toContain('img/red-dead-img.jpg')
+    })
+
+    await step('Alignment right', () => {
+      expect(highlightComponent).toHaveStyle({ flexDirection: 'row' })
+      const content = title.parentElement
+      expect(content).toHaveStyle({ textAlign: 'right' })
+    })
   }
 }
 
@@ -39,23 +50,26 @@ export const AlignmentLeft: Story = {
   args: {
     $alignment: 'left'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const highlight =
-      canvas.getByText(/read dead/i).parentElement?.parentElement
 
-    expect(highlight).toHaveStyle({ 'flex-direction': 'row-reverse' })
+    await step('Alignment left', () => {
+      const highlightComponent = canvas.getByTestId('HighlightComponent')
+      expect(highlightComponent).toHaveStyle({ 'flex-direction': 'row-reverse' })
+    })
   }
 }
 
 export const WithFloatImage: Story = {
   args: {
-    float: '/img/red-dead-float.png'
+    floatImg: '/img/red-dead-float.png'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const floatImage = canvas.getByRole('img', { name: /read dead it's back/i })
 
-    expect(floatImage).toBeInTheDocument()
+    await step('Float image', () => {
+      const floatImg = canvas.getByRole('img', { name: /read dead it's back/i })
+      expect(floatImg).toBeVisible()
+    })
   }
 }

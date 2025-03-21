@@ -23,34 +23,25 @@ export const bannerMapper = (banners: BannerEntityResponseCollection) => {
 }
 
 // Retorna todos dados necessários para o componente Highlight
-export const highlightMapper = (
-  highlight: ComponentPageHighlight,
-  alignment?: HighlightProps['$alignment']
-) => {
+export const highlightMapper = (highlight: ComponentPageHighlight, alignment?: HighlightProps['alignment']) => {
   return {
     title: highlight.title,
     description: highlight.description,
     buttonLabel: highlight.buttonLabel,
     buttonLink: highlight.buttonLink,
     alignment: alignment ?? highlight.alignment,
-    background:
-      process.env.NEXT_PUBLIC_API_URL +
-      highlight.background.data.attributes.url,
+    background: process.env.NEXT_PUBLIC_API_URL + highlight.background.data.attributes.url,
     float: process.env.NEXT_PUBLIC_API_URL + highlight.float.data.attributes.url
   }
 }
 
 // Retorna todos dados necessários para o slider de produtos
-export const productMapper = (
-  products: GameEntityResponseCollection | GameRelationResponseCollection
-) => {
+export const productMapper = (products: GameEntityResponseCollection | GameRelationResponseCollection) => {
   return products.data.map(({ attributes: product }) => ({
     title: product.name,
     slug: product.slug,
     developer: product.developers.data[0]?.attributes.name || '',
     price: product.price,
-    img: product.cover.data
-      ? process.env.NEXT_PUBLIC_API_URL + product.cover.data.attributes.url
-      : '' // todo add default image
+    img: product.cover.data ? process.env.NEXT_PUBLIC_API_URL + product.cover.data.attributes.url : '' // todo add default image
   }))
 }
