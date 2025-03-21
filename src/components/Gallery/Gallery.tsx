@@ -39,12 +39,12 @@ const modalSettings: SliderSettings = {
   nextArrow: <ArrowRight title='Next' />
 }
 
-export type GalleryImageProps = {
+export interface GalleryImageProps {
   src: string
   label: string
 }
 
-export type GalleryProps = {
+export interface GalleryProps {
   items: GalleryImageProps[]
 }
 
