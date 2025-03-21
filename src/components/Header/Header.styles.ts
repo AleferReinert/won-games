@@ -25,7 +25,7 @@ export const Wrapper = styled.header`
   `}
 `
 
-export const OpenMenu = styled.div`
+export const OpenMenu = styled.button`
   ${({ theme }) => css`
     @media (min-width: ${theme.breakpoint.small}) {
       display: none;

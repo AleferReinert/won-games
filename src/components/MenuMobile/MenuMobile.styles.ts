@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
 import * as ButtonStyles from 'components/Button/Button.styles'
+import styled, { css } from 'styled-components'
 
 export const MenuMobile = styled.nav`
   ${({ theme }) => css`
@@ -17,7 +17,7 @@ export const MenuMobile = styled.nav`
   `}
 `
 
-export const CloseMenu = styled.div`
+export const CloseMenu = styled.button`
   ${({ theme }) => css`
     position: absolute;
     top: 0;

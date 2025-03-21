@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/global'
 import theme from '../src/styles/theme'
 
-const customViewports = {
+export const customViewports = {
   xxsmall: {
     name: `320 x 480`,
     styles: {

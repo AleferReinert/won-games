@@ -1,9 +1,5 @@
+import { ChevronDown as ChevronDownIcon, Exit as ExitIcon, Heart as HeartIcon } from '@styled-icons/boxicons-regular'
 import { AccountCircle as AccountCircleIcon } from '@styled-icons/material-outlined'
-import {
-  ChevronDown as ChevronDownIcon,
-  Heart as HeartIcon,
-  Exit as ExitIcon
-} from '@styled-icons/boxicons-regular'
 import Dropdown from 'components/Dropdown/Dropdown'
 import Link from 'next/link'
 import * as S from './UserDropdown.styles'
@@ -14,7 +10,7 @@ type UserDropdownProps = {
 
 const UserDropdown = ({ username }: UserDropdownProps) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper data-testid='UserDropdownComponent'>
       <Dropdown
         button={
           <>

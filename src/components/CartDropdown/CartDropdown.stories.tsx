@@ -28,9 +28,11 @@ export const Default: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Icon', () => {
-      const icon = canvas.getByRole('img', { name: 'Shopping cart' })
-      expect(icon).toBeInTheDocument()
+    await step('Button with icon', () => {
+      const button = canvas.getByRole('button', { name: 'Shopping cart' })
+      const icon = within(button).getByRole('img', { hidden: true })
+      expect(button).toBeVisible()
+      expect(icon).toBeVisible()
     })
 
     await step('Badge with 3', () => {

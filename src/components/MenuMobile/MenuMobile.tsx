@@ -9,15 +9,11 @@ type MenuMobileProps = {
   setMenuMobile: Dispatch<SetStateAction<boolean>>
 }
 
-const MenuMobile = ({
-  username,
-  menuMobile,
-  setMenuMobile
-}: MenuMobileProps) => {
+const MenuMobile = ({ username, menuMobile, setMenuMobile }: MenuMobileProps) => {
   return (
-    <S.MenuMobile aria-label='menu mobile' aria-hidden={!menuMobile}>
-      <S.CloseMenu aria-label='Close menu' onClick={() => setMenuMobile(false)}>
-        <CloseIcon />
+    <S.MenuMobile aria-label='Menu mobile' aria-hidden={!menuMobile} data-testid='MenuMobileComponent'>
+      <S.CloseMenu aria-label='Close menu' title='Close menu' onClick={() => setMenuMobile(false)}>
+        <CloseIcon role='img' width={24} height={24} />
       </S.CloseMenu>
 
       <S.MenuNav>

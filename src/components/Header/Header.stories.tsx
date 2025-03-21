@@ -1,68 +1,122 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
-import theme from 'styles/theme'
-import { jsMediaQuery } from 'utils/tests/helpers'
+import Container from 'components/Container/Container'
 import HeaderComponent from './Header'
 
 const meta: Meta<typeof HeaderComponent> = {
   title: 'Components/Header',
-  component: HeaderComponent
+  component: HeaderComponent,
+  decorators: (Story) => (
+    <Container>
+      <Story />
+    </Container>
+  ),
+  tags: ['autodocs']
 }
 
 export default meta
 
 type Story = StoryObj<typeof HeaderComponent>
 
-export const Default: Story = {
-  play: async ({ canvasElement }) => {
+export const Mobile: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'xsmall'
+    }
+  },
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const openMenuIcon = canvas.getByLabelText(/open menu/i)
-    const logo = canvas.getByRole('img', { name: /won games/i })
-    const menuDesktop = ['Home', 'Explore']
-    const searchIcon = canvas.getByTitle(/search/i)
-    const cartDropdownComponent = canvas.getByTestId('CartDropdownComponent')
-    const signInButton = canvas.queryByRole('link', { name: /sign in/i })
-    const menuMobile = canvas.getByLabelText(/menu mobile/i)
-    const closeMenuIcon = canvas.getByLabelText(/close menu/i)
+    const menuButton = canvas.getByRole('button', { name: 'Open menu' })
+    const menuMobile = canvas.getByTestId('MenuMobileComponent')
 
-    expect(logo).toBeInTheDocument()
-    expect(searchIcon).toBeInTheDocument()
-    expect(cartDropdownComponent).toBeInTheDocument()
-    expect(menuMobile).not.toBeVisible()
-    expect(menuMobile).toHaveStyle({ pointerEvents: 'none' })
-
-    jsMediaQuery.lessThan(theme.breakpoint.small, async () => {
-      expect(openMenuIcon).toBeVisible()
-      expect(signInButton).not.toBeInTheDocument()
-      for (const link of menuDesktop) {
-        expect(canvas.getAllByRole('link', { name: link, hidden: true })[0]).not.toBeVisible()
-      }
-
-      // open menuMobile on openMenuIcon clicked
-      await userEvent.click(openMenuIcon)
-      await waitFor(() => {
-        expect(menuMobile).toHaveAttribute('aria-hidden', 'false')
-        expect(menuMobile).toHaveStyle({ pointerEvents: 'all' })
-
-        setTimeout(() => {
-          expect(menuMobile).not.toHaveStyle({ opacity: '0' })
-        }, 50)
-      })
-
-      // close menuMobile on closeIcon clicked
-      await userEvent.click(closeMenuIcon)
-      await waitFor(() => {
-        expect(menuMobile).toHaveAttribute('aria-hidden', 'true')
-        expect(menuMobile).toHaveStyle({ pointerEvents: 'none' })
-      })
+    await step('Menu button with icon', () => {
+      const menuIcon = within(menuButton).getByRole('img', { hidden: true })
+      expect(menuButton).toBeVisible()
+      expect(menuIcon).toBeVisible()
     })
 
-    jsMediaQuery.greaterThan(theme.breakpoint.small, async () => {
-      expect(openMenuIcon).not.toBeVisible()
-      expect(signInButton).toBeInTheDocument()
-      for (const link of menuDesktop) {
-        expect(canvas.getAllByRole('link', { name: link, hidden: true })[0]).toBeVisible()
-      }
+    await step('Logo component', () => {
+      const logo = canvas.getByTestId('LogoComponent')
+      expect(logo).toBeVisible()
+    })
+
+    await step('Search button with icon', () => {
+      const searchButton = canvas.getByRole('button', { name: 'Search' })
+      const searchIcon = within(searchButton).getByRole('img', { hidden: true })
+      expect(searchButton).toBeVisible()
+      expect(searchIcon).toBeVisible()
+    })
+
+    await step('Cart link with icon', () => {
+      const cartLink = canvas.getByRole('link', { name: 'Shopping cart' })
+      const cartIcon = within(cartLink).getByRole('img', { hidden: true })
+      expect(cartLink).toBeVisible()
+      expect(cartIcon).toBeVisible()
+    })
+
+    await step('Menu hidden on load page', () => {
+      expect(menuMobile).not.toBeVisible()
+    })
+
+    await step('Menu visible on click menu button', async () => {
+      userEvent.click(menuButton)
+      await waitFor(() => expect(menuMobile).toBeVisible())
+    })
+
+    await step('Menu hidden on click close menu button', async () => {
+      const closeMenuButton = canvas.getByRole('button', { name: 'Close menu' })
+      userEvent.click(closeMenuButton)
+      await waitFor(() => expect(menuMobile).not.toBeVisible())
+    })
+  }
+}
+
+export const Desktop: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'small'
+    }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const cartButton = canvas.getByRole('button', { name: 'Shopping cart' })
+    const cartItemListComponent = canvas.getByTestId('CartItemListComponent')
+
+    await step('Hidden menu button', () => {
+      const menuButton = canvas.queryByRole('button', { name: /open menu/i })
+      expect(menuButton).not.toBeInTheDocument()
+    })
+
+    await step('Menu desktop', () => {
+      const homeLink = canvas.getByRole('link', { name: 'Home' })
+      const exploreLink = canvas.getByRole('link', { name: 'Explore' })
+      expect(homeLink).toHaveAttribute('href', '/')
+      expect(exploreLink).toHaveAttribute('href', '/products')
+    })
+
+    await step('Cart button with icon', () => {
+      const cartIcon = within(cartButton).getByRole('img', { hidden: true })
+      expect(cartButton).toBeVisible()
+      expect(cartIcon).toBeVisible()
+    })
+
+    await step('Sign in button link', () => {
+      const signInButtonLink = canvas.getByRole('link', { name: 'Sign in' })
+      expect(signInButtonLink).toHaveAttribute('href', '/sign-in')
+    })
+
+    await step('CartItemListComponent hidden', () => {
+      expect(cartItemListComponent).not.toBeVisible()
+    })
+
+    await step('Open dropdown on click cart button', async () => {
+      userEvent.click(cartButton)
+      await waitFor(() => expect(cartItemListComponent).toBeVisible())
+    })
+
+    await step('Close dropdown on click cart button', async () => {
+      userEvent.click(cartButton)
+      await waitFor(() => expect(cartItemListComponent).not.toBeVisible())
     })
   }
 }
@@ -71,10 +125,22 @@ export const Authenticated: Story = {
   args: {
     username: 'John Steven'
   },
-  play: ({ canvasElement }) => {
+  parameters: {
+    viewport: {
+      defaultViewport: 'small'
+    }
+  },
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const signInButton = canvas.queryByRole('link', { name: /sign in/i })
 
-    expect(signInButton).not.toBeInTheDocument()
+    await step('Hidden sign in button link', () => {
+      const signInButtonLink = canvas.queryByRole('link', { name: 'Sign in' })
+      expect(signInButtonLink).not.toBeInTheDocument()
+    })
+
+    await step('UserDropdownComponent', () => {
+      const userDropdownComponent = canvas.getByTestId('UserDropdownComponent')
+      expect(userDropdownComponent).toBeVisible()
+    })
   }
 }

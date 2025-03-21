@@ -48,7 +48,7 @@ export const Horizontal: Story = {
   args: {
     settings: 'Horizontal'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const slides = canvas.getAllByTestId('slide')
     const slider = canvasElement.querySelector('.slick-slider')
@@ -62,7 +62,7 @@ export const Vertical: Story = {
   args: {
     settings: 'Vertical'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const slider = canvasElement.querySelector('.slick-slider')
 
     expect(slider).toHaveClass('slick-vertical')

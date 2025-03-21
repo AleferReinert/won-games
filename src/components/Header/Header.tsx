@@ -8,7 +8,7 @@ import UserDropdown from 'components/UserDropdown/UserDropdown'
 import { useState } from 'react'
 import * as S from './Header.styles'
 
-type MenuProps = {
+interface MenuProps {
   username?: string
 }
 
@@ -17,9 +17,9 @@ const Header = ({ username }: MenuProps) => {
 
   return (
     <S.Wrapper>
-      <S.OpenMenu onClick={() => setMenuMobile(true)}>
+      <S.OpenMenu onClick={() => setMenuMobile(true)} title='Open menu' aria-label='Open menu'>
         <S.IconWrapper>
-          <MenuIcon aria-label='open menu' />
+          <MenuIcon role='img' aria-hidden width={24} height={24} />
         </S.IconWrapper>
       </S.OpenMenu>
 
@@ -34,29 +34,27 @@ const Header = ({ username }: MenuProps) => {
 
       <S.NavRight>
         <S.IconWrapper>
-          <SearchIcon title='Search' />
+          <button title='Search' aria-label='Search'>
+            <SearchIcon role='img' aria-hidden width={24} height={24} />
+          </button>
         </S.IconWrapper>
 
         <S.IconWrapper>
           <CartDropdown />
         </S.IconWrapper>
 
-        {!username ? (
+        {username ? (
+          <UserDropdown username={username} />
+        ) : (
           <S.ButtonSignIn>
             <Button size='small' href='/sign-in' asLink>
               Sign in
             </Button>
           </S.ButtonSignIn>
-        ) : (
-          <UserDropdown username={username} />
         )}
       </S.NavRight>
 
-      <MenuMobile
-        menuMobile={menuMobile}
-        setMenuMobile={setMenuMobile}
-        username={username}
-      />
+      <MenuMobile menuMobile={menuMobile} setMenuMobile={setMenuMobile} username={username} />
     </S.Wrapper>
   )
 }

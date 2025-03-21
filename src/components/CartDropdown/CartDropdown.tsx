@@ -17,11 +17,11 @@ const CartDropdown = ({ cartItems, total }: CartDropdownProps) => {
         <Dropdown
           button={
             <>
-              <S.ButtonCart role='button'>
+              <S.ButtonCart title='Shopping cart' aria-label='Shopping cart'>
                 <S.BadgeCart aria-label='Cart items'>
                   {cartItems && cartItems.length > 0 ? cartItems.length : 0}
                 </S.BadgeCart>
-                <ShoppingCartIcon title='Shopping cart' />
+                <ShoppingCartIcon role='img' aria-hidden width={24} height={24} />
               </S.ButtonCart>
             </>
           }
@@ -30,8 +30,8 @@ const CartDropdown = ({ cartItems, total }: CartDropdownProps) => {
         </Dropdown>
       </div>
       <div id='mobile'>
-        <Link href='/cart'>
-          <ShoppingCartIcon title='Shopping cart' />
+        <Link href='/cart' title='Shopping cart' aria-label='Shopping cart'>
+          <ShoppingCartIcon role='img' aria-hidden width={24} height={24} />
         </Link>
       </div>
     </S.Wrapper>

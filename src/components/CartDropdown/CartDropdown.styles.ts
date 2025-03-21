@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const ButtonCart = styled.div`
+export const ButtonCart = styled.button`
   ${({ theme }) => css`
     position: relative;
     background: transparent;

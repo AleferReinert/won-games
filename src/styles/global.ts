@@ -30,6 +30,7 @@ const GlobalStyles = createGlobalStyle`
         cursor: pointer;
         border: 0;
         font-family: inherit;
+        background-color: transparent;
       }
 
       label {
