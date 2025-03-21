@@ -4,7 +4,7 @@ import Dropdown from 'components/Dropdown/Dropdown'
 import Link from 'next/link'
 import * as S from './UserDropdown.styles'
 
-type UserDropdownProps = {
+interface UserDropdownProps {
   username: string
 }
 
@@ -22,15 +22,15 @@ const UserDropdown = ({ username }: UserDropdownProps) => {
       >
         <S.Nav>
           <Link href='/account/profile'>
-            <AccountCircleIcon />
+            <AccountCircleIcon aria-hidden />
             My account
           </Link>
           <Link href='/wishlist'>
-            <HeartIcon />
+            <HeartIcon aria-hidden />
             Wishlist
           </Link>
           <Link href='/logout'>
-            <ExitIcon />
+            <ExitIcon aria-hidden />
             Logout
           </Link>
         </S.Nav>

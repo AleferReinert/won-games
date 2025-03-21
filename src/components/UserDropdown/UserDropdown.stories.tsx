@@ -10,11 +10,12 @@ const meta: Meta<typeof UserDropdownComponent> = {
   },
   decorators: [
     (Story) => (
-      <div style={{ textAlign: 'right', padding: '2rem' }}>
+      <div style={{ textAlign: 'right', padding: '2rem', height: '280px' }}>
         <Story />
       </div>
     )
-  ]
+  ],
+  tags: ['autodocs']
 }
 
 export default meta
@@ -22,21 +23,27 @@ export default meta
 type Story = StoryObj<typeof UserDropdownComponent>
 
 export const UserDropdown: Story = {
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const username = canvas.getByText('John')
+    const navigation = canvas.getByRole('navigation', { hidden: true })
 
-    expect(username).toBeInTheDocument()
+    await step('Name', () => {
+      expect(username).toBeInTheDocument()
+    })
 
-    userEvent.click(username)
-    waitFor(() => {
-      const myAccountLink = canvas.getByRole('link', { name: /my account/i })
-      const wishlistLink = canvas.getByRole('link', { name: /wishlist/i })
-      const logoutLink = canvas.getByRole('link', { name: /logout/i })
+    await step('Navigation hidden on load page', async () => {
+      await waitFor(() => expect(navigation).not.toBeVisible())
+    })
 
-      expect(myAccountLink).toBeInTheDocument()
-      expect(wishlistLink).toBeInTheDocument()
-      expect(logoutLink).toBeInTheDocument()
+    await step('Navigation visible on username click', async () => {
+      userEvent.click(username)
+      await waitFor(() => expect(navigation).toBeVisible())
+    })
+
+    await step('Navigation hidden on username second click', async () => {
+      userEvent.click(username)
+      await waitFor(() => expect(navigation).not.toBeVisible())
     })
   }
 }

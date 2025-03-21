@@ -26,7 +26,7 @@ export const Username = styled.div`
   `}
 `
 
-export const Nav = styled.div`
+export const Nav = styled.nav`
   ${({ theme }) => css`
     text-align: left;
 
