@@ -23,9 +23,11 @@ export default meta
 type Story = StoryObj<typeof {{pascalCase name}}Page>
 
 export const {{pascalCase name}}: Story = {
-    play: ({canvasElement}) => {
+     play: async ({canvasElement, step}) => {
         const canvas = within(canvasElement)
 
-        expect()
+				await step('',() =>{
+	        expect()
+				})
     }
 }
