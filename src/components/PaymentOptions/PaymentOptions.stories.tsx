@@ -12,14 +12,8 @@ const meta: Meta<typeof PaymentOptionsComponent> = {
   },
   parameters: {
     layout: 'centered'
-  }
-  // decorators: [
-  //   (Story) => (
-  //     <div style={{ maxWidth: '39rem' }}>
-  //       <Story />
-  //     </div>
-  //   )
-  // ]
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -27,21 +21,32 @@ export default meta
 type Story = StoryObj<typeof PaymentOptionsComponent>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: /payment/i })
-    const buttonAddNewCreditCard = canvas.getByRole('button', {
-      name: /add new credit card/i
-    })
-    const buttonContinueShopping = canvas.getByRole('button', {
-      name: /continue shopping/i
-    })
-    const buttonBuyNow = canvas.getByRole('button', { name: /buy now/i })
 
-    expect(title).toBeInTheDocument()
-    expect(buttonAddNewCreditCard).toBeInTheDocument()
-    expect(buttonContinueShopping).toBeInTheDocument()
-    expect(buttonBuyNow).toBeDisabled()
+    await step('HeadingComponent', () => {
+      const headingComponent = canvas.getByTestId('HeadingComponent')
+      expect(headingComponent).toHaveTextContent('Payment')
+    })
+
+    await step('Button add new credit card with icon', () => {
+      const button = canvas.getByRole('button', { name: /add new credit card/i })
+      const icon = within(button).getByRole('img', { hidden: true })
+      expect(button).toBeVisible()
+      expect(icon).toBeVisible()
+    })
+
+    await step('Button link to continue shopping', () => {
+      const buttonLink = canvas.getByRole('link', { name: /continue shopping/i })
+      expect(buttonLink).toHaveAttribute('href', '/products')
+    })
+
+    await step('Button buy now disabled and with icon', () => {
+      const buttonBuyNow = canvas.getByRole('button', { name: /buy now/i })
+      const icon = within(buttonBuyNow).getByRole('img', { hidden: true })
+      expect(buttonBuyNow).toBeDisabled()
+      expect(icon).toBeVisible()
+    })
   }
 }
 
@@ -49,14 +54,22 @@ export const WithCreditCards: Story = {
   args: {
     creditCards: creditCardsMock
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const creditCards = canvas.getAllByRole('listitem')
-    const radios = canvas.getAllByRole('radio')
+    const creditCardComponents = canvas.getAllByTestId('CreditCardComponent')
 
-    expect(creditCards.length).toBeGreaterThan(0)
+    await step('Credit card components', () => {
+      expect(creditCardComponents.length).toBeGreaterThan(0)
+    })
 
-    // First credit card selected as default
-    expect(radios[0]).toBeChecked()
+    await step('First credit card selected', () => {
+      const firstInputRadio = canvas.getAllByRole('radio')[0]
+      expect(firstInputRadio).toBeChecked()
+    })
+
+    await step('Button buy now enabled', () => {
+      const buttonBuyNow = canvas.getByRole('button', { name: /buy now/i })
+      expect(buttonBuyNow).not.toBeDisabled()
+    })
   }
 }

@@ -15,7 +15,7 @@ export default meta
 type Story = StoryObj<typeof LoadingComponent>
 
 export const Loading: Story = {
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('3 dots animation', () => {

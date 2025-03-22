@@ -6,9 +6,10 @@ export const Wrapper = styled.form`
   `}
 `
 
-export const CreditCards = styled.div`
+export const CreditCards = styled.ul`
   display: flex;
   flex-direction: column;
+  list-style: none;
 `
 
 export const RadioWrapper = styled.div`
@@ -18,7 +19,10 @@ export const RadioWrapper = styled.div`
   justify-content: end;
 `
 
-export const Item = styled.label`
+export const Item = styled.li`
+  ${() => css``}
+`
+export const Label = styled.label`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightGray};
     padding: ${theme.spacings.xsmall};

@@ -21,25 +21,29 @@ const PaymentOptions = ({ creditCards, handlePayment }: PaymentOptionsProps) => 
         <Heading size='large' color='black' $line='bottom' $lineBottomSize='small'>
           Payment
         </Heading>
-        <S.CreditCards role='list'>
+        <S.CreditCards>
           {creditCards?.map((creditCard, index) => (
-            <S.Item role='listitem' key={index} title={creditCard.name} onClick={() => setSelectedCreditCard(index)}>
-              <CreditCard img={creditCard.img} name={creditCard.name} number={creditCard.number} />
-              <S.RadioWrapper>
-                <Radio checked={index === selectedCreditCard} id={'creditCard' + index} name='creditCard' />
-              </S.RadioWrapper>
+            <S.Item key={index}>
+              <S.Label title={creditCard.name} onClick={() => setSelectedCreditCard(index)}>
+                <CreditCard img={creditCard.img} name={creditCard.name} number={creditCard.number} />
+                <S.RadioWrapper>
+                  <Radio checked={index === selectedCreditCard} id={'creditCard' + index} name='creditCard' />
+                </S.RadioWrapper>
+              </S.Label>
             </S.Item>
           ))}
         </S.CreditCards>
         <S.AddCreditCard>
-          <Add /> Add new credit card
+          <Add role='img' aria-hidden /> Add new credit card
         </S.AddCreditCard>
       </Box>
 
       <S.Buttons>
-        <Button $variant='link'>Continue shopping</Button>
+        <Button $variant='link' asLink href='/products'>
+          Continue shopping
+        </Button>
         <Button disabled={creditCards === undefined || creditCards.length === 0} onClick={handlePayment}>
-          <ShoppingCart />
+          <ShoppingCart role='img' aria-hidden />
           Buy now
         </Button>
       </S.Buttons>
