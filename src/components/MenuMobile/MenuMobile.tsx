@@ -3,7 +3,7 @@ import Button from 'components/Button/Button'
 import { Dispatch, SetStateAction } from 'react'
 import * as S from './MenuMobile.styles'
 
-type MenuMobileProps = {
+interface MenuMobileProps {
   username?: string
   menuMobile: boolean
   setMenuMobile: Dispatch<SetStateAction<boolean>>
@@ -13,7 +13,7 @@ const MenuMobile = ({ username, menuMobile, setMenuMobile }: MenuMobileProps) =>
   return (
     <S.MenuMobile aria-label='Menu mobile' aria-hidden={!menuMobile} data-testid='MenuMobileComponent'>
       <S.CloseMenu aria-label='Close menu' title='Close menu' onClick={() => setMenuMobile(false)}>
-        <CloseIcon role='img' width={24} height={24} />
+        <CloseIcon role='img' aria-hidden width={24} height={24} />
       </S.CloseMenu>
 
       <S.MenuNav>

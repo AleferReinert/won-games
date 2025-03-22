@@ -1,7 +1,8 @@
 import * as ButtonStyles from 'components/Button/Button.styles'
+import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
-export const MenuMobile = styled.nav`
+export const MenuMobile = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.white};
     position: fixed;
@@ -37,7 +38,7 @@ export const MenuNav = styled.nav`
   flex-direction: column;
 `
 
-export const MenuLink = styled.a`
+export const MenuLink = styled(Link)`
   ${({ theme }) => css`
     position: relative;
     color: ${theme.colors.black};

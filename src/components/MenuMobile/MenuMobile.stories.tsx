@@ -1,15 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, within } from '@storybook/test'
+import { expect, fn, waitFor, within } from '@storybook/test'
+import { customViewports } from '../../../.storybook/preview'
 import MenuMobileComponent from './MenuMobile'
-
 const meta: Meta<typeof MenuMobileComponent> = {
   title: 'Components/MenuMobile',
   component: MenuMobileComponent,
+  args: {
+    menuMobile: true,
+    setMenuMobile: fn()
+  },
   parameters: {
     viewport: {
-      defaultViewport: 'xsmall'
+      defaultViewport: 'xxsmall'
     }
-  }
+  },
+  decorators: (Story) => (
+    <div style={{ height: `${customViewports.xxsmall.styles.height}` }}>
+      <Story />
+    </div>
+  ),
+  tags: ['autodocs']
 }
 
 export default meta
@@ -17,18 +27,32 @@ export default meta
 type Story = StoryObj<typeof MenuMobileComponent>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const closeIcon = canvas.getByLabelText(/close menu/i)
-    const menuLinks = ['Home', 'Explore', 'Log in now', 'Sign up']
-    const or = canvas.getByText('or')
 
-    // render all elements
-    expect(closeIcon).toBeInTheDocument()
-    expect(or).toBeInTheDocument()
-    for (const link of menuLinks) {
-      expect(canvas.getByText(link)).toBeInTheDocument()
-    }
+    await step('Close button with icon', async () => {
+      const button = await waitFor(() => canvas.getByRole('button', { name: /close menu/i }))
+      const icon = within(button).getByRole('img', { hidden: true })
+      expect(button).toBeVisible()
+      expect(icon).toBeVisible()
+    })
+
+    await step('Menu links', () => {
+      const home = canvas.getByRole('link', { name: 'Home' })
+      const explore = canvas.getByRole('link', { name: 'Explore' })
+      expect(home).toHaveAttribute('href', '/')
+      expect(explore).toHaveAttribute('href', '/products')
+    })
+
+    await step('Log in now button link', () => {
+      const logInNow = canvas.getByRole('link', { name: 'Log in now' })
+      expect(logInNow).toHaveAttribute('href', '/sign-in')
+    })
+
+    await step('Sign up link', () => {
+      const signUp = canvas.getByRole('link', { name: 'Sign up' })
+      expect(signUp).toHaveAttribute('href', '/sign-up')
+    })
   }
 }
 
@@ -36,20 +60,27 @@ export const Authenticated: Story = {
   args: {
     username: 'John'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const closeIcon = canvas.getByLabelText(/close menu/i)
-    const menuLinks = ['Home', 'Explore', 'My account', 'Wishlist']
-    const AuthLinks = ['Log in now', 'Sign up']
 
-    expect(closeIcon).toBeInTheDocument()
+    await step('My account link', () => {
+      const myAccountLink = canvas.getByRole('link', { name: 'My account' })
+      expect(myAccountLink).toHaveAttribute('href', '/account/profile')
+    })
 
-    for (const link of menuLinks) {
-      expect(canvas.getByText(link)).toBeInTheDocument()
-    }
+    await step('Wishlist link', () => {
+      const wishlistLink = canvas.getByRole('link', { name: 'Wishlist' })
+      expect(wishlistLink).toHaveAttribute('href', '/wishlist')
+    })
 
-    for (const link of AuthLinks) {
-      expect(canvas.queryByText(link)).not.toBeInTheDocument()
-    }
+    await step('Log in now link hidden', () => {
+      const logInNow = canvas.queryByRole('link', { name: 'Log in now' })
+      expect(logInNow).not.toBeInTheDocument()
+    })
+
+    await step('Sign up link hidden', () => {
+      const signUp = canvas.queryByRole('link', { name: 'Sign up' })
+      expect(signUp).not.toBeInTheDocument()
+    })
   }
 }
