@@ -8,7 +8,7 @@ export interface RibbonProps {
 
 const Ribbon = ({ text, color = 'primary', size = 'large' }: RibbonProps) => {
   return (
-    <S.Wrapper color={color} size={size}>
+    <S.Wrapper color={color} size={size} data-testid='RibbonComponent'>
       {text}
     </S.Wrapper>
   )

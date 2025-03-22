@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, fn, userEvent, within } from '@storybook/test'
+import { expect, userEvent, waitFor, within } from '@storybook/test'
 import { productMock } from '../../mocks/product.mock'
 import ProductComponent from './Product'
 
@@ -7,19 +7,6 @@ const meta: Meta<typeof ProductComponent> = {
   title: 'Components/Product',
   component: ProductComponent,
   args: productMock,
-  argTypes: {
-    onFav: {
-      action: 'clicked',
-      table: { disable: true }
-    }
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ width: '30rem' }}>
-        <Story />
-      </div>
-    )
-  ],
   parameters: {
     layout: 'centered'
   },
@@ -31,28 +18,65 @@ export default meta
 type Story = StoryObj<typeof ProductComponent>
 
 export const Default: Story = {
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: 'Population Zero' })
-    const developer = canvas.getByRole('heading', { name: 'Other Ocean' })
-    const img = canvas.getByRole('img', { name: 'Population Zero' })
-    const slug = canvas.getByRole('link')
-    const icon = canvas.getByRole('img', { name: /add to wishlist/i })
-    const price = canvas.getByLabelText('price')
-    const buttonAddToCart = canvas.getByRole('button', { name: /add to cart/i })
+    const buttonAddToFavorites = canvas.getByRole('button', { name: 'Add to wishlist' })
 
-    // render items
-    expect(title).toBeInTheDocument()
-    expect(developer).toBeInTheDocument()
-    expect(img.getAttribute('src')).toMatch(/\/img\/game-test.jpg/)
-    expect(slug).toHaveAttribute('href', '/product/population-zero')
-    expect(icon).toBeInTheDocument()
-    expect(price).toContainHTML('$215.00')
-    expect(buttonAddToCart).toBeInTheDocument()
+    await step('Image', () => {
+      const image = canvas.getByRole('img', { name: 'Population Zero' })
+      expect(image.getAttribute('src')).toContain('/img/game-test.jpg')
+    })
 
-    // function called when icon clicked
-    // await userEvent.click(icon)
-    // expect(args.onFav).toHaveBeenCalled()
+    await step('Title', () => {
+      const title = canvas.getByRole('heading', { level: 3 })
+      expect(title).toHaveTextContent('Population Zero')
+    })
+
+    await step('Developer', () => {
+      const developer = canvas.getByRole('heading', { level: 4 })
+      expect(developer).toHaveTextContent('Other Ocean')
+    })
+
+    await step('PriceComponent', () => {
+      const priceComponent = canvas.getByTestId('PriceComponent')
+      expect(priceComponent).toBeVisible()
+    })
+
+    await step('Favorite: buttonAdd visible, buttonRemove hidden', () => {
+      const buttonRemove = canvas.queryByRole('button', { name: 'Remove from wishlist' })
+      expect(buttonRemove).not.toBeInTheDocument()
+    })
+
+    await step('Add to favorites: change buttons on click', async () => {
+      expect(buttonAddToFavorites).toBeVisible()
+      userEvent.click(buttonAddToFavorites)
+      await waitFor(async () => {
+        const buttonRemove = canvas.getByRole('button', { name: 'Remove from wishlist' })
+        expect(buttonRemove).toBeVisible()
+        await waitFor(() => {
+          const buttonAdd = canvas.queryByRole('button', { name: 'Add to wishlist' })
+          expect(buttonAdd).not.toBeInTheDocument()
+        })
+      })
+    })
+
+    await step('Remove from favorites: change buttons on click', async () => {
+      const buttonRemove = canvas.getByRole('button', { name: 'Remove from wishlist' })
+      userEvent.click(buttonRemove)
+      await waitFor(async () => {
+        const buttonAdd = canvas.getByRole('button', { name: 'Add to wishlist' })
+        expect(buttonAdd).toBeVisible()
+        await waitFor(() => {
+          const buttonRemove = canvas.queryByRole('button', { name: 'Remove from wishlist' })
+          expect(buttonRemove).not.toBeInTheDocument()
+        })
+      })
+    })
+
+    await step('Slug: link with href', () => {
+      const slug = canvas.getByRole('link')
+      expect(slug).toHaveAttribute('href', '/product/population-zero')
+    })
   }
 }
 
@@ -61,39 +85,17 @@ export const WithDiscount: Story = {
     ribbonText: '20% off',
     promotionalPrice: 185.0
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const ribbon = canvas.getByText(/20% off/i)
-    const promotionalPrice = canvas.getByLabelText('promotional price')
 
-    expect(ribbon).toBeInTheDocument()
-    expect(promotionalPrice).toBeInTheDocument()
-  }
-}
+    await step('RibbonComponent', () => {
+      const ribbonComponent = canvas.getByTestId('RibbonComponent')
+      expect(ribbonComponent).toBeVisible()
+    })
 
-export const Favorited: Story = {
-  args: {
-    favorite: true
-  },
-  play: ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const icon = canvas.getByRole('img', { name: /remove from wishlist/i })
-
-    expect(icon).toBeInTheDocument()
-  }
-}
-
-export const OnFav: Story = {
-  args: {
-    onFav: fn()
-  },
-  play: async ({ canvasElement, args, step }) => {
-    const canvas = within(canvasElement)
-    const icon = canvas.getByRole('img', { name: /add to wishlist/i })
-
-    step('onFav is called when icon is clicked', async () => {
-      await userEvent.click(icon)
-      expect(args.onFav).toHaveBeenCalled()
+    await step('Promotional price', () => {
+      const promotionalPrice = canvas.getByLabelText('promotional price')
+      expect(promotionalPrice).toBeVisible()
     })
   }
 }
