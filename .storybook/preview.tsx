@@ -79,7 +79,24 @@ const preview: Preview = {
     },
     options: {
       showPanel: true,
-      panelDirection: 'right'
+      panelDirection: 'right',
+      storySort: (a, b) => {
+        const order = ['Pages', 'Templates', 'Components', 'Atoms']
+
+        const getIndex = (title) => {
+          const index = order.findIndex((item) => title.startsWith(item))
+          return index === -1 ? order.length : index // Se não estiver na ordem, coloca no final
+        }
+
+        const indexA = getIndex(a.title)
+        const indexB = getIndex(b.title)
+
+        if (indexA !== indexB) {
+          return indexA - indexB // Ordena conforme a ordem definida
+        }
+
+        return a.title.localeCompare(b.title, 'en', { numeric: true }) // Ordenação alfabética dentro de cada grupo
+      }
     }
   }
 }

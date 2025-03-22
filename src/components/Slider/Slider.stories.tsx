@@ -28,6 +28,7 @@ const meta: Meta<typeof SliderComponent> = {
       }
     }
   },
+  tags: ['autodocs'],
   render: (args) => {
     return (
       <SliderComponent settings={args.settings}>
@@ -48,13 +49,18 @@ export const Horizontal: Story = {
   args: {
     settings: 'Horizontal'
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const slides = canvas.getAllByTestId('slide')
-    const slider = canvasElement.querySelector('.slick-slider')
 
-    expect(slides.length).toBeGreaterThan(2)
-    expect(slider).not.toHaveClass('slick-vertical')
+    await step('Multiple slides', () => {
+      const slides = canvas.getAllByTestId('slide')
+      expect(slides.length).toBeGreaterThan(2)
+    })
+
+    await step('Horizontal slider', () => {
+      const slider = canvasElement.querySelector('.slick-slider')
+      expect(slider).not.toHaveClass('slick-vertical')
+    })
   }
 }
 
@@ -62,9 +68,10 @@ export const Vertical: Story = {
   args: {
     settings: 'Vertical'
   },
-  play: async ({ canvasElement }) => {
-    const slider = canvasElement.querySelector('.slick-slider')
-
-    expect(slider).toHaveClass('slick-vertical')
+  play: async ({ canvasElement, step }) => {
+    await step('Vertical slider', () => {
+      const slider = canvasElement.querySelector('.slick-slider')
+      expect(slider).toHaveClass('slick-vertical')
+    })
   }
 }
