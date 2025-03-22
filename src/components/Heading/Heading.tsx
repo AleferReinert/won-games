@@ -28,6 +28,7 @@ const Heading = ({
       $lineColor={$lineColor}
       $lineBottomSize={$lineBottomSize}
       as={as}
+      data-testid='HeadingComponent'
     >
       {children}
     </S.Wrapper>

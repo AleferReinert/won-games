@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, within } from '@storybook/test'
+import { expect, waitFor, within } from '@storybook/test'
 import Container from 'components/Container/Container'
+import theme from 'styles/theme'
 import { productsMock } from '../../mocks/products.mock'
 import ProductSliderComponent from './ProductSlider'
 
@@ -15,7 +16,7 @@ const meta: Meta<typeof ProductSliderComponent> = {
   },
   decorators: [
     (Story) => (
-      <Container>
+      <Container style={{ padding: '20px 0' }}>
         <Story />
       </Container>
     )
@@ -24,24 +25,26 @@ const meta: Meta<typeof ProductSliderComponent> = {
     viewport: {
       defaultViewport: 'large'
     }
-  }
+  },
+  tags: ['autodocs']
 }
 export default meta
 
 type Story = StoryObj<typeof ProductSliderComponent>
 
 export const Default: Story = {
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const items = canvas.getAllByRole('heading', { name: /population zero/i })
 
-    expect(items.length).toBeGreaterThanOrEqual(2)
+    await step('Multiple items', () => {
+      const items = canvas.getAllByRole('heading', { name: /population zero/i })
+      expect(items.length).toBeGreaterThanOrEqual(2)
+    })
 
-    // todo: not working in terminal
-    // const nextIcon = await waitFor(() =>
-    //   canvas.getByRole('img', { name: /next games/i })
-    // )
-    // expect(nextIcon).toHaveStyle({ fill: theme.colors.white })
+    await step('ArrowColor white', async () => {
+      const nextIcon = await waitFor(() => canvas.getByRole('img', { name: 'Next games', hidden: true }))
+      expect(nextIcon).toHaveStyle({ fill: theme.colors.white })
+    })
   }
 }
 
@@ -53,15 +56,13 @@ export const ArrowBlack: Story = {
     backgrounds: {
       default: 'Light'
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('ArrowColor black', async () => {
+      const nextIcon = await waitFor(() => canvas.getByRole('img', { name: 'Next games', hidden: true }))
+      expect(nextIcon).toHaveStyle({ fill: theme.colors.black })
+    })
   }
-  // play: async ({ canvasElement }) => {
-  // const canvas = within(canvasElement)
-  // todo: not working in terminal
-  // const nextIcon = await waitFor(() =>
-  //   canvas.getByRole('img', {
-  //     name: /next games/i
-  //   })
-  // )
-  // expect(nextIcon).toHaveStyle({ fill: theme.colors['black'] })
-  // }
 }

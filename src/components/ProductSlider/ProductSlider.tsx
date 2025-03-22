@@ -1,7 +1,8 @@
-import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
-import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
+import { ArrowBackIos } from '@styled-icons/material-outlined/ArrowBackIos'
+import { ArrowForwardIos } from '@styled-icons/material-outlined/ArrowForwardIos'
 import Product, { ProductProps } from 'components/Product/Product'
 import Slider, { SliderSettings } from 'components/Slider/Slider'
+import type { CustomArrowProps } from 'react-slick'
 import theme from 'styles/theme'
 import { pxToNumber } from 'utils/tests/helpers'
 import * as S from './ProductSlider.styles'
@@ -11,9 +12,21 @@ export interface ProductSliderProps {
   $arrowColor?: 'white' | 'black'
 }
 
+const ArrowLeft = ({ currentSlide, slideCount, ...rest }: CustomArrowProps) => {
+  void currentSlide
+  void slideCount
+  return <ArrowBackIos {...rest} title='Previous games' role='img' aria-label='Previous games' />
+}
+
+const ArrowRight = ({ currentSlide, slideCount, ...rest }: CustomArrowProps) => {
+  void currentSlide
+  void slideCount
+  return <ArrowForwardIos {...rest} title='Next games' role='img' aria-label='Next games' />
+}
+
 const settings: SliderSettings = {
-  prevArrow: <ArrowLeft title='previous games' role='img' />,
-  nextArrow: <ArrowRight title='next games' role='img' />,
+  prevArrow: <ArrowLeft />,
+  nextArrow: <ArrowRight />,
   slidesToShow: 4,
   infinite: false,
   lazyLoad: 'ondemand',

@@ -24,52 +24,47 @@ const meta: Meta<typeof ShowcaseComponent> = {
   },
   decorators: [
     (Story) => (
-      <Container>
+      <Container style={{ padding: '20px 0' }}>
         <Story />
       </Container>
     )
-  ]
+  ],
+  tags: ['autodocs']
 }
 
 export default meta
 
 type Story = StoryObj<typeof ShowcaseComponent>
 
-export const Playground: Story = {
-  args: {
-    title: 'Most Populars',
-    highlight: highlightMock,
-    products: productsMock,
-    $arrowColor: 'white'
-  }
-}
-
-export const TitleOnly: Story = {
+export const Title: Story = {
   args: {
     title: 'Most populars'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const title = canvas.getByRole('heading', { name: /most populars/i })
 
-    expect(title).toBeInTheDocument()
+    await step('HeadingComponent', () => {
+      const HeadingComponent = canvas.getByTestId('HeadingComponent')
+      expect(HeadingComponent).toBeVisible()
+    })
   }
 }
 
-export const HighlightOnly: Story = {
+export const Highlight: Story = {
   args: {
     highlight: highlightMock
   },
-  play: ({ args, canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const highlight = `${args.highlight?.title}`
 
-    // should render the highlight
-    expect(canvas.getByText(highlight)).toBeInTheDocument()
+    await step('HighlightComponent', () => {
+      const HighlightComponent = canvas.getByTestId('HighlightComponent')
+      expect(HighlightComponent).toBeVisible()
+    })
   }
 }
 
-export const GamesOnly: Story = {
+export const Products: Story = {
   args: {
     products: productsMock
   },
@@ -77,41 +72,13 @@ export const GamesOnly: Story = {
     viewport: {
       defaultViewport: 'large'
     }
-  }
-  // play: async ({ canvasElement, args }) => {
-  // const canvas = within(canvasElement)
-
-  // should render the games
-  // expect(args.products).not.toHaveLength(0)
-
-  // arrowColor white as default
-  // todo: not working in terminal
-  // const nextIcon = await waitFor(() =>
-  //   canvas.getByRole('img', { name: /next games/i })
-  // )
-  // expect(nextIcon).toHaveStyle({ fill: theme.colors.white })
-  // }
-}
-
-export const ArrowColorBlack: Story = {
-  args: {
-    products: productsMock,
-    $arrowColor: 'black'
   },
-  parameters: {
-    viewport: {
-      defaultViewport: 'large'
-    },
-    backgrounds: {
-      default: 'Light'
-    }
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('ProductSliderComponent', () => {
+      const ProductSliderComponent = canvas.getByTestId('ProductSliderComponent')
+      expect(ProductSliderComponent).toBeVisible()
+    })
   }
-  // play: async ({ canvasElement }) => {
-  // todo: not working in terminal
-  // const canvas = within(canvasElement)
-  // const nextIcon = await waitFor(() =>
-  //   canvas.getByRole('img', { name: /next games/i })
-  // )
-  // expect(nextIcon).toHaveStyle({ fill: theme.colors.black })
-  // }
 }
