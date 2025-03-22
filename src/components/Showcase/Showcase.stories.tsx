@@ -24,9 +24,11 @@ const meta: Meta<typeof ShowcaseComponent> = {
   },
   decorators: [
     (Story) => (
-      <Container style={{ padding: '20px 0' }}>
-        <Story />
-      </Container>
+      <div style={{ padding: '20px 0' }}>
+        <Container>
+          <Story />
+        </Container>
+      </div>
     )
   ],
   tags: ['autodocs']

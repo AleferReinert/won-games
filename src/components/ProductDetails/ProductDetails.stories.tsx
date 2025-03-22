@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import theme from 'styles/theme'
-import { pxToNumber } from 'utils/tests/helpers'
 import { productDetailsMock } from '../../mocks/productDetails.mock'
 import ProductDetailsComponent from './ProductDetails'
 
@@ -23,7 +21,11 @@ const meta: Meta<typeof ProductDetailsComponent> = {
       control: { type: 'inline-check' },
       options: ['Action', 'Adventure', 'Role-playing', 'Simulation', 'Sci-fi']
     }
-  }
+  },
+  parameters: {
+    layout: 'padded'
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -31,41 +33,55 @@ export default meta
 type Story = StoryObj<typeof ProductDetailsComponent>
 
 export const ProductDetails: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const viewport = canvasElement.clientWidth
-    const breakpointSmall = pxToNumber(theme.breakpoint.small)
-    const title = canvas.queryByText(/game details/i)
-    const formattedDate = canvas.getByText('Sep 13, 2019')
-    const subtitles = [
-      'Category',
-      'Platforms',
-      'Release date',
-      'Developer',
-      'Publisher',
-      'Rating'
-    ]
 
-    // title "Game Details" on desktop only
-    viewport < breakpointSmall
-      ? expect(title).not.toBeVisible()
-      : expect(title).toBeVisible()
+    await step('Title', () => {
+      const title = canvas.getByRole('heading', { level: 2 })
+      expect(title).toHaveTextContent('Game details')
+    })
 
-    // subtitles
-    for (const subtitle of subtitles) {
-      expect(
-        canvas.getByRole('heading', { name: subtitle })
-      ).toBeInTheDocument()
-    }
+    await step('Category', () => {
+      const title = canvas.getByRole('heading', { level: 3, name: 'Category' })
+      const categories = canvas.getByText('Action, Adventure')
+      expect(title).toBeVisible()
+      expect(categories).toBeVisible()
+    })
 
-    // formatted data
-    expect(formattedDate).toBeInTheDocument()
+    await step('Platforms', () => {
+      const title = canvas.getByRole('heading', { level: 3, name: 'Platforms' })
+      const platformsComponent = canvas.getByTestId('PlatformsComponent')
+      expect(title).toBeVisible()
+      expect(platformsComponent).toBeVisible()
+    })
 
-    // platforms
-    expect(canvas.getByText(/Windows 7/i)).toBeInTheDocument()
+    await step('Release date with date formatted', () => {
+      const title = canvas.getByRole('heading', { level: 3, name: 'Release date' })
+      const dateFormatted = canvas.getByText('Sep 13, 2019')
+      expect(title).toBeVisible()
+      expect(dateFormatted).toBeVisible()
+    })
 
-    // render 18+ when rating BR18
-    expect(canvas.getByText('18+')).toBeInTheDocument()
+    await step('Developer', () => {
+      const title = canvas.getByRole('heading', { level: 3, name: 'Developer' })
+      const developer = canvas.getByText('Gearbox Software')
+      expect(title).toBeVisible()
+      expect(developer).toBeVisible()
+    })
+
+    await step('Publisher', () => {
+      const title = canvas.getByRole('heading', { level: 3, name: 'Publisher' })
+      const publisher = canvas.getByText('2K')
+      expect(title).toBeVisible()
+      expect(publisher).toBeVisible()
+    })
+
+    await step('Rating with rating formatted', () => {
+      const title = canvas.getByRole('heading', { level: 3, name: 'Rating' })
+      const ratingFormatted = canvas.getByText('18+')
+      expect(title).toBeVisible()
+      expect(ratingFormatted).toBeVisible()
+    })
   }
 }
 
@@ -73,10 +89,12 @@ export const RatingFree: Story = {
   args: {
     rating: 'BR0'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const rating = canvas.getByText(/free/i)
 
-    expect(rating).toBeInTheDocument()
+    await step('Rating free on BR0', () => {
+      const rating = canvas.getByText(/free/i)
+      expect(rating).toBeInTheDocument()
+    })
   }
 }

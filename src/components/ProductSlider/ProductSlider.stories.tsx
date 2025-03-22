@@ -16,9 +16,11 @@ const meta: Meta<typeof ProductSliderComponent> = {
   },
   decorators: [
     (Story) => (
-      <Container style={{ padding: '20px 0' }}>
-        <Story />
-      </Container>
+      <div style={{ padding: '20px 0' }}>
+        <Container>
+          <Story />
+        </Container>
+      </div>
     )
   ],
   parameters: {

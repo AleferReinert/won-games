@@ -13,9 +13,7 @@ const Platforms = ({ platforms }: PlatformsProps) => {
     */
 
   // Ordena as versões de cada plataforma dentro dos parenteses
-  function sortedGrouped(
-    obj: Record<string, string[]>
-  ): Record<string, string[]> {
+  function sortedGrouped(obj: Record<string, string[]>): Record<string, string[]> {
     const novoObj = {} as Record<string, string[]>
 
     for (const chave in obj) {
@@ -67,7 +65,7 @@ const Platforms = ({ platforms }: PlatformsProps) => {
   }
 
   return (
-    <S.Wrapper>
+    <S.Wrapper data-testid='PlatformsComponent'>
       <p>{groupSystems(platforms)}</p>
     </S.Wrapper>
   )
