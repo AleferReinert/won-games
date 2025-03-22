@@ -48,13 +48,13 @@ const Filter = ({ filterOptions, initialValues = {}, handleFilter }: FilterProps
 
   return (
     <>
-      <S.OpenFilter onClick={() => setIsOpen(true)} title='Open filters'>
-        <FilterListIcon aria-hidden='true' />
+      <S.OpenFilter onClick={() => setIsOpen(true)} title='Open filters' aria-label='Open filters'>
+        <FilterListIcon role='img' aria-hidden='true' />
       </S.OpenFilter>
 
       <S.Wrapper $isOpen={$isOpen} data-testid='FilterComponent'>
-        <S.CloseFilter onClick={() => setIsOpen(false)} title='Close filters'>
-          <CloseIcon />
+        <S.CloseFilter onClick={() => setIsOpen(false)} title='Close filters' aria-label='Close filters'>
+          <CloseIcon role='img' aria-hidden />
         </S.CloseFilter>
         <S.Items>
           {filterOptions.map((filter, index) => (
