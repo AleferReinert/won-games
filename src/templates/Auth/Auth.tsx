@@ -2,7 +2,7 @@ import Heading from 'components/Heading/Heading'
 import Logo from 'components/Logo/Logo'
 import * as S from './Auth.styles'
 
-type AuthTemplateProps = {
+interface AuthTemplateProps {
   title: string
   children: React.ReactNode
 }

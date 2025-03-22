@@ -1,7 +1,7 @@
-import { InputHTMLAttributes, ReactNode, useState } from 'react'
+import { ComponentProps, ReactNode, useState } from 'react'
 import * as S from './TextField.styles'
 
-export type TextFieldProps = {
+export interface TextFieldProps extends ComponentProps<'input'> {
   name: string
   // onInput?: (value: string) => void
   label?: string
@@ -10,7 +10,7 @@ export type TextFieldProps = {
   disabled?: boolean
   errorMessage?: string
   initialValue?: string
-} & InputHTMLAttributes<HTMLInputElement>
+}
 
 const TextField = ({
   // onInput,

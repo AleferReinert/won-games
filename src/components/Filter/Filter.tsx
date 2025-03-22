@@ -18,7 +18,7 @@ export interface FilterOptionsProps {
   }[]
 }
 
-export type FilterProps = {
+export interface FilterProps {
   filterOptions: FilterOptionsProps[]
   initialValues?: ParsedUrlQueryInput
   handleFilter: (values: ParsedUrlQueryInput) => void

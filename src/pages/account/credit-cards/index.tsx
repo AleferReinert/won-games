@@ -13,7 +13,7 @@ export function getServerSideProps() {
   }
 }
 
-type CreditCardsPageProps = {
+interface CreditCardsPageProps {
   creditCards: CreditCardProps[]
 }
 
@@ -23,11 +23,7 @@ const CreditCardsPage = ({ creditCards }: CreditCardsPageProps) => {
       <S.CreditCards>
         {creditCards?.map((creditCard, index) => (
           <S.Item key={index}>
-            <CreditCard
-              img={creditCard.img}
-              name={creditCard.name}
-              number={creditCard.number}
-            />
+            <CreditCard img={creditCard.img} name={creditCard.name} number={creditCard.number} />
           </S.Item>
         ))}
       </S.CreditCards>

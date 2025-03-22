@@ -4,7 +4,7 @@ import * as S from './ProductDetails.styles'
 
 type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18' | '' // todo: remove ''
 
-export type ProductDetailsProps = {
+export interface ProductDetailsProps {
   developer: string
   releaseDate: string
   platforms: string[]

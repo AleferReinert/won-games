@@ -6,7 +6,7 @@ import Price from 'components/Price/Price'
 import theme from 'styles/theme'
 import * as S from './ProductHeader.styles'
 
-export type ProductHeaderProps = {
+export interface ProductHeaderProps {
   title: string
   description: string
   price: number

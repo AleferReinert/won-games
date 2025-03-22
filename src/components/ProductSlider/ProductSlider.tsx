@@ -1,8 +1,8 @@
 import { ArrowBackIos } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos } from '@styled-icons/material-outlined/ArrowForwardIos'
 import Product, { ProductProps } from 'components/Product/Product'
-import Slider, { SliderSettings } from 'components/Slider/Slider'
-import type { CustomArrowProps } from 'react-slick'
+import Slider from 'components/Slider/Slider'
+import type { CustomArrowProps, Settings } from 'react-slick'
 import theme from 'styles/theme'
 import { pxToNumber } from 'utils/tests/helpers'
 import * as S from './ProductSlider.styles'
@@ -24,7 +24,7 @@ const ArrowRight = ({ currentSlide, slideCount, ...rest }: CustomArrowProps) => 
   return <ArrowForwardIos {...rest} title='Next games' role='img' aria-label='Next games' />
 }
 
-const settings: SliderSettings = {
+const settings: Settings = {
   prevArrow: <ArrowLeft />,
   nextArrow: <ArrowRight />,
   slidesToShow: 4,

@@ -13,7 +13,7 @@ export function getServerSideProps() {
   }
 }
 
-type OrdersPageProps = {
+interface OrdersPageProps {
   items?: CartItemProps[]
 }
 

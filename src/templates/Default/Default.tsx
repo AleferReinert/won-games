@@ -1,9 +1,9 @@
 import Container from 'components/Container/Container'
-import Header from 'components/Header/Header'
 import Footer from 'components/Footer/Footer'
+import Header from 'components/Header/Header'
 import * as S from './Default.styles'
 
-export type DefaultTemplateProps = {
+export interface DefaultTemplateProps {
   children: React.ReactNode
 }
 

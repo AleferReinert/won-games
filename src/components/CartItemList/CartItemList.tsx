@@ -3,7 +3,7 @@ import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import Empty from 'components/Empty/Empty'
 import * as S from './CartItemList.styles'
 
-export type CartItemListProps = {
+export interface CartItemListProps {
   cartItems?: CartItemProps[]
   total?: string
   button?: boolean

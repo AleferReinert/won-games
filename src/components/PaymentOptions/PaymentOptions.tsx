@@ -7,7 +7,7 @@ import Radio from 'components/Radio/Radio'
 import { useState } from 'react'
 import * as S from './PaymentOptions.styles'
 
-export type PaymentOptionsProps = {
+export interface PaymentOptionsProps {
   creditCards?: CreditCardProps[]
   handlePayment: () => void
 }

@@ -1,24 +1,16 @@
 import { ComponentProps, useState } from 'react'
 import * as S from './Checkbox.styles'
 
-export type CheckboxProps = {
+export interface CheckboxProps extends ComponentProps<'input'> {
   id: string
   onCheck?: (status: boolean) => void
   isChecked?: boolean
   label?: string
   $labelColor?: 'white' | 'black'
   value?: string | string[] | number
-} & ComponentProps<'input'>
+}
 
-const Checkbox = ({
-  id,
-  onCheck,
-  isChecked = false,
-  label,
-  $labelColor = 'white',
-  value,
-  ...props
-}: CheckboxProps) => {
+const Checkbox = ({ id, onCheck, isChecked = false, label, $labelColor = 'white', value, ...props }: CheckboxProps) => {
   const [checked, setChecked] = useState(isChecked)
 
   const onChange = () => {
@@ -29,14 +21,7 @@ const Checkbox = ({
 
   return (
     <S.Wrapper>
-      <S.Input
-        type='checkbox'
-        id={id}
-        onChange={onChange}
-        checked={checked}
-        value={value}
-        {...props}
-      />
+      <S.Input type='checkbox' id={id} onChange={onChange} checked={checked} value={value} {...props} />
       {label && (
         <S.Label htmlFor={id} $labelColor={$labelColor}>
           {label}
