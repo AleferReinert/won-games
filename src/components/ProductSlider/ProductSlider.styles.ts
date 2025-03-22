@@ -21,6 +21,7 @@ export const Wrapper = styled.div<WrapperProps>`
     }
 
     .slick-arrow {
+      display: none !important;
       width: 2.4rem;
       height: 2.4rem;
       position: absolute;
@@ -29,24 +30,28 @@ export const Wrapper = styled.div<WrapperProps>`
       fill: ${theme.colors[$arrowColor!]};
       cursor: pointer;
 
+      @media (min-width: ${theme.breakpoint.large}) {
+        display: block !important;
+      }
+
       &.slick-disabled {
         visibility: hidden;
       }
     }
 
     .slick-prev {
-      left: calc(-${theme.spacings.large} - 1.5rem);
+      left: calc(-${theme.spacings.medium} + 0.5rem);
 
-      @media (max-width: calc(${theme.breakpoint.xlarge} -1px)) {
-        left: -${theme.spacings.medium};
+      @media (min-width: ${theme.breakpoint.xlarge}) {
+        left: -${theme.spacings.large};
       }
     }
 
     .slick-next {
-      right: calc(-${theme.spacings.large} - 1.5rem);
+      right: calc(-${theme.spacings.medium} + 0.5rem);
 
-      @media (max-width: calc(${theme.breakpoint.xlarge} -1px)) {
-        right: -${theme.spacings.medium};
+      @media (min-width: ${theme.breakpoint.xlarge}) {
+        right: -${theme.spacings.large};
       }
     }
 

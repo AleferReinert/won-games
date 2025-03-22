@@ -16,15 +16,14 @@ const CartDropdown = ({ cartItems, total }: CartDropdownProps) => {
       <div id='desktop'>
         <Dropdown
           button={
-            <>
-              <S.ButtonCart title='Shopping cart' aria-label='Shopping cart'>
-                <S.BadgeCart aria-label='Cart items'>
-                  {cartItems && cartItems.length > 0 ? cartItems.length : 0}
-                </S.BadgeCart>
-                <ShoppingCartIcon role='img' aria-hidden width={24} height={24} />
-              </S.ButtonCart>
-            </>
+            <S.ButtonCart>
+              <S.BadgeCart aria-label='Cart items'>
+                {cartItems && cartItems.length > 0 ? cartItems.length : 0}
+              </S.BadgeCart>
+              <ShoppingCartIcon role='img' aria-hidden width={24} height={24} />
+            </S.ButtonCart>
           }
+          buttonLabel='Shopping cart'
         >
           <CartItemList cartItems={cartItems} total={total} button />
         </Dropdown>

@@ -19,6 +19,7 @@ const UserDropdown = ({ username }: UserDropdownProps) => {
             <ChevronDownIcon />
           </>
         }
+        buttonLabel='My account'
       >
         <S.Nav>
           <Link href='/account/profile'>

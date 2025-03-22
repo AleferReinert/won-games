@@ -31,15 +31,13 @@ export const Wrapper = styled.div`
   `}
 `
 
-export const ButtonCart = styled.button`
+export const ButtonCart = styled.div`
   ${({ theme }) => css`
     position: relative;
     background: transparent;
 
     svg {
       fill: ${theme.colors.white};
-      width: 2.4rem;
-      height: 2.4rem;
     }
   `}
 `
