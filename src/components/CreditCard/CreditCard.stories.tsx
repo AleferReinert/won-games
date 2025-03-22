@@ -50,7 +50,7 @@ export const Gray: Story = {
   args: {
     color: 'gray'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Color gray', () => {
@@ -64,7 +64,7 @@ export const Right: Story = {
   args: {
     direction: 'right'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Direction right', () => {

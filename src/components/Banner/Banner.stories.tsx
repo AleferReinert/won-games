@@ -38,9 +38,7 @@ export const Default: Story = {
 
     await step('Required description html', () => {
       const description = canvas.getByRole('paragraph')
-      expect(description).toContainHTML(
-        'Play the new <strong>CrashLands</strong> season'
-      )
+      expect(description).toContainHTML('Play the new <strong>CrashLands</strong> season')
     })
 
     await step('Required button link with label and link', () => {
@@ -59,7 +57,7 @@ export const WithRibbon: Story = {
       showPanel: true
     }
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new/i)
 

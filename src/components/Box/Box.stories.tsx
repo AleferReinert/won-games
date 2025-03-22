@@ -40,13 +40,11 @@ export const Xsmall: Story = {
   args: {
     $padding: 'xsmall'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByRole('heading', {
-      name: /children/i
-    }).parentElement
 
     step('Padding xsmall', () => {
+      const wrapper = canvas.getByRole('heading', { name: /children/i }).parentElement
       expect(wrapper).toHaveStyle({ padding: remToPx(theme.spacings.xsmall) })
     })
   }
@@ -56,13 +54,11 @@ export const Medium: Story = {
   args: {
     $padding: 'medium'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByRole('heading', {
-      name: /children/i
-    }).parentElement
 
     step('Padding medium', () => {
+      const wrapper = canvas.getByRole('heading', { name: /children/i }).parentElement
       expect(wrapper).toHaveStyle({ padding: remToPx(theme.spacings.medium) })
     })
   }

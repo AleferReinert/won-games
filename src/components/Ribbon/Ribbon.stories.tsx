@@ -59,7 +59,7 @@ export const Secondary: Story = {
   args: {
     color: 'secondary'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new release/i)
 
@@ -73,7 +73,7 @@ export const Small: Story = {
   args: {
     size: 'small'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new release/i)
 

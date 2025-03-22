@@ -62,7 +62,7 @@ export const Black: Story = {
       default: 'Light'
     }
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
@@ -77,7 +77,7 @@ export const Small: Story = {
     children: 'Small heading',
     size: 'small'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
@@ -92,7 +92,7 @@ export const Medium: Story = {
     children: 'Medium heading',
     size: 'medium'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
@@ -107,7 +107,7 @@ export const Large: Story = {
     children: 'Large heading',
     size: 'large'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
@@ -122,7 +122,7 @@ export const Huge: Story = {
     children: 'Huge heading',
     size: 'huge'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading', { name: /huge heading/i })
 
@@ -137,7 +137,7 @@ export const LineLeft: Story = {
     children: 'Line left',
     $line: 'left'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
@@ -154,7 +154,7 @@ export const LineBottom: Story = {
     children: 'Line bottom',
     $line: 'bottom'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
@@ -172,7 +172,7 @@ export const LineLeftSecondary: Story = {
     $line: 'left',
     $lineColor: 'secondary'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
@@ -190,7 +190,7 @@ export const LineBottomSecondary: Story = {
     $line: 'bottom',
     $lineColor: 'secondary'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
 
@@ -208,7 +208,7 @@ export const LineBottomSmall: Story = {
     $line: 'bottom',
     $lineBottomSize: 'small'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
     const titleAfter = window.getComputedStyle(title, '::after')
@@ -227,7 +227,7 @@ export const LineBottomMedium: Story = {
     $line: 'bottom',
     $lineBottomSize: 'medium'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
     const titleAfter = window.getComputedStyle(title, '::after')
@@ -245,7 +245,7 @@ export const LineBottomLarge: Story = {
     children: 'Line bottom large',
     $line: 'bottom'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const title = canvas.getByRole('heading')
     const titleAfter = window.getComputedStyle(title, '::after')
@@ -265,7 +265,7 @@ export const AsH1: Story = {
     $line: 'bottom',
     as: 'h1'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const heading = canvas.getByRole('heading', { level: 1 })
 

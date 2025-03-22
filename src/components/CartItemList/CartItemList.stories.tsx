@@ -73,7 +73,7 @@ export const Empty: Story = {
   args: {
     cartItems: []
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Empty component', () => {

@@ -21,7 +21,7 @@ export default meta
 type Story = StoryObj<typeof PriceComponent>
 
 export const Default: Story = {
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const price = canvas.getByLabelText('price')
 
@@ -36,7 +36,7 @@ export const Promotional: Story = {
   args: {
     promotionalPrice: 185
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const oldPrice = canvas.getByLabelText('price')
     const promotionalPrice = canvas.getByLabelText('promotional price')
@@ -67,7 +67,7 @@ export const Large: Story = {
     promotionalPrice: 185,
     size: 'large'
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const oldPrice = canvas.getByLabelText('price')
     const promotionalPrice = canvas.getByLabelText('promotional price')
@@ -87,7 +87,7 @@ export const Free: Story = {
   args: {
     price: 0
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const price = canvas.getByLabelText('price')
 

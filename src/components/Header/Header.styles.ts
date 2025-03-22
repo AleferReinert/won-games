@@ -46,7 +46,7 @@ export const LogoWrapper = styled.div`
       left: 50%;
       transform: translateX(-50%);
 
-      ${LogoStyles.wrapperModifiers.$hideText()}
+      ${LogoStyles.wrapperModifiers.$withoutText()}
     }
   `}
 `

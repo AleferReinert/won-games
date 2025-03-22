@@ -65,7 +65,7 @@ export const Link: Story = {
     children: 'button with variant link',
     $variant: 'link'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Links styles', () => {
@@ -83,7 +83,7 @@ export const Full: Story = {
     children: 'full button',
     $full: true
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Full width', () => {
@@ -98,7 +98,7 @@ export const Xsmall: Story = {
     children: 'xsmall button',
     size: 'xsmall'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Xsmall styles', () => {
@@ -113,7 +113,7 @@ export const Small: Story = {
     children: 'small button',
     size: 'small'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Small styles', () => {
@@ -131,7 +131,7 @@ export const Large: Story = {
     children: 'large button',
     size: 'large'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Large styles', () => {
@@ -149,7 +149,7 @@ export const Disabled: Story = {
     children: 'disabled button',
     disabled: true
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Disabled styles', () => {
@@ -168,7 +168,7 @@ export const AsLinkTag: Story = {
     asLink: true,
     href: '/'
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Render as <a>', () => {
