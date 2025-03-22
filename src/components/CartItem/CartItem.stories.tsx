@@ -29,7 +29,7 @@ export const Default: Story = {
     })
 
     await step('Required product price', () => {
-      const price = canvas.getByLabelText('price')
+      const price = canvas.getByLabelText('Price')
       expect(price).toHaveTextContent('$215.00')
     })
   }
@@ -73,17 +73,12 @@ export const Payment: Story = {
 
     await step('Credit card flag', () => {
       const creditCardFlag = canvas.getByRole('img', { name: 'mastercard' })
-      expect(creditCardFlag).toHaveAttribute(
-        'src',
-        expect.stringContaining('/img/creditCards/mastercard.png')
-      )
+      expect(creditCardFlag).toHaveAttribute('src', expect.stringContaining('/img/creditCards/mastercard.png'))
     })
 
     await step('Purchase date', () => {
       const purchaseDate = canvas.getByLabelText('purchase date')
-      expect(purchaseDate).toHaveTextContent(
-        'Purchase made on 07/06/2023 at 00:42'
-      )
+      expect(purchaseDate).toHaveTextContent('Purchase made on 07/06/2023 at 00:42')
     })
   }
 }

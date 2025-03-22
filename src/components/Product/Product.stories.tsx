@@ -94,7 +94,7 @@ export const WithDiscount: Story = {
     })
 
     await step('Promotional price', () => {
-      const promotionalPrice = canvas.getByLabelText('promotional price')
+      const promotionalPrice = canvas.getByLabelText('Promotional price')
       expect(promotionalPrice).toBeVisible()
     })
   }

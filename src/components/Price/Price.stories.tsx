@@ -10,10 +10,10 @@ const meta: Meta<typeof PriceComponent> = {
   args: {
     price: 215
   },
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered'
-  }
+  },
+  tags: ['autodocs']
 }
 
 export default meta
@@ -21,13 +21,22 @@ export default meta
 type Story = StoryObj<typeof PriceComponent>
 
 export const Default: Story = {
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const price = canvas.getByLabelText('price')
+    const price = canvas.getByLabelText('Price')
 
-    expect(price).toHaveStyle({
-      'background-color': theme.colors.secondary,
-      color: theme.colors.white
+    await step('Price with background secondary and color white', () => {
+      expect(price).toHaveStyle({
+        'background-color': theme.colors.secondary,
+        color: theme.colors.white
+      })
+    })
+
+    await step('Size small', () => {
+      expect(price).toHaveStyle({
+        height: remToPx('2.2rem'),
+        fontSize: remToPx(theme.font.sizes.small)
+      })
     })
   }
 }
@@ -36,28 +45,30 @@ export const Promotional: Story = {
   args: {
     promotionalPrice: 185
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const oldPrice = canvas.getByLabelText('price')
-    const promotionalPrice = canvas.getByLabelText('promotional price')
+    const promotionalPrice = canvas.getByLabelText('Promotional price')
 
-    expect(oldPrice).toHaveStyle({
-      color: theme.colors.gray,
-      'text-decoration-line': 'line-through'
-    })
-    expect(promotionalPrice).toHaveStyle({
-      'background-color': theme.colors.secondary,
-      color: theme.colors.white
+    await step('Old price with color gray and line-through', () => {
+      const oldPrice = canvas.getByLabelText('Price')
+      expect(oldPrice).toHaveStyle({
+        color: theme.colors.gray,
+        'text-decoration-line': 'line-through'
+      })
     })
 
-    // size small as default
-    expect(oldPrice).toHaveStyle({
-      height: remToPx('2.2rem'),
-      fontSize: remToPx(theme.font.sizes.small)
+    await step('Promotional price with background secondary and color white', () => {
+      expect(promotionalPrice).toHaveStyle({
+        'background-color': theme.colors.secondary,
+        color: theme.colors.white
+      })
     })
-    expect(promotionalPrice).toHaveStyle({
-      height: remToPx('2.2rem'),
-      fontSize: remToPx(theme.font.sizes.small)
+
+    await step('Promotional price small', () => {
+      expect(promotionalPrice).toHaveStyle({
+        height: remToPx('2.2rem'),
+        fontSize: remToPx(theme.font.sizes.small)
+      })
     })
   }
 }
@@ -67,18 +78,23 @@ export const Large: Story = {
     promotionalPrice: 185,
     size: 'large'
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const oldPrice = canvas.getByLabelText('price')
-    const promotionalPrice = canvas.getByLabelText('promotional price')
 
-    expect(oldPrice).toHaveStyle({
-      height: remToPx('3.8rem'),
-      fontSize: remToPx(theme.font.sizes.xlarge)
+    await step('Old price large', () => {
+      const oldPrice = canvas.getByLabelText('Price')
+      expect(oldPrice).toHaveStyle({
+        height: remToPx('3.8rem'),
+        fontSize: remToPx(theme.font.sizes.xlarge)
+      })
     })
-    expect(promotionalPrice).toHaveStyle({
-      height: remToPx('3.8rem'),
-      fontSize: remToPx(theme.font.sizes.xlarge)
+
+    await step('Promotional price large', () => {
+      const promotionalPrice = canvas.getByLabelText('Promotional price')
+      expect(promotionalPrice).toHaveStyle({
+        height: remToPx('3.8rem'),
+        fontSize: remToPx(theme.font.sizes.xlarge)
+      })
     })
   }
 }
@@ -87,10 +103,12 @@ export const Free: Story = {
   args: {
     price: 0
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const price = canvas.getByLabelText('price')
 
-    expect(price).toContainHTML('Free')
+    await step('Free', () => {
+      const price = canvas.getByLabelText('Price')
+      expect(price).toContainHTML('Free')
+    })
   }
 }

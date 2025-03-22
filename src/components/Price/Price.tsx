@@ -20,10 +20,12 @@ const Price = ({ price, promotionalPrice, size = 'small' }: PriceProps) => {
 
   return (
     <S.Wrapper size={size} data-testid='PriceComponent'>
-      {promotionalPrice && <S.OldPrice aria-label='price'>{formatPrice(price)}</S.OldPrice>}
-      <S.Price aria-label={promotionalPrice ? 'promotional price' : 'price'}>
-        {formatPrice(promotionalPrice ? promotionalPrice : price)}
-      </S.Price>
+      {promotionalPrice && <S.OldPrice aria-label='Price'>{formatPrice(price)}</S.OldPrice>}
+      {promotionalPrice ? (
+        <S.Price aria-label='Promotional price'>{formatPrice(promotionalPrice)}</S.Price>
+      ) : (
+        <S.Price aria-label='Price'>{formatPrice(price)}</S.Price>
+      )}
     </S.Wrapper>
   )
 }
