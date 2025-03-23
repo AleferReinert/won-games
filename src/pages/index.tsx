@@ -45,7 +45,8 @@ export const getStaticProps = async () => {
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query<HomeProps>({
     query: GET_PAGE_HOME,
-    variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) }
+    variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
+    fetchPolicy: 'no-cache'
   })
 
   const { banners, newGames, comingSoonGames, freeGames, showcases } = data
@@ -58,15 +59,13 @@ export const getStaticProps = async () => {
   } = showcases.data.attributes
 
   return {
+    revalidate: 60,
     props: {
-      revalidate: 60,
       banners: bannerMapper(banners),
       newsSectionTitle: newsSection.title,
       newsSectionProducts: productMapper(newGames),
       mostPopularsSectionTitle: mostPopularsSection.title,
-      mostPopularsSectionHighlight: highlightMapper(
-        mostPopularsSection.highlight
-      ),
+      mostPopularsSectionHighlight: highlightMapper(mostPopularsSection.highlight),
       mostPopularsSectionProducts: productMapper(mostPopularsSection.games),
       comingSoonSectionTitle: comingSoonSection.title,
       comingSoonSectionHighlight: highlightMapper(comingSoonSection.highlight),
@@ -103,11 +102,7 @@ export default function Index({
 
       {newsSectionProducts.length > 0 && (
         <S.SectionNews>
-          <Showcase
-            title={newsSectionTitle}
-            products={newsSectionProducts}
-            $arrowColor='black'
-          />
+          <Showcase title={newsSectionTitle} products={newsSectionProducts} $arrowColor='black' />
         </S.SectionNews>
       )}
 
@@ -128,11 +123,7 @@ export default function Index({
       )}
 
       {freeSectionProducts.length > 0 && (
-        <Showcase
-          title={freeSectionTitle}
-          highlight={freeSectionHighlight}
-          products={freeSectionProducts}
-        />
+        <Showcase title={freeSectionTitle} highlight={freeSectionHighlight} products={freeSectionProducts} />
       )}
     </>
   )

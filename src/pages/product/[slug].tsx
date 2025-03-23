@@ -49,7 +49,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // Return product data
   const { data } = await apolloClient.query({
     query: GET_PRODUCT_BY_SLUG,
-    variables: { slug: params?.slug }
+    variables: { slug: params?.slug },
+    fetchPolicy: 'no-cache'
   })
 
   // Redirect to 404 if product is not found
@@ -63,15 +64,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     data: { comingSoonGames, showcase }
   } = await apolloClient.query({
     query: GET_COMING_SOON_PRODUCTS,
-    variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) }
+    variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
+    fetchPolicy: 'no-cache'
   })
   const { comingSoonGames: comingSoonSection } = showcase.data.attributes
 
   // Return recommended section
   const { data: recommended } = await apolloClient.query<Pick<Query, 'recommended'>>({
-    query: GET_RECOMMENDED_PRODUCTS
+    query: GET_RECOMMENDED_PRODUCTS,
+    fetchPolicy: 'no-cache'
   })
-
   const recommendedSection = recommended.recommended.data.attributes.showcase
 
   return {

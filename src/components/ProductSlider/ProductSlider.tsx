@@ -4,7 +4,7 @@ import Product, { ProductProps } from 'components/Product/Product'
 import Slider from 'components/Slider/Slider'
 import type { CustomArrowProps, Settings } from 'react-slick'
 import theme from 'styles/theme'
-import { pxToNumber } from 'utils/tests/helpers'
+import { pxToNumber } from 'utils/pxToNumber'
 import * as S from './ProductSlider.styles'
 
 export interface ProductSliderProps {

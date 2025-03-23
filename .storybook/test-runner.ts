@@ -6,6 +6,7 @@ const DEFAULT_VIEWPORT_SIZE = { width: 1024, height: 768 }
 
 const config: TestRunnerConfig = {
   async preVisit(page, story) {
+    await page.waitForTimeout(500)
     // Accesses the story's parameters and retrieves the viewport used to render it
     const context = await getStoryContext(page, story)
     const viewportName = context.parameters?.viewport?.defaultViewport

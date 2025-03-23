@@ -1,7 +1,7 @@
 import * as LogoStyles from 'components/Logo/Logo.styles'
 import * as MenuMobileStyles from 'components/MenuMobile/MenuMobile.styles'
 import styled, { css } from 'styled-components'
-import { pxToNumber } from 'utils/tests/helpers'
+import { pxToNumber } from 'utils/pxToNumber'
 
 export const Wrapper = styled.header`
   ${({ theme }) => css`

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { remToPx } from 'polished'
 import theme from 'styles/theme'
-import { hexToRGBA } from 'utils/tests/helpers'
 import Empty from './Empty'
 
 const meta: Meta<typeof Empty> = {
@@ -39,12 +38,12 @@ export const Default: Story = {
 
     await step('Without background color', () => {
       expect(wrapper).not.toHaveStyle({
-        backgroundColor: hexToRGBA(theme.colors.white)
+        backgroundColor: theme.colors.white
       })
     })
 
     await step('Description white', () => {
-      expect(description).toHaveStyle({ color: hexToRGBA(theme.colors.white) })
+      expect(description).toHaveStyle({ color: theme.colors.white })
     })
   }
 }
@@ -75,12 +74,12 @@ export const InvertedColors: Story = {
 
     await step('Background white', () => {
       expect(wrapper).toHaveStyle({
-        backgroundColor: hexToRGBA(theme.colors.white)
+        backgroundColor: theme.colors.white
       })
     })
 
     step('Description black', () => {
-      expect(description).toHaveStyle({ color: hexToRGBA(theme.colors.black) })
+      expect(description).toHaveStyle({ color: theme.colors.black })
     })
   }
 }

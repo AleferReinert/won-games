@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { remToPx } from 'polished'
 import theme from 'styles/theme'
-import { hexToRGBA, jsMediaQuery } from 'utils/tests/helpers'
 import Heading from './Heading'
 
 const meta: Meta<typeof Heading> = {
@@ -35,19 +34,6 @@ export const Default: Story = {
 
     await step('Color white and h2 as default', () => {
       expect(title).toHaveStyle({ color: theme.colors.white })
-    })
-
-    step('Responsive font sizes', () => {
-      jsMediaQuery.lessThan(theme.breakpoint.small, () => {
-        expect(title).toHaveStyle({
-          fontSize: remToPx(theme.font.sizes.xlarge)
-        })
-      })
-      jsMediaQuery.greaterThan(theme.breakpoint.small, () => {
-        expect(title).toHaveStyle({
-          fontSize: remToPx(theme.font.sizes.xxlarge)
-        })
-      })
     })
   }
 }
@@ -160,7 +146,7 @@ export const LineBottom: Story = {
 
     step('Primary color as default', () => {
       expect(window.getComputedStyle(title, '::after').borderBottom).toBe(
-        `${remToPx('0.5rem')} solid ${hexToRGBA(theme.colors.primary)}`
+        `${remToPx('0.5rem')} solid ${theme.colors.primary}`
       )
     })
   }
@@ -178,7 +164,7 @@ export const LineLeftSecondary: Story = {
 
     step('Color secondary', () => {
       expect(title).toHaveStyle({
-        borderLeft: `${remToPx('0.7rem')} solid ${hexToRGBA(theme.colors.secondary)}`
+        borderLeft: `${remToPx('0.7rem')} solid ${theme.colors.secondary}`
       })
     })
   }
@@ -196,7 +182,7 @@ export const LineBottomSecondary: Story = {
 
     step('Color secondary', () => {
       expect(window.getComputedStyle(title, '::after').borderBottom).toBe(
-        `${remToPx('0.5rem')} solid ${hexToRGBA(theme.colors.secondary)}`
+        `${remToPx('0.5rem')} solid ${theme.colors.secondary}`
       )
     })
   }

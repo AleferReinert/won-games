@@ -1,9 +1,9 @@
 import { HighlightProps } from 'components/Highlight/Highlight'
 import {
-  BannerEntityResponseCollection,
-  ComponentPageHighlight,
-  GameEntityResponseCollection,
-  GameRelationResponseCollection
+	BannerEntityResponseCollection,
+	ComponentPageHighlight,
+	GameEntityResponseCollection,
+	GameRelationResponseCollection
 } from 'types/generated'
 
 // Retorna todos dados necessários para o componente Banner
@@ -23,7 +23,7 @@ export const bannerMapper = (banners: BannerEntityResponseCollection) => {
 }
 
 // Retorna todos dados necessários para o componente Highlight
-export const highlightMapper = (highlight: ComponentPageHighlight, alignment?: HighlightProps['alignment']) => {
+export const highlightMapper = (highlight: ComponentPageHighlight, alignment?: HighlightProps['$alignment']) => {
   return {
     title: highlight.title,
     description: highlight.description,
@@ -37,11 +37,11 @@ export const highlightMapper = (highlight: ComponentPageHighlight, alignment?: H
 
 // Retorna todos dados necessários para o slider de produtos
 export const productMapper = (products: GameEntityResponseCollection | GameRelationResponseCollection) => {
-  return products.data.map(({ attributes: product }) => ({
+  return products.data ? products.data.map(({ attributes: product }) => ({
     title: product.name,
     slug: product.slug,
     developer: product.developers.data[0]?.attributes.name || '',
     price: product.price,
     img: product.cover.data ? process.env.NEXT_PUBLIC_API_URL + product.cover.data.attributes.url : '' // todo add default image
-  }))
+  })) : []
 }

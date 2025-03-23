@@ -1,8 +1,4 @@
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  createHttpLink
-} from '@apollo/client'
+import { ApolloClient, NormalizedCacheObject, createHttpLink } from '@apollo/client'
 import { useMemo } from 'react'
 import { apolloCache } from './apolloCache'
 

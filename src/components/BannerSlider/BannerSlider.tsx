@@ -1,14 +1,15 @@
 import Banner, { BannerProps } from 'components/Banner/Banner'
-import Slider, { SliderSettings } from 'components/Slider/Slider'
+import Slider from 'components/Slider/Slider'
+import type { Settings } from 'react-slick'
 import theme from 'styles/theme'
-import { pxToNumber } from 'utils/tests/helpers'
+import { pxToNumber } from 'utils/pxToNumber'
 import * as S from './BannerSlider.styles'
 
 export interface BannerSliderProps {
   items: BannerProps[]
 }
 
-const settings: SliderSettings = {
+const settings: Settings = {
   dots: true,
   arrows: false,
   vertical: true,
@@ -30,9 +31,7 @@ const settings: SliderSettings = {
 const BannerSlider = ({ items }: BannerSliderProps) => {
   return (
     <S.Wrapper data-testid='BannerSliderComponent'>
-      <Slider settings={settings}>
-        {items && items.map((item, index) => <Banner key={index} {...item} />)}
-      </Slider>
+      <Slider settings={settings}>{items && items.map((item, index) => <Banner key={index} {...item} />)}</Slider>
     </S.Wrapper>
   )
 }

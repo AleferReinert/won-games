@@ -3,7 +3,6 @@ import { expect, within } from '@storybook/test'
 import { AddShoppingCart } from '@styled-icons/material-outlined'
 import { remToPx } from 'polished'
 import theme from 'styles/theme'
-import { hexToRGBA } from 'utils/tests/helpers'
 import ButtonComponent from './Button'
 
 const meta: Meta<typeof ButtonComponent> = {
@@ -155,7 +154,7 @@ export const Disabled: Story = {
     step('Disabled styles', () => {
       const button = canvas.getByRole('button')
       expect(button).toHaveStyle({
-        backgroundColor: hexToRGBA(theme.colors.gray),
+        backgroundColor: theme.colors.gray,
         cursor: 'not-allowed'
       })
     })

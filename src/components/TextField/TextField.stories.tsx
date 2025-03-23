@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, within } from '@storybook/test'
 import { Email, Person } from '@styled-icons/material-outlined'
 import theme from 'styles/theme'
-import { hexToRGBA } from 'utils/tests/helpers'
 import TextField from './TextField'
 
 const meta: Meta<typeof TextField> = {
@@ -176,7 +175,7 @@ export const Error: Story = {
 
     await step('Red border', () => {
       expect(inputWrapper).toHaveStyle({
-        borderColor: hexToRGBA(theme.colors.error)
+        borderColor: theme.colors.error
       })
     })
 

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import theme from 'styles/theme'
-import { hexToRGBA } from 'utils/tests/helpers'
 import CreditCardComponent from './CreditCard'
 
 const meta: Meta<typeof CreditCardComponent> = {
@@ -39,7 +38,7 @@ export const Default: Story = {
 
     step('Color black and direction left as default', () => {
       expect(wrapper).toHaveStyle({
-        color: hexToRGBA(theme.colors.black),
+        color: theme.colors.black,
         flexDirection: 'row'
       })
     })
@@ -55,7 +54,7 @@ export const Gray: Story = {
 
     step('Color gray', () => {
       const wrapper = canvas.getByRole('img').parentElement
-      expect(wrapper).toHaveStyle({ color: hexToRGBA(theme.colors.gray) })
+      expect(wrapper).toHaveStyle({ color: theme.colors.gray })
     })
   }
 }
