@@ -62,8 +62,8 @@ export const WithProducts: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step(`First ${productsLimit} products on load page`, () => {
-      const firstProducts = canvas.getAllByTestId('ProductComponent')
+    await step(`First ${productsLimit} products on load page`, async () => {
+      const firstProducts = await waitFor(() => canvas.getAllByTestId('ProductComponent'))
       expect(firstProducts).toHaveLength(productsLimit)
     })
 
@@ -71,8 +71,8 @@ export const WithProducts: Story = {
       const buttonShowMore = await waitFor(() => canvas.getByRole('button', { name: /show more/i }))
       buttonShowMore.click()
 
-      await waitFor(() => {
-        const moreProducts = canvas.getAllByTestId('ProductComponent')
+      await waitFor(async () => {
+        const moreProducts = await waitFor(() => canvas.getAllByTestId('ProductComponent'))
         expect(moreProducts).toHaveLength(productsLimit * 2)
       })
     })
