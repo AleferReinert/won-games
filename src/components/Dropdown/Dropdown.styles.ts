@@ -22,7 +22,8 @@ export const Wrapper = styled.div<WrapperProps>`
     display: inline-block;
     position: relative;
 
-    ${Children} {
+    ${Children},
+    ${Overlay} {
       ${$state && wrapperModifiers.open()}
       ${!$state && wrapperModifiers.close()}
     }
@@ -35,8 +36,11 @@ export const Button = styled.button`
     font-weight: ${theme.font.semibold};
     font-size: ${theme.font.sizes.medium};
     background: transparent;
+    position: relative;
+    z-index: ${theme.layers.modal};
   `}
 `
+
 export const Children = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
@@ -49,6 +53,7 @@ export const Children = styled.div`
     transition: ${theme.transition.default};
     width: max-content;
     ${wrapperModifiers.close()}
+    z-index: ${theme.layers.modal};
 
     &:before {
       display: block;
@@ -59,5 +64,18 @@ export const Children = styled.div`
       top: -2rem;
       right: 1rem;
     }
+  `}
+`
+
+export const Overlay = styled.div`
+  ${({ theme }) => css`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: ${theme.layers.overlay};
+    cursor: default !important;
   `}
 `

@@ -43,5 +43,21 @@ export const Dropdown: Story = {
       userEvent.click(button)
       await waitFor(() => expect(children).not.toBeVisible())
     })
+
+    await step('Overlay visible on click button', async () => {
+      const overlay = canvas.getByTestId('DropdownOverlay')
+      expect(overlay).not.toBeVisible()
+      userEvent.click(button)
+      await waitFor(() => expect(overlay).toBeVisible())
+    })
+
+    await step('Close dropdown on overlay click', async () => {
+      const overlay = canvas.getByTestId('DropdownOverlay')
+      userEvent.click(overlay)
+      await waitFor(() => {
+        expect(children).not.toBeVisible()
+        expect(overlay).not.toBeVisible()
+      })
+    })
   }
 }

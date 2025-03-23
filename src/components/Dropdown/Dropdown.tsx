@@ -16,6 +16,7 @@ const Dropdown = ({ button, buttonLabel, children }: DropdownProps) => {
         {button}
       </S.Button>
       <S.Children aria-hidden={!$state}>{children}</S.Children>
+      <S.Overlay data-testid='DropdownOverlay' aria-hidden={!$state} onClick={() => setState(false)} />
     </S.Wrapper>
   )
 }
