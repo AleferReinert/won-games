@@ -1,3 +1,5 @@
+import { fn } from '@storybook/test'
+
 export const cartContextMock = {
   cartProducts: [
     {
@@ -16,8 +18,8 @@ export const cartContextMock = {
   totalQuantity: 2,
   totalPrice: 218,
   isInCart: (id: string) => ['2', '4'].includes(id),
-  addToCart: () => null,
-  removeFromCart: () => null,
+  addToCart: fn(),
+  removeFromCart: fn(),
   clearCart: () => null,
   loading: false
 }

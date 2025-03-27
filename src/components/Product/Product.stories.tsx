@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
+import { CartContext } from 'contexts/CartContext'
+import { cartContextMock } from 'mocks/cartContext.mock'
 import { productMock } from '../../mocks/product.mock'
 import ProductComponent from './Product'
 
@@ -7,6 +9,11 @@ const meta: Meta<typeof ProductComponent> = {
   title: 'Components/Product',
   component: ProductComponent,
   args: productMock,
+  decorators: (Story) => (
+    <CartContext.Provider value={cartContextMock}>
+      <Story />
+    </CartContext.Provider>
+  ),
   parameters: {
     layout: 'centered'
   },
@@ -73,6 +80,18 @@ export const Default: Story = {
       })
     })
 
+    await step('Not added in cart', () => {
+      expect(cartContextMock.isInCart(productMock.id)).toBe(false)
+    })
+
+    await step('addTocart called on click', async () => {
+      const buttonAddToCart = canvas.getByRole('button', { name: 'Add to cart' })
+      userEvent.click(buttonAddToCart)
+      await waitFor(async () => {
+        expect(cartContextMock.addToCart).toHaveBeenCalled()
+      })
+    })
+
     await step('Slug: link with href', () => {
       const slug = canvas.getByRole('link')
       expect(slug).toHaveAttribute('href', '/product/population-zero')
@@ -80,6 +99,26 @@ export const Default: Story = {
   }
 }
 
+export const AddedToCart: Story = {
+  args: {
+    id: '2'
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement)
+
+    await step('Added in cart', () => {
+      expect(cartContextMock.isInCart(args.id)).toBe(true)
+    })
+
+    await step('removeFromCart called on click', async () => {
+      const buttonRemoveFromCart = canvas.getByRole('button', { name: 'Remove from cart' })
+      userEvent.click(buttonRemoveFromCart)
+      await waitFor(async () => {
+        expect(cartContextMock.removeFromCart).toHaveBeenCalled()
+      })
+    })
+  }
+}
 export const WithDiscount: Story = {
   args: {
     ribbonText: '20% off',
