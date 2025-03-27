@@ -8,12 +8,14 @@ import theme from 'styles/theme'
 import * as S from './ProductHeader.styles'
 
 export interface ProductHeaderProps {
+  id: string
   title: string
   description: string
   price: number
 }
 
-const ProductHeader = ({ title, description, price }: ProductHeaderProps) => {
+const ProductHeader = ({ id, title, description, price }: ProductHeaderProps) => {
+  console.log(id)
   return (
     <S.Wrapper data-testid='ProductHeaderComponent'>
       <Box>
@@ -24,7 +26,7 @@ const ProductHeader = ({ title, description, price }: ProductHeaderProps) => {
         <Price price={price} />
 
         <S.ButtonsWrapper>
-          <AddToCartButton id='1' $full showLabel />
+          <AddToCartButton id={id} $full showLabel />
           <Button $full $variant='link'>
             <FavoriteBorder fill={theme.colors.primary} role='img' aria-hidden />
             Wishlist

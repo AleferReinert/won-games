@@ -13,7 +13,7 @@ import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
-import { Game, GameEntity, Query } from 'types/generated'
+import { GameEntity, Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './ProductPage.styles'
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!data.games.data.length) {
     return { notFound: true }
   }
-  const game: Game = data.games.data[0].attributes
+  const game: GameEntity = data.games.data[0]
 
   // Return coming soon section
   const {
@@ -80,24 +80,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     revalidate: 60,
     props: {
       game,
-      cover: process.env.NEXT_PUBLIC_API_URL + game.cover.data?.attributes.url || '', // todo: add default cover
+      cover: process.env.NEXT_PUBLIC_API_URL + game.attributes.cover.data?.attributes.url || '', // todo: add default cover
       productHeader: {
-        title: game.name,
-        description: game.short_description,
-        price: game.price
+        id: game.id,
+        title: game.attributes.name,
+        description: game.attributes.short_description,
+        price: game.attributes.price
       },
-      gallery: game.gallery.data.map(({ attributes: image }) => ({
+      gallery: game.attributes.gallery.data.map(({ attributes: image }) => ({
         src: process.env.NEXT_PUBLIC_API_URL + image.url,
         label: image.alternativeText
       })),
-      description: game.description,
+      description: game.attributes.description,
       details: {
-        developer: game.developers.data[0]?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
-        releaseDate: game.release_date ?? '',
-        platforms: game.platforms.data.map((platform) => platform.attributes.name),
-        publisher: game.publisher.data?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
-        rating: game.rating ?? '',
-        categories: game.categories.data.map(({ attributes: category }) => category.name)
+        developer: game.attributes.developers.data[0]?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
+        releaseDate: game.attributes.release_date ?? '',
+        platforms: game.attributes.platforms.data.map((platform) => platform.attributes.name),
+        publisher: game.attributes.publisher.data?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
+        rating: game.attributes.rating ?? '',
+        categories: game.attributes.categories.data.map(({ attributes: category }) => category.name)
       },
       comingSoonSection: {
         title: comingSoonSection.title,
