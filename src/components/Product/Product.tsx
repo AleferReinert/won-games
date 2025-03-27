@@ -1,14 +1,16 @@
-import { AddShoppingCart, Favorite, FavoriteBorder } from '@styled-icons/material-outlined'
+import { AddShoppingCart, Favorite, FavoriteBorder, RemoveShoppingCart } from '@styled-icons/material-outlined'
 import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
 import Price, { PriceProps } from 'components/Price/Price'
 import Ribbon from 'components/Ribbon/Ribbon'
+import { useCart } from 'hooks/useCart'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import * as S from './Product.styles'
 
 export interface ProductProps extends PriceProps {
+  id: string
   slug: string
   title: string
   developer: string
@@ -16,7 +18,8 @@ export interface ProductProps extends PriceProps {
   ribbonText?: string
 }
 
-const Product = ({ slug, title, developer, img, price, promotionalPrice = null, ribbonText }: ProductProps) => {
+const Product = ({ id, slug, title, developer, img, price, promotionalPrice = null, ribbonText }: ProductProps) => {
+  const { addToCart, removeFromCart, isInCart } = useCart()
   const [favorite, setFavorite] = useState(false)
 
   return (
@@ -46,9 +49,20 @@ const Product = ({ slug, title, developer, img, price, promotionalPrice = null, 
 
           <S.BuyBox>
             <Price price={price} promotionalPrice={promotionalPrice} />
-            <Button size='xsmall' title='Add to cart' aria-label='Add to cart'>
-              <AddShoppingCart role='img' aria-hidden />
-            </Button>
+            {isInCart(id) ? (
+              <Button
+                title='Remove from cart'
+                aria-label='Remove from cart'
+                size='xsmall'
+                onClick={() => removeFromCart(id)}
+              >
+                <RemoveShoppingCart role='img' aria-hidden />
+              </Button>
+            ) : (
+              <Button title='Add to cart' aria-label='Add to cart' size='xsmall' onClick={() => addToCart(id)}>
+                <AddShoppingCart role='img' aria-hidden />
+              </Button>
+            )}
           </S.BuyBox>
         </S.Content>
       </Box>

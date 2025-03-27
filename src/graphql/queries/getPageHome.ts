@@ -22,11 +22,7 @@ export const GET_PAGE_HOME = gql`
     ) {
       ...ProductEntityFragment
     }
-    freeGames: games(
-      filters: { price: { eq: 0 } }
-      sort: "release_date:desc"
-      pagination: { start: 0, limit: 8 }
-    ) {
+    freeGames: games(filters: { price: { eq: 0 } }, sort: "release_date:desc", pagination: { start: 0, limit: 8 }) {
       ...ProductEntityFragment
     }
     showcases: home {
@@ -45,6 +41,7 @@ export const GET_PAGE_HOME = gql`
             }
             games {
               data {
+                id
                 attributes {
                   name
                   slug

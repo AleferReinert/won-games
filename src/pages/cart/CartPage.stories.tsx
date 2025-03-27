@@ -73,8 +73,8 @@ export const WithProducts: Story = {
     const canvas = within(canvasElement)
     const cartPage = within(canvas.getByTestId('CartPage'))
 
-    await step('CartItemListComponent', () => {
-      const cartItemListComponent = cartPage.getByTestId('CartItemListComponent')
+    await step('CartItemsComponent', () => {
+      const cartItemListComponent = cartPage.getByTestId('CartItemsComponent')
       expect(cartItemListComponent).toBeVisible()
     })
 

@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components'
 import * as CreditCardsStyles from 'components/CreditCard/CreditCard.styles'
+import Image from 'next/image'
+import styled, { css } from 'styled-components'
 export const Wrapper = styled.li`
   ${({ theme }) => css`
     border-bottom: 0.1rem solid ${theme.colors.lightGray};
@@ -26,8 +27,9 @@ export const Content = styled.div`
   `}
 `
 
-export const Img = styled.img`
+export const Img = styled(Image)`
   max-width: 9.4rem;
+  height: calc(9.4rem * (9 / 16));
   aspect-ratio: 16/9;
 `
 

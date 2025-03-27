@@ -1,27 +1,29 @@
 import Button from 'components/Button/Button'
-import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
+import CartItem from 'components/CartItem/CartItem'
 import Empty from 'components/Empty/Empty'
-import * as S from './CartItemList.styles'
+import { useCart } from 'hooks/useCart'
+import { formatPrice } from 'utils/formatPrice'
+import * as S from './CartItems.styles'
 
-export interface CartItemListProps {
-  cartItems?: CartItemProps[]
-  total?: string
+export interface CartItemsProps {
   button?: boolean
 }
 
-const CartItemList = ({ cartItems = [], total, button = false }: CartItemListProps) => {
+const CartItems = ({ button = false }: CartItemsProps) => {
+  const { cartProducts, totalPrice } = useCart()
+
   return (
-    <S.Wrapper aria-label='cart list' data-testid='CartItemListComponent'>
+    <S.Wrapper aria-label='cart list' data-testid='CartItemsComponent'>
       <S.List>
-        {cartItems && cartItems.length > 0 ? (
+        {cartProducts && cartProducts.length > 0 ? (
           <>
-            {cartItems.map((game, index) => (
+            {cartProducts.map((game, index) => (
               <CartItem key={index} {...game} />
             ))}
 
             <S.Footer>
               {!button && 'Total:'}
-              <S.PriceTotal aria-label='total price'>{total}</S.PriceTotal>
+              <S.PriceTotal aria-label='total price'>{formatPrice(totalPrice)}</S.PriceTotal>
               {button && (
                 <Button asLink href='/cart'>
                   Buy it now
@@ -42,4 +44,4 @@ const CartItemList = ({ cartItems = [], total, button = false }: CartItemListPro
   )
 }
 
-export default CartItemList
+export default CartItems

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import * as cartItemListStyles from '../CartItemList/CartItemList.styles'
+import * as cartItemListStyles from '../CartItems/CartItems.styles'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`

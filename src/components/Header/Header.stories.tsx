@@ -80,7 +80,7 @@ export const Desktop: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const cartButton = canvas.getByRole('button', { name: 'Shopping cart' })
-    const cartItemListComponent = canvas.getByTestId('CartItemListComponent')
+    const cartItemListComponent = canvas.getByTestId('CartItemsComponent')
 
     await step('Hidden menu button', () => {
       const menuButton = canvas.queryByRole('button', { name: /open menu/i })
@@ -105,7 +105,7 @@ export const Desktop: Story = {
       expect(signInButtonLink).toHaveAttribute('href', '/sign-in')
     })
 
-    await step('CartItemListComponent hidden', () => {
+    await step('CartItemsComponent hidden', () => {
       expect(cartItemListComponent).not.toBeVisible()
     })
 

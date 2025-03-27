@@ -12,28 +12,25 @@ interface PaymentProps {
 }
 
 export interface CartItemProps {
+  id: string
   img: string
-  title: string
+  name: string
   price: number
   downloadLink?: string
   paymentInfo?: PaymentProps
 }
 
-const CartItem = ({
-  img,
-  title,
-  price,
-  downloadLink,
-  paymentInfo
-}: CartItemProps) => {
+const CartItem = ({ img, name, price, downloadLink, paymentInfo }: CartItemProps) => {
+  const imgSrc = process.env.STORYBOOK ? img : process.env.NEXT_PUBLIC_API_URL + img
+
   return (
     <S.Wrapper data-testid='CartItemComponent'>
       <Box>
         <S.Content>
-          <S.Img src={img} alt={title} />
+          <S.Img src={imgSrc} alt={name} width={293} height={138} />
           <S.InfoWrapper>
             <S.TitleWrapper>
-              <S.Title>{title}</S.Title>
+              <S.Title>{name}</S.Title>
               {downloadLink && (
                 <S.DownloadLink href={downloadLink} title='Download' download>
                   <FileDownload title='Download' />
@@ -45,9 +42,7 @@ const CartItem = ({
 
           {paymentInfo && (
             <S.PaymentInfo>
-              <S.PurchaseDate aria-label='purchase date'>
-                {paymentInfo.purchaseDate}
-              </S.PurchaseDate>
+              <S.PurchaseDate aria-label='purchase date'>{paymentInfo.purchaseDate}</S.PurchaseDate>
               <CreditCard
                 img={paymentInfo.creditCardFlag}
                 name={paymentInfo.creditCardBrand}

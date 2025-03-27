@@ -1,21 +1,21 @@
 import { CartItemProps } from 'components/CartItem/CartItem'
 
-export const cartItemsMinMock: Omit<
-  CartItemProps,
-  'paymentInfo' | 'downloadLink'
->[] = [
+export const cartItemsMinMock: Omit<CartItemProps, 'paymentInfo' | 'downloadLink'>[] = [
   {
-    title: 'Population Zero',
+    id: '1',
+    name: 'Population Zero',
     img: '/img/game-test.jpg',
     price: 215.0
   },
   {
-    title: 'Borderlands 2',
+    id: '2',
+    name: 'Borderlands 2',
     img: '/img/game-test.jpg',
     price: 315.0
   },
   {
-    title: 'Diablo 1',
+    id: '3',
+    name: 'Diablo 1',
     img: '/img/game-test.jpg',
     price: 79.0
   }

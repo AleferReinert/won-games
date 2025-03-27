@@ -1,6 +1,6 @@
 import { Info } from '@styled-icons/material-outlined/Info'
 import { CartItemProps } from 'components/CartItem/CartItem'
-import CartItemList from 'components/CartItemList/CartItemList'
+import CartItems from 'components/CartItems/CartItems'
 import Container from 'components/Container/Container'
 import { CreditCardProps } from 'components/CreditCard/CreditCard'
 import Divider from 'components/Divider/Divider'
@@ -22,7 +22,7 @@ import * as S from './CartPage.styles'
 
 interface CartPageProps {
   cartItems: CartItemProps[]
-  total: string
+  total: number
   creditCards: CreditCardProps[]
   recommendedSection: ShowcaseProps
 }
@@ -65,7 +65,7 @@ const CartPage = ({ cartItems, total, creditCards, recommendedSection }: CartPag
         ) : (
           <>
             <S.Content>
-              <CartItemList cartItems={cartItems} total={total} />
+              <CartItems cartItems={cartItems} total={total} />
 
               <PaymentOptions creditCards={creditCards} handlePayment={handlePayment} />
             </S.Content>
