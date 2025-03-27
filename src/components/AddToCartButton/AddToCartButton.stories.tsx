@@ -36,7 +36,7 @@ export const NotAdded: Story = {
     await step('addToCart called on click', async () => {
       const buttonAddToCart = canvas.getByRole('button', { name: 'Add to cart' })
       userEvent.click(buttonAddToCart)
-      await waitFor(async () => {
+      await waitFor(() => {
         expect(cartContextMock.addToCart).toHaveBeenCalled()
       })
     })
@@ -57,7 +57,7 @@ export const Added: Story = {
     await step('removeFromCart called on click', async () => {
       const buttonRemoveFromCart = canvas.getByRole('button', { name: 'Remove from cart' })
       userEvent.click(buttonRemoveFromCart)
-      await waitFor(async () => {
+      await waitFor(() => {
         expect(cartContextMock.removeFromCart).toHaveBeenCalled()
       })
     })

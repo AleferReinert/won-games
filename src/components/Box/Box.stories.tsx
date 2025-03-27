@@ -40,7 +40,7 @@ export const Xsmall: Story = {
   args: {
     $padding: 'xsmall'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Padding xsmall', () => {
@@ -54,7 +54,7 @@ export const Medium: Story = {
   args: {
     $padding: 'medium'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Padding medium', () => {

@@ -14,7 +14,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const [cartProductIds, setCartProductIds] = useState<string[]>([])
 
   useEffect(() => {
-    const data = getStorageItem('cartProducts')
+    const data: string[] = getStorageItem('cartProducts')
     if (data) setCartProductIds(data)
   }, [])
 
@@ -30,7 +30,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   })
   const saveCartProducts = (newCartProductIds: string[]) => {
     setCartProductIds(newCartProductIds)
-    setStorageItem('cartProducts', cartProductIds)
+    setStorageItem('cartProducts', newCartProductIds)
   }
   const formattedProducts = cartProductsMapper(data?.games?.data || [])
   const totalQuantity = formattedProducts.length

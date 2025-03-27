@@ -3,7 +3,7 @@ import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrow
 import Container from 'components/Container/Container'
 import Empty from 'components/Empty/Empty'
 import Filter, { FilterOptionsProps } from 'components/Filter/Filter'
-import Loading from 'components/Loading/Loading'
+import { Loading } from 'components/Loading/Loading'
 import Product from 'components/Product/Product'
 import { GET_ALL_CATEGORIES } from 'graphql/queries/getAllCategories'
 import { GET_ALL_PLATFORMS } from 'graphql/queries/getAllPlatforms'
@@ -152,8 +152,9 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
         <div>
           <S.Products>
             {products.length > 0 &&
-              products?.map(({ attributes }, index) => (
+              products?.map(({ attributes, id }, index) => (
                 <Product
+                  id={id}
                   key={index}
                   title={attributes.name}
                   developer={attributes.developers.data[0]?.attributes.name || ''} //todo: no strapi não da pra colocar required

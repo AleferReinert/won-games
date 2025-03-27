@@ -65,7 +65,7 @@ export const WithProducts: Story = {
   args: {
     wishlistProducts: productsMock
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const wrapperWishlistGames = within(canvas.getByRole('heading', { name: 'Wishlist', level: 1 }).parentElement!)
     const products = wrapperWishlistGames.queryAllByTestId('ProductComponent')

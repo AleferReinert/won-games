@@ -27,7 +27,7 @@ export default meta
 type Story = StoryObj<typeof CreditCardsPage>
 
 export const CreditCards: Story = {
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('CreditCard components', () => {

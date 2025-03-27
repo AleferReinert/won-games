@@ -49,7 +49,7 @@ export const WithIcon: Story = {
   args: {
     children: <>{<AddShoppingCart role='img' />} button with icon</>
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Icon', () => {
@@ -64,7 +64,7 @@ export const Link: Story = {
     children: 'button with variant link',
     $variant: 'link'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Links styles', () => {
@@ -82,7 +82,7 @@ export const Full: Story = {
     children: 'full button',
     $full: true
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Full width', () => {
@@ -97,7 +97,7 @@ export const Xsmall: Story = {
     children: 'xsmall button',
     size: 'xsmall'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Xsmall styles', () => {
@@ -112,7 +112,7 @@ export const Small: Story = {
     children: 'small button',
     size: 'small'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Small styles', () => {
@@ -130,7 +130,7 @@ export const Large: Story = {
     children: 'large button',
     size: 'large'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Large styles', () => {
@@ -148,7 +148,7 @@ export const Disabled: Story = {
     children: 'disabled button',
     disabled: true
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Disabled styles', () => {
@@ -167,7 +167,7 @@ export const AsLinkTag: Story = {
     asLink: true,
     href: '/'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Render as <a>', () => {

@@ -25,7 +25,7 @@ type Story = StoryObj<typeof OrdersPage>
 
 export const Default: Story = {
   name: 'Empty (default)',
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Empty message', () => {
@@ -39,7 +39,7 @@ export const WithOrders: Story = {
   args: {
     items: cartItemsFullMock
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('CartItem components ', () => {

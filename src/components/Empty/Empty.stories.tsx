@@ -53,7 +53,7 @@ export const WithButton: Story = {
     buttonText: 'Go back to store',
     buttonUrl: '/link'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const button = canvas.getByRole('link', { name: /go back to store/i })
 

@@ -13,7 +13,7 @@ import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
-import { GameEntity, Query } from 'types/generated'
+import { GameEntity, GameEntityResponseCollection, Home, Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './ProductPage.styles'
@@ -67,7 +67,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
     fetchPolicy: 'no-cache'
   })
-  const { comingSoonGames: comingSoonSection } = showcase.data.attributes
+  const { comingSoonGames: comingSoonSection }: Pick<Home, 'comingSoonGames'> = showcase.data.attributes
+  const comingSoonSectionProducts: GameEntityResponseCollection = comingSoonGames
 
   // Return recommended section
   const { data: recommended } = await apolloClient.query<Pick<Query, 'recommended'>>({
@@ -103,7 +104,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       comingSoonSection: {
         title: comingSoonSection.title,
         highlight: highlightMapper(comingSoonSection.highlight),
-        products: productMapper(comingSoonGames)
+        products: productMapper(comingSoonSectionProducts)
       },
       recommendedSection: {
         title: recommendedSection.title,

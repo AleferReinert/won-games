@@ -57,7 +57,7 @@ export const WithRibbon: Story = {
       showPanel: true
     }
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new/i)
 

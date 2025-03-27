@@ -1,0 +1,4 @@
+generators/plopfile.js
+public/sw.js
+public/workbox-*.js
+next.config.js

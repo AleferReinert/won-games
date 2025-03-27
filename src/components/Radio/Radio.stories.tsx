@@ -85,7 +85,7 @@ export const WithBlackLabel: Story = {
       default: 'Light'
     }
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const label = canvas.getByText(/with black label/i)
 

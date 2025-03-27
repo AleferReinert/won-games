@@ -1,16 +1,16 @@
 import { ArrowBackIos as ArrowLeft, ArrowForwardIos as ArrowRight, Close } from '@styled-icons/material-outlined'
-import Slider, { SliderSettings } from 'components/Slider/Slider'
+import Slider from 'components/Slider/Slider'
 import Image from 'next/image'
 import { SetStateAction, useEffect, useRef, useState } from 'react'
-import SlickSlider from 'react-slick'
+import SlickSlider, { Settings } from 'react-slick'
 import * as S from './Gallery.styles'
 
-const commomSettings: SliderSettings = {
+const commomSettings: Settings = {
   infinite: false,
   lazyLoad: 'ondemand'
 }
 
-const thumbsSettings: SliderSettings = {
+const thumbsSettings: Settings = {
   ...commomSettings,
   arrows: false,
   slidesToShow: 4,
@@ -32,7 +32,7 @@ const thumbsSettings: SliderSettings = {
   ]
 }
 
-const modalSettings: SliderSettings = {
+const modalSettings: Settings = {
   ...commomSettings,
   initialSlide: 2,
   prevArrow: <ArrowLeft title='Previous' />,

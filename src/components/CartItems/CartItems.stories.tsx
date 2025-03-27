@@ -18,7 +18,7 @@ export default meta
 type Story = StoryObj<typeof CartItemsComponent>
 
 export const Empty: Story = {
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Empty component', () => {

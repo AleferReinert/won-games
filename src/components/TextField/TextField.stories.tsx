@@ -122,7 +122,7 @@ export const IconRight: Story = {
     icon: 'Person',
     $iconPosition: 'right'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const inputWrapper = canvas.getByRole('textbox').parentElement
 
@@ -189,7 +189,7 @@ export const InitialValue: Story = {
   args: {
     initialValue: 'Initial value'
   },
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const textField = canvas.getByRole('textbox')
 

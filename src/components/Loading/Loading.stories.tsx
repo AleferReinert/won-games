@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import LoadingComponent from './Loading'
+import { Loading as LoadingComponent } from './Loading'
 
 const meta: Meta<typeof LoadingComponent> = {
   title: 'Components/Atoms/Loading',
@@ -15,7 +15,7 @@ export default meta
 type Story = StoryObj<typeof LoadingComponent>
 
 export const Loading: Story = {
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('3 dots animation', () => {

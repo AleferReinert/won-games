@@ -80,7 +80,7 @@ export const Default: Story = {
       })
     })
 
-    await step('AddToCartButtonComponent', async () => {
+    await step('AddToCartButtonComponent', () => {
       const addToCartButtonComponent = canvas.getByTestId('AddToCartButtonComponent')
       expect(addToCartButtonComponent).toBeVisible()
     })

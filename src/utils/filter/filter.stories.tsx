@@ -52,7 +52,7 @@ const meta: Meta = {
 export default meta
 
 export const QueryStringToGraphqlFilters: StoryObj = {
-  play: async ({ args }) => {
+  play: ({ args }) => {
     const { queryString, filterOptions } = args as ParseArgsProps
     const parsedQuery = queryStringToGraphqlFilters({
       queryString,

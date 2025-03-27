@@ -15,7 +15,6 @@ export interface ProductHeaderProps {
 }
 
 const ProductHeader = ({ id, title, description, price }: ProductHeaderProps) => {
-  console.log(id)
   return (
     <S.Wrapper data-testid='ProductHeaderComponent'>
       <Box>

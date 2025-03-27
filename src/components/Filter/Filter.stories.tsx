@@ -37,7 +37,7 @@ export const Mobile: Story = {
     const buttonOpen = canvas.getByRole('button', { name: 'Open filters' })
     const filterComponent = canvas.getByTestId('FilterComponent')
 
-    await step('Button open filter', async () => {
+    await step('Button open filter', () => {
       expect(buttonOpen).toBeVisible()
     })
 
@@ -164,7 +164,7 @@ export const InitialValues: Story = {
   play: async ({ canvasElement, args, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Initial values checked', async () => {
+    await step('Initial values checked', () => {
       const priceRadio = canvas.getByRole('radio', { name: 'Under $200' })
       const windows7Checkbox = canvas.getByRole('checkbox', { name: 'Windows 7' })
       const windows8Checkbox = canvas.getByRole('checkbox', { name: 'Windows 8' })

@@ -12,7 +12,7 @@ export default meta
 type Story = StoryObj<typeof DividerComponent>
 
 export const Divider: Story = {
-  play: async ({ canvasElement, step }) => {
+  play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Line', () => {
