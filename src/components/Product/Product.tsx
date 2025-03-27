@@ -1,9 +1,8 @@
-import { AddShoppingCart, Favorite, FavoriteBorder, RemoveShoppingCart } from '@styled-icons/material-outlined'
+import { Favorite, FavoriteBorder } from '@styled-icons/material-outlined'
+import AddToCartButton from 'components/AddToCartButton/AddToCartButton'
 import Box from 'components/Box/Box'
-import Button from 'components/Button/Button'
 import Price, { PriceProps } from 'components/Price/Price'
 import Ribbon from 'components/Ribbon/Ribbon'
-import { useCart } from 'hooks/useCart'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -19,7 +18,6 @@ export interface ProductProps extends PriceProps {
 }
 
 const Product = ({ id, slug, title, developer, img, price, promotionalPrice = null, ribbonText }: ProductProps) => {
-  const { addToCart, removeFromCart, isInCart } = useCart()
   const [favorite, setFavorite] = useState(false)
 
   return (
@@ -49,20 +47,7 @@ const Product = ({ id, slug, title, developer, img, price, promotionalPrice = nu
 
           <S.BuyBox>
             <Price price={price} promotionalPrice={promotionalPrice} />
-            {isInCart(id) ? (
-              <Button
-                title='Remove from cart'
-                aria-label='Remove from cart'
-                size='xsmall'
-                onClick={() => removeFromCart(id)}
-              >
-                <RemoveShoppingCart role='img' aria-hidden />
-              </Button>
-            ) : (
-              <Button title='Add to cart' aria-label='Add to cart' size='xsmall' onClick={() => addToCart(id)}>
-                <AddShoppingCart role='img' aria-hidden />
-              </Button>
-            )}
+            <AddToCartButton id={id} size='xsmall' />
           </S.BuyBox>
         </S.Content>
       </Box>

@@ -41,11 +41,9 @@ export const ProductHeader: Story = {
       expect(price).toBeInTheDocument()
     })
 
-    await step('Button add to cart', () => {
-      const buttonAddToCart = canvas.getByRole('button', {
-        name: /add to cart/i
-      })
-      expect(buttonAddToCart).toBeInTheDocument()
+    await step('AddToCartButtonComponent', () => {
+      const addToCartButtonComponent = canvas.getByTestId('AddToCartButtonComponent')
+      expect(addToCartButtonComponent).toBeVisible()
     })
 
     await step('Button wishlist', () => {

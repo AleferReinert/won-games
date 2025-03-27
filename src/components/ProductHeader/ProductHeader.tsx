@@ -1,4 +1,5 @@
-import { AddShoppingCart, FavoriteBorder } from '@styled-icons/material-outlined'
+import { FavoriteBorder } from '@styled-icons/material-outlined'
+import AddToCartButton from 'components/AddToCartButton/AddToCartButton'
 import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
 import Heading from 'components/Heading/Heading'
@@ -23,12 +24,9 @@ const ProductHeader = ({ title, description, price }: ProductHeaderProps) => {
         <Price price={price} />
 
         <S.ButtonsWrapper>
-          <Button $full>
-            <AddShoppingCart />
-            Add to cart
-          </Button>
+          <AddToCartButton id='1' $full showLabel />
           <Button $full $variant='link'>
-            <FavoriteBorder fill={theme.colors.primary} />
+            <FavoriteBorder fill={theme.colors.primary} role='img' aria-hidden />
             Wishlist
           </Button>
         </S.ButtonsWrapper>

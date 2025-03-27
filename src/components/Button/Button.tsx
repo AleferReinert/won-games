@@ -1,14 +1,16 @@
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 import * as S from './Button.styles'
 
-export type ButtonProps = {
+export interface ButtonProps {
   size?: 'xsmall' | 'small' | 'medium' | 'large'
   $full?: boolean
   icon?: ReactNode
   $variant?: 'primary' | 'link'
   asLink?: boolean
-} & AnchorHTMLAttributes<HTMLAnchorElement> &
-  ButtonHTMLAttributes<HTMLButtonElement>
+}
+
+export type ButtonConditionalProps = ButtonProps &
+  (AnchorHTMLAttributes<HTMLAnchorElement> | ButtonHTMLAttributes<HTMLButtonElement>)
 
 const Button = ({
   children,
@@ -17,7 +19,7 @@ const Button = ({
   $variant = 'primary',
   asLink = false,
   ...props
-}: ButtonProps) => {
+}: ButtonConditionalProps) => {
   const options = { size, $full, $variant, ...props }
 
   return (

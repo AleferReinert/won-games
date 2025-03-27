@@ -80,16 +80,9 @@ export const Default: Story = {
       })
     })
 
-    await step('Not added in cart', () => {
-      expect(cartContextMock.isInCart(productMock.id)).toBe(false)
-    })
-
-    await step('addTocart called on click', async () => {
-      const buttonAddToCart = canvas.getByRole('button', { name: 'Add to cart' })
-      userEvent.click(buttonAddToCart)
-      await waitFor(async () => {
-        expect(cartContextMock.addToCart).toHaveBeenCalled()
-      })
+    await step('AddToCartButtonComponent', async () => {
+      const addToCartButtonComponent = canvas.getByTestId('AddToCartButtonComponent')
+      expect(addToCartButtonComponent).toBeVisible()
     })
 
     await step('Slug: link with href', () => {
@@ -99,26 +92,6 @@ export const Default: Story = {
   }
 }
 
-export const AddedToCart: Story = {
-  args: {
-    id: '2'
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement)
-
-    await step('Added in cart', () => {
-      expect(cartContextMock.isInCart(args.id)).toBe(true)
-    })
-
-    await step('removeFromCart called on click', async () => {
-      const buttonRemoveFromCart = canvas.getByRole('button', { name: 'Remove from cart' })
-      userEvent.click(buttonRemoveFromCart)
-      await waitFor(async () => {
-        expect(cartContextMock.removeFromCart).toHaveBeenCalled()
-      })
-    })
-  }
-}
 export const WithDiscount: Story = {
   args: {
     ribbonText: '20% off',
