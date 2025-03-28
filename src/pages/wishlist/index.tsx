@@ -4,7 +4,7 @@ import Empty from 'components/Empty/Empty'
 import Heading from 'components/Heading/Heading'
 import Product, { ProductProps } from 'components/Product/Product'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
-import { GET_RECOMMENDED_PRODUCTS } from 'graphql/queries/getRecommendedProducts'
+import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import * as S from 'pages/wishlist/WishlistPage.styles'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
@@ -21,7 +21,7 @@ export interface WishlistPageProps {
 export async function getStaticProps() {
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
-    query: GET_RECOMMENDED_PRODUCTS
+    query: RECOMMENDED_PRODUCTS
   })
 
   const { title, highlight, games } = data.recommended.data.attributes.showcase

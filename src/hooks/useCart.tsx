@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { CartContext } from 'contexts/CartContext'
-import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
+import { PRODUCTS } from 'graphql/queries/products'
 import { ReactNode, useContext, useEffect, useState } from 'react'
 import { Query } from 'types/generated'
 import { getStorageItem, setStorageItem } from 'utils/localStorage'
@@ -19,7 +19,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     if (data) setCartProductIds(data)
   }, [])
 
-  const { data, loading, error } = useQuery<Pick<Query, 'games'>>(GET_ALL_PRODUCTS, {
+  const { data, loading, error } = useQuery<Pick<Query, 'games'>>(PRODUCTS, {
     skip: !cartProductIds.length,
     variables: {
       filters: {

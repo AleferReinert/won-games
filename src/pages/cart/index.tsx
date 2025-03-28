@@ -8,7 +8,7 @@ import Empty from 'components/Empty/Empty'
 import Heading from 'components/Heading/Heading'
 import PaymentOptions from 'components/PaymentOptions/PaymentOptions'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
-import { GET_RECOMMENDED_PRODUCTS } from 'graphql/queries/getRecommendedProducts'
+import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import Link from 'next/link'
@@ -29,7 +29,7 @@ interface CartPageProps {
 export async function getServerSideProps() {
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
-    query: GET_RECOMMENDED_PRODUCTS
+    query: RECOMMENDED_PRODUCTS
   })
 
   const { title, highlight, games } = data.recommended.data.attributes.showcase

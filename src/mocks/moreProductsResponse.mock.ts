@@ -1,5 +1,5 @@
 import { MockedResponse } from '@apollo/client/testing'
-import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
+import { PRODUCTS } from 'graphql/queries/products'
 import { productsLimit } from 'pages/products'
 import { Enum_Game_Rating, GameEntityResponseCollection } from 'types/generated'
 
@@ -7,7 +7,7 @@ export const moreProductsResponseMock: MockedResponse<{
   games: GameEntityResponseCollection
 }> = {
   request: {
-    query: GET_ALL_PRODUCTS,
+    query: PRODUCTS,
     variables: {
       limit: productsLimit,
       start: 3,

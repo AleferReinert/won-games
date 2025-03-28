@@ -1,9 +1,9 @@
 import { MockedResponse } from '@apollo/client/testing'
-import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
+import { PRODUCTS } from 'graphql/queries/products'
 
 export const cartItemResponseMock: MockedResponse = {
   request: {
-    query: GET_ALL_PRODUCTS,
+    query: PRODUCTS,
     variables: {
       filters: { id: { in: ['2'] } }
     }

@@ -1,29 +1,29 @@
 import { gql } from '@apollo/client'
-import { BannerFragment } from 'graphql/fragments/banner'
-import { HighlightFragment } from 'graphql/fragments/highlight'
-import { ProductEntityFragment } from 'graphql/fragments/product'
+import { BANNER } from 'graphql/fragments/banner'
+import { HIGHLIGHT } from 'graphql/fragments/highlight'
+import { PRODUCT_ENTITY } from 'graphql/fragments/product'
 
-export const GET_PAGE_HOME = gql`
-  query getPageHome($currentDate: Date!) {
+export const PAGE_HOME = gql`
+  query PageHome($currentDate: Date!) {
     banners {
-      ...BannerFragment
+      ...banner
     }
     newGames: games(
       filters: { release_date: { lte: $currentDate } }
       sort: "release_date:desc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...ProductEntityFragment
+      ...product
     }
     comingSoonGames: games(
       filters: { release_date: { gt: $currentDate } }
       sort: "release_date:asc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...ProductEntityFragment
+      ...product
     }
     freeGames: games(filters: { price: { eq: 0 } }, sort: "release_date:desc", pagination: { start: 0, limit: 8 }) {
-      ...ProductEntityFragment
+      ...product
     }
     showcases: home {
       data {
@@ -31,13 +31,13 @@ export const GET_PAGE_HOME = gql`
           newGames {
             title
             highlight {
-              ...HighlightFragment
+              ...highlight
             }
           }
           mostPopularGames {
             title
             highlight {
-              ...HighlightFragment
+              ...highlight
             }
             games {
               data {
@@ -68,20 +68,20 @@ export const GET_PAGE_HOME = gql`
           comingSoonGames {
             title
             highlight {
-              ...HighlightFragment
+              ...highlight
             }
           }
           freeGames {
             title
             highlight {
-              ...HighlightFragment
+              ...highlight
             }
           }
         }
       }
     }
   }
-  ${BannerFragment}
-  ${ProductEntityFragment}
-  ${HighlightFragment}
+  ${BANNER}
+  ${PRODUCT_ENTITY}
+  ${HIGHLIGHT}
 `

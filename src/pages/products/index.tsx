@@ -5,9 +5,9 @@ import Empty from 'components/Empty/Empty'
 import Filter, { FilterOptionsProps } from 'components/Filter/Filter'
 import { Loading } from 'components/Loading/Loading'
 import Product from 'components/Product/Product'
-import { GET_ALL_CATEGORIES } from 'graphql/queries/getAllCategories'
-import { GET_ALL_PLATFORMS } from 'graphql/queries/getAllPlatforms'
-import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
+import { CATEGORIES } from 'graphql/queries/categories'
+import { PLATFORMS } from 'graphql/queries/platforms'
+import { PRODUCTS } from 'graphql/queries/products'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import * as S from 'pages/products/ProductsPage.styles'
@@ -25,12 +25,12 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const {
     data: { platforms }
   } = await apolloClient.query<Pick<Query, 'platforms'>>({
-    query: GET_ALL_PLATFORMS
+    query: PLATFORMS
   })
   const {
     data: { categories }
   } = await apolloClient.query<Pick<Query, 'categories'>>({
-    query: GET_ALL_CATEGORIES
+    query: CATEGORIES
   })
 
   const filterOptions: FilterOptionsProps[] = [
@@ -88,7 +88,7 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   ]
 
   await apolloClient.query<Pick<Query, 'games'>>({
-    query: GET_ALL_PRODUCTS,
+    query: PRODUCTS,
     variables: {
       limit: productsLimit,
       ...queryStringToGraphqlFilters({
@@ -112,7 +112,7 @@ interface ProductsPageProps {
 
 const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const { query, push } = useRouter()
-  const { data, fetchMore, loading } = useQuery<Pick<Query, 'games'>>(GET_ALL_PRODUCTS, {
+  const { data, fetchMore, loading } = useQuery<Pick<Query, 'games'>>(PRODUCTS, {
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: productsLimit,

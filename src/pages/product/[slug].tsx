@@ -5,10 +5,10 @@ import Heading from 'components/Heading/Heading'
 import ProductDetails, { ProductDetailsProps } from 'components/ProductDetails/ProductDetails'
 import ProductHeader, { ProductHeaderProps } from 'components/ProductHeader/ProductHeader'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
-import { GET_ALL_PRODUCTS } from 'graphql/queries/getAllProducts'
-import { GET_COMING_SOON_PRODUCTS } from 'graphql/queries/getComingSoonProducts'
-import { GET_PRODUCT_BY_SLUG } from 'graphql/queries/getProductBySlug'
-import { GET_RECOMMENDED_PRODUCTS } from 'graphql/queries/getRecommendedProducts'
+import { COMING_SOON } from 'graphql/queries/comingSoon'
+import { PRODUCT_BY_SLUG } from 'graphql/queries/productBySlug'
+import { PRODUCTS } from 'graphql/queries/products'
+import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
@@ -32,7 +32,7 @@ export interface ProductPageProps {
 export async function getStaticPaths() {
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query({
-    query: GET_ALL_PRODUCTS,
+    query: PRODUCTS,
     variables: { limit: 9 }
   })
 
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   // Return product data
   const { data } = await apolloClient.query({
-    query: GET_PRODUCT_BY_SLUG,
+    query: PRODUCT_BY_SLUG,
     variables: { slug: params?.slug },
     fetchPolicy: 'no-cache'
   })
@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const {
     data: { comingSoonGames, showcase }
   } = await apolloClient.query({
-    query: GET_COMING_SOON_PRODUCTS,
+    query: COMING_SOON,
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
     fetchPolicy: 'no-cache'
   })
@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   // Return recommended section
   const { data: recommended } = await apolloClient.query<Pick<Query, 'recommended'>>({
-    query: GET_RECOMMENDED_PRODUCTS,
+    query: RECOMMENDED_PRODUCTS,
     fetchPolicy: 'no-cache'
   })
   const recommendedSection = recommended.recommended.data.attributes.showcase

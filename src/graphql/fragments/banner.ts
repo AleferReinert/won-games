@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
-export const BannerFragment = gql`
-  fragment BannerFragment on BannerEntityResponseCollection {
+export const BANNER = gql`
+  fragment banner on BannerEntityResponseCollection {
     data {
       attributes {
         img {

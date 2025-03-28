@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
-export const GET_PRODUCT_BY_SLUG = gql`
-  query getProductBySlug($slug: String!) {
+export const PRODUCT_BY_SLUG = gql`
+  query ProductBySlug($slug: String!) {
     games(filters: { slug: { eq: $slug } }) {
       data {
         id

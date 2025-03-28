@@ -1,15 +1,15 @@
 import { gql } from '@apollo/client'
-import { HighlightFragment } from 'graphql/fragments/highlight'
-import { ProductEntityFragment } from 'graphql/fragments/product'
+import { HIGHLIGHT } from 'graphql/fragments/highlight'
+import { PRODUCT_ENTITY } from 'graphql/fragments/product'
 
-export const GET_COMING_SOON_PRODUCTS = gql`
-  query getComingSoonProducts($currentDate: Date!) {
+export const COMING_SOON = gql`
+  query ComingSoon($currentDate: Date!) {
     comingSoonGames: games(
       filters: { release_date: { gt: $currentDate } }
       sort: "release_date:asc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...ProductEntityFragment
+      ...product
     }
     showcase: home {
       data {
@@ -17,13 +17,13 @@ export const GET_COMING_SOON_PRODUCTS = gql`
           comingSoonGames {
             title
             highlight {
-              ...HighlightFragment
+              ...highlight
             }
           }
         }
       }
     }
   }
-  ${ProductEntityFragment}
-  ${HighlightFragment}
+  ${PRODUCT_ENTITY}
+  ${HIGHLIGHT}
 `

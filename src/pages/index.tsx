@@ -4,7 +4,7 @@ import Container from 'components/Container/Container'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { ProductProps } from 'components/Product/Product'
 import Showcase from 'components/Showcase/Showcase'
-import { GET_PAGE_HOME } from 'graphql/queries/getPageHome'
+import { PAGE_HOME } from 'graphql/queries/pageHome'
 import { ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import {
@@ -44,7 +44,7 @@ export interface HomeProps {
 export const getStaticProps = async () => {
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query<HomeProps>({
-    query: GET_PAGE_HOME,
+    query: PAGE_HOME,
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
     fetchPolicy: 'no-cache'
   })
