@@ -5,5 +5,5 @@ export const highlightMock: HighlightProps = {
   description: `Come seen John's new adventures`,
   buttonLabel: 'Buy now',
   buttonLink: '/highlight-link',
-  $background: '/img/red-dead-img.jpg'
+  background: '/img/red-dead-img.jpg'
 }

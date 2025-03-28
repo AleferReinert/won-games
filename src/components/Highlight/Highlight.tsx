@@ -7,7 +7,7 @@ export interface HighlightProps {
   description: string
   buttonLabel: string
   buttonLink: string
-  $background: string
+  background: string
   floatImg?: string
   $alignment?: 'left' | 'right'
 }
@@ -17,12 +17,12 @@ const Highlight = ({
   description,
   buttonLabel,
   buttonLink,
-  $background,
+  background,
   floatImg,
   $alignment = 'right'
 }: HighlightProps) => {
   return (
-    <S.Wrapper $background={$background} $alignment={$alignment} data-testid='HighlightComponent'>
+    <S.Wrapper $background={background} $alignment={$alignment} data-testid='HighlightComponent'>
       <S.FloatImage>
         {floatImg && (
           <Image src={floatImg} alt={title} fill sizes='(max-width: 768px) 100vw, 50vw' /> // todo: check sizes
