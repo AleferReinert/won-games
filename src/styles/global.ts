@@ -41,6 +41,24 @@ const GlobalStyles = createGlobalStyle`
       svg:focus {
         outline: none;
       }
+
+      img {
+        position: relative;
+      }
+
+      img::after {
+        content: attr(alt);
+        position: absolute;
+        inset: 0;
+        background-color: ${theme.colors.lightGray};
+        display: flex;
+        align-items: center;
+        font-style: italic;
+        text-align: center;
+        justify-content: center;
+        font-size: ${theme.font.sizes.xsmall};
+        color: ${theme.colors.gray};
+      }
     `}    
 `
 

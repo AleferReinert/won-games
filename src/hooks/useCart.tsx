@@ -12,13 +12,14 @@ interface CartProviderProps {
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cartProductIds, setCartProductIds] = useState<string[]>([])
+  const [loadingState, setLoadingState] = useState(true)
 
   useEffect(() => {
     const data: string[] = getStorageItem('cartProducts')
     if (data) setCartProductIds(data)
   }, [])
 
-  const { data, loading } = useQuery<Pick<Query, 'games'>>(GET_ALL_PRODUCTS, {
+  const { data, loading, error } = useQuery<Pick<Query, 'games'>>(GET_ALL_PRODUCTS, {
     skip: !cartProductIds.length,
     variables: {
       filters: {
@@ -28,6 +29,13 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       }
     }
   })
+
+  useEffect(() => {
+    if (!loading && !error && data) {
+      setLoadingState(false)
+    }
+  }, [loading, error, data])
+
   const saveCartProducts = (newCartProductIds: string[]) => {
     setCartProductIds(newCartProductIds)
     setStorageItem('cartProducts', newCartProductIds)
@@ -56,7 +64,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         addToCart,
         removeFromCart,
         clearCart,
-        loading
+        loading: loading || loadingState
       }}
     >
       {children}

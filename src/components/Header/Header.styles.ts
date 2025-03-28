@@ -113,7 +113,8 @@ export const IconWrapper = styled.div`
     width: 2.4rem;
     height: 2.4rem;
 
-    svg {
+    > svg,
+    > button > svg {
       fill: ${theme.colors.white};
     }
   `}

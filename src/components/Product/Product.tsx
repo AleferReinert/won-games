@@ -26,7 +26,7 @@ const Product = ({ id, slug, title, developer, img, price, promotionalPrice = nu
 
       <Link href={`/product/${slug}`} passHref>
         <S.ImageBox>
-          {img ? <Image src={img} alt={title} priority={false} width='292' height='137' /> : 'Image not found'}
+          <Image src={img} alt={img ? title : 'Image not found'} priority={false} width='292' height='137' />
         </S.ImageBox>
       </Link>
 

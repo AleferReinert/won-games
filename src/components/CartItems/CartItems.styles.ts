@@ -2,7 +2,20 @@ import styled, { css } from 'styled-components'
 
 import { tint } from 'polished'
 
-export const Wrapper = styled.div``
+export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.white};
+    min-height: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+      width: 100%;
+    }
+  `}
+`
 
 export const List = styled.ul``
 

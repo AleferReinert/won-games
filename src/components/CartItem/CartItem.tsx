@@ -27,7 +27,7 @@ const CartItem = ({ img, name, price, downloadLink, paymentInfo }: CartItemProps
     <S.Wrapper data-testid='CartItemComponent'>
       <Box>
         <S.Content>
-          <S.Img src={imgSrc} alt={name} width={293} height={138} />
+          <S.Img src={img ? imgSrc : ''} alt={img ? name : 'Image not found'} width={293} height={138} />
           <S.InfoWrapper>
             <S.TitleWrapper>
               <S.Title>{name}</S.Title>

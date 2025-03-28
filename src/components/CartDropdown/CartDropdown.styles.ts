@@ -5,6 +5,21 @@ export const Wrapper = styled.div`
   ${({ theme }) => css`
     ${cartItemListStyles.Wrapper} {
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+      min-width: 30rem;
+      min-height: 10rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    ${cartItemListStyles.Footer} {
+      width: 100%;
+    }
+
+    ${cartItemListStyles.List} {
+      max-height: 30.4rem;
+      overflow-y: auto;
     }
 
     #desktop {
