@@ -20,8 +20,7 @@ export const Info = styled.p`
     margin-top: ${theme.spacings.large};
 
     svg {
-      color: ${theme.colors.primary};
-      width: 2rem;
+      fill: ${theme.colors.primary};
       margin-right: ${theme.spacings.xxsmall};
     }
 

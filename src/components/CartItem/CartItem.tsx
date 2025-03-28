@@ -1,7 +1,8 @@
-import { FileDownload } from '@styled-icons/material/FileDownload'
+import { Clear, FileDownload } from '@styled-icons/material'
 import Box from 'components/Box/Box'
 import CreditCard from 'components/CreditCard/CreditCard'
 import Price from 'components/Price/Price'
+import { useCart } from 'hooks/useCart'
 import * as S from './CartItem.styles'
 
 interface PaymentProps {
@@ -20,7 +21,8 @@ export interface CartItemProps {
   paymentInfo?: PaymentProps
 }
 
-const CartItem = ({ img, name, price, downloadLink, paymentInfo }: CartItemProps) => {
+const CartItem = ({ id, img, name, price, downloadLink, paymentInfo }: CartItemProps) => {
+  const { removeFromCart } = useCart()
   const imgSrc = process.env.STORYBOOK ? img : process.env.NEXT_PUBLIC_API_URL + img
 
   return (
@@ -28,17 +30,24 @@ const CartItem = ({ img, name, price, downloadLink, paymentInfo }: CartItemProps
       <Box>
         <S.Content>
           <S.Img src={img ? imgSrc : ''} alt={img ? name : 'Image not found'} width={293} height={138} />
-          <S.InfoWrapper>
-            <S.TitleWrapper>
-              <S.Title>{name}</S.Title>
+          <S.Group>
+            <S.InfoWrapper>
+              <S.TitleWrapper>
+                <S.Title>{name}</S.Title>
+              </S.TitleWrapper>
+              <Price price={price} />
+            </S.InfoWrapper>
+            <S.ButtonGroup>
               {downloadLink && (
                 <S.DownloadLink href={downloadLink} title='Download' download>
-                  <FileDownload title='Download' />
+                  <FileDownload role='img' aria-hidden width={24} height={24} />
                 </S.DownloadLink>
               )}
-            </S.TitleWrapper>
-            <Price price={price} />
-          </S.InfoWrapper>
+              <S.ButtonRemove type='button' onClick={() => removeFromCart(id)} title='Remove from cart'>
+                <Clear role='img' aria-hidden width={20} height={20} />
+              </S.ButtonRemove>
+            </S.ButtonGroup>
+          </S.Group>
 
           {paymentInfo && (
             <S.PaymentInfo>

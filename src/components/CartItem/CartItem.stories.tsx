@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, within } from '@storybook/test'
+import { expect, userEvent, waitFor, within } from '@storybook/test'
+import { CartContext } from 'contexts/CartContext'
+import { cartContextMock } from 'mocks/cartContext.mock'
 import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
 import CartItemComponent from './CartItem'
 
@@ -7,6 +9,13 @@ const meta: Meta<typeof CartItemComponent> = {
   title: 'Components/CartItem',
   component: CartItemComponent,
   args: cartItemsMinMock[0],
+  decorators: [
+    (Story) => (
+      <CartContext.Provider value={cartContextMock}>
+        <Story />
+      </CartContext.Provider>
+    )
+  ],
   tags: ['autodocs']
 }
 
@@ -32,6 +41,12 @@ export const Default: Story = {
       const price = canvas.getByLabelText('Price')
       expect(price).toHaveTextContent('$215.00')
     })
+
+    await step('Remove product from cart', async () => {
+      const button = canvas.getByRole('button', { name: 'Remove from cart' })
+      userEvent.click(button)
+      await waitFor(() => expect(cartContextMock.removeFromCart).toHaveBeenCalled())
+    })
   }
 }
 
@@ -41,15 +56,16 @@ export const Download: Story = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
+    const buttonLinkDownload = canvas.getByRole('link', { name: 'Download' })
 
-    await step('Icon', () => {
-      const icon = canvas.getByRole('img', { name: /download/i })
-      expect(icon).toBeInTheDocument()
+    await step('Button Link with href and download', () => {
+      expect(buttonLinkDownload).toHaveAttribute('href', '/link')
+      expect(buttonLinkDownload).toHaveAttribute('download')
     })
 
-    await step('Link', () => {
-      const link = canvas.getByRole('link', { name: /download/i })
-      expect(link).toHaveAttribute('href', '/link')
+    await step('Icon', () => {
+      const icon = within(buttonLinkDownload).getByRole('img', { hidden: true })
+      expect(icon).toBeVisible()
     })
   }
 }

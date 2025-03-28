@@ -23,8 +23,9 @@ const OrdersPage = ({ items = [] }: OrdersPageProps) => {
       {items.map((item, index) => (
         <CartItem
           key={index}
+          id={item.id}
           img={item.img}
-          title={item.title}
+          name={item.name}
           price={item.price}
           downloadLink={item.downloadLink}
           paymentInfo={{

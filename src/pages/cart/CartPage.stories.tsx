@@ -12,7 +12,6 @@ const meta: Meta<typeof CartPage> = {
   component: CartPage,
   args: {
     cartItems: cartItemsFullMock,
-    total: '$530',
     creditCards: creditCardsMock,
     recommendedSection: {
       title: 'You may like these games',

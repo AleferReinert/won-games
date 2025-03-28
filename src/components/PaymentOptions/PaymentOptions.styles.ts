@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 export const Wrapper = styled.form`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
+    max-height: min-content;
   `}
 `
 

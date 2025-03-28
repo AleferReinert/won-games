@@ -8,7 +8,7 @@ const NotFoundPage = () => {
   return (
     <Container>
       <Heading as='h1' $line='left' $lineColor='secondary'>
-        Página não encontrada
+        Page not found
       </Heading>
       <Empty title='404' $description='This page could not be found.' buttonText='Go back' buttonUrl='/' />
     </Container>

@@ -13,7 +13,6 @@ export interface CartItemsProps {
 const CartItems = ({ button = false }: CartItemsProps) => {
   const { cartProducts, totalPrice, loading } = useCart()
 
-  console.log('loading: ', loading)
   return (
     <S.Wrapper aria-label='cart list' data-testid='CartItemsComponent'>
       {loading ? (

@@ -55,6 +55,7 @@ const WishlistPage = ({ wishlistProducts, recommendedSection }: WishlistPageProp
             {wishlistProducts?.map((product, index) => (
               <Product
                 key={'wishlist-' + index}
+                id={product.id}
                 title={product.title}
                 developer={product.developer}
                 img={product.img}

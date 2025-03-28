@@ -22,7 +22,6 @@ import * as S from './CartPage.styles'
 
 interface CartPageProps {
   cartItems: CartItemProps[]
-  total: number
   creditCards: CreditCardProps[]
   recommendedSection: ShowcaseProps
 }
@@ -49,7 +48,7 @@ export async function getServerSideProps() {
   }
 }
 
-const CartPage = ({ cartItems, total, creditCards, recommendedSection }: CartPageProps & NextPageWithLayout) => {
+const CartPage = ({ cartItems, creditCards, recommendedSection }: CartPageProps & NextPageWithLayout) => {
   const handlePayment = () => ({})
   const emptyCart = !cartItems || !cartItems.length
 
@@ -65,12 +64,12 @@ const CartPage = ({ cartItems, total, creditCards, recommendedSection }: CartPag
         ) : (
           <>
             <S.Content>
-              <CartItems cartItems={cartItems} total={total} />
+              <CartItems />
 
               <PaymentOptions creditCards={creditCards} handlePayment={handlePayment} />
             </S.Content>
             <S.Info>
-              <Info />
+              <Info role='img' aria-hidden width={24} height={24} />
               Your purchase is protected by a secure WON platform connection. By purchasing from our store you accept
               and agree with our
               <Link href='/'>terms of use</Link>. After completing the purchase You have the right to a refund within a

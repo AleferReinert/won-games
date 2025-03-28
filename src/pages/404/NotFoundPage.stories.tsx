@@ -28,7 +28,7 @@ export const NotFound: Story = {
 
     await step('Page title', () => {
       const title = canvas.getByRole('heading', { level: 1 })
-      expect(title).toHaveTextContent('Página não encontrada')
+      expect(title).toHaveTextContent('Page not found')
     })
 
     await step('Title', () => {
