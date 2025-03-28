@@ -5,6 +5,7 @@ import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import { Poppins } from 'next/font/google'
 import Head from 'next/head'
+import NextNProgress from 'nextjs-progressbar'
 import type { ReactElement, ReactNode } from 'react'
 import { StyleSheetManager, ThemeProvider } from 'styled-components'
 import GlobalStyles from 'styles/global'
@@ -43,6 +44,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
               <meta name='description' content='Seus jogos favoritos estão aqui. Acesse agora e divirta-se!' />
             </Head>
             <GlobalStyles />
+            <NextNProgress
+              color={theme.colors.primary}
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={3}
+              showOnShallow={true}
+            />
             {getLayout(<Component className={poppins.className} {...pageProps} />)}
           </CartProvider>
         </ThemeProvider>
