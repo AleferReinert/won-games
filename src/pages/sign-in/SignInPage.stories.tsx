@@ -46,7 +46,7 @@ export const SignIn: Story = {
     })
 
     await step('Button sign in now', () => {
-      const signInNow = canvas.getByRole('button', { name: /sign in now/i })
+      const signInNow = canvas.getByRole('button', { name: /sign in/i })
       expect(signInNow).toHaveAttribute('type', 'submit')
     })
 

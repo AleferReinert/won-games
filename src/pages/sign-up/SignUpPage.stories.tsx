@@ -1,3 +1,4 @@
+import { MockedProvider } from '@apollo/client/testing'
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import AuthTemplate from 'templates/Auth/Auth'
@@ -9,7 +10,9 @@ const meta: Meta<typeof SignUpPage> = {
   decorators: [
     (Story) => (
       <AuthTemplate title='Sign Up'>
-        <Story />
+        <MockedProvider>
+          <Story />
+        </MockedProvider>
       </AuthTemplate>
     )
   ],

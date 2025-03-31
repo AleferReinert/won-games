@@ -5,14 +5,12 @@ import CartDropdown from 'components/CartDropdown/CartDropdown'
 import Logo from 'components/Logo/Logo'
 import MenuMobile from 'components/MenuMobile/MenuMobile'
 import UserDropdown from 'components/UserDropdown/UserDropdown'
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import * as S from './Header.styles'
 
-interface MenuProps {
-  username?: string
-}
-
-const Header = ({ username }: MenuProps) => {
+const Header = () => {
+  const { status } = useSession()
   const [menuMobile, setMenuMobile] = useState(false)
 
   return (
@@ -43,8 +41,8 @@ const Header = ({ username }: MenuProps) => {
           <CartDropdown />
         </S.IconWrapper>
 
-        {username ? (
-          <UserDropdown username={username} />
+        {status === 'authenticated' ? (
+          <UserDropdown />
         ) : (
           <S.ButtonSignIn>
             <Button size='small' href='/sign-in' asLink>
@@ -54,7 +52,7 @@ const Header = ({ username }: MenuProps) => {
         )}
       </S.NavRight>
 
-      <MenuMobile menuMobile={menuMobile} setMenuMobile={setMenuMobile} username={username} />
+      <MenuMobile menuMobile={menuMobile} setMenuMobile={setMenuMobile} />
     </S.Wrapper>
   )
 }

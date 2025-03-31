@@ -2,6 +2,7 @@ import { ApolloProvider } from '@apollo/client'
 import isPropValid from '@emotion/is-prop-valid'
 import { CartProvider } from 'hooks/useCart'
 import type { NextPage } from 'next'
+import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import { Poppins } from 'next/font/google'
 import Head from 'next/head'
@@ -26,35 +27,37 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page)
   const client = useApollo(pageProps.initialApolloState)
 
   return (
-    <StyleSheetManager shouldForwardProp={isPropValid} enableVendorPrefixes>
-      <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <CartProvider>
-            <Head>
-              <title>Won Games</title>
-              <link rel='shortchut icon' href='/img/icon-512.png' />
-              <link rel='apple-touch-icon' href='/img/icon-512.png' />
-              <link rel='manifest' href='/manifest.json' />
-              <meta name='theme-color' content='#06092B' />
-              <meta name='description' content='Seus jogos favoritos estão aqui. Acesse agora e divirta-se!' />
-            </Head>
-            <GlobalStyles />
-            <NextNProgress
-              color={theme.colors.primary}
-              startPosition={0.3}
-              stopDelayMs={200}
-              height={3}
-              showOnShallow={true}
-            />
-            {getLayout(<Component className={poppins.className} {...pageProps} />)}
-          </CartProvider>
-        </ThemeProvider>
-      </ApolloProvider>
-    </StyleSheetManager>
+    <SessionProvider session={session}>
+      <StyleSheetManager shouldForwardProp={isPropValid} enableVendorPrefixes>
+        <ApolloProvider client={client}>
+          <ThemeProvider theme={theme}>
+            <CartProvider>
+              <Head>
+                <title>Won Games</title>
+                <link rel='shortchut icon' href='/img/icon-512.png' />
+                <link rel='apple-touch-icon' href='/img/icon-512.png' />
+                <link rel='manifest' href='/manifest.json' />
+                <meta name='theme-color' content='#06092B' />
+                <meta name='description' content='Seus jogos favoritos estão aqui. Acesse agora e divirta-se!' />
+              </Head>
+              <GlobalStyles />
+              <NextNProgress
+                color={theme.colors.primary}
+                startPosition={0.3}
+                stopDelayMs={200}
+                height={3}
+                showOnShallow={true}
+              />
+              {getLayout(<Component className={poppins.className} {...pageProps} />)}
+            </CartProvider>
+          </ThemeProvider>
+        </ApolloProvider>
+      </StyleSheetManager>
+    </SessionProvider>
   )
 }

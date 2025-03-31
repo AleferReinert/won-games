@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
 import Container from 'components/Container/Container'
+import { NextAuthSessionArgs } from '../../../.storybook/preview'
 import HeaderComponent from './Header'
 
 const meta: Meta<typeof HeaderComponent> = {
@@ -16,7 +17,7 @@ const meta: Meta<typeof HeaderComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof HeaderComponent>
+type Story = StoryObj<typeof HeaderComponent> & { args?: NextAuthSessionArgs }
 
 export const Mobile: Story = {
   parameters: {
@@ -72,6 +73,9 @@ export const Mobile: Story = {
 }
 
 export const Desktop: Story = {
+  args: {
+    nextAuthSession: null
+  },
   parameters: {
     viewport: {
       defaultViewport: 'small'
@@ -122,9 +126,6 @@ export const Desktop: Story = {
 }
 
 export const Authenticated: Story = {
-  args: {
-    username: 'John Steven'
-  },
   parameters: {
     viewport: {
       defaultViewport: 'small'

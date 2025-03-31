@@ -10,13 +10,11 @@ const meta: Meta<typeof CreditCardsPage> = {
   args: {
     creditCards: creditCardsMock
   },
-  decorators: [
-    (Story) => (
-      <AccountTemplate activeLink='My cards'>
-        <Story />
-      </AccountTemplate>
-    )
-  ],
+  decorators: (Story) => (
+    <AccountTemplate activeLink='My cards'>
+      <Story />
+    </AccountTemplate>
+  ),
   parameters: {
     layout: 'fullscreen'
   }

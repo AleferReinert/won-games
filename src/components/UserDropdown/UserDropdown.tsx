@@ -1,22 +1,21 @@
 import { ChevronDown as ChevronDownIcon, Exit as ExitIcon, Heart as HeartIcon } from '@styled-icons/boxicons-regular'
 import { AccountCircle as AccountCircleIcon } from '@styled-icons/material-outlined'
 import Dropdown from 'components/Dropdown/Dropdown'
+import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import * as S from './UserDropdown.styles'
 
-interface UserDropdownProps {
-  username: string
-}
+const UserDropdown = () => {
+  const { data: session } = useSession()
 
-const UserDropdown = ({ username }: UserDropdownProps) => {
   return (
     <S.Wrapper data-testid='UserDropdownComponent'>
       <Dropdown
         button={
           <>
-            <AccountCircleIcon />
-            <S.Username>{username}</S.Username>
-            <ChevronDownIcon />
+            <AccountCircleIcon aria-hidden />
+            <S.Username>{session?.user?.name}</S.Username>
+            <ChevronDownIcon aria-hidden />
           </>
         }
         buttonLabel='My account'
@@ -30,7 +29,7 @@ const UserDropdown = ({ username }: UserDropdownProps) => {
             <HeartIcon aria-hidden />
             Wishlist
           </Link>
-          <Link href='/logout'>
+          <Link href='/' onClick={() => void signOut()}>
             <ExitIcon aria-hidden />
             Logout
           </Link>

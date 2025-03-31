@@ -1,7 +1,7 @@
-import styled, { css, DefaultTheme } from 'styled-components'
-import Link from 'next/link'
-import * as HeadingStyles from 'components/Heading/Heading.styles'
 import * as BoxStyles from 'components/Box/Box.styles'
+import * as HeadingStyles from 'components/Heading/Heading.styles'
+import Link from 'next/link'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -65,6 +65,7 @@ export const Item = styled(Link)<ItemProps>`
 
     svg {
       width: 2.4rem;
+      height: 2.4rem;
     }
 
     ${active && itemModifiers.active(theme)}

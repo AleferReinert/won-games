@@ -135,7 +135,8 @@ export const IconRight: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-    label: 'Disabled'
+    label: 'Disabled',
+    value: 'disabled'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)

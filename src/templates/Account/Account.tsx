@@ -2,6 +2,8 @@ import { AccountCircle, CreditCard, ExitToApp, FormatListBulleted } from '@style
 import Box from 'components/Box/Box'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
+import { signOut, useSession } from 'next-auth/react'
+import { ReactNode } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import * as S from './Account.styles'
 
@@ -24,16 +26,22 @@ const nav = [
   {
     icon: <ExitToApp aria-hidden role='img' />,
     title: 'Sign out',
-    link: '/logout'
+    link: '/'
   }
 ]
 
 interface AccountTemplateProps {
   activeLink: 'My profile' | 'My cards' | 'My orders'
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
+  const { status } = useSession({ required: true })
+
+  if (status === 'loading') {
+    return null
+  }
+
   return (
     <DefaultTemplate>
       <Container>
@@ -45,7 +53,14 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
           <S.Nav>
             {nav.map((item, index) => {
               return (
-                <S.Item key={index} href={item.link} active={activeLink === item.title}>
+                <S.Item
+                  key={index}
+                  href={item.link}
+                  active={activeLink === item.title}
+                  onClick={() => {
+                    item.title === 'Sign out' && signOut()
+                  }}
+                >
                   {item.icon}
                   <S.Text>{item.title}</S.Text>
                 </S.Item>

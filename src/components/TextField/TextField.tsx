@@ -1,9 +1,8 @@
-import { ComponentProps, ReactNode, useState } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 import * as S from './TextField.styles'
 
 export interface TextFieldProps extends ComponentProps<'input'> {
   name: string
-  // onInput?: (value: string) => void
   label?: string
   icon?: ReactNode
   $iconPosition?: 'left' | 'right'
@@ -13,24 +12,21 @@ export interface TextFieldProps extends ComponentProps<'input'> {
 }
 
 const TextField = ({
-  // onInput,
   name,
   label,
   icon,
   $iconPosition = 'left',
   disabled = false,
   errorMessage,
-  initialValue = '',
+  // initialValue = '',
   ...props
 }: TextFieldProps) => {
-  const [value, setValue] = useState(initialValue)
+  // const [value, setValue] = useState(initialValue)
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.currentTarget.value
-    setValue(newValue)
-
-    // !!onInput && onInput(newValue)
-  }
+  // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const newValue = e.currentTarget.value
+  //   setValue(newValue)
+  // }
 
   return (
     <S.Wrapper disabled={disabled}>
@@ -39,8 +35,8 @@ const TextField = ({
         {!!icon && <S.Icon>{icon}</S.Icon>}
         <S.Input
           type='text'
-          onChange={onChange}
-          value={value}
+          // onChange={onChange}
+          // value={value}
           disabled={disabled}
           autoComplete='off'
           name={name}

@@ -1,6 +1,6 @@
 import type { TestRunnerConfig } from '@storybook/test-runner'
 import { getStoryContext } from '@storybook/test-runner'
-import { customViewports } from './preview'
+import { customViewports } from './customViewports'
 
 const DEFAULT_VIEWPORT_SIZE = { width: 1024, height: 768 }
 

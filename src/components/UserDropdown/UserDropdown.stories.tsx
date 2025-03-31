@@ -8,13 +8,11 @@ const meta: Meta<typeof UserDropdownComponent> = {
   args: {
     username: 'John'
   },
-  decorators: [
-    (Story) => (
-      <div style={{ textAlign: 'right', padding: '2rem', height: '280px' }}>
-        <Story />
-      </div>
-    )
-  ],
+  decorators: (Story) => (
+    <div style={{ textAlign: 'right', padding: '2rem', height: '280px' }}>
+      <Story />
+    </div>
+  ),
   tags: ['autodocs']
 }
 

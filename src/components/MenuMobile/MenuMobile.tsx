@@ -1,15 +1,17 @@
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 import Button from 'components/Button/Button'
+import { useSession } from 'next-auth/react'
 import { Dispatch, SetStateAction } from 'react'
 import * as S from './MenuMobile.styles'
 
 interface MenuMobileProps {
-  username?: string
   menuMobile: boolean
   setMenuMobile: Dispatch<SetStateAction<boolean>>
 }
 
-const MenuMobile = ({ username, menuMobile, setMenuMobile }: MenuMobileProps) => {
+const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
+  const { status } = useSession()
+
   return (
     <S.MenuMobile aria-label='Menu mobile' aria-hidden={!menuMobile} data-testid='MenuMobileComponent'>
       <S.CloseMenu aria-label='Close menu' title='Close menu' onClick={() => setMenuMobile(false)}>
@@ -19,7 +21,7 @@ const MenuMobile = ({ username, menuMobile, setMenuMobile }: MenuMobileProps) =>
       <S.MenuNav>
         <S.MenuLink href='/'>Home</S.MenuLink>
         <S.MenuLink href='/products'>Explore</S.MenuLink>
-        {!!username && (
+        {status === 'authenticated' && (
           <>
             <S.MenuLink href='/account/profile'>My account</S.MenuLink>
             <S.MenuLink href='/wishlist'>Wishlist</S.MenuLink>
@@ -27,11 +29,11 @@ const MenuMobile = ({ username, menuMobile, setMenuMobile }: MenuMobileProps) =>
         )}
       </S.MenuNav>
 
-      {!username && (
+      {status === 'unauthenticated' && (
         <S.AuthBox>
           <S.LogInNow>
             <Button size='large' asLink href='/sign-in'>
-              Log in now
+              Log in
             </Button>
           </S.LogInNow>
           <span>or</span>

@@ -1,55 +1,26 @@
-import { Preview } from '@storybook/react'
+import { Preview, StoryContext, StoryFn } from '@storybook/react'
+import { Session } from 'next-auth'
+import { SessionProvider } from 'next-auth/react'
 import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/global'
 import theme from '../src/styles/theme'
+import { customViewports } from './customViewports'
 
-export const customViewports = {
-  xxsmall: {
-    name: `320 x 480`,
-    styles: {
-      width: theme.breakpoint.xxsmall,
-      height: '480px'
-    }
-  },
-  xsmall: {
-    name: `360 x 640`,
-    styles: {
-      width: theme.breakpoint.xsmall,
-      height: '640px'
-    }
-  },
-  small: {
-    name: `768 x 1024`,
-    styles: {
-      width: theme.breakpoint.small,
-      height: '1024px'
-    }
-  },
-  medium: {
-    name: `1024 x 768`,
-    styles: {
-      width: theme.breakpoint.medium,
-      height: '768px'
-    }
-  },
-  large: {
-    name: `1366 x 768`,
-    styles: {
-      width: theme.breakpoint.large,
-      height: '768px'
-    }
-  },
-  xlarge: {
-    name: `1920 x 1080`,
-    styles: {
-      width: theme.breakpoint.xlarge,
-      height: '1080px'
-    }
-  }
+export interface NextAuthSessionArgs {
+  nextAuthSession?: Session | null
 }
 
 const preview: Preview = {
+  args: {
+    nextAuthSession: {
+      expires: '2023-01-01T00:00:00Z',
+      user: {
+        name: 'John',
+        email: 'johndoe@example.com'
+      }
+    }
+  },
   parameters: {
     layout: 'fullscreen',
     nextRouter: {
@@ -63,14 +34,8 @@ const preview: Preview = {
     backgrounds: {
       default: 'Dark',
       values: [
-        {
-          name: 'Dark',
-          value: theme.colors.darkBg
-        },
-        {
-          name: 'Light',
-          value: theme.colors.lightBg
-        }
+        { name: 'Dark', value: theme.colors.darkBg },
+        { name: 'Light', value: theme.colors.lightBg }
       ]
     },
     controls: {
@@ -79,20 +44,18 @@ const preview: Preview = {
     options: {
       showPanel: true,
       panelDirection: 'right',
+      // @ts-expect-error
       storySort: (a, b) => {
         const order = ['Pages', 'Templates', 'Components', 'Atoms']
-
+        // @ts-expect-error
         const getIndex = (title) => {
           const index = order.findIndex((item) => title.startsWith(item))
-          return index === -1 ? order.length : index // Se não estiver na ordem, coloca no final
+          return index === -1 ? order.length : index
         }
-
         const indexA = getIndex(a.title)
         const indexB = getIndex(b.title)
 
-        if (indexA !== indexB) {
-          return indexA - indexB // Ordena conforme a ordem definida
-        }
+        if (indexA !== indexB) return indexA - indexB
 
         return a.title.localeCompare(b.title, 'en', { numeric: true }) // Ordenação alfabética dentro de cada grupo
       }
@@ -101,11 +64,14 @@ const preview: Preview = {
 }
 
 export const decorators = [
-  (Story) => (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Story />
-    </ThemeProvider>
+  (Story: StoryFn, { args }: StoryContext<NextAuthSessionArgs>) => (
+    <SessionProvider session={args.nextAuthSession}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Story />
+      </ThemeProvider>
+    </SessionProvider>
   )
 ]
+
 export default preview

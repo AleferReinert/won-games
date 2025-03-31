@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, fn, waitFor, within } from '@storybook/test'
-import { customViewports } from '../../../.storybook/preview'
+import { customViewports } from '../../../.storybook/customViewports'
+import { NextAuthSessionArgs } from '../../../.storybook/preview'
 import MenuMobileComponent from './MenuMobile'
+
 const meta: Meta<typeof MenuMobileComponent> = {
   title: 'Components/MenuMobile',
   component: MenuMobileComponent,
@@ -24,9 +26,38 @@ const meta: Meta<typeof MenuMobileComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof MenuMobileComponent>
+type Story = StoryObj<typeof MenuMobileComponent> & { args?: NextAuthSessionArgs }
 
-export const Default: Story = {
+export const Authenticated: Story = {
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('My account link', () => {
+      const myAccountLink = canvas.getByRole('link', { name: 'My account' })
+      expect(myAccountLink).toHaveAttribute('href', '/account/profile')
+    })
+
+    await step('Wishlist link', () => {
+      const wishlistLink = canvas.getByRole('link', { name: 'Wishlist' })
+      expect(wishlistLink).toHaveAttribute('href', '/wishlist')
+    })
+
+    await step('Log in link hidden', () => {
+      const logInNow = canvas.queryByRole('link', { name: 'Log in' })
+      expect(logInNow).not.toBeInTheDocument()
+    })
+
+    await step('Sign up link hidden', () => {
+      const signUp = canvas.queryByRole('link', { name: 'Sign up' })
+      expect(signUp).not.toBeInTheDocument()
+    })
+  }
+}
+
+export const Unauthenticated: Story = {
+  args: {
+    nextAuthSession: null
+  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
@@ -44,43 +75,14 @@ export const Default: Story = {
       expect(explore).toHaveAttribute('href', '/products')
     })
 
-    await step('Log in now button link', () => {
-      const logInNow = canvas.getByRole('link', { name: 'Log in now' })
+    await step('Log in button link', () => {
+      const logInNow = canvas.getByRole('link', { name: 'Log in' })
       expect(logInNow).toHaveAttribute('href', '/sign-in')
     })
 
     await step('Sign up link', () => {
       const signUp = canvas.getByRole('link', { name: 'Sign up' })
       expect(signUp).toHaveAttribute('href', '/sign-up')
-    })
-  }
-}
-
-export const Authenticated: Story = {
-  args: {
-    username: 'John'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement)
-
-    await step('My account link', () => {
-      const myAccountLink = canvas.getByRole('link', { name: 'My account' })
-      expect(myAccountLink).toHaveAttribute('href', '/account/profile')
-    })
-
-    await step('Wishlist link', () => {
-      const wishlistLink = canvas.getByRole('link', { name: 'Wishlist' })
-      expect(wishlistLink).toHaveAttribute('href', '/wishlist')
-    })
-
-    await step('Log in now link hidden', () => {
-      const logInNow = canvas.queryByRole('link', { name: 'Log in now' })
-      expect(logInNow).not.toBeInTheDocument()
-    })
-
-    await step('Sign up link hidden', () => {
-      const signUp = canvas.queryByRole('link', { name: 'Sign up' })
-      expect(signUp).not.toBeInTheDocument()
     })
   }
 }

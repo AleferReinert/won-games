@@ -7,7 +7,9 @@ export const Wrapper = styled.div`
 
       svg {
         width: 2.4rem;
+        height: 2.4rem;
         margin-bottom: -0.1rem;
+        fill: ${theme.colors.white};
       }
     }
 
@@ -31,7 +33,8 @@ export const Nav = styled.nav`
     text-align: left;
 
     svg {
-      width: 2rem;
+      width: 2.2rem;
+      height: 2.2rem;
       margin-right: 1.4rem;
     }
 
