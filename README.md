@@ -42,14 +42,15 @@ Projeto do curso "React Avançado: Crie aplicações com NextJS, Strapi e mais".
 ## Tecnologias Utilizadas
 
 - **Chromatic:** Ferramenta para revisão visual e gestão de componentes do Storybook.
-- **NextJS:** Um framework React para produção.
-- **PlopJS:** Uma ferramenta para a criação de scaffolds.
-- **React:** Uma biblioteca JavaScript para construir interfaces de usuário.
-- **Strapi:** Um CMS headless para gerenciar conteúdo.
-- **Storybook:** Uma ferramenta para desenvolver componentes de interface isoladamente.
+- **NextAuth:** Autenticação para Next.js.
+- **NextJS:** Framework em React.
+- **PlopJS:** Ferramenta para gerar arquivos personalizados.
+- **React:** Biblioteca JavaScript para construir interfaces de usuário.
+- **Strapi:** CMS headless para gerenciar conteúdo.
+- **Storybook:** Ferramenta para desenvolver componentes de interface isoladamente.
 - **Styled Components:** Biblioteca para escrever CSS com JavaScript.
-- **Testing Library:** Um conjunto de utilitários para testar componentes React.
-- **TypeScript:** Um superconjunto do JavaScript que adiciona tipagem estática opcional.
+- **Testing Library:** Conjunto de utilitários para testar componentes React.
+- **TypeScript:** Superconjunto do JavaScript que adiciona tipagem estática opcional.
 
 ## URL do Projeto
 
