@@ -21,6 +21,13 @@ const preview: Preview = {
       }
     }
   },
+  argTypes: {
+    nextAuthSession: {
+      table: {
+        disable: true
+      }
+    }
+  },
   parameters: {
     layout: 'fullscreen',
     nextRouter: {

@@ -35,7 +35,10 @@ const theme = {
     lightGrayHover: '#d9d9d9',
     gray: '#8F8F8F',
     darkGray: '#2E2F42',
-    error: '#FF5F5F'
+    error: '#FF5F5F',
+    success: '#28a745',
+    info: '#17a2b8',
+    warning: '#ffc107'
   },
   spacings: {
     xxsmall: '0.8rem',

@@ -17,8 +17,11 @@ export const authOptions: NextAuthOptions = {
         })
         const data = await response.json()
 
+        if (!response.ok) {
+          throw new Error('E-mail or password incorrect')
+        }
+
         if (data.user) {
-          console.log('data.user: ', data.user)
           return { ...data.user, jwt: data.jwt }
         }
 
@@ -37,12 +40,9 @@ export const authOptions: NextAuthOptions = {
         token.jwt = user.jwt
       }
 
-      // console.log('jwt callback: ', token)
-
       return Promise.resolve(token)
     },
     async session({ session, token }) {
-      console.log('session token: ', token)
       // @ts-expect-error todo: fix
       session.jwt = token.jwt
       // @ts-expect-error todo: fix

@@ -30,6 +30,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.3",
     "graphql": "^16.10.0",
+    "joi": "^17.13.3",
     "next": "^15.2.3",
     "next-auth": "^4.24.11",
     "next-pwa": "^5.6.0",
