@@ -2,7 +2,7 @@ import { AccountCircle, CreditCard, ExitToApp, FormatListBulleted } from '@style
 import Box from 'components/Box/Box'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { ReactNode } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import * as S from './Account.styles'
@@ -36,12 +36,6 @@ interface AccountTemplateProps {
 }
 
 const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
-  const { status } = useSession({ required: true })
-
-  if (status === 'loading') {
-    return null
-  }
-
   return (
     <DefaultTemplate>
       <Container>

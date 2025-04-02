@@ -5,12 +5,14 @@ import Heading from 'components/Heading/Heading'
 import Product, { ProductProps } from 'components/Product/Product'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
+import type { GetServerSidePropsContext } from 'next'
 import * as S from 'pages/wishlist/WishlistPage.styles'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
 import { Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
+import { requireAuth } from 'utils/requireAuth'
 import type { NextPageWithLayout } from '../_app'
 
 export interface WishlistPageProps {
@@ -18,12 +20,12 @@ export interface WishlistPageProps {
   recommendedSection: ShowcaseProps
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { session } = await requireAuth(context)
   const apolloClient = initializeApollo()
   const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS
   })
-
   const { title, highlight, games } = data.recommended.data.attributes.showcase
 
   return {
@@ -33,7 +35,8 @@ export async function getStaticProps() {
         title,
         highlight: highlightMapper(highlight),
         products: productMapper(games)
-      }
+      },
+      session
     }
   }
 }

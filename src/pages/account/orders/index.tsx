@@ -1,14 +1,19 @@
 import Box from 'components/Box/Box'
 import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
+import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
+import { requireAuth } from 'utils/requireAuth'
 import { cartItemsFullMock } from '../../../mocks/cartItemsFull.mock'
 import * as S from './OrdersPage.styles'
 
-export function getServerSideProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { session } = await requireAuth(context)
+
   return {
     props: {
-      items: cartItemsFullMock
+      items: cartItemsFullMock,
+      session
     }
   }
 }
