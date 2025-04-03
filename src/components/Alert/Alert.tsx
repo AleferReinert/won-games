@@ -7,8 +7,10 @@ interface AlertProps {
 }
 const Alert = ({ variant = 'error', children }: AlertProps) => {
   return (
-    <S.Wrapper variant={variant} role='alert'>
-      <p>{children}</p>
+    <S.Wrapper>
+      <S.Alert variant={variant} role='alert'>
+        <p>{children}</p>
+      </S.Alert>
     </S.Wrapper>
   )
 }

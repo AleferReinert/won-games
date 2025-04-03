@@ -1,10 +1,10 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
-type WrapperProps = {
+type AlertProps = {
   variant?: 'error' | 'success' | 'info' | 'warning'
 }
 
-const wrapperModifiers = {
+const alertModifiers = {
   error: (theme: DefaultTheme) => css`
     border-color: ${theme.colors.error};
     color: ${theme.colors.error};
@@ -27,7 +27,13 @@ const wrapperModifiers = {
   `
 }
 
-export const Wrapper = styled.div<WrapperProps>`
+export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    padding: ${theme.spacings.xxsmall} 0;
+  `}
+`
+
+export const Alert = styled.div<AlertProps>`
   ${({ theme, variant }) => css`
     display: flex;
     align-items: center;
@@ -38,9 +44,8 @@ export const Wrapper = styled.div<WrapperProps>`
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
     transition: ${theme.transition.default};
-    margin: ${theme.spacings.xxsmall} 0;
     min-height: 4.3rem;
 
-    ${variant && wrapperModifiers[variant](theme)}
+    ${variant && alertModifiers[variant](theme)}
   `}
 `
