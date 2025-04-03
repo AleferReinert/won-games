@@ -14,7 +14,7 @@ const SignInPage = () => {
   const [values, setValues] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
-  const { push } = useRouter()
+  const { push, query } = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,23 +29,21 @@ const SignInPage = () => {
 
     setErrors({})
 
-    signIn('credentials', { ...values, redirect: false, callbackUrl: '/' })
+    signIn('credentials', {
+      ...values,
+      redirect: false,
+      callbackUrl: typeof query.callbackUrl === 'string' ? query.callbackUrl : '/'
+    })
       .then((result) => {
         if (result?.error) {
           setErrors({ credentials: result.error })
           return
-        }
-
-        if (result?.url) {
+        } else if (result?.url) {
           return push(result.url)
         }
       })
-      .catch((error) => {
-        console.error('catch error: ', error)
-      })
-      .then(() => {
-        setLoading(false)
-      })
+      .catch((error) => console.error('catch error: ', error))
+      .then(() => setLoading(false))
   }
 
   return (
