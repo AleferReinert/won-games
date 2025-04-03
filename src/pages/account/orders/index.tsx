@@ -1,10 +1,11 @@
+import Alert from 'components/Alert/Alert'
 import Box from 'components/Box/Box'
 import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
+import { cartItemsFullMock } from 'mocks/cartItemsFull.mock'
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
 import { requireAuth } from 'utils/requireAuth'
-import { cartItemsFullMock } from '../../../mocks/cartItemsFull.mock'
 import * as S from './OrdersPage.styles'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -44,7 +45,7 @@ const OrdersPage = ({ items = [] }: OrdersPageProps) => {
     </S.Wrapper>
   ) : (
     <Box>
-      <S.WithoutOrdersMessage>You have no orders yet.</S.WithoutOrdersMessage>
+      <Alert variant='info'>You have no orders yet.</Alert>
     </Box>
   )
 }

@@ -5,7 +5,3 @@ export const Wrapper = styled.ul`
     margin-top: calc(${theme.spacings.xsmall} * -1);
   `}
 `
-
-export const WithoutOrdersMessage = styled.p`
-  list-style: none;
-`
