@@ -4,14 +4,15 @@ import Button from 'components/Button/Button'
 import CartDropdown from 'components/CartDropdown/CartDropdown'
 import Logo from 'components/Logo/Logo'
 import MenuMobile from 'components/MenuMobile/MenuMobile'
+import Skeleton from 'components/Skeleton/Skeleton'
 import UserDropdown from 'components/UserDropdown/UserDropdown'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import * as S from './Header.styles'
 
 const Header = () => {
-  const { status } = useSession()
   const [menuMobile, setMenuMobile] = useState(false)
+  const { status } = useSession()
 
   return (
     <S.Wrapper>
@@ -41,9 +42,9 @@ const Header = () => {
           <CartDropdown />
         </S.IconWrapper>
 
-        {status === 'authenticated' ? (
-          <UserDropdown />
-        ) : (
+        {status === 'loading' && <Skeleton width={57} height={30} />}
+        {status === 'authenticated' && <UserDropdown />}
+        {status === 'unauthenticated' && (
           <S.ButtonSignIn>
             <Button size='small' href='/sign-in' asLink>
               Sign in
