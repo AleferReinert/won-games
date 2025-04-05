@@ -27,7 +27,7 @@ export const ProductHeader: Story = {
     const canvas = within(canvasElement)
 
     await step('Title', () => {
-      const title = canvas.getByRole('heading', { name: /borderlands 3/i })
+      const title = canvas.getByRole('heading', { name: /borderlands 3/i, level: 1 })
       expect(title).toBeInTheDocument()
     })
 

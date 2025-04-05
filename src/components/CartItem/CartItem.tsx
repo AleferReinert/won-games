@@ -28,7 +28,7 @@ const CartItem = ({ id, img, name, price, downloadLink, paymentInfo }: CartItemP
   return (
     <S.Wrapper data-testid='CartItemComponent'>
       <Box>
-        <S.Content>
+        <S.Content paymentInfo={paymentInfo}>
           <S.Img src={img ? imgSrc : ''} alt={img ? name : 'Image not found'} width={293} height={138} />
           <S.Group>
             <S.InfoWrapper>

@@ -2,6 +2,7 @@ import * as CreditCardsStyles from 'components/CreditCard/CreditCard.styles'
 import Image from 'next/image'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
+import { CartItemProps } from './CartItem'
 
 export const Wrapper = styled.li`
   ${({ theme }) => css`
@@ -11,8 +12,8 @@ export const Wrapper = styled.li`
   `}
 `
 
-export const Content = styled.div`
-  ${({ theme }) => css`
+export const Content = styled.div<Pick<CartItemProps, 'paymentInfo'>>`
+  ${({ theme, paymentInfo }) => css`
     display: grid;
     grid-template-columns: min-content auto;
     grid-template-rows: auto auto;
@@ -23,7 +24,7 @@ export const Content = styled.div`
     }
 
     @media (min-width: ${theme.breakpoint.small}) {
-      grid-template-columns: min-content auto;
+      grid-template-columns: ${paymentInfo ? 'min-content 1fr 1fr' : 'min-content 1fr'};
       grid-template-rows: none;
       column-gap: ${theme.spacings.small};
     }

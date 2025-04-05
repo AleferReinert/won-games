@@ -18,7 +18,9 @@ const ProductHeader = ({ id, title, description, price }: ProductHeaderProps) =>
   return (
     <S.Wrapper data-testid='ProductHeaderComponent'>
       <Box>
-        <Heading color='black'>{title}</Heading>
+        <Heading color='black' as='h1'>
+          {title}
+        </Heading>
 
         <S.Description>{description}</S.Description>
 
