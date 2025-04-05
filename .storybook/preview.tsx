@@ -12,15 +12,6 @@ export interface NextAuthSessionArgs {
 }
 
 const preview: Preview = {
-  args: {
-    nextAuthSession: {
-      expires: '2023-01-01T00:00:00Z',
-      user: {
-        name: 'John',
-        email: 'johndoe@example.com'
-      }
-    }
-  },
   argTypes: {
     nextAuthSession: {
       table: {

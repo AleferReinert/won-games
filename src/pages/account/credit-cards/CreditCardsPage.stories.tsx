@@ -28,7 +28,7 @@ export const Empty: Story = {
 
     step('Empty message', () => {
       const alert = canvas.getByRole('alert')
-      expect(alert).toHaveTextContent("You don't have any credit cards yet")
+      expect(alert).toHaveTextContent("You don't have any credit cards yet.")
     })
   }
 }

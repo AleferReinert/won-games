@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, fn, waitFor, within } from '@storybook/test'
+import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { customViewports } from '../../../.storybook/customViewports'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
 import MenuMobileComponent from './MenuMobile'
@@ -29,6 +30,9 @@ export default meta
 type Story = StoryObj<typeof MenuMobileComponent> & { args?: NextAuthSessionArgs }
 
 export const Authenticated: Story = {
+  args: {
+    nextAuthSession: nextAuthSessionMock
+  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 

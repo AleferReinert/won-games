@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
       }
     }
 
-    display: none;
     line-height: 0;
 
     @media (min-width: ${theme.breakpoint.small}) {

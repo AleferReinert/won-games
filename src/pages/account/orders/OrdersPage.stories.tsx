@@ -23,14 +23,13 @@ export default meta
 
 type Story = StoryObj<typeof OrdersPage>
 
-export const Default: Story = {
-  name: 'Empty (default)',
+export const Empty: Story = {
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Empty message', () => {
-      const emptyMessage = canvas.getByText(/you have no orders yet/i)
-      expect(emptyMessage).toBeInTheDocument()
+      const alert = canvas.getByRole('alert')
+      expect(alert).toHaveTextContent('You have no orders yet.')
     })
   }
 }

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
 import Container from 'components/Container/Container'
+import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
 import HeaderComponent from './Header'
 
@@ -73,9 +74,6 @@ export const Mobile: Story = {
 }
 
 export const Desktop: Story = {
-  args: {
-    nextAuthSession: null
-  },
   parameters: {
     viewport: {
       defaultViewport: 'small'
@@ -104,8 +102,8 @@ export const Desktop: Story = {
       expect(cartIcon).toBeVisible()
     })
 
-    await step('Sign in button link', () => {
-      const signInButtonLink = canvas.getByRole('link', { name: 'Sign in' })
+    await step('Sign in button link', async () => {
+      const signInButtonLink = await waitFor(() => canvas.getByRole('link', { name: 'Sign in' }))
       expect(signInButtonLink).toHaveAttribute('href', '/sign-in')
     })
 
@@ -126,6 +124,9 @@ export const Desktop: Story = {
 }
 
 export const Authenticated: Story = {
+  args: {
+    nextAuthSession: nextAuthSessionMock
+  },
   parameters: {
     viewport: {
       defaultViewport: 'small'

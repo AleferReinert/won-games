@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
+import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import UserDropdownComponent from './UserDropdown'
 
 const meta: Meta<typeof UserDropdownComponent> = {
   title: 'Components/UserDropdown',
   component: UserDropdownComponent,
   args: {
-    username: 'John'
+    nextAuthSession: nextAuthSessionMock
   },
   decorators: (Story) => (
     <div style={{ textAlign: 'right', padding: '2rem', height: '280px' }}>

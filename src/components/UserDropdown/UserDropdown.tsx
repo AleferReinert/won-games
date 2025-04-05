@@ -15,7 +15,7 @@ const UserDropdown = () => {
           <>
             <AccountCircleIcon aria-hidden />
             <S.Username>{session?.user?.name}</S.Username>
-            <ChevronDownIcon aria-hidden />
+            <ChevronDownIcon aria-hidden role='img' width={24} height={24} />
           </>
         }
         buttonLabel='My account'
