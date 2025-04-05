@@ -26,7 +26,7 @@ interface CreditCardsPageProps {
 const CreditCardsPage = ({ creditCards }: CreditCardsPageProps) => {
   return (
     <Box>
-      {creditCards.length ? (
+      {creditCards?.length ? (
         <S.CreditCards>
           {creditCards?.map((creditCard, index) => (
             <S.Item key={index}>

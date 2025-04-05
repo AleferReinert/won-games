@@ -7,9 +7,7 @@ import CreditCardsPage from '.'
 const meta: Meta<typeof CreditCardsPage> = {
   title: 'Pages/Account/CreditCards',
   component: CreditCardsPage,
-  args: {
-    creditCards: creditCardsMock
-  },
+
   decorators: (Story) => (
     <AccountTemplate activeLink='My cards'>
       <Story />
@@ -24,7 +22,21 @@ export default meta
 
 type Story = StoryObj<typeof CreditCardsPage>
 
-export const CreditCards: Story = {
+export const Empty: Story = {
+  play: ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    step('Empty message', () => {
+      const alert = canvas.getByRole('alert')
+      expect(alert).toHaveTextContent("You don't have any credit cards yet")
+    })
+  }
+}
+
+export const WithCreditCards: Story = {
+  args: {
+    creditCards: creditCardsMock
+  },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
