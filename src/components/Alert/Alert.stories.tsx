@@ -43,7 +43,7 @@ export const Default: Story = {
 
 export const Success: Story = {
   args: {
-    variant: 'success'
+    $variant: 'success'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -59,7 +59,7 @@ export const Success: Story = {
 
 export const Info: Story = {
   args: {
-    variant: 'info'
+    $variant: 'info'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -75,7 +75,7 @@ export const Info: Story = {
 
 export const Warning: Story = {
   args: {
-    variant: 'warning'
+    $variant: 'warning'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)

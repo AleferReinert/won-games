@@ -21,7 +21,7 @@ import { queryStringToGraphqlFilters } from 'utils/filter'
 export const productsLimit = 3 // todo: aumentar para 9 quando tiver mais produtos
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-  const apolloClient = initializeApollo()
+  const apolloClient = initializeApollo({})
   const {
     data: { platforms }
   } = await apolloClient.query<Pick<Query, 'platforms'>>({

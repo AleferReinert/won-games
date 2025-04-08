@@ -7,7 +7,7 @@ export interface TextFieldProps extends ComponentProps<'input'> {
   icon?: ReactNode
   $iconPosition?: 'left' | 'right'
   disabled?: boolean
-  errorMessage?: string
+  $errorMessage?: string
   initialValue?: string
 }
 
@@ -17,7 +17,7 @@ const TextField = ({
   icon,
   $iconPosition = 'left',
   disabled = false,
-  errorMessage,
+  $errorMessage,
   // initialValue = '',
   ...props
 }: TextFieldProps) => {
@@ -31,7 +31,7 @@ const TextField = ({
   return (
     <S.Wrapper disabled={disabled}>
       {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
-      <S.InputWrapper $iconPosition={$iconPosition} errorMessage={errorMessage}>
+      <S.InputWrapper $iconPosition={$iconPosition} $errorMessage={$errorMessage}>
         {!!icon && <S.Icon>{icon}</S.Icon>}
         <S.Input
           type='text'
@@ -44,7 +44,7 @@ const TextField = ({
           {...props}
         />
       </S.InputWrapper>
-      {!!errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+      {!!$errorMessage && <S.ErrorMessage>{$errorMessage}</S.ErrorMessage>}
     </S.Wrapper>
   )
 }

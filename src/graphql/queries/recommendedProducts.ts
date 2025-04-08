@@ -13,7 +13,7 @@ export const RECOMMENDED_PRODUCTS = gql`
               ...highlight
             }
             games {
-              ...product
+              ...productRelation
             }
           }
         }

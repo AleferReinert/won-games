@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as S from 'pages/sign-in/SignInPage.styles'
 import { useState, type ReactElement } from 'react'
-import Auth from 'templates/Auth/Auth'
+import AuthTemplate from 'templates/Auth/Auth'
 import { signInValidation } from 'utils/signInValidation'
 
 const SignInPage = () => {
@@ -48,7 +48,7 @@ const SignInPage = () => {
 
   return (
     <S.FormWrapper>
-      {errors.credentials && <Alert variant='error'>{errors.credentials}</Alert>}
+      {errors.credentials && <Alert $variant='error'>{errors.credentials}</Alert>}
 
       <form onSubmit={handleSubmit}>
         <TextField
@@ -60,7 +60,7 @@ const SignInPage = () => {
           onChange={(e) => setValues({ ...values, email: e.target.value })}
           value={values.email}
           disabled={loading}
-          errorMessage={errors.email}
+          $errorMessage={errors.email}
         />
         <TextField
           aria-label='Password'
@@ -71,9 +71,9 @@ const SignInPage = () => {
           onChange={(e) => setValues({ ...values, password: e.target.value })}
           value={values.password}
           disabled={loading}
-          errorMessage={errors.password}
+          $errorMessage={errors.password}
         />
-        <S.ForgotPassword href='/todo'>Forgot your password?</S.ForgotPassword>
+        <S.ForgotPassword href='/forgot-password'>Forgot your password?</S.ForgotPassword>
 
         <Button $full size='large' type='submit' disabled={loading}>
           {loading ? 'Signing in...' : 'Sign in'}
@@ -88,7 +88,7 @@ const SignInPage = () => {
 }
 
 SignInPage.getLayout = function getLayout(page: ReactElement) {
-  return <Auth title='Sign In'>{page}</Auth>
+  return <AuthTemplate title='Sign In'>{page}</AuthTemplate>
 }
 
 export default SignInPage

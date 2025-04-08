@@ -9,7 +9,7 @@ export const COMING_SOON = gql`
       sort: "release_date:asc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...product
+      ...productEntity
     }
     showcase: home {
       data {

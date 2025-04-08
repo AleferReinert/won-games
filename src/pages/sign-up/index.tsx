@@ -61,7 +61,7 @@ const SignUpPage = () => {
 
   return (
     <S.FormWrapper>
-      {errors.general && <Alert variant='error'>{errors.general}</Alert>}
+      {errors.general && <Alert $variant='error'>{errors.general}</Alert>}
 
       <form onSubmit={handleSubmit}>
         <TextField
@@ -72,7 +72,7 @@ const SignUpPage = () => {
           onChange={(e) => setValues({ ...values, username: e.target.value })}
           value={values.username}
           disabled={loading}
-          errorMessage={errors.username}
+          $errorMessage={errors.username}
         />
         <TextField
           aria-label='E-mail'
@@ -83,7 +83,7 @@ const SignUpPage = () => {
           onChange={(e) => setValues({ ...values, email: e.target.value })}
           value={values.email}
           disabled={loading}
-          errorMessage={errors.email}
+          $errorMessage={errors.email}
         />
         <TextField
           aria-label='Password'
@@ -94,7 +94,7 @@ const SignUpPage = () => {
           onChange={(e) => setValues({ ...values, password: e.target.value })}
           value={values.password}
           disabled={loading}
-          errorMessage={errors.password}
+          $errorMessage={errors.password}
         />
         <TextField
           aria-label='Confirm password'
@@ -105,7 +105,7 @@ const SignUpPage = () => {
           onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })}
           value={values.confirmPassword}
           disabled={loading}
-          errorMessage={errors.confirmPassword}
+          $errorMessage={errors.confirmPassword}
         />
         <Button $full size='large' type='submit' disabled={loading}>
           {loading ? 'Creating account...' : 'Sign up'}

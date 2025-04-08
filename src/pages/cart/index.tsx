@@ -27,7 +27,7 @@ interface CartPageProps {
 }
 
 export async function getServerSideProps() {
-  const apolloClient = initializeApollo()
+  const apolloClient = initializeApollo({})
   const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS
   })

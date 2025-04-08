@@ -22,7 +22,7 @@ export interface WishlistPageProps {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { session } = await requireAuth(context)
-  const apolloClient = initializeApollo()
+  const apolloClient = initializeApollo({})
   const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS
   })

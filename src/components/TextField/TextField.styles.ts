@@ -34,10 +34,8 @@ const modifiers = {
   `
 }
 
-export const InputWrapper = styled.div<
-  Pick<TextFieldProps, '$iconPosition' | 'errorMessage'>
->`
-  ${({ theme, errorMessage, $iconPosition }) => css`
+export const InputWrapper = styled.div<Pick<TextFieldProps, '$iconPosition' | '$errorMessage'>>`
+  ${({ theme, $errorMessage, $iconPosition }) => css`
     display: flex;
     align-items: center;
     background: ${theme.colors.lightGray};
@@ -57,7 +55,7 @@ export const InputWrapper = styled.div<
     }
 
     ${$iconPosition === 'right' && modifiers.$iconPositionRight()}
-    ${!!errorMessage && modifiers.errorMessage(theme)}
+    ${!!$errorMessage && modifiers.errorMessage(theme)}
   `}
 `
 

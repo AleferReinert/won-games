@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const PRODUCT_ENTITY = gql`
-  fragment product on GameEntityResponseCollection {
+  fragment productEntity on GameEntityResponseCollection {
     data {
       id
       attributes {
@@ -29,7 +29,7 @@ export const PRODUCT_ENTITY = gql`
 `
 
 export const PRODUCT_RELATION = gql`
-  fragment product on GameRelationResponseCollection {
+  fragment productRelation on GameRelationResponseCollection {
     data {
       id
       attributes {

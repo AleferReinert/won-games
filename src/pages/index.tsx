@@ -42,7 +42,7 @@ export interface HomeProps {
 }
 
 export const getStaticProps = async () => {
-  const apolloClient = initializeApollo()
+  const apolloClient = initializeApollo({})
   const { data } = await apolloClient.query<HomeProps>({
     query: PAGE_HOME,
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },

@@ -166,7 +166,7 @@ export const Disabled: Story = {
 
 export const Error: Story = {
   args: {
-    errorMessage: 'Ops...something is wrong'
+    $errorMessage: 'Ops...something is wrong'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)

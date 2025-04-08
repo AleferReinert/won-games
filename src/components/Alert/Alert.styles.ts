@@ -1,7 +1,7 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 
 type AlertProps = {
-  variant?: 'error' | 'success' | 'info' | 'warning'
+  $variant?: 'error' | 'success' | 'info' | 'warning'
 }
 
 const alertModifiers = {
@@ -34,7 +34,7 @@ export const Wrapper = styled.div`
 `
 
 export const Alert = styled.div<AlertProps>`
-  ${({ theme, variant }) => css`
+  ${({ theme, $variant }) => css`
     display: flex;
     align-items: center;
     padding: ${theme.spacings.xxsmall} ${theme.spacings.xsmall};
@@ -46,6 +46,6 @@ export const Alert = styled.div<AlertProps>`
     transition: ${theme.transition.default};
     min-height: 4.3rem;
 
-    ${variant && alertModifiers[variant](theme)}
+    ${$variant && alertModifiers[$variant](theme)}
   `}
 `

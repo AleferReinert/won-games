@@ -30,7 +30,7 @@ export interface ProductPageProps {
 
 // Return slugs of first 9 products
 export async function getStaticPaths() {
-  const apolloClient = initializeApollo()
+  const apolloClient = initializeApollo({})
   const { data } = await apolloClient.query({
     query: PRODUCTS,
     variables: { limit: 9 }
@@ -44,7 +44,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const apolloClient = initializeApollo()
+  const apolloClient = initializeApollo({})
 
   // Return product data
   const { data } = await apolloClient.query({

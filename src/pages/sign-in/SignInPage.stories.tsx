@@ -43,7 +43,7 @@ export const SignIn: Story = {
       const forgotYourPassword = canvas.getByRole('link', {
         name: /forgot your password?/i
       })
-      expect(forgotYourPassword).toHaveAttribute('href', '/todo')
+      expect(forgotYourPassword).toHaveAttribute('href', '/forgot-password')
     })
 
     await step('Button sign in', () => {

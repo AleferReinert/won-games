@@ -35,7 +35,7 @@ const CreditCardsPage = ({ creditCards }: CreditCardsPageProps) => {
           ))}
         </S.CreditCards>
       ) : (
-        <Alert variant='info'>You don&apos;t have any credit cards yet.</Alert>
+        <Alert $variant='info'>You don&apos;t have any credit cards yet.</Alert>
       )}
     </Box>
   )

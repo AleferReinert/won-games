@@ -13,17 +13,17 @@ export const PAGE_HOME = gql`
       sort: "release_date:desc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...product
+      ...productEntity
     }
     comingSoonGames: games(
       filters: { release_date: { gt: $currentDate } }
       sort: "release_date:asc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...product
+      ...productEntity
     }
     freeGames: games(filters: { price: { eq: 0 } }, sort: "release_date:desc", pagination: { start: 0, limit: 8 }) {
-      ...product
+      ...productEntity
     }
     showcases: home {
       data {
