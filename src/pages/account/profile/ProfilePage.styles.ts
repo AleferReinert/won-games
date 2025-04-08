@@ -20,7 +20,8 @@ export const Footer = styled.div`
     flex-direction: column;
 
     @media (min-width: ${theme.breakpoint.small}) {
-      flex-direction: row-reverse;
+      flex-direction: row;
+      justify-content: end;
       margin-top: ${theme.spacings.xxlarge};
     }
   `}

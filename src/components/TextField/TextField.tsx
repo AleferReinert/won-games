@@ -8,7 +8,7 @@ export interface TextFieldProps extends ComponentProps<'input'> {
   $iconPosition?: 'left' | 'right'
   disabled?: boolean
   $errorMessage?: string
-  initialValue?: string
+  // initialValue?: string
 }
 
 const TextField = ({

@@ -2,16 +2,23 @@ import { Email } from '@styled-icons/material-outlined'
 import Alert from 'components/Alert/Alert'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
+import { useSearchParams } from 'next/navigation'
 import * as S from 'pages/sign-in/SignInPage.styles'
-import { useState, type ReactElement } from 'react'
+import { useEffect, useState, type ReactElement } from 'react'
 import AuthTemplate from 'templates/Auth/Auth'
 import { forgotPasswordValidation } from 'utils/forgotPasswordValidation'
 
 const ForgotPasswordPage = () => {
-  const [values, setValues] = useState({ email: '' })
+  const searchParams = useSearchParams()
+  const email = searchParams?.get('email') || ''
+  const [values, setValues] = useState({ email: email })
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [success, setSuccess] = useState(false)
+
+  useEffect(() => {
+    setValues({ email })
+  }, [email])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

@@ -36,14 +36,9 @@ export const Profile: Story = {
       expect(inputEmail).toBeDisabled()
     })
 
-    await step('Input password', () => {
-      const inputPassword = canvas.getByPlaceholderText(/type your password/i)
-      expect(inputPassword).toBeInTheDocument()
-    })
-
-    await step('Input new password', () => {
-      const inputNewPassword = canvas.getByPlaceholderText(/new password/i)
-      expect(inputNewPassword).toBeInTheDocument()
+    await step('Button link to reset password', () => {
+      const buttonLink = canvas.getByRole('link', { name: /reset password/i })
+      expect(buttonLink.getAttribute('href')).toContain('/forgot-password')
     })
 
     await step('Button Save', () => {

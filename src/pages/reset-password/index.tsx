@@ -14,7 +14,7 @@ const ResetPasswordPage = () => {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const searchParams = useSearchParams()
-  const code = searchParams ? searchParams.get('code') : ''
+  const code = searchParams?.get('code') || ''
   const [passwordChanged, setPasswordChanged] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {

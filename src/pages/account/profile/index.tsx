@@ -35,10 +35,11 @@ const ProfilePage = ({ username, email }: ProfilePageProps) => {
         <S.Form>
           <TextField name='name' label='Name' defaultValue={username} />
           <TextField type='email' name='email' label='E-mail' defaultValue={email} disabled />
-          <TextField type='password' name='password' label='Password' placeholder='Type your password' />
-          <TextField type='password' name='new-password' label='New password' placeholder='New password' />
         </S.Form>
         <S.Footer>
+          <Button $variant='link' asLink href={`/forgot-password?email=${email}`}>
+            Reset password
+          </Button>
           <Button>Save</Button>
         </S.Footer>
       </S.Wrapper>
