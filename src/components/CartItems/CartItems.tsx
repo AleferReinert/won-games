@@ -20,8 +20,8 @@ const CartItems = ({ button = false }: CartItemsProps) => {
       ) : cartProducts.length ? (
         <>
           <S.List>
-            {cartProducts.map((game, index) => (
-              <CartItem key={index} {...game} />
+            {cartProducts.map((game) => (
+              <CartItem key={game.id} {...game} />
             ))}
           </S.List>
           <S.Footer>

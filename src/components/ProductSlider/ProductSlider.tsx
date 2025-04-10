@@ -63,8 +63,8 @@ const ProductSlider = ({ products, $arrowColor = 'white' }: ProductSliderProps) 
   return (
     <S.Wrapper $arrowColor={$arrowColor} data-testid='ProductSliderComponent'>
       <Slider settings={settings}>
-        {products.map((item, index) => (
-          <Product key={index} {...item} />
+        {products.map((item) => (
+          <Product key={item.id} {...item} />
         ))}
       </Slider>
     </S.Wrapper>

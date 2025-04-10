@@ -31,7 +31,7 @@ const settings: Settings = {
 const BannerSlider = ({ items }: BannerSliderProps) => {
   return (
     <S.Wrapper data-testid='BannerSliderComponent'>
-      <Slider settings={settings}>{items && items.map((item, index) => <Banner key={index} {...item} />)}</Slider>
+      <Slider settings={settings}>{items && items.map((item) => <Banner key={item.id} {...item} />)}</Slider>
     </S.Wrapper>
   )
 }

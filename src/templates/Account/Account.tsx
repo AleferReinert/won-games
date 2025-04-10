@@ -45,10 +45,10 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
 
         <S.Wrapper>
           <S.Nav>
-            {nav.map((item, index) => {
+            {nav.map((item) => {
               return (
                 <S.Item
-                  key={index}
+                  key={item.title}
                   href={item.link}
                   active={activeLink === item.title}
                   onClick={() => {

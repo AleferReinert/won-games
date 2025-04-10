@@ -152,10 +152,10 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
         <div>
           <S.Products>
             {products.length > 0 &&
-              products?.map(({ attributes, id }, index) => (
+              products?.map(({ attributes, id }) => (
                 <Product
                   id={id}
-                  key={index}
+                  key={id}
                   title={attributes.name}
                   developer={attributes.developers.data[0]?.attributes.name || ''} //todo: no strapi não da pra colocar required
                   img={

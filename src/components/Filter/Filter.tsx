@@ -57,15 +57,15 @@ const Filter = ({ filterOptions, initialValues = {}, handleFilter }: FilterProps
           <CloseIcon role='img' aria-hidden />
         </S.CloseFilter>
         <S.Items>
-          {filterOptions.map((filter, index) => (
-            <S.Item key={index}>
+          {filterOptions.map((filter) => (
+            <S.Item key={filter.title}>
               <Heading $line='bottom' $lineColor='secondary' color='black' size='xlarge'>
                 {filter.title}
               </Heading>
               {filter.type === 'checkbox'
-                ? filter.fields?.map((field, index) => (
+                ? filter.fields?.map((field) => (
                     <Checkbox
-                      key={index}
+                      key={field.id}
                       id={field.id}
                       name={filter.name}
                       label={field.label}
@@ -75,9 +75,9 @@ const Filter = ({ filterOptions, initialValues = {}, handleFilter }: FilterProps
                       onCheck={(value) => handleChange(field.value, value)}
                     />
                   ))
-                : filter.fields?.map((field, index) => (
+                : filter.fields?.map((field) => (
                     <Radio
-                      key={index}
+                      key={field.id}
                       id={field.id}
                       name={filter.name}
                       label={field.label}

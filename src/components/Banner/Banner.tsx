@@ -3,6 +3,7 @@ import Ribbon, { RibbonProps } from 'components/Ribbon/Ribbon'
 import * as S from './Banner.styles'
 
 export interface BannerProps {
+  id: string
   img: string
   title: string
   description: string
@@ -11,19 +12,10 @@ export interface BannerProps {
   ribbon?: RibbonProps
 }
 
-const Banner = ({
-  img,
-  title,
-  description,
-  buttonLabel,
-  buttonLink,
-  ribbon
-}: BannerProps) => {
+const Banner = ({ img, title, description, buttonLabel, buttonLink, ribbon }: BannerProps) => {
   return (
     <S.Wrapper>
-      {ribbon?.text && (
-        <Ribbon text={ribbon.text} size={ribbon.size} color={ribbon.color} />
-      )}
+      {ribbon?.text && <Ribbon text={ribbon.text} size={ribbon.size} color={ribbon.color} />}
       <S.Image src={img} role='img' aria-label={title} />
       <S.Caption>
         <S.Title>{title}</S.Title>

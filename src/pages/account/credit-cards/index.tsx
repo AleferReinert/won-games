@@ -28,8 +28,8 @@ const CreditCardsPage = ({ creditCards }: CreditCardsPageProps) => {
     <Box>
       {creditCards?.length ? (
         <S.CreditCards>
-          {creditCards?.map((creditCard, index) => (
-            <S.Item key={index}>
+          {creditCards?.map((creditCard) => (
+            <S.Item key={creditCard.number}>
               <CreditCard img={creditCard.img} name={creditCard.name} number={creditCard.number} />
             </S.Item>
           ))}

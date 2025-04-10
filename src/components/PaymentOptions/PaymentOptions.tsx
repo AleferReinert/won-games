@@ -23,7 +23,7 @@ const PaymentOptions = ({ creditCards, handlePayment }: PaymentOptionsProps) => 
         </Heading>
         <S.CreditCards>
           {creditCards?.map((creditCard, index) => (
-            <S.Item key={index}>
+            <S.Item key={creditCard.number}>
               <S.Label title={creditCard.name} onClick={() => setSelectedCreditCard(index)}>
                 <CreditCard img={creditCard.img} name={creditCard.name} number={creditCard.number} />
                 <S.RadioWrapper>

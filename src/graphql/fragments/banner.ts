@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 export const BANNER = gql`
   fragment banner on BannerEntityResponseCollection {
     data {
+      id
       attributes {
         img {
           data {

@@ -26,9 +26,9 @@ interface OrdersPageProps {
 const OrdersPage = ({ items = [] }: OrdersPageProps) => {
   return items.length ? (
     <S.Wrapper>
-      {items.map((item, index) => (
+      {items.map((item) => (
         <CartItem
-          key={index}
+          key={item.id}
           id={item.id}
           img={item.img}
           name={item.name}
