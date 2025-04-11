@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
+import { forgotPasswordHandler } from 'mocks/handlers/forgotPasswordHandler'
 import AuthTemplate from 'templates/Auth/Auth'
 import ForgotPasswordPage from '.'
 
@@ -15,6 +16,7 @@ const meta: Meta<typeof ForgotPasswordPage> = {
   ],
   parameters: {
     layout: 'fullscreen',
+    msw: [forgotPasswordHandler],
     options: {
       showPanel: false
     }
@@ -56,17 +58,18 @@ export const ForgotPassword: Story = {
       })
     })
 
-    await step('Success', async () => {
-      Object.defineProperty(window, 'fetch', {
-        configurable: true,
-        writable: true,
-        value: () =>
-          Promise.resolve({
-            ok: true,
-            json: () => Promise.resolve({ ok: true })
-          })
-      })
+    await step('Error: response not ok', async () => {
+      await userEvent.clear(inputEmail)
+      await userEvent.type(inputEmail, 'invalid@example.com')
+      userEvent.click(buttonSubmit)
 
+      await waitFor(() => {
+        const error = canvas.getByText('An error occurred')
+        expect(error).toBeVisible()
+      })
+    })
+
+    await step('Success', async () => {
       await userEvent.clear(inputEmail)
       await userEvent.type(inputEmail, 'valid@example.com')
       userEvent.click(buttonSubmit)

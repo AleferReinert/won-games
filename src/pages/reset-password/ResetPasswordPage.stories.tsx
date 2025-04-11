@@ -1,7 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
+import { resetPasswordHandler } from 'mocks/handlers/resetPasswordHandler'
+import * as nextAuthReact from 'next-auth/react'
+import * as nextNavigation from 'next/navigation'
+import { createMock } from 'storybook-addon-module-mock'
 import AuthTemplate from 'templates/Auth/Auth'
 import ResetPasswordPage from '.'
+
+let query: { [key: string]: string } = {}
 
 const meta: Meta<typeof ResetPasswordPage> = {
   title: 'Pages/ResetPassword',
@@ -15,6 +21,9 @@ const meta: Meta<typeof ResetPasswordPage> = {
   ],
   parameters: {
     layout: 'fullscreen',
+    msw: {
+      handlers: [resetPasswordHandler]
+    },
     options: {
       showPanel: false
     }
@@ -24,7 +33,7 @@ export default meta
 
 type Story = StoryObj<typeof ResetPasswordPage>
 
-export const ResetPassword: Story = {
+export const Error: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const inputPassword = canvas.getByLabelText('Password')
@@ -73,15 +82,6 @@ export const ResetPassword: Story = {
     })
 
     await step('Validation: expired link', async () => {
-      Object.defineProperty(window, 'fetch', {
-        configurable: true,
-        writable: true,
-        value: () =>
-          Promise.resolve({
-            ok: true,
-            json: () => Promise.resolve({ error: true })
-          })
-      })
       await userEvent.clear(inputPassword)
       await userEvent.clear(inputPasswordConfirmation)
       await userEvent.type(inputPassword, '123456')
@@ -90,6 +90,46 @@ export const ResetPassword: Story = {
       await waitFor(() => {
         const message = canvas.getByText('Expired link')
         expect(message).toBeVisible()
+      })
+    })
+  }
+}
+export const Success: Story = {
+  parameters: {
+    moduleMock: {
+      mock: () => {
+        const useSearchParamsMock = createMock(nextNavigation, 'useSearchParams')
+        useSearchParamsMock.mockImplementation(
+          () =>
+            ({
+              get: (key: string) => query[key]
+            }) as unknown as nextNavigation.ReadonlyURLSearchParams
+        )
+        const signInMock = createMock(nextAuthReact, 'signIn')
+        signInMock.mockImplementation(() => {
+          console.log('Mock signIn chamado!')
+          return Promise.resolve({ error: null, status: 200, ok: true, url: '' })
+        })
+      }
+    }
+  },
+  play: async ({ canvasElement, step }) => {
+    query = { code: 'validCode' }
+    const canvas = within(canvasElement)
+    const inputPassword = canvas.getByLabelText('Password')
+    const inputPasswordConfirmation = canvas.getByLabelText('Confirm password')
+    const buttonSubmit = canvas.getByRole('button', { name: 'Reset password' })
+
+    await step('Validation: success', async () => {
+      await userEvent.clear(inputPassword)
+      await userEvent.clear(inputPasswordConfirmation)
+      await userEvent.type(inputPassword, '123456')
+      await userEvent.type(inputPasswordConfirmation, '123456')
+      userEvent.click(buttonSubmit)
+      await waitFor(() => {
+        const message = canvas.getByText('Password changed')
+        expect(message).toBeVisible()
+        expect(buttonSubmit).toHaveTextContent('Redirecting...')
       })
     })
   }

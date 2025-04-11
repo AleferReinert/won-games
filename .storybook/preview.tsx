@@ -1,4 +1,5 @@
 import { Preview, StoryContext, StoryFn } from '@storybook/react'
+import { initialize, mswLoader } from 'msw-storybook-addon'
 import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
@@ -6,6 +7,8 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/global'
 import theme from '../src/styles/theme'
 import { customViewports } from './customViewports'
+
+initialize()
 
 export interface NextAuthSessionArgs {
   nextAuthSession?: Session | null
@@ -19,6 +22,7 @@ const preview: Preview = {
       }
     }
   },
+  loaders: [mswLoader],
   parameters: {
     layout: 'fullscreen',
     nextRouter: {

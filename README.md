@@ -42,6 +42,7 @@ Projeto do curso "React Avançado: Crie aplicações com NextJS, Strapi e mais".
 ## Tecnologias Utilizadas
 
 - **Chromatic:** Ferramenta para revisão visual e gestão de componentes do Storybook.
+- **MSW:** Biblioteca de simulação de API para navegador e Node.js..
 - **NextAuth:** Autenticação para Next.js.
 - **NextJS:** Framework em React.
 - **PlopJS:** Ferramenta para gerar arquivos personalizados.
