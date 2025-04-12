@@ -4,7 +4,7 @@ export const apolloCache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        games: {
+        products: {
           keyArgs: ['filters', 'sort'],
           merge(existing = { data: [] }, incoming) {
             return {

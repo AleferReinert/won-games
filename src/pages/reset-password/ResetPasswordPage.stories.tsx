@@ -107,7 +107,6 @@ export const Success: Story = {
         )
         const signInMock = createMock(nextAuthReact, 'signIn')
         signInMock.mockImplementation(() => {
-          console.log('Mock signIn chamado!')
           return Promise.resolve({ error: null, status: 200, ok: true, url: '' })
         })
       }

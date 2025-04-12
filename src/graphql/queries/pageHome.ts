@@ -8,38 +8,42 @@ export const PAGE_HOME = gql`
     banners {
       ...banner
     }
-    newGames: games(
+    newProducts: products(
       filters: { release_date: { lte: $currentDate } }
       sort: "release_date:desc"
       pagination: { start: 0, limit: 8 }
     ) {
       ...productEntity
     }
-    comingSoonGames: games(
+    comingSoonProducts: products(
       filters: { release_date: { gt: $currentDate } }
       sort: "release_date:asc"
       pagination: { start: 0, limit: 8 }
     ) {
       ...productEntity
     }
-    freeGames: games(filters: { price: { eq: 0 } }, sort: "release_date:desc", pagination: { start: 0, limit: 8 }) {
+    freeProducts: products(
+      filters: { price: { eq: 0 } }
+      sort: "release_date:desc"
+      pagination: { start: 0, limit: 8 }
+    ) {
       ...productEntity
     }
     showcases: home {
       data {
         attributes {
-          newGames {
+          newProducts {
             title
             highlight {
               ...highlight
             }
           }
-          mostPopularGames {
+          popularProducts {
             title
             highlight {
               ...highlight
             }
-            games {
+            products {
               data {
                 id
                 attributes {
@@ -65,13 +69,13 @@ export const PAGE_HOME = gql`
               }
             }
           }
-          comingSoonGames {
+          comingSoonProducts {
             title
             highlight {
               ...highlight
             }
           }
-          freeGames {
+          freeProducts {
             title
             highlight {
               ...highlight

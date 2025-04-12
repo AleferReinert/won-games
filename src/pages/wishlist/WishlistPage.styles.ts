@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const WrapperWishlistGames = styled.div`
+export const WrapperWishlist = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacings.small};
     display: grid;

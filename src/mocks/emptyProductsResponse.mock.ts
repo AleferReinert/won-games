@@ -1,9 +1,9 @@
 import { MockedResponse } from '@apollo/client/testing'
 import { PRODUCTS } from 'graphql/queries/products'
-import { GameEntityResponseCollection } from 'types/generated'
+import { ProductEntityResponseCollection } from 'types/generated'
 
 export const emptyProductsResponseMock: MockedResponse<{
-  games: GameEntityResponseCollection
+  products: ProductEntityResponseCollection
 }> = {
   request: {
     query: PRODUCTS,
@@ -14,7 +14,7 @@ export const emptyProductsResponseMock: MockedResponse<{
   },
   result: {
     data: {
-      games: {
+      products: {
         data: [],
         meta: {
           pagination: {
@@ -24,7 +24,7 @@ export const emptyProductsResponseMock: MockedResponse<{
             total: 0
           }
         },
-        __typename: 'GameEntityResponseCollection'
+        __typename: 'ProductEntityResponseCollection'
       }
     }
   }

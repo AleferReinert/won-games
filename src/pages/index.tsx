@@ -9,9 +9,9 @@ import { ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import {
   BannerEntityResponseCollection,
-  GameEntityResponseCollection,
-  GameRelationResponseCollection,
-  HomeEntity
+  HomeEntity,
+  ProductEntityResponseCollection,
+  ProductRelationResponseCollection
 } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { bannerMapper, highlightMapper, productMapper } from 'utils/mappers'
@@ -19,25 +19,25 @@ import * as S from './Home.styles'
 
 export interface HomeTemplateProps {
   banners: BannerProps[]
-  newsSectionTitle: string
-  newsSectionProducts: ProductProps[]
-  mostPopularsSectionTitle: string
-  mostPopularsSectionHighlight: HighlightProps
-  mostPopularsSectionProducts: ProductProps[]
-  comingSoonSectionTitle: string
-  comingSoonSectionHighlight: HighlightProps
-  comingSoonSectionProducts: ProductProps[]
-  freeSectionTitle: string
-  freeSectionHighlight: HighlightProps
-  freeSectionProducts: ProductProps[]
+  newShowcaseTitle: string
+  newShowcaseProducts: ProductProps[]
+  popularShowcaseTitle: string
+  popularShowcaseHighlight: HighlightProps
+  popularShowcaseProducts: ProductProps[]
+  comingSoonShowcaseTitle: string
+  comingSoonShowcaseHighlight: HighlightProps
+  comingSoonShowcaseProducts: ProductProps[]
+  freeShowcaseTitle: string
+  freeShowcaseHighlight: HighlightProps
+  freeShowcaseProducts: ProductProps[]
 }
 
 export interface HomeProps {
   banners: BannerEntityResponseCollection
-  newGames: GameEntityResponseCollection
-  comingSoonGames: GameEntityResponseCollection
-  mostPopularGames: GameRelationResponseCollection
-  freeGames: GameEntityResponseCollection
+  newProducts: ProductEntityResponseCollection
+  comingSoonProducts: ProductEntityResponseCollection
+  mostPopularProducts: ProductRelationResponseCollection
+  freeProducts: ProductEntityResponseCollection
   showcases: { data: HomeEntity }
 }
 
@@ -49,46 +49,46 @@ export const getStaticProps = async () => {
     fetchPolicy: 'no-cache'
   })
 
-  const { banners, newGames, comingSoonGames, freeGames, showcases } = data
+  const { banners, newProducts, comingSoonProducts, freeProducts, showcases } = data
 
   const {
-    newGames: newsSection,
-    mostPopularGames: mostPopularsSection,
-    comingSoonGames: comingSoonSection,
-    freeGames: freeSection
+    newProducts: newShowcase,
+    popularProducts: popularShowcase,
+    comingSoonProducts: comingSoonShowcase,
+    freeProducts: freeShowcase
   } = showcases.data.attributes
 
   return {
     revalidate: 60,
     props: {
       banners: bannerMapper(banners),
-      newsSectionTitle: newsSection.title,
-      newsSectionProducts: productMapper(newGames),
-      mostPopularsSectionTitle: mostPopularsSection.title,
-      mostPopularsSectionHighlight: highlightMapper(mostPopularsSection.highlight),
-      mostPopularsSectionProducts: productMapper(mostPopularsSection.games),
-      comingSoonSectionTitle: comingSoonSection.title,
-      comingSoonSectionHighlight: highlightMapper(comingSoonSection.highlight),
-      comingSoonSectionProducts: productMapper(comingSoonGames),
-      freeSectionTitle: freeSection.title,
-      freeSectionHighlight: highlightMapper(freeSection.highlight),
-      freeSectionProducts: productMapper(freeGames)
+      newShowcaseTitle: newShowcase.title,
+      newShowcaseProducts: productMapper(newProducts),
+      popularShowcaseTitle: popularShowcase.title,
+      popularShowcaseHighlight: highlightMapper(popularShowcase.highlight),
+      popularShowcaseProducts: productMapper(popularShowcase.products),
+      comingSoonShowcaseTitle: comingSoonShowcase.title,
+      comingSoonShowcaseHighlight: highlightMapper(comingSoonShowcase.highlight),
+      comingSoonShowcaseProducts: productMapper(comingSoonProducts),
+      freeShowcaseTitle: freeShowcase.title,
+      freeShowcaseHighlight: highlightMapper(freeShowcase.highlight),
+      freeShowcaseProducts: productMapper(freeProducts)
     }
   }
 }
 export default function Index({
   banners,
-  newsSectionTitle,
-  newsSectionProducts,
-  mostPopularsSectionTitle,
-  mostPopularsSectionHighlight,
-  mostPopularsSectionProducts,
-  comingSoonSectionTitle,
-  comingSoonSectionHighlight,
-  comingSoonSectionProducts,
-  freeSectionTitle,
-  freeSectionHighlight,
-  freeSectionProducts
+  newShowcaseTitle,
+  newShowcaseProducts,
+  popularShowcaseTitle,
+  popularShowcaseHighlight,
+  popularShowcaseProducts,
+  comingSoonShowcaseTitle,
+  comingSoonShowcaseHighlight,
+  comingSoonShowcaseProducts,
+  freeShowcaseTitle,
+  freeShowcaseHighlight,
+  freeShowcaseProducts
 }: HomeTemplateProps) {
   return (
     <>
@@ -100,31 +100,19 @@ export default function Index({
         </Container>
       )}
 
-      {newsSectionProducts.length > 0 && (
-        <S.SectionNews>
-          <Showcase title={newsSectionTitle} products={newsSectionProducts} $arrowColor='black' />
-        </S.SectionNews>
-      )}
+      <S.SectionNews>
+        <Showcase title={newShowcaseTitle} products={newShowcaseProducts} $arrowColor='black' />
+      </S.SectionNews>
 
-      {mostPopularsSectionProducts.length > 0 && (
-        <Showcase
-          title={mostPopularsSectionTitle}
-          highlight={mostPopularsSectionHighlight}
-          products={mostPopularsSectionProducts}
-        />
-      )}
+      <Showcase title={popularShowcaseTitle} highlight={popularShowcaseHighlight} products={popularShowcaseProducts} />
 
-      {comingSoonSectionProducts.length > 0 && (
-        <Showcase
-          title={comingSoonSectionTitle}
-          highlight={comingSoonSectionHighlight}
-          products={comingSoonSectionProducts}
-        />
-      )}
+      <Showcase
+        title={comingSoonShowcaseTitle}
+        highlight={comingSoonShowcaseHighlight}
+        products={comingSoonShowcaseProducts}
+      />
 
-      {freeSectionProducts.length > 0 && (
-        <Showcase title={freeSectionTitle} highlight={freeSectionHighlight} products={freeSectionProducts} />
-      )}
+      <Showcase title={freeShowcaseTitle} highlight={freeShowcaseHighlight} products={freeShowcaseProducts} />
     </>
   )
 }

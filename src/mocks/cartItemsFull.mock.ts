@@ -4,7 +4,7 @@ export const cartItemsFullMock: CartItemProps[] = [
   {
     id: '1',
     name: 'Population Zero',
-    img: '/img/game-test.jpg',
+    img: '/img/product-test.jpg',
     price: 215.0,
     downloadLink: '/link',
     paymentInfo: {
@@ -17,7 +17,7 @@ export const cartItemsFullMock: CartItemProps[] = [
   {
     id: '2',
     name: 'Borderlands 2',
-    img: '/img/game-test.jpg',
+    img: '/img/product-test.jpg',
     price: 315.0,
     downloadLink: '/link',
     paymentInfo: {
@@ -30,7 +30,7 @@ export const cartItemsFullMock: CartItemProps[] = [
   {
     id: '3',
     name: 'Diablo 1',
-    img: '/img/game-test.jpg',
+    img: '/img/product-test.jpg',
     price: 79.0,
     downloadLink: '/link',
     paymentInfo: {

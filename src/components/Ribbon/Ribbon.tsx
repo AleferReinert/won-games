@@ -1,15 +1,15 @@
 import * as S from './Ribbon.styles'
 
 export interface RibbonProps {
-  text: string
+  label: string
   color?: 'primary' | 'secondary'
   size?: 'small' | 'large'
 }
 
-const Ribbon = ({ text, color = 'primary', size = 'large' }: RibbonProps) => {
+const Ribbon = ({ label, color = 'primary', size = 'large' }: RibbonProps) => {
   return (
     <S.Wrapper color={color} size={size} data-testid='RibbonComponent'>
-      {text}
+      {label}
     </S.Wrapper>
   )
 }

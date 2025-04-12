@@ -1,10 +1,10 @@
 import { MockedResponse } from '@apollo/client/testing'
 import { PRODUCTS } from 'graphql/queries/products'
 import { productsLimit } from 'pages/products'
-import { Enum_Game_Rating, GameEntityResponseCollection } from 'types/generated'
+import { Enum_Product_Rating, ProductEntityResponseCollection } from 'types/generated'
 
 export const moreProductsResponseMock: MockedResponse<{
-  games: GameEntityResponseCollection
+  products: ProductEntityResponseCollection
 }> = {
   request: {
     query: PRODUCTS,
@@ -16,7 +16,7 @@ export const moreProductsResponseMock: MockedResponse<{
   },
   result: {
     data: {
-      games: {
+      products: {
         data: [
           {
             id: '4',
@@ -73,18 +73,18 @@ export const moreProductsResponseMock: MockedResponse<{
                     createdAt: '2024-03-15T12:30:00.000Z',
                     publishedAt: '2024-03-15T12:30:00.000Z',
                     updatedAt: '2024-03-15T12:30:00.000Z',
-                    games: { data: [] },
+                    products: { data: [] },
                     name: 'Nintendo',
                     slug: 'nintendo'
                   }
                 }
               },
-              rating: Enum_Game_Rating.Br18,
+              rating: Enum_Product_Rating.Br18,
               release_date: '2024-03-15T12:30:00.000Z',
               updatedAt: '2024-03-15T12:30:00.000Z',
-              __typename: 'Game'
+              __typename: 'Product'
             },
-            __typename: 'GameEntity'
+            __typename: 'ProductEntity'
           },
           {
             id: '5',
@@ -141,18 +141,18 @@ export const moreProductsResponseMock: MockedResponse<{
                     createdAt: '2024-03-15T12:30:00.000Z',
                     publishedAt: '2024-03-15T12:30:00.000Z',
                     updatedAt: '2024-03-15T12:30:00.000Z',
-                    games: { data: [] },
+                    products: { data: [] },
                     name: 'Nintendo',
                     slug: 'nintendo'
                   }
                 }
               },
-              rating: Enum_Game_Rating.Br18,
+              rating: Enum_Product_Rating.Br18,
               release_date: '2024-03-15T12:30:00.000Z',
               updatedAt: '2024-03-15T12:30:00.000Z',
-              __typename: 'Game'
+              __typename: 'Product'
             },
-            __typename: 'GameEntity'
+            __typename: 'ProductEntity'
           },
           {
             id: '6',
@@ -209,18 +209,18 @@ export const moreProductsResponseMock: MockedResponse<{
                     createdAt: '2024-03-15T12:30:00.000Z',
                     publishedAt: '2024-03-15T12:30:00.000Z',
                     updatedAt: '2024-03-15T12:30:00.000Z',
-                    games: { data: [] },
+                    products: { data: [] },
                     name: 'Nintendo',
                     slug: 'nintendo'
                   }
                 }
               },
-              rating: Enum_Game_Rating.Br18,
+              rating: Enum_Product_Rating.Br18,
               release_date: '2024-03-15T12:30:00.000Z',
               updatedAt: '2024-03-15T12:30:00.000Z',
-              __typename: 'Game'
+              __typename: 'Product'
             },
-            __typename: 'GameEntity'
+            __typename: 'ProductEntity'
           }
         ],
         meta: {
@@ -231,7 +231,7 @@ export const moreProductsResponseMock: MockedResponse<{
             total: 6
           }
         },
-        __typename: 'GameEntityResponseCollection'
+        __typename: 'ProductEntityResponseCollection'
       }
     }
   }

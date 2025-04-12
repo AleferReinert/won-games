@@ -10,7 +10,7 @@ export const cartItemsResponseMock: MockedResponse = {
   },
   result: {
     data: {
-      games: {
+      products: {
         data: [
           {
             id: '2',
@@ -18,7 +18,7 @@ export const cartItemsResponseMock: MockedResponse = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/game-test.jpg'
+                    url: '/img/product-test.jpg'
                   }
                 }
               },
@@ -36,7 +36,7 @@ export const cartItemsResponseMock: MockedResponse = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/game-test.jpg'
+                    url: '/img/product-test.jpg'
                   }
                 }
               },

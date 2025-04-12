@@ -11,17 +11,17 @@ const meta: Meta<typeof HomeTemplate> = {
   component: HomeTemplate,
   args: {
     banners: bannersMock,
-    newsSectionTitle: 'New Games',
-    newsSectionProducts: productsMock,
-    mostPopularsSectionTitle: 'Most Populars',
-    mostPopularsSectionHighlight: highlightMock,
-    mostPopularsSectionProducts: productsMock,
-    comingSoonSectionTitle: 'Coming Soon',
-    comingSoonSectionProducts: productsMock,
-    comingSoonSectionHighlight: highlightMock,
-    freeSectionTitle: 'Free Games',
-    freeSectionProducts: productsMock,
-    freeSectionHighlight: highlightMock
+    newShowcaseTitle: 'New Games',
+    newShowcaseProducts: productsMock,
+    popularShowcaseTitle: 'Most Populars',
+    popularShowcaseHighlight: highlightMock,
+    popularShowcaseProducts: productsMock,
+    comingSoonShowcaseTitle: 'Coming Soon',
+    comingSoonShowcaseProducts: productsMock,
+    comingSoonShowcaseHighlight: highlightMock,
+    freeShowcaseTitle: 'Free Games',
+    freeShowcaseProducts: productsMock,
+    freeShowcaseHighlight: highlightMock
   },
   decorators: [
     (Story) => (
@@ -45,10 +45,10 @@ type Story = StoryObj<typeof HomeTemplate>
 export const Home: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const showcaseNewGames = within(canvas.getAllByTestId('ShowcaseComponent')[0])
+    const showcaseNewProducts = within(canvas.getAllByTestId('ShowcaseComponent')[0])
     const showcaseMostPopulars = within(canvas.getAllByTestId('ShowcaseComponent')[1])
     const showcaseComingSoon = within(canvas.getAllByTestId('ShowcaseComponent')[2])
-    const showcaseFreeGames = within(canvas.getAllByTestId('ShowcaseComponent')[3])
+    const showcaseFreeProducts = within(canvas.getAllByTestId('ShowcaseComponent')[3])
 
     await step('BannerSlider component', () => {
       const bannerSlider = canvas.getByTestId('BannerSliderComponent')
@@ -56,8 +56,8 @@ export const Home: Story = {
     })
 
     await step('Section new games: title and products', () => {
-      const title = showcaseNewGames.getByRole('heading', { level: 2 })
-      const products = showcaseNewGames.getByTestId('ProductSliderComponent')
+      const title = showcaseNewProducts.getByRole('heading', { level: 2 })
+      const products = showcaseNewProducts.getByTestId('ProductSliderComponent')
       expect(title).toHaveTextContent('New Games')
       expect(products).toBeVisible()
     })
@@ -81,9 +81,9 @@ export const Home: Story = {
     })
 
     await step('Section free games: title, highlight and products', () => {
-      const title = showcaseFreeGames.getByRole('heading', { level: 2 })
-      const highlight = showcaseFreeGames.getByTestId('HighlightComponent')
-      const products = showcaseFreeGames.getByTestId('ProductSliderComponent')
+      const title = showcaseFreeProducts.getByRole('heading', { level: 2 })
+      const highlight = showcaseFreeProducts.getByTestId('HighlightComponent')
+      const products = showcaseFreeProducts.getByTestId('ProductSliderComponent')
       expect(title).toHaveTextContent('Free Games')
       expect(highlight).toBeVisible()
       expect(products).toBeVisible()

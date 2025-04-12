@@ -4,13 +4,13 @@ export const cartContextMock = {
   cartProducts: [
     {
       id: '2',
-      img: '/img/game-test.jpg',
+      img: '/img/product-test.jpg',
       name: 'Population Zero',
       price: 89
     },
     {
       id: '4',
-      img: '/img/game-test.jpg',
+      img: '/img/product-test.jpg',
       name: 'Borderlands 2',
       price: 129
     }

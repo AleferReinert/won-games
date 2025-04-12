@@ -17,7 +17,7 @@ export const BANNER = gql`
         description
         button {
           label
-          link
+          url
         }
         ribbon {
           text

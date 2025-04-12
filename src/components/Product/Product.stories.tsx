@@ -31,7 +31,7 @@ export const Default: Story = {
 
     await step('Image', () => {
       const image = canvas.getByRole('img', { name: 'Population Zero' })
-      expect(image.getAttribute('src')).toContain('/img/game-test.jpg')
+      expect(image.getAttribute('src')).toContain('/img/product-test.jpg')
     })
 
     await step('Title', () => {

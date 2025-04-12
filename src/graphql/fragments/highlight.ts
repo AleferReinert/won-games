@@ -15,7 +15,7 @@ export const HIGHLIGHT = gql`
         }
       }
     }
-    float {
+    floatImg {
       data {
         attributes {
           url

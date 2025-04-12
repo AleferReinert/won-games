@@ -10,7 +10,7 @@ export const cartItemResponseMock: MockedResponse = {
   },
   result: {
     data: {
-      games: {
+      products: {
         data: [
           {
             id: '2',

@@ -7,6 +7,9 @@ import Banner from './Banner'
 const meta: Meta<typeof Banner> = {
   title: 'Components/Banner',
   component: Banner,
+  args: {
+    img: bannersMock[0].img
+  },
   decorators: [
     (Story) => (
       <Container>
@@ -20,28 +23,67 @@ const meta: Meta<typeof Banner> = {
 type Story = StoryObj<typeof Banner>
 
 export const Default: Story = {
-  args: {
-    ...bannersMock[0]
-  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     await step('Required image', () => {
-      const image = canvas.getByRole('img', { name: 'Defy death' })
+      const image = canvas.getByRole('img')
       expect(image).toHaveAttribute('src', '/img/background-test.png')
     })
+  }
+}
+
+export const Title: Story = {
+  args: {
+    title: bannersMock[0].title
+  },
+  parameters: {
+    options: {
+      showPanel: true
+    }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
 
     await step('Required title', () => {
       const title = canvas.getByRole('heading', { level: 2 })
       expect(title).toHaveTextContent('Defy death')
     })
+  }
+}
+
+export const Description: Story = {
+  args: {
+    description: bannersMock[0].description
+  },
+  parameters: {
+    options: {
+      showPanel: true
+    }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
 
     await step('Required description html', () => {
       const description = canvas.getByRole('paragraph')
       expect(description).toContainHTML('Play the new <strong>CrashLands</strong> season')
     })
+  }
+}
 
-    await step('Required button link with label and link', () => {
+export const ButtonLink: Story = {
+  args: {
+    buttonLink: bannersMock[0].buttonLink
+  },
+  parameters: {
+    options: {
+      showPanel: true
+    }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('Required button link with label and url', () => {
       const button = canvas.getByRole('link', { name: /buy now/i })
       expect(button).toHaveAttribute('href', '/products/defy-death')
     })
@@ -50,7 +92,7 @@ export const Default: Story = {
 
 export const WithRibbon: Story = {
   args: {
-    ...bannersMock[1]
+    ribbon: { label: bannersMock[1].ribbon!.label }
   },
   parameters: {
     options: {

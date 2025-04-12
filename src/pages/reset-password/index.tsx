@@ -36,8 +36,6 @@ const ResetPasswordPage = () => {
       body: JSON.stringify({ code, ...values })
     })
 
-    console.log('response: ', response)
-
     if (!response.ok) {
       setErrors({ error: 'An error occurred' })
       setLoading(false)

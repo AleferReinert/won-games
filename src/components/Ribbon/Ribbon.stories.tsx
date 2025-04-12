@@ -8,7 +8,7 @@ const meta: Meta<typeof Ribbon> = {
   title: 'Components/Atoms/Ribbon',
   component: Ribbon,
   args: {
-    text: 'New release'
+    label: 'New release'
   },
   decorators: [
     (Story) => (

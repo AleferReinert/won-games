@@ -67,8 +67,8 @@ export const WithProducts: Story = {
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const wrapperWishlistGames = within(canvas.getByRole('heading', { name: 'Wishlist', level: 1 }).parentElement!)
-    const products = wrapperWishlistGames.queryAllByTestId('ProductComponent')
+    const wrapperWishlist = within(canvas.getByRole('heading', { name: 'Wishlist', level: 1 }).parentElement!)
+    const products = wrapperWishlist.queryAllByTestId('ProductComponent')
 
     step('Products', () => {
       expect(products.length).toBeGreaterThan(0)

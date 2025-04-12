@@ -12,7 +12,7 @@ export const resetPasswordHandler = http.post(
     const { code, password, passwordConfirmation } = (await request.json()) as ResetPasswordRequestBody
 
     if (password === passwordConfirmation && code === 'validCode') {
-      return HttpResponse.json({ ok: true, status: 200, user: { email: 'user@example.com' } })
+      return HttpResponse.json({ ok: true, status: 200, user: { email: 'johndoe@example.com' } })
     }
 
     return HttpResponse.json({ ok: false, status: 400, error: 'Expired link' })

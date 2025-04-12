@@ -7,14 +7,12 @@ export const RECOMMENDED_PRODUCTS = gql`
     recommended {
       data {
         attributes {
-          showcase {
-            title
-            highlight {
-              ...highlight
-            }
-            games {
-              ...productRelation
-            }
+          title
+          highlight {
+            ...highlight
+          }
+          products {
+            ...productRelation
           }
         }
       }

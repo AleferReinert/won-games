@@ -6,6 +6,10 @@ export const Wrapper = styled.div`
   ${({ theme }) => css`
     position: relative;
 
+    ${ButtonStyles.Wrapper} {
+      margin-top: ${theme.spacings.xsmall};
+    }
+
     @media (max-width: calc(${theme.breakpoint.small} - 1px)) {
       ${RibbonStyles.Wrapper} {
         right: 0;
@@ -79,7 +83,6 @@ export const Description = styled.p`
     color: ${theme.colors.white};
     font-size: ${theme.font.sizes.small};
     font-weight: ${theme.font.normal};
-    margin-bottom: ${theme.spacings.xsmall};
 
     strong {
       color: ${theme.colors.primary};

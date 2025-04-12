@@ -1,31 +1,28 @@
 import { CartItemProps } from 'components/CartItem/CartItem'
 import { HighlightProps } from 'components/Highlight/Highlight'
-import {
-  BannerEntityResponseCollection,
-  ComponentPageHighlight,
-  GameEntityResponseCollection,
-  GameRelationResponseCollection,
-  Query
-} from 'types/generated'
+import { BannerEntityResponseCollection, ComponentPageHighlight, ProductEntity, Query } from 'types/generated'
 
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerEntityResponseCollection) => {
   return banners.data.map(({ attributes: banner }) => ({
-    img: process.env.NEXT_PUBLIC_API_URL + banner.img.data.attributes.url,
-    title: banner.title,
-    description: banner.description,
-    buttonLabel: banner.button.label,
-    buttonLink: banner.button.link,
+    img: {
+      url: process.env.NEXT_PUBLIC_API_URL + banner.img.data.attributes.url,
+      alternativeText: banner.img.data.attributes.alternativeText
+    },
+    title: banner.title ? banner.title : null,
+    description: banner.description ? banner.description : null,
+    buttonLabel: banner.button?.label ? banner.button.label : null,
+    buttonLink: banner.button?.url ? banner.button.url : null,
     ribbon: {
-      text: banner.ribbon.text,
-      color: banner.ribbon.color,
-      size: banner.ribbon.size
+      text: banner.ribbon?.text ? banner.ribbon.text : null,
+      color: banner.ribbon?.color ? banner.ribbon.color : null,
+      size: banner.ribbon?.size ? banner.ribbon.size : null
     }
   }))
 }
 
 // Retorna os produtos adicionados ao carrinho
-export const cartProductsMapper = (products: Query['games']['data']): CartItemProps[] => {
+export const cartProductsMapper = (products: Query['products']['data']): CartItemProps[] => {
   return products.map((product) => ({
     id: product.id,
     name: product.attributes.name,
@@ -43,12 +40,16 @@ export const highlightMapper = (highlight: ComponentPageHighlight, alignment?: H
     buttonLink: highlight.buttonLink,
     alignment: alignment ?? highlight.alignment,
     background: process.env.NEXT_PUBLIC_API_URL + highlight.background.data.attributes.url,
-    float: process.env.NEXT_PUBLIC_API_URL + highlight.float.data.attributes.url
+    floatImg: highlight.floatImg.data ? process.env.NEXT_PUBLIC_API_URL + highlight.floatImg.data.attributes.url : null
   }
 }
 
+type ProductCollection = {
+  data: Array<ProductEntity>
+}
+
 // Retorna todos dados necessários para o slider de produtos
-export const productMapper = (products: GameEntityResponseCollection | GameRelationResponseCollection) => {
+export const productMapper = (products: ProductCollection) => {
   return products.data
     ? products.data.map(({ id, attributes }) => ({
         id,

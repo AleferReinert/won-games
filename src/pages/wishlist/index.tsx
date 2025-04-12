@@ -26,7 +26,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS
   })
-  const { title, highlight, games } = data.recommended.data.attributes.showcase
+  const { title, highlight, products } = data.recommended.data.attributes
 
   return {
     props: {
@@ -34,7 +34,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       recommendedSection: {
         title,
         highlight: highlightMapper(highlight),
-        products: productMapper(games)
+        products: productMapper(products)
       },
       session
     }
@@ -54,7 +54,7 @@ const WishlistPage = ({ wishlistProducts, recommendedSection }: WishlistPageProp
         {emptyWishlist ? (
           <Empty title='Your wishlist is empty' $description='Games added to your wishlist will appear here.' />
         ) : (
-          <S.WrapperWishlistGames>
+          <S.WrapperWishlist>
             {wishlistProducts?.map((product, index) => (
               <Product
                 key={'wishlist-' + index}
@@ -66,7 +66,7 @@ const WishlistPage = ({ wishlistProducts, recommendedSection }: WishlistPageProp
                 slug={product.slug}
               />
             ))}
-          </S.WrapperWishlistGames>
+          </S.WrapperWishlist>
         )}
         <Divider />
       </Container>

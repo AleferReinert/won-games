@@ -4,7 +4,7 @@ import { PRODUCT_ENTITY } from 'graphql/fragments/product'
 
 export const COMING_SOON = gql`
   query ComingSoon($currentDate: Date!) {
-    comingSoonGames: games(
+    comingSoonProducts: products(
       filters: { release_date: { gt: $currentDate } }
       sort: "release_date:asc"
       pagination: { start: 0, limit: 8 }
@@ -14,7 +14,7 @@ export const COMING_SOON = gql`
     showcase: home {
       data {
         attributes {
-          comingSoonGames {
+          comingSoonProducts {
             title
             highlight {
               ...highlight

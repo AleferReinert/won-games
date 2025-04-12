@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const PRODUCTS = gql`
-  query Products($limit: Int, $start: Int, $filters: GameFiltersInput, $sort: [String]) {
-    games(pagination: { start: $start, limit: $limit }, filters: $filters, sort: $sort) {
+  query Products($limit: Int, $start: Int, $filters: ProductFiltersInput, $sort: [String]) {
+    products(pagination: { start: $start, limit: $limit }, filters: $filters, sort: $sort) {
       data {
         id
         attributes {

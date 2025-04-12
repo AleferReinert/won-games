@@ -22,11 +22,11 @@ export type Banner = {
   __typename?: 'Banner';
   button: Maybe<ComponentPageButton>;
   createdAt: Maybe<Scalars['DateTime']['output']>;
-  description: Scalars['String']['output'];
+  description: Maybe<Scalars['String']['output']>;
   img: UploadFileEntityResponse;
   publishedAt: Maybe<Scalars['DateTime']['output']>;
   ribbon: Maybe<ComponentPageRibbon>;
-  title: Scalars['String']['output'];
+  title: Maybe<Scalars['String']['output']>;
   updatedAt: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -97,16 +97,16 @@ export type BooleanFilterInput = {
 export type Category = {
   __typename?: 'Category';
   createdAt: Maybe<Scalars['DateTime']['output']>;
-  games: Maybe<GameRelationResponseCollection>;
   name: Scalars['String']['output'];
+  products: Maybe<ProductRelationResponseCollection>;
   publishedAt: Maybe<Scalars['DateTime']['output']>;
   slug: Scalars['String']['output'];
   updatedAt: Maybe<Scalars['DateTime']['output']>;
 };
 
 
-export type CategoryGamesArgs = {
-  filters: InputMaybe<GameFiltersInput>;
+export type CategoryProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -132,19 +132,19 @@ export type CategoryEntityResponseCollection = {
 export type CategoryFiltersInput = {
   and: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
   createdAt: InputMaybe<DateTimeFilterInput>;
-  games: InputMaybe<GameFiltersInput>;
   id: InputMaybe<IdFilterInput>;
   name: InputMaybe<StringFilterInput>;
   not: InputMaybe<CategoryFiltersInput>;
   or: InputMaybe<Array<InputMaybe<CategoryFiltersInput>>>;
+  products: InputMaybe<ProductFiltersInput>;
   publishedAt: InputMaybe<DateTimeFilterInput>;
   slug: InputMaybe<StringFilterInput>;
   updatedAt: InputMaybe<DateTimeFilterInput>;
 };
 
 export type CategoryInput = {
-  games: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   name: InputMaybe<Scalars['String']['input']>;
+  products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt: InputMaybe<Scalars['DateTime']['input']>;
   slug: InputMaybe<Scalars['String']['input']>;
 };
@@ -157,22 +157,22 @@ export type CategoryRelationResponseCollection = {
 export type ComponentPageButton = {
   __typename?: 'ComponentPageButton';
   id: Scalars['ID']['output'];
-  label: Scalars['String']['output'];
-  link: Scalars['String']['output'];
+  label: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
 };
 
 export type ComponentPageButtonFiltersInput = {
   and: InputMaybe<Array<InputMaybe<ComponentPageButtonFiltersInput>>>;
   label: InputMaybe<StringFilterInput>;
-  link: InputMaybe<StringFilterInput>;
   not: InputMaybe<ComponentPageButtonFiltersInput>;
   or: InputMaybe<Array<InputMaybe<ComponentPageButtonFiltersInput>>>;
+  url: InputMaybe<StringFilterInput>;
 };
 
 export type ComponentPageButtonInput = {
   id: InputMaybe<Scalars['ID']['input']>;
   label: InputMaybe<Scalars['String']['input']>;
-  link: InputMaybe<Scalars['String']['input']>;
+  url: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentPageHighlight = {
@@ -182,7 +182,7 @@ export type ComponentPageHighlight = {
   buttonLabel: Scalars['String']['output'];
   buttonLink: Scalars['String']['output'];
   description: Scalars['String']['output'];
-  float: UploadFileEntityResponse;
+  floatImg: Maybe<UploadFileEntityResponse>;
   id: Scalars['ID']['output'];
   title: Scalars['String']['output'];
 };
@@ -193,31 +193,31 @@ export type ComponentPageHighlightInput = {
   buttonLabel: InputMaybe<Scalars['String']['input']>;
   buttonLink: InputMaybe<Scalars['String']['input']>;
   description: InputMaybe<Scalars['String']['input']>;
-  float: InputMaybe<Scalars['ID']['input']>;
+  floatImg: InputMaybe<Scalars['ID']['input']>;
   id: InputMaybe<Scalars['ID']['input']>;
   title: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ComponentPagePopularGames = {
-  __typename?: 'ComponentPagePopularGames';
-  games: Maybe<GameRelationResponseCollection>;
+export type ComponentPagePopularProducts = {
+  __typename?: 'ComponentPagePopularProducts';
   highlight: Maybe<ComponentPageHighlight>;
   id: Scalars['ID']['output'];
+  products: Maybe<ProductRelationResponseCollection>;
   title: Scalars['String']['output'];
 };
 
 
-export type ComponentPagePopularGamesGamesArgs = {
-  filters: InputMaybe<GameFiltersInput>;
+export type ComponentPagePopularProductsProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type ComponentPagePopularGamesInput = {
-  games: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+export type ComponentPagePopularProductsInput = {
   highlight: InputMaybe<ComponentPageHighlightInput>;
   id: InputMaybe<Scalars['ID']['input']>;
+  products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   title: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -309,16 +309,16 @@ export type DateTimeFilterInput = {
 export type Developer = {
   __typename?: 'Developer';
   createdAt: Maybe<Scalars['DateTime']['output']>;
-  games: Maybe<GameRelationResponseCollection>;
   name: Scalars['String']['output'];
+  products: Maybe<ProductRelationResponseCollection>;
   publishedAt: Maybe<Scalars['DateTime']['output']>;
   slug: Scalars['String']['output'];
   updatedAt: Maybe<Scalars['DateTime']['output']>;
 };
 
 
-export type DeveloperGamesArgs = {
-  filters: InputMaybe<GameFiltersInput>;
+export type DeveloperProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -344,19 +344,19 @@ export type DeveloperEntityResponseCollection = {
 export type DeveloperFiltersInput = {
   and: InputMaybe<Array<InputMaybe<DeveloperFiltersInput>>>;
   createdAt: InputMaybe<DateTimeFilterInput>;
-  games: InputMaybe<GameFiltersInput>;
   id: InputMaybe<IdFilterInput>;
   name: InputMaybe<StringFilterInput>;
   not: InputMaybe<DeveloperFiltersInput>;
   or: InputMaybe<Array<InputMaybe<DeveloperFiltersInput>>>;
+  products: InputMaybe<ProductFiltersInput>;
   publishedAt: InputMaybe<DateTimeFilterInput>;
   slug: InputMaybe<StringFilterInput>;
   updatedAt: InputMaybe<DateTimeFilterInput>;
 };
 
 export type DeveloperInput = {
-  games: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   name: InputMaybe<Scalars['String']['input']>;
+  products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt: InputMaybe<Scalars['DateTime']['input']>;
   slug: InputMaybe<Scalars['String']['input']>;
 };
@@ -381,7 +381,7 @@ export enum Enum_Componentpageribbon_Size {
   Small = 'small'
 }
 
-export enum Enum_Game_Rating {
+export enum Enum_Product_Rating {
   Br0 = 'BR0',
   Br10 = 'BR10',
   Br12 = 'BR12',
@@ -420,126 +420,15 @@ export type FloatFilterInput = {
   startsWith: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type Game = {
-  __typename?: 'Game';
-  categories: Maybe<CategoryRelationResponseCollection>;
-  cover: Maybe<UploadFileEntityResponse>;
-  createdAt: Maybe<Scalars['DateTime']['output']>;
-  description: Scalars['String']['output'];
-  developers: Maybe<DeveloperRelationResponseCollection>;
-  gallery: Maybe<UploadFileRelationResponseCollection>;
-  name: Scalars['String']['output'];
-  platforms: Maybe<PlatformRelationResponseCollection>;
-  price: Scalars['Float']['output'];
-  publishedAt: Maybe<Scalars['DateTime']['output']>;
-  publisher: Maybe<PublisherEntityResponse>;
-  rating: Maybe<Enum_Game_Rating>;
-  release_date: Maybe<Scalars['Date']['output']>;
-  short_description: Scalars['String']['output'];
-  slug: Scalars['String']['output'];
-  updatedAt: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type GameCategoriesArgs = {
-  filters: InputMaybe<CategoryFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type GameDevelopersArgs = {
-  filters: InputMaybe<DeveloperFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type GameGalleryArgs = {
-  filters: InputMaybe<UploadFileFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type GamePlatformsArgs = {
-  filters: InputMaybe<PlatformFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type GameEntity = {
-  __typename?: 'GameEntity';
-  attributes: Maybe<Game>;
-  id: Maybe<Scalars['ID']['output']>;
-};
-
-export type GameEntityResponse = {
-  __typename?: 'GameEntityResponse';
-  data: Maybe<GameEntity>;
-};
-
-export type GameEntityResponseCollection = {
-  __typename?: 'GameEntityResponseCollection';
-  data: Array<GameEntity>;
-  meta: ResponseCollectionMeta;
-};
-
-export type GameFiltersInput = {
-  and: InputMaybe<Array<InputMaybe<GameFiltersInput>>>;
-  categories: InputMaybe<CategoryFiltersInput>;
-  createdAt: InputMaybe<DateTimeFilterInput>;
-  description: InputMaybe<StringFilterInput>;
-  developers: InputMaybe<DeveloperFiltersInput>;
-  id: InputMaybe<IdFilterInput>;
-  name: InputMaybe<StringFilterInput>;
-  not: InputMaybe<GameFiltersInput>;
-  or: InputMaybe<Array<InputMaybe<GameFiltersInput>>>;
-  platforms: InputMaybe<PlatformFiltersInput>;
-  price: InputMaybe<FloatFilterInput>;
-  publishedAt: InputMaybe<DateTimeFilterInput>;
-  publisher: InputMaybe<PublisherFiltersInput>;
-  rating: InputMaybe<StringFilterInput>;
-  release_date: InputMaybe<DateFilterInput>;
-  short_description: InputMaybe<StringFilterInput>;
-  slug: InputMaybe<StringFilterInput>;
-  updatedAt: InputMaybe<DateTimeFilterInput>;
-};
-
-export type GameInput = {
-  categories: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  cover: InputMaybe<Scalars['ID']['input']>;
-  description: InputMaybe<Scalars['String']['input']>;
-  developers: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  gallery: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  name: InputMaybe<Scalars['String']['input']>;
-  platforms: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  price: InputMaybe<Scalars['Float']['input']>;
-  publishedAt: InputMaybe<Scalars['DateTime']['input']>;
-  publisher: InputMaybe<Scalars['ID']['input']>;
-  rating: InputMaybe<Enum_Game_Rating>;
-  release_date: InputMaybe<Scalars['Date']['input']>;
-  short_description: InputMaybe<Scalars['String']['input']>;
-  slug: InputMaybe<Scalars['String']['input']>;
-};
-
-export type GameRelationResponseCollection = {
-  __typename?: 'GameRelationResponseCollection';
-  data: Array<GameEntity>;
-};
-
-export type GenericMorph = Banner | Category | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection | Developer | Game | Home | I18NLocale | Platform | Publisher | Recommended | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = Banner | Category | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularProducts | ComponentPageRibbon | ComponentPageSection | Developer | Home | I18NLocale | Platform | Product | Publisher | Recommended | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Wishlist;
 
 export type Home = {
   __typename?: 'Home';
-  comingSoonGames: Maybe<ComponentPageSection>;
+  comingSoonProducts: Maybe<ComponentPageSection>;
   createdAt: Maybe<Scalars['DateTime']['output']>;
-  freeGames: Maybe<ComponentPageSection>;
-  mostPopularGames: Maybe<ComponentPagePopularGames>;
-  newGames: Maybe<ComponentPageSection>;
+  freeProducts: Maybe<ComponentPageSection>;
+  newProducts: Maybe<ComponentPageSection>;
+  popularProducts: Maybe<ComponentPagePopularProducts>;
   publishedAt: Maybe<Scalars['DateTime']['output']>;
   updatedAt: Maybe<Scalars['DateTime']['output']>;
 };
@@ -556,10 +445,10 @@ export type HomeEntityResponse = {
 };
 
 export type HomeInput = {
-  comingSoonGames: InputMaybe<ComponentPageSectionInput>;
-  freeGames: InputMaybe<ComponentPageSectionInput>;
-  mostPopularGames: InputMaybe<ComponentPagePopularGamesInput>;
-  newGames: InputMaybe<ComponentPageSectionInput>;
+  comingSoonProducts: InputMaybe<ComponentPageSectionInput>;
+  freeProducts: InputMaybe<ComponentPageSectionInput>;
+  newProducts: InputMaybe<ComponentPageSectionInput>;
+  popularProducts: InputMaybe<ComponentPagePopularProductsInput>;
   publishedAt: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -678,8 +567,8 @@ export type Mutation = {
   createBanner: Maybe<BannerEntityResponse>;
   createCategory: Maybe<CategoryEntityResponse>;
   createDeveloper: Maybe<DeveloperEntityResponse>;
-  createGame: Maybe<GameEntityResponse>;
   createPlatform: Maybe<PlatformEntityResponse>;
+  createProduct: Maybe<ProductEntityResponse>;
   createPublisher: Maybe<PublisherEntityResponse>;
   createUploadFile: Maybe<UploadFileEntityResponse>;
   createUploadFolder: Maybe<UploadFolderEntityResponse>;
@@ -687,12 +576,13 @@ export type Mutation = {
   createUsersPermissionsRole: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  createWishlist: Maybe<WishlistEntityResponse>;
   deleteBanner: Maybe<BannerEntityResponse>;
   deleteCategory: Maybe<CategoryEntityResponse>;
   deleteDeveloper: Maybe<DeveloperEntityResponse>;
-  deleteGame: Maybe<GameEntityResponse>;
   deleteHome: Maybe<HomeEntityResponse>;
   deletePlatform: Maybe<PlatformEntityResponse>;
+  deleteProduct: Maybe<ProductEntityResponse>;
   deletePublisher: Maybe<PublisherEntityResponse>;
   deleteRecommended: Maybe<RecommendedEntityResponse>;
   deleteUploadFile: Maybe<UploadFileEntityResponse>;
@@ -701,6 +591,7 @@ export type Mutation = {
   deleteUsersPermissionsRole: Maybe<UsersPermissionsDeleteRolePayload>;
   /** Delete an existing user */
   deleteUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteWishlist: Maybe<WishlistEntityResponse>;
   /** Confirm an email users email address */
   emailConfirmation: Maybe<UsersPermissionsLoginPayload>;
   /** Request a reset password token */
@@ -716,9 +607,9 @@ export type Mutation = {
   updateCategory: Maybe<CategoryEntityResponse>;
   updateDeveloper: Maybe<DeveloperEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
-  updateGame: Maybe<GameEntityResponse>;
   updateHome: Maybe<HomeEntityResponse>;
   updatePlatform: Maybe<PlatformEntityResponse>;
+  updateProduct: Maybe<ProductEntityResponse>;
   updatePublisher: Maybe<PublisherEntityResponse>;
   updateRecommended: Maybe<RecommendedEntityResponse>;
   updateUploadFile: Maybe<UploadFileEntityResponse>;
@@ -727,6 +618,7 @@ export type Mutation = {
   updateUsersPermissionsRole: Maybe<UsersPermissionsUpdateRolePayload>;
   /** Update an existing user */
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  updateWishlist: Maybe<WishlistEntityResponse>;
   upload: UploadFileEntityResponse;
 };
 
@@ -753,13 +645,13 @@ export type MutationCreateDeveloperArgs = {
 };
 
 
-export type MutationCreateGameArgs = {
-  data: GameInput;
+export type MutationCreatePlatformArgs = {
+  data: PlatformInput;
 };
 
 
-export type MutationCreatePlatformArgs = {
-  data: PlatformInput;
+export type MutationCreateProductArgs = {
+  data: ProductInput;
 };
 
 
@@ -788,6 +680,11 @@ export type MutationCreateUsersPermissionsUserArgs = {
 };
 
 
+export type MutationCreateWishlistArgs = {
+  data: WishlistInput;
+};
+
+
 export type MutationDeleteBannerArgs = {
   id: Scalars['ID']['input'];
 };
@@ -803,12 +700,12 @@ export type MutationDeleteDeveloperArgs = {
 };
 
 
-export type MutationDeleteGameArgs = {
+export type MutationDeletePlatformArgs = {
   id: Scalars['ID']['input'];
 };
 
 
-export type MutationDeletePlatformArgs = {
+export type MutationDeleteProductArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -834,6 +731,11 @@ export type MutationDeleteUsersPermissionsRoleArgs = {
 
 
 export type MutationDeleteUsersPermissionsUserArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteWishlistArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -902,12 +804,6 @@ export type MutationUpdateFileInfoArgs = {
 };
 
 
-export type MutationUpdateGameArgs = {
-  data: GameInput;
-  id: Scalars['ID']['input'];
-};
-
-
 export type MutationUpdateHomeArgs = {
   data: HomeInput;
 };
@@ -915,6 +811,12 @@ export type MutationUpdateHomeArgs = {
 
 export type MutationUpdatePlatformArgs = {
   data: PlatformInput;
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateProductArgs = {
+  data: ProductInput;
   id: Scalars['ID']['input'];
 };
 
@@ -954,6 +856,12 @@ export type MutationUpdateUsersPermissionsUserArgs = {
 };
 
 
+export type MutationUpdateWishlistArgs = {
+  data: WishlistInput;
+  id: Scalars['ID']['input'];
+};
+
+
 export type MutationUploadArgs = {
   field: InputMaybe<Scalars['String']['input']>;
   file: Scalars['Upload']['input'];
@@ -980,16 +888,16 @@ export type PaginationArg = {
 export type Platform = {
   __typename?: 'Platform';
   createdAt: Maybe<Scalars['DateTime']['output']>;
-  games: Maybe<GameRelationResponseCollection>;
   name: Scalars['String']['output'];
+  products: Maybe<ProductRelationResponseCollection>;
   publishedAt: Maybe<Scalars['DateTime']['output']>;
   slug: Scalars['String']['output'];
   updatedAt: Maybe<Scalars['DateTime']['output']>;
 };
 
 
-export type PlatformGamesArgs = {
-  filters: InputMaybe<GameFiltersInput>;
+export type PlatformProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1015,19 +923,19 @@ export type PlatformEntityResponseCollection = {
 export type PlatformFiltersInput = {
   and: InputMaybe<Array<InputMaybe<PlatformFiltersInput>>>;
   createdAt: InputMaybe<DateTimeFilterInput>;
-  games: InputMaybe<GameFiltersInput>;
   id: InputMaybe<IdFilterInput>;
   name: InputMaybe<StringFilterInput>;
   not: InputMaybe<PlatformFiltersInput>;
   or: InputMaybe<Array<InputMaybe<PlatformFiltersInput>>>;
+  products: InputMaybe<ProductFiltersInput>;
   publishedAt: InputMaybe<DateTimeFilterInput>;
   slug: InputMaybe<StringFilterInput>;
   updatedAt: InputMaybe<DateTimeFilterInput>;
 };
 
 export type PlatformInput = {
-  games: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   name: InputMaybe<Scalars['String']['input']>;
+  products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt: InputMaybe<Scalars['DateTime']['input']>;
   slug: InputMaybe<Scalars['String']['input']>;
 };
@@ -1035,6 +943,117 @@ export type PlatformInput = {
 export type PlatformRelationResponseCollection = {
   __typename?: 'PlatformRelationResponseCollection';
   data: Array<PlatformEntity>;
+};
+
+export type Product = {
+  __typename?: 'Product';
+  categories: Maybe<CategoryRelationResponseCollection>;
+  cover: Maybe<UploadFileEntityResponse>;
+  createdAt: Maybe<Scalars['DateTime']['output']>;
+  description: Scalars['String']['output'];
+  developers: Maybe<DeveloperRelationResponseCollection>;
+  gallery: Maybe<UploadFileRelationResponseCollection>;
+  name: Scalars['String']['output'];
+  platforms: Maybe<PlatformRelationResponseCollection>;
+  price: Scalars['Float']['output'];
+  publishedAt: Maybe<Scalars['DateTime']['output']>;
+  publisher: Maybe<PublisherEntityResponse>;
+  rating: Maybe<Enum_Product_Rating>;
+  release_date: Maybe<Scalars['Date']['output']>;
+  short_description: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ProductCategoriesArgs = {
+  filters: InputMaybe<CategoryFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ProductDevelopersArgs = {
+  filters: InputMaybe<DeveloperFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ProductGalleryArgs = {
+  filters: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ProductPlatformsArgs = {
+  filters: InputMaybe<PlatformFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ProductEntity = {
+  __typename?: 'ProductEntity';
+  attributes: Maybe<Product>;
+  id: Maybe<Scalars['ID']['output']>;
+};
+
+export type ProductEntityResponse = {
+  __typename?: 'ProductEntityResponse';
+  data: Maybe<ProductEntity>;
+};
+
+export type ProductEntityResponseCollection = {
+  __typename?: 'ProductEntityResponseCollection';
+  data: Array<ProductEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ProductFiltersInput = {
+  and: InputMaybe<Array<InputMaybe<ProductFiltersInput>>>;
+  categories: InputMaybe<CategoryFiltersInput>;
+  createdAt: InputMaybe<DateTimeFilterInput>;
+  description: InputMaybe<StringFilterInput>;
+  developers: InputMaybe<DeveloperFiltersInput>;
+  id: InputMaybe<IdFilterInput>;
+  name: InputMaybe<StringFilterInput>;
+  not: InputMaybe<ProductFiltersInput>;
+  or: InputMaybe<Array<InputMaybe<ProductFiltersInput>>>;
+  platforms: InputMaybe<PlatformFiltersInput>;
+  price: InputMaybe<FloatFilterInput>;
+  publishedAt: InputMaybe<DateTimeFilterInput>;
+  publisher: InputMaybe<PublisherFiltersInput>;
+  rating: InputMaybe<StringFilterInput>;
+  release_date: InputMaybe<DateFilterInput>;
+  short_description: InputMaybe<StringFilterInput>;
+  slug: InputMaybe<StringFilterInput>;
+  updatedAt: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ProductInput = {
+  categories: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  cover: InputMaybe<Scalars['ID']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
+  developers: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  gallery: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  name: InputMaybe<Scalars['String']['input']>;
+  platforms: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  price: InputMaybe<Scalars['Float']['input']>;
+  publishedAt: InputMaybe<Scalars['DateTime']['input']>;
+  publisher: InputMaybe<Scalars['ID']['input']>;
+  rating: InputMaybe<Enum_Product_Rating>;
+  release_date: InputMaybe<Scalars['Date']['input']>;
+  short_description: InputMaybe<Scalars['String']['input']>;
+  slug: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ProductRelationResponseCollection = {
+  __typename?: 'ProductRelationResponseCollection';
+  data: Array<ProductEntity>;
 };
 
 export enum PublicationState {
@@ -1045,16 +1064,16 @@ export enum PublicationState {
 export type Publisher = {
   __typename?: 'Publisher';
   createdAt: Maybe<Scalars['DateTime']['output']>;
-  games: Maybe<GameRelationResponseCollection>;
   name: Scalars['String']['output'];
+  products: Maybe<ProductRelationResponseCollection>;
   publishedAt: Maybe<Scalars['DateTime']['output']>;
   slug: Scalars['String']['output'];
   updatedAt: Maybe<Scalars['DateTime']['output']>;
 };
 
 
-export type PublisherGamesArgs = {
-  filters: InputMaybe<GameFiltersInput>;
+export type PublisherProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1080,19 +1099,19 @@ export type PublisherEntityResponseCollection = {
 export type PublisherFiltersInput = {
   and: InputMaybe<Array<InputMaybe<PublisherFiltersInput>>>;
   createdAt: InputMaybe<DateTimeFilterInput>;
-  games: InputMaybe<GameFiltersInput>;
   id: InputMaybe<IdFilterInput>;
   name: InputMaybe<StringFilterInput>;
   not: InputMaybe<PublisherFiltersInput>;
   or: InputMaybe<Array<InputMaybe<PublisherFiltersInput>>>;
+  products: InputMaybe<ProductFiltersInput>;
   publishedAt: InputMaybe<DateTimeFilterInput>;
   slug: InputMaybe<StringFilterInput>;
   updatedAt: InputMaybe<DateTimeFilterInput>;
 };
 
 export type PublisherInput = {
-  games: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   name: InputMaybe<Scalars['String']['input']>;
+  products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt: InputMaybe<Scalars['DateTime']['input']>;
   slug: InputMaybe<Scalars['String']['input']>;
 };
@@ -1105,14 +1124,14 @@ export type Query = {
   category: Maybe<CategoryEntityResponse>;
   developer: Maybe<DeveloperEntityResponse>;
   developers: Maybe<DeveloperEntityResponseCollection>;
-  game: Maybe<GameEntityResponse>;
-  games: Maybe<GameEntityResponseCollection>;
   home: Maybe<HomeEntityResponse>;
   i18NLocale: Maybe<I18NLocaleEntityResponse>;
   i18NLocales: Maybe<I18NLocaleEntityResponseCollection>;
   me: Maybe<UsersPermissionsMe>;
   platform: Maybe<PlatformEntityResponse>;
   platforms: Maybe<PlatformEntityResponseCollection>;
+  product: Maybe<ProductEntityResponse>;
+  products: Maybe<ProductEntityResponseCollection>;
   publisher: Maybe<PublisherEntityResponse>;
   publishers: Maybe<PublisherEntityResponseCollection>;
   recommended: Maybe<RecommendedEntityResponse>;
@@ -1124,6 +1143,8 @@ export type Query = {
   usersPermissionsRoles: Maybe<UsersPermissionsRoleEntityResponseCollection>;
   usersPermissionsUser: Maybe<UsersPermissionsUserEntityResponse>;
   usersPermissionsUsers: Maybe<UsersPermissionsUserEntityResponseCollection>;
+  wishlist: Maybe<WishlistEntityResponse>;
+  wishlists: Maybe<WishlistEntityResponseCollection>;
 };
 
 
@@ -1166,19 +1187,6 @@ export type QueryDevelopersArgs = {
 };
 
 
-export type QueryGameArgs = {
-  id: InputMaybe<Scalars['ID']['input']>;
-};
-
-
-export type QueryGamesArgs = {
-  filters: InputMaybe<GameFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
 export type QueryHomeArgs = {
   publicationState?: InputMaybe<PublicationState>;
 };
@@ -1203,6 +1211,19 @@ export type QueryPlatformArgs = {
 
 export type QueryPlatformsArgs = {
   filters: InputMaybe<PlatformFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryProductArgs = {
+  id: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1274,12 +1295,34 @@ export type QueryUsersPermissionsUsersArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+
+export type QueryWishlistArgs = {
+  id: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryWishlistsArgs = {
+  filters: InputMaybe<WishlistFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type Recommended = {
   __typename?: 'Recommended';
   createdAt: Maybe<Scalars['DateTime']['output']>;
+  highlight: Maybe<ComponentPageHighlight>;
+  products: Maybe<ProductRelationResponseCollection>;
   publishedAt: Maybe<Scalars['DateTime']['output']>;
-  showcase: ComponentPagePopularGames;
+  title: Scalars['String']['output'];
   updatedAt: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type RecommendedProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type RecommendedEntity = {
@@ -1294,8 +1337,10 @@ export type RecommendedEntityResponse = {
 };
 
 export type RecommendedInput = {
+  highlight: InputMaybe<ComponentPageHighlightInput>;
+  products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   publishedAt: InputMaybe<Scalars['DateTime']['input']>;
-  showcase: InputMaybe<ComponentPagePopularGamesInput>;
+  title: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ResponseCollectionMeta = {
@@ -1698,4 +1743,53 @@ export type UsersPermissionsUserInput = {
 export type UsersPermissionsUserRelationResponseCollection = {
   __typename?: 'UsersPermissionsUserRelationResponseCollection';
   data: Array<UsersPermissionsUserEntity>;
+};
+
+export type Wishlist = {
+  __typename?: 'Wishlist';
+  createdAt: Maybe<Scalars['DateTime']['output']>;
+  products: Maybe<ProductRelationResponseCollection>;
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  user: Maybe<UsersPermissionsUserEntityResponse>;
+};
+
+
+export type WishlistProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type WishlistEntity = {
+  __typename?: 'WishlistEntity';
+  attributes: Maybe<Wishlist>;
+  id: Maybe<Scalars['ID']['output']>;
+};
+
+export type WishlistEntityResponse = {
+  __typename?: 'WishlistEntityResponse';
+  data: Maybe<WishlistEntity>;
+};
+
+export type WishlistEntityResponseCollection = {
+  __typename?: 'WishlistEntityResponseCollection';
+  data: Array<WishlistEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type WishlistFiltersInput = {
+  and: InputMaybe<Array<InputMaybe<WishlistFiltersInput>>>;
+  createdAt: InputMaybe<DateTimeFilterInput>;
+  id: InputMaybe<IdFilterInput>;
+  not: InputMaybe<WishlistFiltersInput>;
+  or: InputMaybe<Array<InputMaybe<WishlistFiltersInput>>>;
+  products: InputMaybe<ProductFiltersInput>;
+  updatedAt: InputMaybe<DateTimeFilterInput>;
+  user: InputMaybe<UsersPermissionsUserFiltersInput>;
+};
+
+export type WishlistInput = {
+  products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  user: InputMaybe<Scalars['ID']['input']>;
 };

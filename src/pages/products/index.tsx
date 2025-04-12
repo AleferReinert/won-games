@@ -87,7 +87,7 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     }
   ]
 
-  await apolloClient.query<Pick<Query, 'games'>>({
+  await apolloClient.query<Pick<Query, 'products'>>({
     query: PRODUCTS,
     variables: {
       limit: productsLimit,
@@ -112,7 +112,7 @@ interface ProductsPageProps {
 
 const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const { query, push } = useRouter()
-  const { data, fetchMore, loading } = useQuery<Pick<Query, 'games'>>(PRODUCTS, {
+  const { data, fetchMore, loading } = useQuery<Pick<Query, 'products'>>(PRODUCTS, {
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: productsLimit,
@@ -134,14 +134,14 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const loadMore = () => {
     fetchMore({
       variables: {
-        start: data?.games.data.length || 0,
+        start: data?.products.data.length || 0,
         limit: productsLimit
       }
     })
   }
 
-  const products = data?.games.data || []
-  const totalProducts = data?.games.meta.pagination.total || 0
+  const products = data?.products.data || []
+  const totalProducts = data?.products.meta.pagination.total || 0
   const allProductsLoaded = products.length >= totalProducts
 
   return (

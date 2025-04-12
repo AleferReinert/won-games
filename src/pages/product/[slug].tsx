@@ -13,7 +13,7 @@ import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
-import { GameEntity, GameEntityResponseCollection, Home, Query } from 'types/generated'
+import { Home, ProductEntity, ProductEntityResponseCollection, Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './ProductPage.styles'
@@ -36,8 +36,8 @@ export async function getStaticPaths() {
     variables: { limit: 9 }
   })
 
-  const paths = data.games.data.map((game: GameEntity) => ({
-    params: { slug: game.attributes.slug }
+  const paths = data.products.data.map((product: ProductEntity) => ({
+    params: { slug: product.attributes.slug }
   }))
 
   return { paths, fallback: true }
@@ -54,52 +54,52 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   })
 
   // Redirect to 404 if product is not found
-  if (!data.games.data.length) {
+  if (!data.products.data.length) {
     return { notFound: true }
   }
-  const game: GameEntity = data.games.data[0]
+  const product: ProductEntity = data.products.data[0]
 
   // Return coming soon section
   const {
-    data: { comingSoonGames, showcase }
+    data: { comingSoonProducts, showcase }
   } = await apolloClient.query({
     query: COMING_SOON,
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
     fetchPolicy: 'no-cache'
   })
-  const { comingSoonGames: comingSoonSection }: Pick<Home, 'comingSoonGames'> = showcase.data.attributes
-  const comingSoonSectionProducts: GameEntityResponseCollection = comingSoonGames
+  const { comingSoonProducts: comingSoonSection }: Pick<Home, 'comingSoonProducts'> = showcase.data.attributes
+  const comingSoonSectionProducts: ProductEntityResponseCollection = comingSoonProducts
 
   // Return recommended section
   const { data: recommended } = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS,
     fetchPolicy: 'no-cache'
   })
-  const recommendedSection = recommended.recommended.data.attributes.showcase
+  const recommendedSection = recommended.recommended.data.attributes
 
   return {
     revalidate: 60,
     props: {
-      game,
-      cover: process.env.NEXT_PUBLIC_API_URL + game.attributes.cover.data?.attributes.url || '', // todo: add default cover
+      product,
+      cover: process.env.NEXT_PUBLIC_API_URL + product.attributes.cover.data?.attributes.url || '', // todo: add default cover
       productHeader: {
-        id: game.id,
-        title: game.attributes.name,
-        description: game.attributes.short_description,
-        price: game.attributes.price
+        id: product.id,
+        title: product.attributes.name,
+        description: product.attributes.short_description,
+        price: product.attributes.price
       },
-      gallery: game.attributes.gallery.data.map(({ attributes: image }) => ({
+      gallery: product.attributes.gallery.data.map(({ attributes: image }) => ({
         src: process.env.NEXT_PUBLIC_API_URL + image.url,
         label: image.alternativeText
       })),
-      description: game.attributes.description,
+      description: product.attributes.description,
       details: {
-        developer: game.attributes.developers.data[0]?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
-        releaseDate: game.attributes.release_date ?? '',
-        platforms: game.attributes.platforms.data.map((platform) => platform.attributes.name),
-        publisher: game.attributes.publisher.data?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
-        rating: game.attributes.rating ?? '',
-        categories: game.attributes.categories.data.map(({ attributes: category }) => category.name)
+        developer: product.attributes.developers.data[0]?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
+        releaseDate: product.attributes.release_date ?? '',
+        platforms: product.attributes.platforms.data.map((platform) => platform.attributes.name),
+        publisher: product.attributes.publisher.data?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
+        rating: product.attributes.rating ?? '',
+        categories: product.attributes.categories.data.map(({ attributes: category }) => category.name)
       },
       comingSoonSection: {
         title: comingSoonSection.title,
@@ -108,7 +108,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
       recommendedSection: {
         title: recommendedSection.title,
-        products: productMapper(recommendedSection.games)
+        products: productMapper(recommendedSection.products)
       }
     }
   }

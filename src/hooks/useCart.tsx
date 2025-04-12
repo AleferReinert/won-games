@@ -19,7 +19,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     if (data) setCartProductIds(data)
   }, [])
 
-  const { data, loading, error } = useQuery<Pick<Query, 'games'>>(PRODUCTS, {
+  const { data, loading, error } = useQuery<Pick<Query, 'products'>>(PRODUCTS, {
     skip: !cartProductIds.length,
     variables: {
       filters: {
@@ -40,7 +40,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCartProductIds(newCartProductIds)
     setStorageItem('cartProducts', newCartProductIds)
   }
-  const formattedProducts = cartProductsMapper(data?.games?.data || [])
+  const formattedProducts = cartProductsMapper(data?.products?.data || [])
   const totalQuantity = formattedProducts.length
   const totalPrice = formattedProducts.reduce((acc, product) => acc + product.price, 0)
   const isInCart = (id: string) => cartProductIds.includes(id)

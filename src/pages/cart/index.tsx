@@ -32,7 +32,7 @@ export async function getServerSideProps() {
     query: RECOMMENDED_PRODUCTS
   })
 
-  const { title, highlight, games } = data.recommended.data.attributes.showcase
+  const { title, highlight, products } = data.recommended.data.attributes
 
   return {
     props: {
@@ -42,7 +42,7 @@ export async function getServerSideProps() {
       recommendedSection: {
         title,
         highlight: highlightMapper(highlight),
-        products: productMapper(games)
+        products: productMapper(products)
       }
     }
   }
