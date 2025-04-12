@@ -71,9 +71,9 @@ export const Description: Story = {
   }
 }
 
-export const ButtonLink: Story = {
+export const ButtonUrl: Story = {
   args: {
-    buttonLink: bannersMock[0].buttonLink
+    buttonUrl: bannersMock[0].buttonUrl
   },
   parameters: {
     options: {

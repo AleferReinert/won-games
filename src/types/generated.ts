@@ -180,7 +180,7 @@ export type ComponentPageHighlight = {
   alignment: Maybe<Enum_Componentpagehighlight_Alignment>;
   background: UploadFileEntityResponse;
   buttonLabel: Scalars['String']['output'];
-  buttonLink: Scalars['String']['output'];
+  buttonUrl: Scalars['String']['output'];
   description: Scalars['String']['output'];
   floatImg: Maybe<UploadFileEntityResponse>;
   id: Scalars['ID']['output'];
@@ -191,7 +191,7 @@ export type ComponentPageHighlightInput = {
   alignment: InputMaybe<Enum_Componentpagehighlight_Alignment>;
   background: InputMaybe<Scalars['ID']['input']>;
   buttonLabel: InputMaybe<Scalars['String']['input']>;
-  buttonLink: InputMaybe<Scalars['String']['input']>;
+  buttonUrl: InputMaybe<Scalars['String']['input']>;
   description: InputMaybe<Scalars['String']['input']>;
   floatImg: InputMaybe<Scalars['ID']['input']>;
   id: InputMaybe<Scalars['ID']['input']>;
@@ -225,24 +225,24 @@ export type ComponentPageRibbon = {
   __typename?: 'ComponentPageRibbon';
   color: Maybe<Enum_Componentpageribbon_Color>;
   id: Scalars['ID']['output'];
+  label: Scalars['String']['output'];
   size: Maybe<Enum_Componentpageribbon_Size>;
-  text: Maybe<Scalars['String']['output']>;
 };
 
 export type ComponentPageRibbonFiltersInput = {
   and: InputMaybe<Array<InputMaybe<ComponentPageRibbonFiltersInput>>>;
   color: InputMaybe<StringFilterInput>;
+  label: InputMaybe<StringFilterInput>;
   not: InputMaybe<ComponentPageRibbonFiltersInput>;
   or: InputMaybe<Array<InputMaybe<ComponentPageRibbonFiltersInput>>>;
   size: InputMaybe<StringFilterInput>;
-  text: InputMaybe<StringFilterInput>;
 };
 
 export type ComponentPageRibbonInput = {
   color: InputMaybe<Enum_Componentpageribbon_Color>;
   id: InputMaybe<Scalars['ID']['input']>;
+  label: InputMaybe<Scalars['String']['input']>;
   size: InputMaybe<Enum_Componentpageribbon_Size>;
-  text: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentPageSection = {

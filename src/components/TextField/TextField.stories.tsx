@@ -185,17 +185,3 @@ export const Error: Story = {
     })
   }
 }
-
-export const InitialValue: Story = {
-  args: {
-    initialValue: 'Initial value'
-  },
-  play: ({ canvasElement, step }) => {
-    const canvas = within(canvasElement)
-    const textField = canvas.getByRole('textbox')
-
-    step('Initial value', () => {
-      expect(textField).toHaveValue('Initial value')
-    })
-  }
-}

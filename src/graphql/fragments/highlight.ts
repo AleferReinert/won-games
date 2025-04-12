@@ -5,7 +5,7 @@ export const HIGHLIGHT = gql`
     title
     description
     buttonLabel
-    buttonLink
+    buttonUrl
     alignment
     background {
       data {

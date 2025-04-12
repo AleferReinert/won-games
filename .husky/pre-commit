@@ -1,1 +1,1 @@
-yarn lint && yarn test-storybook
+npx tsc --noEmit && yarn lint && yarn test-storybook

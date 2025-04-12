@@ -12,12 +12,14 @@ export const bannerMapper = (banners: BannerEntityResponseCollection) => {
     title: banner.title ? banner.title : null,
     description: banner.description ? banner.description : null,
     buttonLabel: banner.button?.label ? banner.button.label : null,
-    buttonLink: banner.button?.url ? banner.button.url : null,
-    ribbon: {
-      text: banner.ribbon?.text ? banner.ribbon.text : null,
-      color: banner.ribbon?.color ? banner.ribbon.color : null,
-      size: banner.ribbon?.size ? banner.ribbon.size : null
-    }
+    buttonUrl: banner.button?.url ? banner.button.url : null,
+    ribbon: banner.ribbon
+      ? {
+          label: banner.ribbon?.label ? banner.ribbon.label : null,
+          color: banner.ribbon?.color ? banner.ribbon.color : null,
+          size: banner.ribbon?.size ? banner.ribbon.size : null
+        }
+      : null
   }))
 }
 
@@ -37,7 +39,7 @@ export const highlightMapper = (highlight: ComponentPageHighlight, alignment?: H
     title: highlight.title,
     description: highlight.description,
     buttonLabel: highlight.buttonLabel,
-    buttonLink: highlight.buttonLink,
+    buttonUrl: highlight.buttonUrl,
     alignment: alignment ?? highlight.alignment,
     background: process.env.NEXT_PUBLIC_API_URL + highlight.background.data.attributes.url,
     floatImg: highlight.floatImg.data ? process.env.NEXT_PUBLIC_API_URL + highlight.floatImg.data.attributes.url : null

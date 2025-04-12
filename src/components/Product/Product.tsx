@@ -14,15 +14,15 @@ export interface ProductProps extends PriceProps {
   title: string
   developer: string
   img: string
-  ribbonText?: string
+  ribbonLabel?: string
 }
 
-const Product = ({ id, slug, title, developer, img, price, promotionalPrice = null, ribbonText }: ProductProps) => {
+const Product = ({ id, slug, title, developer, img, price, promotionalPrice = null, ribbonLabel }: ProductProps) => {
   const [favorite, setFavorite] = useState(false)
 
   return (
     <S.Wrapper data-testid='ProductComponent'>
-      {ribbonText && <Ribbon text={ribbonText} color='primary' size='small' />}
+      {ribbonLabel && <Ribbon label={ribbonLabel} color='primary' size='small' />}
 
       <Link href={`/product/${slug}`} passHref>
         <S.ImageBox>

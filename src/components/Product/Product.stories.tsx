@@ -94,7 +94,7 @@ export const Default: Story = {
 
 export const WithDiscount: Story = {
   args: {
-    ribbonText: '20% off',
+    ribbonLabel: '20% off',
     promotionalPrice: 185.0
   },
   play: async ({ canvasElement, step }) => {

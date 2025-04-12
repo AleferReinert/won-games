@@ -20,7 +20,7 @@ export const BANNER = gql`
           url
         }
         ribbon {
-          text
+          label
           color
           size
         }

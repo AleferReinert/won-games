@@ -11,12 +11,12 @@ export interface BannerProps {
   title?: string
   description?: string
   buttonLabel?: string
-  buttonLink?: string
+  buttonUrl?: string
   ribbon?: RibbonProps
 }
 
-const Banner = ({ img, title, description, buttonLabel = 'Buy now', buttonLink, ribbon }: BannerProps) => {
-  const caption = title || description || buttonLink
+const Banner = ({ img, title, description, buttonLabel = 'Buy now', buttonUrl, ribbon }: BannerProps) => {
+  const caption = title || description || buttonUrl
 
   return (
     <S.Wrapper>
@@ -26,8 +26,8 @@ const Banner = ({ img, title, description, buttonLabel = 'Buy now', buttonLink, 
         <S.Caption>
           {title && <S.Title>{title}</S.Title>}
           {description && <S.Description dangerouslySetInnerHTML={{ __html: description }} />}
-          {buttonLink && (
-            <Button asLink href={buttonLink}>
+          {buttonUrl && (
+            <Button asLink href={buttonUrl}>
               {buttonLabel}
             </Button>
           )}
