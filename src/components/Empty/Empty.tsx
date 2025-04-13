@@ -12,18 +12,13 @@ export interface EmptyProps {
 
 const Empty = ({ title, $description, buttonText, buttonUrl, $invertedColors = false, $small = false }: EmptyProps) => {
   return (
-    <S.Wrapper
-      data-testid='EmptyComponent'
-      title={title}
-      $description={$description}
-      $invertedColors={$invertedColors}
-      $small={$small}
-    >
+    <S.Wrapper data-testid='EmptyComponent' $invertedColors={$invertedColors} $small={$small}>
       <S.Img
         src='/img/empty.svg'
-        alt='A person on a couch playing video games'
+        alt='Decorative image'
         width={$small ? 140 : 340}
         height={$small ? 72 : 176}
+        aria-hidden
       />
       <S.Title>{title}</S.Title>
       <S.Message>{$description}</S.Message>

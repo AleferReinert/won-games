@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import { EmptyProps } from './Empty'
 
-export const Wrapper = styled.div<EmptyProps>`
+export const Wrapper = styled.div<Pick<EmptyProps, '$invertedColors' | '$small'>>`
   ${({ theme, $invertedColors, $small }) => css`
     padding: ${theme.spacings.medium};
     text-align: center;

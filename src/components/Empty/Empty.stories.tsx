@@ -21,29 +21,29 @@ type Story = StoryObj<typeof Empty>
 export const Default: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByTestId('EmptyComponent')
-    const img = canvas.getByRole('img')
-    const title = canvas.getByRole('heading', { name: 'No results found' })
-    const description = canvas.getByRole('paragraph')
 
-    await step('Title and description', () => {
+    await step('Title', () => {
+      const title = canvas.getByRole('heading', { name: 'No results found' })
       expect(title).toBeVisible()
+    })
+
+    await step('Description', () => {
+      const description = canvas.getByRole('paragraph')
+      expect(description).toHaveStyle({ color: theme.colors.white })
       expect(description.textContent).toContain('Sorry')
     })
 
     await step('Image 340x176 as default', () => {
+      const img = canvas.getByRole('img', { hidden: true })
       expect(img).toHaveAttribute('width', '340')
       expect(img).toHaveAttribute('height', '176')
     })
 
     await step('Without background color', () => {
+      const wrapper = canvas.getByTestId('EmptyComponent')
       expect(wrapper).not.toHaveStyle({
         backgroundColor: theme.colors.white
       })
-    })
-
-    await step('Description white', () => {
-      expect(description).toHaveStyle({ color: theme.colors.white })
     })
   }
 }
@@ -55,9 +55,9 @@ export const WithButton: Story = {
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('link', { name: /go back to store/i })
 
     step('Optional button link', () => {
+      const button = canvas.getByRole('link', { name: /go back to store/i })
       expect(button).toHaveAttribute('href', '/link')
     })
   }
@@ -69,16 +69,16 @@ export const InvertedColors: Story = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const wrapper = canvas.getByTestId('EmptyComponent')
-    const description = canvas.getByRole('paragraph')
 
     await step('Background white', () => {
+      const wrapper = canvas.getByTestId('EmptyComponent')
       expect(wrapper).toHaveStyle({
         backgroundColor: theme.colors.white
       })
     })
 
     step('Description black', () => {
+      const description = canvas.getByRole('paragraph')
       expect(description).toHaveStyle({ color: theme.colors.black })
     })
   }
@@ -90,14 +90,14 @@ export const Small: Story = {
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const img = canvas.getByRole('img')
-    const title = canvas.getByRole('heading')
 
     await step('Title small', () => {
+      const title = canvas.getByRole('heading')
       expect(title).toHaveStyle({ fontSize: remToPx(theme.font.sizes.large) })
     })
 
     step('Image 140x72', () => {
+      const img = canvas.getByRole('img', { hidden: true })
       expect(img).toHaveAttribute('width', '140')
       expect(img).toHaveAttribute('height', '72')
     })
