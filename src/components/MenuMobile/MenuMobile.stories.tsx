@@ -46,6 +46,11 @@ export const Authenticated: Story = {
       expect(wishlistLink).toHaveAttribute('href', '/wishlist')
     })
 
+    await step('Logout link', () => {
+      const logoutLink = canvas.getByRole('link', { name: 'Logout' })
+      expect(logoutLink).toBeVisible()
+    })
+
     await step('Log in link hidden', () => {
       const logInNow = canvas.queryByRole('link', { name: 'Log in' })
       expect(logInNow).not.toBeInTheDocument()

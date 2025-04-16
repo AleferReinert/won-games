@@ -1,6 +1,6 @@
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 import Button from 'components/Button/Button'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { Dispatch, SetStateAction } from 'react'
 import * as S from './MenuMobile.styles'
 
@@ -25,6 +25,9 @@ const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
           <>
             <S.MenuLink href='/account/profile'>My account</S.MenuLink>
             <S.MenuLink href='/wishlist'>Wishlist</S.MenuLink>
+            <S.MenuLink href='/' onClick={() => void signOut()}>
+              Logout
+            </S.MenuLink>
           </>
         )}
       </S.MenuNav>
