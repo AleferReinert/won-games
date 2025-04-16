@@ -5,6 +5,7 @@ import Heading from 'components/Heading/Heading'
 import Product, { ProductProps } from 'components/Product/Product'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
+import { WISHLIST } from 'graphql/queries/wishlist'
 import type { GetServerSidePropsContext } from 'next'
 import * as S from 'pages/wishlist/WishlistPage.styles'
 import type { ReactElement } from 'react'
@@ -16,22 +17,34 @@ import { requireAuth } from 'utils/requireAuth'
 import type { NextPageWithLayout } from '../_app'
 
 export interface WishlistPageProps {
-  wishlistProducts?: ProductProps[]
-  recommendedSection: ShowcaseProps
+  wishlistProducts: ProductProps[]
+  recommendedShowcase: ShowcaseProps
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { session } = await requireAuth(context)
   const apolloClient = initializeApollo({})
-  const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
+  const responseWishlist = await apolloClient.query<Pick<Query, 'wishlists'>>({
+    query: WISHLIST,
+    variables: { userEmail: { eq: session?.user?.email } },
+    context: {
+      headers: {
+        // @ts-expect-error todo: fix
+        authorization: `Bearer ${session?.jwt}`
+      }
+    },
+    fetchPolicy: 'no-cache'
+  })
+  const wishlistProducts = responseWishlist.data.wishlists.data[0]?.attributes.products
+  const responseRecommended = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS
   })
-  const { title, highlight, products } = data.recommended.data.attributes
+  const { title, highlight, products } = responseRecommended.data.recommended.data.attributes
 
   return {
     props: {
-      wishlistProducts: [],
-      recommendedSection: {
+      wishlistProducts: wishlistProducts ? productMapper(wishlistProducts) : [],
+      recommendedShowcase: {
         title,
         highlight: highlightMapper(highlight),
         products: productMapper(products)
@@ -41,9 +54,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 }
 
-const WishlistPage = ({ wishlistProducts, recommendedSection }: WishlistPageProps & NextPageWithLayout) => {
-  const emptyWishlist = !wishlistProducts || !wishlistProducts.length
-
+const WishlistPage = ({ wishlistProducts = [], recommendedShowcase }: WishlistPageProps & NextPageWithLayout) => {
   return (
     <div data-testid='WishlistPageComponent'>
       <Container>
@@ -51,13 +62,11 @@ const WishlistPage = ({ wishlistProducts, recommendedSection }: WishlistPageProp
           Wishlist
         </Heading>
 
-        {emptyWishlist ? (
-          <Empty title='Your wishlist is empty' $description='Games added to your wishlist will appear here.' />
-        ) : (
+        {wishlistProducts.length ? (
           <S.WrapperWishlist>
-            {wishlistProducts?.map((product, index) => (
+            {wishlistProducts?.map((product) => (
               <Product
-                key={'wishlist-' + index}
+                key={'wishlist-' + product.id}
                 id={product.id}
                 title={product.title}
                 developer={product.developer}
@@ -67,14 +76,16 @@ const WishlistPage = ({ wishlistProducts, recommendedSection }: WishlistPageProp
               />
             ))}
           </S.WrapperWishlist>
+        ) : (
+          <Empty title='Your wishlist is empty' $description='Games added to your wishlist will appear here.' />
         )}
         <Divider />
       </Container>
 
       <Showcase
-        title={recommendedSection.title}
-        highlight={recommendedSection.highlight}
-        products={recommendedSection.products}
+        title={recommendedShowcase.title}
+        highlight={recommendedShowcase.highlight}
+        products={recommendedShowcase.products}
       />
     </div>
   )

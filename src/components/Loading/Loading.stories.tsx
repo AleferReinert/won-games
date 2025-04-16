@@ -25,29 +25,42 @@ export const Default: Story = {
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
+    const loading = canvas.getByTestId('3dotsLoadingComponent')
 
-    step('SVG with fill white', () => {
-      const loading = canvas.getByRole('img', { name: 'Carregando...' })
+    step('Fill white', () => {
       expect(loading).toHaveAttribute('fill', theme.colors.white)
+    })
+
+    step('Size 40', () => {
+      expect(loading).toHaveAttribute('width', '40')
     })
   }
 }
 
-export const Dark: Story = {
+export const Size: Story = {
   args: {
-    color: 'dark'
-  },
-  parameters: {
-    backgrounds: {
-      default: 'Light'
-    }
+    size: 100
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    step('SVG with fill dark', () => {
-      const loading = canvas.getByRole('img', { name: 'Carregando...' })
-      expect(loading).toHaveAttribute('fill', theme.colors.black)
+    step('Size', () => {
+      const loading = canvas.getByRole('img', { name: 'Loading...' })
+      expect(loading).toHaveAttribute('width', '100')
+    })
+  }
+}
+
+export const Spinner: Story = {
+  args: {
+    animation: 'spinner'
+  },
+  play: ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const loading = canvas.getByTestId('SpinnerLoadingComponent')
+
+    step('Spinner animation', () => {
+      expect(loading).toBeVisible()
     })
   }
 }

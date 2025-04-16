@@ -1,6 +1,7 @@
 import { fn } from '@storybook/test'
+import { CartContextProps } from 'contexts/CartContext'
 
-export const cartContextMock = {
+export const cartContextMock: CartContextProps = {
   cartProducts: [
     {
       id: '2',

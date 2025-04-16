@@ -48,6 +48,7 @@ export const wrapperModifiers = {
     &:disabled {
       background: ${theme.colors.gray};
       cursor: not-allowed;
+      color: ${theme.colors.white};
     }
   `
 }

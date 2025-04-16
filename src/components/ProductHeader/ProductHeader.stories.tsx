@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import Container from 'components/Container/Container'
+import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
+import { NextAuthSessionArgs } from '../../../.storybook/preview'
 import { productHeaderMock } from '../../mocks/productHeader.mock'
 import ProductHeaderComponent from './ProductHeader'
 
@@ -20,9 +22,9 @@ const meta: Meta<typeof ProductHeaderComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof ProductHeaderComponent>
+type Story = StoryObj<typeof ProductHeaderComponent> & { args?: NextAuthSessionArgs }
 
-export const ProductHeader: Story = {
+export const Unauthenticated: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
@@ -46,9 +48,23 @@ export const ProductHeader: Story = {
       expect(addToCartButtonComponent).toBeVisible()
     })
 
-    await step('Button wishlist', () => {
-      const buttonWishlist = canvas.getByRole('button', { name: /wishlist/i })
-      expect(buttonWishlist).toBeInTheDocument()
+    await step('AddToWishlistButton component hidden', () => {
+      const addToWishlistComponent = canvas.queryByTestId('AddToWishlistButtonComponent')
+      expect(addToWishlistComponent).not.toBeInTheDocument()
+    })
+  }
+}
+
+export const Authenticated: Story = {
+  args: {
+    nextAuthSession: nextAuthSessionMock
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('AddToWishlistButton component', () => {
+      const addToWishlistComponent = canvas.getByTestId('AddToWishlistButtonComponent')
+      expect(addToWishlistComponent).toBeVisible()
     })
   }
 }

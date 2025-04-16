@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, userEvent, waitFor, within } from '@storybook/test'
+import { expect, within } from '@storybook/test'
 import { CartContext } from 'contexts/CartContext'
 import { cartContextMock } from 'mocks/cartContext.mock'
+import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
+import { NextAuthSessionArgs } from '../../../.storybook/preview'
 import { productMock } from '../../mocks/product.mock'
 import ProductComponent from './Product'
 
@@ -22,12 +24,11 @@ const meta: Meta<typeof ProductComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof ProductComponent>
+type Story = StoryObj<typeof ProductComponent> & { args?: NextAuthSessionArgs }
 
-export const Default: Story = {
+export const Unauthenticated: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const buttonAddToFavorites = canvas.getByRole('button', { name: 'Add to wishlist' })
 
     await step('Image', () => {
       const image = canvas.getByRole('img', { name: 'Population Zero' })
@@ -49,35 +50,9 @@ export const Default: Story = {
       expect(priceComponent).toBeVisible()
     })
 
-    await step('Favorite: buttonAdd visible, buttonRemove hidden', () => {
-      const buttonRemove = canvas.queryByRole('button', { name: 'Remove from wishlist' })
-      expect(buttonRemove).not.toBeInTheDocument()
-    })
-
-    await step('Add to favorites: change buttons on click', async () => {
-      expect(buttonAddToFavorites).toBeVisible()
-      userEvent.click(buttonAddToFavorites)
-      await waitFor(async () => {
-        const buttonRemove = canvas.getByRole('button', { name: 'Remove from wishlist' })
-        expect(buttonRemove).toBeVisible()
-        await waitFor(() => {
-          const buttonAdd = canvas.queryByRole('button', { name: 'Add to wishlist' })
-          expect(buttonAdd).not.toBeInTheDocument()
-        })
-      })
-    })
-
-    await step('Remove from favorites: change buttons on click', async () => {
-      const buttonRemove = canvas.getByRole('button', { name: 'Remove from wishlist' })
-      userEvent.click(buttonRemove)
-      await waitFor(async () => {
-        const buttonAdd = canvas.getByRole('button', { name: 'Add to wishlist' })
-        expect(buttonAdd).toBeVisible()
-        await waitFor(() => {
-          const buttonRemove = canvas.queryByRole('button', { name: 'Remove from wishlist' })
-          expect(buttonRemove).not.toBeInTheDocument()
-        })
-      })
+    await step('AddToWishlistButton component hidden', () => {
+      const addToWishlistComponent = canvas.queryByTestId('AddToWishlistButtonComponent')
+      expect(addToWishlistComponent).not.toBeInTheDocument()
     })
 
     await step('AddToCartButtonComponent', () => {
@@ -92,6 +67,19 @@ export const Default: Story = {
   }
 }
 
+export const Authenticated: Story = {
+  args: {
+    nextAuthSession: nextAuthSessionMock
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('AddToWishlistButton component', () => {
+      const addToWishlistComponent = canvas.getByTestId('AddToWishlistButtonComponent')
+      expect(addToWishlistComponent).toBeVisible()
+    })
+  }
+}
 export const WithDiscount: Story = {
   args: {
     ribbonLabel: '20% off',

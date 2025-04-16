@@ -26,13 +26,7 @@ export const ImageBox = styled.div`
   height: 14rem;
   width: 100%;
   background: #f6f7f8;
-  background-image: linear-gradient(
-    to right,
-    #f6f7f8 0%,
-    #edeef1 20%,
-    #f6f7f8 40%,
-    #f6f7f8 100%
-  );
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
   background-size: 80rem 14rem;
   animation: placeholderShimmer 1s linear infinite forwards;
 
@@ -60,9 +54,7 @@ export const Content = styled.div`
   height: 100%;
 `
 
-export const Info = styled.div`
-  max-width: calc(100% - 2.5rem);
-`
+export const Info = styled.div``
 
 export const Title = styled.h3`
   ${({ theme }) => css`
@@ -70,6 +62,23 @@ export const Title = styled.h3`
     line-height: ${theme.font.sizes.medium};
     font-weight: ${theme.font.bold};
     color: ${theme.colors.black};
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      padding: 0;
+      height: min-content;
+      transform: translate(0.1rem, -0.1rem);
+
+      &:disabled {
+        background: transparent;
+      }
+    }
+
+    svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
   `}
 `
 
@@ -78,23 +87,6 @@ export const Developer = styled.h4`
     font-size: ${theme.font.sizes.xsmall};
     font-weight: ${theme.font.bold};
     color: ${theme.colors.gray};
-  `}
-`
-
-export const FavButton = styled.button`
-  ${({ theme }) => css`
-    background: transparent;
-    border: 0;
-    position: absolute;
-    right: 0;
-    cursor: pointer;
-    top: 0;
-
-    svg {
-      fill: ${theme.colors.primary};
-      width: 2.4rem;
-      height: 2.4rem;
-    }
   `}
 `
 

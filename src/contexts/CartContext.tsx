@@ -1,7 +1,7 @@
 import { CartItemProps } from 'components/CartItem/CartItem'
 import { createContext } from 'react'
 
-interface CartContextProps {
+export interface CartContextProps {
   cartProducts: CartItemProps[]
   totalQuantity: number
   totalPrice: number

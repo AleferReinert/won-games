@@ -4,7 +4,8 @@ import { BannerEntityResponseCollection, ComponentPageHighlight, ProductEntity, 
 
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerEntityResponseCollection) => {
-  return banners.data.map(({ attributes: banner }) => ({
+  return banners.data.map(({ id, attributes: banner }) => ({
+    id,
     img: {
       url: process.env.NEXT_PUBLIC_API_URL + banner.img.data.attributes.url,
       alternativeText: banner.img.data.attributes.alternativeText

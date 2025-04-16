@@ -9,7 +9,7 @@ const meta: Meta<typeof WishlistPage> = {
   title: 'Pages/Wishlist',
   component: WishlistPage,
   args: {
-    recommendedSection: {
+    recommendedShowcase: {
       title: 'Recommended',
       highlight: highlightMock,
       products: productsMock
