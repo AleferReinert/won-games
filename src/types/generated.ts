@@ -1867,10 +1867,12 @@ export type ProductsQueryVariables = Exact<{
 
 export type ProductsQuery = { __typename?: 'Query', products: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } } };
 
-export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProfileQueryVariables = Exact<{
+  identifier: InputMaybe<Scalars['ID']['input']>;
+}>;
 
 
-export type ProfileQuery = { __typename?: 'Query', me: { __typename?: 'UsersPermissionsMe', username: string, email: string } };
+export type ProfileQuery = { __typename?: 'Query', usersPermissionsUser: { __typename?: 'UsersPermissionsUserEntityResponse', data: { __typename?: 'UsersPermissionsUserEntity', attributes: { __typename?: 'UsersPermissionsUser', username: string, email: string } } } };
 
 export type RecommendedProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2288,10 +2290,14 @@ export const ProductsDocument = gql`
     `;
 export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
 export const ProfileDocument = gql`
-    query Profile {
-  me {
-    username
-    email
+    query Profile($identifier: ID) {
+  usersPermissionsUser(id: $identifier) {
+    data {
+      attributes {
+        username
+        email
+      }
+    }
   }
 }
     `;

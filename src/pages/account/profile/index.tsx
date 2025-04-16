@@ -6,19 +6,25 @@ import { GetServerSidePropsContext } from 'next/types'
 import * as S from 'pages/account/profile/ProfilePage.styles'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import { Query } from 'types/generated'
+import { ProfileQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { requireAuth } from 'utils/requireAuth'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { session } = await requireAuth(context)
   const apolloClient = initializeApollo({ session })
-  const { data } = await apolloClient.query<Pick<Query, 'me'>>({ query: PROFILE })
+  const { data } = await apolloClient.query<ProfileQuery>({
+    query: PROFILE,
+    variables: {
+      // @ts-expect-error todo: fix
+      identifier: session.id
+    }
+  })
   return {
     props: {
       session,
-      username: data.me.username,
-      email: data.me.email
+      username: data.usersPermissionsUser.data.attributes.username,
+      email: data.usersPermissionsUser.data.attributes.email
     }
   }
 }
