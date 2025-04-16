@@ -42,7 +42,7 @@ export const highlightMapper = (highlight: ComponentPageHighlight, alignment?: H
     buttonLabel: highlight.buttonLabel,
     buttonUrl: highlight.buttonUrl,
     alignment: alignment ?? highlight.alignment,
-    background: process.env.NEXT_PUBLIC_API_URL + highlight.background.data.attributes.url,
+    $background: process.env.NEXT_PUBLIC_API_URL + highlight.background.data.attributes.url,
     floatImg: highlight.floatImg.data ? process.env.NEXT_PUBLIC_API_URL + highlight.floatImg.data.attributes.url : null
   }
 }
