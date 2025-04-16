@@ -5,13 +5,16 @@ dotenv.config()
 
 const config: CodegenConfig = {
   schema: process.env.NEXT_PUBLIC_API_URL + '/graphql',
-  // documents: 'src/graphql/**/!(*.generated).{ts,tsx}',
+  documents: 'src/graphql/**/*.ts',
   generates: {
     'src/types/generated.ts': {
-      plugins: ['typescript'],
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
       config: {
         avoidOptionals: true,
-        maybeValue: 'T'
+        maybeValue: 'T',
+        withHooks: false,
+        withHOC: false,
+        withComponent: false
       }
     }
   },

@@ -1,3 +1,5 @@
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T;
 export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -1793,3 +1795,538 @@ export type WishlistInput = {
   products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   user: InputMaybe<Scalars['ID']['input']>;
 };
+
+export type BannerFragment = { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id: string, attributes: { __typename?: 'Banner', title: string, description: string, img: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, button: { __typename?: 'ComponentPageButton', label: string, url: string }, ribbon: { __typename?: 'ComponentPageRibbon', label: string, color: Enum_Componentpageribbon_Color, size: Enum_Componentpageribbon_Size } } }> };
+
+export type HighlightFragment = { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } };
+
+export type ProductEntityFragment = { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> };
+
+export type ProductRelationFragment = { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> };
+
+export type CreateWishlistMutationVariables = Exact<{
+  data: WishlistInput;
+}>;
+
+
+export type CreateWishlistMutation = { __typename?: 'Mutation', createWishlist: { __typename?: 'WishlistEntityResponse', data: { __typename?: 'WishlistEntity', id: string, attributes: { __typename?: 'Wishlist', user: { __typename?: 'UsersPermissionsUserEntityResponse', data: { __typename?: 'UsersPermissionsUserEntity', id: string, attributes: { __typename?: 'UsersPermissionsUser', username: string } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> } } } } };
+
+export type RegisterUserMutationVariables = Exact<{
+  input: UsersPermissionsRegisterInput;
+}>;
+
+
+export type RegisterUserMutation = { __typename?: 'Mutation', register: { __typename?: 'UsersPermissionsLoginPayload', jwt: string } };
+
+export type UpdateWishlishMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  data: WishlistInput;
+}>;
+
+
+export type UpdateWishlishMutation = { __typename?: 'Mutation', updateWishlist: { __typename?: 'WishlistEntityResponse', data: { __typename?: 'WishlistEntity', id: string, attributes: { __typename?: 'Wishlist', user: { __typename?: 'UsersPermissionsUserEntityResponse', data: { __typename?: 'UsersPermissionsUserEntity', id: string, attributes: { __typename?: 'UsersPermissionsUser', username: string } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> } } } } };
+
+export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CategoriesQuery = { __typename?: 'Query', categories: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes: { __typename?: 'Category', name: string, slug: string } }> } };
+
+export type ComingSoonQueryVariables = Exact<{
+  currentDate: Scalars['Date']['input'];
+}>;
+
+
+export type ComingSoonQuery = { __typename?: 'Query', comingSoonProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, showcase: { __typename?: 'HomeEntityResponse', data: { __typename?: 'HomeEntity', attributes: { __typename?: 'Home', comingSoonProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } } } } } };
+
+export type PageHomeQueryVariables = Exact<{
+  currentDate: Scalars['Date']['input'];
+}>;
+
+
+export type PageHomeQuery = { __typename?: 'Query', banners: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id: string, attributes: { __typename?: 'Banner', title: string, description: string, img: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, button: { __typename?: 'ComponentPageButton', label: string, url: string }, ribbon: { __typename?: 'ComponentPageRibbon', label: string, color: Enum_Componentpageribbon_Color, size: Enum_Componentpageribbon_Size } } }> }, newProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, comingSoonProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, freeProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, showcases: { __typename?: 'HomeEntityResponse', data: { __typename?: 'HomeEntity', attributes: { __typename?: 'Home', newProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }, popularProducts: { __typename?: 'ComponentPagePopularProducts', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, slug: string, price: number, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> }, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }> } }, comingSoonProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }, freeProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } } } } } };
+
+export type PlatformsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PlatformsQuery = { __typename?: 'Query', platforms: { __typename?: 'PlatformEntityResponseCollection', data: Array<{ __typename?: 'PlatformEntity', attributes: { __typename?: 'Platform', name: string, slug: string } }> } };
+
+export type ProductBySlugQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type ProductBySlugQuery = { __typename?: 'Query', products: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, short_description: string, description: string, price: number, release_date: any, rating: Enum_Product_Rating, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string } } }, gallery: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } }> }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> }, platforms: { __typename?: 'PlatformRelationResponseCollection', data: Array<{ __typename?: 'PlatformEntity', attributes: { __typename?: 'Platform', name: string } }> }, publisher: { __typename?: 'PublisherEntityResponse', data: { __typename?: 'PublisherEntity', attributes: { __typename?: 'Publisher', name: string } } }, categories: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes: { __typename?: 'Category', name: string } }> } } }> } };
+
+export type ProductsQueryVariables = Exact<{
+  limit: InputMaybe<Scalars['Int']['input']>;
+  start: InputMaybe<Scalars['Int']['input']>;
+  filters: InputMaybe<ProductFiltersInput>;
+  sort: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+}>;
+
+
+export type ProductsQuery = { __typename?: 'Query', products: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } } };
+
+export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProfileQuery = { __typename?: 'Query', me: { __typename?: 'UsersPermissionsMe', username: string, email: string } };
+
+export type RecommendedProductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RecommendedProductsQuery = { __typename?: 'Query', recommended: { __typename?: 'RecommendedEntityResponse', data: { __typename?: 'RecommendedEntity', attributes: { __typename?: 'Recommended', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> } } } } };
+
+export type WishlistQueryVariables = Exact<{
+  userEmail: InputMaybe<StringFilterInput>;
+}>;
+
+
+export type WishlistQuery = { __typename?: 'Query', wishlists: { __typename?: 'WishlistEntityResponseCollection', data: Array<{ __typename?: 'WishlistEntity', id: string, attributes: { __typename?: 'Wishlist', products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> } } }> } };
+
+export const BannerFragmentDoc = gql`
+    fragment banner on BannerEntityResponseCollection {
+  data {
+    id
+    attributes {
+      img {
+        data {
+          attributes {
+            url
+            alternativeText
+          }
+        }
+      }
+      title
+      description
+      button {
+        label
+        url
+      }
+      ribbon {
+        label
+        color
+        size
+      }
+    }
+  }
+}
+    `;
+export const HighlightFragmentDoc = gql`
+    fragment highlight on ComponentPageHighlight {
+  title
+  description
+  buttonLabel
+  buttonUrl
+  alignment
+  background {
+    data {
+      attributes {
+        url
+        alternativeText
+      }
+    }
+  }
+  floatImg {
+    data {
+      attributes {
+        url
+        alternativeText
+      }
+    }
+  }
+}
+    `;
+export const ProductEntityFragmentDoc = gql`
+    fragment productEntity on ProductEntityResponseCollection {
+  data {
+    id
+    attributes {
+      slug
+      cover {
+        data {
+          attributes {
+            url
+            alternativeText
+          }
+        }
+      }
+      name
+      developers {
+        data {
+          attributes {
+            name
+          }
+        }
+      }
+      price
+    }
+  }
+}
+    `;
+export const ProductRelationFragmentDoc = gql`
+    fragment productRelation on ProductRelationResponseCollection {
+  data {
+    id
+    attributes {
+      slug
+      cover {
+        data {
+          attributes {
+            url
+            alternativeText
+          }
+        }
+      }
+      name
+      developers {
+        data {
+          attributes {
+            name
+          }
+        }
+      }
+      price
+    }
+  }
+}
+    `;
+export const CreateWishlistDocument = gql`
+    mutation CreateWishlist($data: WishlistInput!) {
+  createWishlist(data: $data) {
+    data {
+      id
+      attributes {
+        user {
+          data {
+            id
+            attributes {
+              username
+            }
+          }
+        }
+        products {
+          ...productRelation
+        }
+      }
+    }
+  }
+}
+    ${ProductRelationFragmentDoc}`;
+export type CreateWishlistMutationFn = Apollo.MutationFunction<CreateWishlistMutation, CreateWishlistMutationVariables>;
+export type CreateWishlistMutationResult = Apollo.MutationResult<CreateWishlistMutation>;
+export type CreateWishlistMutationOptions = Apollo.BaseMutationOptions<CreateWishlistMutation, CreateWishlistMutationVariables>;
+export const RegisterUserDocument = gql`
+    mutation RegisterUser($input: UsersPermissionsRegisterInput!) {
+  register(input: $input) {
+    jwt
+  }
+}
+    `;
+export type RegisterUserMutationFn = Apollo.MutationFunction<RegisterUserMutation, RegisterUserMutationVariables>;
+export type RegisterUserMutationResult = Apollo.MutationResult<RegisterUserMutation>;
+export type RegisterUserMutationOptions = Apollo.BaseMutationOptions<RegisterUserMutation, RegisterUserMutationVariables>;
+export const UpdateWishlishDocument = gql`
+    mutation UpdateWishlish($id: ID!, $data: WishlistInput!) {
+  updateWishlist(id: $id, data: $data) {
+    data {
+      id
+      attributes {
+        user {
+          data {
+            id
+            attributes {
+              username
+            }
+          }
+        }
+        products {
+          ...productRelation
+        }
+      }
+    }
+  }
+}
+    ${ProductRelationFragmentDoc}`;
+export type UpdateWishlishMutationFn = Apollo.MutationFunction<UpdateWishlishMutation, UpdateWishlishMutationVariables>;
+export type UpdateWishlishMutationResult = Apollo.MutationResult<UpdateWishlishMutation>;
+export type UpdateWishlishMutationOptions = Apollo.BaseMutationOptions<UpdateWishlishMutation, UpdateWishlishMutationVariables>;
+export const CategoriesDocument = gql`
+    query Categories {
+  categories(sort: "name:asc", pagination: {start: 0, limit: 100}) {
+    data {
+      attributes {
+        name
+        slug
+      }
+    }
+  }
+}
+    `;
+export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
+export const ComingSoonDocument = gql`
+    query ComingSoon($currentDate: Date!) {
+  comingSoonProducts: products(
+    filters: {release_date: {gt: $currentDate}}
+    sort: "release_date:asc"
+    pagination: {start: 0, limit: 8}
+  ) {
+    ...productEntity
+  }
+  showcase: home {
+    data {
+      attributes {
+        comingSoonProducts {
+          title
+          highlight {
+            ...highlight
+          }
+        }
+      }
+    }
+  }
+}
+    ${ProductEntityFragmentDoc}
+${HighlightFragmentDoc}`;
+export type ComingSoonQueryResult = Apollo.QueryResult<ComingSoonQuery, ComingSoonQueryVariables>;
+export const PageHomeDocument = gql`
+    query PageHome($currentDate: Date!) {
+  banners {
+    ...banner
+  }
+  newProducts: products(
+    filters: {release_date: {lte: $currentDate}}
+    sort: "release_date:desc"
+    pagination: {start: 0, limit: 8}
+  ) {
+    ...productEntity
+  }
+  comingSoonProducts: products(
+    filters: {release_date: {gt: $currentDate}}
+    sort: "release_date:asc"
+    pagination: {start: 0, limit: 8}
+  ) {
+    ...productEntity
+  }
+  freeProducts: products(
+    filters: {price: {eq: 0}}
+    sort: "release_date:desc"
+    pagination: {start: 0, limit: 8}
+  ) {
+    ...productEntity
+  }
+  showcases: home {
+    data {
+      attributes {
+        newProducts {
+          title
+          highlight {
+            ...highlight
+          }
+        }
+        popularProducts {
+          title
+          highlight {
+            ...highlight
+          }
+          products {
+            data {
+              id
+              attributes {
+                name
+                slug
+                price
+                developers {
+                  data {
+                    attributes {
+                      name
+                    }
+                  }
+                }
+                cover {
+                  data {
+                    attributes {
+                      url
+                      alternativeText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        comingSoonProducts {
+          title
+          highlight {
+            ...highlight
+          }
+        }
+        freeProducts {
+          title
+          highlight {
+            ...highlight
+          }
+        }
+      }
+    }
+  }
+}
+    ${BannerFragmentDoc}
+${ProductEntityFragmentDoc}
+${HighlightFragmentDoc}`;
+export type PageHomeQueryResult = Apollo.QueryResult<PageHomeQuery, PageHomeQueryVariables>;
+export const PlatformsDocument = gql`
+    query Platforms {
+  platforms(sort: "name:asc", pagination: {start: 0, limit: 50}) {
+    data {
+      attributes {
+        name
+        slug
+      }
+    }
+  }
+}
+    `;
+export type PlatformsQueryResult = Apollo.QueryResult<PlatformsQuery, PlatformsQueryVariables>;
+export const ProductBySlugDocument = gql`
+    query ProductBySlug($slug: String!) {
+  products(filters: {slug: {eq: $slug}}) {
+    data {
+      id
+      attributes {
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        name
+        short_description
+        description
+        price
+        gallery {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+        developers {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        release_date
+        platforms {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        publisher {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        rating
+        categories {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export type ProductBySlugQueryResult = Apollo.QueryResult<ProductBySlugQuery, ProductBySlugQueryVariables>;
+export const ProductsDocument = gql`
+    query Products($limit: Int, $start: Int, $filters: ProductFiltersInput, $sort: [String]) {
+  products(
+    pagination: {start: $start, limit: $limit}
+    filters: $filters
+    sort: $sort
+  ) {
+    data {
+      id
+      attributes {
+        cover {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        developers {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        name
+        price
+        slug
+      }
+    }
+    meta {
+      pagination {
+        total
+      }
+    }
+  }
+}
+    `;
+export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
+export const ProfileDocument = gql`
+    query Profile {
+  me {
+    username
+    email
+  }
+}
+    `;
+export type ProfileQueryResult = Apollo.QueryResult<ProfileQuery, ProfileQueryVariables>;
+export const RecommendedProductsDocument = gql`
+    query RecommendedProducts {
+  recommended {
+    data {
+      attributes {
+        title
+        highlight {
+          ...highlight
+        }
+        products {
+          ...productRelation
+        }
+      }
+    }
+  }
+}
+    ${HighlightFragmentDoc}
+${ProductRelationFragmentDoc}`;
+export type RecommendedProductsQueryResult = Apollo.QueryResult<RecommendedProductsQuery, RecommendedProductsQueryVariables>;
+export const WishlistDocument = gql`
+    query Wishlist($userEmail: StringFilterInput) {
+  wishlists(filters: {user: {email: $userEmail}}) {
+    data {
+      id
+      attributes {
+        products {
+          ...productRelation
+        }
+      }
+    }
+  }
+}
+    ${ProductRelationFragmentDoc}`;
+export type WishlistQueryResult = Apollo.QueryResult<WishlistQuery, WishlistQueryVariables>;
