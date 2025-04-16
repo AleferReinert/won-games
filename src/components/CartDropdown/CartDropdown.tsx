@@ -3,6 +3,7 @@ import CartItems from 'components/CartItems/CartItems'
 import Dropdown from 'components/Dropdown/Dropdown'
 import { useCart } from 'hooks/useCart'
 import Link from 'next/link'
+import theme from 'styles/theme'
 import * as S from './CartDropdown.styles'
 
 const CartDropdown = () => {
@@ -25,7 +26,7 @@ const CartDropdown = () => {
       </div>
       <div id='mobile'>
         <Link href='/cart' title='Shopping cart' aria-label='Shopping cart'>
-          <ShoppingCartIcon role='img' aria-hidden width={24} height={24} />
+          <ShoppingCartIcon role='img' aria-hidden width={24} height={24} fill={theme.colors.white} />
         </Link>
       </div>
     </S.Wrapper>
