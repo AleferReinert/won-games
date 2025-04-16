@@ -76,16 +76,16 @@ export const Added: Story = {
   }
 }
 
-export const Label: Story = {
+export const ShowLabel: Story = {
   args: {
-    label: 'Wishlist'
+    showLabel: true
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const button = canvas.getByRole('button')
 
     await step('Label', () => {
-      expect(button).toHaveTextContent('Wishlist')
+      expect(button).toHaveTextContent(/wishlist/i)
     })
   }
 }

@@ -8,11 +8,11 @@ import theme from 'styles/theme'
 
 interface AddToWishlistButtonProps {
   id: string
-  label?: string
+  showLabel?: boolean
   loadingColor?: string
 }
 
-const AddToWishlistButton = ({ id, label, loadingColor }: AddToWishlistButtonProps) => {
+const AddToWishlistButton = ({ id, showLabel = false, loadingColor }: AddToWishlistButtonProps) => {
   const [loading, setLoading] = useState(false)
   const { status } = useSession()
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
@@ -36,7 +36,7 @@ const AddToWishlistButton = ({ id, label, loadingColor }: AddToWishlistButtonPro
             ) : (
               <Favorite role='img' aria-hidden fill={theme.colors.primary} />
             )}
-            {label}
+            {showLabel && 'Remove from wishlist'}
           </Button>
         ) : (
           <Button
@@ -54,7 +54,7 @@ const AddToWishlistButton = ({ id, label, loadingColor }: AddToWishlistButtonPro
             ) : (
               <FavoriteBorder role='img' aria-hidden fill={theme.colors.primary} />
             )}
-            {label}
+            {showLabel && 'Add to wishlist'}
           </Button>
         )}
       </div>

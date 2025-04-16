@@ -25,8 +25,8 @@ const ProductHeader = ({ id, title, description, price }: ProductHeaderProps) =>
         <Price price={price} />
 
         <S.ButtonsWrapper>
+          <AddToWishlistButton id={id} showLabel />
           <AddToCartButton id={id} $full showLabel />
-          <AddToWishlistButton id={id} label='Wishlist' />
         </S.ButtonsWrapper>
       </Box>
     </S.Wrapper>
