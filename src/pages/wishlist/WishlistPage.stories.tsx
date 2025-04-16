@@ -1,14 +1,22 @@
+import { MockedProvider } from '@apollo/client/testing'
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
+import { WishlistContext } from 'contexts/WishlistContext'
 import { highlightMock } from 'mocks/highlight.mock'
+import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { productsMock } from 'mocks/products.mock'
+import { wishlistContextMock } from 'mocks/wishlistContext.mock'
+import { wishlistResponseMock } from 'mocks/wishlistResponse.mock'
 import DefaultTemplate from 'templates/Default/Default'
+import { apolloCache } from 'utils/apolloCache'
 import WishlistPage from '.'
+import { NextAuthSessionArgs } from '../../../.storybook/preview'
 
-const meta: Meta<typeof WishlistPage> = {
+const meta: Meta<typeof WishlistPage> & { args?: NextAuthSessionArgs } = {
   title: 'Pages/Wishlist',
   component: WishlistPage,
   args: {
+    nextAuthSession: nextAuthSessionMock,
     recommendedShowcase: {
       title: 'Recommended',
       highlight: highlightMock,
@@ -62,9 +70,15 @@ export const Empty: Story = {
 }
 
 export const WithProducts: Story = {
-  args: {
-    wishlistProducts: productsMock
-  },
+  decorators: [
+    (Story) => (
+      <WishlistContext.Provider value={wishlistContextMock}>
+        <MockedProvider mocks={[wishlistResponseMock]} cache={apolloCache}>
+          <Story />
+        </MockedProvider>
+      </WishlistContext.Provider>
+    )
+  ],
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const wrapperWishlist = within(canvas.getByRole('heading', { name: 'Wishlist', level: 1 }).parentElement!)

@@ -1,3 +1,4 @@
+import * as SkeletonStyles from 'components/Skeleton/Skeleton.styles'
 import styled, { css } from 'styled-components'
 
 export const WrapperWishlist = styled.div`
@@ -9,6 +10,10 @@ export const WrapperWishlist = styled.div`
     @media (min-width: ${theme.breakpoint.small}) {
       margin-top: ${theme.spacings.medium};
       grid-template-columns: repeat(2, 1fr);
+
+      ${SkeletonStyles.Wrapper} {
+        height: 25.8rem;
+      }
     }
 
     @media (min-width: ${theme.breakpoint.medium}) {

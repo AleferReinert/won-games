@@ -1,41 +1,9 @@
 // src/mocks/wishlistResponse.mock.ts
 import { MockedResponse } from '@apollo/client/testing'
 import { WISHLIST } from 'graphql/queries/wishlist'
+import { WishlistQuery } from 'types/generated'
 
-export const wishlistResponseMock: MockedResponse<{
-  wishlists: {
-    data: Array<{
-      id: string
-      attributes: {
-        products: {
-          data: Array<{
-            id: string
-            attributes: {
-              slug: string
-              cover: {
-                data: {
-                  attributes: {
-                    url: string
-                    alternativeText: string
-                  }
-                }
-              }
-              name: string
-              developers: {
-                data: Array<{
-                  attributes: {
-                    name: string
-                  }
-                }>
-              }
-              price: number
-            }
-          }>
-        }
-      }
-    }>
-  }
-}> = {
+export const wishlistResponseMock: MockedResponse<WishlistQuery> = {
   request: {
     query: WISHLIST,
     variables: {
@@ -58,7 +26,7 @@ export const wishlistResponseMock: MockedResponse<{
                       cover: {
                         data: {
                           attributes: {
-                            url: '/uploads/wasteland_3_colorado_collection_fcbc522edb_f447fafd45.jpg',
+                            url: '/img/product-test.jpg',
                             alternativeText: ''
                           }
                         }
@@ -83,7 +51,7 @@ export const wishlistResponseMock: MockedResponse<{
                       cover: {
                         data: {
                           attributes: {
-                            url: '/uploads/god-of-war.jpg',
+                            url: '/img/product-test.jpg',
                             alternativeText: ''
                           }
                         }

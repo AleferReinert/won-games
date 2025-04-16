@@ -12,7 +12,7 @@ export const wishlistContextMock: WishlistContextProps = {
             id: '1',
             attributes: {
               name: 'cover-image.jpg',
-              url: '/uploads/cover-image.jpg',
+              url: '/img/product-test.jpg',
               alternativeText: 'Imagem de capa do jogo',
               caption: 'Capa do jogo',
               createdAt: '2022-01-01T00:00:00.000Z',
