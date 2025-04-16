@@ -8,11 +8,11 @@ const pulse = keyframes`
 `
 
 export const Wrapper = styled.div<SkeletonProps>`
-  ${({ theme, width, height }) => css`
+  ${({ theme, width, height, $rounded }) => css`
     width: ${typeof width === 'number' ? `${width}px` : width};
     height: ${typeof height === 'number' ? `${height}px` : height};
     background-color: ${theme.colors.white};
-    border-radius: ${theme.border.radius};
+    border-radius: ${$rounded ? theme.border.radius : 0};
     animation: ${pulse} 2s ease-in-out infinite;
   `}
 `

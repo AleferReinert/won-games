@@ -42,7 +42,7 @@ const Header = () => {
           <CartDropdown />
         </S.IconWrapper>
 
-        {status === 'loading' && <Skeleton width={57} height={30} />}
+        {status === 'loading' && <Skeleton width={57} height={30} $rounded />}
         {status === 'authenticated' && <UserDropdown />}
         {status === 'unauthenticated' && (
           <S.ButtonSignIn>

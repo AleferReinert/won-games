@@ -61,12 +61,12 @@ const theme = {
     fast: '0.1s ease-in-out'
   },
   breakpoint: {
-    xlarge: '1920px',
-    large: '1366px',
-    medium: '1024px',
-    small: '768px',
+    xxsmall: '320px',
     xsmall: '360px',
-    xxsmall: '320px'
+    small: '768px',
+    medium: '1024px',
+    large: '1366px',
+    xlarge: '1920px'
   }
 }
 
