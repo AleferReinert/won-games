@@ -66,6 +66,7 @@ export const Item = styled(Link)<ItemProps>`
     svg {
       width: 2.4rem;
       height: 2.4rem;
+      fill: ${active ? theme.colors.white : theme.colors.black};
     }
 
     ${active && itemModifiers.active(theme)}
