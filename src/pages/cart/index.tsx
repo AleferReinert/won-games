@@ -8,8 +8,9 @@ import Empty from 'components/Empty/Empty'
 import Heading from 'components/Heading/Heading'
 import PaymentOptions from 'components/PaymentOptions/PaymentOptions'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
+import Skeleton from 'components/Skeleton/Skeleton'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
-import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
+import { useCart } from 'hooks/useCart'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import Link from 'next/link'
 import { GetServerSidePropsContext } from 'next/types'
@@ -39,8 +40,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      cartItems: cartItemsMinMock,
-      total: '$530',
       creditCards: creditCardsMock,
       recommendedSection: {
         title,
@@ -51,9 +50,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 }
 
-const CartPage = ({ cartItems, creditCards, recommendedSection }: CartPageProps & NextPageWithLayout) => {
+const CartPage = ({ creditCards, recommendedSection }: CartPageProps & NextPageWithLayout) => {
+  const { cartProducts, loading } = useCart()
   const handlePayment = () => ({})
-  const emptyCart = !cartItems || !cartItems.length
+  const isCartEmpty = !loading && cartProducts.length === 0
 
   return (
     <div data-testid='CartPage'>
@@ -62,24 +62,34 @@ const CartPage = ({ cartItems, creditCards, recommendedSection }: CartPageProps 
           My cart
         </Heading>
 
-        {emptyCart ? (
+        {isCartEmpty && (
           <Empty title='Your cart is empty' $description='Go back to the store and explore great games and offers.' />
-        ) : (
-          <>
-            <S.Content>
-              <CartItems />
+        )}
 
-              <PaymentOptions creditCards={creditCards} handlePayment={handlePayment} />
-            </S.Content>
-            <S.Info>
-              <Info role='img' aria-hidden width={24} height={24} />
-              Your purchase is protected by a secure WON platform connection. By purchasing from our store you accept
-              and agree with our
-              <Link href='/'>terms of use</Link>. After completing the purchase You have the right to a refund within a
-              maximum of 30 days, without any additional cost as long as the purchased game download does not occurred
-              after your purchase.
-            </S.Info>
-          </>
+        <S.Content>
+          {loading ? (
+            <>
+              <Skeleton width='auto' height={180} />
+              <Skeleton width='auto' height={180} />
+            </>
+          ) : (
+            cartProducts.length && (
+              <>
+                <CartItems />
+                <PaymentOptions creditCards={creditCards} handlePayment={handlePayment} />
+              </>
+            )
+          )}
+        </S.Content>
+
+        {!isCartEmpty && (
+          <S.Info>
+            <Info role='img' aria-hidden width={24} height={24} />
+            Your purchase is protected by a secure WON platform connection. By purchasing from our store you accept and
+            agree with our <Link href='/'>terms of use</Link>. After completing the purchase You have the right to a
+            refund within a maximum of 30 days, without any additional cost as long as the purchased game download does
+            not occurred after your purchase.
+          </S.Info>
         )}
         <Divider />
       </Container>

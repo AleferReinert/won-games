@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
+import { CartContext } from 'contexts/CartContext'
+import { cartContextMock } from 'mocks/cartContext.mock'
 import { cartItemsFullMock } from 'mocks/cartItemsFull.mock'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import { highlightMock } from 'mocks/highlight.mock'
@@ -68,6 +70,13 @@ export const Empty: Story = {
 }
 
 export const WithProducts: Story = {
+  decorators: [
+    (Story) => (
+      <CartContext.Provider value={cartContextMock}>
+        <Story />
+      </CartContext.Provider>
+    )
+  ],
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const cartPage = within(canvas.getByTestId('CartPage'))
