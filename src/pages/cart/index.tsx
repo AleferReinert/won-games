@@ -12,11 +12,13 @@ import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import Link from 'next/link'
+import { GetServerSidePropsContext } from 'next/types'
 import type { ReactElement } from 'react'
 import Default from 'templates/Default/Default'
 import { Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
+import { requireAuth } from 'utils/requireAuth'
 import type { NextPageWithLayout } from '../_app'
 import * as S from './CartPage.styles'
 
@@ -26,8 +28,9 @@ interface CartPageProps {
   recommendedSection: ShowcaseProps
 }
 
-export async function getServerSideProps() {
-  const apolloClient = initializeApollo({})
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { session } = await requireAuth(context)
+  const apolloClient = initializeApollo({ session })
   const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS
   })

@@ -9,12 +9,11 @@ import { requireAuth } from 'utils/requireAuth'
 import * as S from './OrdersPage.styles'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { session } = await requireAuth(context)
+  await requireAuth(context)
 
   return {
     props: {
-      items: cartItemsFullMock,
-      session
+      items: cartItemsFullMock
     }
   }
 }

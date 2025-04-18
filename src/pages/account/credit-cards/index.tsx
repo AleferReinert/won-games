@@ -9,12 +9,11 @@ import AccountTemplate from 'templates/Account/Account'
 import { requireAuth } from 'utils/requireAuth'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { session } = await requireAuth(context)
+  await requireAuth(context)
 
   return {
     props: {
-      creditCards: creditCardsMock,
-      session
+      creditCards: creditCardsMock
     }
   }
 }

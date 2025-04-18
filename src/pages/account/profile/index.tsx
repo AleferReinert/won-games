@@ -20,9 +20,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       identifier: session.id
     }
   })
+
   return {
     props: {
-      session,
       username: data.usersPermissionsUser.data.attributes.username,
       email: data.usersPermissionsUser.data.attributes.email
     }
