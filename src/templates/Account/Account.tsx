@@ -1,4 +1,4 @@
-import { AccountCircle, CreditCard, ExitToApp, FormatListBulleted } from '@styled-icons/material-outlined'
+import { AccountCircle, ExitToApp, FormatListBulleted } from '@styled-icons/material-outlined'
 import Box from 'components/Box/Box'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
@@ -14,18 +14,13 @@ const nav = [
     link: '/account/profile'
   },
   {
-    icon: <CreditCard aria-hidden role='img' />,
-    title: 'My cards',
-    link: '/account/credit-cards'
-  },
-  {
     icon: <FormatListBulleted aria-hidden role='img' />,
     title: 'My orders',
     link: '/account/orders'
   },
   {
     icon: <ExitToApp aria-hidden role='img' />,
-    title: 'Sign out',
+    title: 'Logout',
     link: '/'
   }
 ]
@@ -52,7 +47,7 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
                   href={item.link}
                   active={activeLink === item.title}
                   onClick={() => {
-                    item.title === 'Sign out' && signOut()
+                    item.title === 'Logout' && signOut()
                   }}
                 >
                   {item.icon}

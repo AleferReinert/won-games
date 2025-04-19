@@ -12,7 +12,7 @@ const meta: Meta<typeof AccountTemplate> = {
   },
   argTypes: {
     activeLink: {
-      options: ['My profile', 'My cards', 'My orders'],
+      options: ['My profile', 'My orders'],
       control: { type: 'radio' }
     }
   },
@@ -31,24 +31,28 @@ type Story = StoryObj<typeof AccountTemplate>
 export const Account: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const main = within(canvasElement).getByRole('main')
-    const navigation = within(within(main).getByRole('navigation'))
 
     await step('Page title', () => {
       const title = canvas.getByRole('heading', { level: 1 })
       expect(title).toHaveTextContent('My account')
     })
 
-    await step('Navigation links', () => {
-      const links = ['My profile', 'My cards', 'My orders', 'Sign out']
-      for (const link of links) {
-        expect(navigation.getByRole('link', { name: link })).toBeVisible()
-      }
+    await step('My profile: link and icon', () => {
+      const myProfile = canvas.getByRole('link', { name: /my profile/i })
+      expect(myProfile).toHaveAttribute('href', '/account/profile')
+      expect(within(myProfile).getByRole('img', { hidden: true })).toBeVisible()
     })
 
-    await step('Navigation icons', () => {
-      const icons = navigation.getAllByRole('img', { hidden: true })
-      expect(icons.length).toBe(4)
+    await step('My orders: link and icon', () => {
+      const myOrders = canvas.getByRole('link', { name: /my orders/i })
+      expect(myOrders).toHaveAttribute('href', '/account/orders')
+      expect(within(myOrders).getByRole('img', { hidden: true })).toBeVisible()
+    })
+
+    await step('Logout: link and icon', () => {
+      const logout = canvas.getByRole('link', { name: /logout/i })
+      expect(logout).toHaveAttribute('href', '/')
+      expect(within(logout).getByRole('img', { hidden: true })).toBeVisible()
     })
 
     await step('Required active link', () => {
