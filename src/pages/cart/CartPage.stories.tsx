@@ -2,19 +2,17 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { CartContext } from 'contexts/CartContext'
 import { cartContextMock } from 'mocks/cartContext.mock'
-import { cartItemsFullMock } from 'mocks/cartItemsFull.mock'
-import { creditCardsMock } from 'mocks/creditCards.mock'
 import { highlightMock } from 'mocks/highlight.mock'
+import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { productsMock } from 'mocks/products.mock'
 import DefaultTemplate from 'templates/Default/Default'
 import CartPage from '.'
+import { NextAuthSessionArgs } from '../../../.storybook/preview'
 
 const meta: Meta<typeof CartPage> = {
   title: 'Pages/Cart',
   component: CartPage,
   args: {
-    cartItems: cartItemsFullMock,
-    creditCards: creditCardsMock,
     recommendedSection: {
       title: 'You may like these games',
       highlight: highlightMock,
@@ -32,18 +30,18 @@ const meta: Meta<typeof CartPage> = {
     layout: 'fullscreen',
     options: {
       showPanel: false
+    },
+    nextjs: {
+      appDirectory: true
     }
   }
 }
 
 export default meta
 
-type Story = StoryObj<typeof CartPage>
+type Story = StoryObj<typeof CartPage> & { args?: NextAuthSessionArgs }
 
 export const Empty: Story = {
-  args: {
-    cartItems: []
-  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const cartPage = within(canvas.getByTestId('CartPage'))
@@ -70,6 +68,9 @@ export const Empty: Story = {
 }
 
 export const WithProducts: Story = {
+  args: {
+    nextAuthSession: nextAuthSessionMock
+  },
   decorators: [
     (Story) => (
       <CartContext.Provider value={cartContextMock}>
@@ -84,11 +85,6 @@ export const WithProducts: Story = {
     await step('CartItemsComponent', () => {
       const cartItemListComponent = cartPage.getByTestId('CartItemsComponent')
       expect(cartItemListComponent).toBeVisible()
-    })
-
-    await step('PaymentOptionsComponent', () => {
-      const paymentOptions = cartPage.getByTestId('PaymentOptionsComponent')
-      expect(paymentOptions).toBeVisible()
     })
 
     await step('Info text', () => {

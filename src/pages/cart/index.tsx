@@ -1,20 +1,19 @@
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import { Info } from '@styled-icons/material-outlined/Info'
-import { CartItemProps } from 'components/CartItem/CartItem'
 import CartItems from 'components/CartItems/CartItems'
 import Container from 'components/Container/Container'
-import { CreditCardProps } from 'components/CreditCard/CreditCard'
 import Divider from 'components/Divider/Divider'
 import Empty from 'components/Empty/Empty'
 import Heading from 'components/Heading/Heading'
-import PaymentOptions from 'components/PaymentOptions/PaymentOptions'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import Skeleton from 'components/Skeleton/Skeleton'
+import StripePaymentForm from 'components/StripePaymentForm/StripePaymentForm'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { useCart } from 'hooks/useCart'
-import { creditCardsMock } from 'mocks/creditCards.mock'
 import Link from 'next/link'
 import { GetServerSidePropsContext } from 'next/types'
-import type { ReactElement } from 'react'
+import { type ReactElement } from 'react'
 import Default from 'templates/Default/Default'
 import { Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
@@ -23,9 +22,7 @@ import { requireAuth } from 'utils/requireAuth'
 import type { NextPageWithLayout } from '../_app'
 import * as S from './CartPage.styles'
 
-interface CartPageProps {
-  cartItems: CartItemProps[]
-  creditCards: CreditCardProps[]
+export interface CartPageProps {
   recommendedSection: ShowcaseProps
 }
 
@@ -40,7 +37,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      creditCards: creditCardsMock,
       recommendedSection: {
         title,
         highlight: highlightMapper(highlight),
@@ -50,9 +46,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 }
 
-const CartPage = ({ creditCards, recommendedSection }: CartPageProps & NextPageWithLayout) => {
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+
+const CartPage = ({ recommendedSection }: CartPageProps & NextPageWithLayout) => {
   const { cartProducts, loading } = useCart()
-  const handlePayment = () => ({})
   const isCartEmpty = !loading && cartProducts.length === 0
 
   return (
@@ -76,7 +73,9 @@ const CartPage = ({ creditCards, recommendedSection }: CartPageProps & NextPageW
             cartProducts.length && (
               <>
                 <CartItems />
-                <PaymentOptions creditCards={creditCards} handlePayment={handlePayment} />
+                <Elements stripe={stripePromise}>
+                  <StripePaymentForm />
+                </Elements>
               </>
             )
           )}
