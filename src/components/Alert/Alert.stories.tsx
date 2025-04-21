@@ -26,10 +26,19 @@ export const Default: Story = {
   name: 'Error (default)',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
+    const alert = canvas.getByRole('alert')
 
     await step('Required children', () => {
       const children = canvas.getByText(/lorem ipsum dolor sit amet/i)
       expect(children).toBeVisible()
+    })
+
+    await step('Border left', () => {
+      expect(getComputedStyle(alert).borderLeftWidth).toBe('4px')
+    })
+
+    await step('Font size 16px', () => {
+      expect(getComputedStyle(alert).fontSize).toBe('16px')
     })
 
     await step('Colors', () => {
@@ -37,6 +46,34 @@ export const Default: Story = {
       expect(alert).toHaveStyle({ 'border-color': theme.colors.error })
       expect(alert).toHaveStyle({ color: theme.colors.error })
       expect(alert).toHaveStyle({ 'background-color': theme.colors.error + '33' })
+    })
+  }
+}
+
+export const Small: Story = {
+  args: {
+    $size: 'small'
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const alert = canvas.getByRole('alert')
+
+    await step('Font size 14px', () => {
+      expect(getComputedStyle(alert).fontSize).toBe('14px')
+    })
+  }
+}
+
+export const HideBorderLeft: Story = {
+  args: {
+    $hideBorderLeft: true
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const alert = canvas.getByRole('alert')
+
+    await step('Border left 0', () => {
+      expect(getComputedStyle(alert).borderLeftWidth).toBe('0px')
     })
   }
 }

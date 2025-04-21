@@ -1,14 +1,17 @@
 import { ReactNode } from 'react'
 import * as S from './Alert.styles'
 
-interface AlertProps {
+export interface AlertProps {
   $variant?: 'error' | 'success' | 'info' | 'warning'
   children: ReactNode
+  $size?: 'small' | 'default'
+  $hideBorderLeft?: boolean
 }
-const Alert = ({ $variant = 'error', children }: AlertProps) => {
+
+const Alert = ({ $variant = 'error', children, $size = 'default', $hideBorderLeft }: AlertProps) => {
   return (
     <S.Wrapper>
-      <S.Alert $variant={$variant} role='alert'>
+      <S.Alert $variant={$variant} $size={$size} $hideBorderLeft={$hideBorderLeft} role='alert'>
         <p>{children}</p>
       </S.Alert>
     </S.Wrapper>
