@@ -1,5 +1,5 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import { PaymentIntent, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { ShoppingCart } from '@styled-icons/material-outlined'
 import Alert from 'components/Alert/Alert'
 import Box from 'components/Box/Box'
@@ -59,6 +59,36 @@ const StripePaymentForm = () => {
     setButtonDisabled(!event?.complete)
   }
 
+  function getTotalInCents() {
+    const total = cartProducts.reduce((acc, product) => {
+      return acc + product.price
+    }, 0)
+    const total_in_cents = Math.round(total * 100)
+    return total_in_cents
+  }
+
+  async function createOrder(paymentIntent?: PaymentIntent) {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // @ts-expect-error todo: fix
+        Authorization: `Bearer ${session.jwt}`
+      },
+      body: JSON.stringify({
+        // @ts-expect-error todo: fix
+        user: session?.id,
+        total_in_cents: getTotalInCents(),
+        paymentIntentId: paymentIntent?.id ?? null,
+        paymentMethod: paymentIntent?.payment_method ?? null,
+        cart: cartProducts.map((product) => ({ id: product.id })),
+        card_brand: null,
+        card_last4: null
+      })
+    })
+    router.push('/success')
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
@@ -69,9 +99,9 @@ const StripePaymentForm = () => {
     }
 
     if (allProductsFree) {
-      router.push('/success')
+      createOrder()
     } else {
-      const { error } = await stripe.confirmCardPayment(clientSecret, {
+      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement)!
         }
@@ -80,7 +110,7 @@ const StripePaymentForm = () => {
         setError(error.message ?? 'An error occurred')
       } else {
         setError(null)
-        router.push('/success')
+        createOrder(paymentIntent)
       }
     }
     setLoading(false)
