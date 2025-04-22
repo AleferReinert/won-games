@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { CartContext } from 'contexts/CartContext'
 import { PRODUCTS } from 'graphql/queries/products'
-import { ReactNode, useContext, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { Query } from 'types/generated'
 import { getStorageItem, setStorageItem } from 'utils/localStorage'
 import { cartProductsMapper } from 'utils/mappers'
@@ -52,7 +52,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     const newCartProductIds = cartProductIds.filter((productId) => productId !== id)
     saveCartProducts(newCartProductIds)
   }
-  const clearCart = () => saveCartProducts([])
+  const clearCart = useCallback(() => saveCartProducts([]), [saveCartProducts])
 
   return (
     <CartContext.Provider

@@ -38,7 +38,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 const SuccessPage = ({ recommendedSection }: SuccessPageProps) => {
   const { clearCart } = useCart()
 
-  useEffect(() => clearCart(), [clearCart])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => clearCart(), [])
 
   return (
     <>
