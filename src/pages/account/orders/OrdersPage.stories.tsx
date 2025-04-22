@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
+import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
+import { ordersResponseMock } from 'mocks/ordersResponse.mock'
 import AccountTemplate from 'templates/Account/Account'
 import OrdersPage from '.'
-import { cartItemsFullMock } from '../../../mocks/cartItemsFull.mock'
+import { NextAuthSessionArgs } from '../../../../.storybook/preview'
 
-const meta: Meta<typeof OrdersPage> = {
+const meta: Meta<typeof OrdersPage> & { args?: NextAuthSessionArgs } = {
   title: 'Pages/Account/Orders',
   component: OrdersPage,
   decorators: [
@@ -14,6 +16,10 @@ const meta: Meta<typeof OrdersPage> = {
       </AccountTemplate>
     )
   ],
+  args: {
+    nextAuthSession: nextAuthSessionMock,
+    orders: { data: [], meta: { pagination: { total: 0, page: 1, pageCount: 1, pageSize: 1 } } }
+  },
   parameters: {
     layout: 'fullscreen'
   }
@@ -36,7 +42,8 @@ export const Empty: Story = {
 
 export const WithOrders: Story = {
   args: {
-    items: cartItemsFullMock
+    // @ts-expect-error todo: its working, only ts error - fix
+    orders: ordersResponseMock.result!.data.orders
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)

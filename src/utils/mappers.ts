@@ -1,6 +1,12 @@
-import { CartItemProps } from 'components/CartItem/CartItem'
+import { CartItemProps, PaymentProps } from 'components/CartItem/CartItem'
 import { HighlightProps } from 'components/Highlight/Highlight'
-import { BannerEntityResponseCollection, ComponentPageHighlight, ProductEntity, Query } from 'types/generated'
+import {
+  BannerEntityResponseCollection,
+  ComponentPageHighlight,
+  OrderEntityResponseCollection,
+  ProductEntity,
+  Query
+} from 'types/generated'
 
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerEntityResponseCollection) => {
@@ -63,4 +69,32 @@ export const productMapper = (products: ProductCollection) => {
         img: attributes.cover.data ? process.env.NEXT_PUBLIC_API_URL + attributes.cover.data.attributes.url : '' // todo add default image
       }))
     : []
+}
+
+// Retornas compras realizadas
+export function ordersMapper(response: OrderEntityResponseCollection): CartItemProps[] {
+  return response.data.flatMap((orderEntity) => {
+    const { card_brand, card_last4, createdAt } = orderEntity.attributes
+    const paymentInfo: PaymentProps = {
+      creditCardBrand: card_brand,
+      creditCardNumber: `**** **** **** ${card_last4}`,
+      creditCardFlag: `/img/creditCards/${card_brand}.png`,
+      purchaseDate: `Purchase made on ${createdAt}`
+    }
+
+    return orderEntity.attributes.products.data.map((productEntity) => {
+      const { id, attributes } = productEntity
+      const { name, price, cover } = attributes
+      const formats = cover.data.attributes.formats
+      const img = formats.thumbnail.url
+
+      return {
+        id,
+        img,
+        name: name.trim(),
+        price,
+        paymentInfo
+      }
+    })
+  })
 }

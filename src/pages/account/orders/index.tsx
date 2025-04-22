@@ -1,32 +1,46 @@
 import Alert from 'components/Alert/Alert'
 import Box from 'components/Box/Box'
-import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
-import { cartItemsFullMock } from 'mocks/cartItemsFull.mock'
+import CartItem from 'components/CartItem/CartItem'
+import { ORDERS } from 'graphql/queries/orders'
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
+import { Query } from 'types/generated'
+import { initializeApollo } from 'utils/apollo'
+import { ordersMapper } from 'utils/mappers'
 import { requireAuth } from 'utils/requireAuth'
 import * as S from './OrdersPage.styles'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  await requireAuth(context)
+  const { session } = await requireAuth(context)
+  const apolloClient = initializeApollo({ session })
+  const {
+    data: { orders }
+  } = await apolloClient.query<Pick<Query, 'orders'>>({
+    query: ORDERS,
+    // @ts-expect-error todo: fix
+    variables: { identifier: session.id }
+  })
 
   return {
     props: {
-      items: cartItemsFullMock
+      orders
     }
   }
 }
 
 interface OrdersPageProps {
-  items?: CartItemProps[]
+  orders: Query['orders']
 }
 
-const OrdersPage = ({ items = [] }: OrdersPageProps) => {
-  return items.length ? (
+const OrdersPage = ({ orders }: OrdersPageProps) => {
+  const ordersItems = ordersMapper(orders)
+
+  return ordersItems.length ? (
     <S.Wrapper>
-      {items.map((item) => (
+      {ordersItems.map((item) => (
         <CartItem
+          removeFromCartButton={false}
           key={item.id}
           id={item.id}
           img={item.img}

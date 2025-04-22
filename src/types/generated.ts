@@ -17,6 +17,7 @@ export type Scalars = {
   Date: { input: any; output: any; }
   DateTime: { input: any; output: any; }
   JSON: { input: any; output: any; }
+  Long: { input: any; output: any; }
   Upload: { input: any; output: any; }
 };
 
@@ -422,7 +423,7 @@ export type FloatFilterInput = {
   startsWith: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = Banner | Category | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularProducts | ComponentPageRibbon | ComponentPageSection | Developer | Home | I18NLocale | Platform | Product | Publisher | Recommended | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Wishlist;
+export type GenericMorph = Banner | Category | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularProducts | ComponentPageRibbon | ComponentPageSection | Developer | Home | I18NLocale | Order | Platform | Product | Publisher | Recommended | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Wishlist;
 
 export type Home = {
   __typename?: 'Home';
@@ -562,6 +563,30 @@ export type JsonFilterInput = {
   startsWith: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type LongFilterInput = {
+  and: InputMaybe<Array<InputMaybe<Scalars['Long']['input']>>>;
+  between: InputMaybe<Array<InputMaybe<Scalars['Long']['input']>>>;
+  contains: InputMaybe<Scalars['Long']['input']>;
+  containsi: InputMaybe<Scalars['Long']['input']>;
+  endsWith: InputMaybe<Scalars['Long']['input']>;
+  eq: InputMaybe<Scalars['Long']['input']>;
+  eqi: InputMaybe<Scalars['Long']['input']>;
+  gt: InputMaybe<Scalars['Long']['input']>;
+  gte: InputMaybe<Scalars['Long']['input']>;
+  in: InputMaybe<Array<InputMaybe<Scalars['Long']['input']>>>;
+  lt: InputMaybe<Scalars['Long']['input']>;
+  lte: InputMaybe<Scalars['Long']['input']>;
+  ne: InputMaybe<Scalars['Long']['input']>;
+  not: InputMaybe<LongFilterInput>;
+  notContains: InputMaybe<Scalars['Long']['input']>;
+  notContainsi: InputMaybe<Scalars['Long']['input']>;
+  notIn: InputMaybe<Array<InputMaybe<Scalars['Long']['input']>>>;
+  notNull: InputMaybe<Scalars['Boolean']['input']>;
+  null: InputMaybe<Scalars['Boolean']['input']>;
+  or: InputMaybe<Array<InputMaybe<Scalars['Long']['input']>>>;
+  startsWith: InputMaybe<Scalars['Long']['input']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
@@ -569,6 +594,7 @@ export type Mutation = {
   createBanner: Maybe<BannerEntityResponse>;
   createCategory: Maybe<CategoryEntityResponse>;
   createDeveloper: Maybe<DeveloperEntityResponse>;
+  createOrder: Maybe<OrderEntityResponse>;
   createPlatform: Maybe<PlatformEntityResponse>;
   createProduct: Maybe<ProductEntityResponse>;
   createPublisher: Maybe<PublisherEntityResponse>;
@@ -583,6 +609,7 @@ export type Mutation = {
   deleteCategory: Maybe<CategoryEntityResponse>;
   deleteDeveloper: Maybe<DeveloperEntityResponse>;
   deleteHome: Maybe<HomeEntityResponse>;
+  deleteOrder: Maybe<OrderEntityResponse>;
   deletePlatform: Maybe<PlatformEntityResponse>;
   deleteProduct: Maybe<ProductEntityResponse>;
   deletePublisher: Maybe<PublisherEntityResponse>;
@@ -610,6 +637,7 @@ export type Mutation = {
   updateDeveloper: Maybe<DeveloperEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateHome: Maybe<HomeEntityResponse>;
+  updateOrder: Maybe<OrderEntityResponse>;
   updatePlatform: Maybe<PlatformEntityResponse>;
   updateProduct: Maybe<ProductEntityResponse>;
   updatePublisher: Maybe<PublisherEntityResponse>;
@@ -644,6 +672,11 @@ export type MutationCreateCategoryArgs = {
 
 export type MutationCreateDeveloperArgs = {
   data: DeveloperInput;
+};
+
+
+export type MutationCreateOrderArgs = {
+  data: OrderInput;
 };
 
 
@@ -698,6 +731,11 @@ export type MutationDeleteCategoryArgs = {
 
 
 export type MutationDeleteDeveloperArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteOrderArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -811,6 +849,12 @@ export type MutationUpdateHomeArgs = {
 };
 
 
+export type MutationUpdateOrderArgs = {
+  data: OrderInput;
+  id: Scalars['ID']['input'];
+};
+
+
 export type MutationUpdatePlatformArgs = {
   data: PlatformInput;
   id: Scalars['ID']['input'];
@@ -870,6 +914,67 @@ export type MutationUploadArgs = {
   info: InputMaybe<FileInfoInput>;
   ref: InputMaybe<Scalars['String']['input']>;
   refId: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type Order = {
+  __typename?: 'Order';
+  card_brand: Maybe<Scalars['String']['output']>;
+  card_last4: Maybe<Scalars['String']['output']>;
+  createdAt: Maybe<Scalars['DateTime']['output']>;
+  payment_intent_id: Maybe<Scalars['String']['output']>;
+  products: Maybe<ProductRelationResponseCollection>;
+  total_in_cents: Scalars['Long']['output'];
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  users_permissions_user: Maybe<UsersPermissionsUserEntityResponse>;
+};
+
+
+export type OrderProductsArgs = {
+  filters: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type OrderEntity = {
+  __typename?: 'OrderEntity';
+  attributes: Maybe<Order>;
+  id: Maybe<Scalars['ID']['output']>;
+};
+
+export type OrderEntityResponse = {
+  __typename?: 'OrderEntityResponse';
+  data: Maybe<OrderEntity>;
+};
+
+export type OrderEntityResponseCollection = {
+  __typename?: 'OrderEntityResponseCollection';
+  data: Array<OrderEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type OrderFiltersInput = {
+  and: InputMaybe<Array<InputMaybe<OrderFiltersInput>>>;
+  card_brand: InputMaybe<StringFilterInput>;
+  card_last4: InputMaybe<StringFilterInput>;
+  createdAt: InputMaybe<DateTimeFilterInput>;
+  id: InputMaybe<IdFilterInput>;
+  not: InputMaybe<OrderFiltersInput>;
+  or: InputMaybe<Array<InputMaybe<OrderFiltersInput>>>;
+  payment_intent_id: InputMaybe<StringFilterInput>;
+  products: InputMaybe<ProductFiltersInput>;
+  total_in_cents: InputMaybe<LongFilterInput>;
+  updatedAt: InputMaybe<DateTimeFilterInput>;
+  users_permissions_user: InputMaybe<UsersPermissionsUserFiltersInput>;
+};
+
+export type OrderInput = {
+  card_brand: InputMaybe<Scalars['String']['input']>;
+  card_last4: InputMaybe<Scalars['String']['input']>;
+  payment_intent_id: InputMaybe<Scalars['String']['input']>;
+  products: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  total_in_cents: InputMaybe<Scalars['Long']['input']>;
+  users_permissions_user: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Pagination = {
@@ -1130,6 +1235,8 @@ export type Query = {
   i18NLocale: Maybe<I18NLocaleEntityResponse>;
   i18NLocales: Maybe<I18NLocaleEntityResponseCollection>;
   me: Maybe<UsersPermissionsMe>;
+  order: Maybe<OrderEntityResponse>;
+  orders: Maybe<OrderEntityResponseCollection>;
   platform: Maybe<PlatformEntityResponse>;
   platforms: Maybe<PlatformEntityResponseCollection>;
   product: Maybe<ProductEntityResponse>;
@@ -1201,6 +1308,18 @@ export type QueryI18NLocaleArgs = {
 
 export type QueryI18NLocalesArgs = {
   filters: InputMaybe<I18NLocaleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryOrderArgs = {
+  id: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryOrdersArgs = {
+  filters: InputMaybe<OrderFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -1838,6 +1957,13 @@ export type ComingSoonQueryVariables = Exact<{
 
 export type ComingSoonQuery = { __typename?: 'Query', comingSoonProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, showcase: { __typename?: 'HomeEntityResponse', data: { __typename?: 'HomeEntity', attributes: { __typename?: 'Home', comingSoonProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } } } } } };
 
+export type OrdersQueryVariables = Exact<{
+  identifier: InputMaybe<Scalars['ID']['input']>;
+}>;
+
+
+export type OrdersQuery = { __typename?: 'Query', orders: { __typename?: 'OrderEntityResponseCollection', data: Array<{ __typename?: 'OrderEntity', id: string, attributes: { __typename?: 'Order', card_brand: string, card_last4: string, createdAt: any, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', formats: any } } } } }> } } }> } };
+
 export type PageHomeQueryVariables = Exact<{
   currentDate: Scalars['Date']['input'];
 }>;
@@ -2091,6 +2217,37 @@ export const ComingSoonDocument = gql`
     ${ProductEntityFragmentDoc}
 ${HighlightFragmentDoc}`;
 export type ComingSoonQueryResult = Apollo.QueryResult<ComingSoonQuery, ComingSoonQueryVariables>;
+export const OrdersDocument = gql`
+    query Orders($identifier: ID) {
+  orders(filters: {users_permissions_user: {id: {eq: $identifier}}}) {
+    data {
+      id
+      attributes {
+        card_brand
+        card_last4
+        createdAt
+        products {
+          data {
+            id
+            attributes {
+              name
+              price
+              cover {
+                data {
+                  attributes {
+                    formats
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export type OrdersQueryResult = Apollo.QueryResult<OrdersQuery, OrdersQueryVariables>;
 export const PageHomeDocument = gql`
     query PageHome($currentDate: Date!) {
   banners {

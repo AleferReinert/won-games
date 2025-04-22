@@ -5,7 +5,7 @@ import Price from 'components/Price/Price'
 import { useCart } from 'hooks/useCart'
 import * as S from './CartItem.styles'
 
-interface PaymentProps {
+export interface PaymentProps {
   creditCardBrand: string
   creditCardNumber: string
   creditCardFlag: string
@@ -19,9 +19,10 @@ export interface CartItemProps {
   price: number
   downloadLink?: string
   paymentInfo?: PaymentProps
+  removeFromCartButton?: boolean
 }
 
-const CartItem = ({ id, img, name, price, downloadLink, paymentInfo }: CartItemProps) => {
+const CartItem = ({ id, img, name, price, downloadLink, paymentInfo, removeFromCartButton = true }: CartItemProps) => {
   const { removeFromCart } = useCart()
   const imgSrc = process.env.STORYBOOK ? img : process.env.NEXT_PUBLIC_API_URL + img
 
@@ -43,9 +44,11 @@ const CartItem = ({ id, img, name, price, downloadLink, paymentInfo }: CartItemP
                   <FileDownload role='img' aria-hidden width={24} height={24} />
                 </S.DownloadLink>
               )}
-              <S.ButtonRemove type='button' onClick={() => removeFromCart(id)} title='Remove from cart'>
-                <Clear role='img' aria-hidden width={20} height={20} />
-              </S.ButtonRemove>
+              {removeFromCartButton && (
+                <S.ButtonRemove type='button' onClick={() => removeFromCart(id)} title='Remove from cart'>
+                  <Clear role='img' aria-hidden width={20} height={20} />
+                </S.ButtonRemove>
+              )}
             </S.ButtonGroup>
           </S.Group>
 

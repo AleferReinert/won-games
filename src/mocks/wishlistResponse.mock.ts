@@ -1,4 +1,3 @@
-// src/mocks/wishlistResponse.mock.ts
 import { MockedResponse } from '@apollo/client/testing'
 import { WISHLIST } from 'graphql/queries/wishlist'
 import { WishlistQuery } from 'types/generated'

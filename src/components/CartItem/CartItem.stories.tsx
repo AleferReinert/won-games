@@ -42,7 +42,7 @@ export const Default: Story = {
       expect(price).toHaveTextContent('$215.00')
     })
 
-    await step('Remove product from cart', async () => {
+    await step('RemoveFromCartButton visible', async () => {
       const button = canvas.getByRole('button', { name: 'Remove from cart' })
       userEvent.click(button)
       await waitFor(() => expect(cartContextMock.removeFromCart).toHaveBeenCalled())
@@ -95,6 +95,20 @@ export const Payment: Story = {
     await step('Purchase date', () => {
       const purchaseDate = canvas.getByLabelText('purchase date')
       expect(purchaseDate).toHaveTextContent('Purchase made on 07/06/2023 at 00:42')
+    })
+  }
+}
+
+export const RemoveFromCartButton: Story = {
+  args: {
+    removeFromCartButton: false
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('Remove product from cart', () => {
+      const button = canvas.queryByRole('button', { name: 'Remove from cart' })
+      expect(button).not.toBeInTheDocument()
     })
   }
 }
