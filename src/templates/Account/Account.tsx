@@ -2,7 +2,7 @@ import { AccountCircle, ExitToApp, FormatListBulleted } from '@styled-icons/mate
 import Box from 'components/Box/Box'
 import Container from 'components/Container/Container'
 import Heading from 'components/Heading/Heading'
-import { signOut } from 'next-auth/react'
+import { useLogout } from 'hooks/useLogout'
 import { ReactNode } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import * as S from './Account.styles'
@@ -31,6 +31,8 @@ interface AccountTemplateProps {
 }
 
 const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
+  const { logout } = useLogout()
+
   return (
     <DefaultTemplate>
       <Container>
@@ -47,7 +49,7 @@ const AccountTemplate = ({ activeLink, children }: AccountTemplateProps) => {
                   href={item.link}
                   active={activeLink === item.title}
                   onClick={() => {
-                    item.title === 'Logout' && signOut()
+                    item.title === 'Logout' && logout()
                   }}
                 >
                   {item.icon}

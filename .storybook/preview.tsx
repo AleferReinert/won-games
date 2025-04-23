@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/global'
 import theme from '../src/styles/theme'
 import { customViewports } from './customViewports'
+import { createMockRouter } from './mockRouter'
 
 initialize()
 
@@ -67,12 +68,14 @@ const preview: Preview = {
 
 export const decorators = [
   (Story: StoryFn, { args }: StoryContext<NextAuthSessionArgs>) => (
-    <SessionProvider session={args.nextAuthSession}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Story />
-      </ThemeProvider>
-    </SessionProvider>
+    <AppRouterContext.Provider value={createMockRouter()}>
+      <SessionProvider session={args.nextAuthSession}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          <Story />
+        </ThemeProvider>
+      </SessionProvider>
+    </AppRouterContext.Provider>
   )
 ]
 

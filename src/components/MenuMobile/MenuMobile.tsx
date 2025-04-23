@@ -1,6 +1,7 @@
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 import Button from 'components/Button/Button'
-import { signOut, useSession } from 'next-auth/react'
+import { useLogout } from 'hooks/useLogout'
+import { useSession } from 'next-auth/react'
 import { Dispatch, SetStateAction } from 'react'
 import * as S from './MenuMobile.styles'
 
@@ -11,6 +12,7 @@ interface MenuMobileProps {
 
 const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
   const { status } = useSession()
+  const { logout } = useLogout()
 
   return (
     <S.MenuMobile aria-label='Menu mobile' aria-hidden={!menuMobile} data-testid='MenuMobileComponent'>
@@ -25,7 +27,7 @@ const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
           <>
             <S.MenuLink href='/account/profile'>My account</S.MenuLink>
             <S.MenuLink href='/wishlist'>Wishlist</S.MenuLink>
-            <S.MenuLink href='/' onClick={() => void signOut()}>
+            <S.MenuLink href='/' onClick={logout}>
               Logout
             </S.MenuLink>
           </>
