@@ -1,12 +1,13 @@
 import Button from 'components/Button/Button'
 import Ribbon, { RibbonProps } from 'components/Ribbon/Ribbon'
+import Image from 'next/image'
 import * as S from './Banner.styles'
 
 export interface BannerProps {
   id: string
   img: {
     url: string
-    alternativeText?: string
+    alternativeText: string
   }
   title?: string
   description?: string
@@ -21,7 +22,11 @@ const Banner = ({ img, title, description, buttonLabel = 'Buy now', buttonUrl, r
   return (
     <S.Wrapper>
       {ribbon?.label && <Ribbon label={ribbon.label} size={ribbon.size} color={ribbon.color} />}
-      <S.Image src={img.url} role='img' aria-label={img.alternativeText || title} />
+
+      <S.ImageWrapper>
+        <Image src={img.url} alt={img.alternativeText || title || 'Decorative image'} fill />
+      </S.ImageWrapper>
+
       {caption && (
         <S.Caption>
           {title && <S.Title>{title}</S.Title>}

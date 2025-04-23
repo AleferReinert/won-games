@@ -10,6 +10,10 @@ export const Wrapper = styled.div`
       margin-top: ${theme.spacings.xsmall};
     }
 
+    ${RibbonStyles.Wrapper} {
+      z-index: ${theme.layers.base};
+    }
+
     @media (max-width: calc(${theme.breakpoint.small} - 1px)) {
       ${RibbonStyles.Wrapper} {
         right: 0;
@@ -30,20 +34,13 @@ export const Wrapper = styled.div`
   `}
 `
 
-type ImageProps = {
-  src: string
-}
-
-export const Image = styled.div<ImageProps>`
-  ${({ theme, src }) => css`
+export const ImageWrapper = styled.div`
+  ${({ theme }) => css`
     width: 100%;
-    aspect-ratio: 16/9;
-    background-color: ${theme.colors.lightGray};
-    background-image: url(${src});
-    background-position: center center;
-    background-size: cover;
+    height: 23rem;
+    position: relative;
 
-    @media (min-width: ${theme.breakpoint.small}) {
+    @media (min-width: ${theme.breakpoint.medium}) {
       height: 58rem;
     }
   `}

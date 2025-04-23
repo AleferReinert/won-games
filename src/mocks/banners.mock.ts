@@ -4,7 +4,8 @@ export const bannersMock: BannerProps[] = [
   {
     id: '2',
     img: {
-      url: '/img/background-test.png'
+      url: '/img/background-test.png',
+      alternativeText: ''
     },
     title: 'Defy death',
     description: 'Play the new <strong>CrashLands</strong> season',
@@ -13,7 +14,10 @@ export const bannersMock: BannerProps[] = [
   },
   {
     id: '1',
-    img: { url: '/img/background-test.png' },
+    img: {
+      url: '/img/background-test.png',
+      alternativeText: ''
+    },
     title: 'God of War',
     description: 'Same background to test',
     buttonLabel: 'Buy now',

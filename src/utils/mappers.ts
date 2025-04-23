@@ -14,7 +14,7 @@ export const bannerMapper = (banners: BannerEntityResponseCollection) => {
     id,
     img: {
       url: process.env.NEXT_PUBLIC_API_URL + banner.img.data.attributes.url,
-      alternativeText: banner.img.data.attributes.alternativeText
+      alternativeText: banner.img.data.attributes.alternativeText ?? ''
     },
     title: banner.title ? banner.title : null,
     description: banner.description ? banner.description : null,

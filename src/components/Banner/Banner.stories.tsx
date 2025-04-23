@@ -28,7 +28,7 @@ export const Default: Story = {
 
     await step('Required image', () => {
       const image = canvas.getByRole('img')
-      expect(image).toHaveAttribute('src', '/img/background-test.png')
+      expect(image).toBeVisible()
     })
   }
 }
