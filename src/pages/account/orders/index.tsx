@@ -19,7 +19,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   } = await apolloClient.query<Pick<Query, 'orders'>>({
     query: ORDERS,
     // @ts-expect-error todo: fix
-    variables: { identifier: session.id }
+    variables: { identifier: session.id },
+    fetchPolicy: 'no-cache'
   })
 
   return {
