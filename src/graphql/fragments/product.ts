@@ -23,6 +23,8 @@ export const PRODUCT_ENTITY = gql`
           }
         }
         price
+        promotional_price
+        ribbon_label
       }
     }
   }
@@ -51,6 +53,8 @@ export const PRODUCT_RELATION = gql`
           }
         }
         price
+        promotional_price
+        ribbon_label
       }
     }
   }

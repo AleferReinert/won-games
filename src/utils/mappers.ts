@@ -1,5 +1,7 @@
+import { BannerProps } from 'components/Banner/Banner'
 import { CartItemProps, PaymentProps } from 'components/CartItem/CartItem'
 import { HighlightProps } from 'components/Highlight/Highlight'
+import { ProductProps } from 'components/Product/Product'
 import {
   BannerEntityResponseCollection,
   ComponentPageHighlight,
@@ -10,24 +12,30 @@ import {
 
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerEntityResponseCollection) => {
-  return banners.data.map(({ id, attributes: banner }) => ({
-    id,
-    img: {
-      url: process.env.NEXT_PUBLIC_API_URL + banner.img.data.attributes.url,
-      alternativeText: banner.img.data.attributes.alternativeText ?? ''
-    },
-    title: banner.title ? banner.title : null,
-    description: banner.description ? banner.description : null,
-    buttonLabel: banner.button?.label ? banner.button.label : null,
-    buttonUrl: banner.button?.url ? banner.button.url : null,
-    ribbon: banner.ribbon
-      ? {
-          label: banner.ribbon?.label ? banner.ribbon.label : null,
-          color: banner.ribbon?.color ? banner.ribbon.color : null,
-          size: banner.ribbon?.size ? banner.ribbon.size : null
+  return banners.data.map(
+    ({ id, attributes }): BannerProps => ({
+      id,
+      img: {
+        url: process.env.NEXT_PUBLIC_API_URL + attributes.img.data.attributes.url,
+        alternativeText: attributes.img.data.attributes.alternativeText ?? ''
+      },
+      title: attributes.title,
+      ...(attributes.description && {
+        description: attributes.description
+      }),
+      ...(attributes.button && {
+        buttonLabel: attributes.button.label,
+        buttonUrl: attributes.button?.url
+      }),
+      ...(attributes.ribbon && {
+        ribbon: {
+          label: attributes.ribbon.label,
+          size: attributes.ribbon.size,
+          color: attributes.ribbon.color
         }
-      : null
-  }))
+      })
+    })
+  )
 }
 
 // Retorna os produtos adicionados ao carrinho
@@ -65,14 +73,18 @@ export const highlightMapper = (
 // Retorna todos dados necessários para o slider de produtos
 export const productMapper = (products: { data: Array<ProductEntity> }) => {
   return products.data
-    ? products.data.map(({ id, attributes }) => ({
-        id,
-        title: attributes.name,
-        slug: attributes.slug,
-        developer: attributes.developers.data[0]?.attributes.name || '',
-        price: attributes.price,
-        img: attributes.cover.data ? process.env.NEXT_PUBLIC_API_URL + attributes.cover.data.attributes.url : '' // todo add default image
-      }))
+    ? products.data.map(
+        ({ id, attributes }): ProductProps => ({
+          id,
+          title: attributes.name,
+          slug: attributes.slug,
+          developer: attributes.developers.data[0]?.attributes.name || '',
+          price: attributes.price,
+          promotionalPrice: attributes.promotional_price,
+          ribbonLabel: attributes.ribbon_label,
+          img: attributes.cover.data ? process.env.NEXT_PUBLIC_API_URL + attributes.cover.data.attributes.url : '' // todo add default image
+        })
+      )
     : []
 }
 

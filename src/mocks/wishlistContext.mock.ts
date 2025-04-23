@@ -43,6 +43,8 @@ export const wishlistContextMock: WishlistContextProps = {
         },
         name: 'The Legend of Zelda: Breath of the Wild',
         price: 24,
+        promotional_price: 10,
+        ribbon_label: 'Best Seller',
         slug: 'the-legend-of-zelda-breath-of-the-wild',
         description: 'The Legend of Zelda: Breath of the Wild',
         short_description: 'The Legend of Zelda: Breath of the Wild',

@@ -6,8 +6,7 @@ const WrapperModifiers = {
     background-color: ${theme.colors[color ?? 'primary']};
 
     &::after {
-      border-color: ${theme.colors[color ?? 'primary']} transparent transparent
-        ${theme.colors[color ?? 'primary']};
+      border-color: ${theme.colors[color ?? 'primary']} transparent transparent ${theme.colors[color ?? 'primary']};
       filter: brightness(75%);
     }
   `,
@@ -45,6 +44,7 @@ export const Wrapper = styled.div<Pick<RibbonProps, 'color' | 'size'>>`
     color: ${theme.colors.white};
     font-weight: ${theme.font.bold};
     position: absolute;
+    z-index: ${theme.layers.base};
 
     &::after {
       content: '';

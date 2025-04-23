@@ -40,7 +40,9 @@ export const wishlistResponseMock: MockedResponse<WishlistQuery> = {
                           }
                         ]
                       },
-                      price: 49
+                      price: 49,
+                      promotional_price: 30,
+                      ribbon_label: '20% off'
                     }
                   },
                   {
@@ -65,7 +67,9 @@ export const wishlistResponseMock: MockedResponse<WishlistQuery> = {
                           }
                         ]
                       },
-                      price: 30
+                      price: 30,
+                      promotional_price: 0,
+                      ribbon_label: ''
                     }
                   }
                 ]

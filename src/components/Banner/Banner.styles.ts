@@ -10,10 +10,6 @@ export const Wrapper = styled.div`
       margin-top: ${theme.spacings.xsmall};
     }
 
-    ${RibbonStyles.Wrapper} {
-      z-index: ${theme.layers.base};
-    }
-
     @media (max-width: calc(${theme.breakpoint.small} - 1px)) {
       ${RibbonStyles.Wrapper} {
         right: 0;
