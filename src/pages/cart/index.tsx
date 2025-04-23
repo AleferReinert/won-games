@@ -28,6 +28,8 @@ export interface CartPageProps {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { session } = await requireAuth(context)
+  if (!session) return { props: {} }
+
   const apolloClient = initializeApollo({ session })
   const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS
