@@ -34,8 +34,8 @@ export const Default: Story = {
     })
 
     await step('Background image', () => {
-      const background = window.getComputedStyle(highlightComponent).backgroundImage
-      expect(background).toContain('img/red-dead-img.jpg')
+      const background = canvas.getByRole('img', { name: 'background image test' })
+      expect(background).toBeVisible()
     })
 
     await step('Alignment right', () => {
@@ -62,13 +62,16 @@ export const AlignmentLeft: Story = {
 
 export const WithFloatImage: Story = {
   args: {
-    floatImg: '/img/red-dead-float.png'
+    floatImg: {
+      url: '/img/red-dead-float.png',
+      alternativeText: 'float image test'
+    }
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     await step('Float image', () => {
-      const floatImg = canvas.getByRole('img', { name: /read dead it's back/i })
+      const floatImg = canvas.getByRole('img', { name: 'float image test' })
       expect(floatImg).toBeVisible()
     })
   }

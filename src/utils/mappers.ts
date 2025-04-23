@@ -41,24 +41,29 @@ export const cartProductsMapper = (products: Query['products']['data']): CartIte
 }
 
 // Retorna todos dados necessários para o componente Highlight
-export const highlightMapper = (highlight: ComponentPageHighlight, alignment?: HighlightProps['$alignment']) => {
+export const highlightMapper = (
+  highlight: ComponentPageHighlight,
+  alignment?: HighlightProps['$alignment']
+): HighlightProps => {
   return {
     title: highlight.title,
     description: highlight.description,
     buttonLabel: highlight.buttonLabel,
     buttonUrl: highlight.buttonUrl,
-    alignment: alignment ?? highlight.alignment,
-    $background: process.env.NEXT_PUBLIC_API_URL + highlight.background.data.attributes.url,
-    floatImg: highlight.floatImg.data ? process.env.NEXT_PUBLIC_API_URL + highlight.floatImg.data.attributes.url : null
+    $alignment: alignment ?? highlight.alignment,
+    background: {
+      url: process.env.NEXT_PUBLIC_API_URL + highlight.background.data.attributes.url,
+      alternativeText: highlight.background.data.attributes.alternativeText ?? ''
+    },
+    floatImg: highlight.floatImg.data && {
+      url: process.env.NEXT_PUBLIC_API_URL + highlight.floatImg.data.attributes.url,
+      alternativeText: highlight.floatImg.data ? highlight.floatImg.data.attributes.alternativeText : ''
+    }
   }
 }
 
-type ProductCollection = {
-  data: Array<ProductEntity>
-}
-
 // Retorna todos dados necessários para o slider de produtos
-export const productMapper = (products: ProductCollection) => {
+export const productMapper = (products: { data: Array<ProductEntity> }) => {
   return products.data
     ? products.data.map(({ id, attributes }) => ({
         id,

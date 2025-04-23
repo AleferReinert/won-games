@@ -7,8 +7,14 @@ export interface HighlightProps {
   description: string
   buttonLabel: string
   buttonUrl: string
-  $background: string
-  floatImg?: string
+  background: {
+    url: string
+    alternativeText: string
+  }
+  floatImg?: {
+    url: string
+    alternativeText: string
+  }
   $alignment?: 'left' | 'right'
 }
 
@@ -17,15 +23,21 @@ const Highlight = ({
   description,
   buttonLabel,
   buttonUrl,
-  $background,
+  background,
   floatImg,
   $alignment = 'right'
 }: HighlightProps) => {
   return (
-    <S.Wrapper $background={$background} $alignment={$alignment} data-testid='HighlightComponent'>
+    <S.Wrapper $alignment={$alignment} data-testid='HighlightComponent'>
+      <Image src={background.url} alt={background.alternativeText || 'Decorative image'} fill />
       <S.FloatImage>
         {floatImg && (
-          <Image src={floatImg} alt={title} fill sizes='(max-width: 768px) 100vw, 50vw' /> // todo: check sizes
+          <Image
+            src={floatImg.url}
+            alt={floatImg.alternativeText || 'Decorative image'}
+            fill
+            sizes='(max-width: 768px) 100vw, 50vw'
+          />
         )}
       </S.FloatImage>
       <S.Content>
