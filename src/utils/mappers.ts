@@ -76,10 +76,14 @@ export function ordersMapper(response: OrderEntityResponseCollection): CartItemP
   return response.data.flatMap((orderEntity) => {
     const { card_brand, card_last4, createdAt } = orderEntity.attributes
     const paymentInfo: PaymentProps = {
-      creditCardBrand: card_brand,
-      creditCardNumber: `**** **** **** ${card_last4}`,
-      creditCardFlag: `/img/creditCards/${card_brand}.png`,
-      purchaseDate: `Purchase made on ${createdAt}`
+      creditCardBrand: card_brand || '',
+      creditCardNumber: card_last4 ? `**** **** **** ${card_last4}` : '',
+      creditCardFlag: card_brand ? `/img/creditCards/${card_brand}.png` : '',
+      purchaseDate: `Purchase made on ${new Intl.DateTimeFormat('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      }).format(new Date(createdAt))}`
     }
 
     return orderEntity.attributes.products.data.map((productEntity) => {

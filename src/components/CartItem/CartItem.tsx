@@ -55,12 +55,16 @@ const CartItem = ({ id, img, name, price, downloadLink, paymentInfo, removeFromC
           {paymentInfo && (
             <S.PaymentInfo>
               <S.PurchaseDate aria-label='purchase date'>{paymentInfo.purchaseDate}</S.PurchaseDate>
-              <CreditCard
-                img={paymentInfo.creditCardFlag}
-                name={paymentInfo.creditCardBrand}
-                number={paymentInfo.creditCardNumber}
-                color='gray'
-              />
+              {price > 0 ? (
+                <CreditCard
+                  img={paymentInfo.creditCardFlag}
+                  name={paymentInfo.creditCardBrand}
+                  number={paymentInfo.creditCardNumber}
+                  color='gray'
+                />
+              ) : (
+                'Free'
+              )}
             </S.PaymentInfo>
           )}
         </S.Content>

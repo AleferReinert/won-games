@@ -12,6 +12,136 @@ export const ordersResponseMock: MockedResponse<OrdersQuery> = {
       orders: {
         data: [
           {
+            id: '44',
+            attributes: {
+              card_brand: 'visa',
+              card_last4: '4242',
+              createdAt: '2025-05-23T19:45:22.990Z',
+              products: {
+                data: [
+                  {
+                    id: '4',
+                    attributes: {
+                      name: 'Heroes of Might',
+                      price: 0,
+                      cover: {
+                        data: {
+                          attributes: {
+                            formats: {
+                              large: {
+                                ext: '.jpg',
+                                url: '/uploads/large_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71.jpg',
+                                hash: 'large_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
+                                mime: 'image/jpeg',
+                                name: 'large_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
+                                path: null,
+                                size: 75.2,
+                                width: 1000,
+                                height: 390
+                              },
+                              small: {
+                                ext: '.jpg',
+                                url: '/uploads/small_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71.jpg',
+                                hash: 'small_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
+                                mime: 'image/jpeg',
+                                name: 'small_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
+                                path: null,
+                                size: 22.92,
+                                width: 500,
+                                height: 195
+                              },
+                              medium: {
+                                ext: '.jpg',
+                                url: '/uploads/medium_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71.jpg',
+                                hash: 'medium_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
+                                mime: 'image/jpeg',
+                                name: 'medium_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
+                                path: null,
+                                size: 46.1,
+                                width: 750,
+                                height: 292
+                              },
+                              thumbnail: {
+                                ext: '.jpg',
+                                url: '/img/product-test.jpg',
+                                hash: 'thumbnail_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
+                                mime: 'image/jpeg',
+                                name: 'thumbnail_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
+                                path: null,
+                                size: 6.48,
+                                width: 245,
+                                height: 95
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    id: '3',
+                    attributes: {
+                      name: 'Coming Soon One',
+                      price: 108,
+                      cover: {
+                        data: {
+                          attributes: {
+                            formats: {
+                              large: {
+                                ext: '.jpg',
+                                url: '/uploads/large_anno_1404_gold_edition_24be89b878_aad65ddf17.jpg',
+                                hash: 'large_anno_1404_gold_edition_24be89b878_aad65ddf17',
+                                mime: 'image/jpeg',
+                                name: 'large_anno_1404_gold_edition_24be89b878.jpg',
+                                path: null,
+                                size: 79.25,
+                                width: 1000,
+                                height: 390
+                              },
+                              small: {
+                                ext: '.jpg',
+                                url: '/uploads/small_anno_1404_gold_edition_24be89b878_aad65ddf17.jpg',
+                                hash: 'small_anno_1404_gold_edition_24be89b878_aad65ddf17',
+                                mime: 'image/jpeg',
+                                name: 'small_anno_1404_gold_edition_24be89b878.jpg',
+                                path: null,
+                                size: 24.72,
+                                width: 500,
+                                height: 195
+                              },
+                              medium: {
+                                ext: '.jpg',
+                                url: '/uploads/medium_anno_1404_gold_edition_24be89b878_aad65ddf17.jpg',
+                                hash: 'medium_anno_1404_gold_edition_24be89b878_aad65ddf17',
+                                mime: 'image/jpeg',
+                                name: 'medium_anno_1404_gold_edition_24be89b878.jpg',
+                                path: null,
+                                size: 49.04,
+                                width: 750,
+                                height: 292
+                              },
+                              thumbnail: {
+                                ext: '.jpg',
+                                url: '/img/product-test.jpg',
+                                hash: 'thumbnail_anno_1404_gold_edition_24be89b878_aad65ddf17',
+                                mime: 'image/jpeg',
+                                name: 'thumbnail_anno_1404_gold_edition_24be89b878.jpg',
+                                path: null,
+                                size: 7.16,
+                                width: 245,
+                                height: 95
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
             id: '43',
             attributes: {
               card_brand: 'visa',
@@ -128,124 +258,6 @@ export const ordersResponseMock: MockedResponse<OrdersQuery> = {
                                 name: 'thumbnail_wasteland_3_colorado_collection_fcbc522edb.jpg',
                                 path: null,
                                 size: 6.71,
-                                width: 245,
-                                height: 95
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  {
-                    id: '4',
-                    attributes: {
-                      name: 'Heroes of Might',
-                      price: 0,
-                      cover: {
-                        data: {
-                          attributes: {
-                            formats: {
-                              large: {
-                                ext: '.jpg',
-                                url: '/uploads/large_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71.jpg',
-                                hash: 'large_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
-                                mime: 'image/jpeg',
-                                name: 'large_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
-                                path: null,
-                                size: 75.2,
-                                width: 1000,
-                                height: 390
-                              },
-                              small: {
-                                ext: '.jpg',
-                                url: '/uploads/small_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71.jpg',
-                                hash: 'small_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
-                                mime: 'image/jpeg',
-                                name: 'small_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
-                                path: null,
-                                size: 22.92,
-                                width: 500,
-                                height: 195
-                              },
-                              medium: {
-                                ext: '.jpg',
-                                url: '/uploads/medium_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71.jpg',
-                                hash: 'medium_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
-                                mime: 'image/jpeg',
-                                name: 'medium_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
-                                path: null,
-                                size: 46.1,
-                                width: 750,
-                                height: 292
-                              },
-                              thumbnail: {
-                                ext: '.jpg',
-                                url: '/img/product-test.jpg',
-                                hash: 'thumbnail_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
-                                mime: 'image/jpeg',
-                                name: 'thumbnail_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
-                                path: null,
-                                size: 6.48,
-                                width: 245,
-                                height: 95
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  {
-                    id: '3',
-                    attributes: {
-                      name: 'Coming Soon One',
-                      price: 108,
-                      cover: {
-                        data: {
-                          attributes: {
-                            formats: {
-                              large: {
-                                ext: '.jpg',
-                                url: '/uploads/large_anno_1404_gold_edition_24be89b878_aad65ddf17.jpg',
-                                hash: 'large_anno_1404_gold_edition_24be89b878_aad65ddf17',
-                                mime: 'image/jpeg',
-                                name: 'large_anno_1404_gold_edition_24be89b878.jpg',
-                                path: null,
-                                size: 79.25,
-                                width: 1000,
-                                height: 390
-                              },
-                              small: {
-                                ext: '.jpg',
-                                url: '/uploads/small_anno_1404_gold_edition_24be89b878_aad65ddf17.jpg',
-                                hash: 'small_anno_1404_gold_edition_24be89b878_aad65ddf17',
-                                mime: 'image/jpeg',
-                                name: 'small_anno_1404_gold_edition_24be89b878.jpg',
-                                path: null,
-                                size: 24.72,
-                                width: 500,
-                                height: 195
-                              },
-                              medium: {
-                                ext: '.jpg',
-                                url: '/uploads/medium_anno_1404_gold_edition_24be89b878_aad65ddf17.jpg',
-                                hash: 'medium_anno_1404_gold_edition_24be89b878_aad65ddf17',
-                                mime: 'image/jpeg',
-                                name: 'medium_anno_1404_gold_edition_24be89b878.jpg',
-                                path: null,
-                                size: 49.04,
-                                width: 750,
-                                height: 292
-                              },
-                              thumbnail: {
-                                ext: '.jpg',
-                                url: '/img/product-test.jpg',
-                                hash: 'thumbnail_anno_1404_gold_edition_24be89b878_aad65ddf17',
-                                mime: 'image/jpeg',
-                                name: 'thumbnail_anno_1404_gold_edition_24be89b878.jpg',
-                                path: null,
-                                size: 7.16,
                                 width: 245,
                                 height: 95
                               }

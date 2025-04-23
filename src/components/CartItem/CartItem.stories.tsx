@@ -76,25 +76,40 @@ export const Payment: Story = {
       creditCardNumber: '**** **** **** 4326',
       creditCardBrand: 'mastercard',
       creditCardFlag: '/img/creditCards/mastercard.png',
-      purchaseDate: 'Purchase made on 07/06/2023 at 00:42'
+      purchaseDate: 'Purchase made on 23/05/2025 at 19:45'
     }
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Credit card number', () => {
-      const creditCardNumber = canvas.getByLabelText('credit card number')
-      expect(creditCardNumber).toHaveTextContent('**** **** **** 4326')
-    })
-
-    await step('Credit card flag', () => {
-      const creditCardFlag = canvas.getByRole('img', { name: 'mastercard' })
-      expect(creditCardFlag).toHaveAttribute('src', expect.stringContaining('/img/creditCards/mastercard.png'))
-    })
-
     await step('Purchase date', () => {
       const purchaseDate = canvas.getByLabelText('purchase date')
-      expect(purchaseDate).toHaveTextContent('Purchase made on 07/06/2023 at 00:42')
+      expect(purchaseDate).toHaveTextContent('Purchase made on 23/05/2025 at 19:45')
+    })
+
+    await step('creditCardComponent', () => {
+      const creditCardComponent = canvas.getByTestId('CreditCardComponent')
+      expect(creditCardComponent).toBeVisible()
+    })
+  }
+}
+
+export const Free: Story = {
+  args: {
+    paymentInfo: {
+      purchaseDate: 'Purchase made on 07/06/2023 at 00:42',
+      creditCardBrand: '',
+      creditCardFlag: '',
+      creditCardNumber: ''
+    },
+    price: 0
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('Free', () => {
+      const free = canvas.getAllByText('Free')
+      expect(free.length).toBe(2)
     })
   }
 }

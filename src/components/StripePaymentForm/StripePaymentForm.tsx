@@ -68,6 +68,7 @@ const StripePaymentForm = () => {
   }
 
   async function createOrder(paymentIntent?: PaymentIntent) {
+    console.log('entrou no createOrder')
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`, {
       method: 'POST',
       headers: {
@@ -81,9 +82,7 @@ const StripePaymentForm = () => {
         total_in_cents: getTotalInCents(),
         paymentIntentId: paymentIntent?.id ?? null,
         paymentMethod: paymentIntent?.payment_method ?? null,
-        cart: cartProducts.map((product) => ({ id: product.id })),
-        card_brand: null,
-        card_last4: null
+        cart: cartProducts.map((product) => ({ id: product.id }))
       })
     })
     router.push('/success')
