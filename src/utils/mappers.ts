@@ -9,6 +9,7 @@ import {
   ProductEntity,
   Query
 } from 'types/generated'
+import { getImageUrl } from './getImageUrl'
 
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerEntityResponseCollection) => {
@@ -16,7 +17,7 @@ export const bannerMapper = (banners: BannerEntityResponseCollection) => {
     ({ id, attributes }): BannerProps => ({
       id,
       img: {
-        url: process.env.NEXT_PUBLIC_API_URL + attributes.img.data.attributes.url,
+        url: getImageUrl(attributes.img.data.attributes.url),
         alternativeText: attributes.img.data.attributes.alternativeText ?? ''
       },
       title: attributes.title,
@@ -44,7 +45,7 @@ export const cartProductsMapper = (products: Query['products']['data']): CartIte
     id: product.id,
     name: product.attributes.name,
     price: product.attributes.price,
-    img: product.attributes.cover?.data?.attributes?.url
+    img: getImageUrl(product.attributes.cover?.data?.attributes?.url)
   }))
 }
 
@@ -60,11 +61,11 @@ export const highlightMapper = (
     buttonUrl: highlight.buttonUrl,
     $alignment: alignment ?? highlight.alignment,
     background: {
-      url: process.env.NEXT_PUBLIC_API_URL + highlight.background.data.attributes.url,
+      url: getImageUrl(highlight.background.data.attributes.url),
       alternativeText: highlight.background.data.attributes.alternativeText ?? ''
     },
     floatImg: highlight.floatImg.data && {
-      url: process.env.NEXT_PUBLIC_API_URL + highlight.floatImg.data.attributes.url,
+      url: getImageUrl(highlight.floatImg.data.attributes.url),
       alternativeText: highlight.floatImg.data ? highlight.floatImg.data.attributes.alternativeText : ''
     }
   }
@@ -82,7 +83,7 @@ export const productMapper = (products: { data: Array<ProductEntity> }) => {
           price: attributes.price,
           promotionalPrice: attributes.promotional_price,
           ribbonLabel: attributes.ribbon_label,
-          img: attributes.cover.data ? process.env.NEXT_PUBLIC_API_URL + attributes.cover.data.attributes.url : '' // todo add default image
+          img: attributes.cover.data ? getImageUrl(attributes.cover.data.attributes.url) : '' // todo add default image
         })
       )
     : []
@@ -107,7 +108,7 @@ export function ordersMapper(response: OrderEntityResponseCollection): CartItemP
       const { id, attributes } = productEntity
       const { name, price, cover } = attributes
       const formats = cover.data.attributes.formats
-      const img = formats.thumbnail.url
+      const img = getImageUrl(formats.thumbnail.url)
 
       return {
         id,

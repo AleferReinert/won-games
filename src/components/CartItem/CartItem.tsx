@@ -24,7 +24,7 @@ export interface CartItemProps {
 
 const CartItem = ({ id, img, name, price, downloadLink, paymentInfo, removeFromCartButton = true }: CartItemProps) => {
   const { removeFromCart } = useCart()
-  const imgSrc = process.env.STORYBOOK ? img : process.env.NEXT_PUBLIC_API_URL + img
+  const imgSrc = process.env.STORYBOOK ? img : img
 
   return (
     <S.Wrapper data-testid='CartItemComponent'>

@@ -15,6 +15,7 @@ import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
 import { Home, ProductEntity, ProductEntityResponseCollection, Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
+import { getImageUrl } from 'utils/getImageUrl'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './ProductPage.styles'
 
@@ -81,7 +82,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     revalidate: 60,
     props: {
       product,
-      cover: process.env.NEXT_PUBLIC_API_URL + product.attributes.cover.data?.attributes.url || '', // todo: add default cover
+      cover: getImageUrl(product.attributes.cover.data?.attributes.url) || '', // todo: add default cover
       productHeader: {
         id: product.id,
         title: product.attributes.name,
@@ -89,7 +90,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         price: product.attributes.price
       },
       gallery: product.attributes.gallery.data.map(({ attributes: image }) => ({
-        src: process.env.NEXT_PUBLIC_API_URL + image.url,
+        src: getImageUrl(image.url),
         label: image.alternativeText
       })),
       description: product.attributes.description,

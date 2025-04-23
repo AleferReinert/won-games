@@ -17,6 +17,7 @@ import DefaultTemplate from 'templates/Default/Default'
 import { Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { queryStringToGraphqlFilters } from 'utils/filter'
+import { getImageUrl } from 'utils/getImageUrl'
 
 export const productsLimit = 3 // todo: aumentar para 9 quando tiver mais produtos
 
@@ -158,9 +159,7 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
                   key={id}
                   title={attributes.name}
                   developer={attributes.developers.data[0]?.attributes.name || ''} //todo: no strapi não da pra colocar required
-                  img={
-                    attributes.cover?.data ? process.env.NEXT_PUBLIC_API_URL + attributes.cover.data.attributes.url : ''
-                  }
+                  img={attributes.cover?.data ? getImageUrl(attributes.cover.data.attributes.url) : ''}
                   price={attributes.price}
                   slug={attributes.slug}
                 />
