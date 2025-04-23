@@ -11,7 +11,7 @@ const meta: Meta<typeof PaymentOptionsComponent> = {
     handlePayment: { action: 'button enabled', table: { disable: true } }
   },
   parameters: {
-    layout: 'centered'
+    layout: 'padded'
   },
   tags: ['autodocs']
 }

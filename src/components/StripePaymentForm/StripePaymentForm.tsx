@@ -68,7 +68,6 @@ const StripePaymentForm = () => {
   }
 
   async function createOrder(paymentIntent?: PaymentIntent) {
-    console.log('entrou no createOrder')
     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`, {
       method: 'POST',
       headers: {

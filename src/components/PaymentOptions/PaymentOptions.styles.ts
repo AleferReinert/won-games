@@ -4,6 +4,7 @@ export const Wrapper = styled.form`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     max-height: min-content;
+    max-width: 39rem;
   `}
 `
 
@@ -62,7 +63,8 @@ export const Buttons = styled.div`
     flex-direction: column;
     gap: ${theme.spacings.xsmall};
 
-    button {
+    button,
+    a {
       padding-left: 0;
       padding-right: 0;
       width: 100%;
@@ -74,7 +76,8 @@ export const Buttons = styled.div`
       justify-content: space-between;
       padding: ${theme.spacings.small};
 
-      button {
+      button,
+      a {
         width: 50%;
       }
     }

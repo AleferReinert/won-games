@@ -17,7 +17,7 @@ const meta: Meta<typeof StripePaymentFormComponent> = {
     </Elements>
   ),
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
     nextjs: {
       appDirectory: true
     }
