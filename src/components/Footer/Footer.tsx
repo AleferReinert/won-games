@@ -8,13 +8,8 @@ const Footer = () => {
     <S.Wrapper>
       <Logo color='black' />
       <S.Content>
-        <S.Column>
-          <Heading
-            color='black'
-            size='medium'
-            $line='bottom'
-            $lineColor='secondary'
-          >
+        <S.Column aria-label='contact'>
+          <Heading color='black' size='medium' $line='bottom' $lineColor='secondary'>
             Contact
           </Heading>
           <a href='mailto:' aria-label='email'>
@@ -25,70 +20,57 @@ const Footer = () => {
           </a>
         </S.Column>
 
-        <S.Column>
-          <Heading
-            color='black'
-            size='medium'
-            $line='bottom'
-            $lineColor='secondary'
-          >
+        <S.Column aria-labelledby='social-media'>
+          <Heading color='black' size='medium' $line='bottom' $lineColor='secondary'>
             Follow Us
           </Heading>
-          <nav aria-labelledby='social media'>
-            <a
-              href='https://facebook.com/wongames'
-              target='_blank'
-              rel='noopener, noreferrer'
-            >
-              Facebook
-            </a>
-            <a
-              href='https://instagram.com/wongames'
-              target='_blank'
-              rel='noopener, noreferrer'
-            >
-              Instagram
-            </a>
-            <a
-              href='https://twitter.com/wongames'
-              target='_blank'
-              rel='noopener, noreferrer'
-            >
-              Twitter
-            </a>
-            <a
-              href='https://youtube.com/wongames'
-              target='_blank'
-              rel='noopener, noreferrer'
-            >
-              YouTube
-            </a>
+          <nav id='social-media'>
+            <ul>
+              <li>
+                <a href='https://facebook.com/wongames' target='_blank' rel='noopener noreferrer'>
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a href='https://instagram.com/wongames' target='_blank' rel='noopener noreferrer'>
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a href='https://twitter.com/wongames' target='_blank' rel='noopener noreferrer'>
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a href='https://youtube.com/wongames' target='_blank' rel='noopener noreferrer'>
+                  YouTube
+                </a>
+              </li>
+            </ul>
           </nav>
         </S.Column>
 
-        <S.Column>
-          <Heading
-            color='black'
-            size='medium'
-            $line='bottom'
-            $lineColor='secondary'
-          >
+        <S.Column aria-labelledby='resources'>
+          <Heading color='black' size='medium' $line='bottom' $lineColor='secondary'>
             Links
           </Heading>
-          <nav aria-labelledby='footer resources'>
-            <Link href='/'>Home</Link>
-            <Link href='/products'>Store</Link>
-            <Link href='/search'>Search</Link>
+          <nav id='resources'>
+            <ul>
+              <li>
+                <Link href='/'>Home</Link>
+              </li>
+              <li>
+                <Link href='/products'>Store</Link>
+              </li>
+              <li>
+                <Link href='/search'>Search</Link>
+              </li>
+            </ul>
           </nav>
         </S.Column>
 
-        <S.Column>
-          <Heading
-            color='black'
-            size='medium'
-            $line='bottom'
-            $lineColor='secondary'
-          >
+        <S.Column aria-label='address'>
+          <Heading color='black' size='medium' $line='bottom' $lineColor='secondary'>
             Location
           </Heading>
           <S.Address>
@@ -99,9 +81,7 @@ const Footer = () => {
         </S.Column>
       </S.Content>
 
-      <S.Copyright aria-label='copyright'>
-        Won Games 2023 © All rights reserved.
-      </S.Copyright>
+      <S.Copyright aria-label='copyright'>Won Games 2023 © All rights reserved.</S.Copyright>
     </S.Wrapper>
   )
 }
