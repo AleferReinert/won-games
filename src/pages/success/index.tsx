@@ -6,14 +6,14 @@ import Link from 'next/link'
 import { GetServerSidePropsContext } from 'next/types'
 import { useEffect, type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
-import { Query } from 'types/generated'
+import { RecommendedProductsQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import { requireAuth } from 'utils/requireAuth'
 import * as S from './success.styles'
 
 interface SuccessPageProps {
-  recommendedSection: ShowcaseProps
+  recommendedShowcase: ShowcaseProps
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -21,14 +21,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) return { props: {} }
 
   const apolloClient = initializeApollo({ session })
-  const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
+  const responseRecommended = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS
   })
-  const { title, highlight, products } = data.recommended.data.attributes
+  const { title, highlight, products } = responseRecommended.data.recommended.data.attributes
 
   return {
     props: {
-      recommendedSection: {
+      recommendedShowcase: {
         title,
         highlight: highlightMapper(highlight),
         products: productMapper(products)
@@ -37,7 +37,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 }
 
-const SuccessPage = ({ recommendedSection }: SuccessPageProps) => {
+const SuccessPage = ({ recommendedShowcase }: SuccessPageProps) => {
   const { clearCart } = useCart()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,11 +54,7 @@ const SuccessPage = ({ recommendedSection }: SuccessPageProps) => {
         </S.Description>
       </S.Wrapper>
 
-      <Showcase
-        title={recommendedSection.title}
-        highlight={recommendedSection.highlight}
-        products={recommendedSection.products}
-      />
+      <Showcase {...recommendedShowcase} />
     </>
   )
 }

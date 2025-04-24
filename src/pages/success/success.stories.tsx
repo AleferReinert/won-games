@@ -9,7 +9,7 @@ const meta: Meta<typeof SuccessPage> = {
   title: 'Pages/Success',
   component: SuccessPage,
   args: {
-    recommendedSection: {
+    recommendedShowcase: {
       title: 'You may like these games',
       highlight: highlightMock,
       products: productsMock
