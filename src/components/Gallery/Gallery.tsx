@@ -80,7 +80,6 @@ const Gallery = ({ items }: GalleryProps) => {
               fill
               sizes='(max-width: 768px) 100vw, 50vw'
             />
-            {/* todo: verify sizes */}
           </S.Thumb>
         ))}
       </Slider>
@@ -98,7 +97,7 @@ const Gallery = ({ items }: GalleryProps) => {
                 alt={item.label ? item.label : ''}
                 fill
                 sizes='(max-width: 768px) 100vw, 50vw'
-              /> // todo: verify sizes
+              />
             ))}
           </Slider>
         </S.ContentModal>

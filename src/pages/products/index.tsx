@@ -19,7 +19,7 @@ import { initializeApollo } from 'utils/apollo'
 import { queryStringToGraphqlFilters } from 'utils/filter'
 import { getImageUrl } from 'utils/getImageUrl'
 
-export const productsLimit = 3 // todo: aumentar para 9 quando tiver mais produtos
+export const productsLimit = 9
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const apolloClient = initializeApollo({})
@@ -158,8 +158,8 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
                   id={id}
                   key={id}
                   title={attributes.name}
-                  developer={attributes.developers.data[0]?.attributes.name || ''} //todo: no strapi não da pra colocar required
-                  img={attributes.cover?.data ? getImageUrl(attributes.cover.data.attributes.url) : ''}
+                  developer={attributes.developers.data[0]?.attributes.name || ''}
+                  img={getImageUrl(attributes.cover.data.attributes.url) || '/img/defaults/product-default.webp'}
                   price={attributes.price}
                   slug={attributes.slug}
                 />

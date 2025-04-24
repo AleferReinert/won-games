@@ -86,11 +86,155 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               price: 49,
               slug: 'wasteland-3-colorado-collection'
             }
+          },
+          {
+            id: '4',
+            attributes: {
+              cover: {
+                data: {
+                  attributes: {
+                    url: '/img/product-test.jpg'
+                  }
+                }
+              },
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'Rockstar Games'
+                    }
+                  }
+                ]
+              },
+              name: 'Grand Theft Auto V',
+              price: 60,
+              slug: 'grand-theft-auto-v'
+            }
+          },
+          {
+            id: '5',
+            attributes: {
+              cover: {
+                data: {
+                  attributes: {
+                    url: '/img/product-test.jpg'
+                  }
+                }
+              },
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'CD Projekt'
+                    }
+                  }
+                ]
+              },
+              name: 'Cyberpunk 2077',
+              price: 10,
+              slug: 'cyberpunk-2077'
+            }
+          },
+          {
+            id: '6',
+            attributes: {
+              cover: {
+                data: {
+                  attributes: {
+                    url: '/img/product-test.jpg'
+                  }
+                }
+              },
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'Bethesda'
+                    }
+                  }
+                ]
+              },
+              name: 'The Elder Scrolls V: Skyrim',
+              price: 30,
+              slug: 'the-elder-scrolls-v-skyrim'
+            }
+          },
+          {
+            id: '7',
+            attributes: {
+              cover: {
+                data: {
+                  attributes: {
+                    url: '/img/product-test.jpg'
+                  }
+                }
+              },
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'Ubisoft'
+                    }
+                  }
+                ]
+              },
+              name: "Assassin's Creed Valhalla",
+              price: 40,
+              slug: 'assassins-creed-valhalla'
+            }
+          },
+          {
+            id: '8',
+            attributes: {
+              cover: {
+                data: {
+                  attributes: {
+                    url: ''
+                  }
+                }
+              },
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'Square Enix'
+                    }
+                  }
+                ]
+              },
+              name: 'Final Fantasy XV',
+              price: 35,
+              slug: 'final-fantasy-xv'
+            }
+          },
+          {
+            id: '9',
+            attributes: {
+              cover: {
+                data: {
+                  attributes: {
+                    url: '/img/product-test.jpg'
+                  }
+                }
+              },
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'Valve'
+                    }
+                  }
+                ]
+              },
+              name: 'Half-Life: Alyx',
+              price: 50,
+              slug: 'half-life-alyx'
+            }
           }
         ],
         meta: {
           pagination: {
-            total: 4
+            total: 12
           }
         }
       }

@@ -2,6 +2,8 @@ import type { StorybookConfig } from '@storybook/nextjs'
 import dotenv from 'dotenv'
 
 process.env.NEXT_PUBLIC_API_URL = 'http://localhost:6006'
+process.env.NEXT_PUBLIC_IMAGE_HOST = ''
+
 dotenv.config()
 
 const config: StorybookConfig = {

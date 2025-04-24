@@ -9,7 +9,7 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
     query: PRODUCTS,
     variables: {
       limit: productsLimit,
-      start: 3,
+      start: 9,
       filters: { price: {}, and: [] }
     }
   },
@@ -74,7 +74,7 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
         ],
         meta: {
           pagination: {
-            total: 6
+            total: 12
           }
         }
       }

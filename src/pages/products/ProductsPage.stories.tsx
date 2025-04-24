@@ -73,7 +73,7 @@ export const WithProducts: Story = {
 
       await waitFor(async () => {
         const moreProducts = await waitFor(() => canvas.getAllByTestId('ProductComponent'))
-        expect(moreProducts).toHaveLength(productsLimit * 2)
+        expect(moreProducts).toHaveLength(12)
       })
     })
 
