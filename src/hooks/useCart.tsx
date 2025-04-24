@@ -36,10 +36,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
   }, [loading, error, data])
 
-  const saveCartProducts = (newCartProductIds: string[]) => {
+  const saveCartProducts = useCallback((newCartProductIds: string[]) => {
     setCartProductIds(newCartProductIds)
     setStorageItem('cartProducts', newCartProductIds)
-  }
+  }, [])
   const formattedProducts = cartProductsMapper(data?.products?.data || [])
   const totalQuantity = formattedProducts.length
   const totalPrice = formattedProducts.reduce((acc, product) => acc + product.price, 0)
