@@ -13,7 +13,7 @@ const meta: Meta<typeof CartPage> = {
   title: 'Pages/Cart',
   component: CartPage,
   args: {
-    recommendedSection: {
+    recommendedShowcase: {
       title: 'You may like these games',
       highlight: highlightMock,
       products: productsMock

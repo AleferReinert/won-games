@@ -15,7 +15,7 @@ import Link from 'next/link'
 import { GetServerSidePropsContext } from 'next/types'
 import { type ReactElement } from 'react'
 import Default from 'templates/Default/Default'
-import { Query } from 'types/generated'
+import { RecommendedProductsQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import { requireAuth } from 'utils/requireAuth'
@@ -23,7 +23,7 @@ import type { NextPageWithLayout } from '../_app'
 import * as S from './CartPage.styles'
 
 export interface CartPageProps {
-  recommendedSection: ShowcaseProps
+  recommendedShowcase: ShowcaseProps
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -31,15 +31,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) return { props: {} }
 
   const apolloClient = initializeApollo({ session })
-  const { data } = await apolloClient.query<Pick<Query, 'recommended'>>({
+  const recommendedProducts = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS
   })
 
-  const { title, highlight, products } = data.recommended.data.attributes
+  const { title, highlight, products } = recommendedProducts.data.recommended.data.attributes
 
   return {
     props: {
-      recommendedSection: {
+      recommendedShowcase: {
         title,
         highlight: highlightMapper(highlight),
         products: productMapper(products)
@@ -50,7 +50,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
-const CartPage = ({ recommendedSection }: CartPageProps & NextPageWithLayout) => {
+const CartPage = ({ recommendedShowcase }: CartPageProps & NextPageWithLayout) => {
   const { cartProducts, loading } = useCart()
   const isCartEmpty = !loading && cartProducts.length === 0
 
@@ -95,11 +95,7 @@ const CartPage = ({ recommendedSection }: CartPageProps & NextPageWithLayout) =>
         <Divider />
       </Container>
 
-      <Showcase
-        title={recommendedSection.title}
-        highlight={recommendedSection.highlight}
-        products={recommendedSection.products}
-      />
+      <Showcase {...recommendedShowcase} />
     </div>
   )
 }
