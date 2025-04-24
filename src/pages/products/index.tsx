@@ -14,81 +14,21 @@ import * as S from 'pages/products/ProductsPage.styles'
 import { ParsedUrlQueryInput } from 'querystring'
 import { type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
-import { Query } from 'types/generated'
+import { CategoriesQuery, PlatformsQuery, ProductsQuery, ProductsQueryVariables } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { queryStringToGraphqlFilters } from 'utils/filter'
+import { generateFilterOptions } from 'utils/filterOptions'
 import { getImageUrl } from 'utils/getImageUrl'
 
 export const productsLimit = 9
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const apolloClient = initializeApollo({})
-  const {
-    data: { platforms }
-  } = await apolloClient.query<Pick<Query, 'platforms'>>({
-    query: PLATFORMS
-  })
-  const {
-    data: { categories }
-  } = await apolloClient.query<Pick<Query, 'categories'>>({
-    query: CATEGORIES
-  })
+  const { data: platforms } = await apolloClient.query<PlatformsQuery>({ query: PLATFORMS })
+  const { data: categories } = await apolloClient.query<CategoriesQuery>({ query: CATEGORIES })
+  const filterOptions = generateFilterOptions({ platforms, categories })
 
-  const filterOptions: FilterOptionsProps[] = [
-    {
-      title: 'Price',
-      name: 'price',
-      type: 'radio',
-      fields: [
-        { label: 'Under $50', id: 'under-50', value: '50' },
-        { label: 'Under $100', id: 'under-100', value: '100' },
-        { label: 'Under $150', id: 'under-150', value: '150' },
-        { label: 'Under $200', id: 'under-200', value: '200' },
-        { label: 'Free', id: 'free', value: '0' }
-      ]
-    },
-    {
-      title: 'Sort by',
-      name: 'sort',
-      type: 'radio',
-      fields: [
-        {
-          label: 'Low to high',
-          id: 'low-to-high',
-          value: 'price:asc'
-        },
-        {
-          label: 'High to low',
-          id: 'high-to-low',
-          value: 'price:desc'
-        }
-      ]
-    },
-    {
-      title: 'Platforms',
-      name: 'platforms',
-      type: 'checkbox',
-      fields:
-        platforms.data.map(({ attributes }) => ({
-          label: attributes.name,
-          id: attributes.slug,
-          value: attributes.slug
-        })) || []
-    },
-    {
-      title: 'Categories',
-      name: 'categories',
-      type: 'checkbox',
-      fields:
-        categories.data.map(({ attributes }) => ({
-          label: attributes.name,
-          id: attributes.slug,
-          value: attributes.slug
-        })) || []
-    }
-  ]
-
-  await apolloClient.query<Pick<Query, 'products'>>({
+  await apolloClient.query<ProductsQuery, Pick<ProductsQueryVariables, 'limit'>>({
     query: PRODUCTS,
     variables: {
       limit: productsLimit,
@@ -113,7 +53,7 @@ interface ProductsPageProps {
 
 const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const { query, push } = useRouter()
-  const { data, fetchMore, loading } = useQuery<Pick<Query, 'products'>>(PRODUCTS, {
+  const { data, fetchMore, loading } = useQuery<ProductsQuery, Pick<ProductsQueryVariables, 'limit'>>(PRODUCTS, {
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: productsLimit,
@@ -142,8 +82,10 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   }
 
   const products = data?.products.data || []
-  const totalProducts = data?.products.meta.pagination.total || 0
-  const allProductsLoaded = products.length >= totalProducts
+  const allProductsLoaded = products.length >= (data?.products.meta.pagination.total || 0)
+  const hasProducts = products.length > 0
+  const showEmpty = !loading && !hasProducts
+  const showShowMore = hasProducts && !loading && !allProductsLoaded
 
   return (
     <Container data-testid='ProductsPage'>
@@ -152,8 +94,8 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
 
         <div>
           <S.Products>
-            {products.length > 0 &&
-              products?.map(({ attributes, id }) => (
+            {hasProducts &&
+              products.map(({ attributes, id }) => (
                 <Product
                   id={id}
                   key={id}
@@ -165,11 +107,14 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
                 />
               ))}
           </S.Products>
-          {products.length === 0 ? (
+
+          {showEmpty && (
             <Empty title='No results found' $description="Sorry, we couldn't find any results for your search." />
-          ) : loading ? (
-            <Loading />
-          ) : allProductsLoaded ? null : (
+          )}
+
+          {loading && <Loading />}
+
+          {showShowMore && (
             <S.ShowMore onClick={loadMore}>
               <span>Show more</span>
               <KeyboardArrowDown />
