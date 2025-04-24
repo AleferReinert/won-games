@@ -2,7 +2,7 @@ import Heading from 'components/Heading/Heading'
 import Platforms from 'components/Platforms/Platforms'
 import * as S from './ProductDetails.styles'
 
-type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18' | '' // todo: remove ''
+type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
 
 export interface ProductDetailsProps {
   developer: string
@@ -14,7 +14,7 @@ export interface ProductDetailsProps {
 }
 
 const ProductDetails = ({ developer, releaseDate, platforms, publisher, rating, categories }: ProductDetailsProps) => {
-  const emptyData = !categories.length && !platforms.length && !releaseDate && !developer && !publisher && rating === ''
+  const emptyData = !categories.length && !platforms.length && !releaseDate && !developer && !publisher && !rating
 
   return (
     <S.Wrapper data-testid='ProductDetailsComponent'>
