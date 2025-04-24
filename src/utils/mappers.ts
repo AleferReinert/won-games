@@ -83,7 +83,9 @@ export const productMapper = (products: { data: Array<ProductEntity> }) => {
           price: attributes.price,
           promotionalPrice: attributes.promotional_price,
           ribbonLabel: attributes.ribbon_label,
-          img: attributes.cover.data ? getImageUrl(attributes.cover.data.attributes.url) : '' // todo add default image
+          img: attributes.cover.data
+            ? getImageUrl(attributes.cover.data.attributes.url)
+            : '/img/defaults/product-default.webp'
         })
       )
     : []

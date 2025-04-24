@@ -82,7 +82,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     revalidate: 60,
     props: {
       product,
-      cover: getImageUrl(product.attributes.cover.data?.attributes.url) || '', // todo: add default cover
+      cover: getImageUrl(product.attributes.cover.data?.attributes.url) || '/img/defaults/product-cover-default.webp',
       productHeader: {
         id: product.id,
         title: product.attributes.name,
