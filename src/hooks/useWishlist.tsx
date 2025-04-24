@@ -50,6 +50,8 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
     }
   })
 
+  const loadingInitial = !session || loadingQuery || loadingCreateWishlist || loadingUpdateWishlist
+
   useEffect(() => {
     setWishlistProducts(data?.wishlists.data[0]?.attributes.products.data ?? [])
     setWishlistId(data?.wishlists.data[0]?.id ?? null)
@@ -100,7 +102,7 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
         isInWishlist,
         addToWishlist,
         removeFromWishlist,
-        loading: loadingQuery || loadingCreateWishlist || loadingUpdateWishlist,
+        loading: loadingInitial,
         products: wishlistProducts
       }}
     >

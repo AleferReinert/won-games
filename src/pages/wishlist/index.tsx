@@ -9,9 +9,9 @@ import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { useWishlist } from 'hooks/useWishlist'
 import type { GetServerSidePropsContext } from 'next'
 import * as S from 'pages/wishlist/WishlistPage.styles'
-import type { ReactElement } from 'react'
+import { type ReactElement } from 'react'
 import Base from 'templates/Default/Default'
-import { Query } from 'types/generated'
+import { RecommendedProductsQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import { requireAuth } from 'utils/requireAuth'
@@ -26,7 +26,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) return { props: {} }
 
   const apolloClient = initializeApollo({ session })
-  const responseRecommended = await apolloClient.query<Pick<Query, 'recommended'>>({
+  const responseRecommended = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS
   })
   const { title, highlight, products } = responseRecommended.data.recommended.data.attributes
@@ -55,12 +55,8 @@ const WishlistPage = ({ recommendedShowcase }: WishlistPageProps & NextPageWithL
 
         <S.WrapperWishlist>
           {loading ? (
-            <>
-              <Skeleton width='100%' height={235} />
-              <Skeleton width='100%' height={235} />
-            </>
+            <Skeleton width='100%' height={235} />
           ) : (
-            products.length &&
             products.map((product) => {
               return (
                 <Product
@@ -83,11 +79,7 @@ const WishlistPage = ({ recommendedShowcase }: WishlistPageProps & NextPageWithL
         <Divider />
       </Container>
 
-      <Showcase
-        title={recommendedShowcase.title}
-        highlight={recommendedShowcase.highlight}
-        products={recommendedShowcase.products}
-      />
+      <Showcase {...recommendedShowcase} />
     </div>
   )
 }

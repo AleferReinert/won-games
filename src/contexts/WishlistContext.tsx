@@ -15,7 +15,7 @@ export const WishlistContextDefaultValues = {
   isInWishlist: () => false,
   addToWishlist: () => Promise.resolve({} as FetchResult<void>),
   removeFromWishlist: () => Promise.resolve({} as FetchResult<void>),
-  loading: false
+  loading: true
 }
 
 export const WishlistContext = createContext<WishlistContextProps>(WishlistContextDefaultValues)

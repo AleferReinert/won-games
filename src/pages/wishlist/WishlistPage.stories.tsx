@@ -6,6 +6,7 @@ import { highlightMock } from 'mocks/highlight.mock'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { productsMock } from 'mocks/products.mock'
 import { wishlistContextMock } from 'mocks/wishlistContext.mock'
+import { wishlistEmptyResponseMock } from 'mocks/wishlistEmptyResponse.mock'
 import { wishlistResponseMock } from 'mocks/wishlistResponse.mock'
 import DefaultTemplate from 'templates/Default/Default'
 import { apolloCache } from 'utils/apolloCache'
@@ -43,6 +44,15 @@ export default meta
 type Story = StoryObj<typeof WishlistPage>
 
 export const Empty: Story = {
+  decorators: [
+    (Story) => (
+      <WishlistContext.Provider value={{ ...wishlistContextMock, products: [] }}>
+        <MockedProvider mocks={[wishlistEmptyResponseMock]} cache={apolloCache}>
+          <Story />
+        </MockedProvider>
+      </WishlistContext.Provider>
+    )
+  ],
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const wishlistPageComponent = within(canvas.getByTestId('WishlistPageComponent'))
