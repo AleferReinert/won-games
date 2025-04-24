@@ -18,7 +18,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { data } = await apolloClient.query<ProfileQuery>({
     query: PROFILE,
     variables: {
-      // @ts-expect-error todo: fix
       identifier: session.id
     }
   })

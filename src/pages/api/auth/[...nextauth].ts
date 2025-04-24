@@ -9,8 +9,11 @@ export const authOptions: NextAuthOptions = {
   providers: [
     Provider({
       credentials: {},
-      // @ts-expect-error todo: fix
-      async authorize({ email, password }) {
+      async authorize(credentials) {
+        if (!credentials) {
+          throw new Error('Credentials not found')
+        }
+        const { email, password } = credentials as { email: string; password: string }
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`, {
           method: 'POST',
           body: new URLSearchParams({ identifier: email, password })
@@ -34,18 +37,14 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id
         token.email = user.email
-        // @ts-expect-error todo: fix
         token.name = user.username
-        // @ts-expect-error todo: fix
         token.jwt = user.jwt
       }
 
       return Promise.resolve(token)
     },
     async session({ session, token }) {
-      // @ts-expect-error todo: fix
       session.jwt = token.jwt
-      // @ts-expect-error todo: fix
       session.id = token.id
 
       return Promise.resolve(session)

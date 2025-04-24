@@ -11,7 +11,6 @@ function createApolloClient(session?: Session | null) {
     link: createHttpLink({
       uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
       headers: {
-        // @ts-expect-error todo: fix
         authorization: session?.jwt ? `Bearer ${session.jwt}` : ''
       }
     }),

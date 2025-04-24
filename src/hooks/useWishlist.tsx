@@ -20,7 +20,6 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [createWishlist, { loading: loadingCreateWishlist }] = useMutation(CREATE_WISHLIST, {
     context: {
       headers: {
-        // @ts-expect-error todo: fix
         authorization: `Bearer ${session?.jwt}`
       }
     },
@@ -33,7 +32,6 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [updateWishlist, { loading: loadingUpdateWishlist }] = useMutation(UPDATE_WISHLIST, {
     context: {
       headers: {
-        // @ts-expect-error todo: fix
         authorization: `Bearer ${session?.jwt}`
       }
     },
@@ -47,7 +45,6 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
     variables: { userEmail: { eq: session?.user?.email } },
     context: {
       headers: {
-        // @ts-expect-error todo: fix
         authorization: `Bearer ${session?.jwt}`
       }
     }
@@ -76,7 +73,6 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
       return createWishlist({
         variables: {
           data: {
-            // @ts-expect-error todo: fix
             user: session?.id,
             products: [productId]
           }

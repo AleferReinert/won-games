@@ -31,8 +31,7 @@ const StripePaymentForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // @ts-expect-error todo: fix
-          Authorization: `Bearer ${session.jwt}`
+          Authorization: `Bearer ${session?.jwt}`
         },
         body: JSON.stringify({ cart: cartProducts.map((product) => ({ id: product.id })) })
       })
@@ -51,8 +50,7 @@ const StripePaymentForm = () => {
           }
         })
     }
-    // @ts-expect-error todo: fix
-  }, [cartProducts, session.jwt])
+  }, [cartProducts, session?.jwt])
 
   const handleChange = (event: StripeCardElementChangeEvent) => {
     setError(event?.error?.message ?? null)
@@ -72,11 +70,9 @@ const StripePaymentForm = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // @ts-expect-error todo: fix
-        Authorization: `Bearer ${session.jwt}`
+        Authorization: `Bearer ${session?.jwt}`
       },
       body: JSON.stringify({
-        // @ts-expect-error todo: fix
         user: session?.id,
         total_in_cents: getTotalInCents(),
         paymentIntentId: paymentIntent?.id ?? null,
