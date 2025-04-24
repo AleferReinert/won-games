@@ -5,7 +5,7 @@ import { ORDERS } from 'graphql/queries/orders'
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import { Query } from 'types/generated'
+import { OrderEntityResponseCollection, OrdersQuery, OrdersQueryVariables } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { ordersMapper } from 'utils/mappers'
 import { requireAuth } from 'utils/requireAuth'
@@ -13,12 +13,10 @@ import * as S from './OrdersPage.styles'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { session } = await requireAuth(context)
-  if (!session) return { props: {} }
+  if (!session || !session.id) return { props: {} }
 
   const apolloClient = initializeApollo({ session })
-  const {
-    data: { orders }
-  } = await apolloClient.query<Pick<Query, 'orders'>>({
+  const orders = await apolloClient.query<OrdersQuery, OrdersQueryVariables>({
     query: ORDERS,
     variables: { identifier: session.id },
     fetchPolicy: 'no-cache'
@@ -26,13 +24,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      orders
+      orders: orders.data.orders
     }
   }
 }
 
 interface OrdersPageProps {
-  orders: Query['orders']
+  orders: OrderEntityResponseCollection
 }
 
 const OrdersPage = ({ orders }: OrdersPageProps) => {

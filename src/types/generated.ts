@@ -226,10 +226,10 @@ export type ComponentPagePopularProductsInput = {
 
 export type ComponentPageRibbon = {
   __typename?: 'ComponentPageRibbon';
-  color: Maybe<Enum_Componentpageribbon_Color>;
+  color: Enum_Componentpageribbon_Color;
   id: Scalars['ID']['output'];
   label: Scalars['String']['output'];
-  size: Maybe<Enum_Componentpageribbon_Size>;
+  size: Enum_Componentpageribbon_Size;
 };
 
 export type ComponentPageRibbonFiltersInput = {
@@ -1055,7 +1055,7 @@ export type PlatformRelationResponseCollection = {
 export type Product = {
   __typename?: 'Product';
   categories: Maybe<CategoryRelationResponseCollection>;
-  cover: Maybe<UploadFileEntityResponse>;
+  cover: UploadFileEntityResponse;
   createdAt: Maybe<Scalars['DateTime']['output']>;
   description: Scalars['String']['output'];
   developers: Maybe<DeveloperRelationResponseCollection>;

@@ -42,8 +42,8 @@ export const Empty: Story = {
 
 export const WithOrders: Story = {
   args: {
-    // @ts-expect-error todo: its working, only ts error - fix
-    orders: ordersResponseMock.result!.data.orders
+    // @ts-expect-error todo fix
+    orders: ordersResponseMock.result?.data.orders
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
