@@ -14,7 +14,7 @@ import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
-import { Home, ProductEntity, ProductEntityResponseCollection, Query } from 'types/generated'
+import { ComingSoonQuery, ProductBySlugQuery, ProductsQuery, Query } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { getImageUrl } from 'utils/getImageUrl'
 import { highlightMapper, productMapper } from 'utils/mappers'
@@ -25,20 +25,20 @@ export interface ProductPageProps {
   productHeader: ProductHeaderProps
   description: string
   details: ProductDetailsProps
-  comingSoonSection: ShowcaseProps
-  recommendedSection: ShowcaseProps
+  comingSoon: ShowcaseProps
+  recommended: ShowcaseProps
   gallery?: GalleryImageProps[]
 }
 
 // Return slugs of first 9 products
 export async function getStaticPaths() {
   const apolloClient = initializeApollo({})
-  const { data } = await apolloClient.query({
+  const { data } = await apolloClient.query<ProductsQuery>({
     query: PRODUCTS,
     variables: { limit: 9 }
   })
 
-  const paths = data.products.data.map((product: ProductEntity) => ({
+  const paths = data.products.data.map((product) => ({
     params: { slug: product.attributes.slug }
   }))
 
@@ -47,37 +47,29 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const apolloClient = initializeApollo({})
-
-  // Return product data
-  const { data } = await apolloClient.query({
+  const productResponse = await apolloClient.query<ProductBySlugQuery>({
     query: PRODUCT_BY_SLUG,
     variables: { slug: params?.slug },
     fetchPolicy: 'no-cache'
   })
+  const productsNotFound = productResponse.data.products.data.length === 0
+  productsNotFound && { notFound: true }
 
-  // Redirect to 404 if product is not found
-  if (!data.products.data.length) {
-    return { notFound: true }
-  }
-  const product: ProductEntity = data.products.data[0]
-
-  // Return coming soon section
-  const {
-    data: { comingSoonProducts, showcase }
-  } = await apolloClient.query({
+  const comingSoonResponse = await apolloClient.query<ComingSoonQuery>({
     query: COMING_SOON,
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
     fetchPolicy: 'no-cache'
   })
-  const { comingSoonProducts: comingSoonSection }: Pick<Home, 'comingSoonProducts'> = showcase.data.attributes
-  const comingSoonSectionProducts: ProductEntityResponseCollection = comingSoonProducts
+  const comingSoonProducts = comingSoonResponse.data.comingSoonProducts
+  const comingSoonShowcase = comingSoonResponse.data.showcase.data.attributes.comingSoonProducts
 
-  // Return recommended section
-  const { data: recommended } = await apolloClient.query<Pick<Query, 'recommended'>>({
+  const recommendedProductsResponse = await apolloClient.query<Pick<Query, 'recommended'>>({
     query: RECOMMENDED_PRODUCTS,
     fetchPolicy: 'no-cache'
   })
-  const recommendedSection = recommended.recommended.data.attributes
+
+  const product = productResponse.data.products.data[0]
+  const recommendedSection = recommendedProductsResponse.data.recommended.data.attributes
 
   return {
     revalidate: 60,
@@ -90,9 +82,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         description: product.attributes.short_description,
         price: product.attributes.price
       },
-      gallery: product.attributes.gallery.data.map(({ attributes: image }) => ({
-        src: getImageUrl(image.url),
-        label: image.alternativeText
+      gallery: product.attributes.gallery.data.map(({ attributes }) => ({
+        src: getImageUrl(attributes.url),
+        label: attributes.alternativeText
       })),
       description: product.attributes.description,
       details: {
@@ -101,14 +93,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         platforms: product.attributes.platforms.data.map((platform) => platform.attributes.name),
         publisher: product.attributes.publisher.data?.attributes.name || '',
         rating: product.attributes.rating || '',
-        categories: product.attributes.categories.data.map(({ attributes: category }) => category.name)
+        categories: product.attributes.categories.data.map(({ attributes }) => attributes.name)
       },
-      comingSoonSection: {
-        title: comingSoonSection.title,
-        highlight: highlightMapper(comingSoonSection.highlight),
-        products: productMapper(comingSoonSectionProducts)
+      comingSoon: {
+        title: comingSoonShowcase.title,
+        highlight: highlightMapper(comingSoonShowcase.highlight),
+        products: productMapper(comingSoonProducts)
       },
-      recommendedSection: {
+      recommended: {
         title: recommendedSection.title,
         products: productMapper(recommendedSection.products)
       }
@@ -122,8 +114,8 @@ const ProductPage = ({
   gallery,
   description,
   details,
-  comingSoonSection,
-  recommendedSection
+  comingSoon,
+  recommended
 }: ProductPageProps) => {
   const router = useRouter()
   if (router.isFallback) return <Loading />
@@ -159,13 +151,8 @@ const ProductPage = ({
         <Divider />
       </Container>
 
-      <Showcase
-        title={comingSoonSection.title}
-        highlight={comingSoonSection.highlight}
-        products={comingSoonSection.products}
-      />
-
-      <Showcase title={recommendedSection.title} products={recommendedSection.products} />
+      <Showcase title={comingSoon.title} highlight={comingSoon.highlight} products={comingSoon.products} />
+      <Showcase title={recommended.title} products={recommended.products} />
     </>
   )
 }

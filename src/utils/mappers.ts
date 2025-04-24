@@ -4,9 +4,10 @@ import { HighlightProps } from 'components/Highlight/Highlight'
 import { ProductProps } from 'components/Product/Product'
 import {
   BannerEntityResponseCollection,
-  ComponentPageHighlight,
+  HighlightFragment,
   OrderEntityResponseCollection,
-  ProductEntity,
+  ProductEntityFragment,
+  ProductRelationFragment,
   Query
 } from 'types/generated'
 import { getImageUrl } from './getImageUrl'
@@ -51,7 +52,7 @@ export const cartProductsMapper = (products: Query['products']['data']): CartIte
 
 // Retorna todos dados necessários para o componente Highlight
 export const highlightMapper = (
-  highlight: ComponentPageHighlight,
+  highlight: HighlightFragment,
   alignment?: HighlightProps['$alignment']
 ): HighlightProps => {
   return {
@@ -72,7 +73,7 @@ export const highlightMapper = (
 }
 
 // Retorna todos dados necessários para o slider de produtos
-export const productMapper = (products: { data: Array<ProductEntity> }) => {
+export const productMapper = (products: ProductEntityFragment | ProductRelationFragment) => {
   return products.data
     ? products.data.map(
         ({ id, attributes }): ProductProps => ({

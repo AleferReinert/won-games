@@ -17,12 +17,12 @@ const meta: Meta<typeof ProductPage> = {
     productHeader: productHeaderMock,
     description: productDescriptionMock,
     details: productDetailsMock,
-    comingSoonSection: {
+    comingSoon: {
       title: 'Coming soon',
       products: productsMock,
       highlight: highlightMock
     },
-    recommendedSection: {
+    recommended: {
       title: 'You may like these games',
       products: productsMock
     }
