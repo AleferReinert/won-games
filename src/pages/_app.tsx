@@ -41,11 +41,12 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
               <WishlistProvider>
                 <Head>
                   <title>Won Games</title>
+                  <link rel='icon' type='image/png' href='/img/favicon.png' />
                   <link rel='shortchut icon' href='/img/icon-512.png' />
                   <link rel='apple-touch-icon' href='/img/icon-512.png' />
                   <link rel='manifest' href='/manifest.json' />
                   <meta name='theme-color' content='#06092B' />
-                  <meta name='description' content='Seus jogos favoritos estão aqui. Acesse agora e divirta-se!' />
+                  <meta name='description' content='Your favorite games are here. Join now and have fun!' />
                 </Head>
                 <GlobalStyles />
                 <NextNProgress
