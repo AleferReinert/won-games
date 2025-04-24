@@ -36,7 +36,7 @@ export const Wrapper = styled.div`
 `
 export const Description = styled.p`
   ${({ theme }) => css`
-    color: ${theme.colors.gray};
+    color: ${theme.colors.darkGray};
     font-size: ${theme.font.sizes.small};
     margin-bottom: ${theme.spacings.small};
 
