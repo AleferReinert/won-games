@@ -14,7 +14,7 @@ import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
-import { ComingSoonQuery, ProductBySlugQuery, ProductsQuery, Query } from 'types/generated'
+import { ComingSoonQuery, ProductBySlugQuery, ProductsQuery, RecommendedProductsQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { getImageUrl } from 'utils/getImageUrl'
 import { highlightMapper, productMapper } from 'utils/mappers'
@@ -63,13 +63,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const comingSoonProducts = comingSoonResponse.data.comingSoonProducts
   const comingSoonShowcase = comingSoonResponse.data.showcase.data.attributes.comingSoonProducts
 
-  const recommendedProductsResponse = await apolloClient.query<Pick<Query, 'recommended'>>({
+  const recommendedProducts = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS,
     fetchPolicy: 'no-cache'
   })
 
   const product = productResponse.data.products.data[0]
-  const recommendedSection = recommendedProductsResponse.data.recommended.data.attributes
+  const recommendedSection = recommendedProducts.data.recommended.data.attributes
 
   return {
     revalidate: 60,
@@ -151,8 +151,8 @@ const ProductPage = ({
         <Divider />
       </Container>
 
-      <Showcase title={comingSoon.title} highlight={comingSoon.highlight} products={comingSoon.products} />
-      <Showcase title={recommended.title} products={recommended.products} />
+      <Showcase {...comingSoon} />
+      <Showcase {...recommended} />
     </>
   )
 }
