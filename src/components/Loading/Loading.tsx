@@ -1,4 +1,5 @@
 import theme from 'styles/theme'
+import * as S from './Loading.styles'
 
 export interface LoadingProps {
   color?: string
@@ -8,7 +9,7 @@ export interface LoadingProps {
 
 export const Loading = ({ color = theme.colors.white, animation = '3dots', size = 40 }: LoadingProps) => {
   return (
-    <>
+    <S.Wrapper>
       {animation === '3dots' && (
         <svg
           role='img'
@@ -79,6 +80,6 @@ export const Loading = ({ color = theme.colors.white, animation = '3dots', size 
           </g>
         </svg>
       )}
-    </>
+    </S.Wrapper>
   )
 }
