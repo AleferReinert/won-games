@@ -2,6 +2,7 @@ import Container from 'components/Container/Container'
 import Divider from 'components/Divider/Divider'
 import Gallery, { GalleryImageProps } from 'components/Gallery/Gallery'
 import Heading from 'components/Heading/Heading'
+import { Loading } from 'components/Loading/Loading'
 import ProductDetails, { ProductDetailsProps } from 'components/ProductDetails/ProductDetails'
 import ProductHeader, { ProductHeaderProps } from 'components/ProductHeader/ProductHeader'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
@@ -95,11 +96,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       })),
       description: product.attributes.description,
       details: {
-        developer: product.attributes.developers.data[0]?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
-        releaseDate: product.attributes.release_date ?? '',
+        developer: product.attributes.developers.data[0]?.attributes.name || '',
+        releaseDate: product.attributes.release_date || '',
         platforms: product.attributes.platforms.data.map((platform) => platform.attributes.name),
-        publisher: product.attributes.publisher.data?.attributes.name ?? '', // todo: not is possible set this with required in Strapi, create default
-        rating: product.attributes.rating ?? '',
+        publisher: product.attributes.publisher.data?.attributes.name || '',
+        rating: product.attributes.rating || '',
         categories: product.attributes.categories.data.map(({ attributes: category }) => category.name)
       },
       comingSoonSection: {
@@ -125,7 +126,7 @@ const ProductPage = ({
   recommendedSection
 }: ProductPageProps) => {
   const router = useRouter()
-  if (router.isFallback) return <p>Loading...</p> // todo: add loading component
+  if (router.isFallback) return <Loading />
 
   return (
     <>
