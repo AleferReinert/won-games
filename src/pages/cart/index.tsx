@@ -12,7 +12,7 @@ import StripePaymentForm from 'components/StripePaymentForm/StripePaymentForm'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { useCart } from 'hooks/useCart'
 import Link from 'next/link'
-import { GetServerSidePropsContext } from 'next/types'
+import { GetServerSideProps } from 'next/types'
 import { type ReactElement } from 'react'
 import Default from 'templates/Default/Default'
 import { RecommendedProductsQuery } from 'types/generated'
@@ -26,15 +26,16 @@ export interface CartPageProps {
   recommendedShowcase: ShowcaseProps
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export const getServerSideProps: GetServerSideProps<CartPageProps> = async (context) => {
   const { session } = await requireAuth(context)
-  if (!session) return { props: {} }
+  if (!session) {
+    return { props: {} as CartPageProps }
+  }
 
   const apolloClient = initializeApollo({ session })
   const recommendedProducts = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS
   })
-
   const { title, highlight, products } = recommendedProducts.data.recommended.data.attributes
 
   return {
