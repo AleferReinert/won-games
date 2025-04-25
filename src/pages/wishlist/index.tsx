@@ -7,7 +7,7 @@ import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import Skeleton from 'components/Skeleton/Skeleton'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { useWishlist } from 'hooks/useWishlist'
-import type { GetServerSidePropsContext } from 'next'
+import type { GetServerSideProps } from 'next'
 import * as S from 'pages/wishlist/WishlistPage.styles'
 import { type ReactElement } from 'react'
 import Base from 'templates/Default/Default'
@@ -21,9 +21,9 @@ export interface WishlistPageProps {
   recommendedShowcase: ShowcaseProps
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export const getServerSideProps: GetServerSideProps<WishlistPageProps> = async (context) => {
   const { session } = await requireAuth(context)
-  if (!session) return { props: {} }
+  if (!session) return { props: {} as WishlistPageProps }
 
   const apolloClient = initializeApollo({ session })
   const responseRecommended = await apolloClient.query<RecommendedProductsQuery>({
