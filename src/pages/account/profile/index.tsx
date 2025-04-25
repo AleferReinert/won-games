@@ -2,24 +2,30 @@ import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
 import { PROFILE } from 'graphql/queries/profile'
-import { GetServerSidePropsContext } from 'next/types'
+import { GetServerSideProps } from 'next/types'
 import * as S from 'pages/account/profile/ProfilePage.styles'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import { ProfileQuery } from 'types/generated'
+import { ProfileQuery, ProfileQueryVariables } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { requireAuth } from 'utils/requireAuth'
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+interface ProfilePageProps {
+  username: string
+  email: string
+}
+
+export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (context) => {
   const { session } = await requireAuth(context)
-  if (!session) return { props: {} }
+
+  if (!session || !session.id) {
+    return { props: {} as ProfilePageProps }
+  }
 
   const apolloClient = initializeApollo({ session })
-  const { data } = await apolloClient.query<ProfileQuery>({
+  const { data } = await apolloClient.query<ProfileQuery, ProfileQueryVariables>({
     query: PROFILE,
-    variables: {
-      identifier: session.id
-    }
+    variables: { identifier: session.id }
   })
 
   return {
@@ -28,11 +34,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       email: data.usersPermissionsUser.data.attributes.email
     }
   }
-}
-
-interface ProfilePageProps {
-  username: string
-  email: string
 }
 
 const ProfilePage = ({ username, email }: ProfilePageProps) => {
