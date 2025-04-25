@@ -3,7 +3,7 @@ import { CartItemProps, PaymentProps } from 'components/CartItem/CartItem'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { ProductProps } from 'components/Product/Product'
 import {
-  BannerEntityResponseCollection,
+  BannerFragment,
   HighlightFragment,
   OrderEntityResponseCollection,
   ProductEntityFragment,
@@ -13,7 +13,7 @@ import {
 import { getImageUrl } from './getImageUrl'
 
 // Retorna todos dados necessários para o componente Banner
-export const bannerMapper = (banners: BannerEntityResponseCollection) => {
+export const bannerMapper = (banners: BannerFragment) => {
   return banners.data.map(
     ({ id, attributes }): BannerProps => ({
       id,

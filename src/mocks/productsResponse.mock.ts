@@ -49,7 +49,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
                 data: {
                   attributes: {
                     url: '/img/product-test.jpg',
-                    alternativeText: ''
+                    alternativeText: 'Vampire: The Masquerade – Bloodlines'
                   }
                 }
               },
@@ -119,8 +119,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               name: 'Grand Theft Auto V',
               price: 60,
               slug: 'grand-theft-auto-v',
-              promotional_price: 0,
-              ribbon_label: ''
+              promotional_price: 30,
+              ribbon_label: '50% off'
             }
           },
           {
@@ -174,7 +174,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               price: 30,
               slug: 'the-elder-scrolls-v-skyrim',
               promotional_price: 0,
-              ribbon_label: ''
+              ribbon_label: 'New'
             }
           },
           {

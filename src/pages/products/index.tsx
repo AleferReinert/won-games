@@ -104,6 +104,8 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
                   img={getImageUrl(attributes.cover.data.attributes.url) || '/img/defaults/product-default.webp'}
                   price={attributes.price}
                   slug={attributes.slug}
+                  promotionalPrice={attributes.promotional_price}
+                  ribbonLabel={attributes.ribbon_label}
                 />
               ))}
           </S.Products>
