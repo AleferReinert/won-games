@@ -23,7 +23,8 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -32,7 +33,9 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Cyberpunk 2077',
               price: 24,
-              slug: 'cyberpunk-2077'
+              slug: 'cyberpunk-2077',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -41,7 +44,8 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -50,7 +54,9 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Red Dead Redemption 2',
               price: 40,
-              slug: 'red-dead-redemption-2'
+              slug: 'red-dead-redemption-2',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -59,7 +65,8 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -68,7 +75,9 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Horizon Zero Dawn',
               price: 35,
-              slug: 'horizon-zero-dawn'
+              slug: 'horizon-zero-dawn',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           }
         ],

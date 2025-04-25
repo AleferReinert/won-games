@@ -50,6 +50,8 @@ export const PAGE_HOME = gql`
                   name
                   slug
                   price
+                  promotional_price
+                  ribbon_label
                   developers {
                     data {
                       attributes {

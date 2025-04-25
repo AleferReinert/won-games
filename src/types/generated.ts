@@ -1923,9 +1923,11 @@ export type WishlistInput = {
 
 export type BannerFragment = { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id: string, attributes: { __typename?: 'Banner', title: string, description: string, img: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, button: { __typename?: 'ComponentPageButton', label: string, url: string }, ribbon: { __typename?: 'ComponentPageRibbon', label: string, color: Enum_Componentpageribbon_Color, size: Enum_Componentpageribbon_Size } } }> };
 
-export type HighlightFragment = { __typename?: 'ComponentPageHighlight', id: string, title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } };
+export type HighlightFragment = { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } };
 
-export type ProductEntityFragment = { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> };
+export type PopularProductsFragment = { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, slug: string, price: number, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> }, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }> };
+
+export type ProductEntityFragment = { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> };
 
 export type ProductRelationFragment = { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> };
 
@@ -1961,7 +1963,7 @@ export type ComingSoonQueryVariables = Exact<{
 }>;
 
 
-export type ComingSoonQuery = { __typename?: 'Query', comingSoonProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, showcase: { __typename?: 'HomeEntityResponse', data: { __typename?: 'HomeEntity', attributes: { __typename?: 'Home', comingSoonProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', id: string, title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } } } } } };
+export type ComingSoonQuery = { __typename?: 'Query', comingSoonProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, showcase: { __typename?: 'HomeEntityResponse', data: { __typename?: 'HomeEntity', attributes: { __typename?: 'Home', comingSoonProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } } } } } };
 
 export type OrdersQueryVariables = Exact<{
   identifier: InputMaybe<Scalars['ID']['input']>;
@@ -1975,7 +1977,7 @@ export type PageHomeQueryVariables = Exact<{
 }>;
 
 
-export type PageHomeQuery = { __typename?: 'Query', banners: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id: string, attributes: { __typename?: 'Banner', title: string, description: string, img: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, button: { __typename?: 'ComponentPageButton', label: string, url: string }, ribbon: { __typename?: 'ComponentPageRibbon', label: string, color: Enum_Componentpageribbon_Color, size: Enum_Componentpageribbon_Size } } }> }, newProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, comingSoonProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, freeProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, showcases: { __typename?: 'HomeEntityResponse', data: { __typename?: 'HomeEntity', attributes: { __typename?: 'Home', newProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', id: string, title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }, popularProducts: { __typename?: 'ComponentPagePopularProducts', title: string, highlight: { __typename?: 'ComponentPageHighlight', id: string, title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, slug: string, price: number, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> }, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }> } }, comingSoonProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', id: string, title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }, freeProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', id: string, title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } } } } } };
+export type PageHomeQuery = { __typename?: 'Query', banners: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id: string, attributes: { __typename?: 'Banner', title: string, description: string, img: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, button: { __typename?: 'ComponentPageButton', label: string, url: string }, ribbon: { __typename?: 'ComponentPageRibbon', label: string, color: Enum_Componentpageribbon_Color, size: Enum_Componentpageribbon_Size } } }> }, newProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, comingSoonProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, freeProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, showcases: { __typename?: 'HomeEntityResponse', data: { __typename?: 'HomeEntity', attributes: { __typename?: 'Home', newProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }, popularProducts: { __typename?: 'ComponentPagePopularProducts', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, slug: string, price: number, promotional_price: number, ribbon_label: string, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> }, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }> } }, comingSoonProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } }, freeProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } } } } } };
 
 export type PlatformsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1997,7 +1999,7 @@ export type ProductsQueryVariables = Exact<{
 }>;
 
 
-export type ProductsQuery = { __typename?: 'Query', products: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } } };
+export type ProductsQuery = { __typename?: 'Query', products: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number } } } };
 
 export type ProfileQueryVariables = Exact<{
   identifier: InputMaybe<Scalars['ID']['input']>;
@@ -2009,7 +2011,7 @@ export type ProfileQuery = { __typename?: 'Query', usersPermissionsUser: { __typ
 export type RecommendedProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RecommendedProductsQuery = { __typename?: 'Query', recommended: { __typename?: 'RecommendedEntityResponse', data: { __typename?: 'RecommendedEntity', attributes: { __typename?: 'Recommended', title: string, highlight: { __typename?: 'ComponentPageHighlight', id: string, title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> } } } } };
+export type RecommendedProductsQuery = { __typename?: 'Query', recommended: { __typename?: 'RecommendedEntityResponse', data: { __typename?: 'RecommendedEntity', attributes: { __typename?: 'Recommended', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> } } } } };
 
 export type WishlistQueryVariables = Exact<{
   userEmail: InputMaybe<StringFilterInput>;
@@ -2048,7 +2050,6 @@ export const BannerFragmentDoc = gql`
     `;
 export const HighlightFragmentDoc = gql`
     fragment highlight on ComponentPageHighlight {
-  id
   title
   description
   buttonLabel
@@ -2072,12 +2073,21 @@ export const HighlightFragmentDoc = gql`
   }
 }
     `;
-export const ProductEntityFragmentDoc = gql`
-    fragment productEntity on ProductEntityResponseCollection {
+export const PopularProductsFragmentDoc = gql`
+    fragment popularProducts on ProductRelationResponseCollection {
   data {
     id
     attributes {
+      name
       slug
+      price
+      developers {
+        data {
+          attributes {
+            name
+          }
+        }
+      }
       cover {
         data {
           attributes {
@@ -2086,7 +2096,23 @@ export const ProductEntityFragmentDoc = gql`
           }
         }
       }
-      name
+    }
+  }
+}
+    `;
+export const ProductEntityFragmentDoc = gql`
+    fragment productEntity on ProductEntityResponseCollection {
+  data {
+    id
+    attributes {
+      cover {
+        data {
+          attributes {
+            url
+            alternativeText
+          }
+        }
+      }
       developers {
         data {
           attributes {
@@ -2094,7 +2120,9 @@ export const ProductEntityFragmentDoc = gql`
           }
         }
       }
+      name
       price
+      slug
       promotional_price
       ribbon_label
     }
@@ -2306,6 +2334,8 @@ export const PageHomeDocument = gql`
                 name
                 slug
                 price
+                promotional_price
+                ribbon_label
                 developers {
                   data {
                     attributes {
@@ -2433,6 +2463,7 @@ export const ProductsDocument = gql`
           data {
             attributes {
               url
+              alternativeText
             }
           }
         }
@@ -2446,6 +2477,8 @@ export const ProductsDocument = gql`
         name
         price
         slug
+        promotional_price
+        ribbon_label
       }
     }
     meta {

@@ -21,7 +21,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -36,7 +37,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'The Legend of Zelda: Breath of the Wild',
               price: 24,
-              slug: 'the-legend-of-zelda-breath-of-the-wild'
+              slug: 'the-legend-of-zelda-breath-of-the-wild',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -45,7 +48,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -60,7 +64,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Vampire: The Masquerade – Bloodlines',
               price: 99,
-              slug: 'vampire-the-masquerade-bloodlines'
+              slug: 'vampire-the-masquerade-bloodlines',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -69,7 +75,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -84,7 +91,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Wasteland 3 Colorado Collection',
               price: 49,
-              slug: 'wasteland-3-colorado-collection'
+              slug: 'wasteland-3-colorado-collection',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -93,7 +102,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -108,7 +118,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Grand Theft Auto V',
               price: 60,
-              slug: 'grand-theft-auto-v'
+              slug: 'grand-theft-auto-v',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -117,7 +129,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -132,7 +145,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Cyberpunk 2077',
               price: 10,
-              slug: 'cyberpunk-2077'
+              slug: 'cyberpunk-2077',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -141,7 +156,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -156,7 +172,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'The Elder Scrolls V: Skyrim',
               price: 30,
-              slug: 'the-elder-scrolls-v-skyrim'
+              slug: 'the-elder-scrolls-v-skyrim',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -165,7 +183,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -180,7 +199,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: "Assassin's Creed Valhalla",
               price: 40,
-              slug: 'assassins-creed-valhalla'
+              slug: 'assassins-creed-valhalla',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -189,7 +210,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: ''
+                    url: '',
+                    alternativeText: ''
                   }
                 }
               },
@@ -204,7 +226,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Final Fantasy XV',
               price: 35,
-              slug: 'final-fantasy-xv'
+              slug: 'final-fantasy-xv',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           },
           {
@@ -213,7 +237,8 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/product-test.jpg',
+                    alternativeText: ''
                   }
                 }
               },
@@ -228,7 +253,9 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               },
               name: 'Half-Life: Alyx',
               price: 50,
-              slug: 'half-life-alyx'
+              slug: 'half-life-alyx',
+              promotional_price: 0,
+              ribbon_label: ''
             }
           }
         ],

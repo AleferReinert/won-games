@@ -10,6 +10,7 @@ export const PRODUCTS = gql`
             data {
               attributes {
                 url
+                alternativeText
               }
             }
           }
@@ -23,6 +24,8 @@ export const PRODUCTS = gql`
           name
           price
           slug
+          promotional_price
+          ribbon_label
         }
       }
       meta {

@@ -5,7 +5,6 @@ export const PRODUCT_ENTITY = gql`
     data {
       id
       attributes {
-        slug
         cover {
           data {
             attributes {
@@ -14,7 +13,6 @@ export const PRODUCT_ENTITY = gql`
             }
           }
         }
-        name
         developers {
           data {
             attributes {
@@ -22,7 +20,9 @@ export const PRODUCT_ENTITY = gql`
             }
           }
         }
+        name
         price
+        slug
         promotional_price
         ribbon_label
       }
