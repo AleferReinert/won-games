@@ -23,11 +23,11 @@ import * as S from './ProductPage.styles'
 export interface ProductPageProps {
   cover: string
   productHeader: ProductHeaderProps
+  gallery?: GalleryImageProps[]
   description: string
   details: ProductDetailsProps
   comingSoon: ShowcaseProps
   recommended: ShowcaseProps
-  gallery?: GalleryImageProps[]
 }
 
 // Return slugs of first 9 products
@@ -45,7 +45,7 @@ export async function getStaticPaths() {
   return { paths, fallback: true }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params }) => {
   const apolloClient = initializeApollo({})
   const productResponse = await apolloClient.query<ProductBySlugQuery>({
     query: PRODUCT_BY_SLUG,
@@ -53,56 +53,58 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     fetchPolicy: 'no-cache'
   })
   const productsNotFound = productResponse.data.products.data.length === 0
-  productsNotFound && { notFound: true }
+  if (productsNotFound) {
+    return { notFound: true }
+  }
 
   const comingSoonResponse = await apolloClient.query<ComingSoonQuery>({
     query: COMING_SOON,
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
     fetchPolicy: 'no-cache'
   })
-  const comingSoonProducts = comingSoonResponse.data.comingSoonProducts
-  const comingSoonShowcase = comingSoonResponse.data.showcase.data.attributes.comingSoonProducts
 
   const recommendedProducts = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS,
     fetchPolicy: 'no-cache'
   })
 
+  const comingSoon = comingSoonResponse.data.showcase.data.attributes.comingSoonProducts
+  const recommended = recommendedProducts.data.recommended.data.attributes
   const product = productResponse.data.products.data[0]
-  const recommendedSection = recommendedProducts.data.recommended.data.attributes
+  const { cover, name, short_description, price, gallery, description, developers, release_date } = product.attributes
+  const { platforms, publisher, rating, categories } = product.attributes
 
   return {
     revalidate: 60,
     props: {
-      product,
-      cover: getImageUrl(product.attributes.cover.data?.attributes.url) || '/img/defaults/product-cover-default.webp',
+      cover: getImageUrl(cover.data?.attributes.url) || '/img/defaults/product-cover-default.webp',
       productHeader: {
         id: product.id,
-        title: product.attributes.name,
-        description: product.attributes.short_description,
-        price: product.attributes.price
+        title: name,
+        description: short_description,
+        price: price
       },
-      gallery: product.attributes.gallery.data.map(({ attributes }) => ({
+      gallery: gallery.data.map(({ attributes }) => ({
         src: getImageUrl(attributes.url),
         label: attributes.alternativeText
       })),
-      description: product.attributes.description,
+      description: description,
       details: {
-        developer: product.attributes.developers.data[0]?.attributes.name || '',
-        releaseDate: product.attributes.release_date || '',
-        platforms: product.attributes.platforms.data.map((platform) => platform.attributes.name),
-        publisher: product.attributes.publisher.data?.attributes.name || '',
-        rating: product.attributes.rating || '',
-        categories: product.attributes.categories.data.map(({ attributes }) => attributes.name)
+        developer: developers.data[0]?.attributes.name || '',
+        releaseDate: release_date || '',
+        platforms: platforms.data.map((platform) => platform.attributes.name),
+        publisher: publisher.data?.attributes.name || '',
+        rating: rating || '',
+        categories: categories.data.map(({ attributes }) => attributes.name)
       },
       comingSoon: {
-        title: comingSoonShowcase.title,
-        highlight: highlightMapper(comingSoonShowcase.highlight),
-        products: productMapper(comingSoonProducts)
+        title: comingSoon.title,
+        highlight: highlightMapper(comingSoon.highlight),
+        products: productMapper(comingSoonResponse.data.comingSoonProducts)
       },
       recommended: {
-        title: recommendedSection.title,
-        products: productMapper(recommendedSection.products)
+        title: recommended.title,
+        products: productMapper(recommended.products)
       }
     }
   }
