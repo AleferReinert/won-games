@@ -3,7 +3,7 @@ import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { useCart } from 'hooks/useCart'
 import Link from 'next/link'
-import { GetServerSidePropsContext } from 'next/types'
+import { GetServerSideProps } from 'next/types'
 import { useEffect, type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import { RecommendedProductsQuery } from 'types/generated'
@@ -16,9 +16,9 @@ interface SuccessPageProps {
   recommendedShowcase: ShowcaseProps
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export const getServerSideProps: GetServerSideProps<SuccessPageProps> = async (context) => {
   const { session } = await requireAuth(context)
-  if (!session) return { props: {} }
+  if (!session) return { props: {} as SuccessPageProps }
 
   const apolloClient = initializeApollo({ session })
   const responseRecommended = await apolloClient.query<RecommendedProductsQuery>({

@@ -22,6 +22,10 @@ import { getImageUrl } from 'utils/getImageUrl'
 
 export const productsLimit = 9
 
+interface ProductsPageProps {
+  filterOptions: FilterOptionsProps[]
+}
+
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const apolloClient = initializeApollo({})
   const { data: platforms } = await apolloClient.query<PlatformsQuery>({ query: PLATFORMS })
@@ -45,10 +49,6 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
       filterOptions
     }
   }
-}
-
-interface ProductsPageProps {
-  filterOptions: FilterOptionsProps[]
 }
 
 const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
