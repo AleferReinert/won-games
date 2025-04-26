@@ -1,4 +1,6 @@
 /// <reference types="cypress" />
+import '@testing-library/cypress/add-commands'
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -25,4 +27,6 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-Cypress.Commands.add('google', () => cy.visit('https://google.com'))
+Cypress.Commands.add('google', () => {
+  cy.visit('https://google.com')
+})
