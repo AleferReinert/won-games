@@ -118,15 +118,20 @@ Inicie o Storybook:
 yarn storybook
 ```
 
-Execute os testes unitários (necessário que o Storybook esteja em execução):
+Execute os testes unitários:
 
-```
-yarn test
+```bash
+# Storybook precisa estar em execução
+yarn test-storybook
 ```
 
 Execute os testes e2e:
 
-```
+```bash
+# No terminal
+yarn cy:run
+
+# Com interface gráfica
 yarn cy:open
 ```
 
