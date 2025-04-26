@@ -7,33 +7,21 @@ E-commerce de jogos com todas as funcionalidades necessárias:
 ##### Cabeçalho
 
 - Logo
-- Menu com links:
-  - Home
-  - Explorar
+- Menu com links: Home, Explorar
 - Busca
 - Dropdown do carrinho
-- Dropdown do usuário com links:
-  - Minha conta
-  - Lista de desejos
-  - Logout
+- Dropdown do usuário com links: Minha conta, Lista de desejos, Logout
 
 ##### Rodapé
 
 - Logo
-- Colunas de:
-  - Contato
-  - Redes sociais
-  - Links internos
-  - Endereço
+- Colunas de: contato, redes sociais, links internos, endereço
 - Direitos autorais
 
 ##### Home
 
 - Banner
-- Seção de jogos em lançamento
-- Seção de jogos mais populares
-- Seção de jogos que serão lançados em breve
-- Seção de jogos gratuitos
+- Seções de jogos: lançamentos, populares, em breve, gratuitos
 
 ##### Página do jogo
 
@@ -64,10 +52,7 @@ E-commerce de jogos com todas as funcionalidades necessárias:
 
 ##### Minha conta
 
-- Navegação lateral com links:
-  - Meu perfil
-  - Meus pedidos
-  - Logout
+- Navegação lateral com links: Meu perfil, Meus pedidos, Logout
 
 ##### Minha conta / Meu perfil
 
@@ -77,10 +62,7 @@ E-commerce de jogos com todas as funcionalidades necessárias:
 
 ##### Minha conta / Meus pedidos
 
-- Lista de jogos comprados exibindo:
-  - Foto
-  - Nome
-  - Preço
+- Lista de jogos comprados exibindo: foto, nome, preço
 - Número do cartão exibindo apenas os 4 últimos dígitos
 - Bandeira do cartão
 - Data da compra
@@ -92,19 +74,13 @@ E-commerce de jogos com todas as funcionalidades necessárias:
 
 ##### Login
 
-- Formulário com:
-  - E-mail
-  - Senha
+- Formulário com: e-mail, senha
 - Link para redefinir senha
 - Link para criar conta
 
 ##### Cadastro
 
-- Formulário com:
-  - Nome completo
-  - Email
-  - Senha
-  - Confirmação de senha
+- Formulário com: nome completo, e-mail, senha, confirmação de senha
 - Link para login
 
 ##### Carrinho
