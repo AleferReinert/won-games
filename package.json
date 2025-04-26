@@ -14,7 +14,8 @@
     "test": "test-storybook",
     "chromatic": "chromatic --exit-zero-on-changes",
     "generate": "graphql-codegen",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@apollo/client": "^3.13.4",

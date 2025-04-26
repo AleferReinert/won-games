@@ -42,3 +42,7 @@ public/workbox-*.js
 build-storybook.log
 
 tsconfig.tsbuildinfo
+
+# cypress
+cypress/screenshots
+cypress/videos

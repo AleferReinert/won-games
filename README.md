@@ -25,29 +25,18 @@ E-commerce de jogos com todas as funcionalidades necessárias:
 
 ##### Página do jogo
 
-- Banner
-- Nome
-- Preço
-- Descrição curta
+- Banner, nome, preço, descrição curta
 - Botão para adicionar/remover da lista de desejos
 - Botão para adicionar/remover do carrinho
 - Galeria de imagens
 - Descrição longa
-- Categorias
-- Plataformas
-- Data de lançamento
-- Desenvolvedor
-- Editora
-- Classificação etária
-- Seção de jogos que lançarão em breve
-- Seção de jogos recomendados
+- Categorias, plataformas, data de lançamento, desenvolvedor, editora, classificação etária
+- Seções de jogos: em breve, recomendados
 
 ##### Explorar
 
 - Listagem de jogos
-- Filtro por faixa de preço
-- Filtro por plataforma
-- Filtro por categorias
+- Filtros por: faixa de preço, plataforma, categorias
 - Ordenar por preço mais baixo ou mais alto
 
 ##### Minha conta
