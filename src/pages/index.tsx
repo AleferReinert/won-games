@@ -12,76 +12,76 @@ import { bannerMapper, highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './Home.styles'
 
 export interface HomeProps {
-	banners: BannerProps[]
-	newReleasesShowcase: ShowcaseProps
-	mostPopularsShowcase: ShowcaseProps
-	comingSoonShowcase: ShowcaseProps
-	freeProductsShowcase: ShowcaseProps
+  banners: BannerProps[]
+  newReleasesShowcase: ShowcaseProps
+  mostPopularsShowcase: ShowcaseProps
+  comingSoonShowcase: ShowcaseProps
+  freeProductsShowcase: ShowcaseProps
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-	const apolloClient = initializeApollo({})
-	const home = await apolloClient.query<PageHomeQuery>({
-		query: PAGE_HOME,
-		variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
-		fetchPolicy: 'no-cache'
-	})
-	const { newProducts, popularProducts, comingSoonProducts, freeProducts } = home.data.showcases.data.attributes
+  const apolloClient = initializeApollo({})
+  const home = await apolloClient.query<PageHomeQuery>({
+    query: PAGE_HOME,
+    variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
+    fetchPolicy: 'no-cache'
+  })
+  const { newProducts, popularProducts, comingSoonProducts, freeProducts } = home.data.showcases.data.attributes
 
-	return {
-		revalidate: 60,
-		props: {
-			banners: bannerMapper(home.data.banners),
-			newReleasesShowcase: {
-				title: newProducts.title,
-				products: productMapper(home.data.newProducts)
-			},
-			mostPopularsShowcase: {
-				title: popularProducts.title,
-				highlight: highlightMapper(popularProducts.highlight),
-				products: productMapper(popularProducts.products)
-			},
-			comingSoonShowcase: {
-				title: comingSoonProducts.title,
-				highlight: highlightMapper(comingSoonProducts.highlight),
-				products: productMapper(home.data.comingSoonProducts)
-			},
-			freeProductsShowcase: {
-				title: freeProducts.title,
-				highlight: highlightMapper(freeProducts.highlight),
-				products: productMapper(home.data.freeProducts)
-			}
-		}
-	}
+  return {
+    revalidate: 60,
+    props: {
+      banners: bannerMapper(home.data.banners),
+      newReleasesShowcase: {
+        title: newProducts.title,
+        products: productMapper(home.data.newProducts)
+      },
+      mostPopularsShowcase: {
+        title: popularProducts.title,
+        highlight: highlightMapper(popularProducts.highlight),
+        products: productMapper(popularProducts.products)
+      },
+      comingSoonShowcase: {
+        title: comingSoonProducts.title,
+        highlight: highlightMapper(comingSoonProducts.highlight),
+        products: productMapper(home.data.comingSoonProducts)
+      },
+      freeProductsShowcase: {
+        title: freeProducts.title,
+        highlight: highlightMapper(freeProducts.highlight),
+        products: productMapper(home.data.freeProducts)
+      }
+    }
+  }
 }
 export default function Index({
-	banners,
-	newReleasesShowcase,
-	mostPopularsShowcase,
-	comingSoonShowcase,
-	freeProductsShowcase
+  banners,
+  newReleasesShowcase,
+  mostPopularsShowcase,
+  comingSoonShowcase,
+  freeProductsShowcase
 }: HomeProps) {
-	return (
-		<>
-			{banners.length > 0 && (
-				<Container>
-					<S.SectionBanner>
-						<BannerSlider items={banners} />
-					</S.SectionBanner>
-				</Container>
-			)}
+  return (
+    <>
+      {banners.length > 0 && (
+        <Container>
+          <S.SectionBanner>
+            <BannerSlider items={banners} />
+          </S.SectionBanner>
+        </Container>
+      )}
 
-			<S.SectionNews>
-				<Showcase {...newReleasesShowcase} $arrowColor='black' />
-			</S.SectionNews>
+      <S.SectionNews>
+        <Showcase data-cy='newReleases' {...newReleasesShowcase} $arrowColor='black' />
+      </S.SectionNews>
 
-			<Showcase {...mostPopularsShowcase} />
-			<Showcase {...comingSoonShowcase} />
-			<Showcase {...freeProductsShowcase} />
-		</>
-	)
+      <Showcase data-cy='mostPopulars' {...mostPopularsShowcase} />
+      <Showcase data-cy='comingSoon' {...comingSoonShowcase} />
+      <Showcase data-cy='freeGames' {...freeProductsShowcase} />
+    </>
+  )
 }
 
 Index.getLayout = function getLayout(page: ReactElement) {
-	return <DefaultTemplate>{page}</DefaultTemplate>
+  return <DefaultTemplate>{page}</DefaultTemplate>
 }

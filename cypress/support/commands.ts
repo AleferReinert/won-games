@@ -1,32 +1,20 @@
 /// <reference types="cypress" />
 import '@testing-library/cypress/add-commands'
 
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-Cypress.Commands.add('google', () => {
-  cy.visit('https://google.com')
+Cypress.Commands.add('toggleBanner', () => {
+  cy.get('[data-testid="BannerSliderComponent"]').within(() => {
+    cy.get('.slick-track > :nth-child(1)').as('firstBanner')
+    cy.get('.slick-track > :nth-child(2)').as('secondBanner')
+    cy.get('.slick-dots > :nth-child(1)').as('firstDot')
+    cy.get('.slick-dots > :nth-child(2)').as('secondDot')
+
+    cy.get('@firstBanner').should('be.visible')
+    cy.get('@secondDot').click()
+    cy.get('@firstBanner').should('not.be.visible')
+    cy.get('@secondBanner').should('be.visible')
+
+    cy.get('@firstDot').click()
+    cy.get('@secondBanner').should('not.be.visible')
+    cy.get('@firstBanner').should('be.visible')
+  })
 })

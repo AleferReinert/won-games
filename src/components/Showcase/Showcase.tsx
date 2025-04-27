@@ -2,16 +2,17 @@ import { Container } from 'components/Container/Container.styles'
 import Heading from 'components/Heading/Heading'
 import Highlight, { HighlightProps } from 'components/Highlight/Highlight'
 import ProductSlider, { ProductSliderProps } from 'components/ProductSlider/ProductSlider'
+import { ComponentProps } from 'react'
 import * as S from './Showcase.styles'
 
-export interface ShowcaseProps extends ProductSliderProps {
+export interface ShowcaseProps extends ProductSliderProps, ComponentProps<'div'> {
   title?: string
   highlight?: HighlightProps
 }
 
-const Showcase = ({ title, highlight, products, $arrowColor = 'white' }: ShowcaseProps) => {
+const Showcase = ({ title, highlight, products, $arrowColor = 'white', ...rest }: ShowcaseProps) => {
   return (
-    <S.Wrapper data-testid='ShowcaseComponent'>
+    <S.Wrapper {...rest} data-testid='ShowcaseComponent'>
       <Container>
         {title && (
           <Heading $line='left' $lineColor='secondary'>
