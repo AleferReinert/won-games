@@ -203,7 +203,7 @@ export type ComponentPageHighlightInput = {
 
 export type ComponentPagePopularProducts = {
   __typename?: 'ComponentPagePopularProducts';
-  highlight: Maybe<ComponentPageHighlight>;
+  highlight: ComponentPageHighlight;
   id: Scalars['ID']['output'];
   products: Maybe<ProductRelationResponseCollection>;
   title: Scalars['String']['output'];
@@ -252,7 +252,7 @@ export type ComponentPageSection = {
   __typename?: 'ComponentPageSection';
   highlight: Maybe<ComponentPageHighlight>;
   id: Scalars['ID']['output'];
-  title: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
 };
 
 export type ComponentPageSectionInput = {
@@ -1989,7 +1989,7 @@ export type ProductBySlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductBySlugQuery = { __typename?: 'Query', products: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, short_description: string, description: string, price: number, release_date: any, rating: Enum_Product_Rating, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string } } }, gallery: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } }> }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> }, platforms: { __typename?: 'PlatformRelationResponseCollection', data: Array<{ __typename?: 'PlatformEntity', attributes: { __typename?: 'Platform', name: string } }> }, publisher: { __typename?: 'PublisherEntityResponse', data: { __typename?: 'PublisherEntity', attributes: { __typename?: 'Publisher', name: string } } }, categories: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes: { __typename?: 'Category', name: string } }> } } }> } };
+export type ProductBySlugQuery = { __typename?: 'Query', products: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, short_description: string, description: string, price: number, release_date: any, rating: Enum_Product_Rating, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string, width: number, height: number } } }, gallery: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } }> }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> }, platforms: { __typename?: 'PlatformRelationResponseCollection', data: Array<{ __typename?: 'PlatformEntity', attributes: { __typename?: 'Platform', name: string } }> }, publisher: { __typename?: 'PublisherEntityResponse', data: { __typename?: 'PublisherEntity', attributes: { __typename?: 'Publisher', name: string } } }, categories: { __typename?: 'CategoryRelationResponseCollection', data: Array<{ __typename?: 'CategoryEntity', attributes: { __typename?: 'Category', name: string } }> } } }> } };
 
 export type ProductsQueryVariables = Exact<{
   limit: InputMaybe<Scalars['Int']['input']>;
@@ -2398,6 +2398,9 @@ export const ProductBySlugDocument = gql`
           data {
             attributes {
               url
+              alternativeText
+              width
+              height
             }
           }
         }

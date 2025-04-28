@@ -3,15 +3,8 @@ import styled, { css } from 'styled-components'
 
 import * as HeadingStyles from 'components/Heading/Heading.styles'
 
-type CoverProps = {
-  src: string
-}
-
-export const Cover = styled.div<CoverProps>`
-  ${({ theme, src }) => css`
-    background-image: url(${src});
-    background-position: top center;
-    background-size: cover;
+export const Cover = styled.div`
+  ${({ theme }) => css`
     width: 100%;
     height: 40rem;
     position: absolute;

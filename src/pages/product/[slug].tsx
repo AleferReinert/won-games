@@ -11,6 +11,7 @@ import { PRODUCT_BY_SLUG } from 'graphql/queries/productBySlug'
 import { PRODUCTS } from 'graphql/queries/products'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { GetStaticProps } from 'next'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
@@ -21,7 +22,10 @@ import { highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './ProductPage.styles'
 
 export interface ProductPageProps {
-  cover: string
+  cover: {
+    url: string
+    alternativeText: string
+  }
   productHeader: ProductHeaderProps
   gallery?: GalleryImageProps[]
   description: string
@@ -77,7 +81,12 @@ export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params 
   return {
     revalidate: 60,
     props: {
-      cover: getImageUrl(cover.data?.attributes.url) || '/img/defaults/product-cover-default.webp',
+      cover: {
+        url: getImageUrl(cover.data?.attributes.url) || '/img/defaults/product-cover-default.webp',
+        alternativeText: cover.data.attributes.alternativeText,
+        width: cover.data.attributes.width,
+        height: cover.data.attributes.height
+      },
       productHeader: {
         id: product.id,
         title: name,
@@ -124,7 +133,16 @@ const ProductPage = ({
 
   return (
     <>
-      <S.Cover src={cover} aria-label='cover' role='img' />
+      <S.Cover>
+        <Image
+          src={cover.url}
+          alt={cover.alternativeText}
+          fill
+          objectFit='cover'
+          aria-hidden={cover.alternativeText ? false : true}
+        />
+      </S.Cover>
+
       <S.ProductHeaderWrapper>
         <ProductHeader {...productHeader} />
       </S.ProductHeaderWrapper>

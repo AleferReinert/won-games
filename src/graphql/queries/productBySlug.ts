@@ -10,6 +10,7 @@ export const PRODUCT_BY_SLUG = gql`
             data {
               attributes {
                 url
+                alternativeText
               }
             }
           }

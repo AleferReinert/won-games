@@ -13,7 +13,10 @@ const meta: Meta<typeof ProductPage> = {
   title: 'Pages/Product',
   component: ProductPage,
   args: {
-    cover: '/img/products/cyberpunk-1.jpg',
+    cover: {
+      url: '/img/products/cyberpunk-1.jpg',
+      alternativeText: 'Cyberpunk'
+    },
     productHeader: productHeaderMock,
     description: productDescriptionMock,
     details: productDetailsMock,
@@ -51,7 +54,7 @@ export const Default: Story = {
     const canvas = within(canvasElement)
 
     await step('Cover', () => {
-      const cover = canvas.getByRole('img', { name: 'cover' })
+      const cover = canvas.getByRole('img', { name: 'Cyberpunk' })
       expect(cover).toBeVisible()
     })
 
