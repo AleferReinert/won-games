@@ -1,11 +1,12 @@
+import { FilterOptionsProps } from 'components/Filter/Filter'
 import { CategoriesQuery, PlatformsQuery } from 'types/generated'
 
-interface FilterOptionsProps {
+interface generateFilterOptionsProps {
   platforms: PlatformsQuery
   categories: CategoriesQuery
 }
 
-export const generateFilterOptions = ({ platforms, categories }: FilterOptionsProps) => [
+export const generateFilterOptions = ({ platforms, categories }: generateFilterOptionsProps): FilterOptionsProps[] => [
   {
     title: 'Price',
     name: 'price',

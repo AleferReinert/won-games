@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { NormalizedCacheObject, useQuery } from '@apollo/client'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 import Container from 'components/Container/Container'
 import Empty from 'components/Empty/Empty'
@@ -24,6 +24,7 @@ export const productsLimit = 9
 
 interface ProductsPageProps {
   filterOptions: FilterOptionsProps[]
+  initialApolloState: NormalizedCacheObject | null
 }
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
@@ -42,13 +43,12 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
       })
     }
   })
-
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-      filterOptions
-    }
+  const props: ProductsPageProps = {
+    filterOptions,
+    initialApolloState: apolloClient.cache.extract()
   }
+
+  return { props }
 }
 
 const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
