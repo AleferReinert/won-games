@@ -14,5 +14,16 @@ describe('Product page (unauthenticated)', () => {
       cy.findByLabelText('Price').should('have.text', '$108.00')
       cy.findByRole('button', { name: 'Add to cart' }).should('be.visible')
     })
+
+    cy.findByTestId('GalleryComponent').within(() => {
+      cy.findAllByRole('button', { name: 'Thumb' }).eq(0).as('Thumb1')
+      cy.findByLabelText('modal').as('Modal')
+
+      cy.get('@Modal').should('not.be.visible')
+      cy.get('@Thumb1').click()
+      cy.get('@Modal').should('be.visible')
+      cy.findByRole('button', { name: 'Close modal' }).click()
+      cy.get('@Modal').should('not.be.visible')
+    })
   })
 })
