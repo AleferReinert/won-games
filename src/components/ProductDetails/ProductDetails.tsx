@@ -48,7 +48,8 @@ const ProductDetails = ({ developer, releaseDate, platforms, publisher, rating, 
                   {new Intl.DateTimeFormat('en-US', {
                     day: 'numeric',
                     month: 'short',
-                    year: 'numeric'
+                    year: 'numeric',
+                    timeZone: 'UTC'
                   }).format(new Date(releaseDate))}
                 </S.Description>
               </S.Block>

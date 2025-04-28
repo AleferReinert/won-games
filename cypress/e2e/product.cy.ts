@@ -3,7 +3,7 @@ const shortDescription =
   'Anno 1404 and its add-on are an award winning combination of construction, economy, discovery, diplomacy & combat.'
 
 describe('Product page (unauthenticated)', () => {
-  it('Cover, title, short description, price and add to cart button', () => {
+  it('Cover, title, short description, price, add to cart button, gallery, description, categories, platforms, release date, developer, publisher, rating', () => {
     cy.visit('/product/anno-1404')
 
     cy.findByRole('img', { name: 'Anno 1404' })
@@ -24,6 +24,17 @@ describe('Product page (unauthenticated)', () => {
       cy.get('@Modal').should('be.visible')
       cy.findByRole('button', { name: 'Close modal' }).click()
       cy.get('@Modal').should('not.be.visible')
+    })
+
+    cy.findByTestId('description').should('contain.text', 'Create your own nation with a unique blend')
+
+    cy.findByTestId('ProductDetailsComponent').within(() => {
+      cy.findByText('(mac, windows)').should('be.visible')
+      cy.findByText('Dec 8, 2010').should('be.visible')
+      cy.findByText('Blue Byte, Related Designs').should('be.visible')
+      cy.findByText('Ubisoft').should('be.visible')
+      cy.findByText('12+').should('be.visible')
+      cy.findByText('Historical, Simulation, Strategy').should('be.visible')
     })
   })
 })
