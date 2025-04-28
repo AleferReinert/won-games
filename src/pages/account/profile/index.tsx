@@ -28,12 +28,12 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
     variables: { identifier: session.id }
   })
 
-  return {
-    props: {
-      username: data.usersPermissionsUser.data.attributes.username,
-      email: data.usersPermissionsUser.data.attributes.email
-    }
+  const props: ProfilePageProps = {
+    username: data.usersPermissionsUser.data.attributes.username,
+    email: data.usersPermissionsUser.data.attributes.email
   }
+
+  return { props }
 }
 
 const ProfilePage = ({ username, email }: ProfilePageProps) => {
