@@ -76,7 +76,7 @@ export default function Index({
 
       <Showcase data-cy='mostPopulars' {...mostPopularsShowcase} />
       <Showcase data-cy='comingSoon' {...comingSoonShowcase} />
-      <Showcase data-cy='freeGames' {...freeProductsShowcase} />
+      <Showcase data-cy='freeProducts' {...freeProductsShowcase} />
     </>
   )
 }

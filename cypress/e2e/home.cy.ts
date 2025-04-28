@@ -18,7 +18,7 @@ describe('Home page', () => {
       cy.findByTestId('HighlightComponent').should('be.visible')
       cy.findByTestId('ProductSliderComponent').should('be.visible')
     })
-    cy.get('[data-cy="freeGames"]').within(() => {
+    cy.get('[data-cy="freeProducts"]').within(() => {
       cy.findByRole('heading', { level: 2 }).should('be.visible')
       cy.findByTestId('HighlightComponent').should('be.visible')
       cy.findByTestId('ProductSliderComponent').should('be.visible')

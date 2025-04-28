@@ -166,8 +166,8 @@ const ProductPage = ({
         <Divider />
       </Container>
 
-      <Showcase {...comingSoon} />
-      <Showcase {...recommended} />
+      <Showcase data-cy='comingSoon' {...comingSoon} />
+      <Showcase data-cy='recommendedProducts' {...recommended} />
     </>
   )
 }
