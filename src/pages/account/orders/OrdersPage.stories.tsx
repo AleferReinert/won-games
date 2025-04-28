@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
-import { ordersResponseMock } from 'mocks/ordersResponse.mock'
+import { ordersMock } from 'mocks/orders.mock'
 import AccountTemplate from 'templates/Account/Account'
 import OrdersPage from '.'
 import { NextAuthSessionArgs } from '../../../../.storybook/preview'
@@ -18,7 +18,7 @@ const meta: Meta<typeof OrdersPage> & { args?: NextAuthSessionArgs } = {
   ],
   args: {
     nextAuthSession: nextAuthSessionMock,
-    orders: { data: [], meta: { pagination: { total: 0, page: 1, pageCount: 1, pageSize: 1 } } }
+    orders: []
   },
   parameters: {
     layout: 'fullscreen'
@@ -42,8 +42,7 @@ export const Empty: Story = {
 
 export const WithOrders: Story = {
   args: {
-    // @ts-expect-error todo fix
-    orders: ordersResponseMock.result?.data.orders
+    orders: ordersMock.orders
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)

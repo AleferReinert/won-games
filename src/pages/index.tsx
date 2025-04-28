@@ -27,33 +27,32 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     fetchPolicy: 'no-cache'
   })
   const { newProducts, popularProducts, comingSoonProducts, freeProducts } = home.data.showcases.data.attributes
-
-  return {
-    revalidate: 60,
-    props: {
-      banners: bannerMapper(home.data.banners),
-      newReleasesShowcase: {
-        title: newProducts.title,
-        products: productMapper(home.data.newProducts)
-      },
-      mostPopularsShowcase: {
-        title: popularProducts.title,
-        highlight: highlightMapper(popularProducts.highlight),
-        products: productMapper(popularProducts.products)
-      },
-      comingSoonShowcase: {
-        title: comingSoonProducts.title,
-        highlight: highlightMapper(comingSoonProducts.highlight),
-        products: productMapper(home.data.comingSoonProducts)
-      },
-      freeProductsShowcase: {
-        title: freeProducts.title,
-        highlight: highlightMapper(freeProducts.highlight),
-        products: productMapper(home.data.freeProducts)
-      }
+  const props: HomeProps = {
+    banners: bannerMapper(home.data.banners),
+    newReleasesShowcase: {
+      title: newProducts.title,
+      products: productMapper(home.data.newProducts)
+    },
+    mostPopularsShowcase: {
+      title: popularProducts.title,
+      highlight: highlightMapper(popularProducts.highlight),
+      products: productMapper(popularProducts.products)
+    },
+    comingSoonShowcase: {
+      title: comingSoonProducts.title,
+      highlight: highlightMapper(comingSoonProducts.highlight),
+      products: productMapper(home.data.comingSoonProducts)
+    },
+    freeProductsShowcase: {
+      title: freeProducts.title,
+      highlight: highlightMapper(freeProducts.highlight),
+      products: productMapper(home.data.freeProducts)
     }
   }
+
+  return { revalidate: 60, props }
 }
+
 export default function Index({
   banners,
   newReleasesShowcase,

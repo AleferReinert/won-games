@@ -1,15 +1,19 @@
 import Alert from 'components/Alert/Alert'
 import Box from 'components/Box/Box'
-import CartItem from 'components/CartItem/CartItem'
+import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import { ORDERS } from 'graphql/queries/orders'
 import type { GetServerSidePropsContext } from 'next'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
-import { OrderEntityResponseCollection, OrdersQuery, OrdersQueryVariables } from 'types/generated'
+import { OrdersQuery, OrdersQueryVariables } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { ordersMapper } from 'utils/mappers'
 import { requireAuth } from 'utils/requireAuth'
 import * as S from './OrdersPage.styles'
+
+export interface OrdersPageProps {
+  orders: CartItemProps[]
+}
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { session } = await requireAuth(context)
@@ -21,24 +25,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     variables: { identifier: session.id },
     fetchPolicy: 'no-cache'
   })
-
-  return {
-    props: {
-      orders: orders.data.orders
-    }
+  const props: OrdersPageProps = {
+    orders: ordersMapper(orders.data)
   }
-}
 
-interface OrdersPageProps {
-  orders: OrderEntityResponseCollection
+  return { props }
 }
 
 const OrdersPage = ({ orders }: OrdersPageProps) => {
-  const ordersItems = ordersMapper(orders)
-
-  return ordersItems.length ? (
+  return orders.length ? (
     <S.Wrapper>
-      {ordersItems.map((item) => (
+      {orders.map((item) => (
         <CartItem
           removeFromCartButton={false}
           key={item.id}

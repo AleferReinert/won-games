@@ -5,7 +5,7 @@ import { ProductProps } from 'components/Product/Product'
 import {
   BannerFragment,
   HighlightFragment,
-  OrderEntityResponseCollection,
+  OrdersQuery,
   ProductEntityFragment,
   ProductRelationFragment,
   Query
@@ -93,8 +93,8 @@ export const productMapper = (products: ProductEntityFragment | ProductRelationF
 }
 
 // Retornas compras realizadas
-export function ordersMapper(response: OrderEntityResponseCollection): CartItemProps[] {
-  return response.data.flatMap((orderEntity) => {
+export function ordersMapper(response: Pick<OrdersQuery, 'orders'>): CartItemProps[] {
+  return response.orders.data.flatMap((orderEntity) => {
     const { card_brand, card_last4, createdAt } = orderEntity.attributes
     const paymentInfo: PaymentProps = {
       creditCardBrand: card_brand || '',
