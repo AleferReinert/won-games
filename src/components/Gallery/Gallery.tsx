@@ -1,7 +1,7 @@
 import { ArrowBackIos as ArrowLeft, ArrowForwardIos as ArrowRight, Close } from '@styled-icons/material-outlined'
 import Slider from 'components/Slider/Slider'
 import Image from 'next/image'
-import { SetStateAction, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SlickSlider, { Settings } from 'react-slick'
 import * as S from './Gallery.styles'
 
@@ -51,7 +51,6 @@ export interface GalleryProps {
 const Gallery = ({ items }: GalleryProps) => {
   const slider = useRef<SlickSlider>(null)
   const [modal, setModal] = useState(false)
-  const [mousePosition, setMousePosition] = useState(0)
 
   useEffect(() => {
     const handleKeyUp = ({ key }: KeyboardEvent) => {
@@ -69,9 +68,8 @@ const Gallery = ({ items }: GalleryProps) => {
           <S.Thumb
             key={'thumb-' + index}
             title='Open modal'
-            onMouseDown={(event: { clientX: SetStateAction<number> }) => setMousePosition(event.clientX)}
-            onMouseUp={(event: { clientX: number }) => {
-              event.clientX === mousePosition && (slider.current!.slickGoTo(index, true), setModal(true))
+            onClick={() => {
+              slider.current!.slickGoTo(index, true), setModal(true)
             }}
           >
             <Image
