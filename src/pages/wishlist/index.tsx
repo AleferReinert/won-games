@@ -30,16 +30,15 @@ export const getServerSideProps: GetServerSideProps<WishlistPageProps> = async (
     query: RECOMMENDED_PRODUCTS
   })
   const { title, highlight, products } = responseRecommended.data.recommended.data.attributes
-
-  return {
-    props: {
-      recommendedShowcase: {
-        title,
-        highlight: highlightMapper(highlight),
-        products: productMapper(products)
-      }
+  const props: WishlistPageProps = {
+    recommendedShowcase: {
+      title,
+      highlight: highlightMapper(highlight),
+      products: productMapper(products)
     }
   }
+
+  return { props }
 }
 
 const WishlistPage = ({ recommendedShowcase }: WishlistPageProps & NextPageWithLayout) => {

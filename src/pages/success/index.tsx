@@ -25,16 +25,15 @@ export const getServerSideProps: GetServerSideProps<SuccessPageProps> = async (c
     query: RECOMMENDED_PRODUCTS
   })
   const { title, highlight, products } = responseRecommended.data.recommended.data.attributes
-
-  return {
-    props: {
-      recommendedShowcase: {
-        title,
-        highlight: highlightMapper(highlight),
-        products: productMapper(products)
-      }
+  const props: SuccessPageProps = {
+    recommendedShowcase: {
+      title,
+      highlight: highlightMapper(highlight),
+      products: productMapper(products)
     }
   }
+
+  return { props }
 }
 
 const SuccessPage = ({ recommendedShowcase }: SuccessPageProps) => {
