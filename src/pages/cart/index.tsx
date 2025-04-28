@@ -37,16 +37,15 @@ export const getServerSideProps: GetServerSideProps<CartPageProps> = async (cont
     query: RECOMMENDED_PRODUCTS
   })
   const { title, highlight, products } = recommendedProducts.data.recommended.data.attributes
-
-  return {
-    props: {
-      recommendedShowcase: {
-        title,
-        highlight: highlightMapper(highlight),
-        products: productMapper(products)
-      }
+  const props: CartPageProps = {
+    recommendedShowcase: {
+      title,
+      highlight: highlightMapper(highlight),
+      products: productMapper(products)
     }
   }
+
+  return { props }
 }
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
