@@ -51,6 +51,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params }) => {
   const apolloClient = initializeApollo({})
+
   const productResponse = await apolloClient.query<ProductBySlugQuery>({
     query: PRODUCT_BY_SLUG,
     variables: { slug: params?.slug },
@@ -60,13 +61,11 @@ export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params 
   if (productsNotFound) {
     return { notFound: true }
   }
-
   const comingSoonResponse = await apolloClient.query<ComingSoonQuery>({
     query: COMING_SOON,
     variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
     fetchPolicy: 'no-cache'
   })
-
   const recommendedProducts = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS,
     fetchPolicy: 'no-cache'
@@ -77,46 +76,42 @@ export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params 
   const product = productResponse.data.products.data[0]
   const { cover, name, short_description, price, gallery, description, developers, release_date } = product.attributes
   const { platforms, publisher, rating, categories } = product.attributes
-
-  return {
-    revalidate: 60,
-    props: {
-      cover: {
-        url: getImageUrl(cover.data?.attributes.url) || '/img/defaults/product-cover-default.webp',
-        alternativeText: cover.data.attributes.alternativeText,
-        width: cover.data.attributes.width,
-        height: cover.data.attributes.height
-      },
-      productHeader: {
-        id: product.id,
-        title: name,
-        description: short_description,
-        price: price
-      },
-      gallery: gallery.data.map(({ attributes }) => ({
-        src: getImageUrl(attributes.url),
-        label: attributes.alternativeText
-      })),
-      description: description,
-      details: {
-        developer: developers.data[0]?.attributes.name || '',
-        releaseDate: release_date || '',
-        platforms: platforms.data.map((platform) => platform.attributes.name),
-        publisher: publisher.data?.attributes.name || '',
-        rating: rating || '',
-        categories: categories.data.map(({ attributes }) => attributes.name)
-      },
-      comingSoon: {
-        title: comingSoon.title,
-        highlight: highlightMapper(comingSoon.highlight),
-        products: productMapper(comingSoonResponse.data.comingSoonProducts)
-      },
-      recommended: {
-        title: recommended.title,
-        products: productMapper(recommended.products)
-      }
+  const props: ProductPageProps = {
+    cover: {
+      url: getImageUrl(cover.data?.attributes.url) || '/img/defaults/product-cover-default.webp',
+      alternativeText: cover.data.attributes.alternativeText
+    },
+    productHeader: {
+      id: product.id,
+      title: name,
+      description: short_description,
+      price: price
+    },
+    gallery: gallery.data.map(({ attributes }) => ({
+      src: getImageUrl(attributes.url),
+      label: attributes.alternativeText
+    })),
+    description: description,
+    details: {
+      developer: developers.data[0]?.attributes.name || '',
+      releaseDate: release_date || '',
+      platforms: platforms.data.map((platform) => platform.attributes.name),
+      publisher: publisher.data?.attributes.name || '',
+      rating: rating || '',
+      categories: categories.data.map(({ attributes }) => attributes.name)
+    },
+    comingSoon: {
+      title: comingSoon.title,
+      highlight: highlightMapper(comingSoon.highlight),
+      products: productMapper(comingSoonResponse.data.comingSoonProducts)
+    },
+    recommended: {
+      title: recommended.title,
+      products: productMapper(recommended.products)
     }
   }
+
+  return { revalidate: 60, props }
 }
 
 const ProductPage = ({
