@@ -40,7 +40,7 @@ type Story = StoryObj<typeof ShowcaseComponent>
 
 export const Title: Story = {
   args: {
-    title: 'Most populars'
+    title: 'Most popular'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)

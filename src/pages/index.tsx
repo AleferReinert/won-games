@@ -14,7 +14,7 @@ import * as S from './Home.styles'
 export interface HomeProps {
   banners: BannerProps[]
   newReleasesShowcase: ShowcaseProps
-  mostPopularsShowcase: ShowcaseProps
+  mostPopularShowcase: ShowcaseProps
   comingSoonShowcase: ShowcaseProps
   freeProductsShowcase: ShowcaseProps
 }
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
       title: newProducts.title,
       products: productMapper(home.data.newProducts)
     },
-    mostPopularsShowcase: {
+    mostPopularShowcase: {
       title: popularProducts.title,
       highlight: highlightMapper(popularProducts.highlight),
       products: productMapper(popularProducts.products)
@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 export default function Index({
   banners,
   newReleasesShowcase,
-  mostPopularsShowcase,
+  mostPopularShowcase,
   comingSoonShowcase,
   freeProductsShowcase
 }: HomeProps) {
@@ -78,7 +78,7 @@ export default function Index({
         </S.SectionNews>
       )}
 
-      <Showcase data-cy='mostPopulars' {...mostPopularsShowcase} />
+      <Showcase data-cy='mostPopular' {...mostPopularShowcase} />
       <Showcase data-cy='comingSoon' {...comingSoonShowcase} />
       <Showcase data-cy='freeProducts' {...freeProductsShowcase} />
     </>

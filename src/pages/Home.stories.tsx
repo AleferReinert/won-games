@@ -15,8 +15,8 @@ const meta: Meta<typeof HomeTemplate> = {
       title: 'New Games',
       products: productsMock
     },
-    mostPopularsShowcase: {
-      title: 'Most Populars',
+    mostPopularShowcase: {
+      title: 'Most Popular',
       highlight: highlightMock,
       products: productsMock
     },
@@ -54,7 +54,7 @@ export const Home: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const showcaseNewProducts = within(canvas.getAllByTestId('ShowcaseComponent')[0])
-    const showcaseMostPopulars = within(canvas.getAllByTestId('ShowcaseComponent')[1])
+    const showcaseMostPopular = within(canvas.getAllByTestId('ShowcaseComponent')[1])
     const showcaseComingSoon = within(canvas.getAllByTestId('ShowcaseComponent')[2])
     const showcaseFreeProducts = within(canvas.getAllByTestId('ShowcaseComponent')[3])
 
@@ -70,11 +70,11 @@ export const Home: Story = {
       expect(products).toBeVisible()
     })
 
-    await step('Section most populars: title, highlight and products', () => {
-      const title = showcaseMostPopulars.getByRole('heading', { level: 2 })
-      const highlight = showcaseMostPopulars.getByTestId('HighlightComponent')
-      const products = showcaseMostPopulars.getByTestId('ProductSliderComponent')
-      expect(title).toHaveTextContent('Most Populars')
+    await step('Section most popular: title, highlight and products', () => {
+      const title = showcaseMostPopular.getByRole('heading', { level: 2 })
+      const highlight = showcaseMostPopular.getByTestId('HighlightComponent')
+      const products = showcaseMostPopular.getByTestId('ProductSliderComponent')
+      expect(title).toHaveTextContent('Most Popular')
       expect(highlight).toBeVisible()
       expect(products).toBeVisible()
     })
