@@ -59,7 +59,7 @@ describe('Products page', () => {
     cy.url().should('include', `windows=true`)
   })
 
-  it.only('Filter by categories', () => {
+  it('Filter by categories', () => {
     cy.findByRole('checkbox', { name: `Action` }).click()
     cy.url().should('include', `action=true`)
 
@@ -67,7 +67,7 @@ describe('Products page', () => {
     cy.url().should('include', `adventure=true`)
   })
 
-  it.only('Filter with empty products', () => {
+  it('Filter with empty products', () => {
     cy.findByRole('checkbox', { name: `Naval` }).click()
     cy.findByText('No results found').should('be.visible')
     cy.get('@FilteredProducts').should('have.length', 0)
