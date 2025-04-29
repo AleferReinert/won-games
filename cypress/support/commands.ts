@@ -23,7 +23,7 @@ Cypress.Commands.add('toggleBanner', () => {
 Cypress.Commands.add('filterUnderPrice', (price) => {
   cy.findByRole('radio', { name: `Under $${price}` }).click()
   cy.url().should('include', `price=${price}`)
-  cy.wait(1000)
+  cy.wait(500)
   cy.get('@FilteredProducts')
     .findAllByLabelText('Price')
     .each(($price) => {
@@ -31,4 +31,53 @@ Cypress.Commands.add('filterUnderPrice', (price) => {
       const priceNumber = Number(priceText.replace('$', ''))
       expect(priceNumber).to.be.lessThan(price)
     })
+})
+
+Cypress.Commands.add('getPriceValue', (priceAlias) => {
+  cy.get(priceAlias)
+    .invoke('text')
+    .then((text) => text.replace('$', ''))
+})
+
+Cypress.Commands.add('isPriceAscending', (firstPriceAlias, lastPriceAlias) => {
+  cy.getPriceValue(firstPriceAlias).then((firstPrice) => {
+    let parsedFirstPrice: number
+
+    if (firstPrice === 'Free') {
+      parsedFirstPrice = 0
+    } else {
+      parsedFirstPrice = Number(firstPrice)
+    }
+
+    cy.getPriceValue(lastPriceAlias).then((lastPrice) => {
+      let parsedLastPrice: number
+      if (lastPrice === 'Free') {
+        parsedLastPrice = 0
+      } else {
+        parsedLastPrice = Number(lastPrice)
+      }
+      expect(parsedLastPrice).to.be.greaterThan(parsedFirstPrice)
+    })
+  })
+})
+
+Cypress.Commands.add('isPriceDescending', (firstPriceAlias, lastPriceAlias) => {
+  cy.getPriceValue(firstPriceAlias).then((firstPrice) => {
+    let parsedFirstPrice: number
+    if (firstPrice === 'Free') {
+      parsedFirstPrice = 0
+    } else {
+      parsedFirstPrice = Number(firstPrice)
+    }
+
+    cy.getPriceValue(lastPriceAlias).then((lastPrice) => {
+      let parsedLastPrice: number
+      if (lastPrice === 'Free') {
+        parsedLastPrice = 0
+      } else {
+        parsedLastPrice = Number(lastPrice)
+      }
+      expect(parsedLastPrice).to.be.lessThan(parsedFirstPrice)
+    })
+  })
 })

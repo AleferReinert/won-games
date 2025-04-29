@@ -1,30 +1,50 @@
 /// <reference types="cypress" />
 
 describe('Products page', () => {
-  it('Render 9 products and show more on button click', () => {
+  beforeEach(() => {
     cy.visit('/products')
     cy.get('[data-cy="products"]').findAllByRole('article').as('FilteredProducts')
-    cy.findByRole('button', { name: /show more/i }).as('ShowMoreButton')
+    cy.intercept('POST', '**/graphql', (req) => {
+      if (req.body.operationName === 'Products') {
+        req.alias = 'getProducts'
+      }
+    })
+  })
 
-    // Show more products on button click
+  it('Loads 9 products by default and loads more on button click', () => {
     cy.get('@FilteredProducts').should('have.length', 9)
-    cy.get('@ShowMoreButton').click()
+    cy.findByRole('button', { name: /show more/i }).click()
     cy.get('@FilteredProducts').should('have.length.gt', 9)
+  })
 
-    // Filter options: Free
+  it('Filter by price', () => {
     cy.findByRole('radio', { name: `Free` }).click()
     cy.url().should('include', `price=0`)
-    cy.wait(1000)
+    cy.wait('@getProducts')
     cy.get('@FilteredProducts')
       .findAllByLabelText('Price')
       .each(($price) => {
         expect($price.text()).to.equal('Free')
       })
 
-    // Filter options: Price under
     cy.filterUnderPrice(50)
     cy.filterUnderPrice(100)
     cy.filterUnderPrice(150)
     cy.filterUnderPrice(200)
+  })
+
+  it('Filter by sort by', () => {
+    cy.get('@FilteredProducts').first().findByLabelText('Price').as('FirstPrice')
+    cy.get('@FilteredProducts').last().findByLabelText('Price').as('LastPrice')
+
+    cy.findByRole('radio', { name: `Low to high` }).click()
+    cy.url().should('include', `sort=price%3Aasc`)
+    cy.wait('@getProducts')
+    cy.isPriceAscending('@FirstPrice', '@LastPrice')
+
+    cy.findByRole('radio', { name: `High to low` }).click()
+    cy.url().should('include', `sort=price%3Adesc`)
+    cy.wait('@getProducts')
+    cy.isPriceDescending('@FirstPrice', '@LastPrice')
   })
 })
