@@ -99,10 +99,13 @@ export const CloseModal = styled.div`
     padding: ${theme.spacings.xxsmall};
     text-align: right;
     color: ${theme.colors.white};
+    z-index: ${theme.layers.overlay};
 
     svg {
       cursor: pointer;
       width: 2rem;
+      height: 2rem;
+      fill: ${theme.colors.white};
     }
   `}
 `

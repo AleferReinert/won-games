@@ -1,17 +1,15 @@
 /// <reference types="cypress" />
 
 describe('Product page (unauthenticated)', () => {
-  it('Cover, title, short description, price, add to cart button, gallery, description, categories, platforms, release date, developer, publisher, rating, coming soon and recommended products', () => {
-    cy.visit('/product/anno-1404')
+  beforeEach(() => cy.visit('/product/anno-1404'))
 
+  it('Cover, title, short description, price, add to cart button, gallery, description, categories, platforms, release date, developer, publisher, rating, coming soon and recommended products', () => {
     cy.findByRole('img', { name: 'Anno 1404' })
 
+    cy.findByLabelText('Cart items').as('CartItemsCount')
     cy.findByTestId('ProductHeaderComponent').within(() => {
       cy.findByRole('heading', { level: 1 }).should('have.text', 'Anno 1404')
-      cy.findByRole('paragraph').should(
-        'contain.text',
-        'Anno 1404 and its add-on are an award winning combination of construction'
-      )
+      cy.findByRole('paragraph').should('contain.text', 'Anno 1404 and its add-on are an award winning combination')
       cy.findByLabelText('Price').should('have.text', '$108.00')
       cy.findByRole('button', { name: 'Add to cart' }).should('be.visible')
     })
@@ -48,5 +46,40 @@ describe('Product page (unauthenticated)', () => {
       cy.findByRole('heading', { level: 2 }).should('be.visible')
       cy.findByTestId('ProductSliderComponent').should('be.visible')
     })
+  })
+
+  it('Add to cart/remove from cart', () => {
+    cy.findByLabelText('Cart items').as('CartItemsBadge')
+    cy.findByTestId('ProductHeaderComponent').findByRole('button', { name: 'Add to cart' }).as('AddToCartButton')
+    cy.findByRole('button', { name: 'Shopping cart' }).as('ShoppingCartButton')
+    cy.findByTestId('CartItemsComponent').as('CartItemsComponent')
+
+    // Empty badge on header
+    cy.get('@CartItemsBadge').should('have.text', '0')
+
+    // Add to cart
+    cy.get('@AddToCartButton').click()
+
+    // Update badge
+    cy.get('@CartItemsBadge').should('have.text', '1')
+
+    // Open dropdown with product and total price
+    cy.get('@ShoppingCartButton').click()
+    cy.get('@CartItemsComponent').should('be.visible')
+    cy.get('@CartItemsComponent').findByText('Anno 1404').should('be.visible')
+    cy.get('@CartItemsComponent').findByLabelText('total price').should('have.text', '$108.00')
+
+    // Close dropdown on click outside
+    cy.findByTestId('DropdownOverlay').click()
+
+    // Remove from cart
+    cy.findByRole('button', { name: 'Remove from cart' }).click()
+
+    // Update badge
+    cy.get('@CartItemsBadge').should('have.text', '0')
+
+    // Dropdown should be empty
+    cy.get('@ShoppingCartButton').click()
+    cy.findByText('Your cart is empty').should('be.visible')
   })
 })

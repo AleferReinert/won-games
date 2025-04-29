@@ -84,7 +84,7 @@ const Gallery = ({ items }: GalleryProps) => {
 
       <S.Modal aria-label='modal' aria-hidden={!modal}>
         <S.CloseModal aria-label='Close modal' role='button' title='Close' onClick={() => setModal(false)}>
-          <Close />
+          <Close aria-hidden role='img' />
         </S.CloseModal>
         <S.ContentModal>
           <Slider ref={slider} settings={modalSettings}>
