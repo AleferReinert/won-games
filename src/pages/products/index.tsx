@@ -93,7 +93,7 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
         <Filter filterOptions={filterOptions} initialValues={query} handleFilter={handleFilter} />
 
         <div>
-          <S.Products>
+          <S.Products data-cy='products'>
             {hasProducts &&
               products.map(({ attributes, id }) => (
                 <Product
