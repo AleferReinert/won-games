@@ -6,7 +6,7 @@ import { PAGE_HOME } from 'graphql/queries/pageHome'
 import { GetStaticProps } from 'next'
 import { ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
-import { PageHomeQuery } from 'types/generated'
+import { PageHomeQuery, PageHomeQueryVariables } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { bannerMapper, highlightMapper, productMapper } from 'utils/mappers'
 import * as S from './Home.styles'
@@ -21,9 +21,11 @@ export interface HomeProps {
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const apolloClient = initializeApollo({})
-  const home = await apolloClient.query<PageHomeQuery>({
+  const currentDate = new Date().toISOString().slice(0, 10)
+  const past30DaysDate = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 10)
+  const home = await apolloClient.query<PageHomeQuery, PageHomeQueryVariables>({
     query: PAGE_HOME,
-    variables: { limit: 9, currentDate: new Date().toISOString().slice(0, 10) },
+    variables: { limit: 8, currentDate, pastDate: past30DaysDate },
     fetchPolicy: 'no-cache'
   })
   const { newProducts, popularProducts, comingSoonProducts, freeProducts } = home.data.showcases.data.attributes
@@ -70,9 +72,11 @@ export default function Index({
         </Container>
       )}
 
-      <S.SectionNews>
-        <Showcase data-cy='newReleases' {...newReleasesShowcase} $arrowColor='black' />
-      </S.SectionNews>
+      {newReleasesShowcase.products.length && (
+        <S.SectionNews>
+          <Showcase data-cy='newReleases' {...newReleasesShowcase} $arrowColor='black' />
+        </S.SectionNews>
+      )}
 
       <Showcase data-cy='mostPopulars' {...mostPopularsShowcase} />
       <Showcase data-cy='comingSoon' {...comingSoonShowcase} />
