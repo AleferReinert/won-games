@@ -47,4 +47,29 @@ describe('Products page', () => {
     cy.wait('@getProducts')
     cy.isPriceDescending('@FirstPrice', '@LastPrice')
   })
+
+  it('Filter by platforms', () => {
+    cy.findByRole('checkbox', { name: `linux` }).click()
+    cy.url().should('include', `linux=true`)
+
+    cy.findByRole('checkbox', { name: `mac` }).click()
+    cy.url().should('include', `mac=true`)
+
+    cy.findByRole('checkbox', { name: `windows` }).click()
+    cy.url().should('include', `windows=true`)
+  })
+
+  it.only('Filter by categories', () => {
+    cy.findByRole('checkbox', { name: `Action` }).click()
+    cy.url().should('include', `action=true`)
+
+    cy.findByRole('checkbox', { name: `Adventure` }).click()
+    cy.url().should('include', `adventure=true`)
+  })
+
+  it.only('Filter with empty products', () => {
+    cy.findByRole('checkbox', { name: `Naval` }).click()
+    cy.findByText('No results found').should('be.visible')
+    cy.get('@FilteredProducts').should('have.length', 0)
+  })
 })
