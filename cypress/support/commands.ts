@@ -19,3 +19,16 @@ Cypress.Commands.add('toggleBanner', () => {
     cy.get('@firstBanner').should('be.visible')
   })
 })
+
+Cypress.Commands.add('filterUnderPrice', (price) => {
+  cy.findByRole('radio', { name: `Under $${price}` }).click()
+  cy.url().should('include', `price=${price}`)
+  cy.wait(1000)
+  cy.get('@FilteredProducts')
+    .findAllByLabelText('Price')
+    .each(($price) => {
+      const priceText = $price.text()
+      const priceNumber = Number(priceText.replace('$', ''))
+      expect(priceNumber).to.be.lessThan(price)
+    })
+})
