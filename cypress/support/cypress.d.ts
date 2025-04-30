@@ -50,10 +50,15 @@ declare namespace Cypress {
      *
      * Example:
      * ```ts
-     * cy.isUserLoggedIn('John Doe')
+     * cy.isUserLoggedInAndRedirect('John Doe')
      * ```
      */
     isUserLoggedInAndRedirect(fullname: string): Chainable<void>
+
+    /**
+     * Check if user is logged out and redirect to home.
+     */
+    isUserLoggedOutAndRedirect(): Chainable<void>
 
     /**
      * Type e-mail, password and sign in.
@@ -64,5 +69,17 @@ declare namespace Cypress {
      * ```
      */
     signIn(email: string, password: string): Chainable<void>
+
+    /** Try to access a protected route when unauthenticated:
+     * 1. Redirect to sign-in page
+     * 2. Sign in
+     * 3. Redirect to same protected route
+     *
+     * Example:
+     * ```ts
+     * cy.protectedRoute('/my-private-page')
+     * ```
+     */
+    protectedRoute(url: string): Chainable<void>
   }
 }

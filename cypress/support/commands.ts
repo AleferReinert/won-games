@@ -87,8 +87,20 @@ Cypress.Commands.add('isUserLoggedInAndRedirect', (email) => {
   cy.findByRole('button', { name: 'My account' }).findByText(email).should('be.visible')
 })
 
+Cypress.Commands.add('isUserLoggedOutAndRedirect', () => {
+  cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/')
+  cy.findByRole('link', { name: 'Sign in' }).should('be.visible')
+})
+
 Cypress.Commands.add('signIn', (email = 'johndoe@example.com', password = '123456') => {
-  cy.get('@EmailInput').type(email)
-  cy.get('@PasswordInput').type(password)
+  cy.findByLabelText('E-mail').type(email)
+  cy.findByLabelText('Password').type(password)
   cy.findByRole('button', { name: 'Sign in' }).click()
+})
+
+Cypress.Commands.add('protectedRoute', (url: string) => {
+  cy.visit(url)
+  cy.url({ timeout: 10000 }).should('include', '/sign-in')
+  cy.signIn('johndoe@example.com', '123456')
+  cy.url({ timeout: 10000 }).should('include', url)
 })
