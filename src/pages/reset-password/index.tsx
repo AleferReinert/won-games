@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import * as S from 'pages/sign-in/SignInPage.styles'
 import { useState, type ReactElement } from 'react'
 import AuthTemplate from 'templates/Auth/Auth'
-import { resetPasswordValidation } from 'utils/resetPasswordValidation'
+import { resetPasswordValidation } from 'utils/validations/resetPasswordValidation'
 
 const ResetPasswordPage = () => {
   const [values, setValues] = useState({ password: '', passwordConfirmation: '' })

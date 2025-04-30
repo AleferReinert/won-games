@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import * as S from 'pages/sign-in/SignInPage.styles'
 import { useState, type ReactElement } from 'react'
 import AuthTemplate from 'templates/Auth/Auth'
-import { signInValidation } from 'utils/signInValidation'
+import { signInValidation } from 'utils/validations/signInValidation'
 
 const SignInPage = () => {
   const [values, setValues] = useState({ email: '', password: '' })

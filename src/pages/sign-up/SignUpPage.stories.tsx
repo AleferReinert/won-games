@@ -88,6 +88,15 @@ export const SignUp: Story = {
       })
     })
 
+    await step('Validation: Full name must not contain numbers', async () => {
+      await userEvent.type(inputName, 'John123')
+      userEvent.click(buttonSignUp)
+      await waitFor(() => {
+        const message = canvas.getByText('Full name must not contain numbers')
+        expect(message).toBeVisible()
+      })
+    })
+
     await step('Validation: invalid email', async () => {
       await userEvent.type(inputEmail, 'example@example')
       userEvent.click(buttonSignUp)

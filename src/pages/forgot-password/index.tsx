@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import * as S from 'pages/sign-in/SignInPage.styles'
 import { useEffect, useState, type ReactElement } from 'react'
 import AuthTemplate from 'templates/Auth/Auth'
-import { forgotPasswordValidation } from 'utils/forgotPasswordValidation'
+import { forgotPasswordValidation } from 'utils/validations/forgotPasswordValidation'
 
 const ForgotPasswordPage = () => {
   const searchParams = useSearchParams()

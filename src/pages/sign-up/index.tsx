@@ -10,7 +10,7 @@ import * as S from 'pages/sign-up/SignUpPage.styles'
 import { useState, type ReactElement } from 'react'
 import Auth from 'templates/Auth/Auth'
 import { formatApolloErrors } from 'utils/formatApolloErrors'
-import { signUpValidation, SignUpValidationProps } from 'utils/signUpValidation'
+import { signUpValidation, SignUpValidationProps } from 'utils/validations/signUpValidation'
 
 const SignUpPage = () => {
   const [values, setValues] = useState<SignUpValidationProps>({

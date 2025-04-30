@@ -8,12 +8,14 @@ export interface SignUpValidationProps {
   confirmPassword: string
 }
 
+const ignoreNumbers = /^[^\d]+$/
 const schema = Joi.object({
-  username: Joi.string().min(5).required().messages({
+  username: Joi.string().min(5).pattern(ignoreNumbers).required().messages({
     'string.min': 'Full name must be at least 5 characters',
     'any.required': 'Full name is required',
     'any.empty': 'Full name is required',
-    'string.empty': 'Full name is required'
+    'string.empty': 'Full name is required',
+    'string.pattern.base': 'Full name must not contain numbers'
   }),
   email: Joi.string()
     .email({ tlds: { allow: false } })
