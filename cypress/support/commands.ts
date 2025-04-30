@@ -81,3 +81,14 @@ Cypress.Commands.add('isPriceDescending', (firstPriceAlias, lastPriceAlias) => {
     })
   })
 })
+
+Cypress.Commands.add('isUserLoggedInAndRedirect', (email) => {
+  cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/')
+  cy.findByRole('button', { name: 'My account' }).findByText(email).should('be.visible')
+})
+
+Cypress.Commands.add('signIn', (email = 'johndoe@example.com', password = '123456') => {
+  cy.get('@EmailInput').type(email)
+  cy.get('@PasswordInput').type(password)
+  cy.findByRole('button', { name: 'Sign in' }).click()
+})

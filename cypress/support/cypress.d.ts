@@ -4,7 +4,7 @@ declare namespace Cypress {
     toggleBanner(): Chainable<void>
 
     /**
-     * **Filter options: Price**
+     * Filter options: Price.
      *
      * Example:
      * ```ts
@@ -16,7 +16,7 @@ declare namespace Cypress {
     filterUnderPrice(price: number): Chainable<void>
 
     /**
-     * **Extract numeric price from element**
+     * Extract numeric price from element.
      *
      * Example:
      * ```ts
@@ -26,7 +26,7 @@ declare namespace Cypress {
     getPriceValue(alias: string): Chainable<string | number>
 
     /**
-     * Compare prices and return true if they are in ascending order
+     * Compare prices and return true if they are in ascending order.
      *
      * Example:
      * ```ts
@@ -36,7 +36,7 @@ declare namespace Cypress {
     isPriceAscending(firstPriceAlias: string, lastPriceAlias: string): Chainable<boolean>
 
     /**
-     * Compare prices and return true if they are in descending order
+     * Compare prices and return true if they are in descending order.
      *
      * Example:
      * ```ts
@@ -44,5 +44,25 @@ declare namespace Cypress {
      * ```
      */
     isPriceDescending(firstPriceAlias: string, lastPriceAlias: string): Chainable<boolean>
+
+    /**
+     * Check if user is logged in and redirect to home.
+     *
+     * Example:
+     * ```ts
+     * cy.isUserLoggedIn('John Doe')
+     * ```
+     */
+    isUserLoggedInAndRedirect(fullname: string): Chainable<void>
+
+    /**
+     * Type e-mail, password and sign in.
+     *
+     * Example:
+     * ```ts
+     * cy.signIn('John Doe', '123456')
+     * ```
+     */
+    signIn(email: string, password: string): Chainable<void>
   }
 }

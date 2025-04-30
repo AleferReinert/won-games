@@ -2,9 +2,8 @@
 import { faker } from '@faker-js/faker'
 
 const fullName = faker.person.fullName()
-
 const userInfo = {
-  username: fullName,
+  fullName,
   email: `${fullName.replace(' ', '_')}@test-e2e.com`,
   password: faker.internet.password()
 }
@@ -19,33 +18,33 @@ describe('Sign up page', () => {
     cy.findByLabelText('Confirm password').as('ConfirmPasswordInput')
   })
 
-  it('All fields are empty', () => {
+  it('Show error when all fields are empty', () => {
     cy.get('@SignUpButton').click()
     cy.findByText('Full name is required').should('be.visible')
     cy.findByText('E-mail is required').should('be.visible')
     cy.findByText('Password is required').should('be.visible')
   })
 
-  it('Full name must be at least 5 characters', () => {
+  it('Show error when full name must be at least 5 characters', () => {
     cy.get('@FullNameInput').type('john')
     cy.get('@SignUpButton').click()
     cy.findByText('Full name must be at least 5 characters').should('be.visible')
   })
 
-  it('Full name must not contain numbers', () => {
+  it('Show error when full name must not contain numbers', () => {
     cy.get('@FullNameInput').type('John123')
     cy.get('@SignUpButton').click()
     cy.findByText('Full name must not contain numbers').should('be.visible')
   })
 
-  it('Invalid e-mail', () => {
+  it('Show error when invalid e-mail', () => {
     cy.get('@FullNameInput').type('John Doe')
     cy.get('@EmailInput').type('john@doe')
     cy.get('@SignUpButton').click()
     cy.findByText('Invalid e-mail').should('be.visible')
   })
 
-  it('Password must be at least 6 characters', () => {
+  it('Show error when password must be at least 6 characters', () => {
     cy.get('@FullNameInput').type('John Doe')
     cy.get('@EmailInput').type('johndoe@example.com')
     cy.get('@PasswordInput').type('123')
@@ -53,7 +52,7 @@ describe('Sign up page', () => {
     cy.findByText('Password must be at least 6 characters').should('be.visible')
   })
 
-  it('Passwords do not match', () => {
+  it('Show error when passwords do not match', () => {
     cy.get('@FullNameInput').type('John Doe')
     cy.get('@EmailInput').type('johndoe@example.com')
     cy.get('@PasswordInput').type('123456')
@@ -62,7 +61,7 @@ describe('Sign up page', () => {
     cy.findByText('Passwords do not match').should('be.visible')
   })
 
-  it('Existing user', () => {
+  it('Show error when trying to create an existing user', () => {
     cy.get('@FullNameInput').type('John Doe')
     cy.get('@EmailInput').type('johndoe@example.com')
     cy.get('@PasswordInput').type('123456')
@@ -72,12 +71,11 @@ describe('Sign up page', () => {
   })
 
   it('Create user, login and redirect to home', () => {
-    cy.get('@FullNameInput').type(userInfo.username)
+    cy.get('@FullNameInput').type(userInfo.fullName)
     cy.get('@EmailInput').type(userInfo.email)
     cy.get('@PasswordInput').type(userInfo.password)
     cy.get('@ConfirmPasswordInput').type(userInfo.password)
     cy.get('@SignUpButton').click()
-    cy.url().should('eq', Cypress.config().baseUrl + '/')
-    cy.findByRole('button', { name: 'My account' }).findByText(userInfo.username).should('be.visible')
+    cy.isUserLoggedInAndRedirect(userInfo.fullName)
   })
 })

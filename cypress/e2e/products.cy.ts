@@ -33,7 +33,7 @@ describe('Products page', () => {
     cy.filterUnderPrice(200)
   })
 
-  it('Filter by sort by', () => {
+  it('Filter by sort', () => {
     cy.get('@FilteredProducts').first().findByLabelText('Price').as('FirstPrice')
     cy.get('@FilteredProducts').last().findByLabelText('Price').as('LastPrice')
 
