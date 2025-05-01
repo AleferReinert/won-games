@@ -31,6 +31,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   })
 
   useEffect(() => {
+    setLoadingState(cartProductIds.length ? true : false)
+  }, [cartProductIds])
+
+  useEffect(() => {
     if (!loading && !error && data) {
       setLoadingState(false)
     }
