@@ -82,4 +82,8 @@ describe('Product page (unauthenticated)', () => {
     cy.get('@ShoppingCartButton').click()
     cy.findByText('Your cart is empty').should('be.visible')
   })
+
+  it('Add and remove products from cart', () => {
+    cy.addAndRemoveProductsFromCart()
+  })
 })

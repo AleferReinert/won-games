@@ -41,8 +41,7 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
         queryString: query,
         filterOptions
       })
-    },
-    fetchPolicy: 'no-cache'
+    }
   })
   const props: ProductsPageProps = {
     filterOptions,

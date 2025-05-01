@@ -3,12 +3,7 @@
 describe('Products page', () => {
   beforeEach(() => {
     cy.visit('/products')
-    cy.get('[data-cy="products"]').findAllByRole('article').as('FilteredProducts')
-    cy.intercept('POST', '**/graphql', (req) => {
-      if (req.body.operationName === 'Products') {
-        req.alias = 'getProducts'
-      }
-    })
+    cy.get('[data-cy="products"]').findAllByTestId('ProductComponent').as('FilteredProducts')
   })
 
   it('Loads 9 products by default and loads more on button click', () => {
@@ -18,15 +13,13 @@ describe('Products page', () => {
   })
 
   it('Filter by price', () => {
-    cy.findByRole('radio', { name: `Free` }).click()
-    cy.url().should('include', `price=0`)
-    cy.wait('@getProducts')
+    cy.selectFilterAndCheckUrl('radio', 'Free', 'price=0')
+    cy.wait(2000)
     cy.get('@FilteredProducts')
       .findAllByLabelText('Price')
       .each(($price) => {
         expect($price.text()).to.equal('Free')
       })
-
     cy.filterUnderPrice(50)
     cy.filterUnderPrice(100)
     cy.filterUnderPrice(150)
@@ -37,39 +30,33 @@ describe('Products page', () => {
     cy.get('@FilteredProducts').first().findByLabelText('Price').as('FirstPrice')
     cy.get('@FilteredProducts').last().findByLabelText('Price').as('LastPrice')
 
-    cy.findByRole('radio', { name: `Low to high` }).click()
-    cy.url().should('include', `sort=price%3Aasc`)
-    cy.wait('@getProducts')
-    cy.isPriceAscending('@FirstPrice', '@LastPrice')
+    cy.selectFilterAndCheckUrl('radio', 'Low to high', 'sort=price%3Aasc')
+    cy.wait(2000)
+    cy.isPriceSorted('@FirstPrice', '@LastPrice', 'asc')
 
-    cy.findByRole('radio', { name: `High to low` }).click()
-    cy.url().should('include', `sort=price%3Adesc`)
-    cy.wait('@getProducts')
-    cy.isPriceDescending('@FirstPrice', '@LastPrice')
+    cy.selectFilterAndCheckUrl('radio', 'High to low', 'sort=price%3Adesc')
+    cy.wait(2000)
+    cy.isPriceSorted('@FirstPrice', '@LastPrice', 'desc')
   })
 
   it('Filter by platforms', () => {
-    cy.findByRole('checkbox', { name: `linux` }).click()
-    cy.url().should('include', `linux=true`)
-
-    cy.findByRole('checkbox', { name: `mac` }).click()
-    cy.url().should('include', `mac=true`)
-
-    cy.findByRole('checkbox', { name: `windows` }).click()
-    cy.url().should('include', `windows=true`)
+    cy.selectFilterAndCheckUrl('checkbox', 'linux', 'linux=true')
+    cy.selectFilterAndCheckUrl('checkbox', 'mac', 'mac=true')
+    cy.selectFilterAndCheckUrl('checkbox', 'windows', 'windows=true')
   })
 
   it('Filter by categories', () => {
-    cy.findByRole('checkbox', { name: `Action` }).click()
-    cy.url().should('include', `action=true`)
-
-    cy.findByRole('checkbox', { name: `Adventure` }).click()
-    cy.url().should('include', `adventure=true`)
+    cy.selectFilterAndCheckUrl('checkbox', `Action`, 'action=true')
+    cy.selectFilterAndCheckUrl('checkbox', `Adventure`, 'adventure=true')
   })
 
   it('Filter with empty products', () => {
     cy.findByRole('checkbox', { name: `Naval` }).click()
     cy.findByText('No results found').should('be.visible')
     cy.get('@FilteredProducts').should('have.length', 0)
+  })
+
+  it('Add and remove products from cart', () => {
+    cy.addAndRemoveProductsFromCart()
   })
 })

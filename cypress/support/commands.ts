@@ -39,45 +39,18 @@ Cypress.Commands.add('getPriceValue', (priceAlias) => {
     .then((text) => text.replace('$', ''))
 })
 
-Cypress.Commands.add('isPriceAscending', (firstPriceAlias, lastPriceAlias) => {
+Cypress.Commands.add('isPriceSorted', (firstPriceAlias, lastPriceAlias, order: 'asc' | 'desc') => {
   cy.getPriceValue(firstPriceAlias).then((firstPrice) => {
-    let parsedFirstPrice: number
-
-    if (firstPrice === 'Free') {
-      parsedFirstPrice = 0
-    } else {
-      parsedFirstPrice = Number(firstPrice)
-    }
+    const parsedFirstPrice = firstPrice === 'Free' ? 0 : Number(firstPrice)
 
     cy.getPriceValue(lastPriceAlias).then((lastPrice) => {
-      let parsedLastPrice: number
-      if (lastPrice === 'Free') {
-        parsedLastPrice = 0
-      } else {
-        parsedLastPrice = Number(lastPrice)
-      }
-      expect(parsedLastPrice).to.be.greaterThan(parsedFirstPrice)
-    })
-  })
-})
+      const parsedLastPrice = lastPrice === 'Free' ? 0 : Number(lastPrice)
 
-Cypress.Commands.add('isPriceDescending', (firstPriceAlias, lastPriceAlias) => {
-  cy.getPriceValue(firstPriceAlias).then((firstPrice) => {
-    let parsedFirstPrice: number
-    if (firstPrice === 'Free') {
-      parsedFirstPrice = 0
-    } else {
-      parsedFirstPrice = Number(firstPrice)
-    }
-
-    cy.getPriceValue(lastPriceAlias).then((lastPrice) => {
-      let parsedLastPrice: number
-      if (lastPrice === 'Free') {
-        parsedLastPrice = 0
+      if (order === 'asc') {
+        expect(parsedLastPrice).to.be.greaterThan(parsedFirstPrice)
       } else {
-        parsedLastPrice = Number(lastPrice)
+        expect(parsedLastPrice).to.be.lessThan(parsedFirstPrice)
       }
-      expect(parsedLastPrice).to.be.lessThan(parsedFirstPrice)
     })
   })
 })
@@ -103,4 +76,49 @@ Cypress.Commands.add('protectedRoute', (url: string) => {
   cy.url({ timeout: 10000 }).should('include', '/sign-in')
   cy.signIn('johndoe@example.com', '123456')
   cy.url({ timeout: 10000 }).should('include', url)
+})
+
+Cypress.Commands.add('addToCartFromProduct', ({ index }) => {
+  cy.findAllByTestId('ProductComponent').eq(index).as('FirstProduct')
+  cy.get('@FirstProduct').findByRole('button', { name: 'Add to cart' }).click()
+})
+
+Cypress.Commands.add('removeFromCartFromProduct', ({ index }) => {
+  cy.findAllByTestId('ProductComponent').eq(index).as('FirstProduct')
+  cy.get('@FirstProduct').findByRole('button', { name: 'Remove from cart' }).click()
+})
+
+Cypress.Commands.add('checkCartItemsAndClose', ({ quantity }) => {
+  cy.findByTestId('CartDropdownComponent').within(() => {
+    cy.findByRole('button', { name: 'Shopping cart' }).as('DropdownButton')
+    cy.findByLabelText('Cart items').as('Badge')
+    cy.get('@Badge').should('have.text', quantity)
+    cy.get('@DropdownButton').click()
+    cy.findAllByTestId('CartItemComponent').should('have.length', quantity)
+
+    if (quantity === 0) {
+      cy.findByText('Your cart is empty').should('be.visible')
+    }
+
+    cy.get('@DropdownButton').click()
+  })
+})
+
+Cypress.Commands.add('addAndRemoveProductsFromCart', () => {
+  cy.checkCartItemsAndClose({ quantity: 0 })
+
+  cy.addToCartFromProduct({ index: 0 })
+  cy.addToCartFromProduct({ index: 1 })
+  cy.checkCartItemsAndClose({ quantity: 2 })
+
+  cy.removeFromCartFromProduct({ index: 0 })
+  cy.checkCartItemsAndClose({ quantity: 1 })
+
+  cy.removeFromCartFromProduct({ index: 1 })
+  cy.checkCartItemsAndClose({ quantity: 0 })
+})
+
+Cypress.Commands.add('selectFilterAndCheckUrl', (role, name, urlParam) => {
+  cy.findByRole(role, { name }).click()
+  cy.url().should('include', urlParam)
 })

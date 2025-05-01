@@ -26,24 +26,14 @@ declare namespace Cypress {
     getPriceValue(alias: string): Chainable<string | number>
 
     /**
-     * Compare prices and return true if they are in ascending order.
+     * Check if prices are sorted.
      *
      * Example:
      * ```ts
-     * cy.isPriceAscending('@FirstPrice', '@LastPrice')
+     * cy.isPriceSorted('@FirstPrice', '@LastPrice', 'asc')
      * ```
      */
-    isPriceAscending(firstPriceAlias: string, lastPriceAlias: string): Chainable<boolean>
-
-    /**
-     * Compare prices and return true if they are in descending order.
-     *
-     * Example:
-     * ```ts
-     * cy.isPriceDescending('@FirstPrice', '@LastPrice')
-     * ```
-     */
-    isPriceDescending(firstPriceAlias: string, lastPriceAlias: string): Chainable<boolean>
+    isPriceSorted(firstPriceAlias: string, lastPriceAlias: string, order: 'asc' | 'desc'): Chainable<boolean>
 
     /**
      * Check if user is logged in and redirect to home.
@@ -81,5 +71,47 @@ declare namespace Cypress {
      * ```
      */
     protectedRoute(url: string): Chainable<void>
+
+    /** 1. Select product component by index
+     *	2. Click on 'Add to cart' button
+     *
+     * Example:
+     * ```ts
+     * cy.addToCartFromProduct({ index: 0 })
+     * ```
+     */
+    addToCartFromProduct({ index: number }): Chainable<void>
+
+    /** 1. Select product component by index
+     *	2. Click on 'Remove from cart' button
+     *
+     * Example:
+     * ```ts
+     * cy.removeFromCartFromProduct({ index: 0 })
+     * ```
+     */
+    removeFromCartFromProduct({ index: number }): Chainable<void>
+
+    /** 1. Check quantity on badge
+     * 	2. Open cart dropdown
+     *	2. Check quantity of products
+     *  3. Check empty message when quantity is 0
+     *  4. Close cart dropdown
+     * Example:
+     * ```ts
+     * cy.checkCartItemsAndClose({ quantity: 5 })
+     * ```
+     */
+    checkCartItemsAndClose({ quantity: number }): Chainable<void>
+
+    /** 1. Add products to cart
+     *  2. Remove products from cart
+     */
+    addAndRemoveProductsFromCart(): Chainable<void>
+
+    /** 1. Select an option from filter
+     *  2. Check if URL changes
+     */
+    selectFilterAndCheckUrl(role: string, name: string, urlParam: string): Chainable<void>
   }
 }
