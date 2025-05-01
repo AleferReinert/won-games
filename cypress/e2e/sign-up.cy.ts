@@ -1,12 +1,5 @@
 /// <reference types="cypress" />
-import { faker } from '@faker-js/faker'
-
-const fullName = faker.person.fullName()
-const userInfo = {
-  fullName,
-  email: `${fullName.replace(' ', '_')}@test-e2e.com`,
-  password: faker.internet.password()
-}
+import { fakeUser } from '../support/generateFakeData'
 
 describe('Sign up page', () => {
   beforeEach(() => {
@@ -71,11 +64,11 @@ describe('Sign up page', () => {
   })
 
   it('Create user, login and redirect to home', () => {
-    cy.get('@FullNameInput').type(userInfo.fullName)
-    cy.get('@EmailInput').type(userInfo.email)
-    cy.get('@PasswordInput').type(userInfo.password)
-    cy.get('@ConfirmPasswordInput').type(userInfo.password)
+    cy.get('@FullNameInput').type(fakeUser.fullName)
+    cy.get('@EmailInput').type(fakeUser.email)
+    cy.get('@PasswordInput').type(fakeUser.password)
+    cy.get('@ConfirmPasswordInput').type(fakeUser.password)
     cy.get('@SignUpButton').click()
-    cy.isUserLoggedInAndRedirect(userInfo.fullName)
+    cy.isUserLoggedInAndRedirect(fakeUser.fullName)
   })
 })

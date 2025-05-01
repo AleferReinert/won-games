@@ -4,7 +4,7 @@ describe('Product page (unauthenticated)', () => {
   beforeEach(() => cy.visit('/product/anno-1404'))
 
   it('Cover, title, short description, price, add to cart button, gallery, description, categories, platforms, release date, developer, publisher, rating, coming soon and recommended products', () => {
-    cy.findByRole('img', { name: 'Anno 1404' })
+    cy.findByTestId('cover').findByRole('img', { name: 'Anno 1404' })
 
     cy.findByLabelText('Cart items').as('CartItemsCount')
     cy.findByTestId('ProductHeaderComponent').within(() => {
@@ -73,7 +73,7 @@ describe('Product page (unauthenticated)', () => {
     cy.findByTestId('DropdownOverlay').click()
 
     // Remove from cart
-    cy.findByRole('button', { name: 'Remove from cart' }).click()
+    cy.findByTestId('ProductHeaderComponent').findByRole('button', { name: 'Remove from cart' }).click()
 
     // Update badge
     cy.get('@CartItemsBadge').should('have.text', '0')

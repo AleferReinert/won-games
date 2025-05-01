@@ -54,7 +54,7 @@ const ForgotPasswordPage = () => {
   }
 
   return success ? (
-    <Alert $variant='success'>E-mail sent successfully!</Alert>
+    <Alert $variant='success'>Check your inbox! We&apos;ve sent you a reset link.</Alert>
   ) : (
     <S.FormWrapper>
       {errors.error && <Alert $variant='error'>{errors.error}</Alert>}

@@ -75,7 +75,7 @@ export const ForgotPassword: Story = {
       userEvent.click(buttonSubmit)
       await waitFor(() => {
         const message = canvas.getByRole('alert')
-        expect(message).toHaveTextContent('E-mail sent successfully!')
+        expect(message).toHaveTextContent(`Check your inbox! We've sent you a reset link.`)
       })
     })
   }
