@@ -128,14 +128,8 @@ const ProductPage = ({
 
   return (
     <>
-      <S.Cover>
-        <Image
-          src={cover.url}
-          alt={cover.alternativeText}
-          fill
-          objectFit='cover'
-          aria-hidden={cover.alternativeText ? false : true}
-        />
+      <S.Cover data-testid='cover'>
+        <Image src={cover.url} alt={cover.alternativeText} fill aria-hidden={cover.alternativeText ? false : true} />
       </S.Cover>
 
       <S.ProductHeaderWrapper>

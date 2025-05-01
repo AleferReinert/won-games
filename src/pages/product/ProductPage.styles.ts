@@ -10,6 +10,10 @@ export const Cover = styled.div`
     position: absolute;
     top: 0;
 
+    img {
+      object-fit: cover;
+    }
+
     &::after {
       content: '';
       display: block;
