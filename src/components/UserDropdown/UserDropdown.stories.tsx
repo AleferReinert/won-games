@@ -38,6 +38,9 @@ export const UserDropdown: Story = {
     await step('Navigation visible on username click', async () => {
       userEvent.click(username)
       await waitFor(() => expect(navigation).toBeVisible())
+      expect(within(navigation).getByRole('link', { name: 'My account' })).toHaveAttribute('href', '/account/profile')
+      expect(within(navigation).getByRole('link', { name: 'Wishlist (0)' })).toHaveAttribute('href', '/wishlist')
+      expect(within(navigation).getByRole('link', { name: 'Logout' })).toHaveAttribute('href', '/')
     })
 
     await step('Navigation hidden on username second click', async () => {

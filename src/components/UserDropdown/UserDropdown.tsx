@@ -5,8 +5,10 @@ import { useLogout } from 'hooks/useLogout'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import * as S from './UserDropdown.styles'
+import { useWishlist } from '../../hooks/useWishlist'
 
 const UserDropdown = () => {
+	const { products } = useWishlist()
   const { data: session } = useSession()
   const { logout } = useLogout()
 
@@ -29,7 +31,7 @@ const UserDropdown = () => {
           </Link>
           <Link href='/wishlist'>
             <HeartIcon aria-hidden />
-            Wishlist
+            Wishlist ({products.length})
           </Link>
           <Link href='/' onClick={logout}>
             <ExitIcon aria-hidden />
