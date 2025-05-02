@@ -86,4 +86,9 @@ describe('Product page (unauthenticated)', () => {
   it('Add and remove products from cart', () => {
     cy.addAndRemoveProductsFromCart()
   })
+
+  it('Sign in, add and remove products from wishlist', () => {
+    cy.goToSignInPageAndLogin('johndoe@example.com', '123456')
+    cy.addAndRemoveProductsFromWishlist()
+  })
 })

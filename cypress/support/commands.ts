@@ -79,13 +79,13 @@ Cypress.Commands.add('protectedRoute', (url: string) => {
 })
 
 Cypress.Commands.add('addToCartFromProduct', ({ index }) => {
-  cy.findAllByTestId('ProductComponent').eq(index).as('FirstProduct')
-  cy.get('@FirstProduct').findByRole('button', { name: 'Add to cart' }).click()
+  cy.findAllByTestId('ProductComponent').eq(index).as('Product')
+  cy.get('@Product').findByRole('button', { name: 'Add to cart' }).click()
 })
 
 Cypress.Commands.add('removeFromCartFromProduct', ({ index }) => {
-  cy.findAllByTestId('ProductComponent').eq(index).as('FirstProduct')
-  cy.get('@FirstProduct').findByRole('button', { name: 'Remove from cart' }).click()
+  cy.findAllByTestId('ProductComponent').eq(index).as('Product')
+  cy.get('@Product').findByRole('button', { name: 'Remove from cart' }).click()
 })
 
 Cypress.Commands.add('checkCartItemsAndClose', ({ quantity }) => {
@@ -121,4 +121,57 @@ Cypress.Commands.add('addAndRemoveProductsFromCart', () => {
 Cypress.Commands.add('selectFilterAndCheckUrl', (role, name, urlParam) => {
   cy.findByRole(role, { name }).click()
   cy.url().should('include', urlParam)
+})
+
+Cypress.Commands.add('addToWishlistFromShowcase', ({ quantity }) => {
+  cy.get('[data-testid="ShowcaseComponent"] button[title="Add to wishlist"]').as('AddToWishlistButtons')
+  for (let i = 0; i < quantity; i++) {
+    cy.get('@AddToWishlistButtons').eq(0).should('not.be.disabled').click()
+  }
+})
+
+Cypress.Commands.add('removeFromWishlistFromShowcase', ({ quantity }) => {
+  cy.get('[data-testid="ShowcaseComponent"] button[title="Remove from wishlist"]').as('RemoveFromWishlistButtons')
+  for (let i = 0; i < quantity; i++) {
+    cy.get('@RemoveFromWishlistButtons').eq(0).should('not.be.disabled').click()
+  }
+})
+
+// Cypress.Commands.add('clearWishlist', () => {
+//   cy.get('button[title="Remove from wishlist"]').then((buttons) => {
+//     cy.wrap(buttons).each((button) => {
+//       if (button) {
+//         cy.wrap(button).should('not.be.disabled').click()
+//       } else {
+//         cy.log('Wishlist is empty')
+//       }
+//     })
+//   })
+// })
+
+Cypress.Commands.add('checkWishlistItemsAndClose', ({ quantity }) => {
+  cy.findByTestId('UserDropdownComponent').within(() => {
+    cy.findByRole('button', { name: 'My account' }).as('DropdownButton')
+    cy.get('@DropdownButton').click()
+    cy.contains(`Wishlist (${quantity})`).should('be.visible')
+    cy.get('@DropdownButton').click()
+  })
+})
+
+Cypress.Commands.add('goToSignInPageAndLogin', (email, password) => {
+  cy.findAllByRole('link', { name: 'Sign in' }).first().click()
+  cy.signIn(email, password)
+})
+
+Cypress.Commands.add('addAndRemoveProductsFromWishlist', () => {
+  cy.checkWishlistItemsAndClose({ quantity: 0 })
+
+  cy.addToWishlistFromShowcase({ quantity: 2 })
+  cy.checkWishlistItemsAndClose({ quantity: 2 })
+
+  cy.removeFromWishlistFromShowcase({ quantity: 1 })
+  cy.checkWishlistItemsAndClose({ quantity: 1 })
+
+  cy.removeFromWishlistFromShowcase({ quantity: 1 })
+  cy.checkWishlistItemsAndClose({ quantity: 0 })
 })

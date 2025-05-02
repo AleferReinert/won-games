@@ -52,7 +52,7 @@ const WishlistPage = ({ recommendedShowcase }: WishlistPageProps & NextPageWithL
           Wishlist
         </Heading>
 
-        <S.WrapperWishlist>
+        <S.WrapperWishlist aria-label='wishlist products'>
           {loading ? (
             <Skeleton width='100%' height={235} />
           ) : (

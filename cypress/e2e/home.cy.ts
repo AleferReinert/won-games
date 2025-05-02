@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Home page', () => {
+describe('Home page (unauthenticated)', () => {
   beforeEach(() => {
     cy.visit('/')
   })
@@ -30,5 +30,13 @@ describe('Home page', () => {
 
   it('Add and remove products from cart', () => {
     cy.addAndRemoveProductsFromCart()
+  })
+})
+
+describe('Home page (authenticated)', () => {
+  it('Sign in, add and remove products from wishlist', () => {
+    cy.visit('/')
+    cy.goToSignInPageAndLogin('johndoe@example.com', '123456')
+    cy.addAndRemoveProductsFromWishlist()
   })
 })

@@ -60,6 +60,17 @@ declare namespace Cypress {
      */
     signIn(email: string, password: string): Chainable<void>
 
+    /**
+     * 1. Click on 'Sign in' button
+     * 2. Type e-mail, password and sign in.
+     *
+     * Example:
+     * ```ts
+     * cy.goToSignInPageAndLogin('John Doe', '123456')
+     * ```
+     */
+    goToSignInPageAndLogin(email: string, password: string): Chainable<void>
+
     /** Try to access a protected route when unauthenticated:
      * 1. Redirect to sign-in page
      * 2. Sign in
@@ -113,5 +124,39 @@ declare namespace Cypress {
      *  2. Check if URL changes
      */
     selectFilterAndCheckUrl(role: string, name: string, urlParam: string): Chainable<void>
+
+    /** Select first ocurrences of 'Add to wishlist' button and click
+     * Example:
+     * ```ts
+     * cy.addToWishlistFromShowcase({ quantity: 5 })
+     * ```
+     */
+    addToWishlistFromShowcase({ quantity: number }): Chainable<void>
+
+    /** Select first ocurrences of 'Remove from wishlist' button and click
+     * Example:
+     * ```ts
+     * cy.removeFromWishlistFromShowcase({ quantity: 5 })
+     * ```
+     */
+    removeFromWishlistFromShowcase({ quantity: number }): Chainable<void>
+
+    /** Remove all products from wishlist */
+    // clearWishlist(): Chainable<void>
+
+    /** 1. Add products to wishlist
+     *  2. Remove products from wishlist
+     */
+    addAndRemoveProductsFromWishlist(): Chainable<void>
+
+    /** 1. Open user dropdown
+     *	2. Check quantity in wishlist link
+     *  3. Close user dropdown
+     * Example:
+     * ```ts
+     * cy.checkWishlistItemsAndClose({ quantity: 5 })
+     * ```
+     */
+    checkWishlistItemsAndClose({ quantity: number }): Chainable<void>
   }
 }
