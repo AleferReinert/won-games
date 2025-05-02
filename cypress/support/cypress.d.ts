@@ -83,25 +83,21 @@ declare namespace Cypress {
      */
     protectedRoute(url: string): Chainable<void>
 
-    /** 1. Select product component by index
-     *	2. Click on 'Add to cart' button
-     *
+    /** Select first ocurrences of 'Add to cart' button and click
      * Example:
      * ```ts
-     * cy.addToCartFromProduct({ index: 0 })
+     * cy.addToCartFromShowcase({ quantity: 5 })
      * ```
      */
-    addToCartFromProduct({ index: number }): Chainable<void>
+    addToCartFromShowcase({ quantity: number }): Chainable<void>
 
-    /** 1. Select product component by index
-     *	2. Click on 'Remove from cart' button
-     *
+    /** Select first ocurrences of 'Remove from cart' button and click
      * Example:
      * ```ts
-     * cy.removeFromCartFromProduct({ index: 0 })
+     * cy.removeFromCartFromShowcase({ quantity: 5 })
      * ```
      */
-    removeFromCartFromProduct({ index: number }): Chainable<void>
+    removeFromCartFromShowcase({ quantity: number }): Chainable<void>
 
     /** 1. Check quantity on badge
      * 	2. Open cart dropdown

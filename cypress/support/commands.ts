@@ -78,14 +78,18 @@ Cypress.Commands.add('protectedRoute', (url: string) => {
   cy.url({ timeout: 10000 }).should('include', url)
 })
 
-Cypress.Commands.add('addToCartFromProduct', ({ index }) => {
-  cy.findAllByTestId('ProductComponent').eq(index).as('Product')
-  cy.get('@Product').findByRole('button', { name: 'Add to cart' }).click()
+Cypress.Commands.add('addToCartFromShowcase', ({ quantity }) => {
+  cy.get('[data-testid="ShowcaseComponent"] button[title="Add to cart"]').as('AddToCartButtons')
+  for (let i = 0; i < quantity; i++) {
+    cy.get('@AddToCartButtons').eq(0).should('not.be.disabled').click()
+  }
 })
 
-Cypress.Commands.add('removeFromCartFromProduct', ({ index }) => {
-  cy.findAllByTestId('ProductComponent').eq(index).as('Product')
-  cy.get('@Product').findByRole('button', { name: 'Remove from cart' }).click()
+Cypress.Commands.add('removeFromCartFromShowcase', ({ quantity }) => {
+  cy.get('[data-testid="ShowcaseComponent"] button[title="Remove from cart"]').as('RemoveFromCartButtons')
+  for (let i = 0; i < quantity; i++) {
+    cy.get('@RemoveFromCartButtons').eq(0).should('not.be.disabled').click()
+  }
 })
 
 Cypress.Commands.add('checkCartItemsAndClose', ({ quantity }) => {
@@ -107,14 +111,13 @@ Cypress.Commands.add('checkCartItemsAndClose', ({ quantity }) => {
 Cypress.Commands.add('addAndRemoveProductsFromCart', () => {
   cy.checkCartItemsAndClose({ quantity: 0 })
 
-  cy.addToCartFromProduct({ index: 0 })
-  cy.addToCartFromProduct({ index: 1 })
+  cy.addToCartFromShowcase({ quantity: 2 })
   cy.checkCartItemsAndClose({ quantity: 2 })
 
-  cy.removeFromCartFromProduct({ index: 0 })
+  cy.removeFromCartFromShowcase({ quantity: 1 })
   cy.checkCartItemsAndClose({ quantity: 1 })
 
-  cy.removeFromCartFromProduct({ index: 1 })
+  cy.removeFromCartFromShowcase({ quantity: 1 })
   cy.checkCartItemsAndClose({ quantity: 0 })
 })
 
@@ -155,12 +158,11 @@ Cypress.Commands.add('clearWishlist', () => {
   cy.get('body')
     .wait(2000)
     .then(($body) => {
-      const wishlistItemsAdded = $body.find(
-        '[data-testid="ShowcaseComponent"] button[title="Remove from wishlist"]'
-      ).length
+      const buttonsSelector = '[data-testid="ShowcaseComponent"] button[title="Remove from wishlist"]'
+      const wishlistItemsAdded = $body.find(buttonsSelector).length
 
       if (wishlistItemsAdded > 0) {
-        cy.get('[data-testid="ShowcaseComponent"] button[title="Remove from wishlist"]').then((button) => {
+        cy.get(buttonsSelector).then((button) => {
           for (let i = 0; i < wishlistItemsAdded; i++) {
             cy.wait(500).wrap(button).eq(i).click()
           }
@@ -172,10 +174,13 @@ Cypress.Commands.add('clearWishlist', () => {
 Cypress.Commands.add('addAndRemoveProductsFromWishlist', () => {
   cy.clearWishlist()
   cy.checkWishlistItemsAndClose({ quantity: 0 })
+
   cy.addToWishlistFromShowcase({ quantity: 2 })
   cy.checkWishlistItemsAndClose({ quantity: 2 })
+
   cy.removeFromWishlistFromShowcase({ quantity: 1 })
   cy.checkWishlistItemsAndClose({ quantity: 1 })
+
   cy.removeFromWishlistFromShowcase({ quantity: 1 })
   cy.checkWishlistItemsAndClose({ quantity: 0 })
 })
