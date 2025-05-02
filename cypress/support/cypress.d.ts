@@ -142,7 +142,7 @@ declare namespace Cypress {
     removeFromWishlistFromShowcase({ quantity: number }): Chainable<void>
 
     /** Remove all products from wishlist */
-    // clearWishlist(): Chainable<void>
+    clearWishlist(): Chainable<void>
 
     /** 1. Add products to wishlist
      *  2. Remove products from wishlist
