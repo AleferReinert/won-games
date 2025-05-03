@@ -55,7 +55,7 @@ const CartItem = ({ id, img, name, price, downloadLink, paymentInfo, removeFromC
           {paymentInfo && (
             <S.PaymentInfo>
               <S.PurchaseDate aria-label='purchase date'>{paymentInfo.purchaseDate}</S.PurchaseDate>
-              {price > 0 ? (
+              {paymentInfo.creditCardNumber ? (
                 <CreditCard
                   img={paymentInfo.creditCardFlag}
                   name={paymentInfo.creditCardBrand}
