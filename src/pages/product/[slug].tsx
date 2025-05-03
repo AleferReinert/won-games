@@ -129,7 +129,7 @@ const ProductPage = ({
   return (
     <>
       <S.Cover data-testid='cover'>
-        <Image src={cover.url} alt={cover.alternativeText} fill aria-hidden={cover.alternativeText ? false : true} />
+        <Image priority src={cover.url} alt={cover.alternativeText} fill aria-hidden={!cover.alternativeText} />
       </S.Cover>
 
       <S.ProductHeaderWrapper>

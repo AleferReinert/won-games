@@ -24,7 +24,7 @@ const Banner = ({ img, title, description, buttonLabel = 'Buy now', buttonUrl, r
       {ribbon?.label && <Ribbon label={ribbon.label} size={ribbon.size} color={ribbon.color} />}
 
       <S.ImageWrapper>
-        <Image src={img.url} alt={img.alternativeText || title || 'Decorative image'} fill />
+        <Image priority src={img.url} alt={img.alternativeText || 'Decorative image'} fill />
       </S.ImageWrapper>
 
       {caption && (

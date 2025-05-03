@@ -67,7 +67,7 @@ export const highlightMapper = (
     },
     floatImg: highlight.floatImg.data && {
       url: getImageUrl(highlight.floatImg.data.attributes.url),
-      alternativeText: highlight.floatImg.data ? highlight.floatImg.data.attributes.alternativeText : ''
+      alternativeText: highlight.floatImg.data.attributes.alternativeText ?? ''
     }
   }
 }

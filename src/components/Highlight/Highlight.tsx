@@ -29,13 +29,19 @@ const Highlight = ({
 }: HighlightProps) => {
   return (
     <S.Wrapper $alignment={$alignment} data-testid='HighlightComponent'>
-      <Image src={background.url} alt={background.alternativeText || 'Decorative image'} fill />
+      <Image
+        src={background.url}
+        alt={background.alternativeText}
+        aria-hidden={background.alternativeText ? false : true}
+        fill
+      />
       <S.FloatImage>
         {floatImg && (
           <Image
             src={floatImg.url}
-            alt={floatImg.alternativeText || 'Decorative image'}
+            alt={floatImg.alternativeText}
             fill
+            aria-hidden={floatImg.alternativeText ? false : true}
             sizes='(max-width: 768px) 100vw, 50vw'
           />
         )}
