@@ -15,16 +15,27 @@ export interface ProductProps extends PriceProps {
   developer: string
   img: string
   ribbonLabel?: string
+  imgPriority?: boolean
 }
 
-const Product = ({ id, slug, title, developer, img, price, promotionalPrice = null, ribbonLabel }: ProductProps) => {
+const Product = ({
+  id,
+  slug,
+  title,
+  developer,
+  img,
+  price,
+  promotionalPrice = null,
+  ribbonLabel,
+  imgPriority = false
+}: ProductProps) => {
   return (
     <S.Wrapper data-testid='ProductComponent'>
       {ribbonLabel && <Ribbon label={ribbonLabel} color='primary' size='small' />}
 
       <Link href={`/product/${slug}`} passHref>
         <S.ImageBox>
-          <Image src={img} alt={img ? title : 'Image not found'} priority={false} width='292' height='137' />
+          <Image src={img} alt={img ? title : 'Image not found'} priority={imgPriority} width='292' height='137' />
         </S.ImageBox>
       </Link>
 

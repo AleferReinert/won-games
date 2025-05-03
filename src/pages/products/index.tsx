@@ -95,19 +95,24 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
         <div>
           <S.Products data-cy='products'>
             {hasProducts &&
-              products.map(({ attributes, id }) => (
-                <Product
-                  id={id}
-                  key={id}
-                  title={attributes.name}
-                  developer={attributes.developers.data[0]?.attributes.name || ''}
-                  img={getImageUrl(attributes.cover.data.attributes.url) || '/img/defaults/product-default.webp'}
-                  price={attributes.price}
-                  slug={attributes.slug}
-                  promotionalPrice={attributes.promotional_price}
-                  ribbonLabel={attributes.ribbon_label}
-                />
-              ))}
+              products.map(({ attributes, id }, index) => {
+                const firstThreeProducts = index < 3
+
+                return (
+                  <Product
+                    id={id}
+                    key={id}
+                    title={attributes.name}
+                    developer={attributes.developers.data[0]?.attributes.name || ''}
+                    img={getImageUrl(attributes.cover.data.attributes.url) || '/img/defaults/product-default.webp'}
+                    imgPriority={firstThreeProducts}
+                    price={attributes.price}
+                    slug={attributes.slug}
+                    promotionalPrice={attributes.promotional_price}
+                    ribbonLabel={attributes.ribbon_label}
+                  />
+                )
+              })}
           </S.Products>
 
           {showEmpty && (
