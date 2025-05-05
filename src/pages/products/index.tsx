@@ -2,76 +2,56 @@ import { NormalizedCacheObject, useQuery } from '@apollo/client'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 import Container from 'components/Container/Container'
 import Empty from 'components/Empty/Empty'
-import Filter, { FilterOptionsProps } from 'components/Filter/Filter'
+import Filter from 'components/Filter/Filter'
+import FilterTags from 'components/FilterTags/FilterTags'
 import { Loading } from 'components/Loading/Loading'
 import Product from 'components/Product/Product'
-import { CATEGORIES } from 'graphql/queries/categories'
-import { PLATFORMS } from 'graphql/queries/platforms'
 import { PRODUCTS } from 'graphql/queries/products'
+import { FilterProvider, useFilter } from 'hooks/useFilter'
 import { GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
 import * as S from 'pages/products/ProductsPage.styles'
-import { ParsedUrlQueryInput } from 'querystring'
 import { type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
-import { CategoriesQuery, PlatformsQuery, ProductsQuery, ProductsQueryVariables } from 'types/generated'
+import { ProductsQuery, ProductsQueryVariables } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
-import { queryStringToGraphqlFilters } from 'utils/filter'
-import { generateFilterOptions } from 'utils/filterOptions'
 import { getImageUrl } from 'utils/getImageUrl'
+import { queryStringToGraphqlFilters } from 'utils/queryStringToGraphqlFilters'
 
 export const productsLimit = 9
 
 interface ProductsPageProps {
-  filterOptions: FilterOptionsProps[]
   initialApolloState: NormalizedCacheObject | null
 }
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   const apolloClient = initializeApollo({})
-  const { data: platforms } = await apolloClient.query<PlatformsQuery>({ query: PLATFORMS })
-  const { data: categories } = await apolloClient.query<CategoriesQuery>({ query: CATEGORIES })
-  const filterOptions = generateFilterOptions({ platforms, categories })
 
   await apolloClient.query<ProductsQuery, Pick<ProductsQueryVariables, 'limit'>>({
     query: PRODUCTS,
     variables: {
       limit: productsLimit,
       ...queryStringToGraphqlFilters({
-        queryString: query,
-        filterOptions
+        queryString: query
       })
     }
   })
   const props: ProductsPageProps = {
-    filterOptions,
     initialApolloState: apolloClient.cache.extract()
   }
-
   return { props }
 }
 
-const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
-  const { query, push } = useRouter()
-  const { data, fetchMore, loading } = useQuery<ProductsQuery, Pick<ProductsQueryVariables, 'limit'>>(PRODUCTS, {
+const ProductsPage = () => {
+  const { urlQueryParams } = useFilter()
+  const { data, fetchMore, loading } = useQuery<ProductsQuery>(PRODUCTS, {
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: productsLimit,
       ...queryStringToGraphqlFilters({
-        queryString: query,
-        filterOptions
+        queryString: urlQueryParams
       })
     }
   })
-
-  const handleFilter = (values: ParsedUrlQueryInput) => {
-    push({
-      pathname: '/products',
-      query: values
-    })
-    return
-  }
-
   const loadMore = () => {
     fetchMore({
       variables: {
@@ -80,7 +60,6 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
       }
     })
   }
-
   const products = data?.products.data || []
   const allProductsLoaded = products.length >= (data?.products.meta.pagination.total || 0)
   const hasProducts = products.length > 0
@@ -88,48 +67,51 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const showShowMore = hasProducts && !loading && !allProductsLoaded
 
   return (
-    <Container data-testid='ProductsPage'>
-      <S.Wrapper>
-        <Filter filterOptions={filterOptions} initialValues={query} handleFilter={handleFilter} />
+    <FilterProvider>
+      <Container data-testid='ProductsPage'>
+        <S.Wrapper>
+          <Filter />
 
-        <div>
-          <S.Products data-cy='products'>
-            {hasProducts &&
-              products.map(({ attributes, id }, index) => {
-                const firstThreeProducts = index < 3
+          <div>
+            <FilterTags />
+            <S.Products data-cy='products'>
+              {hasProducts &&
+                products.map(({ attributes, id }, index) => {
+                  const firstThreeProducts = index < 3
 
-                return (
-                  <Product
-                    id={id}
-                    key={id}
-                    title={attributes.name}
-                    developer={attributes.developers.data[0]?.attributes.name || ''}
-                    img={getImageUrl(attributes.cover.data.attributes.url) || '/img/defaults/product-default.webp'}
-                    imgPriority={firstThreeProducts}
-                    price={attributes.price}
-                    slug={attributes.slug}
-                    promotionalPrice={attributes.promotional_price}
-                    ribbonLabel={attributes.ribbon_label}
-                  />
-                )
-              })}
-          </S.Products>
+                  return (
+                    <Product
+                      id={id}
+                      key={id}
+                      title={attributes.name}
+                      developer={attributes.developers.data[0]?.attributes.name || ''}
+                      img={getImageUrl(attributes.cover.data.attributes.url) || '/img/defaults/product-default.webp'}
+                      imgPriority={firstThreeProducts}
+                      price={attributes.price}
+                      slug={attributes.slug}
+                      promotionalPrice={attributes.promotional_price}
+                      ribbonLabel={attributes.ribbon_label}
+                    />
+                  )
+                })}
+            </S.Products>
 
-          {showEmpty && (
-            <Empty title='No results found' $description="Sorry, we couldn't find any results for your search." />
-          )}
+            {showEmpty && (
+              <Empty title='No results found' $description="Sorry, we couldn't find any results for your search." />
+            )}
 
-          {loading && <Loading />}
+            {loading && <Loading />}
 
-          {showShowMore && (
-            <S.ShowMore onClick={loadMore}>
-              <span>Show more</span>
-              <KeyboardArrowDown />
-            </S.ShowMore>
-          )}
-        </div>
-      </S.Wrapper>
-    </Container>
+            {showShowMore && (
+              <S.ShowMore onClick={loadMore}>
+                <span>Show more</span>
+                <KeyboardArrowDown />
+              </S.ShowMore>
+            )}
+          </div>
+        </S.Wrapper>
+      </Container>
+    </FilterProvider>
   )
 }
 

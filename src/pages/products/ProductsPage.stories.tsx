@@ -1,9 +1,12 @@
 import { MockedProvider } from '@apollo/client/testing'
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, waitFor, within } from '@storybook/test'
+import { FilterContext } from 'contexts/FilterContext'
+import { categoriesResponseMock } from 'mocks/categoriesResponseMock'
 import { emptyProductsResponseMock } from 'mocks/emptyProductsResponse.mock'
-import { filterMock } from 'mocks/filter.mock'
+import { filterContextMock } from 'mocks/filterContext.mock'
 import { moreProductsResponseMock } from 'mocks/moreProductsResponse.mock'
+import { platformsResponseMock } from 'mocks/platformsResponseMock'
 import { productsResponseMock } from 'mocks/productsResponse.mock'
 import DefaultTemplate from 'templates/Default/Default'
 import { apolloCache } from 'utils/apolloCache'
@@ -12,9 +15,6 @@ import ProductsPage, { productsLimit } from '.'
 const meta: Meta<typeof ProductsPage> = {
   title: 'Pages/Products',
   component: ProductsPage,
-  args: {
-    filterOptions: filterMock
-  },
   decorators: [
     (Story) => (
       <DefaultTemplate>
@@ -33,9 +33,11 @@ type Story = StoryObj<typeof ProductsPage>
 
 export const Empty: Story = {
   decorators: (Story) => (
-    <MockedProvider mocks={[emptyProductsResponseMock]}>
-      <Story />
-    </MockedProvider>
+    <FilterContext.Provider value={filterContextMock}>
+      <MockedProvider mocks={[emptyProductsResponseMock, platformsResponseMock, categoriesResponseMock]}>
+        <Story />
+      </MockedProvider>
+    </FilterContext.Provider>
   ),
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -55,7 +57,10 @@ export const Empty: Story = {
 
 export const WithProducts: Story = {
   decorators: (Story) => (
-    <MockedProvider mocks={[productsResponseMock, moreProductsResponseMock]} cache={apolloCache}>
+    <MockedProvider
+      mocks={[productsResponseMock, moreProductsResponseMock, platformsResponseMock, categoriesResponseMock]}
+      cache={apolloCache}
+    >
       <Story />
     </MockedProvider>
   ),

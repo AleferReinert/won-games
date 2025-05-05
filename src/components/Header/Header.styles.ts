@@ -97,12 +97,46 @@ export const MenuLink = styled.a`
 export const NavRight = styled.nav`
   ${({ theme }) => css`
     display: flex;
-    flex-grow: 1;
     justify-content: flex-end;
     align-items: center;
+    width: 100%;
 
     > * {
       margin-left: ${theme.spacings.xsmall};
+    }
+  `}
+`
+
+interface SearchProps {
+  $isOpen: boolean
+}
+
+export const SearchWrapper = styled.form<SearchProps>`
+  ${({ theme, $isOpen }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: ${theme.spacings.xsmall};
+    width: 100%;
+
+    input {
+      background: ${theme.colors.darkBg};
+      z-index: ${theme.layers.menu};
+      border: 0;
+      border-bottom: 1px solid ${theme.colors.white};
+      height: 3.3rem;
+      color: ${theme.colors.white};
+      transition: all ${theme.transition.default};
+      width: ${$isOpen ? '100%' : '0'};
+      font-size: ${theme.font.sizes.medium};
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        color: ${theme.colors.white};
+      }
     }
   `}
 `

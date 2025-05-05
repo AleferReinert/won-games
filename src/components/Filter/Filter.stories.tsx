@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, fn, userEvent, waitFor, within } from '@storybook/test'
-import { filterMock } from '../../mocks/filter.mock'
+import { FilterContext } from 'contexts/FilterContext'
+import { filterContextMock } from 'mocks/filterContext.mock'
 import FilterComponent from './Filter'
 
 const meta: Meta<typeof FilterComponent> = {
   title: 'Components/Filter',
   component: FilterComponent,
-  args: {
-    filterOptions: filterMock
-  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: '280px' }}>
-        <Story />
+        <FilterContext.Provider value={filterContextMock}>
+          <Story />
+        </FilterContext.Provider>
       </div>
     )
   ],
@@ -145,68 +145,10 @@ export const Mobile: Story = {
   }
 }
 
-export const InitialValues: Story = {
-  args: {
-    initialValues: {
-      price: 200,
-      'windows-7': 'true',
-      'windows-8': 'true',
-      action: 'true',
-      sort: 'price:asc'
-    },
-    handleFilter: fn()
-  },
+export const Desktop: Story = {
   parameters: {
     viewport: {
       defaultViewport: 'large'
     }
-  },
-  play: async ({ canvasElement, args, step }) => {
-    const canvas = within(canvasElement)
-
-    await step('Initial values checked', () => {
-      const priceRadio = canvas.getByRole('radio', { name: 'Under $200' })
-      const windows7Checkbox = canvas.getByRole('checkbox', { name: 'Windows 7' })
-      const windows8Checkbox = canvas.getByRole('checkbox', { name: 'Windows 8' })
-      const actionCheckbox = canvas.getByRole('checkbox', { name: 'Action' })
-      const sortRadio = canvas.getByRole('radio', { name: /low to high/i })
-      expect(priceRadio).toBeChecked()
-      expect(windows7Checkbox).toBeChecked()
-      expect(windows8Checkbox).toBeChecked()
-      expect(actionCheckbox).toBeChecked()
-      expect(sortRadio).toBeChecked()
-    })
-
-    await step('Filter called with initial values', async () => {
-      await waitFor(() =>
-        expect(args.handleFilter).toHaveBeenCalledWith({
-          price: 200,
-          'windows-7': 'true',
-          'windows-8': 'true',
-          action: 'true',
-          sort: 'price:asc'
-        })
-      )
-    })
-  }
-}
-
-export const OnUserChange: Story = {
-  args: {
-    handleFilter: fn()
-  },
-  parameters: {
-    viewport: {
-      defaultViewport: 'large'
-    }
-  },
-  play: async ({ canvasElement, args, step }) => {
-    const canvas = within(canvasElement)
-
-    await step('Filter called with mac', async () => {
-      const macCheckbox = canvas.getByRole('checkbox', { name: /mac/i })
-      await userEvent.click(macCheckbox)
-      await waitFor(() => expect(args.handleFilter).toHaveBeenCalledWith({ mac: true }))
-    })
   }
 }

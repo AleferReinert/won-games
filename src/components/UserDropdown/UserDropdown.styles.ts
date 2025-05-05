@@ -26,6 +26,7 @@ export const Wrapper = styled.div`
 export const Username = styled.div`
   ${() => css`
     margin: 0 1rem;
+    white-space: nowrap;
   `}
 `
 

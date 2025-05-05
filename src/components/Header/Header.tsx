@@ -7,12 +7,33 @@ import MenuMobile from 'components/MenuMobile/MenuMobile'
 import Skeleton from 'components/Skeleton/Skeleton'
 import UserDropdown from 'components/UserDropdown/UserDropdown'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useRef, useState } from 'react'
 import * as S from './Header.styles'
 
 const Header = () => {
   const [menuMobile, setMenuMobile] = useState(false)
   const { status } = useSession()
+  const [showSearch, setShowSearch] = useState(false)
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
+
+  function handleShowSearch() {
+    searchInputRef.current && !showSearch ? (searchInputRef.current.value = '') : ''
+    setShowSearch(!showSearch)
+    if (!showSearch) {
+      searchInputRef.current?.focus()
+    }
+  }
+
+  function searchSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (searchInputRef.current?.value) {
+      const currentParams = new URLSearchParams(window.location.search)
+      currentParams.set('search', searchInputRef.current.value)
+      router.push(`/products?${currentParams.toString()}`)
+    }
+  }
 
   return (
     <S.Wrapper>
@@ -32,11 +53,14 @@ const Header = () => {
       </S.MenuDesktop>
 
       <S.NavRight>
-        <S.IconWrapper>
-          <button title='Search' aria-label='Search'>
-            <SearchIcon role='img' aria-hidden width={24} height={24} />
-          </button>
-        </S.IconWrapper>
+        <S.SearchWrapper $isOpen={showSearch} onSubmit={searchSubmit}>
+          <input ref={searchInputRef} type='search' placeholder='Search games...' autoFocus />
+          <S.IconWrapper>
+            <button title='Search' aria-label='Search' onClick={handleShowSearch}>
+              <SearchIcon role='img' aria-hidden width={24} height={24} />
+            </button>
+          </S.IconWrapper>
+        </S.SearchWrapper>
 
         <S.IconWrapper>
           <CartDropdown />

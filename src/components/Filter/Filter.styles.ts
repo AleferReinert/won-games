@@ -140,3 +140,16 @@ export const ButtonWrapper = styled.div`
     }
   `}
 `
+
+export const ClearFilter = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: end;
+
+    button {
+      color: ${theme.colors.primary};
+      background: transparent;
+      font-size: ${theme.font.sizes.xsmall};
+    }
+  `}
+`

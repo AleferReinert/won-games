@@ -11,17 +11,15 @@ export interface CheckboxProps extends ComponentProps<'input'> {
 }
 
 const Checkbox = ({ id, onCheck, isChecked = false, label, $labelColor = 'white', value, ...props }: CheckboxProps) => {
-  const [checked, setChecked] = useState(isChecked)
-
-  const onChange = () => {
-    const status = !checked
-    setChecked(status)
-    onCheck && onCheck(status)
+  const [checkedStatus, setCheckedStatus] = useState(isChecked)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckedStatus(e.target.checked)
+    onCheck?.(e.target.checked)
   }
 
   return (
     <S.Wrapper>
-      <S.Input type='checkbox' id={id} onChange={onChange} checked={checked} value={value} {...props} />
+      <S.Input type='checkbox' id={id} onChange={handleChange} checked={checkedStatus} value={value} {...props} />
       {label && (
         <S.Label htmlFor={id} $labelColor={$labelColor}>
           {label}

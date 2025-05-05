@@ -1,4 +1,3 @@
-// src\mocks\moreProductsResponse.mock.ts
 import { MockedResponse } from '@apollo/client/testing'
 import { PRODUCTS } from 'graphql/queries/products'
 import { productsLimit } from 'pages/products'

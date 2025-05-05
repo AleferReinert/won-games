@@ -3,13 +3,13 @@ import Button from 'components/Button/Button'
 import Checkbox from 'components/Checkbox/Checkbox'
 import Heading from 'components/Heading/Heading'
 import Radio from 'components/Radio/Radio'
-import { ParsedUrlQueryInput } from 'querystring'
+import { useFilter } from 'hooks/useFilter'
 import { useEffect, useState } from 'react'
 import * as S from './Filter.styles'
 
 export interface FilterOptionsProps {
   title: string
-  name: string
+  name: 'price' | 'sort' | 'platforms' | 'categories'
   type: 'radio' | 'checkbox'
   fields: {
     label: string
@@ -18,33 +18,14 @@ export interface FilterOptionsProps {
   }[]
 }
 
-export interface FilterProps {
-  filterOptions: FilterOptionsProps[]
-  initialValues?: ParsedUrlQueryInput
-  handleFilter: (values: ParsedUrlQueryInput) => void
-}
-
-const Filter = ({ filterOptions, initialValues = {}, handleFilter }: FilterProps) => {
-  const [values, setValues] = useState(initialValues)
+const Filter = () => {
+  const { filterOptions, selectedFilters, clearFilterSession, handleFilter, handleChange } = useFilter()
   const [$isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    handleFilter(values) // items vem daqui
+    handleFilter()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [values])
-
-  const handleChange = (name: string, value: boolean | string) => {
-    // Se estiver checado, adiciona o valor a url, se não remove
-    if (value) {
-      setValues((s) => ({ ...s, [name]: value }))
-    } else {
-      setValues((s) => {
-        const values = { ...s }
-        delete values[name]
-        return values
-      })
-    }
-  }
+  }, [selectedFilters])
 
   return (
     <>
@@ -57,41 +38,57 @@ const Filter = ({ filterOptions, initialValues = {}, handleFilter }: FilterProps
           <CloseIcon role='img' aria-hidden />
         </S.CloseFilter>
         <S.Items>
-          {filterOptions.map((filter) => (
-            <S.Item key={filter.title}>
-              <Heading $line='bottom' $lineColor='secondary' color='black' size='xlarge'>
-                {filter.title}
-              </Heading>
-              {filter.type === 'checkbox'
-                ? filter.fields?.map((field) => (
-                    <Checkbox
-                      key={field.id}
-                      id={field.id}
-                      name={filter.name}
-                      label={field.label}
-                      value={field.value}
-                      $labelColor='black'
-                      isChecked={values[field.value] === 'true'}
-                      onCheck={(value) => handleChange(field.value, value)}
-                    />
-                  ))
-                : filter.fields?.map((field) => (
-                    <Radio
-                      key={field.id}
-                      id={field.id}
-                      name={filter.name}
-                      label={field.label}
-                      value={field.value}
-                      $labelColor='black'
-                      defaultChecked={String(field.value) === String(values[filter.name])}
-                      onChange={() => handleChange(filter.name, field.value)}
-                    />
-                  ))}
-            </S.Item>
-          ))}
+          {filterOptions.map((filter) => {
+            const filterSessionChecked = Object.keys(selectedFilters).includes(filter.name)
+
+            return (
+              <S.Item key={filter.title}>
+                <Heading $line='bottom' $lineColor='secondary' color='black' size='xlarge'>
+                  {filter.title}
+                </Heading>
+                {filter.type === 'checkbox'
+                  ? filter.fields?.map((field) => {
+                      const arr = Array.isArray(selectedFilters[filter.name])
+                        ? (selectedFilters[filter.name] as string[])
+                        : []
+                      const isChecked = arr.includes(field.value)
+
+                      return (
+                        <Checkbox
+                          key={field.id}
+                          id={field.id}
+                          name={filter.name}
+                          label={field.label}
+                          value={field.value}
+                          $labelColor='black'
+                          checked={isChecked}
+                          onCheck={() => handleChange(filter.name, field.value)}
+                        />
+                      )
+                    })
+                  : filter.fields?.map((field) => (
+                      <Radio
+                        key={field.id}
+                        id={field.id}
+                        name={filter.name}
+                        label={field.label}
+                        value={field.value}
+                        $labelColor='black'
+                        checked={String(selectedFilters[filter.name] ?? '') === String(field.value)}
+                        onChange={() => handleChange(filter.name, field.value)}
+                      />
+                    ))}
+                {filterSessionChecked && (
+                  <S.ClearFilter>
+                    <button onClick={() => clearFilterSession(filter.name)}>Clear</button>
+                  </S.ClearFilter>
+                )}
+              </S.Item>
+            )
+          })}
         </S.Items>
         <S.ButtonWrapper>
-          <Button $full size='large' onClick={() => handleFilter(values)}>
+          <Button $full size='large' onClick={handleFilter}>
             Filter
           </Button>
         </S.ButtonWrapper>
