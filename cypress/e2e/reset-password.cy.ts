@@ -50,6 +50,6 @@ describe('Reset password', () => {
     cy.get('@ConfirmPasswordInput').type('123456')
     cy.get('@ResetPasswordButton').click()
     cy.findByText('Password changed').should('be.visible')
-    cy.isUserLoggedInAndRedirect('John Doe')
+    cy.isUserLoggedInAndRedirect('John')
   })
 })

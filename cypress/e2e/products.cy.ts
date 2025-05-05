@@ -40,14 +40,14 @@ describe('Products page', () => {
   })
 
   it('Filter by platforms', () => {
-    cy.selectFilterAndCheckUrl('checkbox', 'linux', 'linux=true')
-    cy.selectFilterAndCheckUrl('checkbox', 'mac', 'mac=true')
-    cy.selectFilterAndCheckUrl('checkbox', 'windows', 'windows=true')
+    cy.selectFilterAndCheckUrl('checkbox', 'linux', 'platforms=linux')
+    cy.selectFilterAndCheckUrl('checkbox', 'mac', 'platforms=linux%2Cmac')
+    cy.selectFilterAndCheckUrl('checkbox', 'windows', 'platforms=linux%2Cmac%2Cwindows')
   })
 
   it('Filter by categories', () => {
-    cy.selectFilterAndCheckUrl('checkbox', `Action`, 'action=true')
-    cy.selectFilterAndCheckUrl('checkbox', `Adventure`, 'adventure=true')
+    cy.selectFilterAndCheckUrl('checkbox', `Action`, 'categories=action')
+    cy.selectFilterAndCheckUrl('checkbox', `Adventure`, 'categories=action%2Cadventure')
   })
 
   it('Filter with empty products', () => {
@@ -57,6 +57,16 @@ describe('Products page', () => {
   })
 
   it('Add and remove products from cart', () => {
-    cy.addAndRemoveProductsFromCart()
+    cy.checkCartItemsAndClose({ quantity: 0 })
+    cy.get('button[title="Add to cart"]').eq(0).click()
+    cy.get('button[title="Add to cart"]').eq(1).click()
+
+    cy.checkCartItemsAndClose({ quantity: 2 })
+
+    cy.get('button[title="Remove from cart"]').eq(0).click({ force: true })
+    cy.checkCartItemsAndClose({ quantity: 1 })
+
+    cy.get('button[title="Remove from cart"]').eq(0).click({ force: true })
+    cy.checkCartItemsAndClose({ quantity: 0 })
   })
 })

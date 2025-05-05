@@ -22,7 +22,7 @@ describe('Sign in page', () => {
 
   it('Sign in, redirect to home and logout', () => {
     cy.signIn('johndoe@example.com', '123456')
-    cy.isUserLoggedInAndRedirect('John Doe')
+    cy.isUserLoggedInAndRedirect('John')
     cy.findByRole('button', { name: 'My account' }).click()
     cy.findByRole('link', { name: 'Logout' }).click()
     cy.findByRole('link', { name: 'Sign in' }).should('be.visible')

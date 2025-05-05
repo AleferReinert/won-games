@@ -111,8 +111,9 @@ declare namespace Cypress {
      */
     checkCartItemsAndClose({ quantity: number }): Chainable<void>
 
-    /** 1. Add products to cart
+    /** 1. Add products (from showcase) to cart
      *  2. Remove products from cart
+     *
      */
     addAndRemoveProductsFromCart(): Chainable<void>
 

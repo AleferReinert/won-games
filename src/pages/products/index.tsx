@@ -7,8 +7,9 @@ import FilterTags from 'components/FilterTags/FilterTags'
 import { Loading } from 'components/Loading/Loading'
 import Product from 'components/Product/Product'
 import { PRODUCTS } from 'graphql/queries/products'
-import { FilterProvider, useFilter } from 'hooks/useFilter'
+import { FilterProvider } from 'hooks/useFilter'
 import { GetServerSidePropsContext } from 'next'
+import { useRouter } from 'next/router'
 import * as S from 'pages/products/ProductsPage.styles'
 import { type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
@@ -42,13 +43,13 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
 }
 
 const ProductsPage = () => {
-  const { urlQueryParams } = useFilter()
+  const { query } = useRouter()
   const { data, fetchMore, loading } = useQuery<ProductsQuery>(PRODUCTS, {
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: productsLimit,
       ...queryStringToGraphqlFilters({
-        queryString: urlQueryParams
+        queryString: query
       })
     }
   })

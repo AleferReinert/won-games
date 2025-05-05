@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 import { fakeUser } from '../support/generateFakeData'
 
+const fakeUserFirstName = fakeUser.fullName.split(' ')[0]
+
 describe('Sign up page', () => {
   beforeEach(() => {
     cy.visit('/sign-up')
@@ -69,6 +71,6 @@ describe('Sign up page', () => {
     cy.get('@PasswordInput').type(fakeUser.password)
     cy.get('@ConfirmPasswordInput').type(fakeUser.password)
     cy.get('@SignUpButton').click()
-    cy.isUserLoggedInAndRedirect(fakeUser.fullName)
+    cy.isUserLoggedInAndRedirect(fakeUserFirstName)
   })
 })
