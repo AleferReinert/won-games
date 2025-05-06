@@ -13,7 +13,7 @@ const DefaultTemplate = ({ children }: DefaultTemplateProps) => {
       <Container>
         <Header />
       </Container>
-      <S.Children>{children}</S.Children>
+      <S.Main>{children}</S.Main>
       <S.SectionFooter>
         <Container>
           <Footer />

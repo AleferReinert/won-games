@@ -74,6 +74,7 @@ export const Description = styled.div`
 
 export const Content = styled.div`
   ${({ theme }) => css`
+    margin-top: ${theme.spacings.medium};
     font-size: ${theme.font.sizes.medium};
 
     h1,

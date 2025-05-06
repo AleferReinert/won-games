@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
     @media (max-width: calc(${theme.breakpoint.small} - 1px)) {
       ${RibbonStyles.Wrapper} {
         right: 0;
+        top: 2rem;
 
         &::after {
           display: none;

@@ -5,6 +5,20 @@ type WrapperProps = Pick<ProductSliderProps, '$arrowColor'>
 
 export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, $arrowColor }) => css`
+    // To fix problem with slider on mobile
+    overflow: hidden;
+    max-width: ${theme.breakpoint.xxsmall};
+    @media (min-width: ${theme.breakpoint.xsmall}) {
+      max-width: ${theme.breakpoint.xsmall};
+    }
+    @media (min-width: ${theme.breakpoint.small}) {
+      max-width: ${theme.breakpoint.small};
+    }
+    @media (min-width: ${theme.breakpoint.medium}) {
+      max-width: none;
+      overflow: visible;
+    }
+
     div.slick-track {
       display: flex;
       gap: ${theme.spacings.xxsmall};

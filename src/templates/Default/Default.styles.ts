@@ -7,10 +7,10 @@ export const Wrapper = styled.section`
   height: 100vh;
 `
 
-export const Children = styled.main`
+export const Main = styled.main`
   ${({ theme }) => css`
     flex: 1 0 auto;
-    margin-top: ${theme.spacings.large};
+    // margin-top: ${theme.spacings.large};
 
     @media (min-width: ${theme.breakpoint.large}) {
       margin-top: ${theme.spacings.xxlarge};

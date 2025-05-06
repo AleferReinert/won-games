@@ -13,6 +13,7 @@ interface MenuMobileProps {
 const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
   const { status } = useSession()
   const { logout } = useLogout()
+  const closeMenu = () => setMenuMobile(false)
 
   return (
     <S.MenuMobile aria-label='Menu mobile' aria-hidden={!menuMobile} data-testid='MenuMobileComponent'>
@@ -21,12 +22,20 @@ const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
       </S.CloseMenu>
 
       <S.MenuNav>
-        <S.MenuLink href='/'>Home</S.MenuLink>
-        <S.MenuLink href='/products'>Explore</S.MenuLink>
+        <S.MenuLink href='/' onClick={closeMenu}>
+          Home
+        </S.MenuLink>
+        <S.MenuLink href='/products' onClick={closeMenu}>
+          Explore
+        </S.MenuLink>
         {status === 'authenticated' && (
           <>
-            <S.MenuLink href='/account/profile'>My account</S.MenuLink>
-            <S.MenuLink href='/wishlist'>Wishlist</S.MenuLink>
+            <S.MenuLink href='/account/profile' onClick={closeMenu}>
+              My account
+            </S.MenuLink>
+            <S.MenuLink href='/wishlist' onClick={closeMenu}>
+              Wishlist
+            </S.MenuLink>
             <S.MenuLink href='/' onClick={logout}>
               Logout
             </S.MenuLink>
@@ -37,13 +46,13 @@ const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
       {status === 'unauthenticated' && (
         <S.AuthBox>
           <S.LogInNow>
-            <Button size='large' asLink href='/sign-in'>
+            <Button size='large' asLink href='/sign-in' onClick={closeMenu}>
               Log in
             </Button>
           </S.LogInNow>
           <span>or</span>
           <S.SignUp>
-            <Button $variant='link' size='large' asLink href='/sign-up'>
+            <Button $variant='link' size='large' asLink href='/sign-up' onClick={closeMenu}>
               Sign up
             </Button>
           </S.SignUp>

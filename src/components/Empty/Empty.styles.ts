@@ -29,6 +29,7 @@ export const Img = styled(Image)`
   ${({ theme }) => css`
     margin-bottom: ${theme.spacings.small};
     margin-right: -0.3rem;
+    max-width: 100%;
   `}
 `
 

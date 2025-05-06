@@ -3,7 +3,9 @@ import styled, { css } from 'styled-components'
 export const Tags = styled.div`
   ${({ theme }) => css`
     display: flex;
+    flex-wrap: wrap;
     gap: ${theme.spacings.xxsmall};
+    margin-bottom: ${theme.spacings.xsmall};
   `}
 `
 
@@ -14,9 +16,9 @@ export const Tag = styled.div`
     color: ${theme.colors.black};
     font-size: ${theme.font.sizes.small};
     padding: 0 2px 0 ${theme.spacings.xxsmall};
-    margin-bottom: ${theme.spacings.xsmall};
     align-items: center;
     border-radius: ${theme.border.radius};
+    white-space: nowrap;
 
     > span {
       line-height: ${theme.font.sizes.xxlarge};

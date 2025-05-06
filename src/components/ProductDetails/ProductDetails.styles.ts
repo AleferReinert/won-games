@@ -16,7 +16,7 @@ export const Content = styled.div`
   ${({ theme }) => css`
     display: grid;
     gap: ${theme.spacings.xsmall};
-    margin-top: ${theme.spacings.large};
+    margin-top: ${theme.spacings.medium};
 
     @media (min-width: ${theme.breakpoint.small}) {
       grid-template-columns: repeat(2, 1fr);

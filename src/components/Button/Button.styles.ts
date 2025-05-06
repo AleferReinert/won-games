@@ -66,6 +66,7 @@ export const Wrapper = styled.button<ButtonProps>`
     font-weight: ${theme.font.semibold};
     padding: 0 ${theme.spacings.xxsmall};
     gap: ${theme.spacings.xxsmall};
+    white-space: nowrap;
 
     svg {
       width: 2.2rem;
