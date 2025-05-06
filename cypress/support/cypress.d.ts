@@ -55,7 +55,7 @@ declare namespace Cypress {
      *
      * Example:
      * ```ts
-     * cy.signIn('John Doe', '123456')
+     * cy.signIn('johndoe@example.com', '123456')
      * ```
      */
     signIn(email: string, password: string): Chainable<void>
@@ -155,5 +155,15 @@ declare namespace Cypress {
      * ```
      */
     checkWishlistItemsAndClose({ quantity: number }): Chainable<void>
+
+    /**
+     * Type full name, e-mail, password, confirm password (optional) and sign up.
+     *
+     * Example:
+     * ```ts
+     * cy.signUp('John Doe','johndoe@example.com', '123456')
+     * ```
+     */
+    signUp(fullName: string, email: string, password: string, confirmPassword?: string): Chainable<void>
   }
 }

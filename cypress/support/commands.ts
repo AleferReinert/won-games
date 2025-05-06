@@ -184,3 +184,11 @@ Cypress.Commands.add('addAndRemoveProductsFromWishlist', () => {
   cy.removeFromWishlistFromShowcase({ quantity: 1 })
   cy.checkWishlistItemsAndClose({ quantity: 0 })
 })
+
+Cypress.Commands.add('signUp', (fullName, email, password, confirmPassword) => {
+  cy.findByLabelText('Full name').type(fullName)
+  cy.findByLabelText('E-mail').type(email)
+  cy.findByLabelText('Password').type(password)
+  cy.findByLabelText('Confirm password').type(confirmPassword ? confirmPassword : password)
+  cy.findByRole('button', { name: 'Sign up' }).click()
+})

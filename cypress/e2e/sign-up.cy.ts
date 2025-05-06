@@ -21,56 +21,37 @@ describe('Sign up page', () => {
   })
 
   it('Show error when full name must be at least 5 characters', () => {
-    cy.get('@FullNameInput').type('john')
-    cy.get('@SignUpButton').click()
+    cy.signUp('John', 'johndoe@example', '123456')
     cy.findByText('Full name must be at least 5 characters').should('be.visible')
   })
 
-  it('Show error when full name must not contain numbers', () => {
-    cy.get('@FullNameInput').type('John123')
-    cy.get('@SignUpButton').click()
+  it('Show error when full name contain numbers', () => {
+    cy.signUp('John1 Doe2', 'johndoe@example', '123456')
     cy.findByText('Full name must not contain numbers').should('be.visible')
   })
 
   it('Show error when invalid e-mail', () => {
-    cy.get('@FullNameInput').type('John Doe')
-    cy.get('@EmailInput').type('john@doe')
-    cy.get('@SignUpButton').click()
+    cy.signUp('John Doe', 'johndoe@example', '12345')
     cy.findByText('Invalid e-mail').should('be.visible')
   })
 
   it('Show error when password must be at least 6 characters', () => {
-    cy.get('@FullNameInput').type('John Doe')
-    cy.get('@EmailInput').type('johndoe@example.com')
-    cy.get('@PasswordInput').type('123')
-    cy.get('@SignUpButton').click()
+    cy.signUp('John Doe', 'johndoe@example.com', '12345')
     cy.findByText('Password must be at least 6 characters').should('be.visible')
   })
 
   it('Show error when passwords do not match', () => {
-    cy.get('@FullNameInput').type('John Doe')
-    cy.get('@EmailInput').type('johndoe@example.com')
-    cy.get('@PasswordInput').type('123456')
-    cy.get('@ConfirmPasswordInput').type('123455')
-    cy.get('@SignUpButton').click()
+    cy.signUp('John Doe', 'johndoe@example.com', '123456', '123455')
     cy.findByText('Passwords do not match').should('be.visible')
   })
 
   it('Show error when trying to create an existing user', () => {
-    cy.get('@FullNameInput').type('John Doe')
-    cy.get('@EmailInput').type('johndoe@example.com')
-    cy.get('@PasswordInput').type('123456')
-    cy.get('@ConfirmPasswordInput').type('123456')
-    cy.get('@SignUpButton').click()
+    cy.signUp('John Doe', 'johndoe@example.com', '123456')
     cy.findByText('Email or Username are already taken').should('be.visible')
   })
 
   it('Create user, login and redirect to home', () => {
-    cy.get('@FullNameInput').type(fakeUser.fullName)
-    cy.get('@EmailInput').type(fakeUser.email)
-    cy.get('@PasswordInput').type(fakeUser.password)
-    cy.get('@ConfirmPasswordInput').type(fakeUser.password)
-    cy.get('@SignUpButton').click()
+    cy.signUp(fakeUser.fullName, fakeUser.email, fakeUser.password)
     cy.isUserLoggedInAndRedirect(fakeUserFirstName)
   })
 })
