@@ -6,5 +6,6 @@ export default defineConfig({
     baseUrl: 'http://localhost:3000'
   },
   screenshotOnRunFailure: false,
-  viewportWidth: 1024
+  viewportWidth: 1024,
+  chromeWebSecurity: false
 })

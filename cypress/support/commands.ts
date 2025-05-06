@@ -1,6 +1,7 @@
 /// <reference types="@testing-library/cypress" />
 /// <reference types="cypress" />
 import '@testing-library/cypress/add-commands'
+import 'cypress-plugin-stripe-elements'
 
 Cypress.Commands.add('toggleBanner', () => {
   cy.get('[data-testid="BannerSliderComponent"]').within(() => {
