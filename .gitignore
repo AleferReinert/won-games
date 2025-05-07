@@ -46,3 +46,4 @@ tsconfig.tsbuildinfo
 # cypress
 cypress/screenshots
 cypress/videos
+cypress/.env

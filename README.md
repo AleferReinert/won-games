@@ -102,7 +102,7 @@ E-commerce de jogos com todas as funcionalidades necessárias:
    yarn install
    ```
 
-3. Configure as variaveis de ambiente como em `.env.example`.
+3. Configure as variaveis de ambiente como em `.env.example` e `cypress/.env.example`.
 
 ## Scripts
 

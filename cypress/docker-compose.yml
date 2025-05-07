@@ -10,11 +10,13 @@ services:
       DATABASE_USERNAME: strapi
       DATABASE_PASSWORD: strapi
       DATABASE_NAME: strapi
-      STRIPE_KEY: $(NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+      STRIPE_KEY: ${STRIPE_SECRET_KEY}
     ports:
       - '1337:1337'
     depends_on:
       - db
+    env_file:
+      - .env
 
   db:
     container_name: wongames_db
