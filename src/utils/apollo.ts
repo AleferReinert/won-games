@@ -5,6 +5,11 @@ import { apolloCache } from './apolloCache'
 
 let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
+interface initializeApolloProps {
+  initialState?: null
+  session?: Session | null
+}
+
 function createApolloClient(session?: Session | null) {
   const isServer = typeof window === 'undefined'
 
@@ -18,11 +23,6 @@ function createApolloClient(session?: Session | null) {
     }),
     cache: apolloCache
   })
-}
-
-interface initializeApolloProps {
-  initialState?: null
-  session?: Session | null
 }
 
 export function initializeApollo({ initialState = null, session = null }: initializeApolloProps) {
