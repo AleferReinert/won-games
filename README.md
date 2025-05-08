@@ -1,6 +1,6 @@
 # Won Games
 
-E-commerce de jogos com todas as funcionalidades necessárias:
+E-commerce de jogos completo.
 
 ## Requisitos
 
@@ -156,7 +156,9 @@ yarn plop
 - **Testing Library:** Conjunto de utilitários para testar componentes React.
 - **TypeScript:** Superconjunto do JavaScript que adiciona tipagem estática opcional.
 
-## URL do Projeto
+## URLs do Projeto
+
+Explore o projeto no link: [wongames-store.vercel.app](https://wongames-store.vercel.app)
 
 Storybook: [Visualizar no Chromatic](https://main--64ceaf6be6c94aa14b9fe174.chromatic.com)
 
