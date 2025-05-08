@@ -93,9 +93,7 @@ export const CloseModal = styled.div`
   ${({ theme }) => css`
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
     padding: ${theme.spacings.xxsmall};
     text-align: right;
     color: ${theme.colors.white};
@@ -103,8 +101,8 @@ export const CloseModal = styled.div`
 
     svg {
       cursor: pointer;
-      width: 2rem;
-      height: 2rem;
+      width: 2.4rem;
+      height: 2.4rem;
       fill: ${theme.colors.white};
     }
   `}
