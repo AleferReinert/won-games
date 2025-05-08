@@ -2,10 +2,12 @@ import { NormalizedCacheObject, useQuery } from '@apollo/client'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 import Container from 'components/Container/Container'
 import Empty from 'components/Empty/Empty'
-import Filter from 'components/Filter/Filter'
+import Filter, { FilterOptionsProps } from 'components/Filter/Filter'
 import FilterTags from 'components/FilterTags/FilterTags'
-import { Loading } from 'components/Loading/Loading'
 import Product from 'components/Product/Product'
+import Skeleton from 'components/Skeleton/Skeleton'
+import { CATEGORIES } from 'graphql/queries/categories'
+import { PLATFORMS } from 'graphql/queries/platforms'
 import { PRODUCTS } from 'graphql/queries/products'
 import { FilterProvider } from 'hooks/useFilter'
 import { GetServerSidePropsContext } from 'next'
@@ -13,8 +15,9 @@ import { useRouter } from 'next/router'
 import * as S from 'pages/products/ProductsPage.styles'
 import { type ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
-import { ProductsQuery, ProductsQueryVariables } from 'types/generated'
+import { CategoriesQuery, PlatformsQuery, ProductsQuery, ProductsQueryVariables } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
+import { generateFilterOptions } from 'utils/filterOptions'
 import { getImageUrl } from 'utils/getImageUrl'
 import { queryStringToGraphqlFilters } from 'utils/queryStringToGraphqlFilters'
 
@@ -22,6 +25,7 @@ export const productsLimit = 9
 
 interface ProductsPageProps {
   initialApolloState: NormalizedCacheObject | null
+  filterOptions: FilterOptionsProps[]
 }
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
@@ -36,13 +40,18 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
       })
     }
   })
+  const platforms = await apolloClient.query<PlatformsQuery>({ query: PLATFORMS })
+  const categories = await apolloClient.query<CategoriesQuery>({ query: CATEGORIES })
+  const filterOptions = generateFilterOptions({ platforms: platforms.data, categories: categories.data })
+
   const props: ProductsPageProps = {
-    initialApolloState: apolloClient.cache.extract()
+    initialApolloState: apolloClient.cache.extract(),
+    filterOptions
   }
   return { props }
 }
 
-const ProductsPage = () => {
+const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
   const { query } = useRouter()
   const { data, fetchMore, loading } = useQuery<ProductsQuery>(PRODUCTS, {
     notifyOnNetworkStatusChange: true,
@@ -53,22 +62,22 @@ const ProductsPage = () => {
       })
     }
   })
-  const loadMore = () => {
-    fetchMore({
-      variables: {
-        start: data?.products.data.length || 0,
-        limit: productsLimit
-      }
-    })
-  }
   const products = data?.products.data || []
   const allProductsLoaded = products.length >= (data?.products.meta.pagination.total || 0)
   const hasProducts = products.length > 0
   const showEmpty = !loading && !hasProducts
   const showShowMore = hasProducts && !loading && !allProductsLoaded
+  const loadMore = () => {
+    fetchMore({
+      variables: {
+        start: products.length,
+        limit: productsLimit
+      }
+    })
+  }
 
   return (
-    <FilterProvider>
+    <FilterProvider filterOptions={filterOptions}>
       <Container data-testid='ProductsPage'>
         <S.Wrapper>
           <Filter />
@@ -95,13 +104,12 @@ const ProductsPage = () => {
                     />
                   )
                 })}
+              {loading && <Skeleton width='100%' height={235} />}
             </S.Products>
 
             {showEmpty && (
               <Empty title='No results found' $description="Sorry, we couldn't find any results for your search." />
             )}
-
-            {loading && <Loading />}
 
             {showShowMore && (
               <S.ShowMore onClick={loadMore}>

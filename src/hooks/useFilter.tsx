@@ -1,23 +1,17 @@
-import { useQuery } from '@apollo/client'
 import { FilterOptionsProps } from 'components/Filter/Filter'
 import { FilterContext, FilterContextDefaultValues, FilterContextProps } from 'contexts/FilterContext'
-import { CATEGORIES } from 'graphql/queries/categories'
-import { PLATFORMS } from 'graphql/queries/platforms'
 import { useRouter } from 'next/router'
 import { ParsedUrlQueryInput } from 'querystring'
 import { ReactNode, useContext, useMemo, useState } from 'react'
-import { CategoriesQuery, PlatformsQuery } from 'types/generated'
-import { generateFilterOptions } from 'utils/filterOptions'
 
 interface FilterProviderProps {
   children: ReactNode
+  filterOptions: FilterOptionsProps[]
 }
 
-export const FilterProvider = ({ children }: FilterProviderProps) => {
+export const FilterProvider = ({ children, filterOptions }: FilterProviderProps) => {
   const { query, push } = useRouter()
-  const { data: platforms } = useQuery<PlatformsQuery>(PLATFORMS)
-  const { data: categories } = useQuery<CategoriesQuery>(CATEGORIES)
-  const filterOptions = platforms && categories && generateFilterOptions({ platforms, categories })
+
   const search = query['search']?.toString()
 
   const initialValuesFormatted = useMemo(() => {
