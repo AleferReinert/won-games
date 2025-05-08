@@ -3,6 +3,10 @@ import * as MenuMobileStyles from 'components/MenuMobile/MenuMobile.styles'
 import styled, { css } from 'styled-components'
 import { pxToNumber } from 'utils/pxToNumber'
 
+interface SearchProps {
+  $isOpen: boolean
+}
+
 export const Wrapper = styled.header`
   ${({ theme }) => css`
     display: flex;
@@ -33,9 +37,13 @@ export const OpenMenu = styled.button`
   `}
 `
 
-export const LogoWrapper = styled.div`
-  ${({ theme }) => css`
+export const LogoWrapper = styled.div<SearchProps>`
+  ${({ theme, $isOpen }) => css`
     line-height: 0;
+    opacity: ${$isOpen ? '0' : '1'};
+    margin-top: ${$isOpen ? '-4rem' : '0'};
+    transition: all ${theme.transition.default};
+    scale: ${$isOpen ? '0.8' : '1'};
 
     svg {
       transform: translateY(2px);
@@ -47,6 +55,12 @@ export const LogoWrapper = styled.div`
       transform: translateX(-50%);
 
       ${LogoStyles.wrapperModifiers.$withoutText()}
+    }
+
+    @media (min-width: ${theme.breakpoint.small}) {
+      opacity: 1;
+      margin-top: 0;
+      scale: 1;
     }
   `}
 `
@@ -107,10 +121,6 @@ export const NavRight = styled.nav`
   `}
 `
 
-interface SearchProps {
-  $isOpen: boolean
-}
-
 export const SearchWrapper = styled.form<SearchProps>`
   ${({ theme, $isOpen }) => css`
     display: flex;
@@ -120,7 +130,7 @@ export const SearchWrapper = styled.form<SearchProps>`
     width: 100%;
 
     input {
-      background: ${theme.colors.darkBg};
+      background: transparent;
       z-index: ${theme.layers.menu};
       border: 0;
       border-bottom: 1px solid ${theme.colors.white};

@@ -43,7 +43,7 @@ const Header = () => {
         </S.IconWrapper>
       </S.OpenMenu>
 
-      <S.LogoWrapper>
+      <S.LogoWrapper $isOpen={showSearch}>
         <Logo />
       </S.LogoWrapper>
 
