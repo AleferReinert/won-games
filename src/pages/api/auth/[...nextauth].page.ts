@@ -3,6 +3,7 @@ import Provider from 'next-auth/providers/credentials'
 import { NextApiRequest, NextApiResponse } from 'next/types'
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/sign-in'
   },
