@@ -84,8 +84,6 @@ export const Content = styled.div`
     h5,
     h6 {
       color: ${theme.colors.white};
-      margin: ${theme.spacings.xsmall} 0;
-      ${HeadingStyles.lineModifiers.left(theme, 'secondary')};
 
       @media (min-width: ${theme.breakpoint.small}) {
         color: ${theme.colors.black};
@@ -96,23 +94,19 @@ export const Content = styled.div`
       font-size: ${theme.font.sizes.xxlarge};
     }
     h2 {
-      font-size: ${theme.font.sizes.xlarge};
+      font-size: ${theme.font.sizes.xxlarge};
     }
     h3 {
-      font-size: ${theme.font.sizes.large};
+      font-size: ${theme.font.sizes.xlarge};
     }
     h4 {
-      font-size: ${theme.font.sizes.medium};
+      font-size: ${theme.font.sizes.large};
     }
     h5 {
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.medium};
     }
     h6 {
-      font-size: ${theme.font.sizes.xsmall};
-    }
-
-    p {
-      margin-bottom: ${theme.spacings.xsmall};
+      font-size: ${theme.font.sizes.small};
     }
 
     a {
@@ -121,7 +115,6 @@ export const Content = styled.div`
 
     img {
       max-width: 100%;
-      margin-bottom: ${theme.spacings.xsmall};
     }
 
     ul,
@@ -136,15 +129,7 @@ export const Content = styled.div`
       background-color: ${theme.colors.darkGray};
     }
 
-    .description__copyrights {
-      font-size: ${theme.font.sizes.small};
-      color: ${theme.colors.gray};
-      margin-top: ${theme.spacings.small};
-    }
-
     @media (min-width: ${theme.breakpoint.small}) {
-      font-size: ${theme.font.sizes.xlarge};
-
       hr {
         background-color: ${theme.colors.lightGray};
       }
