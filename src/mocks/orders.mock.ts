@@ -1,4 +1,4 @@
-import { OrdersPageProps } from 'pages/account/orders'
+import { OrdersPageProps } from 'pages/account/orders/index.page'
 
 export const ordersMock: OrdersPageProps = {
   orders: [

@@ -19,7 +19,7 @@ import { RecommendedProductsQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import { requireAuth } from 'utils/requireAuth'
-import type { NextPageWithLayout } from '../_app'
+import type { NextPageWithLayout } from '../_app.page'
 import * as S from './CartPage.styles'
 
 export interface CartPageProps {
@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps<CartPageProps> = async (cont
   const props: CartPageProps = {
     recommendedShowcase: {
       title,
-      highlight: highlightMapper(highlight),
+      highlight: highlight.background.data && highlightMapper(highlight),
       products: productMapper(products)
     }
   }

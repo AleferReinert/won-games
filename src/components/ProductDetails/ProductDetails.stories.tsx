@@ -42,42 +42,42 @@ export const ProductDetails: Story = {
     })
 
     await step('Category', () => {
-      const title = canvas.getByRole('heading', { level: 3, name: 'Category' })
+      const title = canvas.getByText('Category')
       const categories = canvas.getByText('Action, Adventure')
       expect(title).toBeVisible()
       expect(categories).toBeVisible()
     })
 
     await step('Platforms', () => {
-      const title = canvas.getByRole('heading', { level: 3, name: 'Platforms' })
+      const title = canvas.getByText('Platforms')
       const platformsComponent = canvas.getByTestId('PlatformsComponent')
       expect(title).toBeVisible()
       expect(platformsComponent).toBeVisible()
     })
 
     await step('Release date with date formatted', () => {
-      const title = canvas.getByRole('heading', { level: 3, name: 'Release date' })
+      const title = canvas.getByText('Release date')
       const dateFormatted = canvas.getByText('Sep 13, 2019')
       expect(title).toBeVisible()
       expect(dateFormatted).toBeVisible()
     })
 
     await step('Developer', () => {
-      const title = canvas.getByRole('heading', { level: 3, name: 'Developer' })
+      const title = canvas.getByText('Developer')
       const developer = canvas.getByText('Gearbox Software')
       expect(title).toBeVisible()
       expect(developer).toBeVisible()
     })
 
     await step('Publisher', () => {
-      const title = canvas.getByRole('heading', { level: 3, name: 'Publisher' })
+      const title = canvas.getByText('Publisher')
       const publisher = canvas.getByText('2K')
       expect(title).toBeVisible()
       expect(publisher).toBeVisible()
     })
 
     await step('Rating with rating formatted', () => {
-      const title = canvas.getByRole('heading', { level: 3, name: 'Rating' })
+      const title = canvas.getByText('Rating')
       const ratingFormatted = canvas.getByText('18+')
       expect(title).toBeVisible()
       expect(ratingFormatted).toBeVisible()

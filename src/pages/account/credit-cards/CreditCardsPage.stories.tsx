@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import AccountTemplate from 'templates/Account/Account'
-import CreditCardsPage from '.'
+import CreditCardsPage from './index.page'
 
 const meta: Meta<typeof CreditCardsPage> = {
   title: 'Pages/Account/CreditCards',

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import AccountTemplate from 'templates/Account/Account'
-import ProfilePage from '.'
+import ProfilePage from './index.page'
 
 const meta: Meta<typeof ProfilePage> = {
   title: 'Pages/Account/Profile',

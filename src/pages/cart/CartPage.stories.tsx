@@ -6,8 +6,8 @@ import { highlightMock } from 'mocks/highlight.mock'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { productsMock } from 'mocks/products.mock'
 import DefaultTemplate from 'templates/Default/Default'
-import CartPage from '.'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
+import CartPage from './index.page'
 
 const meta: Meta<typeof CartPage> = {
   title: 'Pages/Cart',

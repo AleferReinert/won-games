@@ -2,7 +2,7 @@ import { MockedProvider } from '@apollo/client/testing'
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
 import AuthTemplate from 'templates/Auth/Auth'
-import SignUpPage from '.'
+import SignUpPage from './index.page'
 
 const meta: Meta<typeof SignUpPage> = {
   title: 'Pages/SignUp',

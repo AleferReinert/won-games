@@ -6,7 +6,7 @@ import { productDescriptionMock } from 'mocks/productDescription.mock'
 import { productDetailsMock } from 'mocks/productDetails.mock'
 import { productHeaderMock } from 'mocks/productHeader.mock'
 import { productsMock } from 'mocks/products.mock'
-import ProductPage from 'pages/product/[slug]'
+import ProductPage from 'pages/product/[slug].page'
 import DefaultTemplate from 'templates/Default/Default'
 
 const meta: Meta<typeof ProductPage> = {

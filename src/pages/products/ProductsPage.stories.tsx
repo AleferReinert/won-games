@@ -10,7 +10,7 @@ import { platformsResponseMock } from 'mocks/platformsResponseMock'
 import { productsResponseMock } from 'mocks/productsResponse.mock'
 import DefaultTemplate from 'templates/Default/Default'
 import { apolloCache } from 'utils/apolloCache'
-import ProductsPage, { productsLimit } from '.'
+import ProductsPage, { productsLimit } from './index.page'
 
 const meta: Meta<typeof ProductsPage> = {
   title: 'Pages/Products',

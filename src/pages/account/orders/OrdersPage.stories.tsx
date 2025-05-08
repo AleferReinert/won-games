@@ -3,8 +3,8 @@ import { expect, within } from '@storybook/test'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { ordersMock } from 'mocks/orders.mock'
 import AccountTemplate from 'templates/Account/Account'
-import OrdersPage from '.'
 import { NextAuthSessionArgs } from '../../../../.storybook/preview'
+import OrdersPage from './index.page'
 
 const meta: Meta<typeof OrdersPage> & { args?: NextAuthSessionArgs } = {
   title: 'Pages/Account/Orders',

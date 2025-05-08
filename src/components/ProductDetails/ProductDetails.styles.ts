@@ -40,9 +40,9 @@ export const Empty = styled.p`
   `}
 `
 
-export const Block = styled.div``
+export const Block = styled.dl``
 
-export const Title = styled.h3`
+export const Title = styled.dt`
   ${({ theme }) => css`
     color: ${theme.colors.gray};
     font-size: ${theme.font.sizes.small};
@@ -50,7 +50,7 @@ export const Title = styled.h3`
   `}
 `
 
-export const Description = styled.p`
+export const Description = styled.dd`
   ${({ theme }) => css`
     color: ${theme.colors.white};
     font-size: ${theme.font.sizes.medium};

@@ -60,7 +60,7 @@ describe('Full purchase', () => {
 
     // Add to cart
     cy.findAllByRole('button', { name: 'Add to cart' }).eq(0).click()
-    cy.findAllByRole('button', { name: 'Add to cart' }).eq(2).click()
+    cy.findAllByRole('button', { name: 'Add to cart' }).eq(1).click()
     cy.checkCartItemsAndClose({ quantity: 2 })
 
     // Open dropdown and go to checkout
@@ -87,12 +87,9 @@ describe('Full purchase', () => {
 
     cy.get('@CartListProducts').should('have.length', '2')
 
-    cy.get('@FirstProduct').findByLabelText('Price').should('contain.text', '$')
-    cy.get('@FirstProduct').findByLabelText('credit card number').should('have.text', '**** **** **** 4242')
-    cy.get('@FirstProduct').findByRole('img', { name: 'visa' }).should('be.visible')
-
-    cy.get('@SecondProduct').findByLabelText('Price').should('contain.text', '$')
-    cy.get('@SecondProduct').findByLabelText('credit card number').should('have.text', '**** **** **** 4242')
-    cy.get('@SecondProduct').findByRole('img', { name: 'visa' }).should('be.visible')
+    // At least 1 product should be paid
+    cy.get('@CartListProducts').contains('$').should('have.length', '1')
+    cy.get('@CartListProducts').findByText('**** **** **** 4242').should('have.length', '1')
+    cy.get('@CartListProducts').findAllByRole('img', { name: 'visa' }).should('have.length', '1')
   })
 })

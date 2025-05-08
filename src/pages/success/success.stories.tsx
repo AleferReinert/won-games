@@ -3,7 +3,7 @@ import { expect, within } from '@storybook/test'
 import { highlightMock } from 'mocks/highlight.mock'
 import { productsMock } from 'mocks/products.mock'
 import DefaultTemplate from 'templates/Default/Default'
-import SuccessPage from './index'
+import SuccessPage from './index.page'
 
 const meta: Meta<typeof SuccessPage> = {
   title: 'Pages/Success',

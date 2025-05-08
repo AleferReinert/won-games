@@ -37,17 +37,17 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     },
     mostPopularShowcase: {
       title: popularProducts.title,
-      highlight: highlightMapper(popularProducts.highlight),
+      highlight: popularProducts.highlight.background.data && highlightMapper(popularProducts.highlight),
       products: productMapper(popularProducts.products)
     },
     comingSoonShowcase: {
       title: comingSoonProducts.title,
-      highlight: highlightMapper(comingSoonProducts.highlight),
+      highlight: comingSoonProducts.highlight.background.data && highlightMapper(comingSoonProducts.highlight),
       products: productMapper(home.data.comingSoonProducts)
     },
     freeProductsShowcase: {
       title: freeProducts.title,
-      highlight: highlightMapper(freeProducts.highlight),
+      highlight: freeProducts.highlight.background.data && highlightMapper(freeProducts.highlight),
       products: productMapper(home.data.freeProducts)
     }
   }

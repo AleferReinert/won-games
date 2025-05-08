@@ -4,7 +4,7 @@ import { bannersMock } from 'mocks/banners.mock'
 import { highlightMock } from 'mocks/highlight.mock'
 import { productsMock } from 'mocks/products.mock'
 import DefaultTemplate from 'templates/Default/Default'
-import HomeTemplate from '.'
+import HomeTemplate from './index.page'
 
 const meta: Meta<typeof HomeTemplate> = {
   title: 'Pages/Home',

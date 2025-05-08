@@ -15,7 +15,7 @@ import { RecommendedProductsQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { highlightMapper, productMapper } from 'utils/mappers'
 import { requireAuth } from 'utils/requireAuth'
-import type { NextPageWithLayout } from '../_app'
+import type { NextPageWithLayout } from '../_app.page'
 
 export interface WishlistPageProps {
   recommendedShowcase: ShowcaseProps
@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps<WishlistPageProps> = async (
   const props: WishlistPageProps = {
     recommendedShowcase: {
       title,
-      highlight: highlightMapper(highlight),
+      highlight: highlight.background.data && highlightMapper(highlight),
       products: productMapper(products)
     }
   }

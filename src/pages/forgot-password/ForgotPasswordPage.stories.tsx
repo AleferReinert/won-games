@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
 import { forgotPasswordHandler } from 'mocks/handlers/forgotPasswordHandler'
 import AuthTemplate from 'templates/Auth/Auth'
-import ForgotPasswordPage from '.'
+import ForgotPasswordPage from './index.page'
 
 const meta: Meta<typeof ForgotPasswordPage> = {
   title: 'Pages/ForgotPassword',

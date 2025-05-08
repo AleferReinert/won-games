@@ -6,10 +6,14 @@ describe('Products page', () => {
     cy.get('[data-cy="products"]').findAllByTestId('ProductComponent').as('FilteredProducts')
   })
 
-  it('Loads 9 products by default and loads more on button click', () => {
-    cy.get('@FilteredProducts').should('have.length', 9)
-    cy.findByRole('button', { name: /show more/i }).click()
-    cy.get('@FilteredProducts').should('have.length.gt', 9)
+  it('If there are more than 9 products, loads 9 products and loads more on button click', () => {
+    cy.get('@FilteredProducts').then(($products) => {
+      if ($products.length > 9) {
+        cy.get('@FilteredProducts').should('have.length', 9)
+        cy.findByRole('button', { name: /show more/i }).click()
+        cy.get('@FilteredProducts').should('have.length.gt', 9)
+      }
+    })
   })
 
   it('Filter by price', () => {

@@ -6,8 +6,10 @@ import { apolloCache } from './apolloCache'
 let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
 function createApolloClient(session?: Session | null) {
+  const isServer = typeof window === 'undefined'
+
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined',
+    ssrMode: isServer,
     link: createHttpLink({
       uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
       headers: {

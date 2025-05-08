@@ -10,8 +10,8 @@ import { wishlistEmptyResponseMock } from 'mocks/wishlistEmptyResponse.mock'
 import { wishlistResponseMock } from 'mocks/wishlistResponse.mock'
 import DefaultTemplate from 'templates/Default/Default'
 import { apolloCache } from 'utils/apolloCache'
-import WishlistPage from '.'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
+import WishlistPage from './index.page'
 
 const meta: Meta<typeof WishlistPage> & { args?: NextAuthSessionArgs } = {
   title: 'Pages/Wishlist',

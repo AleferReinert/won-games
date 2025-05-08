@@ -5,7 +5,7 @@ import * as nextAuthReact from 'next-auth/react'
 import * as nextNavigation from 'next/navigation'
 import { createMock } from 'storybook-addon-module-mock'
 import AuthTemplate from 'templates/Auth/Auth'
-import ResetPasswordPage from '.'
+import ResetPasswordPage from './index.page'
 
 let query: { [key: string]: string } = {}
 

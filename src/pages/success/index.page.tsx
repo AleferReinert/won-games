@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps<SuccessPageProps> = async (c
   const props: SuccessPageProps = {
     recommendedShowcase: {
       title,
-      highlight: highlightMapper(highlight),
+      highlight: highlight.background.data && highlightMapper(highlight),
       products: productMapper(products)
     }
   }

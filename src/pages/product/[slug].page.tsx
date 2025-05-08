@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params 
     },
     comingSoon: {
       title: comingSoon.title,
-      highlight: highlightMapper(comingSoon.highlight),
+      highlight: comingSoon.highlight.background.data && highlightMapper(comingSoon.highlight),
       products: productMapper(comingSoonResponse.data.comingSoonProducts)
     },
     recommended: {
