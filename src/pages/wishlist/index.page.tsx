@@ -23,12 +23,14 @@ export interface WishlistPageProps {
 
 export const getServerSideProps: GetServerSideProps<WishlistPageProps> = async (context) => {
   const { session } = await requireAuth(context)
+  console.log('getServerSideProps -> session: ', session)
   if (!session) return { props: {} as WishlistPageProps }
 
   const apolloClient = initializeApollo({ session })
   const responseRecommended = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS
   })
+  console.log('getServerSideProps -> responseRecommended: ', responseRecommended)
   const { title, highlight, products } = responseRecommended.data.recommended.data.attributes
   const props: WishlistPageProps = {
     recommendedShowcase: {
@@ -43,6 +45,9 @@ export const getServerSideProps: GetServerSideProps<WishlistPageProps> = async (
 
 const WishlistPage = ({ recommendedShowcase }: WishlistPageProps & NextPageWithLayout) => {
   const { products: wishlistProducts, loading } = useWishlist()
+  console.log('WishlistPage -> wishlistProducts: ', wishlistProducts)
+  console.log('WishlistPage -> loading: ', loading)
+  console.log('WishlistPage -> recommendedShowcase: ', recommendedShowcase)
   const products = productMapper({ data: wishlistProducts })
 
   return (
