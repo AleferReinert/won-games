@@ -3,7 +3,7 @@ import BannerSlider from 'components/BannerSlider/BannerSlider'
 import Container from 'components/Container/Container'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { PAGE_HOME } from 'graphql/queries/pageHome'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import { PageHomeQuery, PageHomeQueryVariables } from 'types/generated'
@@ -19,9 +19,7 @@ export interface HomeProps {
   freeProductsShowcase: ShowcaseProps
 }
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async (context) => {
-  console.log('SSR cookies:', context.req.headers.cookie)
-
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const apolloClient = initializeApollo({})
   const currentDate = new Date().toISOString().slice(0, 10)
   const past30DaysDate = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 10)
@@ -54,7 +52,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (context)
     }
   }
 
-  return { props }
+  return { props, revalidate: 60 }
 }
 
 export default function Index({
