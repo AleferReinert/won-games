@@ -21,40 +21,52 @@ export interface HomeProps {
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (context) => {
+  console.log('Entrou em getServerSideProps')
   const session = await getSession(context)
+  console.log('getServerSideProps - session: ', session)
   const apolloClient = initializeApollo({ session })
+  console.log('getServerSideProps - apolloClient: ', apolloClient)
   const currentDate = new Date().toISOString().slice(0, 10)
   const past30DaysDate = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 10)
-  const home = await apolloClient.query<PageHomeQuery, PageHomeQueryVariables>({
-    query: PAGE_HOME,
-    variables: { limit: 8, currentDate, pastDate: past30DaysDate },
-    fetchPolicy: 'no-cache'
-  })
-  const { newProducts, popularProducts, comingSoonProducts, freeProducts } = home.data.showcases.data.attributes
-  const props: HomeProps = {
-    banners: bannerMapper(home.data.banners),
-    newReleasesShowcase: {
-      title: newProducts.title,
-      products: productMapper(home.data.newProducts)
-    },
-    mostPopularShowcase: {
-      title: popularProducts.title,
-      highlight: popularProducts.highlight.background.data && highlightMapper(popularProducts.highlight),
-      products: productMapper(popularProducts.products)
-    },
-    comingSoonShowcase: {
-      title: comingSoonProducts.title,
-      highlight: comingSoonProducts.highlight.background.data && highlightMapper(comingSoonProducts.highlight),
-      products: productMapper(home.data.comingSoonProducts)
-    },
-    freeProductsShowcase: {
-      title: freeProducts.title,
-      highlight: freeProducts.highlight.background.data && highlightMapper(freeProducts.highlight),
-      products: productMapper(home.data.freeProducts)
+
+  try {
+    const home = await apolloClient.query<PageHomeQuery, PageHomeQueryVariables>({
+      query: PAGE_HOME,
+      variables: { limit: 8, currentDate, pastDate: past30DaysDate },
+      fetchPolicy: 'no-cache'
+    })
+    console.error('Dados da Home:', home)
+
+    const { newProducts, popularProducts, comingSoonProducts, freeProducts } = home.data.showcases.data.attributes
+    const props: HomeProps = {
+      banners: bannerMapper(home.data.banners),
+      newReleasesShowcase: {
+        title: newProducts.title,
+        products: productMapper(home.data.newProducts)
+      },
+      mostPopularShowcase: {
+        title: popularProducts.title,
+        highlight: popularProducts.highlight.background.data && highlightMapper(popularProducts.highlight),
+        products: productMapper(popularProducts.products)
+      },
+      comingSoonShowcase: {
+        title: comingSoonProducts.title,
+        highlight: comingSoonProducts.highlight.background.data && highlightMapper(comingSoonProducts.highlight),
+        products: productMapper(home.data.comingSoonProducts)
+      },
+      freeProductsShowcase: {
+        title: freeProducts.title,
+        highlight: freeProducts.highlight.background.data && highlightMapper(freeProducts.highlight),
+        products: productMapper(home.data.freeProducts)
+      }
     }
+
+    return { props }
+  } catch (error) {
+    console.error('Erro ao buscar dados da Home:', error)
   }
 
-  return { props }
+  return { props: {} as HomeProps }
 }
 
 export default function Index({
