@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<CartPageProps> = async (cont
     return { props: {} as CartPageProps }
   }
 
-  const apolloClient = initializeApollo({ session })
+  const apolloClient = initializeApollo()
   const recommendedProducts = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS
   })

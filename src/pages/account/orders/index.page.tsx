@@ -19,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { session } = await requireAuth(context)
   if (!session || !session.id) return { props: {} }
 
-  const apolloClient = initializeApollo({ session })
+  const apolloClient = initializeApollo({ token: session.jwt })
   const orders = await apolloClient.query<OrdersQuery, OrdersQueryVariables>({
     query: ORDERS,
     variables: { identifier: session.id },

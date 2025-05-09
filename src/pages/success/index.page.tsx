@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps<SuccessPageProps> = async (c
   const { session } = await requireAuth(context)
   if (!session) return { props: {} as SuccessPageProps }
 
-  const apolloClient = initializeApollo({ session })
+  const apolloClient = initializeApollo()
   const responseRecommended = await apolloClient.query<RecommendedProductsQuery>({
     query: RECOMMENDED_PRODUCTS
   })

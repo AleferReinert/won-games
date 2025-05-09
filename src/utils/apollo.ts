@@ -1,52 +1,50 @@
-import { ApolloClient, HttpLink, NormalizedCacheObject } from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import { Session } from 'next-auth'
-import { useMemo } from 'react'
-import { apolloCache } from './apolloCache'
+import { getSession } from 'next-auth/react'
 
-let apolloClient: ApolloClient<NormalizedCacheObject | null>
-
-interface initializeApolloProps {
-  initialState?: null
-  session?: Session | null
+interface InitializeOptions {
+  initialState?: NormalizedCacheObject | null
+  token?: string
 }
 
-function createApolloClient(session?: Session | null) {
-  const isServer = typeof window === 'undefined'
-
+function createApolloClient(token?: string) {
   const httpLink = new HttpLink({
     uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`
   })
 
-  const authLink = setContext((_, { headers, session: clientSession }) => {
-    const jwt = session?.jwt || clientSession?.jwt || ''
-    const authorization = jwt ? `Bearer ${jwt}` : ''
-    return { headers: { ...headers, authorization } }
+  const authLink = setContext(async (_, { headers }) => {
+    const jwt = token ?? (await getSession())?.jwt ?? ''
+    return {
+      headers: {
+        ...headers,
+        authorization: jwt ? `Bearer ${jwt}` : ''
+      }
+    }
   })
 
-  return new ApolloClient({
-    ssrMode: isServer,
+  return new ApolloClient<NormalizedCacheObject>({
+    ssrMode: typeof window === 'undefined',
     link: authLink.concat(httpLink),
-    cache: apolloCache
+    cache: new InMemoryCache()
   })
 }
 
-export function initializeApollo({ initialState = null, session = null }: initializeApolloProps) {
-  const apolloClientGlobal = apolloClient ?? createApolloClient(session)
+let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
+
+export function initializeApollo({ initialState = null, token }: InitializeOptions = {}) {
+  const _client = apolloClient ?? createApolloClient(token)
 
   if (initialState) {
-    apolloClientGlobal.cache.restore(initialState)
+    _client.cache.restore(initialState)
   }
 
-  if (typeof window === 'undefined') {
-    return apolloClientGlobal
+  if (typeof window !== 'undefined') {
+    apolloClient = _client
   }
 
-  apolloClient = apolloClient ?? apolloClientGlobal
-
-  return apolloClient
+  return _client
 }
 
-export function useApollo(initialState = null, session?: Session | null) {
-  return useMemo(() => initializeApollo({ initialState, session }), [initialState, session])
+export function useApollo(initialState: NormalizedCacheObject | null = null) {
+  return initializeApollo({ initialState })
 }

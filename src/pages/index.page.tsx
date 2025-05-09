@@ -20,7 +20,7 @@ export interface HomeProps {
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const apolloClient = initializeApollo({})
+  const apolloClient = initializeApollo()
   const currentDate = new Date().toISOString().slice(0, 10)
   const past30DaysDate = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 10)
   const home = await apolloClient.query<PageHomeQuery, PageHomeQueryVariables>({

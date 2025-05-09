@@ -16,7 +16,6 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [wishlistId, setWishlistId] = useState<string | null>(null)
   const wishlistProductsIds = useMemo(() => wishlistProducts.map((product) => product.id), [wishlistProducts])
   const { data: session } = useSession()
-  console.error('useWishlist.tsx session: ', JSON.stringify(session, null, 2))
 
   const [createWishlist, { loading: loadingCreateWishlist }] = useMutation(CREATE_WISHLIST, {
     context: {

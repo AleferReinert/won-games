@@ -29,7 +29,7 @@ Cypress.Commands.add('filterUnderPrice', (price) => {
     .findAllByLabelText('Price')
     .each(($price) => {
       const priceText = $price.text()
-      const priceNumber = Number(priceText.replace('$', ''))
+      const priceNumber = priceText === 'Free' ? 0 : Number(priceText.replace('$', ''))
       expect(priceNumber).to.be.lessThan(price)
     })
 })

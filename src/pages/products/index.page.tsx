@@ -29,7 +29,7 @@ interface ProductsPageProps {
 }
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-  const apolloClient = initializeApollo({})
+  const apolloClient = initializeApollo()
 
   await apolloClient.query<ProductsQuery, Pick<ProductsQueryVariables, 'limit'>>({
     query: PRODUCTS,
