@@ -20,13 +20,14 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
   const { session } = await requireAuth(context)
 
   if (!session) return { props: {} as ProfilePageProps }
-  console.log('getServerSideProps session: ', session)
+  console.log('getServerSideProps jwt: ', session.jwt)
 
   const apolloClient = initializeApollo({ token: session.jwt, context })
-  const { data } = await apolloClient.query<ProfileQuery, ProfileQueryVariables>({
+  const { data, error } = await apolloClient.query<ProfileQuery, ProfileQueryVariables>({
     query: PROFILE,
     variables: { identifier: session.id! }
   })
+  console.log('getServerSideProps error: ', error)
   console.log('getServerSideProps data: ', data)
 
   const props: ProfilePageProps = {
