@@ -22,7 +22,7 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [createWishlist, { loading: loadingCreateWishlist }] = useMutation(CREATE_WISHLIST, {
     context: {
       headers: {
-        authorization: `Bearer ${session?.jwt}`
+        authorization: session ? `Bearer ${session.jwt}` : 'sem jwt'
       }
     },
     onCompleted: (data) => {
