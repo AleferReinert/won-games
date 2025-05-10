@@ -15,7 +15,9 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [wishlistProducts, setWishlistProducts] = useState<ProductEntity[]>([])
   const [wishlistId, setWishlistId] = useState<string | null>(null)
   const wishlistProductsIds = useMemo(() => wishlistProducts.map((product) => product.id), [wishlistProducts])
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+  console.log('useSession session: ', session)
+  console.log('useSession status: ', status)
 
   const [createWishlist, { loading: loadingCreateWishlist }] = useMutation(CREATE_WISHLIST, {
     context: {
@@ -62,6 +64,9 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   }
 
   const addToWishlist = (productId: string) => {
+    console.log('Clicou em addToWishlist, productId: ', productId)
+    console.log('Clicou em addToWishlist, status: ', status)
+    console.log('Clicou em addToWishlist, session: ', session)
     if (wishlistId) {
       return updateWishlist({
         variables: {
