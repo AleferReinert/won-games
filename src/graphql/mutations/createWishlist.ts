@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client'
-import { PRODUCT_RELATION } from 'graphql/fragments/product'
 
 export const CREATE_WISHLIST = gql`
   mutation CreateWishlist($data: WishlistInput!) {
@@ -7,20 +6,35 @@ export const CREATE_WISHLIST = gql`
       data {
         id
         attributes {
-          user {
+          products {
             data {
               id
               attributes {
-                username
+                slug
+                cover {
+                  data {
+                    attributes {
+                      url
+                      alternativeText
+                    }
+                  }
+                }
+                name
+                developers {
+                  data {
+                    attributes {
+                      name
+                    }
+                  }
+                }
+                price
+                promotional_price
+                ribbon_label
               }
             }
-          }
-          products {
-            ...productRelation
           }
         }
       }
     }
   }
-  ${PRODUCT_RELATION}
 `

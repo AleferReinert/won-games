@@ -72,6 +72,15 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
       variables: {
         start: products.length,
         limit: productsLimit
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev
+        return {
+          products: {
+            ...fetchMoreResult.products,
+            data: [...prev.products.data, ...fetchMoreResult.products.data]
+          }
+        }
       }
     })
   }
