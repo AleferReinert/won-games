@@ -14,6 +14,7 @@ function createApolloClient(token?: string) {
 
   const authLink = setContext(async (_, { headers }) => {
     const jwt = token ?? (await getSession())?.jwt ?? ''
+    console.log('[authLink • SSR]: ', jwt ? `Bearer ${jwt}` : '(sem token)')
     return {
       headers: {
         ...headers,
