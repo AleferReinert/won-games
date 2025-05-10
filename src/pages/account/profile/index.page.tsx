@@ -16,6 +16,8 @@ interface ProfilePageProps {
 }
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (context) => {
+  console.log('Entrou no getServerSideProps')
+  console.log('SSR context object: ', context)
   const { session } = await requireAuth(context)
   console.log('SSR session object: ', session)
 
