@@ -15,16 +15,9 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [wishlistProducts, setWishlistProducts] = useState<ProductEntity[]>([])
   const [wishlistId, setWishlistId] = useState<string | null>(null)
   const wishlistProductsIds = useMemo(() => wishlistProducts.map((product) => product.id), [wishlistProducts])
-  const { data: session, status } = useSession()
-  console.log('useSession session: ', session)
-  console.log('useSession status: ', status)
+  const { data: session } = useSession()
 
   const [createWishlist, { loading: loadingCreateWishlist }] = useMutation(CREATE_WISHLIST, {
-    context: {
-      headers: {
-        Authorization: session ? `Bearer ${session.jwt}` : 'sem jwt'
-      }
-    },
     onCompleted: (data) => {
       setWishlistProducts(data.createWishlist.data.attributes.products.data ?? [])
       setWishlistId(data.createWishlist.data.id)
@@ -32,11 +25,6 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   })
 
   const [updateWishlist, { loading: loadingUpdateWishlist }] = useMutation(UPDATE_WISHLIST, {
-    context: {
-      headers: {
-        Authorization: `Bearer ${session?.jwt}`
-      }
-    },
     onCompleted: (data) => {
       setWishlistProducts(data.updateWishlist.data.attributes.products.data ?? [])
     }
@@ -64,8 +52,14 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   }
 
   const addToWishlist = (productId: string) => {
+    console.log('Clicou em addToWishlist, jwt: ', session?.jwt)
     if (wishlistId) {
       return updateWishlist({
+        context: {
+          headers: {
+            Authorization: `Bearer ${session?.jwt}`
+          }
+        },
         variables: {
           id: wishlistId,
           data: {
@@ -74,12 +68,12 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
         }
       })
     } else {
-      console.log('Entrou em addToWishlist ELSE')
-      console.log('Clicou em addToWishlist, productId: ', productId)
-      console.log('Clicou em addToWishlist, status: ', status)
-      console.log('Clicou em addToWishlist, session.id: ', session?.id)
-      console.log('Clicou em addToWishlist, session: ', session)
       return createWishlist({
+        context: {
+          headers: {
+            Authorization: `Bearer ${session?.jwt}`
+          }
+        },
         variables: {
           data: {
             user: session?.id,
@@ -94,6 +88,11 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
     if (!wishlistId) return Promise.resolve()
 
     return updateWishlist({
+      context: {
+        headers: {
+          Authorization: `Bearer ${session?.jwt}`
+        }
+      },
       variables: {
         id: wishlistId,
         data: {
