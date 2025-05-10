@@ -17,17 +17,17 @@ interface ProfilePageProps {
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (context) => {
   console.log('Entrou no getServerSideProps')
-  console.log('SSR context object: ', context)
   const { session } = await requireAuth(context)
-  console.log('SSR session object: ', session)
 
-  if (!session || !session.id) return { props: {} as ProfilePageProps }
+  if (!session) return { props: {} as ProfilePageProps }
+  console.log('getServerSideProps session: ', session)
 
   const apolloClient = initializeApollo({ token: session.jwt, context })
   const { data } = await apolloClient.query<ProfileQuery, ProfileQueryVariables>({
     query: PROFILE,
-    variables: { identifier: session.id }
+    variables: { identifier: session.id! }
   })
+  console.log('getServerSideProps data: ', data)
 
   const props: ProfilePageProps = {
     username: data.usersPermissionsUser.data.attributes.username,
