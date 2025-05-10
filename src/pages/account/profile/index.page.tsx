@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
 
   if (!session || !session.id) return { props: {} as ProfilePageProps }
 
-  const apolloClient = initializeApollo({ token: session.jwt })
+  const apolloClient = initializeApollo({ token: session.jwt, context })
   const { data } = await apolloClient.query<ProfileQuery, ProfileQueryVariables>({
     query: PROFILE,
     variables: { identifier: session.id }
