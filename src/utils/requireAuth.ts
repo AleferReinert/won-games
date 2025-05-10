@@ -1,8 +1,9 @@
 import { GetServerSidePropsContext } from 'next'
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+import { authOptions } from 'pages/api/auth/[...nextauth].page'
 
 export async function requireAuth(context: GetServerSidePropsContext) {
-  const session = await getSession(context)
+  const session = await getServerSession(context.req, context.res, authOptions)
 
   if (!session) {
     const callbackUrl = encodeURIComponent(context.req.url ?? '/')
