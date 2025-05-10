@@ -25,7 +25,7 @@ function createApolloClient(token?: string, context?: GetServerSidePropsContext)
     return {
       headers: {
         ...headers,
-        authorization: jwt ? `Bearer ${jwt}` : ''
+        Authorization: jwt ? `Bearer ${jwt}` : ''
       }
     }
   })

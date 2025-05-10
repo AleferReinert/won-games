@@ -22,7 +22,7 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [createWishlist, { loading: loadingCreateWishlist }] = useMutation(CREATE_WISHLIST, {
     context: {
       headers: {
-        authorization: session ? `Bearer ${session.jwt}` : 'sem jwt'
+        Authorization: session ? `Bearer ${session.jwt}` : 'sem jwt'
       }
     },
     onCompleted: (data) => {
@@ -34,7 +34,7 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const [updateWishlist, { loading: loadingUpdateWishlist }] = useMutation(UPDATE_WISHLIST, {
     context: {
       headers: {
-        authorization: `Bearer ${session?.jwt}`
+        Authorization: `Bearer ${session?.jwt}`
       }
     },
     onCompleted: (data) => {
@@ -47,7 +47,7 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
     variables: { userEmail: { eq: session?.user?.email } },
     context: {
       headers: {
-        authorization: `Bearer ${session?.jwt}`
+        Authorization: `Bearer ${session?.jwt}`
       }
     }
   })
@@ -64,9 +64,6 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   }
 
   const addToWishlist = (productId: string) => {
-    console.log('Clicou em addToWishlist, productId: ', productId)
-    console.log('Clicou em addToWishlist, status: ', status)
-    console.log('Clicou em addToWishlist, session: ', session)
     if (wishlistId) {
       return updateWishlist({
         variables: {
@@ -77,6 +74,11 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
         }
       })
     } else {
+      console.log('Entrou em addToWishlist ELSE')
+      console.log('Clicou em addToWishlist, productId: ', productId)
+      console.log('Clicou em addToWishlist, status: ', status)
+      console.log('Clicou em addToWishlist, session.id: ', session?.id)
+      console.log('Clicou em addToWishlist, session: ', session)
       return createWishlist({
         variables: {
           data: {
