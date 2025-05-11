@@ -1,5 +1,6 @@
 import Heading from 'components/Heading/Heading'
 import Logo from 'components/Logo/Logo'
+import Image from 'next/image'
 import * as S from './Auth.styles'
 
 interface AuthTemplateProps {
@@ -11,6 +12,7 @@ const AuthTemplate = ({ title, children }: AuthTemplateProps) => {
   return (
     <S.Wrapper>
       <S.BannerBlock data-testid='bannerBlock'>
+        <Image src='/img/authentication-bg.jpg' alt='' aria-hidden fill data-testid='AuthBackgroundImage' />
         <S.BannerContent>
           <Logo />
           <div>
