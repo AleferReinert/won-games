@@ -63,7 +63,7 @@ export const AlignmentLeft: Story = {
 export const WithFloatImage: Story = {
   args: {
     floatImg: {
-      url: '/img/red-dead-float.png',
+      url: '/img/test/banner-float.png',
       alternativeText: 'float image test'
     }
   },

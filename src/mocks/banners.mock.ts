@@ -4,7 +4,7 @@ export const bannersMock: BannerProps[] = [
   {
     id: '2',
     img: {
-      url: '/img/background-test.png',
+      url: '/img/test/banner.png',
       alternativeText: ''
     },
     title: 'Defy death',
@@ -15,7 +15,7 @@ export const bannersMock: BannerProps[] = [
   {
     id: '1',
     img: {
-      url: '/img/background-test.png',
+      url: '/img/test/banner.png',
       alternativeText: ''
     },
     title: 'God of War',

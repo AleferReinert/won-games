@@ -6,7 +6,7 @@ export const highlightMock: HighlightProps = {
   buttonLabel: 'Buy now',
   buttonUrl: '/highlight-link',
   background: {
-    url: '/img/red-dead-img.jpg',
+    url: '/img/test/highlight.jpg',
     alternativeText: 'background image test'
   }
 }

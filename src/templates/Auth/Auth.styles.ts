@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
 
 export const BannerBlock = styled.section`
   ${({ theme }) => css`
-    background: url('img/auth-bg.jpg') no-repeat;
+    background: url('img/authentication-bg.jpg') no-repeat;
     background-size: cover;
     background-position: center center;
     position: relative;

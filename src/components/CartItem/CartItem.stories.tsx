@@ -75,7 +75,7 @@ export const Payment: Story = {
     paymentInfo: {
       creditCardNumber: '**** **** **** 4326',
       creditCardBrand: 'mastercard',
-      creditCardFlag: '/img/creditCards/mastercard.png',
+      creditCardFlag: '/img/credit-cards/mastercard.png',
       purchaseDate: 'Purchase made on 23/05/2025 at 19:45'
     }
   },

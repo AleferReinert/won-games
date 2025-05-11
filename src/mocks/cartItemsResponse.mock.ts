@@ -18,7 +18,7 @@ export const cartItemsResponseMock: MockedResponse = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/test/product.jpg'
                   }
                 }
               },
@@ -36,7 +36,7 @@ export const cartItemsResponseMock: MockedResponse = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg'
+                    url: '/img/test/product.jpg'
                   }
                 }
               },

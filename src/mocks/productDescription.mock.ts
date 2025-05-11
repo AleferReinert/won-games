@@ -1,5 +1,5 @@
 export const productDescriptionMock: string = `
-  <img alt="" src="/img/products/cyberpunk-1.jpg" />
+  <img alt="" src="/img/test/product-slide-1.jpg" />
 <h1>Heading</h1>
 <p>
   Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero,
@@ -15,7 +15,7 @@ export const productDescriptionMock: string = `
   sint quis ad quibusdam?
 </p>
 <h3>Heading</h3>
-<img alt="" src="/img/products/cyberpunk-2.jpg" />
+<img alt="" src="/img/test/product-slide-2.jpg" />
 <h4>Heading</h4>
 <ul>
   <li>Lorem Ipsum</li>

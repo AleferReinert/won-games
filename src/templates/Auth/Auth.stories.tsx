@@ -33,7 +33,7 @@ export const Auth: Story = {
     await step('Column left background image', () => {
       const section = canvas.getByTestId('bannerBlock')
       const sectionBackground = window.getComputedStyle(section).backgroundImage
-      expect(sectionBackground).toContain('img/auth-bg.jpg')
+      expect(sectionBackground).toContain('img/authentication-bg.jpg')
     })
 
     await step('Column left title', () => {

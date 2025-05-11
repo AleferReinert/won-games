@@ -32,7 +32,7 @@ export const Unauthenticated: Story = {
 
     await step('Image', () => {
       const image = canvas.getByRole('img', { name: 'Population Zero' })
-      expect(image.getAttribute('src')).toContain('/img/product-test.jpg')
+      expect(image.getAttribute('src')).toContain('/img/test/product.jpg')
     })
 
     await step('Title', () => {

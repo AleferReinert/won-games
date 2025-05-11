@@ -22,7 +22,7 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }
@@ -43,7 +43,7 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }
@@ -64,7 +64,7 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }

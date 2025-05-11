@@ -78,7 +78,7 @@ export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params 
   const { platforms, publisher, rating, categories } = product.attributes
   const props: ProductPageProps = {
     cover: {
-      url: getImageUrl(cover.data?.attributes.url) || '/img/defaults/product-cover-default.webp',
+      url: getImageUrl(cover.data?.attributes.url) || '/img/default/product-cover.webp',
       alternativeText: cover.data.attributes.alternativeText ?? ''
     },
     productHeader: {

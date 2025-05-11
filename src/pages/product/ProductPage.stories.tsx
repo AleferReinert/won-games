@@ -14,7 +14,7 @@ const meta: Meta<typeof ProductPage> = {
   component: ProductPage,
   args: {
     cover: {
-      url: '/img/products/cyberpunk-1.jpg',
+      url: '/img/test/product-slide-1.jpg',
       alternativeText: 'Cyberpunk'
     },
     productHeader: productHeaderMock,

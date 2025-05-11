@@ -25,7 +25,7 @@ export const wishlistResponseMock: MockedResponse<WishlistQuery> = {
                       cover: {
                         data: {
                           attributes: {
-                            url: '/img/product-test.jpg',
+                            url: '/img/test/product.jpg',
                             alternativeText: ''
                           }
                         }
@@ -52,7 +52,7 @@ export const wishlistResponseMock: MockedResponse<WishlistQuery> = {
                       cover: {
                         data: {
                           attributes: {
-                            url: '/img/product-test.jpg',
+                            url: '/img/test/product.jpg',
                             alternativeText: ''
                           }
                         }

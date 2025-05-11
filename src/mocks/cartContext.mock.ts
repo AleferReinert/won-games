@@ -5,13 +5,13 @@ export const cartContextMock: CartContextProps = {
   cartProducts: [
     {
       id: '2',
-      img: '/img/product-test.jpg',
+      img: '/img/test/product.jpg',
       name: 'Population Zero',
       price: 89
     },
     {
       id: '4',
-      img: '/img/product-test.jpg',
+      img: '/img/test/product.jpg',
       name: 'Borderlands 2',
       price: 129
     }

@@ -21,7 +21,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }
@@ -48,7 +48,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: 'Vampire: The Masquerade – Bloodlines'
                   }
                 }
@@ -75,7 +75,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }
@@ -102,7 +102,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }
@@ -129,7 +129,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }
@@ -156,7 +156,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }
@@ -183,7 +183,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }
@@ -237,7 +237,7 @@ export const productsResponseMock: MockedResponse<ProductsQuery> = {
               cover: {
                 data: {
                   attributes: {
-                    url: '/img/product-test.jpg',
+                    url: '/img/test/product.jpg',
                     alternativeText: ''
                   }
                 }

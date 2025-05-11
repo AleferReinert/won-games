@@ -63,7 +63,7 @@ export const ordersResponseMock: MockedResponse<OrdersQuery> = {
                               },
                               thumbnail: {
                                 ext: '.jpg',
-                                url: '/img/product-test.jpg',
+                                url: '/img/test/product.jpg',
                                 hash: 'thumbnail_heroes_of_might_and_magic_4_complete_bf0a70057b_9e3c5eea71',
                                 mime: 'image/jpeg',
                                 name: 'thumbnail_heroes_of_might_and_magic_4_complete_bf0a70057b.jpg',
@@ -122,7 +122,7 @@ export const ordersResponseMock: MockedResponse<OrdersQuery> = {
                               },
                               thumbnail: {
                                 ext: '.jpg',
-                                url: '/img/product-test.jpg',
+                                url: '/img/test/product.jpg',
                                 hash: 'thumbnail_anno_1404_gold_edition_24be89b878_aad65ddf17',
                                 mime: 'image/jpeg',
                                 name: 'thumbnail_anno_1404_gold_edition_24be89b878.jpg',
@@ -193,7 +193,7 @@ export const ordersResponseMock: MockedResponse<OrdersQuery> = {
                               },
                               thumbnail: {
                                 ext: '.jpg',
-                                url: '/img/product-test.jpg',
+                                url: '/img/test/product.jpg',
                                 hash: 'thumbnail_vampire_the_masquerade_bloodlines_ccbb94ccf7_6bdb8332bd',
                                 mime: 'image/jpeg',
                                 name: 'thumbnail_vampire_the_masquerade_bloodlines_ccbb94ccf7.jpg',
@@ -252,7 +252,7 @@ export const ordersResponseMock: MockedResponse<OrdersQuery> = {
                               },
                               thumbnail: {
                                 ext: '.jpg',
-                                url: '/img/product-test.jpg',
+                                url: '/img/test/product.jpg',
                                 hash: 'thumbnail_wasteland_3_colorado_collection_fcbc522edb_f447fafd45',
                                 mime: 'image/jpeg',
                                 name: 'thumbnail_wasteland_3_colorado_collection_fcbc522edb.jpg',

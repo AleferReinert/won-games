@@ -104,7 +104,7 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
                       key={id}
                       title={attributes.name}
                       developer={attributes.developers.data[0]?.attributes.name || ''}
-                      img={getImageUrl(attributes.cover.data.attributes.url) || '/img/defaults/product-default.webp'}
+                      img={getImageUrl(attributes.cover.data.attributes.url) || '/img/default/product.webp'}
                       imgPriority={firstThreeProducts}
                       price={attributes.price}
                       slug={attributes.slug}

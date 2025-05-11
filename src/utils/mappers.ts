@@ -84,9 +84,7 @@ export const productMapper = (products: ProductEntityFragment | ProductRelationF
           price: attributes.price,
           promotionalPrice: attributes.promotional_price,
           ribbonLabel: attributes.ribbon_label,
-          img: attributes.cover.data
-            ? getImageUrl(attributes.cover.data.attributes.url)
-            : '/img/defaults/product-default.webp'
+          img: attributes.cover.data ? getImageUrl(attributes.cover.data.attributes.url) : '/img/default/product.webp'
         })
       )
     : []
@@ -99,7 +97,7 @@ export function ordersMapper(response: Pick<OrdersQuery, 'orders'>): CartItemPro
     const paymentInfo: PaymentProps = {
       creditCardBrand: card_brand || '',
       creditCardNumber: card_last4 ? `**** **** **** ${card_last4}` : '',
-      creditCardFlag: card_brand ? `/img/creditCards/${card_brand}.png` : '',
+      creditCardFlag: card_brand ? `/img/credit-cards/${card_brand}.png` : '',
       purchaseDate: `Purchase made on ${new Intl.DateTimeFormat('en-US', {
         day: 'numeric',
         month: 'short',
