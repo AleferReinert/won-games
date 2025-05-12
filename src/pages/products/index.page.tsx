@@ -63,10 +63,13 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
     }
   })
   const products = data?.products.data || []
-  const allProductsLoaded = products.length >= (data?.products.meta.pagination.total || 0)
+  const allProductsLength = data?.products.meta.pagination.total || 0
+  const allProductsLoaded = products.length >= allProductsLength
   const hasProducts = products.length > 0
   const showEmpty = !loading && !hasProducts
   const showShowMore = hasProducts && !loading && !allProductsLoaded
+  const productsToLoad = allProductsLength - products.length
+
   const loadMore = () => {
     fetchMore({
       variables: {
@@ -113,7 +116,10 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
                     />
                   )
                 })}
-              {loading && <Skeleton width='100%' height={235} />}
+              {loading &&
+                Array.from({ length: productsToLoad }).map((_, index) => {
+                  return <Skeleton key={index} width='100%' height={235} />
+                })}
             </S.Products>
 
             {showEmpty && (
