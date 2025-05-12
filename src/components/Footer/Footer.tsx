@@ -13,7 +13,7 @@ const Footer = () => {
 
   return (
     <S.Wrapper>
-      <Logo variant='dark' />
+      <Logo width={107} variant='dark' />
       <S.Content>
         <S.Column aria-labelledby='resources'>
           <Heading color='black' size='medium' $line='bottom' $lineColor='secondary'>

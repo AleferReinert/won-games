@@ -1,43 +1,16 @@
 import styled, { css } from 'styled-components'
 import { LogoProps } from './Logo'
 
-export const wrapperModifiers = {
-  small: () => css`
-    width: 6rem;
-    height: 1.8rem;
-  `,
-  medium: () => css`
-    width: 11.1rem;
-    height: 3.3rem;
-  `,
-  large: () => css`
-    width: 20.3rem;
-    height: 6.1rem;
-  `,
-  $withoutText: (size?: LogoProps['size']) => css`
-    width: 4.2rem;
-    overflow: hidden;
-
-    ${size == 'small' &&
-    css`
-      width: 2.3rem;
-    `}
-    ${size == 'large' &&
-    css`
-      width: 7.9rem;
-    `}
-  `
-}
-
 export const Wrapper = styled.a<LogoProps>`
-  ${({ size, $withoutText }) => css`
+  ${({ width }) => css`
     display: flex;
+    position: relative;
+    width: ${width ? `${width}px` : 'auto'};
+    height: fit-content;
 
     img {
-      height: inherit;
+      max-width: 100%;
+      height: auto;
     }
-
-    ${size && wrapperModifiers[size]()}
-    ${$withoutText && wrapperModifiers.$withoutText(size)}
   `}
 `

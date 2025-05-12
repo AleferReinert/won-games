@@ -37,9 +37,16 @@ export const Mobile: Story = {
       expect(menuIcon).toBeVisible()
     })
 
-    await step('Logo component', () => {
-      const logo = canvas.getByTestId('LogoComponent')
-      expect(logo).toBeVisible()
+    await step('Logo icon visible', () => {
+      const logoIcon = within(canvas.getAllByTestId('LogoComponent')[0]).getByRole('img', { hidden: true })
+      expect(logoIcon.getAttribute('src')).toContain('icon')
+      expect(logoIcon).toBeVisible()
+    })
+
+    await step('Logo light hidden', () => {
+      const logoLight = within(canvas.getAllByTestId('LogoComponent')[1]).getByRole('img', { hidden: true })
+      expect(logoLight.getAttribute('src')).toContain('light')
+      expect(logoLight).not.toBeVisible()
     })
 
     await step('Search button with icon', () => {
@@ -83,6 +90,18 @@ export const Desktop: Story = {
     const canvas = within(canvasElement)
     const cartButton = canvas.getByRole('button', { name: 'Shopping cart' })
     const cartItemListComponent = canvas.getByTestId('CartItemsComponent')
+
+    await step('Logo icon hidden', () => {
+      const logoIcon = within(canvas.getAllByTestId('LogoComponent')[0]).getByRole('img', { hidden: true })
+      expect(logoIcon.getAttribute('src')).toContain('icon')
+      expect(logoIcon).not.toBeVisible()
+    })
+
+    await step('Logo light visible', () => {
+      const logoLight = within(canvas.getAllByTestId('LogoComponent')[1]).getByRole('img', { hidden: true })
+      expect(logoLight.getAttribute('src')).toContain('light')
+      expect(logoLight).toBeVisible()
+    })
 
     await step('Hidden menu button', () => {
       const menuButton = canvas.queryByRole('button', { name: /open menu/i })

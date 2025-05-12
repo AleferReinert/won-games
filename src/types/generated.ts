@@ -165,6 +165,7 @@ export type Company = {
   createdAt: Maybe<Scalars['DateTime']['output']>;
   email: Scalars['String']['output'];
   logoDark: UploadFileEntityResponse;
+  logoIcon: UploadFileEntityResponse;
   logoLight: UploadFileEntityResponse;
   name: Scalars['String']['output'];
   neighborhood: Scalars['String']['output'];
@@ -201,6 +202,7 @@ export type CompanyInput = {
   country: InputMaybe<Scalars['String']['input']>;
   email: InputMaybe<Scalars['String']['input']>;
   logoDark: InputMaybe<Scalars['ID']['input']>;
+  logoIcon: InputMaybe<Scalars['ID']['input']>;
   logoLight: InputMaybe<Scalars['ID']['input']>;
   name: InputMaybe<Scalars['String']['input']>;
   neighborhood: InputMaybe<Scalars['String']['input']>;
@@ -2052,7 +2054,7 @@ export type ComingSoonQuery = { __typename?: 'Query', comingSoonProducts: { __ty
 export type CompanyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompanyQuery = { __typename?: 'Query', company: { __typename?: 'CompanyEntityResponse', data: { __typename?: 'CompanyEntity', attributes: { __typename?: 'Company', name: string, email: string, phone: string, street: string, number: string, neighborhood: string, city: string, zipcode: string, state: string, country: string, complement: string, logoLight: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, width: number, height: number, formats: any } } }, logoDark: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, width: number, height: number, formats: any } } }, socialLinks: Array<{ __typename?: 'ComponentPageSocialLink', name: string, url: string }> } } } };
+export type CompanyQuery = { __typename?: 'Query', company: { __typename?: 'CompanyEntityResponse', data: { __typename?: 'CompanyEntity', attributes: { __typename?: 'Company', name: string, email: string, phone: string, street: string, number: string, neighborhood: string, city: string, zipcode: string, state: string, country: string, complement: string, logoLight: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, width: number, height: number, formats: any } } }, logoDark: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, width: number, height: number } } }, logoIcon: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, width: number, height: number } } }, socialLinks: Array<{ __typename?: 'ComponentPageSocialLink', name: string, url: string }> } } } };
 
 export type OrdersQueryVariables = Exact<{
   identifier: InputMaybe<Scalars['ID']['input']>;
@@ -2395,7 +2397,15 @@ export const CompanyDocument = gql`
               url
               width
               height
-              formats
+            }
+          }
+        }
+        logoIcon {
+          data {
+            attributes {
+              url
+              width
+              height
             }
           }
         }

@@ -12,9 +12,17 @@ const AuthTemplate = ({ title, children }: AuthTemplateProps) => {
   return (
     <S.Wrapper>
       <S.BannerBlock data-testid='bannerBlock'>
-        <Image src='/img/authentication-bg.jpg' alt='' aria-hidden fill data-testid='AuthBackgroundImage' />
+        <Image
+          src='/img/authentication-bg.jpg'
+          alt=''
+          aria-hidden
+          fill
+          data-testid='AuthBackgroundImage'
+          priority
+          sizes={'(max-width: 1024px) 512px, (max-width: 1280px) 640px, (max-width: 1366px) 683px, 768px'}
+        />
         <S.BannerContent>
-          <Logo />
+          <Logo width={126} />
           <div>
             <Heading size='huge'>All your favorites games in one place</Heading>
             <S.Description>
@@ -28,7 +36,7 @@ const AuthTemplate = ({ title, children }: AuthTemplateProps) => {
       </S.BannerBlock>
       <S.AuthBlock>
         <S.AuthContent>
-          <Logo variant='dark' size='large' />
+          <Logo width={200} variant='dark' />
           <Heading $line='left' $lineColor='secondary' color='black' as='h1'>
             {title}
           </Heading>

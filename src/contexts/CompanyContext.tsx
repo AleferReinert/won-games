@@ -18,6 +18,11 @@ export interface CompanyContextProps {
   state: string
   country: string
   complement?: string
+  logoIcon: {
+    url: string
+    width: number
+    height: number
+  }
   logoLight: {
     url: string
     width: number
@@ -50,6 +55,11 @@ const CompanyContextDefaultValues: CompanyContextProps = {
   state: '',
   country: '',
   complement: '',
+  logoIcon: {
+    url: '',
+    width: 0,
+    height: 0
+  },
   logoLight: {
     url: '',
     width: 0,

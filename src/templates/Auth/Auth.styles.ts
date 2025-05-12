@@ -121,7 +121,6 @@ export const AuthContent = styled.div`
   width: 100%;
 
   > a:first-child {
-    width: fit-content;
     display: block;
     margin: 0 auto;
   }

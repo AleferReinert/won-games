@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import { remToPx } from 'polished'
 import Logo from './Logo'
 
 const meta: Meta<typeof Logo> = {
@@ -26,9 +25,9 @@ export const Light: Story = {
       expect(logo.getAttribute('src')).toContain('light')
     })
 
-    await step('Size medium', () => {
+    await step('Width 200', () => {
       const wrapper = canvas.getByTestId('LogoComponent')
-      expect(wrapper).toHaveStyle({ width: remToPx('11.1rem') })
+      expect(wrapper).toHaveStyle({ width: '200px' })
     })
   }
 }
@@ -52,48 +51,16 @@ export const Dark: Story = {
   }
 }
 
-export const Small: Story = {
+export const Icon: Story = {
   args: {
-    size: 'small'
+    variant: 'icon'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Size small', () => {
-      const wrapper = canvas.getByTestId('LogoComponent')
-      expect(wrapper).toHaveStyle({ width: remToPx('6rem') })
-    })
-  }
-}
-
-export const Large: Story = {
-  args: {
-    size: 'large'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement)
-
-    await step('Size large', () => {
-      const wrapper = canvas.getByTestId('LogoComponent')
-      expect(wrapper).toHaveStyle({
-        width: remToPx('20.3rem')
-      })
-    })
-  }
-}
-
-export const WithoutText: Story = {
-  args: {
-    $withoutText: true
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement)
-
-    await step('Width 42px', () => {
-      const wrapper = canvas.getByTestId('LogoComponent')
-      expect(wrapper).toHaveStyle({
-        width: remToPx('4.2rem')
-      })
+    await step('Icon in src', () => {
+      const logo = canvas.getByRole('img', { name: 'Won Games' })
+      expect(logo.getAttribute('src')).toContain('icon')
     })
   }
 }

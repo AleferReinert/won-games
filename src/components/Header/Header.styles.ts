@@ -1,4 +1,3 @@
-import * as LogoStyles from 'components/Logo/Logo.styles'
 import * as MenuMobileStyles from 'components/MenuMobile/MenuMobile.styles'
 import styled, { css } from 'styled-components'
 import { pxToNumber } from 'utils/pxToNumber'
@@ -37,30 +36,27 @@ export const OpenMenu = styled.button`
   `}
 `
 
-export const LogoWrapper = styled.div<SearchProps>`
-  ${({ theme, $isOpen }) => css`
-    line-height: 0;
-    opacity: ${$isOpen ? '0' : '1'};
-    margin-top: ${$isOpen ? '-4rem' : '0'};
-    transition: all ${theme.transition.default};
-    scale: ${$isOpen ? '0.8' : '1'};
-
-    svg {
-      transform: translateY(2px);
-    }
-
-    @media (max-width: ${pxToNumber(theme.breakpoint.small) - 1 + 'px'}) {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-
-      ${LogoStyles.wrapperModifiers.$withoutText()}
-    }
+export const LogoFull = styled.div<SearchProps>`
+  ${({ theme }) => css`
+    display: none;
 
     @media (min-width: ${theme.breakpoint.small}) {
-      opacity: 1;
-      margin-top: 0;
-      scale: 1;
+      display: block;
+    }
+  `}
+`
+
+export const LogoIcon = styled.div<SearchProps>`
+  ${({ theme, $isOpen }) => css`
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: ${$isOpen ? '0' : '1'};
+    transition: all ${theme.transition.default};
+    scale: ${$isOpen ? '0' : '1'};
+
+    @media (min-width: ${theme.breakpoint.small}) {
+      display: none;
     }
   `}
 `

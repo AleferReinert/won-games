@@ -12,6 +12,11 @@ export const companyContextMock: CompanyContextProps = {
   state: 'IL',
   country: 'United States',
   complement: 'Apartment 5A',
+  logoIcon: {
+    url: '/img/test/logo-icon.webp',
+    width: 369,
+    height: 234
+  },
   logoLight: {
     url: '/img/test/logo-light.webp',
     width: 972,

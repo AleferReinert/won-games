@@ -43,9 +43,13 @@ const Header = () => {
         </S.IconWrapper>
       </S.OpenMenu>
 
-      <S.LogoWrapper $isOpen={showSearch}>
-        <Logo />
-      </S.LogoWrapper>
+      <S.LogoIcon $isOpen={showSearch}>
+        <Logo width={58} variant='icon' />
+      </S.LogoIcon>
+
+      <S.LogoFull $isOpen={showSearch}>
+        <Logo width={110} />
+      </S.LogoFull>
 
       <S.MenuDesktop>
         <S.MenuLink href='/'>Home</S.MenuLink>

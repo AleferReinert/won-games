@@ -32,7 +32,15 @@ export const COMPANY = gql`
                 url
                 width
                 height
-                formats
+              }
+            }
+          }
+          logoIcon {
+            data {
+              attributes {
+                url
+                width
+                height
               }
             }
           }

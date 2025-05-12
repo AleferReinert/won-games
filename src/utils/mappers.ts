@@ -15,19 +15,24 @@ import {
 import { getImageUrl } from './getImageUrl'
 
 export const companyMapper = (data: CompanyQuery): CompanyContextProps => {
-  const { logoDark, logoLight } = data.company.data.attributes
+  const { logoDark, logoLight, logoIcon } = data.company.data.attributes
 
   return {
     ...data.company.data.attributes,
+    logoIcon: {
+      url: getImageUrl(logoIcon.data.attributes.url),
+      width: logoIcon.data.attributes.width,
+      height: logoIcon.data.attributes.height
+    },
     logoLight: {
-      url: getImageUrl(logoLight.data.attributes.formats.thumbnail.url),
-      width: logoLight.data.attributes.formats.thumbnail.width,
-      height: logoLight.data.attributes.formats.thumbnail.height
+      url: getImageUrl(logoLight.data.attributes.url),
+      width: logoLight.data.attributes.width,
+      height: logoLight.data.attributes.height
     },
     logoDark: {
-      url: getImageUrl(logoDark.data.attributes.formats.thumbnail.url),
-      width: logoDark.data.attributes.formats.thumbnail.width,
-      height: logoDark.data.attributes.formats.thumbnail.height
+      url: getImageUrl(logoDark.data.attributes.url),
+      width: logoDark.data.attributes.width,
+      height: logoDark.data.attributes.height
     }
   }
 }
