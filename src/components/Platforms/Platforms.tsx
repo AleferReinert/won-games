@@ -5,25 +5,24 @@ interface PlatformsProps {
 }
 
 const Platforms = ({ platforms }: PlatformsProps) => {
+  console.log('result: ', platforms)
   /*
     Agrupa os sistemas operacionais.
     Exemplo:
     - Recebe: ['PlayStation 4','PlayStation 5','Xbox Series X','Windows 7','Windows 8','Windows XP']
     - Retorna: 'PlayStation (4, 5), Xbox Series X, Windows (7, 8, XP)'
-    */
+  */
 
-  // Ordena as versões de cada plataforma dentro dos parenteses
+  // Ordena as versões de cada plataforma dentro dos parênteses
   function sortedGrouped(obj: Record<string, string[]>): Record<string, string[]> {
     const novoObj = {} as Record<string, string[]>
 
     for (const chave in obj) {
       novoObj[chave] = obj[chave].sort((a, b) => {
-        // Verifica se ambos os valores são números
         if (!isNaN(Number(a)) && !isNaN(Number(b))) {
-          // Ordena números com um dígito antes dos com dois dígitos
           return a.length - b.length || a.localeCompare(b)
         }
-        return a.localeCompare(b) // Ordena alfabeticamente caso não sejam números
+        return a.localeCompare(b)
       })
     }
 
@@ -32,13 +31,18 @@ const Platforms = ({ platforms }: PlatformsProps) => {
 
   const groupSystems = (platforms: string[]): string => {
     const grouped: { [key: string]: string[] } = {}
+    const noVersion: string[] = []
 
     platforms.forEach((item) => {
       const firstSpaceIndex = item.indexOf(' ')
+      if (firstSpaceIndex === -1) {
+        noVersion.push(item) // Sem versão, ex: "Mac", "Linux"
+        return
+      }
+
       const platform = item.substring(0, firstSpaceIndex)
       const version = item.substring(firstSpaceIndex + 1)
 
-      // Adiciona a versão ao array de cada plataforma
       if (!grouped[platform]) {
         grouped[platform] = []
       }
@@ -46,19 +50,26 @@ const Platforms = ({ platforms }: PlatformsProps) => {
     })
 
     const sortedGroupedPlatforms = sortedGrouped(grouped)
+    const sortedPlatforms = Object.keys(sortedGroupedPlatforms).sort()
+    const sortedNoVersion = noVersion.sort()
 
     let result = ''
-    // Obter as chaves ordenadas alfabeticamente
-    const sortedPlatforms = Object.keys(sortedGroupedPlatforms).sort()
+
+    // Adiciona plataformas com versões agrupadas
     for (const platform of sortedPlatforms) {
-      if (result !== '') {
-        result += ', '
-      }
-      if (sortedGroupedPlatforms[platform].length > 1) {
-        result += `${platform} (${sortedGroupedPlatforms[platform].join(', ')})`
+      if (result !== '') result += ', '
+      const versions = sortedGroupedPlatforms[platform]
+      if (versions.length > 1) {
+        result += `${platform} (${versions.join(', ')})`
       } else {
-        result += `${platform} ${sortedGroupedPlatforms[platform][0]}`
+        result += `${platform} ${versions[0]}`
       }
+    }
+
+    // Adiciona plataformas sem versão
+    if (sortedNoVersion.length > 0) {
+      if (result !== '') result += ', '
+      result += sortedNoVersion.join(', ')
     }
 
     return result
