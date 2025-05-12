@@ -16,6 +16,7 @@ export const wrapperModifiers = {
   `,
   $withoutText: (size?: LogoProps['size']) => css`
     width: 4.2rem;
+    overflow: hidden;
 
     ${size == 'small' &&
     css`
@@ -31,7 +32,6 @@ export const wrapperModifiers = {
 export const Wrapper = styled.a<LogoProps>`
   ${({ size, $withoutText }) => css`
     display: flex;
-    overflow: hidden;
 
     img {
       height: inherit;

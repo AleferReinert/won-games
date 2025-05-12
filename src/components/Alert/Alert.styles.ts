@@ -3,24 +3,24 @@ import { AlertProps } from './Alert'
 
 const alertModifiers = {
   error: (theme: DefaultTheme) => css`
-    border-color: ${theme.colors.error};
-    color: ${theme.colors.error};
-    background-color: ${theme.colors.error}33;
+    border-color: ${theme.colors.error.color};
+    color: ${theme.colors.error.color};
+    background-color: ${theme.colors.error.background};
   `,
   success: (theme: DefaultTheme) => css`
-    border-color: ${theme.colors.success};
-    color: ${theme.colors.success};
-    background-color: ${theme.colors.success}33;
+    border-color: ${theme.colors.success.color};
+    color: ${theme.colors.success.color};
+    background-color: ${theme.colors.success.background};
   `,
   info: (theme: DefaultTheme) => css`
-    border-color: ${theme.colors.info};
-    color: ${theme.colors.info};
-    background-color: ${theme.colors.info}33;
+    border-color: ${theme.colors.info.color};
+    color: ${theme.colors.info.color};
+    background-color: ${theme.colors.info.background};
   `,
   warning: (theme: DefaultTheme) => css`
-    border-color: ${theme.colors.warning};
-    color: ${theme.colors.warning};
-    background-color: ${theme.colors.warning}33;
+    border-color: ${theme.colors.warning.color};
+    color: ${theme.colors.warning.color};
+    background-color: ${theme.colors.warning.background};
   `
 }
 
@@ -44,5 +44,10 @@ export const Alert = styled.div<AlertProps>`
     min-height: 4.3rem;
 
     ${$variant && alertModifiers[$variant](theme)}
+
+    ul {
+      margin-top: ${theme.spacings.xxsmall};
+      padding-left: calc(${theme.spacings.xsmall} + 2px);
+    }
   `}
 `

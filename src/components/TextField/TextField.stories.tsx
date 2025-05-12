@@ -176,12 +176,12 @@ export const Error: Story = {
 
     await step('Red border', () => {
       expect(inputWrapper).toHaveStyle({
-        borderColor: theme.colors.error
+        borderColor: theme.colors.error.color
       })
     })
 
     await step('Error message with red color', () => {
-      expect(errorMessage).toHaveStyle({ color: theme.colors.error })
+      expect(errorMessage).toHaveStyle({ color: theme.colors.error.color })
     })
   }
 }

@@ -119,9 +119,20 @@ const StripePaymentForm = () => {
         {allProductsFree ? (
           <Alert $variant='success'>No payment required.</Alert>
         ) : (
-          <S.CardWrapper>
-            <CardElement options={{ hidePostalCode: true, disableLink: true }} onChange={handleChange} />
-          </S.CardWrapper>
+          <>
+            <Alert $variant='info' $size='small'>
+              <strong>Atenção!</strong>
+              <ul>
+                <li>Este site é apenas uma demonstração</li>
+                <li>Não serão realizadas transações reais</li>
+                <li>Os pagamentos são apenas simulados</li>
+                <li>Não use um cartão de crédito real</li>
+              </ul>
+            </Alert>
+            <S.CardWrapper>
+              <CardElement options={{ hidePostalCode: true, disableLink: true }} onChange={handleChange} />
+            </S.CardWrapper>
+          </>
         )}
         {error && (
           <Alert $variant='error' $size='small' $hideBorderLeft>

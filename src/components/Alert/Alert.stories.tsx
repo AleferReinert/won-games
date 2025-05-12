@@ -43,9 +43,9 @@ export const Default: Story = {
 
     await step('Colors', () => {
       const alert = canvas.getByRole('alert')
-      expect(alert).toHaveStyle({ 'border-color': theme.colors.error })
-      expect(alert).toHaveStyle({ color: theme.colors.error })
-      expect(alert).toHaveStyle({ 'background-color': theme.colors.error + '33' })
+      expect(alert).toHaveStyle({ 'border-color': theme.colors.error.color })
+      expect(alert).toHaveStyle({ color: theme.colors.error.color })
+      expect(alert).toHaveStyle({ 'background-color': theme.colors.error.background })
     })
   }
 }
@@ -87,9 +87,9 @@ export const Success: Story = {
 
     await step('Colors', () => {
       const alert = canvas.getByRole('alert')
-      expect(alert).toHaveStyle({ 'border-color': theme.colors.success })
-      expect(alert).toHaveStyle({ color: theme.colors.success })
-      expect(alert).toHaveStyle({ 'background-color': theme.colors.success + '33' })
+      expect(alert).toHaveStyle({ 'border-color': theme.colors.success.color })
+      expect(alert).toHaveStyle({ color: theme.colors.success.color })
+      expect(alert).toHaveStyle({ 'background-color': theme.colors.success.background })
     })
   }
 }
@@ -103,9 +103,9 @@ export const Info: Story = {
 
     await step('Colors', () => {
       const alert = canvas.getByRole('alert')
-      expect(alert).toHaveStyle({ 'border-color': theme.colors.info })
-      expect(alert).toHaveStyle({ color: theme.colors.info })
-      expect(alert).toHaveStyle({ 'background-color': theme.colors.info + '33' })
+      expect(alert).toHaveStyle({ 'border-color': theme.colors.info.color })
+      expect(alert).toHaveStyle({ color: theme.colors.info.color })
+      expect(alert).toHaveStyle({ 'background-color': theme.colors.info.background })
     })
   }
 }
@@ -119,9 +119,9 @@ export const Warning: Story = {
 
     await step('Colors', () => {
       const alert = canvas.getByRole('alert')
-      expect(alert).toHaveStyle({ 'border-color': theme.colors.warning })
-      expect(alert).toHaveStyle({ color: theme.colors.warning })
-      expect(alert).toHaveStyle({ 'background-color': theme.colors.warning + '33' })
+      expect(alert).toHaveStyle({ 'border-color': theme.colors.warning.color })
+      expect(alert).toHaveStyle({ color: theme.colors.warning.color })
+      expect(alert).toHaveStyle({ 'background-color': theme.colors.warning.background })
     })
   }
 }

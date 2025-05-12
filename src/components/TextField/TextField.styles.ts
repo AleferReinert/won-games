@@ -30,7 +30,7 @@ const modifiers = {
     }
   `,
   errorMessage: (theme: DefaultTheme) => css`
-    border-color: ${theme.colors.error};
+    border-color: ${theme.colors.error.color};
   `
 }
 
@@ -97,7 +97,7 @@ export const Icon = styled.span`
 `
 export const ErrorMessage = styled.span`
   ${({ theme }) => css`
-    color: ${theme.colors.error};
+    color: ${theme.colors.error.color};
     font-size: ${theme.font.sizes.xsmall};
   `}
 `

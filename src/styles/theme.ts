@@ -35,10 +35,10 @@ const theme = {
     lightGrayHover: '#d9d9d9',
     gray: '#8F8F8F',
     darkGray: '#2E2F42',
-    error: '#FF5F5F',
-    success: '#28a745',
-    info: '#17a2b8',
-    warning: '#ffc107'
+    error: { color: '#721c24', background: '#f8d7da' },
+    success: { color: '#155724', background: '#d4edda' },
+    info: { color: '#0c5460', background: '#d1ecf1' },
+    warning: { color: '#856404', background: '#fff3cd' }
   },
   spacings: {
     xxsmall: '0.8rem',
