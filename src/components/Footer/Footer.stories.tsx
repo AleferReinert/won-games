@@ -35,11 +35,9 @@ export const Footer: Story = {
     })
 
     await step('Titles', () => {
-      const titles = ['Contact', 'Follow Us', 'Links', 'Location']
+      const titles = ['Contact', 'Follow Us', 'Links', 'Address']
       for (const title of titles) {
-        expect(
-          canvas.getByRole('heading', { level: 2, name: title })
-        ).toBeVisible()
+        expect(canvas.getByRole('heading', { level: 2, name: title })).toBeVisible()
       }
     })
 

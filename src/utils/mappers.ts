@@ -2,8 +2,10 @@ import { BannerProps } from 'components/Banner/Banner'
 import { CartItemProps, PaymentProps } from 'components/CartItem/CartItem'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { ProductProps } from 'components/Product/Product'
+import { CompanyContextProps } from 'contexts/CompanyContext'
 import {
   BannerFragment,
+  CompanyQuery,
   HighlightFragment,
   OrdersQuery,
   ProductEntityFragment,
@@ -11,6 +13,24 @@ import {
   Query
 } from 'types/generated'
 import { getImageUrl } from './getImageUrl'
+
+export const companyMapper = (data: CompanyQuery): CompanyContextProps => {
+  const { logoDark, logoLight } = data.company.data.attributes
+
+  return {
+    ...data.company.data.attributes,
+    logoLight: {
+      url: getImageUrl(logoLight.data.attributes.formats.thumbnail.url),
+      width: logoLight.data.attributes.formats.thumbnail.width,
+      height: logoLight.data.attributes.formats.thumbnail.height
+    },
+    logoDark: {
+      url: getImageUrl(logoDark.data.attributes.formats.thumbnail.url),
+      width: logoDark.data.attributes.formats.thumbnail.width,
+      height: logoDark.data.attributes.formats.thumbnail.height
+    }
+  }
+}
 
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerFragment) => {

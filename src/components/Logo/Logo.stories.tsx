@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { remToPx } from 'polished'
-import theme from 'styles/theme'
 import Logo from './Logo'
 
 const meta: Meta<typeof Logo> = {
   title: 'Components/Atoms/Logo',
   component: Logo,
   parameters: {
-    layout: 'centered'
+    layout: 'padded'
   },
   tags: ['autodocs']
 }
@@ -17,25 +16,26 @@ export default meta
 
 type Story = StoryObj<typeof Logo>
 
-export const Default: Story = {
+export const Light: Story = {
+  name: 'Light (default)',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Color white', () => {
+    await step('Light in src', () => {
       const logo = canvas.getByRole('img', { name: 'Won Games' })
-      expect(logo).toHaveStyle({ color: theme.colors.white })
+      expect(logo.getAttribute('src')).toContain('light')
     })
 
     await step('Size medium', () => {
       const wrapper = canvas.getByTestId('LogoComponent')
-      expect(wrapper).toHaveStyle({ width: remToPx('11rem') })
+      expect(wrapper).toHaveStyle({ width: remToPx('11.1rem') })
     })
   }
 }
 
-export const Black: Story = {
+export const Dark: Story = {
   args: {
-    color: 'black'
+    variant: 'dark'
   },
   parameters: {
     backgrounds: {
@@ -45,9 +45,9 @@ export const Black: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Color black', () => {
+    await step('Dark in src', () => {
       const logo = canvas.getByRole('img', { name: 'Won Games' })
-      expect(logo).toHaveStyle({ color: theme.colors.black })
+      expect(logo.getAttribute('src')).toContain('dark')
     })
   }
 }
@@ -61,7 +61,7 @@ export const Small: Story = {
 
     await step('Size small', () => {
       const wrapper = canvas.getByTestId('LogoComponent')
-      expect(wrapper).toHaveStyle({ width: remToPx('5.8rem') })
+      expect(wrapper).toHaveStyle({ width: remToPx('6rem') })
     })
   }
 }
@@ -76,7 +76,7 @@ export const Large: Story = {
     await step('Size large', () => {
       const wrapper = canvas.getByTestId('LogoComponent')
       expect(wrapper).toHaveStyle({
-        width: remToPx('20rem')
+        width: remToPx('20.3rem')
       })
     })
   }
@@ -89,14 +89,11 @@ export const WithoutText: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Logo visible', () => {
+    await step('Width 42px', () => {
       const wrapper = canvas.getByTestId('LogoComponent')
-      expect(wrapper).toBeVisible()
-    })
-
-    await step('Text not visible', () => {
-      const text = canvas.getByTestId('LogoText')
-      expect(text).not.toBeVisible()
+      expect(wrapper).toHaveStyle({
+        width: remToPx('4.2rem')
+      })
     })
   }
 }

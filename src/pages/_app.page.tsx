@@ -1,5 +1,6 @@
 import { ApolloProvider } from '@apollo/client'
 import isPropValid from '@emotion/is-prop-valid'
+import { CompanyProvider } from 'contexts/CompanyContext'
 import { CartProvider } from 'hooks/useCart'
 import { WishlistProvider } from 'hooks/useWishlist'
 import type { NextPage } from 'next'
@@ -37,28 +38,30 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <StyleSheetManager shouldForwardProp={isPropValid} enableVendorPrefixes>
         <ApolloProvider client={client}>
           <ThemeProvider theme={theme}>
-            <CartProvider>
-              <WishlistProvider>
-                <Head>
-                  <title>Won Games</title>
-                  <link rel='icon' type='image/png' href='/img/favicon.png' />
-                  <link rel='shortchut icon' href='/img/icon-512.png' />
-                  <link rel='apple-touch-icon' href='/img/icon-512.png' />
-                  <link rel='manifest' href='/manifest.json' />
-                  <meta name='theme-color' content='#06092B' />
-                  <meta name='description' content='Your favorite games are here. Join now and have fun!' />
-                </Head>
-                <GlobalStyles />
-                <NextNProgress
-                  color={theme.colors.primary}
-                  startPosition={0.3}
-                  stopDelayMs={200}
-                  height={3}
-                  showOnShallow={true}
-                />
-                {getLayout(<Component className={poppins.className} {...pageProps} />)}
-              </WishlistProvider>
-            </CartProvider>
+            <CompanyProvider>
+              <CartProvider>
+                <WishlistProvider>
+                  <Head>
+                    <title>Won Games</title>
+                    <link rel='icon' type='image/png' href='/img/favicon.png' />
+                    <link rel='shortchut icon' href='/img/icon-512.png' />
+                    <link rel='apple-touch-icon' href='/img/icon-512.png' />
+                    <link rel='manifest' href='/manifest.json' />
+                    <meta name='theme-color' content='#06092B' />
+                    <meta name='description' content='Your favorite games are here. Join now and have fun!' />
+                  </Head>
+                  <GlobalStyles />
+                  <NextNProgress
+                    color={theme.colors.primary}
+                    startPosition={0.3}
+                    stopDelayMs={200}
+                    height={3}
+                    showOnShallow={true}
+                  />
+                  {getLayout(<Component className={poppins.className} {...pageProps} />)}
+                </WishlistProvider>
+              </CartProvider>
+            </CompanyProvider>
           </ThemeProvider>
         </ApolloProvider>
       </StyleSheetManager>

@@ -15,7 +15,7 @@ describe('Full purchase', () => {
     cy.isUserLoggedInAndRedirect(fakeUser.fullName.split(' ')[0])
 
     // Go to explore and select free
-    cy.findByRole('link', { name: 'Explore' }).click()
+    cy.findByRole('banner').findByRole('link', { name: 'Explore' }).click()
     cy.findByLabelText('Free').click()
     cy.url().should('include', 'price=0')
     cy.wait(2000)
@@ -53,7 +53,7 @@ describe('Full purchase', () => {
     cy.isUserLoggedInAndRedirect(secondFakeUser.fullName.split(' ')[0])
 
     // Go to explore and select high to low
-    cy.findByRole('link', { name: 'Explore' }).click()
+    cy.findByRole('banner').findByRole('link', { name: 'Explore' }).click()
     cy.findByLabelText('High to low').click()
     cy.url().should('include', 'sort=price%3Adesc')
     cy.wait(2000)

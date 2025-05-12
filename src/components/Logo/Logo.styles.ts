@@ -3,39 +3,37 @@ import { LogoProps } from './Logo'
 
 export const wrapperModifiers = {
   small: () => css`
-    width: 5.8rem;
+    width: 6rem;
     height: 1.8rem;
   `,
   medium: () => css`
-    width: 11rem;
+    width: 11.1rem;
     height: 3.3rem;
   `,
   large: () => css`
-    width: 20rem;
+    width: 20.3rem;
     height: 6.1rem;
   `,
   $withoutText: (size?: LogoProps['size']) => css`
     width: 4.2rem;
+
     ${size == 'small' &&
     css`
-      width: 2.2rem;
+      width: 2.3rem;
     `}
     ${size == 'large' &&
     css`
-      width: 7.6rem;
+      width: 7.9rem;
     `}
-    overflow: hidden;
-
-    .text {
-      display: none;
-    }
   `
 }
 
 export const Wrapper = styled.a<LogoProps>`
-  ${({ theme, color, size, $withoutText }) => css`
-    svg {
-      color: ${theme.colors[color!]};
+  ${({ size, $withoutText }) => css`
+    display: flex;
+    overflow: hidden;
+
+    img {
       height: inherit;
     }
 

@@ -28,7 +28,7 @@ const AuthTemplate = ({ title, children }: AuthTemplateProps) => {
       </S.BannerBlock>
       <S.AuthBlock>
         <S.AuthContent>
-          <Logo color='black' size='large' />
+          <Logo variant='dark' size='large' />
           <Heading $line='left' $lineColor='secondary' color='black' as='h1'>
             {title}
           </Heading>

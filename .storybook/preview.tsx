@@ -1,4 +1,6 @@
 import { Preview, StoryContext, StoryFn } from '@storybook/react'
+import { CompanyContext } from 'contexts/CompanyContext'
+import { companyContextMock } from 'mocks/companyContext.mock'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
@@ -70,10 +72,12 @@ export const decorators = [
   (Story: StoryFn, { args }: StoryContext<NextAuthSessionArgs>) => (
     <AppRouterContext.Provider value={createMockRouter()}>
       <SessionProvider session={args.nextAuthSession}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <Story />
-        </ThemeProvider>
+        <CompanyContext.Provider value={companyContextMock}>
+          <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            <Story />
+          </ThemeProvider>
+        </CompanyContext.Provider>
       </SessionProvider>
     </AppRouterContext.Provider>
   )

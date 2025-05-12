@@ -24,7 +24,7 @@ Cypress.Commands.add('toggleBanner', () => {
 Cypress.Commands.add('filterUnderPrice', (price) => {
   cy.findByRole('radio', { name: `Under $${price}` }).click()
   cy.url().should('include', `price=${price}`)
-  cy.wait(500)
+  cy.wait(2000)
   cy.get('@FilteredProducts')
     .findAllByLabelText('Price')
     .each(($price) => {

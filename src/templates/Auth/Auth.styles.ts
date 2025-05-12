@@ -13,15 +13,32 @@ export const Wrapper = styled.div`
   `}
 `
 
+export const LogoLeft = styled.div`
+  position: relative;
+  object-fit: contain;
+
+  img {
+    height: 3.3rem;
+    width: fit-content;
+  }
+`
+
+export const LogoRight = styled.div`
+  position: relative;
+  object-fit: contain;
+  text-align: center;
+
+  img {
+    height: 6.1rem;
+    width: fit-content;
+  }
+`
+
 export const BannerBlock = styled.section`
   ${({ theme }) => css`
     position: relative;
     display: none;
     height: 100%;
-
-    > img {
-      object-fit: cover;
-    }
 
     &::after {
       content: '';
@@ -43,6 +60,12 @@ export const BannerBlock = styled.section`
       display: block;
     }
   `}
+`
+
+export const Background = styled.div`
+  > img {
+    object-fit: cover;
+  }
 `
 
 export const BannerContent = styled.div`

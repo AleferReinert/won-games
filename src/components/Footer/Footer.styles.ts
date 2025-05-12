@@ -6,6 +6,15 @@ export const Wrapper = styled.footer`
     text-transform: uppercase;
   }
 `
+export const Logo = styled.div`
+  position: relative;
+  object-fit: contain;
+
+  img {
+    height: 3.3rem;
+    width: fit-content;
+  }
+`
 
 export const Content = styled.div`
   ${({ theme }) => css`

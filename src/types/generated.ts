@@ -157,6 +157,61 @@ export type CategoryRelationResponseCollection = {
   data: Array<CategoryEntity>;
 };
 
+export type Company = {
+  __typename?: 'Company';
+  city: Scalars['String']['output'];
+  complement: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  createdAt: Maybe<Scalars['DateTime']['output']>;
+  email: Scalars['String']['output'];
+  logoDark: UploadFileEntityResponse;
+  logoLight: UploadFileEntityResponse;
+  name: Scalars['String']['output'];
+  neighborhood: Scalars['String']['output'];
+  number: Scalars['String']['output'];
+  phone: Scalars['String']['output'];
+  socialLinks: Maybe<Array<Maybe<ComponentPageSocialLink>>>;
+  state: Scalars['String']['output'];
+  street: Scalars['String']['output'];
+  updatedAt: Maybe<Scalars['DateTime']['output']>;
+  zipcode: Scalars['String']['output'];
+};
+
+
+export type CompanySocialLinksArgs = {
+  filters: InputMaybe<ComponentPageSocialLinkFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CompanyEntity = {
+  __typename?: 'CompanyEntity';
+  attributes: Maybe<Company>;
+  id: Maybe<Scalars['ID']['output']>;
+};
+
+export type CompanyEntityResponse = {
+  __typename?: 'CompanyEntityResponse';
+  data: Maybe<CompanyEntity>;
+};
+
+export type CompanyInput = {
+  city: InputMaybe<Scalars['String']['input']>;
+  complement: InputMaybe<Scalars['String']['input']>;
+  country: InputMaybe<Scalars['String']['input']>;
+  email: InputMaybe<Scalars['String']['input']>;
+  logoDark: InputMaybe<Scalars['ID']['input']>;
+  logoLight: InputMaybe<Scalars['ID']['input']>;
+  name: InputMaybe<Scalars['String']['input']>;
+  neighborhood: InputMaybe<Scalars['String']['input']>;
+  number: InputMaybe<Scalars['String']['input']>;
+  phone: InputMaybe<Scalars['String']['input']>;
+  socialLinks: InputMaybe<Array<InputMaybe<ComponentPageSocialLinkInput>>>;
+  state: InputMaybe<Scalars['String']['input']>;
+  street: InputMaybe<Scalars['String']['input']>;
+  zipcode: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ComponentPageButton = {
   __typename?: 'ComponentPageButton';
   id: Scalars['ID']['output'];
@@ -259,6 +314,27 @@ export type ComponentPageSectionInput = {
   highlight: InputMaybe<ComponentPageHighlightInput>;
   id: InputMaybe<Scalars['ID']['input']>;
   title: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentPageSocialLink = {
+  __typename?: 'ComponentPageSocialLink';
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type ComponentPageSocialLinkFiltersInput = {
+  and: InputMaybe<Array<InputMaybe<ComponentPageSocialLinkFiltersInput>>>;
+  name: InputMaybe<StringFilterInput>;
+  not: InputMaybe<ComponentPageSocialLinkFiltersInput>;
+  or: InputMaybe<Array<InputMaybe<ComponentPageSocialLinkFiltersInput>>>;
+  url: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentPageSocialLinkInput = {
+  id: InputMaybe<Scalars['ID']['input']>;
+  name: InputMaybe<Scalars['String']['input']>;
+  url: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DateFilterInput = {
@@ -423,7 +499,7 @@ export type FloatFilterInput = {
   startsWith: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = Banner | Category | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularProducts | ComponentPageRibbon | ComponentPageSection | Developer | Home | I18NLocale | Order | Platform | Product | Publisher | Recommended | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Wishlist;
+export type GenericMorph = Banner | Category | Company | ComponentPageButton | ComponentPageHighlight | ComponentPagePopularProducts | ComponentPageRibbon | ComponentPageSection | ComponentPageSocialLink | Developer | Home | I18NLocale | Order | Platform | Product | Publisher | Recommended | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Wishlist;
 
 export type Home = {
   __typename?: 'Home';
@@ -607,6 +683,7 @@ export type Mutation = {
   createWishlist: Maybe<WishlistEntityResponse>;
   deleteBanner: Maybe<BannerEntityResponse>;
   deleteCategory: Maybe<CategoryEntityResponse>;
+  deleteCompany: Maybe<CompanyEntityResponse>;
   deleteDeveloper: Maybe<DeveloperEntityResponse>;
   deleteHome: Maybe<HomeEntityResponse>;
   deleteOrder: Maybe<OrderEntityResponse>;
@@ -634,6 +711,7 @@ export type Mutation = {
   resetPassword: Maybe<UsersPermissionsLoginPayload>;
   updateBanner: Maybe<BannerEntityResponse>;
   updateCategory: Maybe<CategoryEntityResponse>;
+  updateCompany: Maybe<CompanyEntityResponse>;
   updateDeveloper: Maybe<DeveloperEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateHome: Maybe<HomeEntityResponse>;
@@ -829,6 +907,11 @@ export type MutationUpdateBannerArgs = {
 export type MutationUpdateCategoryArgs = {
   data: CategoryInput;
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateCompanyArgs = {
+  data: CompanyInput;
 };
 
 
@@ -1235,6 +1318,7 @@ export type Query = {
   banners: Maybe<BannerEntityResponseCollection>;
   categories: Maybe<CategoryEntityResponseCollection>;
   category: Maybe<CategoryEntityResponse>;
+  company: Maybe<CompanyEntityResponse>;
   developer: Maybe<DeveloperEntityResponse>;
   developers: Maybe<DeveloperEntityResponseCollection>;
   home: Maybe<HomeEntityResponse>;
@@ -1936,7 +2020,7 @@ export type CreateWishlistMutationVariables = Exact<{
 }>;
 
 
-export type CreateWishlistMutation = { __typename?: 'Mutation', createWishlist: { __typename?: 'WishlistEntityResponse', data: { __typename?: 'WishlistEntity', id: string, attributes: { __typename?: 'Wishlist', user: { __typename?: 'UsersPermissionsUserEntityResponse', data: { __typename?: 'UsersPermissionsUserEntity', id: string, attributes: { __typename?: 'UsersPermissionsUser', username: string } } }, products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> } } } } };
+export type CreateWishlistMutation = { __typename?: 'Mutation', createWishlist: { __typename?: 'WishlistEntityResponse', data: { __typename?: 'WishlistEntity', id: string, attributes: { __typename?: 'Wishlist', products: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', slug: string, name: string, price: number, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> } } } } };
 
 export type RegisterUserMutationVariables = Exact<{
   input: UsersPermissionsRegisterInput;
@@ -1964,6 +2048,11 @@ export type ComingSoonQueryVariables = Exact<{
 
 
 export type ComingSoonQuery = { __typename?: 'Query', comingSoonProducts: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id: string, attributes: { __typename?: 'Product', name: string, price: number, slug: string, promotional_price: number, ribbon_label: string, cover: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, developers: { __typename?: 'DeveloperRelationResponseCollection', data: Array<{ __typename?: 'DeveloperEntity', attributes: { __typename?: 'Developer', name: string } }> } } }> }, showcase: { __typename?: 'HomeEntityResponse', data: { __typename?: 'HomeEntity', attributes: { __typename?: 'Home', comingSoonProducts: { __typename?: 'ComponentPageSection', title: string, highlight: { __typename?: 'ComponentPageHighlight', title: string, description: string, buttonLabel: string, buttonUrl: string, alignment: Enum_Componentpagehighlight_Alignment, background: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } }, floatImg: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, alternativeText: string } } } } } } } } };
+
+export type CompanyQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CompanyQuery = { __typename?: 'Query', company: { __typename?: 'CompanyEntityResponse', data: { __typename?: 'CompanyEntity', attributes: { __typename?: 'Company', name: string, email: string, phone: string, street: string, number: string, neighborhood: string, city: string, zipcode: string, state: string, country: string, complement: string, logoLight: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, width: number, height: number, formats: any } } }, logoDark: { __typename?: 'UploadFileEntityResponse', data: { __typename?: 'UploadFileEntity', attributes: { __typename?: 'UploadFile', url: string, width: number, height: number, formats: any } } }, socialLinks: Array<{ __typename?: 'ComponentPageSocialLink', name: string, url: string }> } } } };
 
 export type OrdersQueryVariables = Exact<{
   identifier: InputMaybe<Scalars['ID']['input']>;
@@ -2166,22 +2255,38 @@ export const CreateWishlistDocument = gql`
     data {
       id
       attributes {
-        user {
+        products {
           data {
             id
             attributes {
-              username
+              slug
+              cover {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+              name
+              developers {
+                data {
+                  attributes {
+                    name
+                  }
+                }
+              }
+              price
+              promotional_price
+              ribbon_label
             }
           }
-        }
-        products {
-          ...productRelation
         }
       }
     }
   }
 }
-    ${ProductRelationFragmentDoc}`;
+    `;
 export type CreateWishlistMutationFn = Apollo.MutationFunction<CreateWishlistMutation, CreateWishlistMutationVariables>;
 export type CreateWishlistMutationResult = Apollo.MutationResult<CreateWishlistMutation>;
 export type CreateWishlistMutationOptions = Apollo.BaseMutationOptions<CreateWishlistMutation, CreateWishlistMutationVariables>;
@@ -2258,6 +2363,52 @@ export const ComingSoonDocument = gql`
     ${ProductEntityFragmentDoc}
 ${HighlightFragmentDoc}`;
 export type ComingSoonQueryResult = Apollo.QueryResult<ComingSoonQuery, ComingSoonQueryVariables>;
+export const CompanyDocument = gql`
+    query Company {
+  company {
+    data {
+      attributes {
+        name
+        email
+        phone
+        street
+        number
+        neighborhood
+        city
+        zipcode
+        state
+        country
+        complement
+        logoLight {
+          data {
+            attributes {
+              url
+              width
+              height
+              formats
+            }
+          }
+        }
+        logoDark {
+          data {
+            attributes {
+              url
+              width
+              height
+              formats
+            }
+          }
+        }
+        socialLinks {
+          name
+          url
+        }
+      }
+    }
+  }
+}
+    `;
+export type CompanyQueryResult = Apollo.QueryResult<CompanyQuery, CompanyQueryVariables>;
 export const OrdersDocument = gql`
     query Orders($identifier: ID) {
   orders(filters: {users_permissions_user: {id: {eq: $identifier}}}) {
