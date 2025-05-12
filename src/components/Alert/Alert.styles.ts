@@ -33,7 +33,8 @@ export const Wrapper = styled.div`
 export const Alert = styled.div<AlertProps>`
   ${({ theme, $variant, $size, $hideBorderLeft }) => css`
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     padding: ${theme.spacings.xxsmall} ${theme.spacings.xsmall};
     border-radius: ${theme.border.radius};
     border-width: ${$hideBorderLeft ? 0 : '0 0 0 0.4rem'};

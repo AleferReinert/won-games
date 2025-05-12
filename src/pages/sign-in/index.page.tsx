@@ -48,7 +48,11 @@ const SignInPage = () => {
 
   return (
     <S.FormWrapper>
-      {errors.credentials && <Alert $variant='error'>{errors.credentials}</Alert>}
+      {errors.credentials && (
+        <Alert $variant='error'>
+          <p>{errors.credentials}</p>
+        </Alert>
+      )}
 
       <form onSubmit={handleSubmit}>
         <TextField

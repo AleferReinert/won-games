@@ -12,7 +12,7 @@ const Alert = ({ $variant = 'error', children, $size = 'default', $hideBorderLef
   return (
     <S.Wrapper>
       <S.Alert $variant={$variant} $size={$size} $hideBorderLeft={$hideBorderLeft} role='alert'>
-        <p>{children}</p>
+        {children}
       </S.Alert>
     </S.Wrapper>
   )

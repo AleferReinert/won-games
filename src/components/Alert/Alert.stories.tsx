@@ -7,7 +7,7 @@ const meta: Meta<typeof AlertComponent> = {
   title: 'Components/Atoms/Alert',
   component: AlertComponent,
   args: {
-    children: 'Lorem ipsum dolor sit amet.'
+    children: <p>Lorem ipsum dolor sit amet.</p>
   },
   tags: ['autodocs'],
   parameters: {

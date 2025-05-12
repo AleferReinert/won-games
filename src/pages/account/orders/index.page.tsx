@@ -55,7 +55,9 @@ const OrdersPage = ({ orders }: OrdersPageProps) => {
     </S.Wrapper>
   ) : (
     <Box>
-      <Alert $variant='info'>You have no orders yet.</Alert>
+      <Alert $variant='info'>
+        <p>You have no orders yet.</p>
+      </Alert>
     </Box>
   )
 }

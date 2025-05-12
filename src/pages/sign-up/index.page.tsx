@@ -61,7 +61,11 @@ const SignUpPage = () => {
 
   return (
     <S.FormWrapper>
-      {errors.general && <Alert $variant='error'>{errors.general}</Alert>}
+      {errors.general && (
+        <Alert $variant='error'>
+          <p>{errors.general}</p>
+        </Alert>
+      )}
 
       <form onSubmit={handleSubmit}>
         <TextField

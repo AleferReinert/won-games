@@ -54,8 +54,16 @@ const ResetPasswordPage = () => {
 
   return (
     <S.FormWrapper>
-      {errors.error && <Alert $variant='error'>{errors.error}</Alert>}
-      {passwordChanged && <Alert $variant='success'>Password changed</Alert>}
+      {errors.error && (
+        <Alert $variant='error'>
+          <p>{errors.error}</p>
+        </Alert>
+      )}
+      {passwordChanged && (
+        <Alert $variant='success'>
+          <p>Password changed</p>
+        </Alert>
+      )}
 
       <form onSubmit={(e) => void handleSubmit(e)}>
         {!passwordChanged && (

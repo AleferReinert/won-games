@@ -117,11 +117,15 @@ const StripePaymentForm = () => {
           Payment
         </Heading>
         {allProductsFree ? (
-          <Alert $variant='success'>No payment required.</Alert>
+          <Alert $variant='success'>
+            <p>No payment required.</p>
+          </Alert>
         ) : (
           <>
             <Alert $variant='info' $size='small'>
-              <strong>Atenção!</strong>
+              <p>
+                <strong>Atenção!</strong>
+              </p>
               <ul>
                 <li>Este site é apenas uma demonstração</li>
                 <li>Não serão realizadas transações reais</li>
@@ -136,7 +140,7 @@ const StripePaymentForm = () => {
         )}
         {error && (
           <Alert $variant='error' $size='small' $hideBorderLeft>
-            {error}
+            <p>{error}</p>
           </Alert>
         )}
       </Box>

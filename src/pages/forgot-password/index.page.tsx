@@ -54,10 +54,16 @@ const ForgotPasswordPage = () => {
   }
 
   return success ? (
-    <Alert $variant='success'>Check your inbox! We&apos;ve sent you a reset link.</Alert>
+    <Alert $variant='success'>
+      <p>Check your inbox! We&apos;ve sent you a reset link.</p>
+    </Alert>
   ) : (
     <S.FormWrapper>
-      {errors.error && <Alert $variant='error'>{errors.error}</Alert>}
+      {errors.error && (
+        <Alert $variant='error'>
+          <p>{errors.error}</p>
+        </Alert>
+      )}
       <form onSubmit={(e) => void handleSubmit(e)}>
         <TextField
           aria-label='E-mail'
