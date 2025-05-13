@@ -118,6 +118,7 @@ export const productMapper = (products: ProductEntityFragment | ProductRelationF
 // Retornas compras realizadas
 export function ordersMapper(response: Pick<OrdersQuery, 'orders'>): CartItemProps[] {
   return response.orders.data.flatMap((orderEntity) => {
+    const orderId = orderEntity.id
     const { card_brand, card_last4, createdAt } = orderEntity.attributes
     const paymentInfo: PaymentProps = {
       creditCardBrand: card_brand || '',
@@ -130,17 +131,13 @@ export function ordersMapper(response: Pick<OrdersQuery, 'orders'>): CartItemPro
       }).format(new Date(createdAt))}`
     }
 
-    return orderEntity.attributes.products.data.map((productEntity) => {
-      const { id, attributes } = productEntity
-      const { name, price, cover } = attributes
-      const formats = cover.data.attributes.formats
-      const img = getImageUrl(formats.thumbnail.url)
-
+    return orderEntity.attributes.products.data.map(({ attributes, id }) => {
+      const key = `${orderId}${id}`
       return {
-        id,
-        img,
-        name: name.trim(),
-        price,
+        id: key,
+        img: getImageUrl(attributes.cover.data.attributes.formats.thumbnail.url),
+        name: attributes.name.trim(),
+        price: attributes.price,
         paymentInfo
       }
     })
