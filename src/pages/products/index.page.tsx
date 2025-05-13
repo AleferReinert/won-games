@@ -128,7 +128,11 @@ const ProductsPage = ({ filterOptions }: ProductsPageProps) => {
             </S.Products>
 
             {showEmpty && (
-              <Empty title='No results found' $description="Sorry, we couldn't find any results for your search." />
+              <Empty
+                title='No results found'
+                $description="Sorry, we couldn't find any results for your search."
+                imgPriority
+              />
             )}
 
             {showShowMore && (

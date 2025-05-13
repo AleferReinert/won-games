@@ -10,7 +10,7 @@ const NotFoundPage = () => {
       <Heading as='h1' $line='left' $lineColor='secondary'>
         Page not found
       </Heading>
-      <Empty title='404' $description='This page could not be found.' buttonText='Go back' buttonUrl='/' />
+      <Empty title='404' $description='This page could not be found.' buttonText='Go back' buttonUrl='/' imgPriority />
     </Container>
   )
 }

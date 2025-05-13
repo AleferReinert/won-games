@@ -1,4 +1,5 @@
 import Button from 'components/Button/Button'
+import Image from 'next/image'
 import * as S from './Empty.styles'
 
 export interface EmptyProps {
@@ -8,18 +9,30 @@ export interface EmptyProps {
   $small?: boolean
   buttonText?: string
   buttonUrl?: string
+  imgPriority?: boolean
 }
 
-const Empty = ({ title, $description, buttonText, buttonUrl, $invertedColors = false, $small = false }: EmptyProps) => {
+const Empty = ({
+  title,
+  $description,
+  buttonText,
+  buttonUrl,
+  $invertedColors = false,
+  $small = false,
+  imgPriority = false
+}: EmptyProps) => {
   return (
     <S.Wrapper data-testid='EmptyComponent' $invertedColors={$invertedColors} $small={$small}>
-      <S.Img
-        src='/img/empty.svg'
-        alt='Decorative image'
-        width={$small ? 140 : 340}
-        height={$small ? 72 : 176}
-        aria-hidden
-      />
+      <S.Img>
+        <Image
+          src='/img/empty.svg'
+          alt='Decorative image'
+          width={$small ? 140 : 340}
+          height={$small ? 72 : 176}
+          aria-hidden
+          priority={imgPriority}
+        />
+      </S.Img>
       <S.Title>{title}</S.Title>
       <S.Message>{$description}</S.Message>
 

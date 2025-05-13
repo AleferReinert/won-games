@@ -76,7 +76,11 @@ const WishlistPage = ({ recommendedShowcase }: WishlistPageProps & NextPageWithL
         </S.WrapperWishlist>
 
         {!loading && products.length === 0 && (
-          <Empty title='Your wishlist is empty' $description='Games added to your wishlist will appear here.' />
+          <Empty
+            title='Your wishlist is empty'
+            $description='Games added to your wishlist will appear here.'
+            imgPriority
+          />
         )}
         <Divider />
       </Container>

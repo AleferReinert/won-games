@@ -65,7 +65,11 @@ const CartPage = ({ recommendedShowcase }: CartPageProps & NextPageWithLayout) =
         </Heading>
 
         {isCartEmpty && (
-          <Empty title='Your cart is empty' $description='Go back to the store and explore great games and offers.' />
+          <Empty
+            title='Your cart is empty'
+            $description='Go back to the store and explore great games and offers.'
+            imgPriority
+          />
         )}
 
         <S.Content>

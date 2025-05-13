@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import { EmptyProps } from './Empty'
 
@@ -25,10 +24,10 @@ export const Wrapper = styled.div<Pick<EmptyProps, '$invertedColors' | '$small'>
   `}
 `
 
-export const Img = styled(Image)`
+export const Img = styled.div`
   ${({ theme }) => css`
     margin-bottom: ${theme.spacings.small};
-    margin-right: -0.3rem;
+    transform: translateX(-0.3rem);
     max-width: 100%;
   `}
 `
