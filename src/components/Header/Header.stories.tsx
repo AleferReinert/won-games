@@ -123,7 +123,7 @@ export const Desktop: Story = {
 
     await step('Sign in button link', async () => {
       const signInButtonLink = await waitFor(() => canvas.getByRole('link', { name: 'Sign in' }))
-      expect(signInButtonLink).toHaveAttribute('href', '/sign-in')
+      expect(signInButtonLink.getAttribute('href')).toContain('/sign-in')
     })
 
     await step('CartItemsComponent hidden', () => {

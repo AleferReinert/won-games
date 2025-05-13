@@ -19,7 +19,8 @@ describe('Products page', () => {
   it('Filter by price', () => {
     cy.selectFilterAndCheckUrl('radio', 'Free', 'price=0')
     cy.wait(2000)
-    cy.get('@FilteredProducts')
+    cy.get('[data-cy="products"]')
+      .findAllByTestId('ProductComponent')
       .findAllByLabelText('Price')
       .each(($price) => {
         expect($price.text()).to.equal('Free')
@@ -44,9 +45,9 @@ describe('Products page', () => {
   })
 
   it('Filter by platforms', () => {
-    cy.selectFilterAndCheckUrl('checkbox', 'linux', 'platforms=linux')
-    cy.selectFilterAndCheckUrl('checkbox', 'mac', 'platforms=linux%2Cmac')
-    cy.selectFilterAndCheckUrl('checkbox', 'windows', 'platforms=linux%2Cmac%2Cwindows')
+    cy.selectFilterAndCheckUrl('checkbox', 'Linux', 'platforms=linux')
+    cy.selectFilterAndCheckUrl('checkbox', 'Mac', 'platforms=linux%2Cmac')
+    cy.selectFilterAndCheckUrl('checkbox', 'Windows 7', 'platforms=linux%2Cmac%2Cwindows-7')
   })
 
   it('Filter by categories', () => {

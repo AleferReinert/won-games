@@ -2,6 +2,7 @@ import Heading from 'components/Heading/Heading'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { useCart } from 'hooks/useCart'
+import { Session } from 'next-auth'
 import Link from 'next/link'
 import { GetServerSideProps } from 'next/types'
 import { useEffect, type ReactElement } from 'react'
@@ -14,6 +15,7 @@ import * as S from './success.styles'
 
 interface SuccessPageProps {
   recommendedShowcase: ShowcaseProps
+  session: Session | null
 }
 
 export const getServerSideProps: GetServerSideProps<SuccessPageProps> = async (context) => {
@@ -30,7 +32,8 @@ export const getServerSideProps: GetServerSideProps<SuccessPageProps> = async (c
       title,
       highlight: highlight.background.data && highlightMapper(highlight),
       products: productMapper(products)
-    }
+    },
+    session
   }
 
   return { props }

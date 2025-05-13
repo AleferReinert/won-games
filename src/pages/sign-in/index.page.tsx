@@ -14,7 +14,7 @@ const SignInPage = () => {
   const [values, setValues] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
-  const { push, query } = useRouter()
+  const { query } = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,7 +39,7 @@ const SignInPage = () => {
           setErrors({ credentials: result.error })
           return
         } else if (result?.url) {
-          return push(result.url)
+          window.location.href = result.url
         }
       })
       .catch((error) => console.error('catch error: ', error))

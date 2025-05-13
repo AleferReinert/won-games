@@ -76,7 +76,7 @@ export const wishlistContextMock: WishlistContextProps = {
     }
   ],
   isInWishlist: (id: string) => ['1'].includes(id),
-  addToWishlist: fn(() => Promise.resolve()),
+  addToWishlist: fn(() => Promise.resolve({})),
   removeFromWishlist: fn(() => Promise.resolve({})),
   loading: false
 }

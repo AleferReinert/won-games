@@ -3,6 +3,7 @@ import Box from 'components/Box/Box'
 import CartItem, { CartItemProps } from 'components/CartItem/CartItem'
 import { ORDERS } from 'graphql/queries/orders'
 import type { GetServerSidePropsContext } from 'next'
+import { Session } from 'next-auth'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
 import { OrdersQuery, OrdersQueryVariables } from 'types/generated'
@@ -13,6 +14,7 @@ import * as S from './OrdersPage.styles'
 
 export interface OrdersPageProps {
   orders: CartItemProps[]
+  session: Session | null
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -26,7 +28,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     fetchPolicy: 'no-cache'
   })
   const props: OrdersPageProps = {
-    orders: ordersMapper(orders.data)
+    orders: ordersMapper(orders.data),
+    session
   }
 
   return { props }

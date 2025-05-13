@@ -7,7 +7,7 @@ import MenuMobile from 'components/MenuMobile/MenuMobile'
 import Skeleton from 'components/Skeleton/Skeleton'
 import UserDropdown from 'components/UserDropdown/UserDropdown'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import * as S from './Header.styles'
 
@@ -17,6 +17,7 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
+  const pathname = usePathname()
 
   function handleShowSearch() {
     searchInputRef.current && !showSearch ? (searchInputRef.current.value = '') : ''
@@ -74,7 +75,7 @@ const Header = () => {
         {status === 'authenticated' && <UserDropdown />}
         {status === 'unauthenticated' && (
           <S.ButtonSignIn>
-            <Button size='small' href='/sign-in' asLink>
+            <Button size='small' href={`/sign-in?callbackUrl=${pathname}`} asLink>
               Sign in
             </Button>
           </S.ButtonSignIn>

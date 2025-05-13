@@ -8,6 +8,7 @@ import Skeleton from 'components/Skeleton/Skeleton'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { useWishlist } from 'hooks/useWishlist'
 import type { GetServerSideProps } from 'next'
+import { Session } from 'next-auth'
 import * as S from 'pages/wishlist/WishlistPage.styles'
 import { type ReactElement } from 'react'
 import Base from 'templates/Default/Default'
@@ -19,6 +20,7 @@ import type { NextPageWithLayout } from '../_app.page'
 
 export interface WishlistPageProps {
   recommendedShowcase: ShowcaseProps
+  session: Session | null
 }
 
 export const getServerSideProps: GetServerSideProps<WishlistPageProps> = async (context) => {
@@ -35,7 +37,8 @@ export const getServerSideProps: GetServerSideProps<WishlistPageProps> = async (
       title,
       highlight: highlight.background.data && highlightMapper(highlight),
       products: productMapper(products)
-    }
+    },
+    session
   }
 
   return { props }

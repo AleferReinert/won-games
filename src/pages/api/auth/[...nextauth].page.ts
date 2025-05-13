@@ -47,8 +47,9 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       session.jwt = token.jwt
       session.id = token.id
+      delete session.user?.image
 
-      return Promise.resolve(session)
+      return Promise.resolve(Promise.resolve(session))
     }
   }
 }

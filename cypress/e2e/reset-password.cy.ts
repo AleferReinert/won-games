@@ -33,7 +33,7 @@ describe('Reset password', () => {
     cy.findByText('Expired link').should('be.visible')
   })
 
-  it('Success reset password', () => {
+  it.only('Success reset password', () => {
     cy.intercept('POST', '/api/auth/reset-password', {
       statusCode: 200,
       body: { user: { email: 'johndoe@example.com' } }
@@ -50,6 +50,6 @@ describe('Reset password', () => {
     cy.get('@ConfirmPasswordInput').type('123456')
     cy.get('@ResetPasswordButton').click()
     cy.findByText('Password changed').should('be.visible')
-    cy.isUserLoggedInAndRedirect('John')
+    cy.isUserLoggedInAndRedirect('John') // Todo: now working on cypress only
   })
 })

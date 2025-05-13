@@ -56,9 +56,9 @@ Cypress.Commands.add('isPriceSorted', (firstPriceAlias, lastPriceAlias, order: '
   })
 })
 
-Cypress.Commands.add('isUserLoggedInAndRedirect', (email) => {
+Cypress.Commands.add('isUserLoggedInAndRedirect', (firstName) => {
   cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/')
-  cy.findByRole('button', { name: 'My account' }).findByText(email).should('be.visible')
+  cy.findByRole('button', { name: 'My account' }).findByText(firstName).should('be.visible')
 })
 
 Cypress.Commands.add('isUserLoggedOutAndRedirect', () => {

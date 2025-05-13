@@ -11,6 +11,7 @@ import Skeleton from 'components/Skeleton/Skeleton'
 import StripePaymentForm from 'components/StripePaymentForm/StripePaymentForm'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
 import { useCart } from 'hooks/useCart'
+import { Session } from 'next-auth'
 import Link from 'next/link'
 import { GetServerSideProps } from 'next/types'
 import { type ReactElement } from 'react'
@@ -24,6 +25,7 @@ import * as S from './CartPage.styles'
 
 export interface CartPageProps {
   recommendedShowcase: ShowcaseProps
+  session: Session | null
 }
 
 export const getServerSideProps: GetServerSideProps<CartPageProps> = async (context) => {
@@ -42,7 +44,8 @@ export const getServerSideProps: GetServerSideProps<CartPageProps> = async (cont
       title,
       highlight: highlight.background.data && highlightMapper(highlight),
       products: productMapper(products)
-    }
+    },
+    session
   }
 
   return { props }

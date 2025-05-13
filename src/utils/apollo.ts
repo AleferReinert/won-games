@@ -16,7 +16,7 @@ function createApolloClient(token?: string, context?: GetServerSidePropsContext)
   })
 
   const authLink = setContext(async (_, { headers }) => {
-    let jwt = token
+    let jwt = token || ''
     if (!jwt && context) {
       const session = await getServerSession(context.req, context.res, authOptions)
       jwt = session?.jwt ?? ''
@@ -40,19 +40,14 @@ function createApolloClient(token?: string, context?: GetServerSidePropsContext)
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
 
 export function initializeApollo({ initialState = null, token }: InitializeOptions = {}) {
-  const _client = apolloClient ?? createApolloClient(token)
+  const client = apolloClient ?? createApolloClient(token)
 
-  if (initialState) {
-    _client.cache.restore(initialState)
-  }
+  if (initialState) client.cache.restore(initialState)
+  if (typeof window !== 'undefined') apolloClient = client
 
-  if (typeof window !== 'undefined') {
-    apolloClient = _client
-  }
-
-  return _client
+  return client
 }
 
-export function useApollo(initialState: NormalizedCacheObject | null = null) {
-  return initializeApollo({ initialState })
+export function useApollo(initialState: NormalizedCacheObject | null = null, token?: string) {
+  return initializeApollo({ initialState, token })
 }

@@ -5,7 +5,6 @@ interface PlatformsProps {
 }
 
 const Platforms = ({ platforms }: PlatformsProps) => {
-  console.log('result: ', platforms)
   /*
     Agrupa os sistemas operacionais.
     Exemplo:

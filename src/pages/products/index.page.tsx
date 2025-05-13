@@ -11,6 +11,8 @@ import { PLATFORMS } from 'graphql/queries/platforms'
 import { PRODUCTS } from 'graphql/queries/products'
 import { FilterProvider } from 'hooks/useFilter'
 import { GetServerSidePropsContext } from 'next'
+import { Session } from 'next-auth'
+import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import * as S from 'pages/products/ProductsPage.styles'
 import { type ReactElement } from 'react'
@@ -26,9 +28,11 @@ export const productsLimit = 9
 interface ProductsPageProps {
   initialApolloState: NormalizedCacheObject | null
   filterOptions: FilterOptionsProps[]
+  session: Session | null
 }
 
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context)
   const apolloClient = initializeApollo()
 
   await apolloClient.query<ProductsQuery, Pick<ProductsQueryVariables, 'limit'>>({
@@ -36,7 +40,7 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     variables: {
       limit: productsLimit,
       ...queryStringToGraphqlFilters({
-        queryString: query
+        queryString: context.query
       })
     }
   })
@@ -46,7 +50,8 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
 
   const props: ProductsPageProps = {
     initialApolloState: apolloClient.cache.extract(),
-    filterOptions
+    filterOptions,
+    session
   }
   return { props }
 }

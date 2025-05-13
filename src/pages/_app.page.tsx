@@ -1,9 +1,10 @@
-import { ApolloProvider } from '@apollo/client'
+import { ApolloProvider, NormalizedCacheObject } from '@apollo/client'
 import isPropValid from '@emotion/is-prop-valid'
 import { CompanyProvider } from 'contexts/CompanyContext'
 import { CartProvider } from 'hooks/useCart'
 import { WishlistProvider } from 'hooks/useWishlist'
 import type { NextPage } from 'next'
+import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import { Poppins } from 'next/font/google'
@@ -25,18 +26,25 @@ export type NextPageWithLayout<P = NonNullable<unknown>, IP = P> = NextPage<P, I
   getLayout?: () => ReactNode
 }
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
+type PageProps = {
+  session: Session
+  initialApolloState: NormalizedCacheObject
+  className?: string
 }
 
-export default function App({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
+type AppPropsWithLayout = AppProps<PageProps> & {
+  Component: NextPageWithLayout<PageProps>
+}
+
+export default function App({ Component, pageProps: { ...pageProps } }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page)
-  const client = useApollo(pageProps.initialApolloState)
+  const token = pageProps.session?.jwt || ''
+  const apolloClient = useApollo(pageProps.initialApolloState, token)
 
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={pageProps.session}>
       <StyleSheetManager shouldForwardProp={isPropValid} enableVendorPrefixes>
-        <ApolloProvider client={client}>
+        <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
             <CompanyProvider>
               <CartProvider>

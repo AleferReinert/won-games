@@ -2,6 +2,7 @@ import Box from 'components/Box/Box'
 import Button from 'components/Button/Button'
 import TextField from 'components/TextField/TextField'
 import { PROFILE } from 'graphql/queries/profile'
+import { Session } from 'next-auth'
 import { GetServerSideProps } from 'next/types'
 import * as S from 'pages/account/profile/ProfilePage.styles'
 import type { ReactElement } from 'react'
@@ -13,6 +14,7 @@ import { requireAuth } from 'utils/requireAuth'
 interface ProfilePageProps {
   username: string
   email: string
+  session: Session | null
 }
 
 export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (context) => {
@@ -28,7 +30,8 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
 
   const props: ProfilePageProps = {
     username: data.usersPermissionsUser.data.attributes.username,
-    email: data.usersPermissionsUser.data.attributes.email
+    email: data.usersPermissionsUser.data.attributes.email,
+    session
   }
 
   return { props }

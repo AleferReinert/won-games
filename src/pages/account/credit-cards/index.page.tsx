@@ -3,23 +3,29 @@ import Box from 'components/Box/Box'
 import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
 import { creditCardsMock } from 'mocks/creditCards.mock'
 import type { GetServerSidePropsContext } from 'next'
+import { Session } from 'next-auth'
 import * as S from 'pages/account/credit-cards/CreditCardsPage.styles'
 import type { ReactElement } from 'react'
 import AccountTemplate from 'templates/Account/Account'
 import { requireAuth } from 'utils/requireAuth'
 
+interface CreditCardsPageProps {
+  creditCards: CreditCardProps[]
+  session: Session | null
+}
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  await requireAuth(context)
+  const { session } = await requireAuth(context)
+  if (!session) {
+    return { props: {} as CreditCardsPageProps }
+  }
 
   return {
     props: {
-      creditCards: creditCardsMock
+      creditCards: creditCardsMock,
+      session
     }
   }
-}
-
-interface CreditCardsPageProps {
-  creditCards: CreditCardProps[]
 }
 
 const CreditCardsPage = ({ creditCards }: CreditCardsPageProps) => {

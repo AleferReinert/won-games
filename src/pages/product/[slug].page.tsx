@@ -8,14 +8,15 @@ import ProductHeader, { ProductHeaderProps } from 'components/ProductHeader/Prod
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { COMING_SOON } from 'graphql/queries/comingSoon'
 import { PRODUCT_BY_SLUG } from 'graphql/queries/productBySlug'
-import { PRODUCTS } from 'graphql/queries/products'
 import { RECOMMENDED_PRODUCTS } from 'graphql/queries/recommendedProducts'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
+import { Session } from 'next-auth'
+import { getSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Base from 'templates/Default/Default'
-import { ComingSoonQuery, ProductBySlugQuery, ProductsQuery, RecommendedProductsQuery } from 'types/generated'
+import { ComingSoonQuery, ProductBySlugQuery, RecommendedProductsQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { getImageUrl } from 'utils/getImageUrl'
 import { highlightMapper, productMapper } from 'utils/mappers'
@@ -32,29 +33,16 @@ export interface ProductPageProps {
   details: ProductDetailsProps
   comingSoon: ShowcaseProps
   recommended: ShowcaseProps
+  session: Session | null
 }
 
-// Return slugs of first 9 products
-export async function getStaticPaths() {
-  const apolloClient = initializeApollo()
-  const { data } = await apolloClient.query<ProductsQuery>({
-    query: PRODUCTS,
-    variables: { limit: 9 }
-  })
-
-  const paths = data.products.data.map((product) => ({
-    params: { slug: product.attributes.slug }
-  }))
-
-  return { paths, fallback: true }
-}
-
-export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (context) => {
+  const session = await getSession(context)
   const apolloClient = initializeApollo()
 
   const productResponse = await apolloClient.query<ProductBySlugQuery>({
     query: PRODUCT_BY_SLUG,
-    variables: { slug: params?.slug },
+    variables: { slug: context.params?.slug },
     fetchPolicy: 'no-cache'
   })
   const productsNotFound = productResponse.data.products.data.length === 0
@@ -108,10 +96,11 @@ export const getStaticProps: GetStaticProps<ProductPageProps> = async ({ params 
     recommended: {
       title: recommended.title,
       products: productMapper(recommended.products)
-    }
+    },
+    session
   }
 
-  return { revalidate: 60, props }
+  return { props }
 }
 
 const ProductPage = ({

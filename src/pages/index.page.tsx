@@ -3,7 +3,9 @@ import BannerSlider from 'components/BannerSlider/BannerSlider'
 import Container from 'components/Container/Container'
 import Showcase, { ShowcaseProps } from 'components/Showcase/Showcase'
 import { PAGE_HOME } from 'graphql/queries/pageHome'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
+import { Session } from 'next-auth'
+import { getSession } from 'next-auth/react'
 import { ReactElement } from 'react'
 import DefaultTemplate from 'templates/Default/Default'
 import { PageHomeQuery, PageHomeQueryVariables } from 'types/generated'
@@ -17,10 +19,12 @@ export interface HomeProps {
   mostPopularShowcase: ShowcaseProps
   comingSoonShowcase: ShowcaseProps
   freeProductsShowcase: ShowcaseProps
+  session?: Session | null
 }
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const apolloClient = initializeApollo()
+export const getServerSideProps: GetServerSideProps<HomeProps> = async (context) => {
+  const session = await getSession(context)
+  const apolloClient = initializeApollo({ context })
   const currentDate = new Date().toISOString().slice(0, 10)
   const past30DaysDate = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 10)
   const home = await apolloClient.query<PageHomeQuery, PageHomeQueryVariables>({
@@ -49,10 +53,11 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
       title: freeProducts.title,
       highlight: freeProducts.highlight.background.data && highlightMapper(freeProducts.highlight),
       products: productMapper(home.data.freeProducts)
-    }
+    },
+    session
   }
 
-  return { props, revalidate: 60 }
+  return { props }
 }
 
 export default function Index({

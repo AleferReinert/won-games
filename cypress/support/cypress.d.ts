@@ -40,10 +40,10 @@ declare namespace Cypress {
      *
      * Example:
      * ```ts
-     * cy.isUserLoggedInAndRedirect('John Doe')
+     * cy.isUserLoggedInAndRedirect('John')
      * ```
      */
-    isUserLoggedInAndRedirect(fullname: string): Chainable<void>
+    isUserLoggedInAndRedirect(firstName: string): Chainable<void>
 
     /**
      * Check if user is logged out and redirect to home.
