@@ -21,6 +21,7 @@ export default meta
 type Story = StoryObj<typeof PriceComponent>
 
 export const Default: Story = {
+  name: 'Default (small)',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const price = canvas.getByLabelText('Price')
@@ -68,6 +69,32 @@ export const Promotional: Story = {
       expect(promotionalPrice).toHaveStyle({
         height: remToPx('2.2rem'),
         fontSize: remToPx(theme.font.sizes.small)
+      })
+    })
+  }
+}
+
+export const Medium: Story = {
+  args: {
+    promotionalPrice: 185,
+    size: 'medium'
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('Old price medium', () => {
+      const oldPrice = canvas.getByLabelText('Price')
+      expect(oldPrice).toHaveStyle({
+        height: remToPx('3.3rem'),
+        fontSize: remToPx(theme.font.sizes.medium)
+      })
+    })
+
+    await step('Promotional price medium', () => {
+      const promotionalPrice = canvas.getByLabelText('Promotional price')
+      expect(promotionalPrice).toHaveStyle({
+        height: remToPx('3.3rem'),
+        fontSize: remToPx(theme.font.sizes.medium)
       })
     })
   }

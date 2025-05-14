@@ -3,32 +3,58 @@ import { PriceProps } from './Price'
 
 export const priceModifiers = {
   small: (theme: DefaultTheme) => css`
-    font-size: ${theme.font.sizes.small};
-    height: 2.2rem;
-    line-height: 2.2rem;
-    padding: 0 ${theme.spacings.xxsmall};
+    gap: ${theme.spacings.xxsmall};
+
+    > div {
+      font-size: ${theme.font.sizes.small};
+      height: 2.2rem;
+      line-height: 2.2rem;
+      &:last-child {
+        padding: 0 ${theme.spacings.xxsmall};
+      }
+    }
+  `,
+  medium: (theme: DefaultTheme) => css`
+    gap: ${theme.spacings.xsmall};
+
+    > div {
+      font-size: ${theme.font.sizes.medium};
+      height: 3.3rem;
+      line-height: 3.3rem;
+      &:last-child {
+        padding: 0 ${theme.spacings.xsmall};
+      }
+    }
   `,
   large: (theme: DefaultTheme) => css`
-    font-size: ${theme.font.sizes.xlarge};
-    height: 3.8rem;
-    line-height: 3.8rem;
-    padding: 0 ${theme.spacings.medium};
+    gap: ${theme.spacings.small};
+
+    > div {
+      font-size: ${theme.font.sizes.xlarge};
+      height: 3.8rem;
+      line-height: 3.8rem;
+      &:last-child {
+        padding: 0 ${theme.spacings.medium};
+      }
+    }
   `
 }
 
 export const Wrapper = styled.div<Pick<PriceProps, 'size'>>`
   ${({ theme, size }) => css`
     display: flex;
-    gap: ${size === 'small' ? theme.spacings.xxsmall : theme.spacings.small};
+    ${!!size && priceModifiers[size](theme)}
 
     > div {
       display: inline-flex;
       font-weight: ${theme.font.bold};
 
-      ${!!size && priceModifiers[size](theme)}
-
       &${OldPrice} {
         padding: 0;
+      }
+
+      &:first-child {
+        margin-left: ${theme.spacings.xsmall};
       }
     }
   `}

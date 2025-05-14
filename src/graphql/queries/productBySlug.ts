@@ -18,6 +18,7 @@ export const PRODUCT_BY_SLUG = gql`
           short_description
           description
           price
+          promotional_price
           gallery {
             data {
               attributes {

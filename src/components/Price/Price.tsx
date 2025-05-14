@@ -4,7 +4,7 @@ import * as S from './Price.styles'
 export interface PriceProps {
   price: number
   promotionalPrice?: number | null
-  size?: 'small' | 'large'
+  size?: 'small' | 'medium' | 'large'
 }
 
 const Price = ({ price, promotionalPrice, size = 'small' }: PriceProps) => {

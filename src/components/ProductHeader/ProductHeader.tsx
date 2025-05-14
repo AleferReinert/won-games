@@ -10,19 +10,21 @@ export interface ProductHeaderProps {
   title: string
   description: string
   price: number
+  promotionalPrice?: number
 }
 
-const ProductHeader = ({ id, title, description, price }: ProductHeaderProps) => {
+const ProductHeader = ({ id, title, description, price, promotionalPrice }: ProductHeaderProps) => {
   return (
     <S.Wrapper data-testid='ProductHeaderComponent'>
       <Box>
-        <Heading color='black' as='h1'>
-          {title}
-        </Heading>
+        <S.Header>
+          <Price price={price} promotionalPrice={promotionalPrice} size='medium' />
+          <Heading color='black' as='h1'>
+            {title}
+          </Heading>
+        </S.Header>
 
         <S.Description>{description}</S.Description>
-
-        <Price price={price} />
 
         <S.ButtonsWrapper>
           <AddToWishlistButton id={id} showLabel />

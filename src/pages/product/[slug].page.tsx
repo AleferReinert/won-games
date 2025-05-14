@@ -62,8 +62,8 @@ export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (c
   const comingSoon = comingSoonResponse.data.showcase.data.attributes.comingSoonProducts
   const recommended = recommendedProducts.data.recommended.data.attributes
   const product = productResponse.data.products.data[0]
-  const { cover, name, short_description, price, gallery, description, developers, release_date } = product.attributes
-  const { platforms, publisher, rating, categories } = product.attributes
+  const { cover, name, short_description, price, promotional_price, gallery, description } = product.attributes
+  const { developers, release_date, platforms, publisher, rating, categories } = product.attributes
   const props: ProductPageProps = {
     cover: {
       url: getImageUrl(cover.data?.attributes.url) || '/img/default/product-cover.webp',
@@ -73,7 +73,8 @@ export const getServerSideProps: GetServerSideProps<ProductPageProps> = async (c
       id: product.id,
       title: name,
       description: short_description,
-      price: price
+      price: price,
+      promotionalPrice: promotional_price
     },
     gallery: gallery.data.map(({ attributes }) => ({
       src: getImageUrl(attributes.url),

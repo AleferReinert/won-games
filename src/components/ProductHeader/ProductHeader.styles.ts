@@ -10,13 +10,13 @@ export const Wrapper = styled.div`
 
     ${HeadingStyles.Wrapper} {
       font-size: ${theme.font.sizes.xlarge};
-      margin-bottom: ${theme.spacings.small};
+      margin-bottom: ${theme.spacings.xsmall};
+      line-height: 3.3rem;
     }
 
     ${PriceStyles.Wrapper} {
-      position: absolute;
-      top: ${theme.spacings.medium};
-      right: -1rem;
+      margin-right: calc(-${theme.spacings.xsmall} - 1rem);
+      float: right;
     }
 
     @media (min-width: ${theme.breakpoint.small}) {
@@ -25,11 +25,9 @@ export const Wrapper = styled.div`
       }
 
       ${PriceStyles.Wrapper} {
-        right: ${theme.spacings.xlarge};
-
-        > div {
-          ${PriceStyles.priceModifiers.large(theme)}
-        }
+        ${PriceStyles.priceModifiers.large(theme)}
+        margin-right: 0;
+        padding: 0;
       }
     }
   `}
@@ -46,6 +44,8 @@ export const Description = styled.p`
     }
   `}
 `
+
+export const Header = styled.div``
 
 export const ButtonsWrapper = styled.div`
   ${({ theme }) => css`
