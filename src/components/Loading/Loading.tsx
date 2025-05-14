@@ -5,11 +5,17 @@ export interface LoadingProps {
   color?: string
   animation?: '3dots' | 'spinner'
   size?: number
+  inline?: boolean
 }
 
-export const Loading = ({ color = theme.colors.white, animation = '3dots', size = 40 }: LoadingProps) => {
+export const Loading = ({
+  color = theme.colors.white,
+  animation = '3dots',
+  size = 40,
+  inline = false
+}: LoadingProps) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper inline={inline}>
       {animation === '3dots' && (
         <svg
           role='img'
