@@ -16,7 +16,11 @@ const NotFoundPage = () => {
 }
 
 NotFoundPage.getLayout = function getLayout(page: ReactElement) {
-  return <DefaultTemplate>{page}</DefaultTemplate>
+  return (
+    <DefaultTemplate hideCartDropdown hideUserDropdown>
+      {page}
+    </DefaultTemplate>
+  )
 }
 
 export default NotFoundPage

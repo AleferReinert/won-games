@@ -11,7 +11,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import * as S from './Header.styles'
 
-const Header = () => {
+export interface HeaderProps {
+  hideCartDropdown?: boolean
+  hideUserDropdown?: boolean
+}
+
+const Header = ({ hideCartDropdown = false, hideUserDropdown = false }: HeaderProps) => {
   const [menuMobile, setMenuMobile] = useState(false)
   const { status } = useSession()
   const [showSearch, setShowSearch] = useState(false)
@@ -67,12 +72,14 @@ const Header = () => {
           </S.IconWrapper>
         </S.SearchWrapper>
 
-        <S.IconWrapper>
-          <CartDropdown />
-        </S.IconWrapper>
+        {!hideCartDropdown && (
+          <S.IconWrapper>
+            <CartDropdown />
+          </S.IconWrapper>
+        )}
 
         {status === 'loading' && <Skeleton width={57} height={30} $rounded />}
-        {status === 'authenticated' && <UserDropdown />}
+        {status === 'authenticated' && !hideUserDropdown && <UserDropdown />}
         {status === 'unauthenticated' && (
           <S.ButtonSignIn>
             <Button size='small' href={`/sign-in?callbackUrl=${pathname}`} asLink>

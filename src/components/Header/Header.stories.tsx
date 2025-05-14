@@ -165,3 +165,32 @@ export const Authenticated: Story = {
     })
   }
 }
+
+export const WithoutCartDropdown: Story = {
+  args: {
+    hideCartDropdown: true
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('CartDropdownComponent hidden', () => {
+      const cartDropdownComponent = canvas.queryByTestId('CartDropdownComponent')
+      expect(cartDropdownComponent).not.toBeInTheDocument()
+    })
+  }
+}
+
+export const WithoutUserDropdown: Story = {
+  args: {
+    nextAuthSession: nextAuthSessionMock,
+    hideUserDropdown: true
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('UserDropdownComponent hidden', () => {
+      const userDropdownComponent = canvas.queryByTestId('UserDropdownComponent')
+      expect(userDropdownComponent).not.toBeInTheDocument()
+    })
+  }
+}

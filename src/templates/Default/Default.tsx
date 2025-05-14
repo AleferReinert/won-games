@@ -1,17 +1,17 @@
 import Container from 'components/Container/Container'
 import Footer from 'components/Footer/Footer'
-import Header from 'components/Header/Header'
+import Header, { HeaderProps } from 'components/Header/Header'
 import * as S from './Default.styles'
 
-export interface DefaultTemplateProps {
+export interface DefaultTemplateProps extends HeaderProps {
   children: React.ReactNode
 }
 
-const DefaultTemplate = ({ children }: DefaultTemplateProps) => {
+const DefaultTemplate = ({ children, hideCartDropdown, hideUserDropdown }: DefaultTemplateProps) => {
   return (
     <S.Wrapper>
       <Container>
-        <Header />
+        <Header hideCartDropdown={hideCartDropdown} hideUserDropdown={hideUserDropdown} />
       </Container>
       <S.Main>{children}</S.Main>
       <S.SectionFooter>
