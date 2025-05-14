@@ -27,7 +27,7 @@ const ProductHeader = ({ id, title, description, price, promotionalPrice }: Prod
         <S.Description>{description}</S.Description>
 
         <S.ButtonsWrapper>
-          <AddToWishlistButton id={id} showLabel />
+          <AddToWishlistButton id={id} $full showLabel />
           <AddToCartButton id={id} $full showLabel />
         </S.ButtonsWrapper>
       </Box>

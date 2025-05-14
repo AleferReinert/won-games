@@ -1,18 +1,18 @@
 import { Favorite, FavoriteBorder } from '@styled-icons/material-outlined'
-import Button from 'components/Button/Button'
+import Button, { ButtonProps } from 'components/Button/Button'
 import { Loading } from 'components/Loading/Loading'
 import { useWishlist } from 'hooks/useWishlist'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import theme from 'styles/theme'
 
-interface AddToWishlistButtonProps {
+interface AddToWishlistButtonProps extends ButtonProps {
   id: string
   showLabel?: boolean
   loadingColor?: string
 }
 
-const AddToWishlistButton = ({ id, showLabel = false, loadingColor }: AddToWishlistButtonProps) => {
+const AddToWishlistButton = ({ id, showLabel = false, loadingColor, ...rest }: AddToWishlistButtonProps) => {
   const [loading, setLoading] = useState(false)
   const { status } = useSession()
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
@@ -30,6 +30,7 @@ const AddToWishlistButton = ({ id, showLabel = false, loadingColor }: AddToWishl
             title='Remove from wishlist'
             aria-label='Remove from wishlist'
             disabled={loading}
+            {...rest}
           >
             {loading ? (
               <Loading animation='spinner' size={24} color={loadingColor} />
@@ -48,6 +49,7 @@ const AddToWishlistButton = ({ id, showLabel = false, loadingColor }: AddToWishl
             title='Add to wishlist'
             aria-label='Add to wishlist'
             disabled={loading}
+            {...rest}
           >
             {loading ? (
               <Loading animation='spinner' size={24} color={loadingColor} />
