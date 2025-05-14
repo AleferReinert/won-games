@@ -3,6 +3,7 @@ import AddToWishlistButton from 'components/AddToWishlistButton/AddToWishlistBut
 import Box from 'components/Box/Box'
 import Heading from 'components/Heading/Heading'
 import Price from 'components/Price/Price'
+import theme from 'styles/theme'
 import * as S from './ProductHeader.styles'
 
 export interface ProductHeaderProps {
@@ -27,7 +28,7 @@ const ProductHeader = ({ id, title, description, price, promotionalPrice }: Prod
         <S.Description>{description}</S.Description>
 
         <S.ButtonsWrapper>
-          <AddToWishlistButton id={id} $full showLabel />
+          <AddToWishlistButton id={id} $full showLabel loadingColor={theme.colors.gray} />
           <AddToCartButton id={id} $full showLabel />
         </S.ButtonsWrapper>
       </Box>

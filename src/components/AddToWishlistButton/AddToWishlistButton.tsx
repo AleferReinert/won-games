@@ -33,11 +33,11 @@ const AddToWishlistButton = ({ id, showLabel = false, loadingColor, ...rest }: A
             {...rest}
           >
             {loading ? (
-              <Loading animation='spinner' size={24} color={loadingColor} />
+              <Loading animation='spinner' size={24} color={loadingColor} inline />
             ) : (
               <Favorite role='img' aria-hidden fill={theme.colors.primary} />
             )}
-            {showLabel && 'Remove from wishlist'}
+            {showLabel && (loading ? 'Removing from wishlist' : 'Remove from wishlist')}
           </Button>
         ) : (
           <Button
@@ -52,11 +52,11 @@ const AddToWishlistButton = ({ id, showLabel = false, loadingColor, ...rest }: A
             {...rest}
           >
             {loading ? (
-              <Loading animation='spinner' size={24} color={loadingColor} />
+              <Loading animation='spinner' size={24} color={loadingColor} inline />
             ) : (
               <FavoriteBorder role='img' aria-hidden fill={theme.colors.primary} />
             )}
-            {showLabel && 'Add to wishlist'}
+            {showLabel && (loading ? 'Adding to wishlist' : 'Add to wishlist')}
           </Button>
         )}
       </div>
