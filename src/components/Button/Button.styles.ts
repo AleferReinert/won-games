@@ -43,6 +43,11 @@ export const wrapperModifiers = {
     &:hover {
       color: ${lighten(0.1, theme.colors.primary)};
     }
+
+    &:disabled {
+      background: transparent !important;
+      color: ${theme.colors.gray} !important;
+    }
   `,
   disabled: (theme: DefaultTheme) => css`
     &:disabled {
