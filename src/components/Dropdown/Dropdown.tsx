@@ -50,7 +50,7 @@ export const Dropdown = ({ buttonContent, buttonTitle, children }: DropdownProps
         aria-hidden={!state}
         className={`${dropdown({ state: state ? 'open' : 'close' })} absolute top-full -right-[9px] mt-4 text-base ease-in-out duration-300 w-max z-40`}
       >
-        <div className='border-[10px] border-transparent border-b-theme-white absolute -top-5 right-[10px] '></div>
+        <div className='border-[10px] border-transparent border-b-white absolute -top-5 right-[10px] '></div>
         <div className='rounded-sm overflow-hidden bg-zinc-50'>{children}</div>
       </div>
       <div
