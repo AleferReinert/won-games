@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { creditCardsMock } from '../../mocks/creditCards.mock'
-import PaymentOptionsComponent from './PaymentOptions'
+import { PaymentOptions } from './PaymentOptions'
 
-const meta: Meta<typeof PaymentOptionsComponent> = {
+const meta: Meta<typeof PaymentOptions> = {
   title: 'Components/PaymentOptions',
-  component: PaymentOptionsComponent,
+  component: PaymentOptions,
   argTypes: {
     creditCards: { table: { disable: true } },
     handlePayment: { action: 'button enabled', table: { disable: true } }
@@ -18,7 +18,7 @@ const meta: Meta<typeof PaymentOptionsComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof PaymentOptionsComponent>
+type Story = StoryObj<typeof PaymentOptions>
 
 export const Default: Story = {
   play: async ({ canvasElement, step }) => {
@@ -38,7 +38,7 @@ export const Default: Story = {
 
     await step('Button link to continue shopping', () => {
       const buttonLink = canvas.getByRole('link', { name: /continue shopping/i })
-      expect(buttonLink).toHaveAttribute('href', '/products')
+      expect(buttonLink).toHaveAttribute('href', '/explore')
     })
 
     await step('Button buy now disabled and with icon', () => {

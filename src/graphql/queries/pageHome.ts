@@ -4,6 +4,9 @@ import { HIGHLIGHT } from 'graphql/fragments/highlight'
 import { PRODUCT_ENTITY } from 'graphql/fragments/product'
 
 export const PAGE_HOME = gql`
+  ${BANNER}
+  ${PRODUCT_ENTITY}
+  ${HIGHLIGHT}
   query PageHome($currentDate: Date!, $pastDate: Date!, $limit: Int!) {
     banners {
       ...banner
@@ -87,7 +90,4 @@ export const PAGE_HOME = gql`
       }
     }
   }
-  ${BANNER}
-  ${PRODUCT_ENTITY}
-  ${HIGHLIGHT}
 `

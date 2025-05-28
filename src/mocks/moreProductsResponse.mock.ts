@@ -1,6 +1,6 @@
 import { MockedResponse } from '@apollo/client/testing'
+import { productsLimit } from 'app/(main)/explore/page'
 import { PRODUCTS } from 'graphql/queries/products'
-import { productsLimit } from 'pages/products/index.page'
 import { ProductsQuery } from 'types/generated'
 
 export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {

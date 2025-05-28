@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { highlightMock } from 'mocks/highlight.mock'
-import Highlight from './Highlight'
+import { Highlight } from './Highlight'
 
 const meta: Meta<typeof Highlight> = {
   title: 'Components/Highlight',
@@ -14,6 +14,7 @@ export default meta
 type Story = StoryObj<typeof Highlight>
 
 export const Default: Story = {
+  name: 'Alignment right (default)',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const highlightComponent = canvas.getByTestId('HighlightComponent')
@@ -48,7 +49,7 @@ export const Default: Story = {
 
 export const AlignmentLeft: Story = {
   args: {
-    $alignment: 'left'
+    alignment: 'left'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -60,10 +61,10 @@ export const AlignmentLeft: Story = {
   }
 }
 
-export const WithFloatImage: Story = {
+export const FloatImage: Story = {
   args: {
     floatImg: {
-      url: '/img/test/banner-float.png',
+      url: '/img/test/highlight-float.png',
       alternativeText: 'float image test'
     }
   },

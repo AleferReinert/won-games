@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+@theme {
+  --max-width-container: 1300px;
+  --breakpoint-xs: 360px;
+  --breakpoint-1xl: 1366px;
+  --breakpoint-3xl: 1920px;
+  --font-sans: 'Poppins', 'sans-serif';
+  --color-theme-primary: #f231a5;
+  --color-theme-secondary: #3cd3c1;
+  --color-theme-gray-100: #f2f2f2;
+  --color-theme-gray-200: #eaeaea;
+  --color-theme-gray-300: #d9d9d9;
+  --color-theme-gray-500: #8f8f8f;
+  --color-theme-gray-800: #2e2f42;
+  --color-theme-gray-900: #06092b;
+  --color-theme-gray-950: #030517;
+  --animate-grow-from-center: grow-from-center 0.2s forwards;
+
+  @keyframes grow-from-center {
+    from {
+      width: 0;
+      left: 50%;
+    }
+    to {
+      width: 100%;
+      left: 0;
+    }
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px theme(--color-theme-gray-200) inset;
+}
+
+@layer components {
+  .input-checkbox,
+  .input-radio {
+    @apply transition cursor-pointer flex items-center justify-center size-[18px] appearance-none border-2 border-theme-gray-800 rounded-xs relative;
+    &:before {
+      @apply content-[''] w-[6px] h-[9px] border-r-2 border-b-2 border-zinc-50 rotate-45 absolute top-[1px] opacity-0 ease-in-out duration-100;
+    }
+    &:focus {
+      box-shadow: 0 0 0.5rem theme(--color-theme-primary);
+    }
+    &:checked {
+      @apply border-theme-primary bg-theme-primary;
+      &:before {
+        @apply opacity-100;
+      }
+    }
+  }
+
+  .input-radio {
+    @apply rounded-full;
+  }
+}
+
+@utility custom-clip-path {
+  clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
+
+  @media (min-width: theme(--breakpoint-lg)) {
+    clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0 100%);
+  }
+}
+
+@utility custom-clip-path-secondary {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+}

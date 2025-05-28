@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { creditCardsMock } from 'mocks/creditCards.mock'
-import theme from 'styles/theme'
-import CreditCardComponent from './CreditCard'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import { CreditCard } from './CreditCard'
 
-const meta: Meta<typeof CreditCardComponent> = {
-  title: 'Components/Atoms/CreditCard',
-  component: CreditCardComponent,
+const meta: Meta<typeof CreditCard> = {
+  title: 'Components/CreditCard',
+  component: CreditCard,
   args: creditCardsMock[0],
   parameters: {
     backgrounds: {
@@ -19,7 +19,7 @@ const meta: Meta<typeof CreditCardComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof CreditCardComponent>
+type Story = StoryObj<typeof CreditCard>
 
 export const Default: Story = {
   play: async ({ canvasElement, step }) => {
@@ -38,7 +38,7 @@ export const Default: Story = {
 
     step('Color black and direction left as default', () => {
       expect(wrapper).toHaveStyle({
-        color: theme.colors.black,
+        color: getTailwindValue('--color-theme-gray-950'),
         flexDirection: 'row'
       })
     })
@@ -54,7 +54,7 @@ export const Gray: Story = {
 
     step('Color gray', () => {
       const wrapper = canvas.getByRole('img').parentElement
-      expect(wrapper).toHaveStyle({ color: theme.colors.gray })
+      expect(wrapper).toHaveStyle({ color: getTailwindValue('--color-theme-500') })
     })
   }
 }

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
 import { productDetailsMock } from '../../mocks/productDetails.mock'
-import ProductDetailsComponent from './ProductDetails'
+import { ProductDetails } from './ProductDetails'
 
-const meta: Meta<typeof ProductDetailsComponent> = {
+const meta: Meta<typeof ProductDetails> = {
   title: 'Components/ProductDetails',
-  component: ProductDetailsComponent,
+  component: ProductDetails,
   args: productDetailsMock,
   argTypes: {
     releaseDate: {
@@ -24,15 +24,14 @@ const meta: Meta<typeof ProductDetailsComponent> = {
   },
   parameters: {
     layout: 'padded'
-  },
-  tags: ['autodocs']
+  }
 }
 
 export default meta
 
-type Story = StoryObj<typeof ProductDetailsComponent>
+type Story = StoryObj<typeof ProductDetails>
 
-export const ProductDetails: Story = {
+export const Default: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 

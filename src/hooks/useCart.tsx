@@ -1,3 +1,4 @@
+'use client'
 import { useQuery } from '@apollo/client'
 import { CartContext } from 'contexts/CartContext'
 import { PRODUCTS } from 'graphql/queries/products'

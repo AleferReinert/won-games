@@ -1,3 +1,4 @@
+'use client'
 import { CartItemProps } from 'components/CartItem/CartItem'
 import { createContext } from 'react'
 

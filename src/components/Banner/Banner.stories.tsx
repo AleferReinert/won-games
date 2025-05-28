@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import Container from 'components/Container/Container'
+import { Container } from 'components/Container/Container'
 import { bannersMock } from '../../mocks/banners.mock'
-import Banner from './Banner'
+import { Banner } from './Banner'
 
 const meta: Meta<typeof Banner> = {
   title: 'Components/Banner',
@@ -45,7 +45,7 @@ export const Title: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Required title', () => {
+    await step('Optional title', () => {
       const title = canvas.getByRole('heading', { level: 2 })
       expect(title).toHaveTextContent('Defy death')
     })
@@ -64,7 +64,7 @@ export const Description: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Required description html', () => {
+    await step('Optional description html', () => {
       const description = canvas.getByRole('paragraph')
       expect(description).toContainHTML('Play the new <strong>CrashLands</strong> season')
     })
@@ -83,9 +83,9 @@ export const ButtonUrl: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Required button link with label and url', () => {
+    await step('Optional button link with label and url', () => {
       const button = canvas.getByRole('link', { name: /buy now/i })
-      expect(button).toHaveAttribute('href', '/products/defy-death')
+      expect(button).toHaveAttribute('href', '/explore/defy-death')
     })
   }
 }
@@ -103,7 +103,7 @@ export const WithRibbon: Story = {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new/i)
 
-    step('Ribbon', () => {
+    step('Optional ribbon', () => {
       expect(ribbon).toBeInTheDocument()
     })
   }

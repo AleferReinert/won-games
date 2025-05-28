@@ -1,12 +1,13 @@
 import { ComponentProps, ReactNode } from 'react'
-import * as S from './Container.styles'
 
 interface ContainerProps extends ComponentProps<'div'> {
   children: ReactNode
 }
 
-const Container = ({ children, ...rest }: ContainerProps) => {
-  return <S.Container {...rest}>{children}</S.Container>
+export const Container = ({ children, ...rest }: ContainerProps) => {
+  return (
+    <div {...rest} className={`mx-auto w-full max-w-container px-4 ${rest.className || ''}`}>
+      {children}
+    </div>
+  )
 }
-
-export default Container

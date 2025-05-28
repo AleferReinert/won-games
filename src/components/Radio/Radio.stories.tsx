@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react/*'
 import { expect, fn, userEvent, within } from '@storybook/test'
-import theme from 'styles/theme'
-import Radio from './Radio'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import { Radio } from './Radio'
 
 const meta: Meta<typeof Radio> = {
   title: 'Components/Atoms/Radio',
@@ -12,10 +12,9 @@ const meta: Meta<typeof Radio> = {
   },
   argTypes: {
     onCheck: {
-      // action: 'checked',
       table: { disable: true }
     },
-    $labelColor: {
+    labelColor: {
       if: { arg: 'label' }
     },
     id: {
@@ -78,7 +77,7 @@ export const WithLabel: Story = {
 export const WithBlackLabel: Story = {
   args: {
     label: 'With Black Label',
-    $labelColor: 'black'
+    labelColor: 'black'
   },
   parameters: {
     backgrounds: {
@@ -90,7 +89,7 @@ export const WithBlackLabel: Story = {
     const label = canvas.getByText(/with black label/i)
 
     step('Label black', () => {
-      expect(label).toHaveStyle({ color: theme.colors.black })
+      expect(label).toHaveStyle({ color: getTailwindValue('--color-theme-gray-950') })
     })
   }
 }

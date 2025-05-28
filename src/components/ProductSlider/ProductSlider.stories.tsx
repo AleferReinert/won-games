@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, waitFor, within } from '@storybook/test'
-import Container from 'components/Container/Container'
-import theme from 'styles/theme'
+import { getTailwindValue } from 'utils/getTailwindValue'
 import { productsMock } from '../../mocks/products.mock'
-import ProductSliderComponent from './ProductSlider'
+import { ProductSlider } from './ProductSlider'
 
-const meta: Meta<typeof ProductSliderComponent> = {
+const meta: Meta<typeof ProductSlider> = {
   title: 'Components/ProductSlider',
-  component: ProductSliderComponent,
+  component: ProductSlider,
   args: { products: productsMock },
   argTypes: {
     products: {
@@ -16,10 +15,8 @@ const meta: Meta<typeof ProductSliderComponent> = {
   },
   decorators: [
     (Story) => (
-      <div style={{ padding: '20px 0' }}>
-        <Container>
-          <Story />
-        </Container>
+      <div className='my-5'>
+        <Story />
       </div>
     )
   ],
@@ -32,7 +29,7 @@ const meta: Meta<typeof ProductSliderComponent> = {
 }
 export default meta
 
-type Story = StoryObj<typeof ProductSliderComponent>
+type Story = StoryObj<typeof ProductSlider>
 
 export const Default: Story = {
   play: async ({ canvasElement, step }) => {
@@ -45,14 +42,14 @@ export const Default: Story = {
 
     await step('ArrowColor white', async () => {
       const nextIcon = await waitFor(() => canvas.getByRole('img', { name: 'Next games', hidden: true }))
-      expect(nextIcon).toHaveStyle({ fill: theme.colors.white })
+      expect(nextIcon).toHaveStyle({ fill: getTailwindValue('--color-zinc-50') })
     })
   }
 }
 
 export const ArrowBlack: Story = {
   args: {
-    $arrowColor: 'black'
+    arrowColor: 'black'
   },
   parameters: {
     backgrounds: {
@@ -64,7 +61,7 @@ export const ArrowBlack: Story = {
 
     await step('ArrowColor black', async () => {
       const nextIcon = await waitFor(() => canvas.getByRole('img', { name: 'Next games', hidden: true }))
-      expect(nextIcon).toHaveStyle({ fill: theme.colors.black })
+      expect(nextIcon).toHaveStyle({ fill: getTailwindValue('--color-theme-gray-950') })
     })
   }
 }

@@ -1,16 +1,24 @@
+'use client'
 import { ComponentProps, useState } from 'react'
-import * as S from './Checkbox.styles'
 
 export interface CheckboxProps extends ComponentProps<'input'> {
   id: string
   onCheck?: (status: boolean) => void
   isChecked?: boolean
   label?: string
-  $labelColor?: 'white' | 'black'
+  labelColor?: 'white' | 'black'
   value?: string | string[] | number
 }
 
-const Checkbox = ({ id, onCheck, isChecked = false, label, $labelColor = 'white', value, ...props }: CheckboxProps) => {
+export const Checkbox = ({
+  id,
+  onCheck,
+  isChecked = false,
+  label,
+  labelColor = 'white',
+  value,
+  ...props
+}: CheckboxProps) => {
   const [checkedStatus, setCheckedStatus] = useState(isChecked)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedStatus(e.target.checked)
@@ -18,15 +26,24 @@ const Checkbox = ({ id, onCheck, isChecked = false, label, $labelColor = 'white'
   }
 
   return (
-    <S.Wrapper>
-      <S.Input type='checkbox' id={id} onChange={handleChange} checked={checkedStatus} value={value} {...props} />
+    <div className='flex items-center mb-2'>
+      <input
+        type='checkbox'
+        id={id}
+        onChange={handleChange}
+        checked={checkedStatus}
+        value={value}
+        {...props}
+        className='input-checkbox'
+      />
       {label && (
-        <S.Label htmlFor={id} $labelColor={$labelColor}>
+        <label
+          htmlFor={id}
+          className={`leading-[18px] cursor-pointer pl-2 ${labelColor === 'white' ? 'text-zinc-50' : 'text-theme-gray-950'}`}
+        >
           {label}
-        </S.Label>
+        </label>
       )}
-    </S.Wrapper>
+    </div>
   )
 }
-
-export default Checkbox

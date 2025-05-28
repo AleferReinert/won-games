@@ -4,11 +4,11 @@ import { WishlistContext } from 'contexts/WishlistContext'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { wishlistContextMock } from 'mocks/wishlistContext.mock'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
-import AddToWishlistButtonComponent from './AddToWishlistButton'
+import { AddToWishlistButton } from './AddToWishlistButton'
 
-const meta: Meta<typeof AddToWishlistButtonComponent> & { args?: NextAuthSessionArgs } = {
+const meta: Meta<typeof AddToWishlistButton> & { args?: NextAuthSessionArgs } = {
   title: 'Components/AddToWishlistButton',
-  component: AddToWishlistButtonComponent,
+  component: AddToWishlistButton,
   tags: ['autodocs'],
   args: {
     nextAuthSession: nextAuthSessionMock
@@ -27,7 +27,7 @@ const meta: Meta<typeof AddToWishlistButtonComponent> & { args?: NextAuthSession
 
 export default meta
 
-type Story = StoryObj<typeof AddToWishlistButtonComponent>
+type Story = StoryObj<typeof AddToWishlistButton>
 
 export const NotAdded: Story = {
   play: async ({ canvasElement, step }) => {

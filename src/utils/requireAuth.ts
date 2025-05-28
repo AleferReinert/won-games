@@ -1,15 +1,17 @@
-import { GetServerSidePropsContext } from 'next'
-import { getServerSession } from 'next-auth'
-import { authOptions } from 'pages/api/auth/[...nextauth].page'
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
+import { getServerSession, Session } from 'next-auth'
+import { redirect } from 'next/navigation'
 
-export async function requireAuth(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions)
-
-  if (!session) {
-    const callbackUrl = encodeURIComponent(context.req.url ?? '/')
-    context.res.writeHead(302, { Location: `/sign-in?callbackUrl=${callbackUrl}` })
-    context.res.end()
+// Optional session to set session in Storybook
+export async function requireAuth(session: Session | undefined): Promise<{ serverSession: Session }> {
+  if (session && session.user?.email) {
+    return { serverSession: session }
   }
 
-  return { session }
+  const serverSession = await getServerSession(authOptions)
+
+  if (!serverSession) {
+    redirect('/sign-in')
+  }
+  return { serverSession }
 }

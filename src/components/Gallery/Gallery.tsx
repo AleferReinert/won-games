@@ -1,9 +1,10 @@
-import { ArrowBackIos as ArrowLeft, ArrowForwardIos as ArrowRight, Close } from '@styled-icons/material-outlined'
-import Slider from 'components/Slider/Slider'
+'use client'
+import { Slider } from 'components/Slider/Slider'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos, MdOutlineClose } from 'react-icons/md'
 import SlickSlider, { Settings } from 'react-slick'
-import * as S from './Gallery.styles'
+import styles from './Gallery.module.css'
 
 const commomSettings: Settings = {
   infinite: false,
@@ -35,8 +36,8 @@ const thumbsSettings: Settings = {
 const modalSettings: Settings = {
   ...commomSettings,
   initialSlide: 2,
-  prevArrow: <ArrowLeft title='Previous' />,
-  nextArrow: <ArrowRight title='Next' />
+  prevArrow: <MdOutlineArrowBackIos title='Previous' />,
+  nextArrow: <MdOutlineArrowForwardIos title='Next' />
 }
 
 export interface GalleryImageProps {
@@ -48,8 +49,8 @@ export interface GalleryProps {
   items: GalleryImageProps[]
 }
 
-const Gallery = ({ items }: GalleryProps) => {
-  const slider = useRef<SlickSlider>(null)
+export const Gallery = ({ items }: GalleryProps) => {
+  const slider = useRef<SlickSlider | null>(null)
   const [modal, setModal] = useState(false)
 
   useEffect(() => {
@@ -62,15 +63,16 @@ const Gallery = ({ items }: GalleryProps) => {
   }, [])
 
   return (
-    <S.Wrapper data-testid='GalleryComponent'>
+    <div data-testid='GalleryComponent' className={styles.gallery}>
       <Slider ref={slider} settings={thumbsSettings}>
         {items.map((item, index) => (
-          <S.Thumb
+          <button
             key={'thumb-' + index}
             title='Open modal'
             onClick={() => {
               slider.current!.slickGoTo(index, true), setModal(true)
             }}
+            className='relative cursor-pointer h-[190px]'
           >
             <Image
               src={item.src}
@@ -78,15 +80,24 @@ const Gallery = ({ items }: GalleryProps) => {
               fill
               sizes='(max-width: 768px) 100vw, 50vw'
             />
-          </S.Thumb>
+          </button>
         ))}
       </Slider>
 
-      <S.Modal aria-label='modal' aria-hidden={!modal}>
-        <S.CloseModal aria-label='Close modal' role='button' title='Close' onClick={() => setModal(false)}>
-          <Close aria-hidden role='img' />
-        </S.CloseModal>
-        <S.ContentModal>
+      <div
+        aria-label='modal'
+        aria-hidden={!modal}
+        className={`${styles.modal} fixed inset-0 bg-black/85 transition-opacity ease-in-out duration-300 flex justify-center items-center z-40 p-6`}
+      >
+        <button
+          aria-label='Close modal'
+          title='Close'
+          onClick={() => setModal(false)}
+          className='absolute top-0 right-0 p-2 text-right text-zinc-50 z-30 cursor-pointer'
+        >
+          <MdOutlineClose aria-hidden role='img' className='size-6 fill-zinc-50' />
+        </button>
+        <div className='aspect-video max-w-4/5 max-h-full 3xl:max-w-container'>
           <Slider ref={slider} settings={modalSettings}>
             {items.map((item, index) => (
               <Image
@@ -98,10 +109,8 @@ const Gallery = ({ items }: GalleryProps) => {
               />
             ))}
           </Slider>
-        </S.ContentModal>
-      </S.Modal>
-    </S.Wrapper>
+        </div>
+      </div>
+    </div>
   )
 }
-
-export default Gallery

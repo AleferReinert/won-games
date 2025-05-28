@@ -2,7 +2,6 @@ import { BannerProps } from 'components/Banner/Banner'
 import { CartItemProps, PaymentProps } from 'components/CartItem/CartItem'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { ProductProps } from 'components/Product/Product'
-import { CompanyContextProps } from 'contexts/CompanyContext'
 import {
   BannerFragment,
   CompanyQuery,
@@ -12,9 +11,10 @@ import {
   ProductRelationFragment,
   Query
 } from 'types/generated'
+import { CompanyProps } from './fetchCompany'
 import { getImageUrl } from './getImageUrl'
 
-export const companyMapper = (data: CompanyQuery): CompanyContextProps => {
+export const companyMapper = (data: CompanyQuery): CompanyProps => {
   const { logoDark, logoLight, logoIcon } = data.company.data.attributes
 
   return {
@@ -78,14 +78,14 @@ export const cartProductsMapper = (products: Query['products']['data']): CartIte
 // Retorna todos dados necessários para o componente Highlight
 export const highlightMapper = (
   highlight: HighlightFragment,
-  alignment?: HighlightProps['$alignment']
+  alignment?: HighlightProps['alignment']
 ): HighlightProps => {
   return {
     title: highlight.title,
     description: highlight.description,
     buttonLabel: highlight.buttonLabel,
     buttonUrl: highlight.buttonUrl,
-    $alignment: alignment ?? highlight.alignment,
+    alignment: alignment ?? highlight.alignment,
     background: {
       url: getImageUrl(highlight.background.data.attributes.url),
       alternativeText: highlight.background.data.attributes.alternativeText ?? ''
@@ -109,7 +109,12 @@ export const productMapper = (products: ProductEntityFragment | ProductRelationF
           price: attributes.price,
           promotionalPrice: attributes.promotional_price,
           ribbonLabel: attributes.ribbon_label,
-          img: attributes.cover.data ? getImageUrl(attributes.cover.data.attributes.url) : '/img/default/product.webp'
+          cover: {
+            url: attributes.cover.data
+              ? getImageUrl(attributes.cover.data.attributes.url)
+              : '/img/default/product.webp',
+            alternativeText: attributes.cover.data.attributes.alternativeText || 'Image not found'
+          }
         })
       )
     : []

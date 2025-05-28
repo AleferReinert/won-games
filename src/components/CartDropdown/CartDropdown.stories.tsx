@@ -4,11 +4,11 @@ import { expect, within } from '@storybook/test'
 import { CartContext } from 'contexts/CartContext'
 import { cartContextMock } from 'mocks/cartContext.mock'
 import { cartItemsResponseMock } from 'mocks/cartItemsResponse.mock'
-import CartDropdownComponent from './CartDropdown'
+import { CartDropdown } from './CartDropdown'
 
-const meta: Meta<typeof CartDropdownComponent> = {
+const meta: Meta<typeof CartDropdown> = {
   title: 'Components/CartDropdown',
-  component: CartDropdownComponent,
+  component: CartDropdown,
   decorators: (Story) => (
     <div style={{ textAlign: 'right', padding: '2rem', height: '500px' }}>
       <Story />
@@ -18,10 +18,9 @@ const meta: Meta<typeof CartDropdownComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof CartDropdownComponent>
+type Story = StoryObj<typeof CartDropdown>
 
 export const Empty: Story = {
-  name: 'CartDropdown',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const badge = canvas.getByLabelText(/cart items/i)

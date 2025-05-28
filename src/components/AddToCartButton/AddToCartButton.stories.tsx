@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
 import { CartContext } from 'contexts/CartContext'
 import { cartContextMock } from 'mocks/cartContext.mock'
-import AddToCartButtonComponent from './AddToCartButton'
+import { AddToCartButton } from './AddToCartButton'
 
-const meta: Meta<typeof AddToCartButtonComponent> = {
+const meta: Meta<typeof AddToCartButton> = {
   title: 'Components/AddToCartButton',
-  component: AddToCartButtonComponent,
+  component: AddToCartButton,
   decorators: (Story) => (
     <CartContext.Provider value={cartContextMock}>
       <Story />
@@ -20,7 +20,7 @@ const meta: Meta<typeof AddToCartButtonComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof AddToCartButtonComponent>
+type Story = StoryObj<typeof AddToCartButton>
 
 export const NotAdded: Story = {
   args: {

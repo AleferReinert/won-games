@@ -1,21 +1,31 @@
-import { Cancel } from '@styled-icons/material'
+'use client'
 import { useFilter } from 'hooks/useFilter'
-import * as S from './FilterTags.styles'
+import { MdCancel } from 'react-icons/md'
+import { tv } from 'tailwind-variants'
 
-const FilterTags = () => {
+const filterTags = tv({
+  slots: {
+    listItem: 'inline-flex py-0.5 bg-zinc-50 text-theme-gray-950 items-center whitespace-nowrap rounded-sm pr-1 pl-2',
+    svg: 'size-6 scale-80 fill-theme-gray-950 cursor-pointer transition hover:fill-theme-primary',
+    content: 'leading-7 text-sm font-light',
+    span: 'text-theme-primary font-medium'
+  }
+})
+export const FilterTags = () => {
   const { urlQueryParams, filterOptions, removeFilterOption, removeSearchParam } = useFilter()
+  const { listItem, svg, content, span } = filterTags()
 
   return (
-    <S.Tags>
+    <ul className='flex flex-wrap gap-2 mb-4' aria-label='Applied filters'>
       {'search' in urlQueryParams && (
-        <S.Tag>
-          <span>
-            Results for <span>{urlQueryParams.search}</span>
+        <li className={listItem()}>
+          <span className={content()}>
+            Results for <span className={span()}>{urlQueryParams.search}</span>
           </span>
           <button title='Remove' onClick={() => removeSearchParam()}>
-            <Cancel aria-hidden />
+            <MdCancel aria-hidden className={svg()} />
           </button>
-        </S.Tag>
+        </li>
       )}
       {urlQueryParams &&
         Object.entries(urlQueryParams).map(([key, value]) => {
@@ -39,24 +49,22 @@ const FilterTags = () => {
                   const [first, ...rest] = parts
                   labelContent = (
                     <>
-                      {first} <span>{rest.join(' ')}</span>
+                      {first} <span className={span()}>{rest.join(' ')}</span>
                     </>
                   )
                 }
                 return (
-                  <S.Tag key={item.value}>
-                    <span>{labelContent}</span>
+                  <li key={item.value} className={listItem()}>
+                    <span className={content()}>{labelContent}</span>
                     <button title='Remove' onClick={() => removeFilterOption(key, item.value)}>
-                      <Cancel aria-hidden />
+                      <MdCancel aria-hidden className={svg()} />
                     </button>
-                  </S.Tag>
+                  </li>
                 )
               })
             }
           })
         })}
-    </S.Tags>
+    </ul>
   )
 }
-
-export default FilterTags

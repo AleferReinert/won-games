@@ -1,10 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import Logo from './Logo'
+import { companyMock } from 'mocks/company.mock'
+import { Logo } from './Logo'
 
 const meta: Meta<typeof Logo> = {
   title: 'Components/Atoms/Logo',
   component: Logo,
+  args: {
+    company: companyMock
+  },
   parameters: {
     layout: 'padded'
   },
@@ -61,6 +65,20 @@ export const Icon: Story = {
     await step('Icon in src', () => {
       const logo = canvas.getByRole('img', { name: 'Won Games' })
       expect(logo.getAttribute('src')).toContain('icon')
+    })
+  }
+}
+
+export const Width: Story = {
+  args: {
+    width: 100
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('Icon in src', () => {
+      const logo = canvas.getByRole('img', { name: 'Won Games' })
+      expect(logo).toHaveStyle({ width: '100px' })
     })
   }
 }

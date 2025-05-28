@@ -1,21 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import DividerComponent from './Divider'
+import { Divider } from './Divider'
 
-const meta: Meta<typeof DividerComponent> = {
+const meta: Meta<typeof Divider> = {
   title: 'Components/Atoms/Divider',
-  component: DividerComponent
+  component: Divider
 }
 
 export default meta
 
-type Story = StoryObj<typeof DividerComponent>
+type Story = StoryObj<typeof Divider>
 
-export const Divider: Story = {
+export const Default: Story = {
+  name: 'Divider',
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    step('Line', () => {
+    step('<hr />', () => {
       const line = canvas.getByRole('separator')
       expect(line).toBeVisible()
     })

@@ -1,52 +1,58 @@
+'use client'
 import { ComponentProps, ReactNode } from 'react'
-import * as S from './TextField.styles'
 
 export interface TextFieldProps extends ComponentProps<'input'> {
   name: string
   label?: string
   icon?: ReactNode
-  $iconPosition?: 'left' | 'right'
+  iconPosition?: 'left' | 'right'
   disabled?: boolean
-  $errorMessage?: string
-  // initialValue?: string
+  errorMessage?: string
 }
 
-const TextField = ({
+export const TextField = ({
   name,
   label,
   icon,
-  $iconPosition = 'left',
+  iconPosition = 'left',
   disabled = false,
-  $errorMessage,
-  // initialValue = '',
+  errorMessage,
   ...props
 }: TextFieldProps) => {
-  // const [value, setValue] = useState(initialValue)
-
-  // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const newValue = e.currentTarget.value
-  //   setValue(newValue)
-  // }
-
   return (
-    <S.Wrapper disabled={disabled}>
-      {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
-      <S.InputWrapper $iconPosition={$iconPosition} $errorMessage={$errorMessage}>
-        {!!icon && <S.Icon>{icon}</S.Icon>}
-        <S.Input
+    <div className='mb-2'>
+      {label && (
+        <label
+          className={`text-sm ${disabled ? 'cursor-not-allowed text-theme-gray-500' : 'cursor-pointer text-theme-gray-950'}`}
+          htmlFor={name}
+        >
+          {label}
+        </label>
+      )}
+      <div
+        className={`flex items-center bg-theme-gray-200 rounded-xs px-2 border mb-2 
+					focus-within:shadow-[0_0_5px_theme(--color-theme-primary)]
+					${disabled ? 'cursor-not-allowed' : ''} 
+					${iconPosition === 'right' ? 'flex-row-reverse' : ''} 
+					${errorMessage ? 'border-red-500' : 'border-theme-gray-200'}
+				`}
+      >
+        {icon && (
+          <span className='flex text-theme-gray-500 mx-2 [&_svg]:size-6  disabled:[&_svg]:fill-[blue]'>{icon}</span>
+        )}
+        <input
           type='text'
-          // onChange={onChange}
-          // value={value}
           disabled={disabled}
           autoComplete='off'
           name={name}
           id={name}
           {...props}
+          className='text-theme-gray-950 text-base p-2 bg-transparent border-0 outline-0 w-full 
+						placeholder:text-theme-gray-500 disabled:cursor-not-allowed 
+						disabled:text-theme-gray-500 disabled:placeholder:text-theme-gray-500'
         />
-      </S.InputWrapper>
-      {!!$errorMessage && <S.ErrorMessage>{$errorMessage}</S.ErrorMessage>}
-    </S.Wrapper>
+      </div>
+      {errorMessage && <span className='text-xs text-red-500'>{errorMessage}</span>}
+    </div>
   )
 }
-
-export default TextField

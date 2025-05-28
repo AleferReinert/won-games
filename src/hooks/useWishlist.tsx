@@ -1,3 +1,4 @@
+'use client'
 import { useMutation, useQuery } from '@apollo/client'
 import { WishlistContext } from 'contexts/WishlistContext'
 import { CREATE_WISHLIST } from 'graphql/mutations/createWishlist'

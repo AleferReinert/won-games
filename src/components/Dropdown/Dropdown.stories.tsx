@@ -1,33 +1,46 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
-import DropdownComponent from './Dropdown'
+import { MdOutlineShoppingCart } from 'react-icons/md'
+import { Dropdown } from './Dropdown'
 
-const meta: Meta<typeof DropdownComponent> = {
+const meta: Meta<typeof Dropdown> = {
   title: 'Components/Dropdown',
-  component: DropdownComponent,
+  component: Dropdown,
   decorators: [(story) => <div style={{ height: '80px' }}>{story()}</div>],
   parameters: {
     layout: 'centered'
-  },
-  tags: ['autodocs']
+  }
 }
 
 export default meta
 
-type Story = StoryObj<typeof DropdownComponent>
+type Story = StoryObj<typeof Dropdown>
 
-export const Dropdown: Story = {
+export const Default: Story = {
+  name: 'Dropdown',
   args: {
-    button: 'My account',
+    buttonContent: (
+      <div className='relative bg-transparent leading-0'>
+        <div
+          aria-label='Cart items'
+          className='absolute -top-[5px] -right-[5px] rounded-full text-white size-4 bg-theme-secondary leading-4 text-[10px] font-semibold text-center'
+        >
+          12
+        </div>
+        <MdOutlineShoppingCart role='img' aria-hidden className='fill-zinc-50 size-6' />
+      </div>
+    ),
+    buttonTitle: 'Shopping cart',
     children: 'children'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const button = canvas.getByRole('button', { name: /my account/i })
+    const button = canvas.getByRole('button', { name: /shopping cart/i })
     const children = canvas.getByText('children')
 
-    await step('Button', () => {
+    await step('Button content and title', () => {
       expect(button).toBeVisible()
+      expect(button).toHaveAttribute('title', 'Shopping cart')
     })
 
     await step('Hidden children', () => {

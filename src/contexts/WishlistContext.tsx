@@ -1,3 +1,4 @@
+'use client'
 import { FetchResult } from '@apollo/client'
 import { createContext } from 'react'
 import { ProductEntity } from 'types/generated'

@@ -1,28 +1,33 @@
-import { Favorite, FavoriteBorder } from '@styled-icons/material-outlined'
-import Button, { ButtonProps } from 'components/Button/Button'
+'use client'
+import { Button, ButtonProps } from 'components/Button/Button'
 import { Loading } from 'components/Loading/Loading'
 import { useWishlist } from 'hooks/useWishlist'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
-import theme from 'styles/theme'
+import { ComponentProps, useState } from 'react'
+import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md'
 
-interface AddToWishlistButtonProps extends ButtonProps {
+interface AddToWishlistButtonProps extends Omit<ButtonProps, 'children'>, ComponentProps<'button'> {
   id: string
   showLabel?: boolean
-  loadingColor?: string
+  loadingClass?: string
 }
 
-const AddToWishlistButton = ({ id, showLabel = false, loadingColor, ...rest }: AddToWishlistButtonProps) => {
+export const AddToWishlistButton = ({
+  id,
+  showLabel = false,
+  loadingClass = '',
+  ...rest
+}: AddToWishlistButtonProps) => {
   const [loading, setLoading] = useState(false)
   const { status } = useSession()
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
 
   return (
     status === 'authenticated' && (
-      <div data-testid='AddToWishlistButtonComponent'>
+      <div data-testid='AddToWishlistButtonComponent' className='leading-0'>
         {isInWishlist(id) ? (
           <Button
-            $variant='link'
+            variant='link'
             onClick={() => {
               setLoading(true)
               removeFromWishlist(id).finally(() => setLoading(false))
@@ -33,15 +38,15 @@ const AddToWishlistButton = ({ id, showLabel = false, loadingColor, ...rest }: A
             {...rest}
           >
             {loading ? (
-              <Loading animation='spinner' size={24} color={loadingColor} inline />
+              <Loading animation='spinner' className={`${loadingClass} size-6!`} inline />
             ) : (
-              <Favorite role='img' aria-hidden fill={theme.colors.primary} />
+              <MdOutlineFavorite role='img' aria-hidden className='fill-theme-primary size-6!' />
             )}
             {showLabel && (loading ? 'Removing from wishlist' : 'Remove from wishlist')}
           </Button>
         ) : (
           <Button
-            $variant='link'
+            variant='link'
             onClick={() => {
               setLoading(true)
               addToWishlist(id).finally(() => setLoading(false))
@@ -52,9 +57,9 @@ const AddToWishlistButton = ({ id, showLabel = false, loadingColor, ...rest }: A
             {...rest}
           >
             {loading ? (
-              <Loading animation='spinner' size={24} color={loadingColor} inline />
+              <Loading animation='spinner' className={`${loadingClass} size-6!`} inline />
             ) : (
-              <FavoriteBorder role='img' aria-hidden fill={theme.colors.primary} />
+              <MdOutlineFavoriteBorder role='img' aria-hidden className='fill-theme-primary size-6!' />
             )}
             {showLabel && (loading ? 'Adding to wishlist' : 'Add to wishlist')}
           </Button>
@@ -63,5 +68,3 @@ const AddToWishlistButton = ({ id, showLabel = false, loadingColor, ...rest }: A
     )
   )
 }
-
-export default AddToWishlistButton

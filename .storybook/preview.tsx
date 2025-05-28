@@ -1,15 +1,12 @@
 import { Preview, StoryContext, StoryFn } from '@storybook/react'
-import { CompanyContext } from 'contexts/CompanyContext'
-import { companyContextMock } from 'mocks/companyContext.mock'
+import { companyHandler } from 'mocks/handlers/companyHandler'
 import { initialize, mswLoader } from 'msw-storybook-addon'
-import { Session } from 'next-auth'
+import NextAuth, { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import { ThemeProvider } from 'styled-components'
-import GlobalStyles from '../src/styles/global'
-import theme from '../src/styles/theme'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import '../src/app/globals.css'
 import { customViewports } from './customViewports'
-import { createMockRouter } from './mockRouter'
 
 initialize()
 
@@ -28,6 +25,12 @@ const preview: Preview = {
   loaders: [mswLoader],
   parameters: {
     layout: 'fullscreen',
+    msw: {
+      handlers: [companyHandler]
+    },
+    nextjs: {
+      appDirectory: true
+    },
     nextRouter: {
       Provider: AppRouterContext.Provider
     },
@@ -39,8 +42,8 @@ const preview: Preview = {
     backgrounds: {
       default: 'Dark',
       values: [
-        { name: 'Dark', value: theme.colors.darkBg },
-        { name: 'Light', value: theme.colors.lightBg }
+        { name: 'Dark', value: getTailwindValue('--color-theme-gray-900') },
+        { name: 'Light', value: getTailwindValue('--color-theme-gray-100') }
       ]
     },
     controls: {
@@ -70,17 +73,23 @@ const preview: Preview = {
 
 export const decorators = [
   (Story: StoryFn, { args }: StoryContext<NextAuthSessionArgs>) => (
-    <AppRouterContext.Provider value={createMockRouter()}>
-      <SessionProvider session={args.nextAuthSession}>
-        <CompanyContext.Provider value={companyContextMock}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            <Story />
-          </ThemeProvider>
-        </CompanyContext.Provider>
-      </SessionProvider>
-    </AppRouterContext.Provider>
+    // <AppRouterContext.Provider value={createMockRouter()}>
+    <SessionProvider session={args.nextAuthSession}>
+      <Story />
+    </SessionProvider>
+    // </AppRouterContext.Provider>
   )
 ]
+
+Object.defineProperty(NextAuth, 'getServerSession', {
+  value: async () => ({
+    user: {
+      name: 'John Doe',
+      email: 'johndoe@example.com'
+    },
+    id: 'mock-id',
+    jwt: 'mock-jwt'
+  })
+})
 
 export default preview

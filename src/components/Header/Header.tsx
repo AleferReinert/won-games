@@ -1,28 +1,41 @@
-import { Search as SearchIcon } from '@styled-icons/material-outlined/Search'
-import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
-import Button from 'components/Button/Button'
-import CartDropdown from 'components/CartDropdown/CartDropdown'
-import Logo from 'components/Logo/Logo'
-import MenuMobile from 'components/MenuMobile/MenuMobile'
-import Skeleton from 'components/Skeleton/Skeleton'
-import UserDropdown from 'components/UserDropdown/UserDropdown'
+'use client'
+import { Button } from 'components/Button/Button'
+import { CartDropdown } from 'components/CartDropdown/CartDropdown'
+import { Logo } from 'components/Logo/Logo'
+import { MenuMobile } from 'components/MenuMobile/MenuMobile'
+import { Skeleton } from 'components/Skeleton/Skeleton'
+import { UserDropdown } from 'components/UserDropdown/UserDropdown'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
-import * as S from './Header.styles'
+import { MdOutlineSearch } from 'react-icons/md'
+import { RiMenu2Fill } from 'react-icons/ri'
+import { CompanyProps } from 'utils/fetchCompany'
 
 export interface HeaderProps {
   hideCartDropdown?: boolean
   hideUserDropdown?: boolean
+  company: CompanyProps
 }
 
-const Header = ({ hideCartDropdown = false, hideUserDropdown = false }: HeaderProps) => {
+export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, company }: HeaderProps) => {
   const [menuMobile, setMenuMobile] = useState(false)
   const { status } = useSession()
   const [showSearch, setShowSearch] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const pathname = usePathname()
+  const navLinks = [
+    {
+      label: 'Home',
+      href: '/'
+    },
+    {
+      label: 'Explore',
+      href: '/explore'
+    }
+  ]
 
   function handleShowSearch() {
     searchInputRef.current && !showSearch ? (searchInputRef.current.value = '') : ''
@@ -37,61 +50,68 @@ const Header = ({ hideCartDropdown = false, hideUserDropdown = false }: HeaderPr
     if (searchInputRef.current?.value) {
       const currentParams = new URLSearchParams(window.location.search)
       currentParams.set('search', searchInputRef.current.value)
-      router.push(`/products?${currentParams.toString()}`)
+      router.push(`/explore?${currentParams.toString()}`)
     }
   }
 
   return (
-    <S.Wrapper>
-      <S.OpenMenu onClick={() => setMenuMobile(true)} title='Open menu' aria-label='Open menu'>
-        <S.IconWrapper>
-          <MenuIcon role='img' aria-hidden width={24} height={24} />
-        </S.IconWrapper>
-      </S.OpenMenu>
+    <header className='flex items-center py-6 justify-between relative z-20 '>
+      <button onClick={() => setMenuMobile(true)} title='Open menu' aria-label='Open menu' className='md:hidden'>
+        <RiMenu2Fill role='img' aria-hidden className='size-6 fill-zinc-50' />
+      </button>
 
-      <S.LogoIcon $isOpen={showSearch}>
-        <Logo width={58} variant='icon' />
-      </S.LogoIcon>
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 transition ease-in-out md:hidden 
+				${showSearch ? 'opacity-0 scale-0' : 'opacity-100 scale-100	'}`}
+      >
+        <Logo width={58} variant='icon' company={company} />
+      </div>
 
-      <S.LogoFull $isOpen={showSearch}>
-        <Logo width={110} />
-      </S.LogoFull>
+      <div className='hidden md:block'>
+        <Logo width={110} company={company} />
+      </div>
 
-      <S.MenuDesktop>
-        <S.MenuLink href='/'>Home</S.MenuLink>
-        <S.MenuLink href='/products'>Explore</S.MenuLink>
-      </S.MenuDesktop>
+      <nav className='ml-6 flex max-md:hidden'>
+        {navLinks.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className='group relative text-base mt-[3px] mx-6 no-underline text-center text-zinc-50'
+          >
+            <div className='absolute -bottom-[3px] h-[3px] bg-theme-primary group-hover:animate-grow-from-center'></div>
+            {item.label}
+          </Link>
+        ))}
+      </nav>
 
-      <S.NavRight>
-        <S.SearchWrapper $isOpen={showSearch} onSubmit={searchSubmit}>
-          <input ref={searchInputRef} type='search' placeholder='Search games...' autoFocus />
-          <S.IconWrapper>
-            <button title='Search' aria-label='Search' onClick={handleShowSearch}>
-              <SearchIcon role='img' aria-hidden width={24} height={24} />
-            </button>
-          </S.IconWrapper>
-        </S.SearchWrapper>
+      <nav className='flex justify-end items-center w-full [&>*]:ml-4'>
+        <form onSubmit={searchSubmit} className='flex items-center justify-end w-full gap-4'>
+          <input
+            ref={searchInputRef}
+            type='search'
+            placeholder='Search games...'
+            autoFocus
+            className={`bg-transparent z-20 border-0 border-b border-zinc-50 h-[33px] focus:outline-none
+						text-zinc-50 transition-all ease-in-out duration-300 text-base placeholder:text-zinc-50 
+						${showSearch ? 'w-full' : 'w-0'}`}
+          />
+          <button title='Search' aria-label='Search' onClick={handleShowSearch} className='cursor-pointer'>
+            <MdOutlineSearch role='img' aria-hidden className='size-6 fill-zinc-50' />
+          </button>
+        </form>
 
-        {!hideCartDropdown && (
-          <S.IconWrapper>
-            <CartDropdown />
-          </S.IconWrapper>
-        )}
+        {!hideCartDropdown && <CartDropdown />}
 
-        {status === 'loading' && <Skeleton width={57} height={30} $rounded />}
+        {status === 'loading' && <Skeleton className='w-[57px] h-[30px] rounded-sm' />}
         {status === 'authenticated' && !hideUserDropdown && <UserDropdown />}
         {status === 'unauthenticated' && (
-          <S.ButtonSignIn>
-            <Button size='small' href={`/sign-in?callbackUrl=${pathname}`} asLink>
-              Sign in
-            </Button>
-          </S.ButtonSignIn>
+          <Button size='small' href={`/sign-in?callbackUrl=${pathname}`} asLink className='hidden! md:inline-flex!'>
+            Sign in
+          </Button>
         )}
-      </S.NavRight>
+      </nav>
 
       <MenuMobile menuMobile={menuMobile} setMenuMobile={setMenuMobile} />
-    </S.Wrapper>
+    </header>
   )
 }
-
-export default Header

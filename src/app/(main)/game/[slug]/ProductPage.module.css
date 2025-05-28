@@ -1,0 +1,66 @@
+.content {
+  margin-top: 32px;
+  font-size: var(--text-base);
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  color: var(--color-zinc-50);
+}
+
+@media (min-width: theme(--breakpoint-md)) {
+  .content h1,
+  .content h2,
+  .content h3,
+  .content h4,
+  .content h5,
+  .content h6 {
+    color: var(--color-theme-gray-950);
+  }
+
+  .content hr {
+    background-color: var(--color-theme-gray-200);
+  }
+}
+
+.content h1,
+.content h2 {
+  font-size: 28px;
+}
+
+.content h3 {
+  font-size: var(--text-xl);
+}
+.content h4 {
+  font-size: var(--text-lg);
+}
+.content h5 {
+  font-size: var(--text-base);
+}
+.content h6 {
+  font-size: var(--text-sm);
+}
+
+.content a {
+  color: var(--color-theme-primary);
+}
+
+.content img {
+  max-width: 100%;
+}
+
+.content ul,
+.content ol {
+  padding: 16px 24px;
+}
+
+.content hr {
+  margin: 24px 0;
+  border: 0;
+  height: 1px;
+  background-color: var(--color-theme-gray-800);
+}

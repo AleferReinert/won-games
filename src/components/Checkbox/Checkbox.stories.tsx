@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, within } from '@storybook/test'
-import theme from 'styles/theme'
-import Checkbox from './Checkbox'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import { Checkbox } from './Checkbox'
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Atoms/Checkbox',
@@ -14,7 +14,7 @@ const meta: Meta<typeof Checkbox> = {
       action: 'checked',
       table: { disable: true }
     },
-    $labelColor: {
+    labelColor: {
       if: { arg: 'label' }
     },
     name: {
@@ -97,7 +97,7 @@ export const WithLabel: Story = {
     })
 
     step('Label	with color white as default', () => {
-      expect(label).toHaveStyle({ color: theme.colors.white })
+      expect(label).toHaveStyle({ color: getTailwindValue('--color-zinc-50') })
     })
   }
 }
@@ -105,7 +105,7 @@ export const WithLabel: Story = {
 export const WithBlackLabel: Story = {
   args: {
     label: 'With Black Label',
-    $labelColor: 'black'
+    labelColor: 'black'
   },
   parameters: {
     backgrounds: {
@@ -117,7 +117,7 @@ export const WithBlackLabel: Story = {
     const label = canvas.getByText(/with black label/i)
 
     step('Label	with color black', () => {
-      expect(label).toHaveStyle({ color: theme.colors.black })
+      expect(label).toHaveStyle({ color: getTailwindValue('--color-theme-gray-950') })
     })
   }
 }

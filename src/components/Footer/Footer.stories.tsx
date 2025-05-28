@@ -1,11 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import Container from 'components/Container/Container'
-import FooterComponent from './Footer'
+import { Container } from 'components/Container/Container'
+import { companyMock } from 'mocks/company.mock'
+import { Footer } from './Footer'
 
-const meta: Meta<typeof FooterComponent> = {
+const meta: Meta<typeof Footer> = {
   title: 'Components/Footer',
-  component: FooterComponent,
+  component: Footer,
+  args: {
+    company: companyMock
+  },
   decorators: [
     (Story) => (
       <Container>
@@ -17,15 +21,15 @@ const meta: Meta<typeof FooterComponent> = {
     backgrounds: {
       default: 'Light'
     }
-  },
-  tags: ['autodocs']
+  }
 }
 
 export default meta
 
-type Story = StoryObj<typeof FooterComponent>
+type Story = StoryObj<typeof Footer>
 
-export const Footer: Story = {
+export const Default: Story = {
+  name: 'Footer',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 

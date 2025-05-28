@@ -1,7 +1,6 @@
-import { OrdersPageProps } from 'pages/account/orders/index.page'
 import { nextAuthSessionMock } from './nextAuthSession.mock'
 
-export const ordersMock: OrdersPageProps = {
+export const ordersMock = {
   session: nextAuthSessionMock,
   orders: [
     {

@@ -4,7 +4,7 @@ const withPWA = require('next-pwa')({
 })
 
 module.exports = withPWA({
-  pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
+  pageExtensions: ['tsx', 'ts', 'page.tsx', 'page.ts'],
   reactStrictMode: true,
   compiler: {
     styledComponents: true

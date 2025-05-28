@@ -1,30 +1,29 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import { AddShoppingCart } from '@styled-icons/material-outlined'
-import { remToPx } from 'polished'
-import theme from 'styles/theme'
-import ButtonComponent from './Button'
+import { MdOutlineShoppingCart } from 'react-icons/md'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import { Button } from './Button'
 
-const meta: Meta<typeof ButtonComponent> = {
+const meta: Meta<typeof Button> = {
   title: 'Components/Atoms/Button',
-  component: ButtonComponent,
+  component: Button,
   argTypes: {
     size: {
       control: 'inline-radio'
     },
-    $variant: {
+    variant: {
       control: 'inline-radio'
     }
   },
   parameters: {
-    layout: 'centered'
+    layout: 'padded'
   },
   tags: ['autodocs']
 }
 
 export default meta
 
-type Story = StoryObj<typeof ButtonComponent>
+type Story = StoryObj<typeof Button>
 
 export const Default: Story = {
   args: {
@@ -35,19 +34,19 @@ export const Default: Story = {
     const button = canvas.getByRole('button')
 
     await step('Size medium as default', () => {
-      expect(button).toHaveStyle({ fontSize: remToPx(theme.font.sizes.small) })
-      expect(button).toHaveStyle({ height: remToPx('4rem') })
+      expect(button).toHaveStyle('fontSize: 14px')
+      expect(button).toHaveStyle('height:  40px')
     })
 
     await step('Variant primary as default', () => {
-      expect(button).toHaveStyle({ color: theme.colors.white })
+      expect(button).toHaveClass('text-zinc-50')
     })
   }
 }
 
 export const WithIcon: Story = {
   args: {
-    children: <>{<AddShoppingCart role='img' />} button with icon</>
+    children: <>{<MdOutlineShoppingCart role='img' />} button with icon</>
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -62,17 +61,14 @@ export const WithIcon: Story = {
 export const Link: Story = {
   args: {
     children: 'button with variant link',
-    $variant: 'link'
+    variant: 'link'
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Links styles', () => {
       const button = canvas.getByRole('button')
-      expect(button).toHaveStyle({
-        color: theme.colors.primary,
-        backgroundColor: 'rgba(0, 0, 0, 0)'
-      })
+      expect(button).toHaveClass('text-theme-primary bg-transparent')
     })
   }
 }
@@ -80,14 +76,14 @@ export const Link: Story = {
 export const Full: Story = {
   args: {
     children: 'full button',
-    $full: true
+    full: true
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Full width', () => {
       const button = canvas.getByRole('button')
-      expect(button).toHaveStyle({ minWidth: '100%' })
+      expect(button).toHaveClass('w-full')
     })
   }
 }
@@ -102,7 +98,7 @@ export const Xsmall: Story = {
 
     step('Xsmall styles', () => {
       const button = canvas.getByRole('button')
-      expect(button).toHaveStyle({ height: remToPx('2.2rem') })
+      expect(button).toHaveStyle('height: 22px')
     })
   }
 }
@@ -117,10 +113,7 @@ export const Small: Story = {
 
     step('Small styles', () => {
       const button = canvas.getByRole('button')
-      expect(button).toHaveStyle({
-        height: remToPx('3rem'),
-        fontSize: remToPx(theme.font.sizes.xsmall)
-      })
+      expect(button).toHaveStyle({ height: '30px', fontSize: '12px' })
     })
   }
 }
@@ -135,10 +128,7 @@ export const Large: Story = {
 
     step('Large styles', () => {
       const button = canvas.getByRole('button')
-      expect(button).toHaveStyle({
-        fontSize: remToPx(theme.font.sizes.medium),
-        height: remToPx('5rem')
-      })
+      expect(button).toHaveStyle({ fontSize: '16px', height: '50px' })
     })
   }
 }
@@ -153,10 +143,9 @@ export const Disabled: Story = {
 
     step('Disabled styles', () => {
       const button = canvas.getByRole('button')
-      expect(button).toHaveStyle({
-        backgroundColor: theme.colors.gray,
-        cursor: 'not-allowed'
-      })
+      expect(button).toBeDisabled()
+      expect(button).toHaveStyle('cursor: not-allowed')
+      expect(button).toHaveStyle({ backgroundColor: getTailwindValue('--color-theme-500') })
     })
   }
 }

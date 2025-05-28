@@ -1,3 +1,4 @@
+'use client'
 import { FilterOptionsProps } from 'components/Filter/Filter'
 import { ParsedUrlQuery, ParsedUrlQueryInput } from 'querystring'
 import { createContext, Dispatch, SetStateAction } from 'react'

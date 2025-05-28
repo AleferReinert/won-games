@@ -33,7 +33,7 @@ describe('Reset password', () => {
     cy.findByText('Expired link').should('be.visible')
   })
 
-  it.only('Success reset password', () => {
+  it('Success reset password', () => {
     cy.intercept('POST', '/api/auth/reset-password', {
       statusCode: 200,
       body: { user: { email: 'johndoe@example.com' } }

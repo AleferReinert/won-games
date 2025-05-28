@@ -1,8 +1,8 @@
-import Button from 'components/Button/Button'
+import { Button } from 'components/Button/Button'
 import Image from 'next/image'
-import * as S from './Highlight.styles'
+import { ComponentProps } from 'react'
 
-export interface HighlightProps {
+export interface HighlightProps extends ComponentProps<'div'> {
   title: string
   description: string
   buttonLabel: string
@@ -15,27 +15,30 @@ export interface HighlightProps {
     url: string
     alternativeText: string
   }
-  $alignment?: 'left' | 'right'
+  alignment?: 'left' | 'right'
 }
 
-const Highlight = ({
+export const Highlight = ({
   title,
   description,
   buttonLabel,
   buttonUrl,
   background,
   floatImg,
-  $alignment = 'right'
+  alignment = 'right'
 }: HighlightProps) => {
   return (
-    <S.Wrapper $alignment={$alignment} data-testid='HighlightComponent'>
+    <div
+      data-testid='HighlightComponent'
+      className={`relative flex h-[230px] justify-between mb-8 md:h-[320px] ${alignment === 'right' ? 'flex-row' : 'flex-row-reverse'}`}
+    >
       <Image
         src={background.url}
         alt={background.alternativeText}
         aria-hidden={background.alternativeText ? false : true}
         fill
       />
-      <S.FloatImage>
+      <div className='z-10 self-end flex relative'>
         {floatImg && (
           <Image
             src={floatImg.url}
@@ -43,18 +46,19 @@ const Highlight = ({
             fill
             aria-hidden={floatImg.alternativeText ? false : true}
             sizes='(max-width: 768px) 100vw, 50vw'
+            className='min-w-[100px] max-h-[230px] max-w-full h-auto! static! md:max-h-[320px]'
           />
         )}
-      </S.FloatImage>
-      <S.Content>
-        <S.Title>{title}</S.Title>
-        <S.Description>{description}</S.Description>
+      </div>
+      <div
+        className={`z-10 p-4 text-zinc-50 self-start md:p-10 md:self-end ${alignment === 'right' ? 'text-right pl-0' : 'pr-0'}`}
+      >
+        <h3 className='text-lg font-semibold md:text-[28px]'>{title}</h3>
+        <p className='text-sm font-light mb-4 md:mb-8 md:text-lg'>{description}</p>
         <Button asLink href={buttonUrl}>
           {buttonLabel}
         </Button>
-      </S.Content>
-    </S.Wrapper>
+      </div>
+    </div>
   )
 }
-
-export default Highlight

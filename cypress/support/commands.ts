@@ -152,6 +152,7 @@ Cypress.Commands.add('checkWishlistItemsAndClose', ({ quantity }) => {
 
 Cypress.Commands.add('goToSignInPageAndLogin', (email, password) => {
   cy.findAllByRole('link', { name: 'Sign in' }).first().click()
+  cy.url({ timeout: 10000 }).should('include', '/sign-in')
   cy.signIn(email, password)
 })
 

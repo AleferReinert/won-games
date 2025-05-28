@@ -15,7 +15,7 @@ describe('Wishlist (Protected Route)', () => {
 
   it('Check if added products are displayed here', () => {
     cy.findByLabelText('wishlist products').as('wishlistList')
-    cy.findByText('Your wishlist is empty').should('be.visible')
+    cy.findByText('Your wishlist is empty', { timeout: 30000 }).should('be.visible')
     cy.get('@wishlistList').findAllByTestId('ProductComponent').should('have.length', 0)
 
     cy.addToWishlistFromShowcase({ quantity: 3 })

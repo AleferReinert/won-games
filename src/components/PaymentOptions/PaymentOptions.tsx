@@ -1,54 +1,60 @@
-import { Add, ShoppingCart } from '@styled-icons/material-outlined'
-import Box from 'components/Box/Box'
-import Button from 'components/Button/Button'
-import CreditCard, { CreditCardProps } from 'components/CreditCard/CreditCard'
-import Heading from 'components/Heading/Heading'
-import Radio from 'components/Radio/Radio'
+'use client'
+import { Box } from 'components/Box/Box'
+import { Button } from 'components/Button/Button'
+import { CreditCard, CreditCardProps } from 'components/CreditCard/CreditCard'
+import { Heading } from 'components/Heading/Heading'
+import { Radio } from 'components/Radio/Radio'
 import { useState } from 'react'
-import * as S from './PaymentOptions.styles'
+import { MdOutlineAdd, MdOutlineShoppingCart } from 'react-icons/md'
 
 export interface PaymentOptionsProps {
   creditCards?: CreditCardProps[]
   handlePayment: () => void
 }
 
-const PaymentOptions = ({ creditCards, handlePayment }: PaymentOptionsProps) => {
+export const PaymentOptions = ({ creditCards, handlePayment }: PaymentOptionsProps) => {
   const [selectedCreditCard, setSelectedCreditCard] = useState(0)
 
   return (
-    <S.Wrapper data-testid='PaymentOptionsComponent'>
+    <form data-testid='PaymentOptionsComponent' className='bg-zinc-50 max-h-min max-w-[390px]'>
       <Box>
-        <Heading size='large' color='black' $line='bottom' $lineBottomSize='small'>
+        <Heading size='large' color='black' line='bottom' lineBottomSize='small'>
           Payment
         </Heading>
-        <S.CreditCards>
+        <ul className='flex flex-col'>
           {creditCards?.map((creditCard, index) => (
-            <S.Item key={creditCard.number}>
-              <S.Label title={creditCard.name} onClick={() => setSelectedCreditCard(index)}>
+            <li key={creditCard.number}>
+              <label
+                title={creditCard.name}
+                onClick={() => setSelectedCreditCard(index)}
+                className='bg-theme-gray-200 p-4 flex justify-between mb-2 ease-in-out duration-100 hover:bg-theme-gray-300'
+              >
                 <CreditCard img={creditCard.img} name={creditCard.name} number={creditCard.number} />
-                <S.RadioWrapper>
+                <div className='flex justify-end col-start-3 row-start-1'>
                   <Radio checked={index === selectedCreditCard} id={'creditCard' + index} name='creditCard' />
-                </S.RadioWrapper>
-              </S.Label>
-            </S.Item>
+                </div>
+              </label>
+            </li>
           ))}
-        </S.CreditCards>
-        <S.AddCreditCard>
-          <Add role='img' aria-hidden /> Add new credit card
-        </S.AddCreditCard>
+        </ul>
+        <button className='bg-theme-gray-200 p-4 text-base flex w-full'>
+          <MdOutlineAdd role='img' aria-hidden className='size-6 mr-2' /> Add new credit card
+        </button>
       </Box>
 
-      <S.Buttons>
-        <Button $variant='link' asLink href='/products'>
+      <div className='bg-theme-gray-100 p-4 flex flex-col gap-4 md:flex-row md:gap-0 md:justify-between md:p-6'>
+        <Button variant='link' asLink href='/explore' className='px-0 w-full md:w-1/2'>
           Continue shopping
         </Button>
-        <Button disabled={creditCards === undefined || creditCards.length === 0} onClick={handlePayment}>
-          <ShoppingCart role='img' aria-hidden />
+        <Button
+          disabled={creditCards === undefined || creditCards.length === 0}
+          onClick={handlePayment}
+          className='px-0 w-full md:w-1/2'
+        >
+          <MdOutlineShoppingCart role='img' aria-hidden />
           Buy now
         </Button>
-      </S.Buttons>
-    </S.Wrapper>
+      </div>
+    </form>
   )
 }
-
-export default PaymentOptions

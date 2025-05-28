@@ -1,65 +1,75 @@
-import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
-import Button from 'components/Button/Button'
+'use client'
+import { Button } from 'components/Button/Button'
 import { useLogout } from 'hooks/useLogout'
 import { useSession } from 'next-auth/react'
-import { Dispatch, SetStateAction } from 'react'
-import * as S from './MenuMobile.styles'
+import Link from 'next/link'
+import { ComponentProps, Dispatch, SetStateAction } from 'react'
+import { MdOutlineClose } from 'react-icons/md'
 
-interface MenuMobileProps {
+interface MenuMobileProps extends ComponentProps<'div'> {
   menuMobile: boolean
   setMenuMobile: Dispatch<SetStateAction<boolean>>
 }
 
-const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
+export const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
   const { status } = useSession()
   const { logout } = useLogout()
   const closeMenu = () => setMenuMobile(false)
+  const menuLinkStyles = 'relative text-theme-gray-950 font-semibold text-xl ease-in-out duration-300 no-underline'
 
   return (
-    <S.MenuMobile aria-label='Menu mobile' aria-hidden={!menuMobile} data-testid='MenuMobileComponent'>
-      <S.CloseMenu aria-label='Close menu' title='Close menu' onClick={() => setMenuMobile(false)}>
-        <CloseIcon role='img' aria-hidden width={24} height={24} />
-      </S.CloseMenu>
+    <div
+      aria-label='Menu mobile'
+      aria-hidden={!menuMobile}
+      data-testid='MenuMobileComponent'
+      className={`transition-opacity ease-in-out duration-300 bg-zinc-50 fixed inset-0 overflow-hidden flex flex-col justify-between z-20 ${menuMobile ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+    >
+      <button
+        aria-label='Close menu'
+        title='Close menu'
+        onClick={() => setMenuMobile(false)}
+        className='absolute top-0 right-0 p-4 leading-0 cursor-pointer'
+      >
+        <MdOutlineClose role='img' aria-hidden className='size-6' />
+      </button>
 
-      <S.MenuNav>
-        <S.MenuLink href='/' onClick={closeMenu}>
+      <nav className='flex items-center justify-center flex-col flex-1 gap-6 pt-[33px]'>
+        <Link href='/' onClick={closeMenu} className={menuLinkStyles}>
           Home
-        </S.MenuLink>
-        <S.MenuLink href='/products' onClick={closeMenu}>
+        </Link>
+        <Link href='/explore' onClick={closeMenu} className={menuLinkStyles}>
           Explore
-        </S.MenuLink>
+        </Link>
         {status === 'authenticated' && (
           <>
-            <S.MenuLink href='/account/profile' onClick={closeMenu}>
+            <Link href='/account/profile' onClick={closeMenu} className={menuLinkStyles}>
               My account
-            </S.MenuLink>
-            <S.MenuLink href='/wishlist' onClick={closeMenu}>
+            </Link>
+            <Link href='/wishlist' onClick={closeMenu} className={menuLinkStyles}>
               Wishlist
-            </S.MenuLink>
-            <S.MenuLink href='/' onClick={logout}>
+            </Link>
+            <Link href='/' onClick={logout} className={menuLinkStyles}>
               Logout
-            </S.MenuLink>
+            </Link>
           </>
         )}
-      </S.MenuNav>
+      </nav>
 
       {status === 'unauthenticated' && (
-        <S.AuthBox>
-          <S.LogInNow>
-            <Button size='large' asLink href='/sign-in' onClick={closeMenu}>
+        <div className='text-center pb-10'>
+          <div>
+            <Button size='large' asLink href='/sign-in' onClick={closeMenu} full className='max-w-[280px]'>
               Log in
             </Button>
-          </S.LogInNow>
-          <span>or</span>
-          <S.SignUp>
-            <Button $variant='link' size='large' asLink href='/sign-up' onClick={closeMenu}>
+          </div>
+          <div className='mt-4 -mb-2 text-sm'>or</div>
+          <div>
+            <Button variant='link' size='large' asLink href='/sign-up' onClick={closeMenu} className='underline'>
               Sign up
             </Button>
-          </S.SignUp>
-        </S.AuthBox>
+          </div>
+        </div>
       )}
-    </S.MenuMobile>
+    </div>
   )
 }
-
-export default MenuMobile

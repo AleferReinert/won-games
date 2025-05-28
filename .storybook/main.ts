@@ -19,10 +19,10 @@ const config: StorybookConfig = {
       }
     }
   ],
-  framework: {
-    name: '@storybook/nextjs',
-    options: {}
+  features: {
+    experimentalRSC: true
   },
+  framework: '@storybook/nextjs',
   staticDirs: ['../public'],
   webpackFinal: (config) => {
     config.resolve?.modules?.push(`${process.cwd()}/src`)

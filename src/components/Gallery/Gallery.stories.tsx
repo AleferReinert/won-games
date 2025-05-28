@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
 import { galleryMock } from 'mocks/gallery.mock'
-import GalleryComponents from './Gallery'
+import { Gallery } from './Gallery'
 
-const meta: Meta<typeof GalleryComponents> = {
+const meta: Meta<typeof Gallery> = {
   title: 'Components/Gallery',
-  component: GalleryComponents,
+  component: Gallery,
   args: { items: galleryMock },
   argTypes: {
     items: {
@@ -16,7 +16,7 @@ const meta: Meta<typeof GalleryComponents> = {
 
 export default meta
 
-type Story = StoryObj<typeof GalleryComponents>
+type Story = StoryObj<typeof Gallery>
 
 export const Default: Story = {
   name: 'Gallery',

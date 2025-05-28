@@ -1,0 +1,90 @@
+import { Container } from 'components/Container/Container'
+import { Divider } from 'components/Divider/Divider'
+import { Gallery } from 'components/Gallery/Gallery'
+import { Heading } from 'components/Heading/Heading'
+import { ProductDetails } from 'components/ProductDetails/ProductDetails'
+import { ProductHeader } from 'components/ProductHeader/ProductHeader'
+import { Showcase } from 'components/Showcase/Showcase'
+import { Metadata } from 'next'
+import Image from 'next/image'
+import { fetchProductBySlug } from 'utils/fetchProductBySlug'
+import styles from './ProductPage.module.css'
+
+interface ProductPageProps {
+  params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const { productHeader, cover } = await fetchProductBySlug(slug)
+  return {
+    title: productHeader.title,
+    description: productHeader.description,
+    openGraph: {
+      type: 'article',
+      url: process.env.NEXTAUTH_URL + `/game/${slug}`,
+      title: productHeader.title,
+      description: productHeader.description,
+      images: [{ url: cover.url }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: productHeader.title,
+      description: productHeader.description,
+      images: [{ url: cover.url }]
+    }
+  }
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { slug } = await params
+  const { cover, productHeader, gallery, description, details, comingSoon, recommended } =
+    await fetchProductBySlug(slug)
+
+  return (
+    <div data-testid='ProductPage'>
+      <div data-testid='cover' className='w-full h-[400px] absolute top-0 md:h-[580px] md:custom-clip-path-secondary'>
+        <Image
+          priority
+          src={cover.url}
+          alt={cover.alternativeText}
+          fill
+          aria-hidden={!cover.alternativeText}
+          className='object-cover'
+        />
+        <div className='absolute inset-0 bg-black/70'></div>
+      </div>
+
+      <Container className='mt-[200px] md:mt-[300px]'>
+        <ProductHeader {...productHeader} />
+      </Container>
+
+      {gallery && (
+        <div className='hidden overflow-hidden mt-20 md:block'>
+          <Container>
+            <Gallery items={gallery} />
+          </Container>
+        </div>
+      )}
+
+      <div className='py-10 text-zinc-50 md:text-theme-gray-950 md:bg-zinc-50 md:mt-20'>
+        <Container>
+          <Heading line='left' lineColor='secondary' className='md:text-black'>
+            About game
+          </Heading>
+          <div className={styles.content} data-testid='description' dangerouslySetInnerHTML={{ __html: description }} />
+        </Container>
+      </div>
+
+      <Container>
+        <div className='mt-14 md:mt-16'>
+          <ProductDetails {...details} />
+        </div>
+        <Divider />
+      </Container>
+
+      <Showcase data-cy='comingSoon' {...comingSoon} />
+      <Showcase data-cy='recommendedProducts' {...recommended} />
+    </div>
+  )
+}

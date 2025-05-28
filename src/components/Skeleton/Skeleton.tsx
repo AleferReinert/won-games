@@ -1,13 +1,10 @@
-import * as S from './Skeleton.styles'
+import { ComponentProps } from 'react'
 
-export interface SkeletonProps {
-  width: string | number
-  height: string | number
-  $rounded?: boolean
+export const Skeleton = (props: ComponentProps<'div'>) => {
+  return (
+    <div
+      data-testid='SkeletonComponent'
+      className={`${props.className || ''} min-w-6 min-h-6 bg-zinc-50 animate-pulse`}
+    ></div>
+  )
 }
-
-const Skeleton = ({ width, height, $rounded = false }: SkeletonProps) => {
-  return <S.Wrapper width={width} height={height} $rounded={$rounded} data-testid='SkeletonComponent'></S.Wrapper>
-}
-
-export default Skeleton

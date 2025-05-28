@@ -1,12 +1,22 @@
-import { ComponentProps } from 'react'
-import * as S from './Box.styles'
+import { ComponentProps, ReactNode } from 'react'
+import { tv } from 'tailwind-variants'
 
-export interface BoxProps extends ComponentProps<'div'> {
-  $padding?: 'xsmall' | 'small' | 'medium'
+interface BoxProps extends ComponentProps<'div'> {
+  children: ReactNode
+  size?: 'xsmall' | 'small' | 'medium'
 }
 
-const Box = ({ $padding = 'small', ...props }: BoxProps) => {
-  return <S.Wrapper $padding={$padding}>{props.children}</S.Wrapper>
-}
+const box = tv({
+  base: 'bg-zinc-50',
+  variants: {
+    size: {
+      xsmall: 'p-4',
+      small: 'p-4 md:p-6',
+      medium: 'p-6 md:p-8'
+    }
+  }
+})
 
-export default Box
+export const Box = ({ children, size = 'small', ...props }: BoxProps) => {
+  return <div className={`${box({ size })} ${props.className || ''}`}>{children}</div>
+}

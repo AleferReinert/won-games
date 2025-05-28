@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import { remToPx } from 'polished'
-import theme from 'styles/theme'
-import Ribbon from './Ribbon'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import { Ribbon } from './Ribbon'
 
 const meta: Meta<typeof Ribbon> = {
   title: 'Components/Atoms/Ribbon',
@@ -12,14 +11,7 @@ const meta: Meta<typeof Ribbon> = {
   },
   decorators: [
     (Story) => (
-      <div
-        style={{
-          width: '30rem',
-          position: 'relative',
-          aspectRatio: '16/9',
-          background: '#eee'
-        }}
-      >
+      <div className='relative w-[300px] aspect-video bg-[#eee]'>
         <Story />
       </div>
     )
@@ -33,7 +25,8 @@ export default meta
 
 type Story = StoryObj<typeof Ribbon>
 
-export const Default: Story = {
+export const Large: Story = {
+  name: 'Large (default)',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const ribbon = canvas.getByText(/new release/i)
@@ -43,14 +36,11 @@ export const Default: Story = {
     })
 
     await step('Primary color as default', () => {
-      expect(ribbon).toHaveStyle({ backgroundColor: theme.colors.primary })
+      expect(ribbon).toHaveStyle({ backgroundColor: getTailwindValue('--color-theme-primary') })
     })
 
     step('Size large as default', () => {
-      expect(ribbon).toHaveStyle({
-        fontSize: remToPx(theme.font.sizes.small),
-        height: remToPx('3.3rem')
-      })
+      expect(ribbon).toHaveStyle({ fontSize: '14px', height: '33px' })
     })
   }
 }
@@ -64,7 +54,7 @@ export const Secondary: Story = {
     const ribbon = canvas.getByText(/new release/i)
 
     step('Secondary color', () => {
-      expect(ribbon).toHaveStyle({ backgroundColor: theme.colors.secondary })
+      expect(ribbon).toHaveStyle({ backgroundColor: getTailwindValue('--color-theme-secondary') })
     })
   }
 }
@@ -78,10 +68,7 @@ export const Small: Story = {
     const ribbon = canvas.getByText(/new release/i)
 
     step('Font 10px and height 24px', () => {
-      expect(ribbon).toHaveStyle({
-        fontSize: remToPx(theme.font.sizes.xxsmall),
-        height: remToPx('2.4rem')
-      })
+      expect(ribbon).toHaveStyle({ fontSize: '10px', height: '24px' })
     })
   }
 }

@@ -1,7 +1,8 @@
 import Image from 'next/image'
-import * as S from './CreditCard.styles'
+import { ComponentProps } from 'react'
+import { tv } from 'tailwind-variants'
 
-export interface CreditCardProps {
+export interface CreditCardProps extends ComponentProps<'div'> {
   name: string
   number: string
   img: string
@@ -9,23 +10,25 @@ export interface CreditCardProps {
   direction?: 'left' | 'right'
 }
 
-const CreditCard = ({
-  name,
-  number,
-  img,
-  color = 'black',
-  direction = 'left'
-}: CreditCardProps) => {
+const creditCard = tv({
+  base: 'inline-flex gap-2 items-center',
+  variants: {
+    color: {
+      black: 'text-theme-gray-950',
+      gray: 'text-theme-500'
+    },
+    direction: {
+      left: 'flex-row',
+      right: 'flex-row-reverse'
+    }
+  }
+})
+
+export const CreditCard = ({ name, number, img, color = 'black', direction = 'left' }: CreditCardProps) => {
   return (
-    <S.Wrapper
-      color={color}
-      direction={direction}
-      data-testid='CreditCardComponent'
-    >
+    <div data-testid='CreditCardComponent' className={creditCard({ color, direction })}>
       <Image src={img} width='36' height='22' alt={name} />
-      <S.Number aria-label='credit card number'>{number}</S.Number>
-    </S.Wrapper>
+      <div aria-label='credit card number'>{number}</div>
+    </div>
   )
 }
-
-export default CreditCard

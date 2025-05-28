@@ -4,6 +4,7 @@ describe('Product page (unauthenticated)', () => {
   beforeEach(() => {
     cy.visit('/')
     cy.findAllByTestId('ProductComponent').eq(0).click()
+    cy.findByTestId('ProductPage', { timeout: 30000 }).should('be.visible')
   })
 
   it('Cover, title, short description, price, add to cart button, gallery, description, categories, platforms, release date, developer, publisher, rating, coming soon and recommended products', () => {
@@ -13,7 +14,7 @@ describe('Product page (unauthenticated)', () => {
     cy.findByTestId('ProductHeaderComponent').within(() => {
       cy.findByRole('heading', { level: 1 }).should('be.visible')
       cy.findByRole('paragraph').should('be.visible')
-      cy.findByLabelText('Price').should('be.visible')
+      cy.findAllByLabelText('Price').filter(':visible').should('have.length', 1)
       cy.findByRole('button', { name: 'Add to cart' }).should('be.visible')
     })
 

@@ -1,13 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
-import Container from 'components/Container/Container'
+import { Container } from 'components/Container/Container'
+import { companyMock } from 'mocks/company.mock'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
-import HeaderComponent from './Header'
+import { Header } from './Header'
 
-const meta: Meta<typeof HeaderComponent> = {
+const meta: Meta<typeof Header> = {
   title: 'Components/Header',
-  component: HeaderComponent,
+  component: Header,
+  args: {
+    company: companyMock
+  },
   decorators: (Story) => (
     <Container>
       <Story />
@@ -18,7 +22,7 @@ const meta: Meta<typeof HeaderComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof HeaderComponent> & { args?: NextAuthSessionArgs }
+type Story = StoryObj<typeof Header> & { args?: NextAuthSessionArgs }
 
 export const Mobile: Story = {
   parameters: {
@@ -112,7 +116,7 @@ export const Desktop: Story = {
       const homeLink = canvas.getByRole('link', { name: 'Home' })
       const exploreLink = canvas.getByRole('link', { name: 'Explore' })
       expect(homeLink).toHaveAttribute('href', '/')
-      expect(exploreLink).toHaveAttribute('href', '/products')
+      expect(exploreLink).toHaveAttribute('href', '/explore')
     })
 
     await step('Cart button with icon', () => {

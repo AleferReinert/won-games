@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import Container from 'components/Container/Container'
+import { Container } from 'components/Container/Container'
 import { highlightMock } from 'mocks/highlight.mock'
 import { productsMock } from 'mocks/products.mock'
-import ShowcaseComponent from './Showcase'
+import { Showcase } from './Showcase'
 
-const meta: Meta<typeof ShowcaseComponent> = {
+const meta: Meta<typeof Showcase> = {
   title: 'Components/Showcase',
-  component: ShowcaseComponent,
+  component: Showcase,
   argTypes: {
     highlight: {
       control: 'boolean',
@@ -36,7 +36,7 @@ const meta: Meta<typeof ShowcaseComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof ShowcaseComponent>
+type Story = StoryObj<typeof Showcase>
 
 export const Title: Story = {
   args: {

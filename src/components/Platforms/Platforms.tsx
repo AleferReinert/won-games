@@ -1,10 +1,8 @@
-import * as S from './Platforms.styles'
-
 interface PlatformsProps {
   platforms: string[]
 }
 
-const Platforms = ({ platforms }: PlatformsProps) => {
+export const Platforms = ({ platforms }: PlatformsProps) => {
   /*
     Agrupa os sistemas operacionais.
     Exemplo:
@@ -75,10 +73,8 @@ const Platforms = ({ platforms }: PlatformsProps) => {
   }
 
   return (
-    <S.Wrapper data-testid='PlatformsComponent'>
+    <div data-testid='PlatformsComponent' className='text-zinc-50 text-base'>
       <p>{groupSystems(platforms)}</p>
-    </S.Wrapper>
+    </div>
   )
 }
-
-export default Platforms

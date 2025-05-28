@@ -4,18 +4,18 @@ import { expect, within } from '@storybook/test'
 import { CartContext } from 'contexts/CartContext'
 import { cartContextMock } from 'mocks/cartContext.mock'
 import { cartItemsResponseMock } from 'mocks/cartItemsResponse.mock'
-import theme from 'styles/theme'
-import CartItemsComponent from './CartItems'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import { CartItems } from './CartItems'
 
-const meta: Meta<typeof CartItemsComponent> = {
+const meta: Meta<typeof CartItems> = {
   title: 'Components/CartItems',
-  component: CartItemsComponent,
+  component: CartItems,
   tags: ['autodocs']
 }
 
 export default meta
 
-type Story = StoryObj<typeof CartItemsComponent>
+type Story = StoryObj<typeof CartItems>
 
 export const Empty: Story = {
   play: ({ canvasElement, step }) => {
@@ -54,7 +54,7 @@ export const WithProducts: Story = {
     await step('Total price with primary color ', () => {
       const totalPrice = canvas.getByLabelText('total price')
       expect(totalPrice).toHaveTextContent('$218')
-      expect(totalPrice).toHaveStyle({ color: theme.colors.primary })
+      expect(totalPrice).toHaveStyle({ color: getTailwindValue('--color-theme-primary') })
     })
 
     step('Hidden button', () => {

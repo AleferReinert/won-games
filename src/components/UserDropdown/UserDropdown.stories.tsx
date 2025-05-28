@@ -1,27 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
-import UserDropdownComponent from './UserDropdown'
+import { UserDropdown } from './UserDropdown'
 
-const meta: Meta<typeof UserDropdownComponent> = {
+const meta: Meta<typeof UserDropdown> = {
   title: 'Components/UserDropdown',
-  component: UserDropdownComponent,
+  component: UserDropdown,
   args: {
     nextAuthSession: nextAuthSessionMock
   },
   decorators: (Story) => (
-    <div style={{ textAlign: 'right', padding: '2rem', height: '280px' }}>
+    <div className='text-right p-5 h-52'>
       <Story />
     </div>
-  ),
-  tags: ['autodocs']
+  )
 }
 
 export default meta
 
-type Story = StoryObj<typeof UserDropdownComponent>
+type Story = StoryObj<typeof UserDropdown>
 
-export const UserDropdown: Story = {
+export const Default: Story = {
+  name: 'UserDropdown',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const username = canvas.getByText('John')
@@ -40,7 +40,7 @@ export const UserDropdown: Story = {
       await waitFor(() => expect(navigation).toBeVisible())
       expect(within(navigation).getByRole('link', { name: 'My account' })).toHaveAttribute('href', '/account/profile')
       expect(within(navigation).getByRole('link', { name: 'Wishlist (0)' })).toHaveAttribute('href', '/wishlist')
-      expect(within(navigation).getByRole('link', { name: 'Logout' })).toHaveAttribute('href', '/')
+      expect(within(navigation).getByRole('button', { name: 'Logout' })).toBeVisible()
     })
 
     await step('Navigation hidden on username second click', async () => {

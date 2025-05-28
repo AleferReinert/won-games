@@ -1,0 +1,49 @@
+.productSlider {
+  /* overflow: hidden; */
+  max-width: 320px;
+
+  & :global(div.slick-track) {
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+  }
+  & :global(div.slick-slide > div) {
+    flex: 1 0 auto;
+    height: 100%;
+  }
+
+  & :global(div.slick-list) {
+    margin-inline: calc(var(--spacing) * -2);
+    display: flex;
+    overflow: visible;
+  }
+}
+
+@media (min-width: 360px) {
+  .productSlider {
+    max-width: 360px;
+  }
+}
+
+@media (min-width: 768px) {
+  .productSlider {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .productSlider {
+    max-width: none;
+    overflow: visible;
+  }
+}
+
+@media (min-width: 1366px) {
+  .productSlider {
+    overflow: hidden;
+
+    & :global(div.slick-list) {
+      overflow: hidden;
+      min-width: var(--container-3xl);
+    }
+  }
+}

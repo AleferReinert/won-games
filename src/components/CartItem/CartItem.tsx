@@ -1,9 +1,11 @@
-import { Clear, FileDownload } from '@styled-icons/material'
-import Box from 'components/Box/Box'
-import CreditCard from 'components/CreditCard/CreditCard'
-import Price from 'components/Price/Price'
+'use client'
+import { Box } from 'components/Box/Box'
+import { CreditCard } from 'components/CreditCard/CreditCard'
+import { Price } from 'components/Price/Price'
 import { useCart } from 'hooks/useCart'
-import * as S from './CartItem.styles'
+import Image from 'next/image'
+import Link from 'next/link'
+import { MdFileDownload, MdOutlineClear } from 'react-icons/md'
 
 export interface PaymentProps {
   creditCardBrand: string
@@ -19,58 +21,83 @@ export interface CartItemProps {
   price: number
   downloadLink?: string
   paymentInfo?: PaymentProps
-  removeFromCartButton?: boolean
+  hideRemoveFromCartButton?: boolean
 }
 
-const CartItem = ({ id, img, name, price, downloadLink, paymentInfo, removeFromCartButton = true }: CartItemProps) => {
+export const CartItem = ({
+  id,
+  img,
+  name,
+  price,
+  downloadLink,
+  paymentInfo,
+  hideRemoveFromCartButton = false
+}: CartItemProps) => {
   const { removeFromCart } = useCart()
   const imgSrc = process.env.STORYBOOK ? img : img
 
   return (
-    <S.Wrapper data-testid='CartItemComponent'>
+    <li data-testid='CartItemComponent' className='cursor-default list-none border-b border-theme-gray-200'>
       <Box>
-        <S.Content paymentInfo={paymentInfo}>
-          <S.Img src={img ? imgSrc : ''} alt={img ? name : 'Image not found'} width={293} height={138} />
-          <S.Group>
-            <S.InfoWrapper>
-              <S.TitleWrapper>
-                <S.Title>{name}</S.Title>
-              </S.TitleWrapper>
+        <div
+          className={`grid grid-cols-[min-content_auto] grid-rows-[auto_auto] gap-2 xs:gap-4 md:grid-rows-none md:gap-6 ${paymentInfo ? 'md:grid-cols-[min-content_1fr_1fr]' : 'md:grid-cols-[min-content_1fr]'}`}
+        >
+          <Image
+            src={img ? imgSrc : ''}
+            alt={img ? name : 'Image not found'}
+            width={293}
+            height={138}
+            className='aspect-video max-w-[94px]'
+          />
+          <div className='flex justify-between gap-4'>
+            <div className='overflow-hidden'>
+              <div className='leading-6 mb-0.5 -translate-y-1 flex justify-between gap-2 md:justify-start'>
+                <h2 className='text-base overflow-hidden text-ellipsis font-bold'>{name}</h2>
+              </div>
               <Price price={price} />
-            </S.InfoWrapper>
-            <S.ButtonGroup>
+            </div>
+            <div className='flex gap-2 items-center'>
               {downloadLink && (
-                <S.DownloadLink href={downloadLink} title='Download' download>
-                  <FileDownload role='img' aria-hidden width={24} height={24} />
-                </S.DownloadLink>
+                <Link
+                  href={downloadLink}
+                  title='Download'
+                  download
+                  className='fill-theme-primary inline-flex w-6 translate-y-0.5'
+                >
+                  <MdFileDownload role='img' aria-hidden className='fill-theme-primary size-6' />
+                </Link>
               )}
-              {removeFromCartButton && (
-                <S.ButtonRemove type='button' onClick={() => removeFromCart(id)} title='Remove from cart'>
-                  <Clear role='img' aria-hidden width={20} height={20} />
-                </S.ButtonRemove>
+              {!hideRemoveFromCartButton && (
+                <button
+                  type='button'
+                  onClick={() => removeFromCart(id)}
+                  title='Remove from cart'
+                  className='size-6 cursor-pointer'
+                >
+                  <MdOutlineClear role='img' aria-hidden className='fill-theme-primary size-5' />
+                </button>
               )}
-            </S.ButtonGroup>
-          </S.Group>
+            </div>
+          </div>
 
           {paymentInfo && (
-            <S.PaymentInfo>
-              <S.PurchaseDate aria-label='purchase date'>{paymentInfo.purchaseDate}</S.PurchaseDate>
+            <div className='text-theme-gray-500 text-sm leading-none flex max-w-fit flex-col gap-2 mt-4 justify-self-end col-span-2 md:mt-0 md:col-start-3 md:text-right md:gap-0 md:justify-between'>
+              <div aria-label='purchase date'>{paymentInfo.purchaseDate}</div>
               {paymentInfo.creditCardNumber ? (
                 <CreditCard
                   img={paymentInfo.creditCardFlag}
                   name={paymentInfo.creditCardBrand}
                   number={paymentInfo.creditCardNumber}
                   color='gray'
+                  className='md:flex-row-reverse'
                 />
               ) : (
                 'Free'
               )}
-            </S.PaymentInfo>
+            </div>
           )}
-        </S.Content>
+        </div>
       </Box>
-    </S.Wrapper>
+    </li>
   )
 }
-
-export default CartItem

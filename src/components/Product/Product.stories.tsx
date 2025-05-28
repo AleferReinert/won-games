@@ -5,11 +5,11 @@ import { cartContextMock } from 'mocks/cartContext.mock'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
 import { productMock } from '../../mocks/product.mock'
-import ProductComponent from './Product'
+import { Product } from './Product'
 
-const meta: Meta<typeof ProductComponent> = {
+const meta: Meta<typeof Product> = {
   title: 'Components/Product',
-  component: ProductComponent,
+  component: Product,
   args: productMock,
   decorators: (Story) => (
     <CartContext.Provider value={cartContextMock}>
@@ -24,14 +24,14 @@ const meta: Meta<typeof ProductComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof ProductComponent> & { args?: NextAuthSessionArgs }
+type Story = StoryObj<typeof Product> & { args?: NextAuthSessionArgs }
 
 export const Unauthenticated: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     await step('Image', () => {
-      const image = canvas.getByRole('img', { name: 'Population Zero' })
+      const image = canvas.getByRole('img', { name: 'Game cover image' })
       expect(image.getAttribute('src')).toContain('/img/test/product.jpg')
     })
 
@@ -62,7 +62,7 @@ export const Unauthenticated: Story = {
 
     await step('Slug: link with href', () => {
       const slug = canvas.getByRole('link')
-      expect(slug).toHaveAttribute('href', '/product/population-zero')
+      expect(slug).toHaveAttribute('href', '/game/population-zero')
     })
   }
 }
@@ -80,10 +80,9 @@ export const Authenticated: Story = {
     })
   }
 }
-export const WithDiscount: Story = {
+export const Ribbon: Story = {
   args: {
-    ribbonLabel: '20% off',
-    promotionalPrice: 185.0
+    ribbonLabel: '20% off'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -91,11 +90,39 @@ export const WithDiscount: Story = {
     await step('RibbonComponent', () => {
       const ribbonComponent = canvas.getByTestId('RibbonComponent')
       expect(ribbonComponent).toBeVisible()
+      expect(ribbonComponent).toHaveTextContent('20% off')
     })
+  }
+}
+
+export const PromotionalPrice: Story = {
+  args: {
+    promotionalPrice: 185.0
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
 
     await step('Promotional price', () => {
       const promotionalPrice = canvas.getByLabelText('Promotional price')
       expect(promotionalPrice).toBeVisible()
+      expect(promotionalPrice).toHaveTextContent('$185.00')
+    })
+  }
+}
+
+export const ImageNotFound: Story = {
+  args: {
+    cover: {
+      url: 'http://invalidurl.com',
+      alternativeText: 'Image not found'
+    }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('RibbonComponent', () => {
+      const img = canvas.getByRole('img', { name: 'Image not found' })
+      expect(img).toBeVisible()
     })
   }
 }

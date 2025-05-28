@@ -1,28 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import Container from 'components/Container/Container'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
 import { productHeaderMock } from '../../mocks/productHeader.mock'
-import ProductHeaderComponent from './ProductHeader'
+import { ProductHeader } from './ProductHeader'
 
-const meta: Meta<typeof ProductHeaderComponent> = {
+const meta: Meta<typeof ProductHeader> = {
   title: 'Components/ProductHeader',
-  component: ProductHeaderComponent,
+  component: ProductHeader,
   args: productHeaderMock,
-  decorators: [
-    (Story) => (
-      <Container>
-        <Story />
-      </Container>
-    )
-  ],
+
+  parameters: {
+    viewport: {
+      defaultViewport: 'medium'
+    },
+    layout: 'padded'
+  },
   tags: ['autodocs']
 }
 
 export default meta
 
-type Story = StoryObj<typeof ProductHeaderComponent> & { args?: NextAuthSessionArgs }
+type Story = StoryObj<typeof ProductHeader> & { args?: NextAuthSessionArgs }
 
 export const Unauthenticated: Story = {
   play: async ({ canvasElement, step }) => {
@@ -30,17 +29,18 @@ export const Unauthenticated: Story = {
 
     await step('Title', () => {
       const title = canvas.getByRole('heading', { name: /borderlands 3/i, level: 1 })
-      expect(title).toBeInTheDocument()
+      expect(title).toBeVisible()
     })
 
     await step('Description', () => {
       const description = canvas.getByText(/now is hour to eliminate/i)
-      expect(description).toBeInTheDocument()
+      expect(description).toBeVisible()
     })
 
-    await step('Price', () => {
-      const price = canvas.getByText('$215.00')
-      expect(price).toBeInTheDocument()
+    await step('Price large visible and small hidden', () => {
+      const prices = canvas.getAllByText('$215.00')
+      expect(prices[0]).not.toBeVisible()
+      expect(prices[1]).toBeVisible()
     })
 
     await step('AddToCartButtonComponent', () => {
@@ -65,6 +65,23 @@ export const Authenticated: Story = {
     await step('AddToWishlistButton component', () => {
       const addToWishlistComponent = canvas.getByTestId('AddToWishlistButtonComponent')
       expect(addToWishlistComponent).toBeVisible()
+    })
+  }
+}
+
+export const Mobile: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'xxsmall'
+    }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('Price small visible and large hidden', () => {
+      const prices = canvas.getAllByText('$215.00')
+      expect(prices[0]).toBeVisible()
+      expect(prices[1]).not.toBeVisible()
     })
   }
 }

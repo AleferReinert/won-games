@@ -1,36 +1,42 @@
-import { ShoppingCart as ShoppingCartIcon } from '@styled-icons/material-outlined/ShoppingCart'
-import CartItems from 'components/CartItems/CartItems'
-import Dropdown from 'components/Dropdown/Dropdown'
+'use client'
+import { CartItems } from 'components/CartItems/CartItems'
+import { Dropdown } from 'components/Dropdown/Dropdown'
 import { useCart } from 'hooks/useCart'
 import Link from 'next/link'
-import theme from 'styles/theme'
-import * as S from './CartDropdown.styles'
+import { MdOutlineShoppingCart } from 'react-icons/md'
 
-const CartDropdown = () => {
+export const CartDropdown = () => {
   const { totalQuantity } = useCart()
 
   return (
-    <S.Wrapper data-testid='CartDropdownComponent'>
-      <div id='desktop'>
+    <div data-testid='CartDropdownComponent'>
+      <div id='desktop' className='hidden md:block'>
         <Dropdown
-          button={
-            <S.ButtonCart>
-              <S.BadgeCart aria-label='Cart items'>{totalQuantity}</S.BadgeCart>
-              <ShoppingCartIcon role='img' aria-hidden width={24} height={24} />
-            </S.ButtonCart>
+          buttonContent={
+            <div className='relative bg-transparent leading-0'>
+              <div
+                aria-label='Cart items'
+                className='absolute -top-[5px] -right-[5px] rounded-full text-white size-4 bg-theme-secondary leading-4 text-[10px] font-semibold text-center'
+              >
+                {totalQuantity}
+              </div>
+              <MdOutlineShoppingCart role='img' aria-hidden className='fill-zinc-50 size-6' />
+            </div>
           }
-          buttonLabel='Shopping cart'
+          buttonTitle='Shopping cart'
         >
-          <CartItems button />
+          <CartItems
+            button
+            className='w-[480px] shadow-[0_0_3px_rgba(0,0,0,0.25)] [&_ul]:max-h-[304px] [&_ul]:overflow-y-auto'
+          />
         </Dropdown>
       </div>
-      <div id='mobile'>
+
+      <div id='mobile' className='[&_svg]:fill-zinc-50 md:hidden'>
         <Link href='/cart' title='Shopping cart' aria-label='Shopping cart'>
-          <ShoppingCartIcon role='img' aria-hidden width={24} height={24} fill={theme.colors.white} />
+          <MdOutlineShoppingCart role='img' aria-hidden className='fill-zinc-50 size-6' />
         </Link>
       </div>
-    </S.Wrapper>
+    </div>
   )
 }
-
-export default CartDropdown

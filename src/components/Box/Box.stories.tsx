@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import { remToPx } from 'polished'
-import theme from 'styles/theme'
-import BoxComponent from './Box'
+import { Box } from './Box'
 
-const meta: Meta<typeof BoxComponent> = {
+const meta: Meta<typeof Box> = {
   title: 'Components/Atoms/Box',
-  component: BoxComponent,
+  component: Box,
   args: {
     children: <h1>Children</h1>
   },
@@ -18,9 +16,24 @@ const meta: Meta<typeof BoxComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof BoxComponent>
+type Story = StoryObj<typeof Box>
 
-export const Default: Story = {
+export const Xsmall: Story = {
+  args: {
+    size: 'xsmall'
+  },
+  play: ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    step('Padding xsmall', () => {
+      const wrapper = canvas.getByRole('heading', { name: /children/i }).parentElement
+      expect(wrapper).toHaveStyle({ padding: '16px' })
+    })
+  }
+}
+
+export const Small: Story = {
+  name: 'Small (default)',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const children = canvas.getByRole('heading', { name: /children/i })
@@ -31,35 +44,21 @@ export const Default: Story = {
     })
 
     await step('Padding small as default', () => {
-      expect(wrapper).toHaveStyle({ padding: remToPx(theme.spacings.small) })
-    })
-  }
-}
-
-export const Xsmall: Story = {
-  args: {
-    $padding: 'xsmall'
-  },
-  play: ({ canvasElement, step }) => {
-    const canvas = within(canvasElement)
-
-    step('Padding xsmall', () => {
-      const wrapper = canvas.getByRole('heading', { name: /children/i }).parentElement
-      expect(wrapper).toHaveStyle({ padding: remToPx(theme.spacings.xsmall) })
+      expect(wrapper).toHaveStyle({ padding: '24px' })
     })
   }
 }
 
 export const Medium: Story = {
   args: {
-    $padding: 'medium'
+    size: 'medium'
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     step('Padding medium', () => {
       const wrapper = canvas.getByRole('heading', { name: /children/i }).parentElement
-      expect(wrapper).toHaveStyle({ padding: remToPx(theme.spacings.medium) })
+      expect(wrapper).toHaveStyle({ padding: '32px' })
     })
   }
 }

@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import { remToPx } from 'polished'
-import theme from 'styles/theme'
-import PriceComponent from './Price'
+import { Price } from './Price'
 
-const meta: Meta<typeof PriceComponent> = {
+const meta: Meta<typeof Price> = {
   title: 'Components/Atoms/Price',
-  component: PriceComponent,
+  component: Price,
   args: {
     price: 215
   },
@@ -18,25 +16,22 @@ const meta: Meta<typeof PriceComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof PriceComponent>
+type Story = StoryObj<typeof Price>
 
 export const Default: Story = {
-  name: 'Default (small)',
+  name: 'Small (default)',
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
     const price = canvas.getByLabelText('Price')
 
     await step('Price with background secondary and color white', () => {
-      expect(price).toHaveStyle({
-        'background-color': theme.colors.secondary,
-        color: theme.colors.white
-      })
+      expect(price).toHaveClass('bg-theme-secondary text-zinc-50')
     })
 
     await step('Size small', () => {
       expect(price).toHaveStyle({
-        height: remToPx('2.2rem'),
-        fontSize: remToPx(theme.font.sizes.small)
+        height: '22px',
+        fontSize: '14px'
       })
     })
   }
@@ -52,23 +47,17 @@ export const Promotional: Story = {
 
     await step('Old price with color gray and line-through', () => {
       const oldPrice = canvas.getByLabelText('Price')
-      expect(oldPrice).toHaveStyle({
-        color: theme.colors.gray,
-        'text-decoration-line': 'line-through'
-      })
+      expect(oldPrice).toHaveClass('text-theme-gray-500 line-through')
     })
 
     await step('Promotional price with background secondary and color white', () => {
-      expect(promotionalPrice).toHaveStyle({
-        'background-color': theme.colors.secondary,
-        color: theme.colors.white
-      })
+      expect(promotionalPrice).toHaveClass('bg-theme-secondary text-zinc-50')
     })
 
     await step('Promotional price small', () => {
       expect(promotionalPrice).toHaveStyle({
-        height: remToPx('2.2rem'),
-        fontSize: remToPx(theme.font.sizes.small)
+        height: '22px',
+        fontSize: '14px'
       })
     })
   }
@@ -85,16 +74,16 @@ export const Medium: Story = {
     await step('Old price medium', () => {
       const oldPrice = canvas.getByLabelText('Price')
       expect(oldPrice).toHaveStyle({
-        height: remToPx('3.3rem'),
-        fontSize: remToPx(theme.font.sizes.medium)
+        height: '33px',
+        fontSize: '16px'
       })
     })
 
     await step('Promotional price medium', () => {
       const promotionalPrice = canvas.getByLabelText('Promotional price')
       expect(promotionalPrice).toHaveStyle({
-        height: remToPx('3.3rem'),
-        fontSize: remToPx(theme.font.sizes.medium)
+        height: '33px',
+        fontSize: '16px'
       })
     })
   }
@@ -111,16 +100,16 @@ export const Large: Story = {
     await step('Old price large', () => {
       const oldPrice = canvas.getByLabelText('Price')
       expect(oldPrice).toHaveStyle({
-        height: remToPx('3.8rem'),
-        fontSize: remToPx(theme.font.sizes.xlarge)
+        height: '38px',
+        fontSize: '20px'
       })
     })
 
     await step('Promotional price large', () => {
       const promotionalPrice = canvas.getByLabelText('Promotional price')
       expect(promotionalPrice).toHaveStyle({
-        height: remToPx('3.8rem'),
-        fontSize: remToPx(theme.font.sizes.xlarge)
+        height: '38px',
+        fontSize: '20px'
       })
     })
   }

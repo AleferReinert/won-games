@@ -1,8 +1,8 @@
 import { ApolloClient, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { GetServerSidePropsContext } from 'next'
 import { getServerSession } from 'next-auth'
-import { authOptions } from 'pages/api/auth/[...nextauth].page'
 
 interface InitializeOptions {
   initialState?: NormalizedCacheObject | null
@@ -12,7 +12,8 @@ interface InitializeOptions {
 
 function createApolloClient(token?: string, context?: GetServerSidePropsContext) {
   const httpLink = new HttpLink({
-    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`
+    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
+    headers: token ? { Authorization: `Bearer ${token}` } : {}
   })
 
   const authLink = setContext(async (_, { headers }) => {

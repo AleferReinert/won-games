@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, within } from '@storybook/test'
-import { Email, Person } from '@styled-icons/material-outlined'
-import theme from 'styles/theme'
-import TextField from './TextField'
+import { BiUserCircle } from 'react-icons/bi'
+import { MdOutlineEmail } from 'react-icons/md'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import { TextField } from './TextField'
 
 const meta: Meta<typeof TextField> = {
-  title: 'Components/Atoms/TextField',
+  title: 'Components/TextField',
   component: TextField,
   args: {
     name: 'email'
@@ -16,14 +17,14 @@ const meta: Meta<typeof TextField> = {
       table: { disable: true }
     },
     icon: {
-      options: ['None', 'Email', 'Person'],
+      options: ['None', 'Email', 'UserCircle'],
       mapping: {
         None: '',
-        Email: <Email />,
-        Person: <Person />
+        Email: <MdOutlineEmail />,
+        UserCircle: <BiUserCircle />
       }
     },
-    $iconPosition: { if: { arg: 'icon' } },
+    iconPosition: { if: { arg: 'icon' } },
     name: { table: { disable: true } },
     id: { table: { disable: true } }
   },
@@ -100,7 +101,7 @@ export const WithLabel: Story = {
 
 export const WithIcon: Story = {
   args: {
-    icon: <Person role='img' />
+    icon: <MdOutlineEmail role='img' />
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -120,7 +121,7 @@ export const WithIcon: Story = {
 export const IconRight: Story = {
   args: {
     icon: 'Person',
-    $iconPosition: 'right'
+    iconPosition: 'right'
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -149,11 +150,11 @@ export const Disabled: Story = {
 
     await step('Styles', () => {
       expect(label).toHaveStyle({
-        cursor: 'default',
-        color: theme.colors.gray
+        cursor: 'not-allowed',
+        color: getTailwindValue('--color-theme-gray-500')
       })
-      expect(textField).toHaveStyle({ cursor: 'default' })
-      expect(textField.parentElement).toHaveStyle({ cursor: 'default' })
+      expect(textField).toHaveStyle({ cursor: 'not-allowed', color: getTailwindValue('--color-theme-gray-500') })
+      expect(textField.parentElement).toHaveStyle({ cursor: 'not-allowed' })
     })
 
     await step('Not acessible with tab', async () => {
@@ -166,7 +167,8 @@ export const Disabled: Story = {
 
 export const Error: Story = {
   args: {
-    $errorMessage: 'Ops...something is wrong'
+    icon: <MdOutlineEmail role='img' />,
+    errorMessage: 'Ops...something is wrong'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
@@ -176,12 +178,12 @@ export const Error: Story = {
 
     await step('Red border', () => {
       expect(inputWrapper).toHaveStyle({
-        borderColor: theme.colors.error.color
+        borderColor: getTailwindValue('--color-red-500')
       })
     })
 
     await step('Error message with red color', () => {
-      expect(errorMessage).toHaveStyle({ color: theme.colors.error.color })
+      expect(errorMessage).toHaveStyle({ color: getTailwindValue('--color-red-500') })
     })
   }
 }

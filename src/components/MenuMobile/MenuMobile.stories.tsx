@@ -3,11 +3,11 @@ import { expect, fn, waitFor, within } from '@storybook/test'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { customViewports } from '../../../.storybook/customViewports'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
-import MenuMobileComponent from './MenuMobile'
+import { MenuMobile } from './MenuMobile'
 
-const meta: Meta<typeof MenuMobileComponent> = {
+const meta: Meta<typeof MenuMobile> = {
   title: 'Components/MenuMobile',
-  component: MenuMobileComponent,
+  component: MenuMobile,
   args: {
     menuMobile: true,
     setMenuMobile: fn()
@@ -27,7 +27,7 @@ const meta: Meta<typeof MenuMobileComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof MenuMobileComponent> & { args?: NextAuthSessionArgs }
+type Story = StoryObj<typeof MenuMobile> & { args?: NextAuthSessionArgs }
 
 export const Authenticated: Story = {
   args: {
@@ -81,7 +81,7 @@ export const Unauthenticated: Story = {
       const home = canvas.getByRole('link', { name: 'Home' })
       const explore = canvas.getByRole('link', { name: 'Explore' })
       expect(home).toHaveAttribute('href', '/')
-      expect(explore).toHaveAttribute('href', '/products')
+      expect(explore).toHaveAttribute('href', '/explore')
     })
 
     await step('Log in button link', () => {

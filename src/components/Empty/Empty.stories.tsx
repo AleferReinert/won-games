@@ -1,15 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import { remToPx } from 'polished'
-import theme from 'styles/theme'
-import Empty from './Empty'
+import { getTailwindValue } from 'utils/getTailwindValue'
+import { Empty } from './Empty'
 
 const meta: Meta<typeof Empty> = {
   title: 'Components/Atoms/Empty',
   component: Empty,
   args: {
     title: 'No results found',
-    $description: `Sorry, we couldn't find any results for your search.`
+    description: `Sorry, we couldn't find any results for your search.`
   },
   tags: ['autodocs']
 }
@@ -29,7 +28,7 @@ export const Default: Story = {
 
     await step('Description', () => {
       const description = canvas.getByRole('paragraph')
-      expect(description).toHaveStyle({ color: theme.colors.white })
+      expect(description).toHaveStyle({ color: getTailwindValue('--color-zinc-50') })
       expect(description.textContent).toContain('Sorry')
     })
 
@@ -41,9 +40,7 @@ export const Default: Story = {
 
     await step('Without background color', () => {
       const wrapper = canvas.getByTestId('EmptyComponent')
-      expect(wrapper).not.toHaveStyle({
-        backgroundColor: theme.colors.white
-      })
+      expect(wrapper).not.toHaveStyle({ backgroundColor: getTailwindValue('--color-zinc-50') })
     })
   }
 }
@@ -65,35 +62,33 @@ export const WithButton: Story = {
 
 export const InvertedColors: Story = {
   args: {
-    $invertedColors: true
+    invertedColors: true
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     await step('Background white', () => {
       const wrapper = canvas.getByTestId('EmptyComponent')
-      expect(wrapper).toHaveStyle({
-        backgroundColor: theme.colors.white
-      })
+      expect(wrapper).toHaveStyle({ backgroundColor: getTailwindValue('--color-zinc-50') })
     })
 
     step('Description black', () => {
       const description = canvas.getByRole('paragraph')
-      expect(description).toHaveStyle({ color: theme.colors.black })
+      expect(description).toHaveStyle({ color: getTailwindValue('--color-theme-gray-950') })
     })
   }
 }
 
 export const Small: Story = {
   args: {
-    $small: true
+    small: true
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
     await step('Title small', () => {
       const title = canvas.getByRole('heading')
-      expect(title).toHaveStyle({ fontSize: remToPx(theme.font.sizes.large) })
+      expect(title).toHaveStyle('font-size: 18px')
     })
 
     step('Image 140x72', () => {

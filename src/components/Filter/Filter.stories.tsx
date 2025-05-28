@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { expect, fn, userEvent, waitFor, within } from '@storybook/test'
 import { FilterContext } from 'contexts/FilterContext'
 import { filterContextMock } from 'mocks/filterContext.mock'
-import FilterComponent from './Filter'
+import { Filter } from './Filter'
 
-const meta: Meta<typeof FilterComponent> = {
+const meta: Meta<typeof Filter> = {
   title: 'Components/Filter',
-  component: FilterComponent,
+  component: Filter,
   decorators: [
     (Story) => (
       <div style={{ maxWidth: '280px' }}>
@@ -15,13 +15,12 @@ const meta: Meta<typeof FilterComponent> = {
         </FilterContext.Provider>
       </div>
     )
-  ],
-  tags: ['autodocs']
+  ]
 }
 
 export default meta
 
-type Story = StoryObj<typeof FilterComponent>
+type Story = StoryObj<typeof Filter>
 
 export const Mobile: Story = {
   args: {
@@ -41,11 +40,11 @@ export const Mobile: Story = {
       expect(buttonOpen).toBeVisible()
     })
 
-    await step('FilterComponent hidden', () => {
+    await step('Filter hidden', () => {
       expect(filterComponent).not.toBeVisible()
     })
 
-    await step('Open filter: FilterComponent visible, close button visible, button Filter visible', async () => {
+    await step('Open filter: Filter visible, close button visible, button Filter visible', async () => {
       userEvent.click(buttonOpen)
       await waitFor(() => {
         const buttonClose = canvas.getByRole('button', { name: 'Close filters' })
@@ -137,7 +136,7 @@ export const Mobile: Story = {
       }
     })
 
-    await step('FilterComponent hidden on buttonClose click', async () => {
+    await step('Filter hidden on buttonClose click', async () => {
       const buttonClose = canvas.getByRole('button', { name: 'Close filters' })
       userEvent.click(buttonClose)
       await waitFor(() => expect(filterComponent).not.toBeVisible())
@@ -148,7 +147,15 @@ export const Mobile: Story = {
 export const Desktop: Story = {
   parameters: {
     viewport: {
-      defaultViewport: 'large'
+      defaultViewport: 'medium'
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const filterComponent = canvas.getByTestId('FilterComponent')
+
+    await step('Button open filter', () => {
+      expect(filterComponent).toBeVisible()
+    })
   }
 }

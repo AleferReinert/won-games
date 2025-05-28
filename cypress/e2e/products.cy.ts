@@ -2,7 +2,7 @@
 
 describe('Products page', () => {
   beforeEach(() => {
-    cy.visit('/products')
+    cy.visit('/explore')
     cy.get('[data-cy="products"]').findAllByTestId('ProductComponent').as('FilteredProducts')
   })
 

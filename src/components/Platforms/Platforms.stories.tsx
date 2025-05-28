@@ -1,21 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import PlatformsComponent from './Platforms'
+import { Platforms } from './Platforms'
 
-const meta: Meta<typeof PlatformsComponent> = {
+const meta: Meta<typeof Platforms> = {
   title: 'Components/Atoms/Platforms',
-  component: PlatformsComponent,
+  component: Platforms,
   parameters: {
     layout: 'padded'
-  },
-  tags: ['autodocs']
+  }
 }
 
 export default meta
 
-type Story = StoryObj<typeof PlatformsComponent>
+type Story = StoryObj<typeof Platforms>
 
-export const Platforms: Story = {
+export const Default: Story = {
   args: {
     platforms: ['PlayStation 4', 'PlayStation 5', 'Xbox Series X', 'Windows 10', 'Windows 8', 'Windows 7', 'Windows XP']
   },

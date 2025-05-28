@@ -10,7 +10,7 @@ export const bannersMock: BannerProps[] = [
     title: 'Defy death',
     description: 'Play the new <strong>CrashLands</strong> season',
     buttonLabel: 'Buy now',
-    buttonUrl: '/products/defy-death'
+    buttonUrl: '/explore/defy-death'
   },
   {
     id: '1',
@@ -21,7 +21,7 @@ export const bannersMock: BannerProps[] = [
     title: 'God of War',
     description: 'Same background to test',
     buttonLabel: 'Buy now',
-    buttonUrl: '/products/god-of-war',
+    buttonUrl: '/explore/god-of-war',
     ribbon: {
       label: 'new'
     }

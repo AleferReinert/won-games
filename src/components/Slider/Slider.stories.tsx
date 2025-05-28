@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import SliderComponent from './Slider'
-import { Slide } from './Slider.styles'
+import { Slider } from './Slider'
 
-const meta: Meta<typeof SliderComponent> = {
+const meta: Meta<typeof Slider> = {
   title: 'Components/Slider',
-  component: SliderComponent,
+  component: Slider,
   argTypes: {
     settings: {
       options: ['Horizontal', 'Vertical'],
@@ -31,19 +30,29 @@ const meta: Meta<typeof SliderComponent> = {
   tags: ['autodocs'],
   render: (args) => {
     return (
-      <SliderComponent settings={args.settings}>
-        <Slide data-testid='slide'>1</Slide>
-        <Slide data-testid='slide'>2</Slide>
-        <Slide data-testid='slide'>3</Slide>
-        <Slide data-testid='slide'>4</Slide>
-        <Slide data-testid='slide'>5</Slide>
-      </SliderComponent>
+      <Slider settings={args.settings}>
+        <div data-testid='slide' className='bg-theme-secondary h-48 text-white text-center leading-48 text-3xl border'>
+          1
+        </div>
+        <div data-testid='slide' className='bg-theme-secondary h-48 text-white text-center leading-48 text-3xl border'>
+          2
+        </div>
+        <div data-testid='slide' className='bg-theme-secondary h-48 text-white text-center leading-48 text-3xl border'>
+          3
+        </div>
+        <div data-testid='slide' className='bg-theme-secondary h-48 text-white text-center leading-48 text-3xl border'>
+          4
+        </div>
+        <div data-testid='slide' className='bg-theme-secondary h-48 text-white text-center leading-48 text-3xl border'>
+          5
+        </div>
+      </Slider>
     )
   }
 }
 export default meta
 
-type Story = StoryObj<typeof SliderComponent> & { args: { settings: string } }
+type Story = StoryObj<typeof Slider> & { args: { settings: string } }
 
 export const Horizontal: Story = {
   args: {

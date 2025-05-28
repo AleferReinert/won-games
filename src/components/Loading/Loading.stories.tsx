@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within } from '@storybook/test'
-import theme from 'styles/theme'
 import { Loading as LoadingComponent } from './Loading'
 
 const meta: Meta<typeof LoadingComponent> = {
@@ -16,37 +15,23 @@ export default meta
 
 type Story = StoryObj<typeof LoadingComponent>
 
-export const Default: Story = {
-  name: 'Light (default)',
+export const Dots: Story = {
+  name: 'Dots (default)',
   parameters: {
     backgrounds: {
       default: 'Dark'
     }
   },
-  play: ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const loading = canvas.getByTestId('3dotsLoadingComponent')
+    const loading = canvas.getByTestId('LoadingComponent')
 
-    step('Fill white', () => {
-      expect(loading).toHaveAttribute('fill', theme.colors.white)
+    await step('Width full as default', () => {
+      expect(loading).toHaveClass('w-full')
     })
 
-    step('Size 40', () => {
-      expect(loading).toHaveAttribute('width', '40')
-    })
-  }
-}
-
-export const Size: Story = {
-  args: {
-    size: 100
-  },
-  play: ({ canvasElement, step }) => {
-    const canvas = within(canvasElement)
-
-    step('Size', () => {
-      const loading = canvas.getByRole('img', { name: 'Loading...' })
-      expect(loading).toHaveAttribute('width', '100')
+    step('3 dots', () => {
+      expect(loading.children[0].children.length).toBe(3)
     })
   }
 }
@@ -57,10 +42,39 @@ export const Spinner: Story = {
   },
   play: ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const loading = canvas.getByTestId('SpinnerLoadingComponent')
+    const loading = canvas.getByTestId('LoadingComponent')
 
     step('Spinner animation', () => {
-      expect(loading).toBeVisible()
+      expect(loading.children[0]).toHaveClass('animate-spin')
+    })
+  }
+}
+
+export const Inline: Story = {
+  args: {
+    inline: true
+  },
+  play: ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const loading = canvas.getByTestId('LoadingComponent')
+
+    step('Width fit-content', () => {
+      expect(loading).toHaveClass('w-fit')
+    })
+  }
+}
+
+export const Custom: Story = {
+  args: {
+    className: 'border-r-theme-primary!',
+    animation: 'spinner'
+  },
+  play: ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const loading = canvas.getByTestId('LoadingComponent')
+
+    step('Custom class', () => {
+      expect(loading.children[0]).toHaveClass('border-r-theme-primary!')
     })
   }
 }

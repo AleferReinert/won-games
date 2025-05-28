@@ -1,0 +1,66 @@
+.gallery {
+  & :global(div.slick-track) {
+    display: flex;
+  }
+
+  & :global(div.slick-list) {
+    margin: 0 8px;
+    display: flex;
+    overflow: visible;
+  }
+
+  & :global(.slick-arrow) {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    fill: var(--color-zinc-50);
+  }
+
+  & :global(.slick-disabled) {
+    display: none !important;
+  }
+
+  & :global(.slick-prev) {
+    left: -55px;
+  }
+
+  & :global(.slick-next) {
+    right: -55px;
+  }
+
+  & :global(.slick-slide) {
+    aspect-ratio: 16/9;
+  }
+
+  & :global(.slick-slide > div) {
+    margin: 0 8px;
+    height: 100%;
+    position: relative;
+  }
+}
+
+@media (min-width: 1920px) {
+  .gallery {
+    & :global(div.slick-list) {
+      overflow: hidden;
+    }
+  }
+}
+
+.modal {
+  & :global(div.slick-list) {
+    overflow: hidden;
+  }
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &[aria-hidden='false'] {
+    opacity: 1;
+  }
+}

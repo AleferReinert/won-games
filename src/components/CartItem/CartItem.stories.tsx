@@ -3,11 +3,11 @@ import { expect, userEvent, waitFor, within } from '@storybook/test'
 import { CartContext } from 'contexts/CartContext'
 import { cartContextMock } from 'mocks/cartContext.mock'
 import { cartItemsMinMock } from 'mocks/cartItemsMin.mock'
-import CartItemComponent from './CartItem'
+import { CartItem } from './CartItem'
 
-const meta: Meta<typeof CartItemComponent> = {
+const meta: Meta<typeof CartItem> = {
   title: 'Components/CartItem',
-  component: CartItemComponent,
+  component: CartItem,
   args: cartItemsMinMock[0],
   decorators: [
     (Story) => (
@@ -21,7 +21,7 @@ const meta: Meta<typeof CartItemComponent> = {
 
 export default meta
 
-type Story = StoryObj<typeof CartItemComponent>
+type Story = StoryObj<typeof CartItem>
 
 export const Default: Story = {
   play: async ({ canvasElement, step }) => {
@@ -114,14 +114,14 @@ export const Free: Story = {
   }
 }
 
-export const RemoveFromCartButton: Story = {
+export const HideRemoveFromCartButton: Story = {
   args: {
-    removeFromCartButton: false
+    hideRemoveFromCartButton: true
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
 
-    await step('Remove product from cart', () => {
+    await step('Button remove from cart hidden', () => {
       const button = canvas.queryByRole('button', { name: 'Remove from cart' })
       expect(button).not.toBeInTheDocument()
     })

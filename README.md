@@ -135,24 +135,19 @@ yarn cy:run
 yarn cy:open
 ```
 
-Criar componente, template ou página:
-
-```
-yarn plop
-```
-
 ## Tecnologias Utilizadas
 
 - **Chromatic:** Ferramenta para revisão visual e gestão de componentes do Storybook.
-- **Cypress:** ferramenta de automação de testes end-to-end para aplicações web.
+- **Cypress:** Ferramenta de automação de testes end-to-end para aplicações web.
 - **MSW:** Biblioteca de simulação de API para navegador e Node.js.
 - **NextAuth:** Autenticação para Next.js.
 - **NextJS:** Framework em React.
 - **PlopJS:** Ferramenta para gerar arquivos personalizados.
 - **React:** Biblioteca JavaScript para construir interfaces de usuário.
+- **React Icons:** SVG React icons of popular icon packs.
 - **Strapi:** CMS headless para gerenciar conteúdo.
 - **Storybook:** Ferramenta para desenvolver componentes de interface isoladamente.
-- **Styled Components:** Biblioteca para escrever CSS com JavaScript.
+- **Tailwind CSS:** Framework de utilidades CSS para estilização rápida e eficiente.
 - **Testing Library:** Conjunto de utilitários para testar componentes React.
 - **TypeScript:** Superconjunto do JavaScript que adiciona tipagem estática opcional.
 
