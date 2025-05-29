@@ -10,6 +10,7 @@ interface AuthLayoutProps {
 
 export default async function AuthLayout({ children }: AuthLayoutProps) {
   const company = await fetchCompany()
+  const currentYear = new Date().getFullYear()
 
   return (
     <div className='lg:grid lg:grid-cols-[1fr_1fr]'>
@@ -35,7 +36,9 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
             </p>
           </div>
           <footer className='text-center text-xs text-zinc-50 self-end mt-6'>
-            <p>Won Games 2023 © Todos os Direitos Reservados</p>
+            <p>
+              {company.name} {currentYear} © All rights reserved.
+            </p>
           </footer>
         </div>
       </section>

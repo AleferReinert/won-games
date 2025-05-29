@@ -58,7 +58,7 @@ export const Product = ({
                 className='p-0! h-min translate-x-[1px] -translate-y-[1px] disabled:bg-transparent [&_svg]:size-6'
               />
             </div>
-            <h4 className='text-xs font-semibold text-theme-500'>{developer}</h4>
+            <h4 className='text-xs font-semibold text-theme-gray-500'>{developer}</h4>
           </div>
           <div className='flex justify-end mt-2 gap-1 '>
             <Price price={price} promotionalPrice={promotionalPrice} />
