@@ -8,7 +8,7 @@ import { UserDropdown } from 'components/UserDropdown/UserDropdown'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MdOutlineSearch } from 'react-icons/md'
 import { RiMenu2Fill } from 'react-icons/ri'
 import { CompanyProps } from 'utils/fetchCompany'
@@ -23,26 +23,17 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
   const [menuMobile, setMenuMobile] = useState(false)
   const { status } = useSession()
   const [showSearch, setShowSearch] = useState(false)
+  const pathname = usePathname()
   const searchInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
-  const pathname = usePathname()
-  const navLinks = [
-    {
-      label: 'Home',
-      href: '/'
-    },
-    {
-      label: 'Explore',
-      href: '/explore'
-    }
-  ]
+  useEffect(() => setShowSearch(false), [pathname])
 
   function handleShowSearch() {
-    searchInputRef.current && !showSearch ? (searchInputRef.current.value = '') : ''
-    setShowSearch(!showSearch)
     if (!showSearch) {
+      searchInputRef.current ? (searchInputRef.current.value = '') : ''
       searchInputRef.current?.focus()
     }
+    setShowSearch(!showSearch)
   }
 
   function searchSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -52,11 +43,23 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
       currentParams.set('search', searchInputRef.current.value)
       router.push(`/explore?${currentParams.toString()}`)
     }
+    searchInputRef.current?.blur()
+    setShowSearch(false)
   }
+
+  const navLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'Explore', href: '/explore' }
+  ]
 
   return (
     <header className='flex items-center py-6 justify-between relative z-20 '>
-      <button onClick={() => setMenuMobile(true)} title='Open menu' aria-label='Open menu' className='md:hidden'>
+      <button
+        onClick={() => setMenuMobile(true)}
+        title='Open menu'
+        aria-label='Open menu'
+        className='md:hidden cursor-pointer'
+      >
         <RiMenu2Fill role='img' aria-hidden className='size-6 fill-zinc-50' />
       </button>
 
@@ -85,20 +88,22 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
       </nav>
 
       <nav className='flex justify-end items-center w-full [&>*]:ml-4'>
-        <form onSubmit={searchSubmit} className='flex items-center justify-end w-full gap-4'>
-          <input
-            ref={searchInputRef}
-            type='search'
-            placeholder='Search games...'
-            autoFocus
-            className={`bg-transparent z-20 border-0 border-b border-zinc-50 h-[33px] focus:outline-none
-						text-zinc-50 transition-all ease-in-out duration-300 text-base placeholder:text-zinc-50 
-						${showSearch ? 'w-full' : 'w-0'}`}
-          />
+        <div className='flex gap-4 w-full items-center justify-end'>
+          <form onSubmit={searchSubmit} className='w-full flex justify-end'>
+            <input
+              ref={searchInputRef}
+              type='search'
+              placeholder='Search games...'
+              autoFocus
+              className={`bg-transparent z-20 border-0 border-b border-zinc-50 h-[33px] focus:outline-none
+					text-zinc-50 transition-all ease-in-out duration-300 text-base placeholder:text-zinc-50 
+					${showSearch ? 'w-full opacity-100' : 'w-0 opacity-0'}`}
+            />
+          </form>
           <button title='Search' aria-label='Search' onClick={handleShowSearch} className='cursor-pointer'>
             <MdOutlineSearch role='img' aria-hidden className='size-6 fill-zinc-50' />
           </button>
-        </form>
+        </div>
 
         {!hideCartDropdown && <CartDropdown />}
 

@@ -53,11 +53,20 @@ export const Mobile: Story = {
       expect(logoLight).not.toBeVisible()
     })
 
-    await step('Search button with icon', () => {
+    await step('Search functionality', async () => {
       const searchButton = canvas.getByRole('button', { name: 'Search' })
       const searchIcon = within(searchButton).getByRole('img', { hidden: true })
+      const searchInput = canvas.getByRole('searchbox', { hidden: true })
       expect(searchButton).toBeVisible()
       expect(searchIcon).toBeVisible()
+      expect(searchInput).not.toBeVisible()
+      userEvent.click(searchButton)
+      await waitFor(() => {
+        expect(searchInput).toBeVisible()
+        expect(searchInput).toHaveFocus()
+      })
+      await userEvent.click(searchButton)
+      await waitFor(() => expect(searchInput).not.toBeVisible())
     })
 
     await step('Cart link with icon', () => {

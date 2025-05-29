@@ -34,6 +34,10 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px theme(--color-theme-gray-200) inset;
 }
 
+input::-webkit-search-cancel-button {
+  display: none;
+}
+
 @layer components {
   .input-checkbox,
   .input-radio {
