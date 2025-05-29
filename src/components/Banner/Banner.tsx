@@ -19,7 +19,7 @@ export const Banner = ({ img, title, description, buttonLabel = 'Buy now', butto
   const caption = title || description || buttonUrl
 
   return (
-    <div className='relative md:[box-shadow:0_0.4rem_0.5rem_rgba(0,0,0,0.2)] mx-auto max-w-container 1xl:mx-4'>
+    <div className='relative md:[box-shadow:0_0.4rem_0.5rem_rgba(0,0,0,0.2)] mx-auto 1xl:mx-4'>
       {ribbon?.label && (
         <Ribbon
           label={ribbon.label}

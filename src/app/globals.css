@@ -1,7 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --max-width-container: 1300px;
+  --max-w-container-default: 1200px;
+  --max-w-container-large: 1300px;
   --breakpoint-xs: 360px;
   --breakpoint-1xl: 1366px;
   --breakpoint-3xl: 1920px;
@@ -66,4 +67,8 @@ input:-webkit-autofill {
 
 @utility custom-clip-path-secondary {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+}
+
+@utility max-w-container {
+  @apply max-w-[1200px] 2xl:max-w-[1300px];
 }

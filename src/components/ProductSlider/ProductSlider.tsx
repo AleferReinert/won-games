@@ -99,7 +99,10 @@ export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderP
   }
 
   return (
-    <div data-testid='ProductSliderComponent' className='relative mb-8 mx-auto max-w-[1284px]'>
+    <div
+      data-testid='ProductSliderComponent'
+      className='relative mb-8 mx-auto max-w-[calc(theme(--max-w-container-default)-16px)] 2xl:max-w-[calc(theme(--max-w-container-large)-16px)]'
+    >
       <div className={styles.productSlider}>
         <Slider settings={settings}>
           {products.map((item) => (
