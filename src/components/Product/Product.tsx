@@ -5,6 +5,7 @@ import { Price, PriceProps } from 'components/Price/Price'
 import { Ribbon } from 'components/Ribbon/Ribbon'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRef } from 'react'
 
 export interface ProductProps extends PriceProps {
   id: string
@@ -30,11 +31,23 @@ export const Product = ({
   ribbonLabel,
   imgPriority = false
 }: ProductProps) => {
+  const isDragging = useRef(false)
+
   return (
     <article data-testid='ProductComponent' className='relative grid h-full flex-col grid-rows-[auto_1fr]'>
       {ribbonLabel && <Ribbon label={ribbonLabel} color='primary' size='small' />}
 
-      <Link href={`/game/${slug}`} passHref className='text-theme-gray-500 no-underline'>
+      <Link
+        href={`/game/${slug}`}
+        className='text-theme-gray-500 no-underline'
+        onMouseDown={() => (isDragging.current = false)}
+        onMouseMove={() => (isDragging.current = true)}
+        onClick={(e) => {
+          if (isDragging.current) {
+            e.preventDefault()
+          }
+        }}
+      >
         <div className='h-[140px] w-full italic'>
           <Image
             src={cover.url}

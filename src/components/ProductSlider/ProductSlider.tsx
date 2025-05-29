@@ -1,10 +1,10 @@
 'use client'
-import { Container } from 'components/Container/Container'
 import { Product, ProductProps } from 'components/Product/Product'
 import { Slider } from 'components/Slider/Slider'
 import { ComponentProps } from 'react'
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md'
 import type { CustomArrowProps, Settings } from 'react-slick'
+// import 'slick-carousel/slick/slick.css'
 import styles from './ProductSlider.module.css'
 
 export interface ProductSliderProps extends ComponentProps<'div'> {
@@ -51,43 +51,61 @@ export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderP
     lazyLoad: 'ondemand',
     responsive: [
       {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1.15
+        }
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2.15
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2.15
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3.15
+        }
+      },
+      {
+        breakpoint: 1280,
+        settings: {
+          arrows: false,
+          slidesToShow: 3.15
+        }
+      },
+      {
         breakpoint: 1365,
         settings: {
           arrows: false,
-          slidesToShow: 3.2
+          slidesToShow: 4.15
         }
       },
       {
-        breakpoint: 1023,
+        breakpoint: 1366,
         settings: {
-          slidesToShow: 2.2
-        }
-      },
-      {
-        breakpoint: 767,
-        settings: {
-          slidesToShow: 1.2
-        }
-      },
-      {
-        breakpoint: 359,
-        settings: {
-          slidesToShow: 1.15
+          arrows: false,
+          slidesToShow: 4.15
         }
       }
     ]
   }
 
   return (
-    <div data-testid='ProductSliderComponent' className='relative'>
+    <div data-testid='ProductSliderComponent' className='relative mb-8 mx-auto max-w-[1284px]'>
       <div className={styles.productSlider}>
-        <Container>
-          <Slider settings={settings}>
-            {products.map((item) => (
-              <Product key={item.id} {...item} />
-            ))}
-          </Slider>
-        </Container>
+        <Slider settings={settings}>
+          {products.map((item) => (
+            <Product key={item.id} {...item} />
+          ))}
+        </Slider>
       </div>
     </div>
   )

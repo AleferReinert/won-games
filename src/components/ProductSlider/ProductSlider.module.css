@@ -1,49 +1,45 @@
 .productSlider {
-  /* overflow: hidden; */
-  max-width: 320px;
-
   & :global(div.slick-track) {
     display: flex;
-    gap: calc(var(--spacing) * 2);
+    padding: 0 8px;
   }
+
+  & :global(div.slick-slide) {
+    display: flex !important;
+    float: none;
+  }
+
+  & :global(div.slick-slide[aria-hidden='true'] [data-testid='RibbonComponent']) {
+    opacity: 0;
+    transition: all 300ms ease-in-out;
+  }
+
+  & :global(div.slick-slide[aria-hidden='false'] [data-testid='RibbonComponent']) {
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+  }
+
   & :global(div.slick-slide > div) {
-    flex: 1 0 auto;
+    width: 100%;
     height: 100%;
+    padding: 0 8px;
   }
 
   & :global(div.slick-list) {
-    margin-inline: calc(var(--spacing) * -2);
     display: flex;
-    overflow: visible;
-  }
-}
-
-@media (min-width: 360px) {
-  .productSlider {
-    max-width: 360px;
-  }
-}
-
-@media (min-width: 768px) {
-  .productSlider {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .productSlider {
-    max-width: none;
-    overflow: visible;
+    overflow: hidden;
   }
 }
 
 @media (min-width: 1366px) {
   .productSlider {
-    overflow: hidden;
-
     & :global(div.slick-list) {
       overflow: hidden;
       min-width: var(--container-3xl);
+    }
+
+    & :global(div.slick-track) {
+      padding: 0;
     }
   }
 }

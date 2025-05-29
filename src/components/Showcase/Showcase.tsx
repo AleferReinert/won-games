@@ -20,17 +20,15 @@ export const Showcase = ({
 }: ShowcaseProps) => {
   return (
     <section {...rest} data-testid='ShowcaseComponent' className='mb-20'>
-      <Container>
-        {title && (
+      {title && (
+        <Container>
           <Heading line='left' lineColor='secondary' className={`mb-8 ${headingClass}`}>
             {title}
           </Heading>
-        )}
-
-        {highlight && <Highlight {...highlight} className='mb-8' />}
-
-        {products && <ProductSlider products={products} arrowColor={arrowColor} className='mb-8 -mr-4 3xl:mr-0' />}
-      </Container>
+        </Container>
+      )}
+      {highlight && <Highlight {...highlight} className='mb-8' />}
+      {products && <ProductSlider products={products} arrowColor={arrowColor} />}
     </section>
   )
 }
