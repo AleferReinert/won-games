@@ -4,7 +4,6 @@ import { Slider } from 'components/Slider/Slider'
 import { ComponentProps } from 'react'
 import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from 'react-icons/md'
 import type { CustomArrowProps, Settings } from 'react-slick'
-// import 'slick-carousel/slick/slick.css'
 import styles from './ProductSlider.module.css'
 
 export interface ProductSliderProps extends ComponentProps<'div'> {
@@ -49,6 +48,10 @@ export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderP
     slidesToShow,
     infinite: false,
     lazyLoad: 'ondemand',
+    beforeChange: () => {
+      const active = document.activeElement as HTMLElement
+      if (active && typeof active.blur === 'function') active.blur() // To fix bug: prevent keyboard mobile on drag
+    },
     responsive: [
       {
         breakpoint: 500,
