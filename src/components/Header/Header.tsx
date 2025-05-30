@@ -36,7 +36,7 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
     setShowSearch(!showSearch)
   }
 
-  function searchSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function searchSubmit(e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
     if (searchInputRef.current?.value) {
       const currentParams = new URLSearchParams(window.location.search)
@@ -100,7 +100,12 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
 					${showSearch ? 'w-full opacity-100' : 'w-0 opacity-0'}`}
             />
           </form>
-          <button title='Search' aria-label='Search' onClick={handleShowSearch} className='cursor-pointer'>
+          <button
+            title='Search'
+            aria-label='Search'
+            onClick={showSearch ? (e) => searchSubmit(e) : handleShowSearch}
+            className='cursor-pointer'
+          >
             <MdOutlineSearch role='img' aria-hidden className='size-6 fill-zinc-50' />
           </button>
         </div>

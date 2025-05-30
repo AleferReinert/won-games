@@ -3,7 +3,7 @@ import { FilterOptionsProps } from 'components/Filter/Filter'
 import { FilterContext, FilterContextDefaultValues, FilterContextProps } from 'contexts/FilterContext'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ParsedUrlQueryInput } from 'querystring'
-import { ReactNode, useContext, useMemo, useState } from 'react'
+import { ReactNode, useContext, useEffect, useMemo, useState } from 'react'
 
 interface FilterProviderProps {
   children: ReactNode
@@ -104,6 +104,7 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
     const params = new URLSearchParams(formattedFilters)
     router.push(`/explore?${params.toString()}`)
   }
+
   const removeFilterOption = (key: string, value: string) => {
     setSelectedFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters }
@@ -123,16 +124,15 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
       return updatedFilters
     })
   }
+
   const removeSearchParam = () => {
     setSelectedFilters((currentFilters) => {
       const updatedFilters = { ...currentFilters }
       delete updatedFilters.search
       return updatedFilters
     })
-    const { ...remainingFilters } = selectedFilters || {}
-    const params = new URLSearchParams(remainingFilters as Record<string, string>)
-    router.push(`/explore?${params.toString()}`)
   }
+
   const clearFilterSession = (sessionName: FilterOptionsProps['name']) => {
     setSelectedFilters((currentFilters) => {
       const updatedValues = { ...currentFilters }
@@ -140,6 +140,11 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
       return updatedValues
     })
   }
+
+  useEffect(() => {
+    const params = new URLSearchParams(selectedFilters as Record<string, string>)
+    router.push(`/explore?${params.toString()}`)
+  }, [router, selectedFilters])
 
   return (
     <FilterContext.Provider
