@@ -21,7 +21,8 @@ export interface FilterOptionsProps {
 const filter = tv({
   slots: {
     buttonOpen: 'text-zinc-50 w-6 bg-transparent mb-6 cursor-pointer lg:hidden',
-    buttonClose: 'text-theme-gray-950 bg-transparent flex ml-auto p-4 cursor-pointer lg:hidden',
+    buttonClose:
+      'text-theme-gray-950 bg-transparent flex ml-auto p-4 cursor-pointer transition hover:text-theme-primary lg:hidden',
     buttonClear: 'text-theme-primary bg-transparent text-xs cursor-pointer',
     buttonFilterWrapper:
       'fixed bottom-0 left-0 right-0 p-6 bg-zinc-50 lg:hidden shadow-[0_-0.2rem_0.4rem_0_rgba(3,5,23,0.1)]',
@@ -131,7 +132,14 @@ export const Filter = () => {
           })}
         </div>
         <div className={buttonFilterWrapper()}>
-          <Button full size='large' onClick={handleFilter}>
+          <Button
+            full
+            size='large'
+            onClick={() => {
+              handleFilter
+              setIsOpen(false)
+            }}
+          >
             Filter
           </Button>
         </div>
