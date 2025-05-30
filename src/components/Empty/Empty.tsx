@@ -34,15 +34,17 @@ export const Empty = ({
         />
       </div>
       <h2 className={`text-theme-primary font-bold ${small ? 'text-lg' : 'text-xl lg:text-[28px]'}`}>{title}</h2>
-      <p className={`text-sm font-light mb-6 lg:text-base ${invertedColors ? 'text-theme-gray-950' : 'text-zinc-50'}`}>
-        {description}
-      </p>
+      <div className='space-y-6'>
+        <p className={`text-sm font-light lg:text-base ${invertedColors ? 'text-theme-gray-950' : 'text-zinc-50'}`}>
+          {description}
+        </p>
 
-      {buttonUrl && (
-        <Button asLink href={buttonUrl}>
-          {buttonText}
-        </Button>
-      )}
+        {buttonUrl && (
+          <Button asLink href={buttonUrl}>
+            {buttonText}
+          </Button>
+        )}
+      </div>
     </div>
   )
 }
