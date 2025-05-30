@@ -1,8 +1,7 @@
 'use client'
 import { Button } from 'components/Button/Button'
-import { Checkbox } from 'components/Checkbox/Checkbox'
 import { Heading } from 'components/Heading/Heading'
-import { Radio } from 'components/Radio/Radio'
+import { InputWithLabel } from 'components/InputWithLabel/InputWithLabel'
 import { useFilter } from 'hooks/useFilter'
 import { useEffect, useState } from 'react'
 import { MdOutlineClose, MdOutlineFilterList } from 'react-icons/md'
@@ -27,7 +26,7 @@ const filter = tv({
     buttonFilterWrapper:
       'fixed bottom-0 left-0 right-0 p-6 bg-zinc-50 lg:hidden shadow-[0_-0.2rem_0.4rem_0_rgba(3,5,23,0.1)]',
     component:
-      'bg-zinc-50 fixed top-0 left-0 w-full z-20 grid transition-opacity duration-300 grid-rows-[max-content_auto_max-content] bottom-[98px] md:[&_label]:text-zinc-50!',
+      'bg-zinc-50 fixed top-0 left-0 w-full z-20 grid transition-opacity duration-300 grid-rows-[max-content_auto_max-content] bottom-[98px]',
     items: 'overflow-y-auto px-6 lg:px-0',
     item: 'border-b border-theme-gray-200 pb-6 mb-6 last:border-0 last:pb-0 lg:border-b-theme-gray-800'
   },
@@ -38,7 +37,7 @@ const filter = tv({
       },
       false: {
         component:
-          'opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto md:static md:bg-transparent md:text-zinc-50'
+          'opacity-0 pointer-events-none lg:opacity-100 lg:pointer-events-auto lg:static lg:bg-transparent lg:text-zinc-50'
       }
     }
   },
@@ -84,7 +83,7 @@ export const Filter = () => {
                   lineColor='secondary'
                   color='black'
                   size='large'
-                  className='md:text-zinc-50'
+                  className='lg:text-zinc-50'
                 >
                   {filter.title}
                 </Heading>
@@ -96,26 +95,26 @@ export const Filter = () => {
                       const isChecked = arr.includes(field.value)
 
                       return (
-                        <Checkbox
+                        <InputWithLabel
                           key={field.id}
+                          label={field.label}
+                          type='checkbox'
                           id={field.id}
                           name={filter.name}
-                          label={field.label}
                           value={field.value}
-                          labelColor='black'
                           checked={isChecked}
-                          onCheck={() => handleChange(filter.name, field.value)}
+                          onChange={() => handleChange(filter.name, field.value)}
                         />
                       )
                     })
                   : filter.fields?.map((field) => (
-                      <Radio
+                      <InputWithLabel
                         key={field.id}
+                        label={field.label}
+                        type='radio'
                         id={field.id}
                         name={filter.name}
-                        label={field.label}
                         value={field.value}
-                        labelColor='black'
                         checked={String(selectedFilters[filter.name] ?? '') === String(field.value)}
                         onChange={() => handleChange(filter.name, field.value)}
                       />

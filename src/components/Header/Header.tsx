@@ -20,12 +20,12 @@ export interface HeaderProps {
 }
 
 export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, company }: HeaderProps) => {
-  const [menuMobile, setMenuMobile] = useState(false)
-  const { status } = useSession()
-  const [showSearch, setShowSearch] = useState(false)
+  const router = useRouter()
   const pathname = usePathname()
   const searchInputRef = useRef<HTMLInputElement>(null)
-  const router = useRouter()
+  const { status } = useSession()
+  const [menuMobile, setMenuMobile] = useState(false)
+  const [showSearch, setShowSearch] = useState(false)
   useEffect(() => setShowSearch(false), [pathname])
 
   function handleShowSearch() {
@@ -79,7 +79,7 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
           <Link
             key={item.href}
             href={item.href}
-            className='group relative text-base mt-[3px] mx-6 no-underline text-center text-zinc-50'
+            className='group relative text-base mt-[3px] mx-6 no-underline text-center text-zinc-50 transition'
           >
             <div className='absolute -bottom-[3px] h-[3px] bg-theme-primary group-hover:animate-grow-from-center'></div>
             {item.label}

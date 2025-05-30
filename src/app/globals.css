@@ -38,29 +38,6 @@ input::-webkit-search-cancel-button {
   display: none;
 }
 
-@layer components {
-  .input-checkbox,
-  .input-radio {
-    @apply transition cursor-pointer flex items-center justify-center size-[18px] appearance-none border-2 border-theme-gray-800 rounded-xs relative;
-    &:before {
-      @apply content-[''] w-[6px] h-[9px] border-r-2 border-b-2 border-zinc-50 rotate-45 absolute top-[1px] opacity-0 ease-in-out duration-100;
-    }
-    &:focus {
-      box-shadow: 0 0 0.5rem theme(--color-theme-primary);
-    }
-    &:checked {
-      @apply border-theme-primary bg-theme-primary;
-      &:before {
-        @apply opacity-100;
-      }
-    }
-  }
-
-  .input-radio {
-    @apply rounded-full;
-  }
-}
-
 @utility custom-clip-path {
   clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
 
