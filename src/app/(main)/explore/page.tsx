@@ -1,8 +1,7 @@
 'use client'
-import { useQuery } from '@apollo/client'
+import { NetworkStatus, useQuery } from '@apollo/client'
 import { Empty } from 'components/Empty/Empty'
-import { Product } from 'components/Product/Product'
-import { Skeleton } from 'components/Skeleton/Skeleton'
+import { Product, ProductSkeleton } from 'components/Product/Product'
 import { PRODUCTS } from 'graphql/queries/products'
 import { useSearchParams } from 'next/navigation'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
@@ -15,7 +14,7 @@ export const productsLimit = 9
 export default function ExplorePage() {
   const searchParams = useSearchParams()
   const query = Object.fromEntries(searchParams.entries())
-  const { data, fetchMore, loading } = useQuery<ProductsQuery>(PRODUCTS, {
+  const { data, fetchMore, loading, networkStatus } = useQuery<ProductsQuery>(PRODUCTS, {
     notifyOnNetworkStatusChange: true,
     variables: {
       limit: productsLimit,
@@ -30,7 +29,7 @@ export default function ExplorePage() {
   const hasProducts = products.length > 0
   const showEmpty = !loading && !hasProducts
   const showShowMore = hasProducts && !loading && !allProductsLoaded
-  const productsToLoad = allProductsLength - products.length
+  const productsToLoad = NetworkStatus.fetchMore === networkStatus ? allProductsLength - products.length : 3
 
   const loadMore = () => {
     fetchMore({
@@ -80,7 +79,7 @@ export default function ExplorePage() {
           })}
         {loading &&
           Array.from({ length: productsToLoad }).map((_, index) => {
-            return <Skeleton key={index} className='w-full h-[235px]' />
+            return <ProductSkeleton key={index} />
           })}
       </div>
 

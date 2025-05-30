@@ -3,6 +3,7 @@ import { AddToWishlistButton } from 'components/AddToWishlistButton/AddToWishlis
 import { Box } from 'components/Box/Box'
 import { Price, PriceProps } from 'components/Price/Price'
 import { Ribbon } from 'components/Ribbon/Ribbon'
+import { Skeleton } from 'components/Skeleton/Skeleton'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
@@ -73,12 +74,28 @@ export const Product = ({
             </div>
             <h4 className='text-xs font-semibold text-theme-gray-500'>{developer}</h4>
           </div>
-          <div className='flex justify-end mt-2 gap-1 '>
+          <div className='flex justify-end mt-2 gap-1 leading-0'>
             <Price price={price} promotionalPrice={promotionalPrice} />
             <AddToCartButton id={id} size='xsmall' className='[&_svg]:size-4 [&_svg]:scale-[0.75]' />
           </div>
         </div>
       </Box>
     </article>
+  )
+}
+
+export const ProductSkeleton = () => {
+  return (
+    <div className='w-full h-[235px] bg-zinc-50'>
+      <Skeleton className='bg-black/20! rounded-sm h-[140px]' />
+      <div className='p-4'>
+        <Skeleton className='bg-black/20! rounded-sm w-8/12 h-[20px] mb-0.5' />
+        <Skeleton className='bg-black/20! rounded-sm w-3/12 h-[16px]' />
+        <div className='flex justify-end pt-2 gap-1'>
+          <Skeleton className='bg-black/20! rounded-sm w-[60px] h-[22px]' />
+          <Skeleton className='bg-black/20! rounded-sm w-[38px] h-[22px]' />
+        </div>
+      </div>
+    </div>
   )
 }

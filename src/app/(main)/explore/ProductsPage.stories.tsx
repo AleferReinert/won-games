@@ -21,7 +21,7 @@ const meta: Meta<typeof ExplorePage> = {
   component: ExplorePage,
   decorators: (Story) => (
     <MainLayout>
-      <LayoutProducts searchParams={{}}>
+      <LayoutProducts>
         <Story />
       </LayoutProducts>
     </MainLayout>

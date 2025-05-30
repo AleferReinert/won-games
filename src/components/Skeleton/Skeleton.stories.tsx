@@ -20,8 +20,8 @@ export const Default: Story = {
     const skeletonComponent = canvas.getByTestId('SkeletonComponent')
 
     await step('Min width and height', () => {
-      expect(skeletonComponent).toHaveStyle('min-width: 24px')
-      expect(skeletonComponent).toHaveStyle('min-height: 24px')
+      expect(skeletonComponent).toHaveStyle('min-width: 8px')
+      expect(skeletonComponent).toHaveStyle('min-height: 8px')
     })
   }
 }

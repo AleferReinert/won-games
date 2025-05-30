@@ -136,7 +136,7 @@ export const Filter = () => {
             full
             size='large'
             onClick={() => {
-              handleFilter
+              handleFilter()
               setIsOpen(false)
             }}
           >

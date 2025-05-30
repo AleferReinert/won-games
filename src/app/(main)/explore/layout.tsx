@@ -4,13 +4,11 @@ import { Filter, FilterOptionsProps } from 'components/Filter/Filter'
 import { FilterTags } from 'components/FilterTags/FilterTags'
 import { CATEGORIES } from 'graphql/queries/categories'
 import { PLATFORMS } from 'graphql/queries/platforms'
-import { PRODUCTS } from 'graphql/queries/products'
 import { FilterProvider } from 'hooks/useFilter'
 import { Metadata } from 'next'
-import { CategoriesQuery, PlatformsQuery, ProductsQuery, ProductsQueryVariables } from 'types/generated'
+import { CategoriesQuery, PlatformsQuery } from 'types/generated'
 import { initializeApollo } from 'utils/apollo'
 import { generateFilterOptions } from 'utils/filterOptions'
-import { queryStringToGraphqlFilters } from 'utils/queryStringToGraphqlFilters'
 
 export const metadata: Metadata = {
   title: 'Explore'
@@ -24,22 +22,11 @@ interface ExploreProps {
 }
 
 interface ExploreLayoutProps {
-  searchParams: Record<string, string | string[]>
   children: React.ReactNode
 }
 
-async function fetchProducts(searchParams: Record<string, string | string[]>): Promise<ExploreProps> {
+async function fetchProducts(): Promise<ExploreProps> {
   const apolloClient = initializeApollo()
-
-  await apolloClient.query<ProductsQuery, Pick<ProductsQueryVariables, 'limit'>>({
-    query: PRODUCTS,
-    variables: {
-      limit: productsLimit,
-      ...queryStringToGraphqlFilters({
-        queryString: searchParams ?? {}
-      })
-    }
-  })
   const platforms = await apolloClient.query<PlatformsQuery>({ query: PLATFORMS })
   const categories = await apolloClient.query<CategoriesQuery>({ query: CATEGORIES })
   const filterOptions = generateFilterOptions({ platforms: platforms.data, categories: categories.data })
@@ -50,8 +37,8 @@ async function fetchProducts(searchParams: Record<string, string | string[]>): P
   }
 }
 
-export default async function LayoutProducts({ searchParams, children }: ExploreLayoutProps) {
-  const { filterOptions } = await fetchProducts(searchParams)
+export default async function LayoutExplore({ children }: ExploreLayoutProps) {
+  const { filterOptions } = await fetchProducts()
 
   return (
     <FilterProvider filterOptions={filterOptions}>

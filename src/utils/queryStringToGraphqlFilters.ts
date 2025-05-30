@@ -14,9 +14,9 @@ export interface ParseArgsProps {
     filters: {
       price: { lte: 0 }, 
       and: [ 
-        { platforms: { name: { eqi: 'windows' } } }, 
-        { platforms: { name: { eqi: 'mac' } } }, 
-        { categories: { name: { eqi: 'action' } } } 
+        { platforms: { slug: { eqi: 'windows' } } }, 
+        { platforms: { slug: { eqi: 'mac' } } }, 
+        { categories: { slug: { eqi: 'action' } } } 
       ],
     }
     sort: 'price:asc'
@@ -36,13 +36,13 @@ export const queryStringToGraphqlFilters = ({ queryString }: ParseArgsProps) => 
       if (queryParam === 'platforms') {
         const queryParamValueArray = queryParamValue.split(',')
         queryParamValueArray.map((value) => {
-          query.filters.and.push({ platforms: { name: { eqi: value } } })
+          query.filters.and.push({ platforms: { slug: { eqi: value } } })
         })
       }
       if (queryParam === 'categories') {
         const queryParamValueArray = queryParamValue.split(',')
         queryParamValueArray.map((value) => {
-          query.filters.and.push({ categories: { name: { eqi: value } } })
+          query.filters.and.push({ categories: { slug: { eqi: value } } })
         })
       }
     }
