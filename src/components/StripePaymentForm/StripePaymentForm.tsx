@@ -2,7 +2,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { PaymentIntent, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { Alert } from 'components/Alert/Alert'
-import { Box } from 'components/Box/Box'
 import { Button } from 'components/Button/Button'
 import { Heading } from 'components/Heading/Heading'
 import { Loading } from 'components/Loading/Loading'
@@ -119,7 +118,7 @@ export const StripePaymentForm = () => {
       onSubmit={(e) => void handleSubmit(e)}
       className='bg-zinc-50 lg:max-w-[390px] h-fit'
     >
-      <Box>
+      <div className='bg-zinc-50 p-4 md:p-6'>
         {cartLoading || allProductsFree == null ? (
           <Skeleton className='w-[83px] h-[28px] bg-black/20! rounded-sm mb-6' />
         ) : (
@@ -164,7 +163,7 @@ export const StripePaymentForm = () => {
             <p>{error}</p>
           </Alert>
         )}
-      </Box>
+      </div>
 
       <div className='bg-theme-gray-100 p-4 flex flex-col gap-4 md:flex-row md:gap-0 md:justify-between md:p-6'>
         {cartLoading ? (

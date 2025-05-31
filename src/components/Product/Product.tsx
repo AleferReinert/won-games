@@ -1,6 +1,5 @@
 import { AddToCartButton } from 'components/AddToCartButton/AddToCartButton'
 import { AddToWishlistButton } from 'components/AddToWishlistButton/AddToWishlistButton'
-import { Box } from 'components/Box/Box'
 import { Price, PriceProps } from 'components/Price/Price'
 import { Ribbon } from 'components/Ribbon/Ribbon'
 import { Skeleton } from 'components/Skeleton/Skeleton'
@@ -61,7 +60,7 @@ export const Product = ({
         </div>
       </Link>
 
-      <Box size='xsmall'>
+      <div className='bg-zinc-50 p-4'>
         <div className='flex flex-col justify-between relative h-full'>
           <div>
             <div className='flex justify-between'>
@@ -79,7 +78,7 @@ export const Product = ({
             <AddToCartButton id={id} size='xsmall' className='[&_svg]:size-4 [&_svg]:scale-[0.75]' />
           </div>
         </div>
-      </Box>
+      </div>
     </article>
   )
 }

@@ -1,5 +1,4 @@
 'use client'
-import { Box } from 'components/Box/Box'
 import { CreditCard } from 'components/CreditCard/CreditCard'
 import { Price } from 'components/Price/Price'
 import { useCart } from 'hooks/useCart'
@@ -38,7 +37,7 @@ export const CartItem = ({
 
   return (
     <li data-testid='CartItemComponent' className='cursor-default list-none border-b border-theme-gray-200'>
-      <Box>
+      <div className='bg-zinc-50 p-4 md:p-6'>
         <div
           className={`grid grid-cols-[min-content_auto] grid-rows-[auto_auto] gap-2 xs:gap-4 md:grid-rows-none md:gap-6 ${paymentInfo ? 'md:grid-cols-[min-content_1fr_1fr]' : 'md:grid-cols-[min-content_1fr]'}`}
         >
@@ -97,7 +96,7 @@ export const CartItem = ({
             </div>
           )}
         </div>
-      </Box>
+      </div>
     </li>
   )
 }
