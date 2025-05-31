@@ -14,9 +14,10 @@
     height: 24px;
     position: absolute;
     top: 50%;
-    transform: translate(0, -50%);
+    transform: translateY(-50%);
     cursor: pointer;
     fill: var(--color-zinc-50);
+    transition: transform 100ms ease-in-out;
   }
 
   & :global(.slick-disabled) {
@@ -25,10 +26,18 @@
 
   & :global(.slick-prev) {
     left: -55px;
+
+    &:hover {
+      transform: translate(-4px, -50%);
+    }
   }
 
   & :global(.slick-next) {
     right: -55px;
+
+    &:hover {
+      transform: translate(4px, -50%);
+    }
   }
 
   & :global(.slick-slide) {
