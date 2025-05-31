@@ -3,9 +3,9 @@
 @theme {
   --max-w-container-default: 1200px;
   --max-w-container-large: 1300px;
-  --breakpoint-xs: 360px;
-  --breakpoint-1xl: 1366px;
-  --breakpoint-3xl: 1920px;
+  --breakpoint-xs: 22.5rem;
+  --breakpoint-1xl: 85.375rem;
+  --breakpoint-3xl: 120rem;
   --font-sans: 'Poppins', 'sans-serif';
   --color-theme-primary: #f231a5;
   --color-theme-secondary: #3cd3c1;

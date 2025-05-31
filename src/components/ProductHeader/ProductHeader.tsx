@@ -1,6 +1,5 @@
 import { AddToCartButton } from 'components/AddToCartButton/AddToCartButton'
 import { AddToWishlistButton } from 'components/AddToWishlistButton/AddToWishlistButton'
-import { Box } from 'components/Box/Box'
 import { Heading } from 'components/Heading/Heading'
 import { Price } from 'components/Price/Price'
 
@@ -15,7 +14,7 @@ export interface ProductHeaderProps {
 export const ProductHeader = ({ id, title, description, price, promotionalPrice }: ProductHeaderProps) => {
   return (
     <div data-testid='ProductHeaderComponent' className='relative'>
-      <Box>
+      <div className='bg-zinc-50 p-4 md:p-6'>
         <div>
           <Price
             price={price}
@@ -40,7 +39,7 @@ export const ProductHeader = ({ id, title, description, price, promotionalPrice 
           <AddToWishlistButton id={id} full showLabel loadingClass='border-r-theme-500!' className='md:min-w-auto' />
           <AddToCartButton id={id} full showLabel className='md:min-w-auto' />
         </div>
-      </Box>
+      </div>
     </div>
   )
 }

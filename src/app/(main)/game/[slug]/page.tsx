@@ -43,7 +43,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div data-testid='ProductPage'>
-      <div data-testid='cover' className='w-full h-[400px] absolute top-0 md:h-[580px] md:custom-clip-path-secondary'>
+      <div
+        data-testid='cover'
+        className='w-full overflow-hidden h-[240px] md:h-[400px] lg:h-[340px] xl:h-[440px] 1xl:h-[380px] 2xl:h-[580px] absolute top-0'
+      >
         <Image
           priority
           src={cover.url}
@@ -55,7 +58,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className='absolute inset-0 bg-black/70'></div>
       </div>
 
-      <Container className='mt-[200px] md:mt-[300px]'>
+      <Container className='mt-[130px] md:mt-[290px] lg:mt-[240px] xl:mt-[330px] 1xl:mt-[230px] 2xl:mt-[390px]'>
         <ProductHeader {...productHeader} />
       </Container>
 
