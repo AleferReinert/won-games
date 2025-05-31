@@ -1,6 +1,8 @@
 import { Heading } from 'components/Heading/Heading'
 import { Logo } from 'components/Logo/Logo'
 import Image from 'next/image'
+import Link from 'next/link'
+import { MdKeyboardBackspace } from 'react-icons/md'
 import { fetchCompany } from 'utils/fetchCompany'
 import './../globals.css'
 
@@ -16,6 +18,7 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
     <div className='lg:grid lg:grid-cols-[1fr_1fr]'>
       <section data-testid='bannerBlock' className='hidden relative h-full lg:block'>
         <div className='absolute inset-0 bg-theme-gray-950/85 z-10'></div>
+
         <Image
           src='/img/authentication-bg.jpg'
           alt=''
@@ -42,7 +45,13 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
           </footer>
         </div>
       </section>
-      <main className='bg-zinc-50 p-6 grid items-center min-h-screen'>
+      <main className='bg-zinc-50 p-6 grid items-center min-h-screen relative'>
+        <Link href='/' className='absolute top-6 left-6 lg:hidden'>
+          <MdKeyboardBackspace
+            title='Back to home'
+            className='size-8 fill-theme-gray-500 transition hover:fill-theme-gray-950'
+          />
+        </Link>
         <div className='max-w-[380px] w-full mx-auto'>
           <Logo width={200} variant='dark' company={company} className='mx-auto block' />
           {children}
