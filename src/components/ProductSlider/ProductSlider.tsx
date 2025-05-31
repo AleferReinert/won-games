@@ -14,7 +14,7 @@ export interface ProductSliderProps extends ComponentProps<'div'> {
 export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderProps) => {
   const slidesToShow = 4
   const svgFill = arrowColor === 'white' ? 'fill-zinc-50' : 'fill-theme-gray-950'
-  const svgStyles = 'size-6 absolute top-1/2 cursor-pointer -translate-y-1/2  [&_.slick-disabled]:invisible'
+  const svgStyles = 'size-6 absolute top-1/2 cursor-pointer -translate-y-1/2 transition [&_.slick-disabled]:invisible'
 
   const ArrowLeft = ({ currentSlide, slideCount, ...rest }: CustomArrowProps) => {
     void currentSlide
@@ -25,7 +25,7 @@ export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderP
         role='img'
         title='Previous games'
         aria-label='Previous games'
-        className={`${svgFill} ${svgStyles} -left-[27px] 3xl:-left-10 ${currentSlide === 0 ? 'hidden!' : 'hidden! xl:block!'}`}
+        className={`${svgFill} ${svgStyles} hover:-translate-x-1 -left-[27px] 3xl:-left-10 ${currentSlide === 0 ? 'hidden!' : 'hidden! xl:block!'}`}
       />
     )
   }
@@ -38,7 +38,7 @@ export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderP
         role='img'
         title='Next games'
         aria-label='Next games'
-        className={`${svgFill} ${svgStyles} -right-[27px] 3xl:-right-10 ${currentSlide! + slidesToShow === slideCount ? 'hidden!' : 'hidden! xl:block!'}`}
+        className={`${svgFill} ${svgStyles} hover:translate-x-1 -right-[27px] 3xl:-right-10 ${currentSlide! + slidesToShow === slideCount ? 'hidden!' : 'hidden! xl:block!'}`}
       />
     )
   }
