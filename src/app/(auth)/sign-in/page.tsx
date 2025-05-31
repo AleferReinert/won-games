@@ -94,7 +94,7 @@ export default function SignInPage() {
             Don&apos;t have an account?
             <Link
               href='/sign-up'
-              className='text-theme-secondary ml-2 transition-all border-b border-theme-secondary no-underline'
+              className='text-theme-secondary font-medium ml-2 transition-all border-b border-theme-secondary no-underline'
             >
               Sign up
             </Link>
