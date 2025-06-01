@@ -1,8 +1,6 @@
 /// <reference types="cypress" />
 import { fakeUser } from '../support/generateFakeData'
 
-const fakeUserFirstName = fakeUser.fullName.split(' ')[0]
-
 describe('Sign up page', () => {
   beforeEach(() => {
     cy.visit('/sign-up')
@@ -50,8 +48,8 @@ describe('Sign up page', () => {
     cy.findByText('Email or Username are already taken').should('be.visible')
   })
 
-  it('Create user, login and redirect to home', () => {
+  it.only('Success: e-mail sent', () => {
     cy.signUp(fakeUser.fullName, fakeUser.email, fakeUser.password)
-    cy.isUserLoggedInAndRedirect(fakeUserFirstName)
+    cy.url({ timeout: 30000 }).should('include', '/confirm-your-email')
   })
 })

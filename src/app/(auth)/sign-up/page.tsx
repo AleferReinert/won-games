@@ -5,8 +5,8 @@ import { Button } from 'components/Button/Button'
 import { Heading } from 'components/Heading/Heading'
 import { TextField } from 'components/TextField/TextField'
 import { REGISTER_USER } from 'graphql/mutations/registerUser'
-import { signIn } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { BiUserCircle } from 'react-icons/bi'
 import { MdOutlineEmail, MdOutlineLock } from 'react-icons/md'
@@ -22,18 +22,15 @@ export default function SignUpPage() {
   })
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
-  const [createUser, { error }] = useMutation(REGISTER_USER, {
+  const [createUser] = useMutation(REGISTER_USER, {
     onError: (error) => {
       const formattedErrors = formatApolloErrors(error)
       setErrors(formattedErrors)
       setLoading(false)
     },
-    onCompleted: () => {
-      if (!error) {
-        signIn('credentials', { email: values.email, password: values.password, callbackUrl: '/' })
-      }
-    }
+    onCompleted: () => router.push('/confirm-your-email')
   })
 
   const handleSubmit = (e: React.FormEvent) => {
