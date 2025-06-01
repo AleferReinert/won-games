@@ -63,14 +63,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </Container>
 
       {gallery && (
-        <div className='hidden overflow-hidden mt-20 md:block'>
-          <Container>
-            <Gallery items={gallery} />
-          </Container>
+        <div className='overflow-hidden mt-10  mx-auto max-w-[calc(theme(--max-w-container-default)-16px)] 2xl:max-w-[calc(theme(--max-w-container-large)-16px)]'>
+          <Gallery items={gallery} />
         </div>
       )}
 
-      <div className='py-10 text-zinc-50 md:text-theme-gray-950 md:bg-zinc-50 md:mt-20'>
+      <div className='py-10 text-zinc-50 md:text-theme-gray-950 md:bg-zinc-50 md:mt-10'>
         <Container>
           <Heading line='left' lineColor='secondary' className='md:text-black'>
             About game

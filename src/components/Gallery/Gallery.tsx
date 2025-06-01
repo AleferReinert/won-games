@@ -1,4 +1,5 @@
 'use client'
+import { sliderResponsiveBreakpoints } from 'components/ProductSlider/ProductSlider'
 import { Slider } from 'components/Slider/Slider'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
@@ -15,22 +16,7 @@ const thumbsSettings: Settings = {
   ...commomSettings,
   arrows: false,
   slidesToShow: 4,
-  responsive: [
-    {
-      breakpoint: 1375,
-      settings: {
-        arrows: false,
-        slidesToShow: 3.2
-      }
-    },
-    {
-      breakpoint: 960,
-      settings: {
-        arrows: false,
-        slidesToShow: 2.2
-      }
-    }
-  ]
+  responsive: sliderResponsiveBreakpoints
 }
 
 const modalSettings: Settings = {
@@ -72,7 +58,7 @@ export const Gallery = ({ items }: GalleryProps) => {
             onClick={() => {
               slider.current!.slickGoTo(index, true), setModal(true)
             }}
-            className='relative cursor-pointer h-[190px]'
+            className='relative hover:brightness-110 cursor-pointer h-full transition ease-in-out hover:scale-95'
           >
             <Image
               src={item.src}

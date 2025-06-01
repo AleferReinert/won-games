@@ -1,10 +1,10 @@
 .gallery {
   & :global(div.slick-track) {
     display: flex;
+    padding: 0 8px;
   }
 
   & :global(div.slick-list) {
-    margin: 0 8px;
     display: flex;
     overflow: visible;
   }
@@ -25,7 +25,7 @@
   }
 
   & :global(.slick-prev) {
-    left: -55px;
+    left: -35px;
 
     &:hover {
       transform: translate(-4px, -50%);
@@ -33,7 +33,7 @@
   }
 
   & :global(.slick-next) {
-    right: -55px;
+    right: -35px;
 
     &:hover {
       transform: translate(4px, -50%);
@@ -45,9 +45,33 @@
   }
 
   & :global(.slick-slide > div) {
-    margin: 0 8px;
+    padding: 0 8px;
     height: 100%;
     position: relative;
+  }
+}
+
+@media (min-width: 1280px) {
+  .gallery {
+    & :global(.slick-prev) {
+      left: -55px;
+    }
+
+    & :global(.slick-next) {
+      right: -55px;
+    }
+  }
+}
+@media (min-width: 1280px) {
+  .gallery {
+    & :global(div.slick-list) {
+      overflow: hidden;
+      min-width: var(--container-3xl);
+    }
+
+    & :global(div.slick-track) {
+      padding: 0;
+    }
   }
 }
 

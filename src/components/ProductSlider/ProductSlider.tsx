@@ -11,6 +11,40 @@ export interface ProductSliderProps extends ComponentProps<'div'> {
   arrowColor?: 'white' | 'black'
 }
 
+export const sliderResponsiveBreakpoints = [
+  {
+    breakpoint: 500,
+    settings: {
+      slidesToShow: 1.15
+    }
+  },
+  {
+    breakpoint: 640,
+    settings: {
+      slidesToShow: 2.15
+    }
+  },
+  {
+    breakpoint: 768,
+    settings: {
+      slidesToShow: 2.15
+    }
+  },
+  {
+    breakpoint: 1024,
+    settings: {
+      slidesToShow: 3.15
+    }
+  },
+  {
+    breakpoint: 1280,
+    settings: {
+      arrows: false,
+      slidesToShow: 4
+    }
+  }
+]
+
 export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderProps) => {
   const slidesToShow = 4
   const svgFill = arrowColor === 'white' ? 'fill-zinc-50' : 'fill-theme-gray-950'
@@ -52,53 +86,7 @@ export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderP
       const active = document.activeElement as HTMLElement
       if (active && typeof active.blur === 'function') active.blur() // To fix bug: prevent keyboard mobile on drag
     },
-    responsive: [
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1.15
-        }
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 2.15
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2.15
-        }
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3.15
-        }
-      },
-      {
-        breakpoint: 1280,
-        settings: {
-          arrows: false,
-          slidesToShow: 3.15
-        }
-      },
-      {
-        breakpoint: 1365,
-        settings: {
-          arrows: false,
-          slidesToShow: 4.15
-        }
-      },
-      {
-        breakpoint: 1366,
-        settings: {
-          arrows: false,
-          slidesToShow: 4.15
-        }
-      }
-    ]
+    responsive: sliderResponsiveBreakpoints
   }
 
   return (

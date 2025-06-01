@@ -35,7 +35,7 @@ export const ProductHeader = ({ id, title, description, price, promotionalPrice 
 
         <p className='text-theme-gray-800 text-sm mb-6 md:text-lg md:max-w-[800px]'>{description}</p>
 
-        <div className='flex flex-col gap-y-2 md:flex-row md:justify-end md:gap-x-2'>
+        <div className='flex flex-col gap-y-2 sm:flex-row sm:justify-end sm:gap-x-2'>
           <AddToWishlistButton id={id} full showLabel loadingClass='border-r-theme-500!' className='md:min-w-auto' />
           <AddToCartButton id={id} full showLabel className='md:min-w-auto' />
         </div>
