@@ -14,8 +14,8 @@ export default async function HomePage() {
   return (
     <>
       {home.banners.length > 0 && (
-        <section className='mb-10 -mx-4 lg:relative lg:z-10'>
-          <Container>
+        <section className='mb-10 lg:relative lg:z-10'>
+          <Container className='px-0! xl:px-4!'>
             <BannerSlider items={home.banners} />
           </Container>
         </section>

@@ -14,7 +14,7 @@ export interface BannerProps {
   buttonLabel?: string
   buttonUrl?: string
   ribbon?: RibbonProps
-  setLoading: Dispatch<SetStateAction<boolean>>
+  setLoading?: Dispatch<SetStateAction<boolean>>
 }
 
 export const Banner = ({
@@ -43,12 +43,12 @@ export const Banner = ({
           priority
           src={img.url}
           alt={img.alternativeText || 'Decorative image'}
-          onLoad={() => setLoading(false)}
+          onLoad={setLoading ? () => setLoading(false) : undefined}
           fill
         />
       </div>
       {caption && (
-        <div className='w-full p-6 bg-[black]/35 md:bg-[black]/70 md:rounded-b-sm md:rounded-r-sm md:p-10 absolute bottom-0 left-0'>
+        <div className='w-full p-6 bg-[black]/35 md:bg-[black]/70 md:p-10 absolute bottom-0 left-0'>
           {title && <h2 className='text-lg font-semibold text-zinc-50 md:text-[28px]'>{title}</h2>}
           {description && (
             <p

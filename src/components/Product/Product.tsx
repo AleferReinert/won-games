@@ -5,7 +5,7 @@ import { Ribbon } from 'components/Ribbon/Ribbon'
 import { Skeleton } from 'components/Skeleton/Skeleton'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef } from 'react'
+import { Dispatch, SetStateAction, useRef } from 'react'
 
 export interface ProductProps extends PriceProps {
   id: string
@@ -18,6 +18,7 @@ export interface ProductProps extends PriceProps {
   }
   ribbonLabel?: string
   imgPriority?: boolean
+  setLoading?: Dispatch<SetStateAction<boolean>>
 }
 
 export const Product = ({
@@ -29,7 +30,8 @@ export const Product = ({
   price,
   promotionalPrice = null,
   ribbonLabel,
-  imgPriority = false
+  imgPriority = false,
+  setLoading
 }: ProductProps) => {
   const isDragging = useRef(false)
 
@@ -55,6 +57,7 @@ export const Product = ({
             priority={imgPriority}
             width='292'
             height='137'
+            onLoad={setLoading ? () => setLoading(false) : undefined}
             className='size-full object-cover bg-theme-gray-200 leading-[140px] text-center'
           />
         </div>
@@ -83,9 +86,13 @@ export const Product = ({
   )
 }
 
-export const ProductSkeleton = () => {
+interface ProductSkeletonProps {
+  className?: string
+}
+
+export const ProductSkeleton = ({ className }: ProductSkeletonProps) => {
   return (
-    <div className='w-full h-[235px] bg-zinc-50'>
+    <div className={`w-full h-[235px] bg-zinc-50 ${className || ''}`}>
       <Skeleton className='bg-black/20! rounded-sm h-[140px]' />
       <div className='p-4'>
         <Skeleton className='bg-black/20! rounded-sm w-8/12 h-[20px] mb-0.5' />

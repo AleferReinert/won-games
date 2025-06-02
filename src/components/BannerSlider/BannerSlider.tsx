@@ -7,7 +7,7 @@ import type { Settings } from 'react-slick'
 import styles from './BannerSlider.module.css'
 
 export interface BannerSliderProps {
-  items: Omit<BannerProps, 'setLoading'>[]
+  items: BannerProps[]
 }
 
 export const BannerSlider = ({ items }: BannerSliderProps) => {
@@ -36,7 +36,7 @@ export const BannerSlider = ({ items }: BannerSliderProps) => {
     <div className='relative aspect-video'>
       {loading && (
         <div className='absolute inset-0 bg-theme-gray-900 mx-4 z-10'>
-          <Loading animation='spinner' className='border-r-white! size-16' />
+          <Loading animation='spinner' className='border-r-white! size-14' />
         </div>
       )}
       <div
