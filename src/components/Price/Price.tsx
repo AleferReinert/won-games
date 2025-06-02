@@ -39,15 +39,17 @@ export const Price = ({ price, promotionalPrice, size = 'small', ...props }: Pri
   const { root, oldPrice, currentPrice } = style({ size })
 
   return (
-    <div {...props} data-testid='PriceComponent' className={`${root()} ${props.className || ''}`}>
-      {promotionalPrice && (
-        <div aria-label='Price' className={oldPrice()}>
-          {formatPrice(price)}
+    typeof price === 'number' && (
+      <div {...props} data-testid='PriceComponent' className={`${root()} ${props.className || ''}`}>
+        {promotionalPrice && (
+          <div aria-label='Price' className={oldPrice()}>
+            {formatPrice(price)}
+          </div>
+        )}
+        <div aria-label={promotionalPrice ? 'Promotional price' : 'Price'} className={currentPrice()}>
+          {formatPrice(promotionalPrice || price)}
         </div>
-      )}
-      <div aria-label={promotionalPrice ? 'Promotional price' : 'Price'} className={currentPrice()}>
-        {formatPrice(promotionalPrice || price)}
       </div>
-    </div>
+    )
   )
 }

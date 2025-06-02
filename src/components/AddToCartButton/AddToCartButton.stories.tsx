@@ -7,6 +7,9 @@ import { AddToCartButton } from './AddToCartButton'
 const meta: Meta<typeof AddToCartButton> = {
   title: 'Components/AddToCartButton',
   component: AddToCartButton,
+  args: {
+    price: 0
+  },
   decorators: (Story) => (
     <CartContext.Provider value={cartContextMock}>
       <Story />

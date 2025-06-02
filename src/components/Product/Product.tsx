@@ -75,7 +75,7 @@ export const Product = ({
           </div>
           <div className='flex justify-end mt-2 gap-1 leading-0'>
             <Price price={price} promotionalPrice={promotionalPrice} />
-            <AddToCartButton id={id} size='xsmall' className='[&_svg]:size-4 [&_svg]:scale-[0.75]' />
+            <AddToCartButton id={id} price={price} size='xsmall' className='[&_svg]:size-4 [&_svg]:scale-[0.75]' />
           </div>
         </div>
       </div>

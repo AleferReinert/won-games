@@ -1,14 +1,12 @@
 import { AddToCartButton } from 'components/AddToCartButton/AddToCartButton'
 import { AddToWishlistButton } from 'components/AddToWishlistButton/AddToWishlistButton'
 import { Heading } from 'components/Heading/Heading'
-import { Price } from 'components/Price/Price'
+import { Price, PriceProps } from 'components/Price/Price'
 
-export interface ProductHeaderProps {
+export interface ProductHeaderProps extends Omit<PriceProps, 'size'> {
   id: string
   title: string
   description: string
-  price: number
-  promotionalPrice?: number
 }
 
 export const ProductHeader = ({ id, title, description, price, promotionalPrice }: ProductHeaderProps) => {
@@ -37,7 +35,7 @@ export const ProductHeader = ({ id, title, description, price, promotionalPrice 
 
         <div className='flex flex-col gap-y-2 sm:flex-row sm:justify-end sm:gap-x-2'>
           <AddToWishlistButton id={id} full showLabel loadingClass='border-r-theme-500!' className='md:min-w-auto' />
-          <AddToCartButton id={id} full showLabel className='md:min-w-auto' />
+          <AddToCartButton id={id} price={price} full showLabel className='md:min-w-auto' />
         </div>
       </div>
     </div>
