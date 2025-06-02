@@ -40,7 +40,7 @@ export const companyMapper = (data: CompanyQuery): CompanyProps => {
 // Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerFragment) => {
   return banners.data.map(
-    ({ id, attributes }): BannerProps => ({
+    ({ id, attributes }): Omit<BannerProps, 'setLoading'> => ({
       id,
       img: {
         url: getImageUrl(attributes.img.data.attributes.url),

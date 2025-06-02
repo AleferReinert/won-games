@@ -1,6 +1,6 @@
 import { BannerProps } from 'components/Banner/Banner'
 
-export const bannersMock: BannerProps[] = [
+export const bannersMock: Omit<BannerProps, 'setLoading'>[] = [
   {
     id: '2',
     img: {

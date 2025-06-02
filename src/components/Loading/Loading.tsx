@@ -11,7 +11,7 @@ export const Loading = ({ animation = 'dots', inline, ...props }: LoadingProps) 
   return (
     <div
       data-testid='LoadingComponent'
-      className={`flex w-full justify-center items-center ${inline ? 'w-fit' : 'w-full'}`}
+      className={`flex w-full justify-center items-center ${inline ? 'w-fit' : 'w-full h-full'}`}
     >
       {animation === 'dots' && (
         <div className='flex gap-1'>

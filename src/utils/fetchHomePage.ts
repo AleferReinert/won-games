@@ -6,7 +6,7 @@ import { initializeApollo } from './apollo'
 import { bannerMapper, highlightMapper, productMapper } from './mappers'
 
 export interface HomePageProps {
-  banners: BannerProps[]
+  banners: Omit<BannerProps, 'setLoading'>[]
   newReleasesShowcase: ShowcaseProps
   mostPopularShowcase: ShowcaseProps
   comingSoonShowcase: ShowcaseProps

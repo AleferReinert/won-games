@@ -38,18 +38,6 @@ input::-webkit-search-cancel-button {
   display: none;
 }
 
-@utility custom-clip-path {
-  clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
-
-  @media (min-width: theme(--breakpoint-lg)) {
-    clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0 100%);
-  }
-}
-
-@utility custom-clip-path-secondary {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
-}
-
 @utility max-w-container {
   @apply max-w-[1200px] 2xl:max-w-[1300px];
 }

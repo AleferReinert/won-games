@@ -14,20 +14,20 @@ export default async function HomePage() {
   return (
     <>
       {home.banners.length > 0 && (
-        <Container>
-          <section className='mb-10 -mx-4 lg:relative lg:z-10'>
+        <section className='mb-10 -mx-4 lg:relative lg:z-10'>
+          <Container>
             <BannerSlider items={home.banners} />
-          </section>
-        </Container>
+          </Container>
+        </section>
       )}
 
       {home.newReleasesShowcase.products.length > 0 && (
-        <section className='mb-28 lg:mt-0 lg:pt-[140px] lg:pb-[100px] lg:bg-theme-gray-100 1xl:-mt-[130px]'>
+        <section className='mb-28 xl:pt-44 xl:pb-[100px] xl:bg-theme-gray-100 xl:-mt-36 1xl:-mt-40 xl:mb-0 xl:[clip-path:polygon(0_0,_100%_14%,_100%_100%,_0_86%)]'>
           <Showcase
             data-cy='newReleases'
             {...home.newReleasesShowcase}
             arrowColor='black'
-            headingClass='lg:text-black'
+            headingClass='xl:text-black'
           />
         </section>
       )}

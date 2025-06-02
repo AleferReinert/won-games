@@ -11,8 +11,8 @@ export default async function MainLayout({ children }: { children: React.ReactNo
       <Container>
         <Header company={company} />
       </Container>
-      <main className='flex-[1_0_auto] 1xl:mt-14'>{children}</main>
-      <div className='mt-10 pb-4 pt-14 bg-zinc-50 custom-clip-path lg:pt-28'>
+      <main className='flex-[1_0_auto]'>{children}</main>
+      <div className='mt-10 pb-4 pt-14 bg-zinc-50 md:[clip-path:polygon(0_0,_100%_14%,_100%_100%,_0_100%)]'>
         <Container>
           <Footer company={company} />
         </Container>
