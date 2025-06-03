@@ -80,7 +80,7 @@ export const CartItem = ({
           </div>
 
           {paymentInfo && (
-            <div className='text-theme-gray-500 text-sm leading-none flex max-w-fit flex-col gap-2 mt-4 justify-self-end col-span-2 md:mt-0 md:col-start-3 md:text-right md:gap-0 md:justify-between'>
+            <div className='text-theme-gray-500 text-sm leading-none flex max-w-fit flex-col gap-2 mt-4 md:justify-self-end col-span-2 md:mt-0 md:col-start-3 md:text-right md:gap-0 md:justify-between'>
               <div aria-label='purchase date'>{paymentInfo.purchaseDate}</div>
               {paymentInfo.creditCardNumber ? (
                 <CreditCard
