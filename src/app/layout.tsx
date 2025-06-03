@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { getServerSession } from 'next-auth'
 import { Poppins } from 'next/font/google'
+import NextTopLoader from 'nextjs-toploader'
 import { authOptions } from './api/auth/[...nextauth]/route'
 import './globals.css'
 import Providers from './Providers'
@@ -32,6 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang='pt-br' className={poppins.className}>
       <head />
       <body className='bg-theme-gray-900 overflow-x-hidden font-sans flex flex-col justify-between h-screen'>
+        <NextTopLoader color='#f231a5' height={4} />
         <Providers session={session}>{children}</Providers>
       </body>
     </html>
