@@ -7,7 +7,8 @@ import { TextField } from 'components/TextField/TextField'
 import { REGISTER_USER } from 'graphql/mutations/registerUser'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useTopLoader } from 'nextjs-toploader'
+import { useEffect, useState } from 'react'
 import { BiUserCircle } from 'react-icons/bi'
 import { MdOutlineEmail, MdOutlineLock } from 'react-icons/md'
 import { formatApolloErrors } from 'utils/formatApolloErrors'
@@ -23,6 +24,12 @@ export default function SignUpPage() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const { start, done } = useTopLoader()
+
+  useEffect(() => {
+    loading ? start() : done()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading])
 
   const [createUser] = useMutation(REGISTER_USER, {
     onError: (error) => {

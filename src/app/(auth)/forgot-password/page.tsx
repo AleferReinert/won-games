@@ -4,6 +4,7 @@ import { Button } from 'components/Button/Button'
 import { Heading } from 'components/Heading/Heading'
 import { TextField } from 'components/TextField/TextField'
 import { useSearchParams } from 'next/navigation'
+import { useTopLoader } from 'nextjs-toploader'
 import { useEffect, useState } from 'react'
 import { MdOutlineEmail } from 'react-icons/md'
 import { forgotPasswordValidation } from 'utils/validations/forgotPasswordValidation'
@@ -15,6 +16,12 @@ export default function ForgotPasswordPage() {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const [success, setSuccess] = useState(false)
+  const { start, done } = useTopLoader()
+
+  useEffect(() => {
+    loading ? start() : done()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading])
 
   useEffect(() => {
     setValues({ email })

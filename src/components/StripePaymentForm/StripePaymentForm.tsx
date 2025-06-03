@@ -4,11 +4,11 @@ import { PaymentIntent, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { Alert } from 'components/Alert/Alert'
 import { Button } from 'components/Button/Button'
 import { Heading } from 'components/Heading/Heading'
-import { Loading } from 'components/Loading/Loading'
 import { Skeleton } from 'components/Skeleton/Skeleton'
 import { useCart } from 'hooks/useCart'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useTopLoader } from 'nextjs-toploader'
 import { useEffect, useState } from 'react'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 
@@ -23,6 +23,12 @@ export const StripePaymentForm = () => {
   const [loading, setLoading] = useState(false)
   const stripe = useStripe()
   const elements = useElements()
+  const { start, done } = useTopLoader()
+
+  useEffect(() => {
+    loading ? start() : done()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading])
 
   useEffect(() => {
     if (cartProducts.length) {
@@ -109,7 +115,6 @@ export const StripePaymentForm = () => {
         createOrder(paymentIntent)
       }
     }
-    setLoading(false)
   }
 
   return (
@@ -154,7 +159,7 @@ export const StripePaymentForm = () => {
         )}
 
         {allProductsFree != null && !allProductsFree && (
-          <div className='bg-theme-gray-200 rounded-xs p-4 border border-theme-gray-200 text-theme-gray-950 text-base focus-within:shadow-[0_0_5px_theme(--color-theme-primary)]'>
+          <div className='lg:min-w-[342px] bg-theme-gray-200 rounded-xs p-4 border border-theme-gray-200 text-theme-gray-950 text-base focus-within:shadow-[0_0_5px_theme(--color-theme-primary)]'>
             <CardElement options={{ hidePostalCode: true, disableLink: true }} onChange={handleChange} />
           </div>
         )}
@@ -173,12 +178,18 @@ export const StripePaymentForm = () => {
           </div>
         ) : (
           <>
-            <Button variant='link' asLink href='/explore' className='w-full whitespace-nowrap px-0 md:w-1/2'>
-              Continue shopping
-            </Button>
-            <Button type='submit' disabled={buttonDisabled} className='w-full whitespace-nowrap px-0 md:w-1/2'>
+            {!loading && (
+              <Button variant='link' asLink href='/explore' className='w-full whitespace-nowrap px-0 md:w-1/2'>
+                Continue shopping
+              </Button>
+            )}
+            <Button
+              type='submit'
+              disabled={buttonDisabled}
+              className={`w-full whitespace-nowrap px-0  ${loading ? '' : 'md:w-1/2'}`}
+            >
               {loading ? (
-                <Loading />
+                <>Confirming order...</>
               ) : (
                 <>
                   <MdOutlineShoppingCart role='img' aria-hidden />

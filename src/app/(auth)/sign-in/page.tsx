@@ -7,7 +7,8 @@ import { TextField } from 'components/TextField/TextField'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useTopLoader } from 'nextjs-toploader'
+import { useEffect, useState } from 'react'
 import { MdOutlineEmail, MdOutlineLock } from 'react-icons/md'
 import { signInValidation } from 'utils/validations/signInValidation'
 
@@ -17,6 +18,12 @@ export default function SignInPage() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const { start, done } = useTopLoader()
+
+  useEffect(() => {
+    loading ? start() : done()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()

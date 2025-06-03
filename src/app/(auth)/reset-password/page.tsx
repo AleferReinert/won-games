@@ -5,7 +5,8 @@ import { Heading } from 'components/Heading/Heading'
 import { TextField } from 'components/TextField/TextField'
 import { signIn } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useTopLoader } from 'nextjs-toploader'
+import { useEffect, useState } from 'react'
 import { MdOutlineLock } from 'react-icons/md'
 import { resetPasswordValidation } from 'utils/validations/resetPasswordValidation'
 
@@ -16,6 +17,12 @@ export default function ResetPasswordPage() {
   const searchParams = useSearchParams()
   const code = searchParams?.get('code') || ''
   const [passwordChanged, setPasswordChanged] = useState(false)
+  const { start, done } = useTopLoader()
+
+  useEffect(() => {
+    loading ? start() : done()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
