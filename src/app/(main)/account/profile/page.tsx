@@ -16,14 +16,13 @@ export default async function ProfilePage(session?: Session) {
   return (
     <div>
       <div className='grid gap-4 md:grid-cols-[repeat(2,_1fr)] [&>div]:mb-0'>
-        <TextField name='name' label='Name' defaultValue={username} />
+        <TextField name='name' label='Name' defaultValue={username} disabled />
         <TextField type='email' name='email' label='E-mail' defaultValue={email} disabled />
       </div>
-      <div className='flex mt-4 flex-col md:flex-row md:justify-end md:mt-14'>
-        <Button variant='link' asLink href={`/forgot-password?email=${email}`}>
+      <div className='flex mt-4 flex-col sm:flex-row sm:justify-end md:mt-8'>
+        <Button variant='link' asLink href={`/forgot-password?email=${email}`} className='sm:px-0'>
           Reset password
         </Button>
-        <Button>Save</Button>
       </div>
     </div>
   )
