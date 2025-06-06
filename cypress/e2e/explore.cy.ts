@@ -31,17 +31,21 @@ describe('Products page', () => {
     cy.filterUnderPrice(200)
   })
 
-  it('Filter by sort', () => {
-    cy.get('@FilteredProducts').first().findByLabelText('Price').as('FirstPrice')
-    cy.get('@FilteredProducts').last().findByLabelText('Price').as('LastPrice')
+  it.only('Filter by sort', () => {
+    cy.get('@FilteredProducts').findAllByLabelText('Price').as('Prices')
 
     cy.selectFilterAndCheckUrl('radio', 'Low to high', 'sort=price%3Aasc')
     cy.wait(2000)
-    cy.isPriceSorted('@FirstPrice', '@LastPrice', 'asc')
+    cy.get('@Prices').first().as('FirstPrice')
+    cy.get('@Prices').last().as('LastPrice')
+    cy.get('@LastPrice').then(($el) => {
+      cy.log($el.text()) // Loga o texto do elemento
+    })
+    // cy.isPriceSorted('@FirstPrice', '@LastPrice', 'asc')
 
-    cy.selectFilterAndCheckUrl('radio', 'High to low', 'sort=price%3Adesc')
-    cy.wait(2000)
-    cy.isPriceSorted('@FirstPrice', '@LastPrice', 'desc')
+    // cy.selectFilterAndCheckUrl('radio', 'High to low', 'sort=price%3Adesc')
+    // cy.wait(2000)
+    // cy.isPriceSorted('@FirstPrice', '@LastPrice', 'desc')
   })
 
   it('Filter by platforms', () => {

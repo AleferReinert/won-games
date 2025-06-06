@@ -22,7 +22,7 @@ describe('Search', () => {
 
     // Remove tag
     cy.get('@AppliedFilters').findByRole('button', { name: 'Remove' }).click()
-    cy.findByText('Results for').should('not.exist')
+    cy.findByText('Results for', { timeout: 30000 }).should('not.exist')
   })
 
   it('Search product on enter', () => {

@@ -7,7 +7,7 @@ import { productMapper } from 'utils/mappers'
 
 export default function WishlistPage() {
   const { products, loading } = useWishlist()
-  const wishlistProducts = productMapper({ data: products })
+  const wishlistProducts = productMapper(products)
 
   return (
     <div data-testid='WishlistPage'>

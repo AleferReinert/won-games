@@ -84,7 +84,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <Divider />
       </Container>
 
-      <Showcase data-cy='comingSoon' {...comingSoon} />
+      {comingSoon && <Showcase data-cy='comingSoon' {...comingSoon} />}
       <Showcase data-cy='recommendedProducts' {...recommended} />
     </div>
   )

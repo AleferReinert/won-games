@@ -1,26 +1,28 @@
 import { gql } from '@apollo/client'
-import { PRODUCT_RELATION } from 'graphql/fragments/product'
 
 export const UPDATE_WISHLIST = gql`
   mutation UpdateWishlish($id: ID!, $data: WishlistInput!) {
-    updateWishlist(id: $id, data: $data) {
-      data {
-        id
-        attributes {
-          user {
-            data {
-              id
-              attributes {
-                username
-              }
-            }
-          }
-          products {
-            ...productRelation
-          }
+    updateWishlist(documentId: $id, data: $data) {
+      documentId
+      user {
+        documentId
+        username
+      }
+      products(filters: { publishedAt: { ne: null } }) {
+        documentId
+        slug
+        cover {
+          url
+          alternativeText
         }
+        name
+        developers {
+          name
+        }
+        price
+        promotional_price
+        ribbon_label
       }
     }
   }
-  ${PRODUCT_RELATION}
 `

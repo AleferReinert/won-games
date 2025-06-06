@@ -1,3 +1,4 @@
+import { productsLimit } from 'app/(main)/explore/page'
 import { ParsedUrlQueryInput } from 'querystring'
 
 export interface ParseArgsProps {
@@ -22,30 +23,30 @@ export interface ParseArgsProps {
     sort: 'price:asc'
   }
 */
-export const queryStringToGraphqlFilters = ({ queryString }: ParseArgsProps) => {
+export const queryStringToGraphqlVariables = ({ queryString }: ParseArgsProps) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const query = { filters: { price: {}, and: [] } } as Record<string, any>
+  const variables = { filters: { and: [] }, limit: productsLimit } as Record<string, any>
 
   Object.keys(queryString).forEach((queryParam) => {
     const queryParamValue = queryString[queryParam]?.toString()
 
     if (queryParamValue) {
-      if (queryParam === 'search') query.filters.name = { containsi: queryString.search }
-      if (queryParam === 'price') query.filters.price = { lte: Number(queryString[queryParam]) }
-      if (queryParam === 'sort') query.sort = queryString.sort?.toString()
+      if (queryParam === 'search') variables.filters.name = { containsi: queryString.search }
+      if (queryParam === 'price') variables.filters.and.push({ price: { lte: Number(queryString[queryParam]) } })
+      if (queryParam === 'sort') variables.sort = queryString.sort?.toString()
       if (queryParam === 'platforms') {
         const queryParamValueArray = queryParamValue.split(',')
         queryParamValueArray.map((value) => {
-          query.filters.and.push({ platforms: { slug: { eqi: value } } })
+          variables.filters.and.push({ platforms: { slug: { eq: value } } })
         })
       }
       if (queryParam === 'categories') {
         const queryParamValueArray = queryParamValue.split(',')
         queryParamValueArray.map((value) => {
-          query.filters.and.push({ categories: { slug: { eqi: value } } })
+          variables.filters.and.push({ categories: { slug: { eq: value } } })
         })
       }
     }
   })
-  return query
+  return variables
 }

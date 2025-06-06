@@ -48,8 +48,9 @@ describe('Sign up page', () => {
     cy.findByText('Email or Username are already taken').should('be.visible')
   })
 
-  it.only('Success: e-mail sent', () => {
+  it('Success: e-mail sent and confirm email', () => {
     cy.signUp(fakeUser.fullName, fakeUser.email, fakeUser.password)
     cy.url({ timeout: 30000 }).should('include', '/confirm-your-email')
+    cy.confirmEmail(fakeUser.email)
   })
 })

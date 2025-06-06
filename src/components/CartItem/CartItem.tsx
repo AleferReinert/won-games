@@ -1,6 +1,6 @@
 'use client'
 import { CreditCard } from 'components/CreditCard/CreditCard'
-import { Price } from 'components/Price/Price'
+import { Price, PriceProps } from 'components/Price/Price'
 import { useCart } from 'hooks/useCart'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,11 +13,10 @@ export interface PaymentProps {
   purchaseDate: string
 }
 
-export interface CartItemProps {
+export interface CartItemProps extends Pick<PriceProps, 'price'> {
   id: string
   img: string
   name: string
-  price: number
   downloadLink?: string
   paymentInfo?: PaymentProps
   hideRemoveFromCartButton?: boolean

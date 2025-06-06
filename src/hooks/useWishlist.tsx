@@ -6,28 +6,28 @@ import { UPDATE_WISHLIST } from 'graphql/mutations/updateWishlist'
 import { WISHLIST } from 'graphql/queries/wishlist'
 import { useSession } from 'next-auth/react'
 import { ReactNode, useContext, useEffect, useMemo, useState } from 'react'
-import { ProductEntity, Query } from 'types/generated'
+import { Product, Query } from 'types/generated'
 
 interface WishlistProviderProps {
   children: ReactNode
 }
 
 export const WishlistProvider = ({ children }: WishlistProviderProps) => {
-  const [wishlistProducts, setWishlistProducts] = useState<ProductEntity[]>([])
+  const [wishlistProducts, setWishlistProducts] = useState<Product[]>([])
   const [wishlistId, setWishlistId] = useState<string | null>(null)
-  const wishlistProductsIds = useMemo(() => wishlistProducts.map((product) => product.id), [wishlistProducts])
+  const wishlistProductsIds = useMemo(() => wishlistProducts.map((product) => product.documentId), [wishlistProducts])
   const { data: session } = useSession()
 
   const [createWishlist, { loading: loadingCreateWishlist }] = useMutation(CREATE_WISHLIST, {
-    onCompleted: (data) => {
-      setWishlistProducts(data.createWishlist.data.attributes.products.data ?? [])
-      setWishlistId(data.createWishlist.data.id)
+    onCompleted: ({ createWishlist }) => {
+      setWishlistProducts(createWishlist.products ?? [])
+      setWishlistId(createWishlist.documentId)
     }
   })
 
   const [updateWishlist, { loading: loadingUpdateWishlist }] = useMutation(UPDATE_WISHLIST, {
     onCompleted: (data) => {
-      setWishlistProducts(data.updateWishlist.data.attributes.products.data ?? [])
+      setWishlistProducts(data.updateWishlist.products ?? [])
     }
   })
 
@@ -39,34 +39,19 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const loadingInitial = !session || loadingQuery || loadingCreateWishlist || loadingUpdateWishlist
 
   useEffect(() => {
-    setWishlistProducts(data?.wishlists.data[0]?.attributes.products.data ?? [])
-    setWishlistId(data?.wishlists.data[0]?.id ?? null)
+    setWishlistProducts(data?.wishlists[0]?.products ?? [])
+    setWishlistId(data?.wishlists[0]?.documentId ?? null)
   }, [data])
 
   const isInWishlist = (productId: string) => {
-    return wishlistProducts.some((product) => product.id === productId)
+    return wishlistProducts.some((product) => product.documentId === productId)
   }
 
   const addToWishlist = (productId: string) => {
     if (wishlistId) {
-      return updateWishlist({
-        variables: {
-          id: wishlistId,
-          data: {
-            products: [...wishlistProductsIds, productId]
-          }
-        }
-      })
-    } else {
-      return createWishlist({
-        variables: {
-          data: {
-            user: session?.id,
-            products: [productId]
-          }
-        }
-      })
+      return updateWishlist({ variables: { id: wishlistId, data: { products: [...wishlistProductsIds, productId] } } })
     }
+    return createWishlist({ variables: { data: { user: session?.id, products: [productId] } } })
   }
 
   const removeFromWishlist = (productId: string) => {

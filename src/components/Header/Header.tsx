@@ -8,6 +8,7 @@ import { UserDropdown } from 'components/UserDropdown/UserDropdown'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useTopLoader } from 'nextjs-toploader'
 import { useEffect, useRef, useState } from 'react'
 import { MdOutlineSearch } from 'react-icons/md'
 import { RiMenu2Fill } from 'react-icons/ri'
@@ -27,6 +28,7 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
   const [menuMobile, setMenuMobile] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   useEffect(() => setShowSearch(false), [pathname])
+  const { start } = useTopLoader()
 
   function handleShowSearch() {
     if (!showSearch) {
@@ -38,6 +40,7 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
 
   function searchSubmit(e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
+    start()
     if (searchInputRef.current?.value) {
       const currentParams = new URLSearchParams(window.location.search)
       currentParams.set('search', searchInputRef.current.value)

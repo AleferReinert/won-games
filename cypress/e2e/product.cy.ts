@@ -3,7 +3,7 @@
 describe('Product page (unauthenticated)', () => {
   beforeEach(() => {
     cy.visit('/')
-    cy.findAllByTestId('ProductComponent').eq(0).click()
+    cy.findAllByTestId('ProductComponent').eq(3).click()
     cy.findByTestId('ProductPage', { timeout: 30000 }).should('be.visible')
   })
 

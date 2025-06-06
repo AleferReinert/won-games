@@ -2,63 +2,54 @@ import { BannerProps } from 'components/Banner/Banner'
 import { CartItemProps, PaymentProps } from 'components/CartItem/CartItem'
 import { HighlightProps } from 'components/Highlight/Highlight'
 import { ProductProps } from 'components/Product/Product'
-import {
-  BannerFragment,
-  CompanyQuery,
-  HighlightFragment,
-  OrdersQuery,
-  ProductEntityFragment,
-  ProductRelationFragment,
-  Query
-} from 'types/generated'
-import { CompanyProps } from './fetchCompany'
+import { BannerFragment, HighlightFragment, OrdersQuery, PageHomeQuery, Query } from 'types/generated'
 import { getImageUrl } from './getImageUrl'
 
-export const companyMapper = (data: CompanyQuery): CompanyProps => {
-  const { logoDark, logoLight, logoIcon } = data.company.data.attributes
+// export const companyMapper = (data: CompanyQuery): CompanyProps => {
+//   const { logoDark, logoLight, logoIcon } = data.company.data.attributes
 
-  return {
-    ...data.company.data.attributes,
-    logoIcon: {
-      url: getImageUrl(logoIcon.data.attributes.url),
-      width: logoIcon.data.attributes.width,
-      height: logoIcon.data.attributes.height
-    },
-    logoLight: {
-      url: getImageUrl(logoLight.data.attributes.url),
-      width: logoLight.data.attributes.width,
-      height: logoLight.data.attributes.height
-    },
-    logoDark: {
-      url: getImageUrl(logoDark.data.attributes.url),
-      width: logoDark.data.attributes.width,
-      height: logoDark.data.attributes.height
-    }
-  }
-}
+//   return {
+//     ...data.company.data.attributes,
+//     logoIcon: {
+//       url: getImageUrl(logoIcon.data.attributes.url),
+//       width: logoIcon.data.attributes.width,
+//       height: logoIcon.data.attributes.height
+//     },
+//     logoLight: {
+//       url: getImageUrl(logoLight.data.attributes.url),
+//       width: logoLight.data.attributes.width,
+//       height: logoLight.data.attributes.height
+//     },
+//     logoDark: {
+//       url: getImageUrl(logoDark.data.attributes.url),
+//       width: logoDark.data.attributes.width,
+//       height: logoDark.data.attributes.height
+//     }
+//   }
+// }
 
 // Retorna todos dados necessários para o componente Banner
-export const bannerMapper = (banners: BannerFragment) => {
-  return banners.data.map(
-    ({ id, attributes }): BannerProps => ({
-      id,
+export const bannerMapper = (banners: BannerFragment[]) => {
+  return banners.map(
+    ({ documentId, img, title, description, button, ribbon }): BannerProps => ({
+      id: documentId,
       img: {
-        url: getImageUrl(attributes.img.data.attributes.url),
-        alternativeText: attributes.img.data.attributes.alternativeText ?? ''
+        url: getImageUrl(img.url),
+        alternativeText: img.alternativeText ?? ''
       },
-      title: attributes.title,
-      ...(attributes.description && {
-        description: attributes.description
+      title,
+      ...(description && {
+        description
       }),
-      ...(attributes.button && {
-        buttonLabel: attributes.button.label,
-        buttonUrl: attributes.button?.url
+      ...(button && {
+        buttonLabel: button.label,
+        buttonUrl: button?.url
       }),
-      ...(attributes.ribbon && {
+      ...(ribbon && {
         ribbon: {
-          label: attributes.ribbon.label,
-          size: attributes.ribbon.size,
-          color: attributes.ribbon.color
+          label: ribbon.label,
+          size: ribbon.size,
+          color: ribbon.color
         }
       })
     })
@@ -66,12 +57,12 @@ export const bannerMapper = (banners: BannerFragment) => {
 }
 
 // Retorna os produtos adicionados ao carrinho
-export const cartProductsMapper = (products: Query['products']['data']): CartItemProps[] => {
+export const cartProductsMapper = (products: Query['products']): CartItemProps[] => {
   return products.map((product) => ({
-    id: product.id,
-    name: product.attributes.name,
-    price: product.attributes.price,
-    img: getImageUrl(product.attributes.cover?.data?.attributes?.url)
+    id: product.documentId,
+    name: product.name,
+    price: product.price,
+    img: getImageUrl(product.cover?.url)
   }))
 }
 
@@ -87,33 +78,31 @@ export const highlightMapper = (
     buttonUrl: highlight.buttonUrl,
     alignment: alignment ?? highlight.alignment,
     background: {
-      url: getImageUrl(highlight.background.data.attributes.url),
-      alternativeText: highlight.background.data.attributes.alternativeText ?? ''
+      url: getImageUrl(highlight.background.url),
+      alternativeText: highlight.background.alternativeText ?? ''
     },
-    floatImg: highlight.floatImg.data && {
-      url: getImageUrl(highlight.floatImg.data.attributes.url),
-      alternativeText: highlight.floatImg.data.attributes.alternativeText ?? ''
+    floatImg: highlight.floatImg && {
+      url: getImageUrl(highlight.floatImg.url),
+      alternativeText: highlight.floatImg.alternativeText ?? ''
     }
   }
 }
 
 // Retorna todos dados necessários para o slider de produtos
-export const productMapper = (products: ProductEntityFragment | ProductRelationFragment) => {
-  return products.data
-    ? products.data.map(
-        ({ id, attributes }): ProductProps => ({
-          id,
-          title: attributes.name,
-          slug: attributes.slug,
-          developer: attributes.developers.data[0]?.attributes.name || '',
-          price: attributes.price,
-          promotionalPrice: attributes.promotional_price,
-          ribbonLabel: attributes.ribbon_label,
+export const productMapper = (products: PageHomeQuery['newProducts'] | undefined) => {
+  return products
+    ? products.map(
+        ({ documentId, name, slug, developers, price, promotional_price, ribbon_label, cover }): ProductProps => ({
+          id: documentId,
+          title: name,
+          slug,
+          developer: developers[0]?.name || '',
+          price,
+          promotionalPrice: promotional_price,
+          ribbonLabel: ribbon_label,
           cover: {
-            url: attributes.cover.data
-              ? getImageUrl(attributes.cover.data.attributes.url)
-              : '/img/default/product.webp',
-            alternativeText: attributes.cover.data.attributes.alternativeText || 'Image not found'
+            url: cover ? getImageUrl(cover.url) : '/img/default/product.webp',
+            alternativeText: cover.alternativeText || 'Image not found'
           }
         })
       )
@@ -122,9 +111,9 @@ export const productMapper = (products: ProductEntityFragment | ProductRelationF
 
 // Retornas compras realizadas
 export function ordersMapper(response: Pick<OrdersQuery, 'orders'>): CartItemProps[] {
-  return response.orders.data.flatMap((orderEntity) => {
-    const orderId = orderEntity.id
-    const { card_brand, card_last4, createdAt } = orderEntity.attributes
+  return response.orders.flatMap((orderEntity) => {
+    const orderId = orderEntity.documentId
+    const { card_brand, card_last4, createdAt } = orderEntity
     const paymentInfo: PaymentProps = {
       creditCardBrand: card_brand || '',
       creditCardNumber: card_last4 ? `**** **** **** ${card_last4}` : '',
@@ -136,13 +125,13 @@ export function ordersMapper(response: Pick<OrdersQuery, 'orders'>): CartItemPro
       }).format(new Date(createdAt))}`
     }
 
-    return orderEntity.attributes.products.data.map(({ attributes, id }) => {
-      const key = `${orderId}${id}`
+    return orderEntity.products.map(({ documentId, cover, name, price }) => {
+      const key = `${orderId}${documentId}`
       return {
         id: key,
-        img: getImageUrl(attributes.cover.data.attributes.formats.thumbnail.url),
-        name: attributes.name.trim(),
-        price: attributes.price,
+        img: getImageUrl(cover.formats.thumbnail.url),
+        name: name.trim(),
+        price,
         paymentInfo
       }
     })

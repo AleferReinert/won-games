@@ -1,30 +1,23 @@
 import { MockedResponse } from '@apollo/client/testing'
+import { productsLimit } from 'app/(main)/explore/page'
 import { PRODUCTS } from 'graphql/queries/products'
-import { ProductEntityResponseCollection } from 'types/generated'
+import { ProductsQuery } from 'types/generated'
 
-export const emptyProductsResponseMock: MockedResponse<{
-  products: ProductEntityResponseCollection
-}> = {
+export const emptyProductsResponseMock: MockedResponse<ProductsQuery> = {
   request: {
     query: PRODUCTS,
     variables: {
-      limit: 3,
-      filters: { price: {}, and: [] }
+      filters: { and: [] },
+      limit: productsLimit
     }
   },
   result: {
     data: {
-      products: {
-        data: [],
-        meta: {
-          pagination: {
-            page: 1,
-            pageCount: 4,
-            pageSize: 3,
-            total: 0
-          }
-        },
-        __typename: 'ProductEntityResponseCollection'
+      products: [],
+      products_connection: {
+        pageInfo: {
+          total: 0
+        }
       }
     }
   }

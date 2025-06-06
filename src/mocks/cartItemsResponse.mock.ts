@@ -5,7 +5,7 @@ export const cartItemsResponseMock: MockedResponse = {
   request: {
     query: PRODUCTS,
     variables: {
-      filters: { id: { in: ['2', '4'] } }
+      filters: { documentId: { in: ['2', '4'] } }
     }
   },
   result: {

@@ -41,10 +41,10 @@ export const generateFilterOptions = ({ platforms, categories }: generateFilterO
     name: 'platforms',
     type: 'checkbox',
     fields:
-      platforms.platforms.data.map(({ attributes }) => ({
-        label: attributes.name,
-        id: attributes.slug,
-        value: attributes.slug
+      platforms.platforms.map(({ name, slug }) => ({
+        label: name,
+        id: slug,
+        value: slug
       })) || []
   },
   {
@@ -52,10 +52,10 @@ export const generateFilterOptions = ({ platforms, categories }: generateFilterO
     name: 'categories',
     type: 'checkbox',
     fields:
-      categories.categories.data.map(({ attributes }) => ({
-        label: attributes.name,
-        id: attributes.slug,
-        value: attributes.slug
+      categories.categories.map(({ name, slug }) => ({
+        label: name,
+        id: slug,
+        value: slug
       })) || []
   }
 ]

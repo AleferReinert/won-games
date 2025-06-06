@@ -7,24 +7,20 @@ import { useSearchParams } from 'next/navigation'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import { ProductsQuery } from 'types/generated'
 import { getImageUrl } from 'utils/getImageUrl'
-import { queryStringToGraphqlFilters } from 'utils/queryStringToGraphqlFilters'
+import { queryStringToGraphqlVariables } from 'utils/queryStringToGraphqlVariables'
 
 export const productsLimit = 9
 
 export default function ExplorePage() {
   const searchParams = useSearchParams()
   const query = Object.fromEntries(searchParams.entries())
+  const variables = queryStringToGraphqlVariables({ queryString: query ?? {} })
   const { data, fetchMore, loading, networkStatus } = useQuery<ProductsQuery>(PRODUCTS, {
     notifyOnNetworkStatusChange: true,
-    variables: {
-      limit: productsLimit,
-      ...queryStringToGraphqlFilters({
-        queryString: query ?? {}
-      })
-    }
+    variables: { ...variables }
   })
-  const products = data?.products.data || []
-  const allProductsLength = data?.products.meta.pagination.total || 0
+  const products = data?.products || []
+  const allProductsLength = data?.products_connection?.pageInfo.total || 0
   const allProductsLoaded = products.length >= allProductsLength
   const hasProducts = products.length > 0
   const showEmpty = !loading && !hasProducts
@@ -40,10 +36,12 @@ export default function ExplorePage() {
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev
         return {
-          products: {
-            ...fetchMoreResult.products,
-            data: [...prev.products.data, ...fetchMoreResult.products.data]
-          }
+          products_connection: {
+            pageInfo: {
+              total: fetchMoreResult.products_connection?.pageInfo.total || 0
+            }
+          },
+          products: [...prev.products, ...fetchMoreResult.products]
         }
       }
     })
@@ -56,24 +54,24 @@ export default function ExplorePage() {
         className='grid gap-6 auto-rows-max md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(3,_1fr)]'
       >
         {hasProducts &&
-          products.map(({ attributes, id }, index) => {
+          products.map((product, index) => {
             const firstThreeProducts = index < 3
 
             return (
               <Product
-                id={id}
-                key={id}
-                title={attributes.name}
-                developer={attributes.developers.data[0]?.attributes.name || ''}
+                id={product.documentId}
+                key={product.documentId}
+                title={product.name}
+                developer={product.developers[0]?.name || ''}
                 cover={{
-                  url: getImageUrl(attributes.cover.data.attributes.url) || '/img/default/product.webp',
-                  alternativeText: attributes.cover.data.attributes.alternativeText
+                  url: getImageUrl(product.cover.url) || '/img/default/product.webp',
+                  alternativeText: product.cover.alternativeText || 'Decorative image'
                 }}
                 imgPriority={firstThreeProducts}
-                price={attributes.price}
-                slug={attributes.slug}
-                promotionalPrice={attributes.promotional_price}
-                ribbonLabel={attributes.ribbon_label}
+                price={product.price}
+                slug={product.slug}
+                promotionalPrice={product.promotional_price}
+                ribbonLabel={product.ribbon_label}
               />
             )
           })}

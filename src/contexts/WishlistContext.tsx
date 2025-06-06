@@ -1,10 +1,10 @@
 'use client'
 import { FetchResult } from '@apollo/client'
 import { createContext } from 'react'
-import { ProductEntity } from 'types/generated'
+import { Product } from 'types/generated'
 
 export interface WishlistContextProps {
-  products: ProductEntity[]
+  products: Product[]
   isInWishlist: (id: string) => boolean
   addToWishlist: (id: string) => Promise<FetchResult<void>>
   removeFromWishlist: (id: string) => Promise<void | FetchResult<void>>

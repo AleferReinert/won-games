@@ -20,7 +20,7 @@ interface ProductBySlugProps {
   gallery?: GalleryImageProps[]
   description: string
   details: ProductDetailsProps
-  comingSoon: ShowcaseProps
+  comingSoon?: ShowcaseProps
   recommended: ShowcaseProps
 }
 
@@ -31,7 +31,7 @@ export async function fetchProductBySlug(slug: string): Promise<ProductBySlugPro
     variables: { slug },
     fetchPolicy: 'no-cache'
   })
-  const productsNotFound = productResponse.data.products.data.length === 0
+  const productsNotFound = productResponse.data.products.length === 0
   if (productsNotFound) {
     return redirect('/404')
   }
@@ -41,41 +41,41 @@ export async function fetchProductBySlug(slug: string): Promise<ProductBySlugPro
     fetchPolicy: 'no-cache'
   })
 
-  const comingSoon = comingSoonResponse.data.showcase.data.attributes.comingSoonProducts
+  const comingSoon = comingSoonResponse.data.showcase?.comingSoonProducts
   const recommended = await fetchRecommendedShowcase()
-  const product = productResponse.data.products.data[0]
-  const { cover, name, short_description, price, promotional_price, gallery, description } = product.attributes
-  const { developers, release_date, platforms, publisher, rating, categories } = product.attributes
+  const product = productResponse.data.products[0]
   return {
     cover: {
-      url: getImageUrl(cover.data?.attributes.url) || '/img/default/product-cover.webp',
-      alternativeText: cover.data.attributes.alternativeText ?? ''
+      url: getImageUrl(product.cover?.url) || '/img/default/product-cover.webp',
+      alternativeText: product.cover.alternativeText ?? ''
     },
     productHeader: {
-      id: product.id,
-      title: name,
-      description: short_description,
-      price: price,
-      promotionalPrice: promotional_price
+      id: product.documentId,
+      title: product.name,
+      description: product.short_description,
+      ...(product.price && { price: product.price }),
+      promotionalPrice: product.promotional_price
     },
-    gallery: gallery.data.map(({ attributes }) => ({
-      src: getImageUrl(attributes.url),
-      label: attributes.alternativeText
+    gallery: product.gallery.map(({ url, alternativeText }) => ({
+      src: getImageUrl(url),
+      label: alternativeText || ''
     })),
-    description: description,
+    description: product.description,
     details: {
-      developer: developers.data[0]?.attributes.name || '',
-      releaseDate: release_date || '',
-      platforms: platforms.data.map((platform) => platform.attributes.name),
-      publisher: publisher.data?.attributes.name || '',
-      rating: rating || '',
-      categories: categories.data.map(({ attributes }) => attributes.name)
+      developer: product.developers[0]?.name || '',
+      releaseDate: product.release_date || '',
+      platforms: product.platforms.map((platform) => platform.name),
+      publisher: product.publisher?.name || '',
+      rating: product.rating,
+      categories: product.categories.map(({ name }) => name)
     },
-    comingSoon: {
-      title: comingSoon.title,
-      highlight: comingSoon.highlight.background.data && highlightMapper(comingSoon.highlight),
-      products: productMapper(comingSoonResponse.data.comingSoonProducts)
-    },
+    ...(comingSoon && {
+      comingSoon: {
+        title: comingSoon.title,
+        highlight: comingSoon.highlight && highlightMapper(comingSoon.highlight),
+        products: productMapper(comingSoonResponse.data.comingSoonProducts)
+      }
+    }),
     recommended: {
       title: recommended.title,
       products: recommended.products

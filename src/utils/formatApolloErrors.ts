@@ -13,9 +13,11 @@ export function formatApolloErrors(error: ApolloError) {
           acc[err.path[0]] = err.message
         }
       })
-    }
-
-    if (gqlError.message) {
+      // @ts-expect-error ApolloError type does not have a message property
+    } else if (extensions?.error?.message) {
+      // @ts-expect-error ApolloError type does not have a message property
+      acc.general = extensions.error.message
+    } else if (gqlError.message) {
       acc.general = gqlError.message
     }
 

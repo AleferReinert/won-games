@@ -8,9 +8,7 @@ export const wishlistEmptyResponseMock: MockedResponse<WishlistQuery> = {
   },
   result: {
     data: {
-      wishlists: {
-        data: []
-      }
+      wishlists: []
     }
   }
 }

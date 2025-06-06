@@ -1,18 +1,24 @@
 import { gql } from '@apollo/client'
-import { PRODUCT_RELATION } from 'graphql/fragments/product'
 
 export const WISHLIST = gql`
   query Wishlist($userEmail: StringFilterInput) {
-    wishlists(filters: { user: { email: $userEmail } }) {
-      data {
-        id
-        attributes {
-          products {
-            ...productRelation
-          }
+    wishlists(filters: { user: { email: $userEmail }, publishedAt: { ne: null } }) {
+      documentId
+      products(filters: { publishedAt: { ne: null } }) {
+        documentId
+        slug
+        cover {
+          url
+          alternativeText
         }
+        name
+        developers {
+          name
+        }
+        price
+        promotional_price
+        ribbon_label
       }
     }
   }
-  ${PRODUCT_RELATION}
 `

@@ -10,7 +10,6 @@ const config: CodegenConfig = {
     'src/types/generated.ts': {
       plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
       config: {
-        avoidOptionals: true,
         maybeValue: 'T',
         withHooks: false,
         withHOC: false,

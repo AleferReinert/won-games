@@ -9,8 +9,7 @@ export async function fetchAccountOrders(session: Session): Promise<CartItemProp
   const apolloClient = initializeApollo({ token: session.jwt })
   const orders = await apolloClient.query<OrdersQuery, OrdersQueryVariables>({
     query: ORDERS,
-    variables: { identifier: session.id! }
-    // fetchPolicy: 'no-cache'
+    variables: { userEmail: session.user!.email! }
   })
 
   return ordersMapper(orders.data)

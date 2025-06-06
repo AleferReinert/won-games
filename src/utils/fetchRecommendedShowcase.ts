@@ -11,15 +11,14 @@ export async function fetchRecommendedShowcase(): Promise<ShowcaseProps> {
     fetchPolicy: 'no-cache'
   })
 
-  if (error || !data) {
+  if (error || !data.recommended) {
     console.error('Error loading recommend:', error)
     throw new Error('Error loading recommend')
   }
-  const { title, highlight, products } = data.recommended.data.attributes
-  const result = {
+  const { title, highlight, products } = data.recommended
+  return {
     title,
-    highlight: highlight.background.data && highlightMapper(highlight),
+    highlight: highlight && highlightMapper(highlight),
     products: productMapper(products)
   }
-  return result
 }

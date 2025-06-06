@@ -1,6 +1,7 @@
 /// <reference types="@testing-library/cypress" />
 /// <reference types="cypress" />
 import '@testing-library/cypress/add-commands'
+import 'cypress-maildev'
 import 'cypress-plugin-stripe-elements'
 
 Cypress.Commands.add('toggleBanner', () => {
@@ -193,4 +194,19 @@ Cypress.Commands.add('signUp', (fullName, email, password, confirmPassword) => {
   cy.findByLabelText('Password').type(password)
   cy.findByLabelText('Confirm password').type(confirmPassword ? confirmPassword : password)
   cy.findByRole('button', { name: 'Sign up' }).click()
+})
+
+Cypress.Commands.add('confirmEmail', (email) => {
+  cy.wait(10000)
+  cy.maildevGetLastMessage().then((response) => {
+    expect(response.to[0].address).to.equal(email.toLowerCase())
+    cy.document().invoke('write', response.html)
+    cy.get('a')
+      .contains('Confirm e-mail')
+      .invoke('attr', 'href')
+      .then((href) => href && cy.visit(href))
+  })
+  cy.url().should('include', '/email-confirmed')
+  cy.findByRole('heading', { name: "Thank's for register" }).should('be.visible')
+  cy.findByText('Your e-mail has been confirmed.').should('be.visible')
 })

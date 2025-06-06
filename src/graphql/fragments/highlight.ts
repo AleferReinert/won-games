@@ -8,20 +8,12 @@ export const HIGHLIGHT = gql`
     buttonUrl
     alignment
     background {
-      data {
-        attributes {
-          url
-          alternativeText
-        }
-      }
+      url
+      alternativeText
     }
     floatImg {
-      data {
-        attributes {
-          url
-          alternativeText
-        }
-      }
+      url
+      alternativeText
     }
   }
 `

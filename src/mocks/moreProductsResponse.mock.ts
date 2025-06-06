@@ -7,83 +7,69 @@ export const moreProductsResponseMock: MockedResponse<ProductsQuery> = {
   request: {
     query: PRODUCTS,
     variables: {
+      filters: { and: [] },
       limit: productsLimit,
-      start: 9,
-      filters: { price: {}, and: [] }
+      start: productsLimit
     }
   },
   result: {
     data: {
-      products: {
-        data: [
-          {
-            id: '4',
-            attributes: {
-              cover: {
-                data: {
-                  attributes: {
-                    url: '/img/test/product.jpg',
-                    alternativeText: ''
-                  }
-                }
-              },
-              developers: {
-                data: []
-              },
-              name: 'Cyberpunk 2077',
-              price: 24,
-              slug: 'cyberpunk-2077',
-              promotional_price: 0,
-              ribbon_label: ''
-            }
+      products: [
+        {
+          documentId: '4',
+          cover: {
+            url: '/img/test/product.jpg',
+            alternativeText: ''
           },
-          {
-            id: '5',
-            attributes: {
-              cover: {
-                data: {
-                  attributes: {
-                    url: '/img/test/product.jpg',
-                    alternativeText: ''
-                  }
-                }
-              },
-              developers: {
-                data: []
-              },
-              name: 'Red Dead Redemption 2',
-              price: 40,
-              slug: 'red-dead-redemption-2',
-              promotional_price: 0,
-              ribbon_label: ''
+          developers: [
+            {
+              name: 'CD Projekt'
             }
+          ],
+          name: 'Cyberpunk 2077',
+          price: 24,
+          slug: 'cyberpunk-2077',
+          ribbon_label: '',
+          promotional_price: 0
+        },
+        {
+          documentId: '5',
+          cover: {
+            url: '/img/test/product.jpg',
+            alternativeText: ''
           },
-          {
-            id: '6',
-            attributes: {
-              cover: {
-                data: {
-                  attributes: {
-                    url: '/img/test/product.jpg',
-                    alternativeText: ''
-                  }
-                }
-              },
-              developers: {
-                data: []
-              },
-              name: 'Horizon Zero Dawn',
-              price: 35,
-              slug: 'horizon-zero-dawn',
-              promotional_price: 0,
-              ribbon_label: ''
+          developers: [
+            {
+              name: 'Rockstar Games'
             }
-          }
-        ],
-        meta: {
-          pagination: {
-            total: 12
-          }
+          ],
+          name: 'Red Dead Redemption 2',
+          price: 40,
+          slug: 'red-dead-redemption-2',
+          ribbon_label: '',
+          promotional_price: 0
+        },
+        {
+          documentId: '6',
+          cover: {
+            url: '/img/test/product.jpg',
+            alternativeText: ''
+          },
+          developers: [
+            {
+              name: 'Square Enix'
+            }
+          ],
+          name: 'Horizon Zero Dawn',
+          price: 35,
+          slug: 'horizon-zero-dawn',
+          ribbon_label: '',
+          promotional_price: 0
+        }
+      ],
+      products_connection: {
+        pageInfo: {
+          total: 12
         }
       }
     }

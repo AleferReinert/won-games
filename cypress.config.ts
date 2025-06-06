@@ -7,5 +7,11 @@ export default defineConfig({
   },
   screenshotOnRunFailure: false,
   viewportWidth: 1024,
-  chromeWebSecurity: false
+  chromeWebSecurity: false,
+  env: {
+    MAILDEV_PROTOCOL: 'http',
+    MAILDEV_HOST: '127.0.0.1',
+    MAILDEV_SMTP_PORT: '1025',
+    MAILDEV_API_PORT: '1080'
+  }
 })

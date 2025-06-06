@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ComponentProps } from 'react'
 import { CompanyProps } from 'utils/fetchCompany'
+import { getStrapiMedia } from 'utils/getStrapiMedia'
 
 export interface LogoProps extends ComponentProps<'a'> {
   variant?: 'light' | 'dark' | 'icon'
@@ -20,7 +21,13 @@ export const Logo = ({ variant = 'light', width = 200, company, ...props }: Logo
       className={`flex relative h-fit ${props.className || ''}`}
       style={{ width: width ? `${width}px` : 'auto' }}
     >
-      <Image src={logo.url} alt={name} width={logo.width} height={logo.height} className='max-w-full h-auto' />
+      <Image
+        src={getStrapiMedia(logo.url)}
+        alt={name}
+        width={logo.width}
+        height={logo.height}
+        className='max-w-full h-auto'
+      />
     </Link>
   )
 }

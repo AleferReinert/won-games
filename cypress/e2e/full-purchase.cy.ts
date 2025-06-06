@@ -14,12 +14,17 @@ describe('Full purchase', () => {
     cy.findByRole('link', { name: 'Sign up' }).click()
     cy.url({ timeout: 20000 }).should('include', '/sign-up')
     cy.signUp(fakeUser.fullName, fakeUser.email, fakeUser.password)
+
+    // Confirm email and sign in
+    cy.confirmEmail(fakeUser.email)
+    cy.findByRole('link', { name: 'Sign in' }).click()
+    cy.signIn(fakeUser.email, fakeUser.password)
     cy.isUserLoggedInAndRedirect(fakeUser.fullName.split(' ')[0])
 
     // Go to explore and select free
     cy.findByRole('banner').findByRole('link', { name: 'Explore' }).click()
-    cy.findByLabelText('Free').click()
-    cy.url().should('include', 'price=0')
+    cy.get('#free', { timeout: 30000 }).click()
+    cy.url({ timeout: 30000 }).should('include', 'price=0')
     cy.wait(2000)
 
     // Add to cart
@@ -59,12 +64,17 @@ describe('Full purchase', () => {
     cy.findByRole('link', { name: 'Sign up' }).click()
     cy.url({ timeout: 20000 }).should('include', '/sign-up')
     cy.signUp(secondFakeUser.fullName, secondFakeUser.email, secondFakeUser.password)
+
+    // Confirm email and sign in
+    cy.confirmEmail(secondFakeUser.email)
+    cy.findByRole('link', { name: 'Sign in' }).click()
+    cy.signIn(secondFakeUser.email, secondFakeUser.password)
     cy.isUserLoggedInAndRedirect(secondFakeUser.fullName.split(' ')[0])
 
     // Go to explore and select high to low
     cy.findByRole('banner').findByRole('link', { name: 'Explore' }).click()
-    cy.findByLabelText('High to low').click()
-    cy.url().should('include', 'sort=price%3Adesc')
+    cy.get('#high-to-low', { timeout: 30000 }).click()
+    cy.url({ timeout: 30000 }).should('include', 'sort=price%3Adesc')
     cy.wait(2000)
 
     // Add to cart

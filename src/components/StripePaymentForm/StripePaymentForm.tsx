@@ -65,7 +65,7 @@ export const StripePaymentForm = () => {
 
   function getTotalInCents() {
     const total = cartProducts.reduce((acc, product) => {
-      return acc + product.price
+      return acc + (product.price || 0)
     }, 0)
     const total_in_cents = Math.round(total * 100)
     return total_in_cents

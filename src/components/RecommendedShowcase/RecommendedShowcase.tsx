@@ -11,15 +11,10 @@ export function RecommendedShowcase() {
   if (loading) {
     return <p>Loading...</p>
   }
-  if (error || !data) return null
-
-  const { title, highlight, products } = data.recommended.data.attributes
+  if (error || !data?.recommended) return null
+  const { title, highlight, products } = data.recommended
 
   return (
-    <Showcase
-      title={title}
-      highlight={highlight.background.data && highlightMapper(highlight)}
-      products={productMapper(products)}
-    />
+    <Showcase title={title} highlight={highlight && highlightMapper(highlight)} products={productMapper(products)} />
   )
 }

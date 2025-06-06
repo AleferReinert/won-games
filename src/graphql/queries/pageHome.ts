@@ -33,59 +33,44 @@ export const PAGE_HOME = gql`
       ...productEntity
     }
     showcases: home {
-      data {
-        attributes {
-          newProducts {
-            title
-            highlight {
-              ...highlight
-            }
+      newProducts {
+        title
+        highlight {
+          ...highlight
+        }
+      }
+      popularProducts {
+        title
+        highlight {
+          ...highlight
+        }
+        products {
+          documentId
+
+          name
+          slug
+          price
+          promotional_price
+          ribbon_label
+          developers {
+            name
           }
-          popularProducts {
-            title
-            highlight {
-              ...highlight
-            }
-            products {
-              data {
-                id
-                attributes {
-                  name
-                  slug
-                  price
-                  promotional_price
-                  ribbon_label
-                  developers {
-                    data {
-                      attributes {
-                        name
-                      }
-                    }
-                  }
-                  cover {
-                    data {
-                      attributes {
-                        url
-                        alternativeText
-                      }
-                    }
-                  }
-                }
-              }
-            }
+          cover {
+            url
+            alternativeText
           }
-          comingSoonProducts {
-            title
-            highlight {
-              ...highlight
-            }
-          }
-          freeProducts {
-            title
-            highlight {
-              ...highlight
-            }
-          }
+        }
+      }
+      comingSoonProducts {
+        title
+        highlight {
+          ...highlight
+        }
+      }
+      freeProducts {
+        title
+        highlight {
+          ...highlight
         }
       }
     }

@@ -12,11 +12,11 @@ export async function fetchAccountProfile(session: Session): Promise<AccountProf
   const apolloClient = initializeApollo({ token: session.jwt })
   const { data } = await apolloClient.query<ProfileQuery, ProfileQueryVariables>({
     query: PROFILE,
-    variables: { identifier: session.id! }
+    variables: { email: session.user!.email! }
   })
 
   return {
-    username: data.usersPermissionsUser.data.attributes.username,
-    email: data.usersPermissionsUser.data.attributes.email
+    username: data.usersPermissionsUsers[0].username,
+    email: data.usersPermissionsUsers[0].email
   }
 }

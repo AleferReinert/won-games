@@ -5,6 +5,7 @@ import { PRODUCT_ENTITY } from 'graphql/fragments/product'
 export const COMING_SOON = gql`
   ${PRODUCT_ENTITY}
   ${HIGHLIGHT}
+
   query ComingSoon($currentDate: Date!) {
     comingSoonProducts: products(
       filters: { release_date: { gt: $currentDate } }
@@ -14,14 +15,10 @@ export const COMING_SOON = gql`
       ...productEntity
     }
     showcase: home {
-      data {
-        attributes {
-          comingSoonProducts {
-            title
-            highlight {
-              ...highlight
-            }
-          }
+      comingSoonProducts {
+        title
+        highlight {
+          ...highlight
         }
       }
     }

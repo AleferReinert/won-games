@@ -1,16 +1,15 @@
 import { graphql, HttpResponse } from 'msw'
+import { ProfileQuery } from 'types/generated'
 
-export const profileHandler = graphql.query('Profile', () => {
+export const profileHandler = graphql.query<ProfileQuery>('Profile', () => {
   return HttpResponse.json({
     data: {
-      usersPermissionsUser: {
-        data: {
-          attributes: {
-            username: 'John Doe',
-            email: 'johndoe@example.com'
-          }
+      usersPermissionsUsers: [
+        {
+          username: 'John Doe',
+          email: 'johndoe@example.com'
         }
-      }
+      ]
     }
   })
 })

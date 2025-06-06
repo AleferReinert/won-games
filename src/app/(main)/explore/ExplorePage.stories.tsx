@@ -8,7 +8,6 @@ import { filterContextMock } from 'mocks/filterContext.mock'
 import { categoriesHandler } from 'mocks/handlers/categoriesHandler'
 import { companyHandler } from 'mocks/handlers/companyHandler'
 import { platformsHandler } from 'mocks/handlers/platformsHandler'
-import { productsHandler } from 'mocks/handlers/productsHandler'
 import { moreProductsResponseMock } from 'mocks/moreProductsResponse.mock'
 import { platformsResponseMock } from 'mocks/platformsResponseMock'
 import { productsResponseMock } from 'mocks/productsResponse.mock'
@@ -29,9 +28,10 @@ const meta: Meta<typeof ExplorePage> = {
   parameters: {
     layout: 'fullscreen',
     msw: {
-      handlers: [companyHandler, productsHandler, platformsHandler, categoriesHandler]
+      handlers: [companyHandler, platformsHandler, categoriesHandler]
     }
-  }
+  },
+  tags: ['!dev', '!test']
 }
 
 export default meta
@@ -66,6 +66,7 @@ export const WithProducts: Story = {
   decorators: (Story) => (
     <MockedProvider
       mocks={[productsResponseMock, moreProductsResponseMock, platformsResponseMock, categoriesResponseMock]}
+      addTypename={false}
     >
       <Story />
     </MockedProvider>

@@ -9,7 +9,7 @@ export interface ProductDetailsProps {
   releaseDate: string
   platforms: string[]
   publisher: string
-  rating: Rating
+  rating?: Rating
   categories: string[]
 }
 

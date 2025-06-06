@@ -24,27 +24,31 @@ export async function fetchHomePage(): Promise<HomePageProps> {
       variables: { limit: 8, currentDate, pastDate: past30DaysDate },
       fetchPolicy: 'no-cache'
     })
-    const { newProducts, popularProducts, comingSoonProducts, freeProducts } = home.data.showcases.data.attributes
 
     return {
       banners: bannerMapper(home.data.banners),
       newReleasesShowcase: {
-        title: newProducts.title,
+        title: home.data.showcases?.newProducts?.title,
         products: productMapper(home.data.newProducts)
       },
       mostPopularShowcase: {
-        title: popularProducts.title,
-        highlight: popularProducts.highlight.background.data && highlightMapper(popularProducts.highlight),
-        products: productMapper(popularProducts.products)
+        title: home.data.showcases?.popularProducts?.title,
+        highlight:
+          home.data.showcases?.popularProducts?.highlight &&
+          highlightMapper(home.data.showcases?.popularProducts.highlight),
+        products: productMapper(home.data.showcases?.popularProducts?.products)
       },
       comingSoonShowcase: {
-        title: comingSoonProducts.title,
-        highlight: comingSoonProducts.highlight.background.data && highlightMapper(comingSoonProducts.highlight),
+        title: home.data.showcases?.comingSoonProducts?.title,
+        highlight:
+          home.data.showcases?.comingSoonProducts?.highlight &&
+          highlightMapper(home.data.showcases?.comingSoonProducts.highlight),
         products: productMapper(home.data.comingSoonProducts)
       },
       freeProductsShowcase: {
-        title: freeProducts.title,
-        highlight: freeProducts.highlight.background.data && highlightMapper(freeProducts.highlight),
+        title: home.data.showcases?.freeProducts?.title,
+        highlight:
+          home.data.showcases?.freeProducts?.highlight && highlightMapper(home.data.showcases?.freeProducts.highlight),
         products: productMapper(home.data.freeProducts)
       }
     }

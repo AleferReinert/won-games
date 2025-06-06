@@ -24,7 +24,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     skip: !cartProductIds.length,
     variables: {
       filters: {
-        id: {
+        documentId: {
           in: cartProductIds
         }
       }
@@ -45,9 +45,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCartProductIds(newCartProductIds)
     setStorageItem('cartProducts', newCartProductIds)
   }, [])
-  const formattedProducts = cartProductsMapper(data?.products?.data || [])
+  const formattedProducts = cartProductsMapper(data?.products || [])
   const totalQuantity = formattedProducts.length
-  const totalPrice = formattedProducts.reduce((acc, product) => acc + product.price, 0)
+  const totalPrice = formattedProducts.reduce((acc, product) => acc + (product.price || 0), 0)
   const isInCart = (id: string) => cartProductIds.includes(id)
   const addToCart = (id: string) => {
     const newCartProductIds = [...cartProductIds, id]

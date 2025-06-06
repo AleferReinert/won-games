@@ -165,5 +165,15 @@ declare namespace Cypress {
      * ```
      */
     signUp(fullName: string, email: string, password: string, confirmPassword?: string): Chainable<void>
+
+    /**
+     *
+     *
+     * Example:
+     * ```ts
+     * cy.confirmEmail(johndoe@example.com)
+     * ```
+     */
+    confirmEmail(email: string): Chainable<void>
   }
 }

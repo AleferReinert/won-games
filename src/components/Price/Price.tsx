@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 import { formatPrice } from 'utils/formatPrice'
 
 export interface PriceProps extends ComponentProps<'div'> {
-  price: number
+  price?: number
   promotionalPrice?: number | null
   size?: 'small' | 'medium' | 'large'
 }

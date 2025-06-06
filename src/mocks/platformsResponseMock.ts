@@ -8,28 +8,20 @@ export const platformsResponseMock: MockedResponse<PlatformsQuery> = {
   },
   result: {
     data: {
-      platforms: {
-        data: [
-          {
-            attributes: {
-              name: 'linux',
-              slug: 'linux'
-            }
-          },
-          {
-            attributes: {
-              name: 'mac',
-              slug: 'mac'
-            }
-          },
-          {
-            attributes: {
-              name: 'windows',
-              slug: 'windows'
-            }
-          }
-        ]
-      }
+      platforms: [
+        {
+          name: 'linux',
+          slug: 'linux'
+        },
+        {
+          name: 'mac',
+          slug: 'mac'
+        },
+        {
+          name: 'windows',
+          slug: 'windows'
+        }
+      ]
     }
   }
 }

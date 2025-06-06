@@ -2,6 +2,7 @@
 import { FilterOptionsProps } from 'components/Filter/Filter'
 import { FilterContext, FilterContextDefaultValues, FilterContextProps } from 'contexts/FilterContext'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useTopLoader } from 'nextjs-toploader'
 import { ParsedUrlQueryInput } from 'querystring'
 import { ReactNode, useContext, useEffect, useMemo, useState } from 'react'
 
@@ -13,6 +14,7 @@ interface FilterProviderProps {
 export const FilterProvider = ({ children, filterOptions }: FilterProviderProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const { start } = useTopLoader()
 
   const query: Record<string, string> = useMemo(() => {
     const obj: Record<string, string> = {}
@@ -37,6 +39,7 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
   }, [query, search])
   const [selectedFilters, setSelectedFilters] = useState(initialValuesFormatted)
   const handleChange = (name: string, value: string) => {
+    start()
     // If checked, update url, if unchecked, remove from url
     if (name === 'platforms') {
       setSelectedFilters((s) => {
@@ -106,6 +109,7 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
   }
 
   const removeFilterOption = (key: string, value: string) => {
+    start()
     setSelectedFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters }
       const filterValues = updatedFilters[key]
