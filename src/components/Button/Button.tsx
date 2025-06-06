@@ -27,7 +27,7 @@ const button = tv({
     variant: {
       primary:
         'text-zinc-50 [&>svg]:fill-zinc-50 bg-[linear-gradient(180deg,_#ff5f5f_0%,_#f062c0_50%)] disabled:bg-none hover:bg-[linear-gradient(180deg,_#e35565_0%,_#d958a6_50%)]',
-      link: 'bg-transparent text-theme-primary transition-colors ease-in-out duration-[0.1s] disabled:bg-transparent! disabled:text-theme-500!'
+      link: 'bg-transparent text-theme-primary transition-colors ease-in-out duration-[0.1s] disabled:bg-transparent! disabled:text-theme-gray-500!'
     }
   }
 })

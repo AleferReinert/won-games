@@ -73,6 +73,24 @@ export const Link: Story = {
   }
 }
 
+export const LinkDisabled: Story = {
+  args: {
+    children: 'button with variant link disabled',
+    variant: 'link',
+    disabled: true
+  },
+  play: ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    step('Link disabled styles', () => {
+      const link = canvas.getByRole('button')
+      expect(link).toHaveStyle({ cursor: 'not-allowed' })
+      expect(link).toHaveStyle({ backgroundColor: 'transparent !important' })
+      expect(link).toHaveStyle({ color: getTailwindValue('--color-theme-gray-500') })
+    })
+  }
+}
+
 export const Full: Story = {
   args: {
     children: 'full button',

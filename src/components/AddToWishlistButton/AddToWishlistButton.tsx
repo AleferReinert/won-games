@@ -38,7 +38,7 @@ export const AddToWishlistButton = ({
             {...rest}
           >
             {loading ? (
-              <Loading animation='spinner' className={`${loadingClass} size-6!`} inline />
+              <Loading animation='spinner' className={`${loadingClass} border-r-theme-gray-500! size-6!`} inline />
             ) : (
               <MdOutlineFavorite role='img' aria-hidden className='fill-theme-primary size-6!' />
             )}
@@ -57,7 +57,7 @@ export const AddToWishlistButton = ({
             {...rest}
           >
             {loading ? (
-              <Loading animation='spinner' className={`${loadingClass} size-6!`} inline />
+              <Loading animation='spinner' className={`${loadingClass} border-r-theme-gray-500! size-6!`} inline />
             ) : (
               <MdOutlineFavoriteBorder role='img' aria-hidden className='fill-theme-primary size-6!' />
             )}
