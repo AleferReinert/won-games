@@ -121,7 +121,7 @@ export const StripePaymentForm = () => {
     <form
       data-testid='PaymentOptionsComponent'
       onSubmit={(e) => void handleSubmit(e)}
-      className='bg-zinc-50 lg:max-w-[390px] h-fit'
+      className='bg-zinc-50 lg:w-[390px] h-fit'
     >
       <div className='bg-zinc-50 p-4 md:p-6'>
         {cartLoading || allProductsFree == null ? (
