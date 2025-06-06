@@ -53,7 +53,7 @@ export async function fetchProductBySlug(slug: string): Promise<ProductBySlugPro
       id: product.documentId,
       title: product.name,
       description: product.short_description,
-      ...(product.price && { price: product.price }),
+      ...(typeof product.price === 'number' && { price: product.price }),
       promotionalPrice: product.promotional_price
     },
     gallery: product.gallery.map(({ url, alternativeText }) => ({
