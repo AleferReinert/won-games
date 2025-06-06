@@ -24,9 +24,9 @@ const creditCard = tv({
   }
 })
 
-export const CreditCard = ({ name, number, img, color = 'black', direction = 'left' }: CreditCardProps) => {
+export const CreditCard = ({ name, number, img, color = 'black', direction = 'left', ...props }: CreditCardProps) => {
   return (
-    <div data-testid='CreditCardComponent' className={creditCard({ color, direction })}>
+    <div data-testid='CreditCardComponent' className={`${creditCard({ color, direction })} ${props.className || ''}`}>
       <Image src={img} width='36' height='22' alt={name} />
       <div aria-label='credit card number'>{number}</div>
     </div>

@@ -38,7 +38,7 @@ export const CartItem = ({
     <li data-testid='CartItemComponent' className='cursor-default list-none border-b border-theme-gray-200'>
       <div className='bg-zinc-50 p-4 md:p-6'>
         <div
-          className={`grid grid-cols-[min-content_auto] grid-rows-[auto_auto] gap-2 xs:gap-4 md:grid-rows-none md:gap-6 ${paymentInfo ? 'md:grid-cols-[min-content_1fr_1fr]' : 'md:grid-cols-[min-content_1fr]'}`}
+          className={`grid grid-cols-[min-content_auto] grid-rows-[auto_auto] gap-2 xs:gap-4 md:grid-rows-none md:gap-6 ${paymentInfo ? 'md:grid-cols-[min-content_1fr_min-content]' : 'md:grid-cols-[min-content_1fr]'}`}
         >
           <Image
             src={img ? imgSrc : ''}
@@ -79,8 +79,7 @@ export const CartItem = ({
           </div>
 
           {paymentInfo && (
-            <div className='text-theme-gray-500 text-sm leading-none flex max-w-fit flex-col gap-2 mt-4 md:justify-self-end col-span-2 md:mt-0 md:col-start-3 md:text-right md:gap-0 md:justify-between'>
-              <div aria-label='purchase date'>{paymentInfo.purchaseDate}</div>
+            <div className='text-theme-gray-500 text-sm leading-none flex max-w-fit flex-col gap-2 mt-4 md:justify-self-end col-span-2 md:mt-0 md:col-start-3 md:text-right md:justify-end md:mb-1'>
               {paymentInfo.creditCardNumber ? (
                 <CreditCard
                   img={paymentInfo.creditCardFlag}
@@ -92,6 +91,7 @@ export const CartItem = ({
               ) : (
                 'Free'
               )}
+              <div aria-label='purchase date'>{paymentInfo.purchaseDate}</div>
             </div>
           )}
         </div>
