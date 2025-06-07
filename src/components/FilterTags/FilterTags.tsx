@@ -16,55 +16,57 @@ export const FilterTags = () => {
   const { listItem, svg, content, span } = filterTags()
 
   return (
-    <ul className='flex flex-wrap gap-2 mb-4' aria-label='Applied filters'>
-      {'search' in urlQueryParams && (
-        <li className={listItem()}>
-          <span className={content()}>
-            Results for <span className={span()}>{urlQueryParams.search}</span>
-          </span>
-          <button title='Remove' onClick={() => removeSearchParam()}>
-            <MdCancel aria-hidden className={svg()} />
-          </button>
-        </li>
-      )}
-      {urlQueryParams &&
-        Object.entries(urlQueryParams).map(([key, value]) => {
-          if (!value) return null
-          return filterOptions.map((item) => {
-            if (item.name === key) {
-              const checkedOptions = item.fields.filter((field) => {
-                const valuesArray = value
-                  .toString()
-                  .split(',')
-                  .map((v) => v.trim())
-                return valuesArray.includes(field.value)
-              })
+    Object.keys(urlQueryParams).length > 0 && (
+      <ul className='flex flex-wrap gap-2 mb-4' aria-label='Applied filters'>
+        {'search' in urlQueryParams && (
+          <li className={listItem()}>
+            <span className={content()}>
+              Results for <span className={span()}>{urlQueryParams.search}</span>
+            </span>
+            <button title='Remove' onClick={() => removeSearchParam()}>
+              <MdCancel aria-hidden className={svg()} />
+            </button>
+          </li>
+        )}
+        {urlQueryParams &&
+          Object.entries(urlQueryParams).map(([key, value]) => {
+            if (!value) return null
+            return filterOptions.map((item) => {
+              if (item.name === key) {
+                const checkedOptions = item.fields.filter((field) => {
+                  const valuesArray = value
+                    .toString()
+                    .split(',')
+                    .map((v) => v.trim())
+                  return valuesArray.includes(field.value)
+                })
 
-              return checkedOptions.map((item) => {
-                const isUnder = item.label.toLowerCase().includes('under')
-                let labelContent: React.ReactNode = item.label
+                return checkedOptions.map((item) => {
+                  const isUnder = item.label.toLowerCase().includes('under')
+                  let labelContent: React.ReactNode = item.label
 
-                if (isUnder) {
-                  const parts = item.label.split(' ')
-                  const [first, ...rest] = parts
-                  labelContent = (
-                    <>
-                      {first} <span className={span()}>{rest.join(' ')}</span>
-                    </>
+                  if (isUnder) {
+                    const parts = item.label.split(' ')
+                    const [first, ...rest] = parts
+                    labelContent = (
+                      <>
+                        {first} <span className={span()}>{rest.join(' ')}</span>
+                      </>
+                    )
+                  }
+                  return (
+                    <li key={item.value} className={listItem()}>
+                      <span className={content()}>{labelContent}</span>
+                      <button title='Remove' onClick={() => removeFilterOption(key, item.value)}>
+                        <MdCancel aria-hidden className={svg()} />
+                      </button>
+                    </li>
                   )
-                }
-                return (
-                  <li key={item.value} className={listItem()}>
-                    <span className={content()}>{labelContent}</span>
-                    <button title='Remove' onClick={() => removeFilterOption(key, item.value)}>
-                      <MdCancel aria-hidden className={svg()} />
-                    </button>
-                  </li>
-                )
-              })
-            }
-          })
-        })}
-    </ul>
+                })
+              }
+            })
+          })}
+      </ul>
+    )
   )
 }

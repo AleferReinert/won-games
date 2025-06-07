@@ -20,7 +20,7 @@ export interface FilterOptionsProps {
 
 const filter = tv({
   slots: {
-    buttonOpen: 'text-zinc-50 w-6 bg-transparent mb-6 cursor-pointer lg:hidden',
+    buttonOpen: 'text-zinc-50 w-6 bg-transparent mb-6 cursor-pointer',
     buttonClose:
       'text-theme-gray-950 bg-transparent flex ml-auto p-4 cursor-pointer transition hover:text-theme-primary lg:hidden',
     buttonClear: 'text-theme-primary bg-transparent text-xs cursor-pointer',
@@ -59,9 +59,11 @@ export const Filter = () => {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} title='Open filters' aria-label='Open filters' className={buttonOpen()}>
-        <MdOutlineFilterList role='img' aria-hidden='true' className='fill-zinc-50 size-6' />
-      </button>
+      <div className='flex justify-end lg:hidden'>
+        <button onClick={() => setIsOpen(true)} title='Open filters' aria-label='Open filters' className={buttonOpen()}>
+          <MdOutlineFilterList role='img' aria-hidden='true' className='fill-zinc-50 size-6' />
+        </button>
+      </div>
 
       <div data-testid='FilterComponent' className={component({ isOpen })}>
         <button
@@ -84,7 +86,7 @@ export const Filter = () => {
                   lineColor='secondary'
                   color='black'
                   size='large'
-                  className='lg:text-zinc-50'
+                  className='lg:text-zinc-50 mb-4! lg:mb-8!'
                 >
                   {filter.title}
                 </Heading>
