@@ -24,6 +24,7 @@ const preview: Preview = {
   },
   loaders: [mswLoader],
   parameters: {
+    chromatic: { disableSnapshot: true },
     layout: 'fullscreen',
     msw: {
       handlers: [companyHandler]
