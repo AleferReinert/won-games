@@ -8,7 +8,7 @@ export default async function MainLayout({ children }: { children: React.ReactNo
   return (
     <>
       <Header company={company} />
-      <main className='flex-[1_0_auto]'>{children}</main>
+      <main className='flex-[1_0_auto] md:mt-6'>{children}</main>
       <Footer company={company} />
     </>
   )

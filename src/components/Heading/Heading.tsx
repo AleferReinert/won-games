@@ -35,7 +35,7 @@ const root = tv({
       small: 'text-sm',
       medium: 'text-base',
       large: 'text-lg',
-      xlarge: 'text-lg md:text-[28px]',
+      xlarge: 'text-lg md:text-2xl lg:text-[28px]',
       huge: 'text-[52px]'
     }
   }
