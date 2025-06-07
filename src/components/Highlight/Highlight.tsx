@@ -35,6 +35,7 @@ export const Highlight = ({
 					${alignment === 'right' ? 'flex-row' : 'flex-row-reverse'} 
 					`}
       >
+        <div className='absolute inset-0 bg-black/50 z-10'></div>
         <Image
           src={background.url}
           alt={background.alternativeText}
@@ -59,11 +60,13 @@ export const Highlight = ({
 						${floatImg ? 'self-start' : 'self-end'} 
 						`}
         >
-          <h3 className='text-lg font-semibold lg:text-[28px]'>{title}</h3>
-          <p className='text-sm font-light mb-4 lg:mb-8 lg:text-lg'>{description}</p>
-          <Button asLink href={buttonUrl}>
-            {buttonLabel}
-          </Button>
+          <div>
+            <h3 className='text-lg font-semibold lg:text-[28px] text-shadow-lg/30'>{title}</h3>
+            <p className='text-sm font-light mb-4 lg:mb-8 lg:text-lg text-shadow-lg/30'>{description}</p>
+            <Button asLink href={buttonUrl}>
+              {buttonLabel}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
