@@ -11,15 +11,13 @@
     align-items: center;
     justify-content: center;
     margin-top: 1.5rem;
-    /* z-index: 9999; */
+    gap: 12px;
   }
 
   & :global(.slick-dots li) {
     width: 9px;
     height: 9px;
     display: inline-flex;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
   }
 
   & :global(.slick-dots button) {
@@ -31,6 +29,7 @@
     width: 9px;
     height: 9px;
     transition: background 0.1s ease-in;
+    cursor: pointer;
   }
 
   & :global(.slick-dots .slick-active button),
