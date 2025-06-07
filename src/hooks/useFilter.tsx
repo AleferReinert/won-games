@@ -12,6 +12,14 @@ interface FilterProviderProps {
 }
 
 export const FilterProvider = ({ children, filterOptions }: FilterProviderProps) => {
+  const [isDesktop, setIsDesktop] = useState(true)
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const router = useRouter()
   const searchParams = useSearchParams()
   const { start } = useTopLoader()
@@ -24,8 +32,6 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
     return obj
   }, [searchParams])
 
-  const search = query['search']?.toString()
-
   const initialValuesFormatted = useMemo(() => {
     const formattedQuery: ParsedUrlQueryInput = { ...query }
     const platformsArray = query['platforms']?.toString()?.split(',')
@@ -33,14 +39,18 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
 
     if (platformsArray) formattedQuery['platforms'] = platformsArray
     if (categoriesArray) formattedQuery['categories'] = categoriesArray
-    if (search) formattedQuery.search = search
+    if (query['search']) formattedQuery.search = query['search']
 
     return formattedQuery
-  }, [query, search])
-  const [selectedFilters, setSelectedFilters] = useState(initialValuesFormatted)
+  }, [query])
+
+  const [selectedFilters, setSelectedFilters] = useState<ParsedUrlQueryInput>(initialValuesFormatted)
+
+  useEffect(() => {
+    setSelectedFilters(initialValuesFormatted)
+  }, [initialValuesFormatted])
+
   const handleChange = (name: string, value: string) => {
-    start()
-    // If checked, update url, if unchecked, remove from url
     if (name === 'platforms') {
       setSelectedFilters((s) => {
         const platforms = s[name] ? [...(s[name] as string[])] : []
@@ -74,18 +84,34 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
     }
 
     if (name === 'price' || name === 'sort') {
-      if (value) {
-        setSelectedFilters((s) => ({ ...s, [name]: value }))
-      } else {
-        setSelectedFilters((s) => {
-          delete { ...s }[name]
-          return { ...s }
-        })
-      }
+      setSelectedFilters((s) => {
+        const newState = { ...s }
+        if (value) {
+          newState[name] = value
+        } else {
+          delete newState[name]
+        }
+        return newState
+      })
+    }
+
+    if (name === 'search') {
+      setSelectedFilters((s) => {
+        const newState = { ...s }
+        if (value) {
+          newState[name] = value
+        } else {
+          delete newState[name]
+        }
+        return newState
+      })
     }
   }
 
-  const handleFilter = () => {
+  const handleFilter = (filtersToApply?: Record<string, unknown>) => {
+    start()
+    const currentFilters = { ...(filtersToApply ?? selectedFilters) }
+
     const isEmptyValue = (value: unknown): boolean => {
       return !value || (Array.isArray(value) && !value.length) || (typeof value === 'string' && value.trim() === '')
     }
@@ -101,19 +127,15 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
       )
     }
 
-    const formattedFilters = selectedFilters ? formatFilters(selectedFilters) : {}
-    if (search) formattedFilters.search = search
-
+    const formattedFilters = currentFilters ? formatFilters(currentFilters) : {}
     const params = new URLSearchParams(formattedFilters)
     router.push(`/explore?${params.toString()}`)
   }
 
   const removeFilterOption = (key: string, value: string) => {
-    start()
-    setSelectedFilters((prevFilters) => {
-      const updatedFilters = { ...prevFilters }
+    setSelectedFilters((s) => {
+      const updatedFilters = { ...s }
       const filterValues = updatedFilters[key]
-
       if (Array.isArray(filterValues)) {
         const updatedValues = filterValues.filter((item) => item !== value)
         if (updatedValues.length > 0) {
@@ -124,17 +146,28 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
       } else if (filterValues === value) {
         delete updatedFilters[key]
       }
-
       return updatedFilters
     })
+    if (!isDesktop) {
+      setTimeout(() => {
+        handleFilter({ ...selectedFilters, [key]: undefined })
+      }, 0)
+    }
   }
 
   const removeSearchParam = () => {
-    setSelectedFilters((currentFilters) => {
-      const updatedFilters = { ...currentFilters }
+    setSelectedFilters((s) => {
+      const updatedFilters = { ...s }
       delete updatedFilters.search
       return updatedFilters
     })
+    if (!isDesktop) {
+      setTimeout(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { search, ...rest } = selectedFilters
+        handleFilter(rest)
+      }, 0)
+    }
   }
 
   const clearFilterSession = (sessionName: FilterOptionsProps['name']) => {
@@ -146,9 +179,11 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
   }
 
   useEffect(() => {
-    const params = new URLSearchParams(selectedFilters as Record<string, string>)
-    router.push(`/explore?${params.toString()}`)
-  }, [router, selectedFilters])
+    if (isDesktop) {
+      handleFilter(selectedFilters)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedFilters, isDesktop])
 
   return (
     <FilterContext.Provider

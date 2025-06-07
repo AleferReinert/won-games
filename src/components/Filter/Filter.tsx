@@ -3,7 +3,7 @@ import { Button } from 'components/Button/Button'
 import { Heading } from 'components/Heading/Heading'
 import { InputWithLabel } from 'components/InputWithLabel/InputWithLabel'
 import { useFilter } from 'hooks/useFilter'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { MdOutlineClose, MdOutlineFilterList } from 'react-icons/md'
 import { tv } from 'tailwind-variants'
 
@@ -51,11 +51,6 @@ export const Filter = () => {
   const { filterOptions, selectedFilters, clearFilterSession, handleFilter, handleChange } = useFilter()
   const [isOpen, setIsOpen] = useState(false)
   const { component, buttonOpen, buttonClose, buttonFilterWrapper, items, item, buttonClear } = filter({ isOpen })
-
-  useEffect(() => {
-    handleFilter()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedFilters])
 
   return (
     <>

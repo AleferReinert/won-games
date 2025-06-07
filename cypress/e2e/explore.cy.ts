@@ -31,7 +31,7 @@ describe('Products page', () => {
     cy.filterUnderPrice(200)
   })
 
-  it.only('Filter by sort', () => {
+  it('Filter by sort', () => {
     cy.get('@FilteredProducts').findAllByLabelText('Price').as('Prices')
 
     cy.selectFilterAndCheckUrl('radio', 'Low to high', 'sort=price%3Aasc')
@@ -39,7 +39,7 @@ describe('Products page', () => {
     cy.get('@Prices').first().as('FirstPrice')
     cy.get('@Prices').last().as('LastPrice')
     cy.get('@LastPrice').then(($el) => {
-      cy.log($el.text()) // Loga o texto do elemento
+      cy.log($el.text())
     })
     // cy.isPriceSorted('@FirstPrice', '@LastPrice', 'asc')
 
