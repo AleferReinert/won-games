@@ -5,30 +5,6 @@ import { ProductProps } from 'components/Product/Product'
 import { BannerFragment, HighlightFragment, OrdersQuery, PageHomeQuery, Query } from 'types/generated'
 import { getImageUrl } from './getImageUrl'
 
-// export const companyMapper = (data: CompanyQuery): CompanyProps => {
-//   const { logoDark, logoLight, logoIcon } = data.company.data.attributes
-
-//   return {
-//     ...data.company.data.attributes,
-//     logoIcon: {
-//       url: getImageUrl(logoIcon.data.attributes.url),
-//       width: logoIcon.data.attributes.width,
-//       height: logoIcon.data.attributes.height
-//     },
-//     logoLight: {
-//       url: getImageUrl(logoLight.data.attributes.url),
-//       width: logoLight.data.attributes.width,
-//       height: logoLight.data.attributes.height
-//     },
-//     logoDark: {
-//       url: getImageUrl(logoDark.data.attributes.url),
-//       width: logoDark.data.attributes.width,
-//       height: logoDark.data.attributes.height
-//     }
-//   }
-// }
-
-// Retorna todos dados necessários para o componente Banner
 export const bannerMapper = (banners: BannerFragment[]) => {
   return banners.map(
     ({ documentId, img, title, description, button, ribbon }): BannerProps => ({
@@ -56,7 +32,6 @@ export const bannerMapper = (banners: BannerFragment[]) => {
   )
 }
 
-// Retorna os produtos adicionados ao carrinho
 export const cartProductsMapper = (products: Query['products']): CartItemProps[] => {
   return products.map((product) => ({
     id: product.documentId,
@@ -66,7 +41,6 @@ export const cartProductsMapper = (products: Query['products']): CartItemProps[]
   }))
 }
 
-// Retorna todos dados necessários para o componente Highlight
 export const highlightMapper = (
   highlight: HighlightFragment,
   alignment?: HighlightProps['alignment']
@@ -88,7 +62,6 @@ export const highlightMapper = (
   }
 }
 
-// Retorna todos dados necessários para o slider de produtos
 export const productMapper = (products: PageHomeQuery['newProducts'] | undefined) => {
   return products
     ? products.map(
@@ -109,7 +82,6 @@ export const productMapper = (products: PageHomeQuery['newProducts'] | undefined
     : []
 }
 
-// Retornas compras realizadas
 export function ordersMapper(response: Pick<OrdersQuery, 'orders'>): CartItemProps[] {
   return response.orders.flatMap((orderEntity) => {
     const orderId = orderEntity.documentId

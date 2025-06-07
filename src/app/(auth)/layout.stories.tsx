@@ -54,7 +54,7 @@ export const Auth: Story = {
 
     await step('Column left copyright', () => {
       waitFor(() => {
-        const copyright = canvas.getByText(/Won Games 2023 © Todos os Direitos Reservados/i)
+        const copyright = canvas.getByText('Won Games 2025 © All rights reserved.')
         expect(copyright).toBeVisible()
       })
     })
