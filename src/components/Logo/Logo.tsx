@@ -26,7 +26,7 @@ export const Logo = ({ variant = 'light', width = 200, company, ...props }: Logo
         alt={name}
         width={logo.width}
         height={logo.height}
-        className='max-w-full h-auto'
+        className={`${variant === 'dark' ? 'text-theme-gray-950' : 'text-zinc-50'} max-w-full h-auto text-sm text-center overflow-visible whitespace-nowrap`}
       />
     </Link>
   )
