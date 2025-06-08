@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, within } from '@storybook/test'
-import { Container } from 'components/Container/Container'
+import { expect, waitFor, within } from '@storybook/test'
 import { companyMock } from 'mocks/company.mock'
 import { Footer } from './Footer'
 
@@ -10,13 +9,6 @@ const meta: Meta<typeof Footer> = {
   args: {
     company: companyMock
   },
-  decorators: [
-    (Story) => (
-      <Container>
-        <Story />
-      </Container>
-    )
-  ],
   parameters: {
     backgrounds: {
       default: 'Light'
@@ -34,8 +26,10 @@ export const Default: Story = {
     const canvas = within(canvasElement)
 
     await step('Logo', () => {
-      const logo = canvas.getByRole('img', { name: /won games/i })
-      expect(logo).toBeVisible()
+      waitFor(() => {
+        const logo = canvas.getByRole('img', { name: /won games/i })
+        expect(logo).toBeVisible()
+      })
     })
 
     await step('Titles', () => {

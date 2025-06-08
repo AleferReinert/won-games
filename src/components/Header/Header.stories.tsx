@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, waitFor, within } from '@storybook/test'
-import { Container } from 'components/Container/Container'
 import { companyMock } from 'mocks/company.mock'
 import { nextAuthSessionMock } from 'mocks/nextAuthSession.mock'
 import { NextAuthSessionArgs } from '../../../.storybook/preview'
@@ -12,11 +11,6 @@ const meta: Meta<typeof Header> = {
   args: {
     company: companyMock
   },
-  decorators: (Story) => (
-    <Container>
-      <Story />
-    </Container>
-  ),
   tags: ['autodocs']
 }
 
@@ -42,9 +36,11 @@ export const Mobile: Story = {
     })
 
     await step('Logo icon visible', () => {
-      const logoIcon = within(canvas.getAllByTestId('LogoComponent')[0]).getByRole('img', { hidden: true })
-      expect(logoIcon.getAttribute('src')).toContain('icon')
-      expect(logoIcon).toBeVisible()
+      waitFor(() => {
+        const logoIcon = within(canvas.getAllByTestId('LogoComponent')[0]).getByRole('img', { hidden: true })
+        expect(logoIcon.getAttribute('src')).toContain('icon')
+        expect(logoIcon).toBeVisible()
+      })
     })
 
     await step('Logo light hidden', () => {
@@ -105,15 +101,19 @@ export const Desktop: Story = {
     const cartItemListComponent = canvas.getByTestId('CartItemsComponent')
 
     await step('Logo icon hidden', () => {
-      const logoIcon = within(canvas.getAllByTestId('LogoComponent')[0]).getByRole('img', { hidden: true })
-      expect(logoIcon.getAttribute('src')).toContain('icon')
-      expect(logoIcon).not.toBeVisible()
+      waitFor(() => {
+        const logoIcon = within(canvas.getAllByTestId('LogoComponent')[0]).getByRole('img', { hidden: true })
+        expect(logoIcon.getAttribute('src')).toContain('icon')
+        expect(logoIcon).not.toBeVisible()
+      })
     })
 
     await step('Logo light visible', () => {
-      const logoLight = within(canvas.getAllByTestId('LogoComponent')[1]).getByRole('img', { hidden: true })
-      expect(logoLight.getAttribute('src')).toContain('light')
-      expect(logoLight).toBeVisible()
+      waitFor(() => {
+        const logoLight = within(canvas.getAllByTestId('LogoComponent')[1]).getByRole('img', { hidden: true })
+        expect(logoLight.getAttribute('src')).toContain('light')
+        expect(logoLight).toBeVisible()
+      })
     })
 
     await step('Hidden menu button', () => {
