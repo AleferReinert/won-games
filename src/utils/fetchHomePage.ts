@@ -16,12 +16,12 @@ export interface HomePageProps {
 export async function fetchHomePage(): Promise<HomePageProps> {
   const apolloClient = initializeApollo({})
   const currentDate = new Date().toISOString().slice(0, 10)
-  const past30DaysDate = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().slice(0, 10)
+  const past6MonthsDate = new Date(new Date().setMonth(new Date().getMonth() - 6)).toISOString().slice(0, 10)
 
   try {
     const home = await apolloClient.query<PageHomeQuery, PageHomeQueryVariables>({
       query: PAGE_HOME,
-      variables: { limit: 8, currentDate, pastDate: past30DaysDate },
+      variables: { limit: 8, currentDate, pastDate: past6MonthsDate },
       fetchPolicy: 'no-cache'
     })
 
