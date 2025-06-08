@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /account/
+Disallow: /confirm-your-email
+Disallow: /email-confirmed
+Disallow: /success
+Disallow: /wishlist
