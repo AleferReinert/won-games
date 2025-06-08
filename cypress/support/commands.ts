@@ -3,6 +3,7 @@
 import '@testing-library/cypress/add-commands'
 import 'cypress-maildev'
 import 'cypress-plugin-stripe-elements'
+import { secondFakeUser } from './generateFakeData'
 
 Cypress.Commands.add('toggleBanner', () => {
   cy.get('[data-testid="BannerSliderComponent"]').within(() => {
@@ -209,4 +210,45 @@ Cypress.Commands.add('confirmEmail', (email) => {
   cy.url().should('include', '/email-confirmed')
   cy.findByRole('heading', { name: "Thank's for register" }).should('be.visible')
   cy.findByText('Your e-mail has been confirmed.').should('be.visible')
+})
+
+Cypress.Commands.add('purchasePaidProducts', () => {
+  cy.visit('/sign-up')
+  cy.signUp(secondFakeUser.fullName, secondFakeUser.email, secondFakeUser.password)
+
+  // Confirm email and sign in
+  cy.confirmEmail(secondFakeUser.email)
+  cy.findByRole('link', { name: 'Sign in' }).click()
+  cy.signIn(secondFakeUser.email, secondFakeUser.password)
+  cy.isUserLoggedInAndRedirect(secondFakeUser.fullName.split(' ')[0])
+
+  // Go to explore and select high to low
+  cy.findByRole('banner').findByRole('link', { name: 'Explore' }).click()
+  cy.get('#high-to-low', { timeout: 30000 }).click()
+  cy.url({ timeout: 30000 }).should('include', 'sort=price%3Adesc')
+  cy.wait(2000)
+
+  // Add products to cart
+  cy.findAllByRole('button', { name: 'Add to cart' }).eq(0).click()
+  cy.findAllByRole('button', { name: 'Add to cart' }).eq(1).click()
+  cy.checkCartItemsAndClose({ quantity: 2 })
+
+  // Open dropdown and go to cart
+  cy.findByRole('button', { name: 'Shopping cart' }).click()
+  cy.findByRole('link', { name: 'Buy it now' }).click()
+
+  // Check if products has add
+  cy.get('main').findAllByTestId('CartItemComponent').should('have.length', '2')
+  cy.get('main').findByLabelText('total price').should('contain.text', '$')
+
+  // Type card infos
+  cy.findByRole('button', { name: 'Buy now' }).should('be.disabled')
+  cy.fillElementsInput('cardNumber', '4242424242424242')
+  cy.fillElementsInput('cardExpiry', '1075')
+  cy.fillElementsInput('cardCvc', '123')
+  cy.findByRole('button', { name: 'Buy now' }).click()
+
+  // Success page
+  cy.url({ timeout: 30000 }).should('include', '/success')
+  cy.findByText('Your purchase was successful!', { timeout: 10000 }).should('be.visible')
 })

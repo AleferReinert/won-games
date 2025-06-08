@@ -167,13 +167,19 @@ declare namespace Cypress {
     signUp(fullName: string, email: string, password: string, confirmPassword?: string): Chainable<void>
 
     /**
-     *
-     *
-     * Example:
-     * ```ts
-     * cy.confirmEmail(johndoe@example.com)
-     * ```
+     * Open last e-mail in maildev and click on link 'Confirm e-mail'.
      */
     confirmEmail(email: string): Chainable<void>
+
+    /**
+     * 1. Register a fake user
+     * 2. Confirm e-mail and sign in
+     * 3. Go to explore and select high to low
+     * 4. Add products to cart
+     * 5. Go to cart and check if products has add
+     * 6. Type card infos
+     * 7. Buy and check if redirect to success page
+     */
+    purchasePaidProducts(): Chainable<void>
   }
 }

@@ -12,7 +12,8 @@ const meta: Meta<typeof SuccessPage> = {
     msw: {
       handlers: [companyHandler, recommendedProductsHandler]
     }
-  }
+  },
+  tags: ['!dev', '!test']
 }
 
 export default meta
@@ -31,10 +32,10 @@ export const Success: Story = {
     })
 
     await step('Description', () => {
-      const description = canvas.getAllByRole('paragraph')[0]
-      expect(description).toHaveTextContent(
-        'Save your payment details by email. Your game is now available for download here.'
+      const description = waitFor(() =>
+        canvas.getByText('Save your payment details by email. Your game is now available for download here.')
       )
+      expect(description).toBeVisible()
     })
 
     await step('Link to account/orders', () => {

@@ -86,6 +86,7 @@ export const StripePaymentForm = () => {
         cart: cartProducts.map((product) => ({ id: product.id }))
       })
     })
+    localStorage.setItem('recentPurchase', 'true')
     router.push('/success')
   }
 

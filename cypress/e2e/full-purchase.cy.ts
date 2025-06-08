@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { fakeUser, secondFakeUser } from '../support/generateFakeData'
+import { fakeUser } from '../support/generateFakeData'
 
 describe('Full purchase', () => {
   beforeEach(() => {
@@ -58,51 +58,11 @@ describe('Full purchase', () => {
   })
 
   it('Sign up and buy paid products', () => {
-    // Go to sign up and check login after sign up
-    cy.findByRole('link', { name: 'Sign in' }).click()
-    cy.url({ timeout: 20000 }).should('include', '/sign-in')
-    cy.findByRole('link', { name: 'Sign up' }).click()
-    cy.url({ timeout: 20000 }).should('include', '/sign-up')
-    cy.signUp(secondFakeUser.fullName, secondFakeUser.email, secondFakeUser.password)
-
-    // Confirm email and sign in
-    cy.confirmEmail(secondFakeUser.email)
-    cy.findByRole('link', { name: 'Sign in' }).click()
-    cy.signIn(secondFakeUser.email, secondFakeUser.password)
-    cy.isUserLoggedInAndRedirect(secondFakeUser.fullName.split(' ')[0])
-
-    // Go to explore and select high to low
-    cy.findByRole('banner').findByRole('link', { name: 'Explore' }).click()
-    cy.get('#high-to-low', { timeout: 30000 }).click()
-    cy.url({ timeout: 30000 }).should('include', 'sort=price%3Adesc')
-    cy.wait(2000)
-
-    // Add to cart
-    cy.findAllByRole('button', { name: 'Add to cart' }).eq(0).click()
-    cy.findAllByRole('button', { name: 'Add to cart' }).eq(1).click()
-    cy.checkCartItemsAndClose({ quantity: 2 })
-
-    // Open dropdown and go to checkout
-    cy.findByRole('button', { name: 'Shopping cart' }).click()
-    cy.findByRole('link', { name: 'Buy it now' }).click()
-
-    // // Check if products has add
-    cy.get('main').findAllByTestId('CartItemComponent').should('have.length', '2')
-    cy.get('main').findByLabelText('total price').should('contain.text', '$')
-
-    // // Type card infos
-    cy.findByRole('button', { name: 'Buy now' }).should('be.disabled')
-    cy.fillElementsInput('cardNumber', '4242424242424242')
-    cy.fillElementsInput('cardExpiry', '1075')
-    cy.fillElementsInput('cardCvc', '123')
-    cy.findByRole('button', { name: 'Buy now' }).click()
-
-    // Success page
-    cy.url({ timeout: 30000 }).should('include', '/success')
-    cy.findByText('Your purchase was successful!', { timeout: 10000 }).should('be.visible')
+    cy.purchasePaidProducts()
 
     // My orders - Check products and payment details
     cy.findByRole('link', { name: 'here' }).click()
+    cy.url({ timeout: 30000 }).should('include', '/account/orders')
     cy.get('main').findAllByTestId('CartItemComponent').as('CartListProducts')
     cy.get('@CartListProducts').eq(0).as('FirstProduct')
     cy.get('@CartListProducts').eq(1).as('SecondProduct')
