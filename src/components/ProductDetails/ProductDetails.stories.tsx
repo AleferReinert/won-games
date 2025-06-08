@@ -61,18 +61,18 @@ export const Default: Story = {
       expect(dateFormatted).toBeVisible()
     })
 
-    await step('Developer', () => {
+    await step('Developers', () => {
       const title = canvas.getByText('Developer')
-      const developer = canvas.getByText('Gearbox Software')
+      const developers = canvas.getByText('Gearbox Software, 2K Games')
       expect(title).toBeVisible()
-      expect(developer).toBeVisible()
+      expect(developers).toBeVisible()
     })
 
     await step('Publisher', () => {
       const title = canvas.getByText('Publisher')
-      const publisher = canvas.getByText('2K')
+      const publishers = canvas.getByText('Activision, Deep Silver')
       expect(title).toBeVisible()
-      expect(publisher).toBeVisible()
+      expect(publishers).toBeVisible()
     })
 
     await step('Rating with rating formatted', () => {

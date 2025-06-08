@@ -5,23 +5,23 @@ import { ProductDetailsItem } from 'components/ProductDetailsItem/ProductDetails
 type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
 
 export interface ProductDetailsProps {
-  developer: string
+  developers: string[]
   releaseDate: string
   platforms: string[]
-  publisher: string
+  publishers: string[]
   rating?: Rating
   categories: string[]
 }
 
 export const ProductDetails = ({
-  developer,
+  developers,
   releaseDate,
   platforms,
-  publisher,
+  publishers,
   rating,
   categories
 }: ProductDetailsProps) => {
-  const emptyData = !categories.length && !platforms.length && !releaseDate && !developer && !publisher && !rating
+  const emptyData = !categories.length && !platforms.length && !releaseDate && !developers && !publishers && !rating
 
   return (
     <div data-testid='ProductDetailsComponent'>
@@ -52,8 +52,8 @@ export const ProductDetails = ({
             </ProductDetailsItem>
           )}
 
-          {developer && <ProductDetailsItem title='Developer'>{developer}</ProductDetailsItem>}
-          {publisher && <ProductDetailsItem title='Publisher'>{publisher}</ProductDetailsItem>}
+          {developers && <ProductDetailsItem title='Developer'>{developers.join(', ')}</ProductDetailsItem>}
+          {publishers && <ProductDetailsItem title='Publisher'>{publishers.join(', ')}</ProductDetailsItem>}
 
           {rating && (
             <ProductDetailsItem title='Rating'>

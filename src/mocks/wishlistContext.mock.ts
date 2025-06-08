@@ -45,18 +45,20 @@ export const wishlistContextMock: WishlistContextProps = {
       categories: [],
       platforms: [],
       gallery: [],
-      publisher: {
-        __typename: 'Publisher',
-        documentId: '1',
-        createdAt: '2024-03-15T12:30:00.000Z',
-        publishedAt: '2024-03-15T12:30:00.000Z',
-        updatedAt: '2024-03-15T12:30:00.000Z',
-        products: [],
-        name: 'Nintendo',
-        slug: 'nintendo',
-        // @ts-expect-error mock only
-        products_connection: {}
-      },
+      publishers: [
+        {
+          __typename: 'Publisher',
+          documentId: '1',
+          createdAt: '2024-03-15T12:30:00.000Z',
+          publishedAt: '2024-03-15T12:30:00.000Z',
+          updatedAt: '2024-03-15T12:30:00.000Z',
+          products: [],
+          name: 'Nintendo',
+          slug: 'nintendo',
+          // @ts-expect-error mock only
+          products_connection: {}
+        }
+      ],
       rating: Enum_Product_Rating.Br18,
       release_date: '2024-03-15T12:30:00.000Z',
       updatedAt: '2024-03-15T12:30:00.000Z',

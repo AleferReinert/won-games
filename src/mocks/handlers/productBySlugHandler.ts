@@ -59,7 +59,8 @@ export const productBySlugHandler = graphql.query<ProductBySlugQuery>('ProductBy
             }
           ],
           rating: Enum_Product_Rating.Br12,
-          categories: []
+          categories: [],
+          publishers: []
         }
       ]
     }

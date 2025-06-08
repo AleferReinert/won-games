@@ -62,10 +62,10 @@ export async function fetchProductBySlug(slug: string): Promise<ProductBySlugPro
     })),
     description: product.description,
     details: {
-      developer: product.developers[0]?.name || '',
+      developers: product.developers.map((developer) => developer.name),
       releaseDate: product.release_date || '',
       platforms: product.platforms.map((platform) => platform.name),
-      publisher: product.publisher?.name || '',
+      publishers: product.publishers.map((publisher) => publisher.name),
       rating: product.rating,
       categories: product.categories.map(({ name }) => name)
     },

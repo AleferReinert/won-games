@@ -24,7 +24,7 @@ export const PRODUCT_BY_SLUG = gql`
       platforms {
         name
       }
-      publisher {
+      publishers {
         name
       }
       rating
