@@ -2544,7 +2544,7 @@ export const PageHomeDocument = gql`
   }
   freeProducts: products(
     filters: {price: {eq: 0}}
-    sort: "release_date:desc"
+    sort: "createdAt:desc"
     pagination: {start: 0, limit: $limit}
   ) {
     ...productEntity
