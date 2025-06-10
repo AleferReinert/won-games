@@ -75,7 +75,7 @@ export const productMapper = (products: PageHomeQuery['newProducts'] | undefined
           ribbonLabel: ribbon_label,
           cover: {
             url: cover ? getImageUrl(cover.url) : '/img/default/product.webp',
-            alternativeText: cover.alternativeText || 'Image not found'
+            alternativeText: cover.alternativeText || 'Game cover'
           }
         })
       )
