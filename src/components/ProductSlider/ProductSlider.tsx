@@ -109,6 +109,18 @@ export const ProductSlider = ({ products, arrowColor = 'white', productImgPriori
       />
     )
   }
+
+  function setInertOnItemsHidden() {
+    setTimeout(() => {
+      document.querySelectorAll('.slick-slide').forEach((el) => {
+        if (el.getAttribute('aria-hidden') === 'true') {
+          el.setAttribute('inert', 'true')
+        } else {
+          el.removeAttribute('inert')
+        }
+      })
+    }, 500)
+  }
   const settings: Settings = {
     prevArrow: <ArrowLeft />,
     nextArrow: <ArrowRight />,
@@ -116,9 +128,11 @@ export const ProductSlider = ({ products, arrowColor = 'white', productImgPriori
     infinite: false,
     lazyLoad: 'ondemand',
     beforeChange: () => {
+      setInertOnItemsHidden()
       const active = document.activeElement as HTMLElement
       if (active && typeof active.blur === 'function') active.blur() // To fix bug: prevent keyboard mobile on drag
     },
+    onInit: () => setInertOnItemsHidden(),
     responsive: sliderResponsiveBreakpoints
   }
 
