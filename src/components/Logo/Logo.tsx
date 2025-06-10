@@ -31,7 +31,7 @@ export const Logo = ({ variant = 'light', width = 200, company, ...props }: Logo
         onLoad={() => setLoading(false)}
         className={`${variant === 'dark' ? 'text-theme-gray-900' : 'text-zinc-50'} 
 				${loading ? 'opacity-0' : 'opacity-100'}
-				max-w-full h-auto text-sm text-center overflow-visible whitespace-nowrap transition ease-in-out duration-300`}
+				max-w-full h-auto text-sm text-center transition ease-in-out duration-300`}
       />
     </Link>
   )
