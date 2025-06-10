@@ -73,6 +73,7 @@ export const Gallery = ({ items }: GalleryProps) => {
       <div
         aria-label='modal'
         aria-hidden={!modal}
+        inert={!modal}
         onClick={() => setModal(false)}
         className={`${styles.modal} fixed inset-0 bg-black/85 transition-opacity ease-in-out duration-300 flex justify-center items-center z-40 p-6`}
       >
