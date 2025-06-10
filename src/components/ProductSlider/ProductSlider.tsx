@@ -11,6 +11,7 @@ import styles from './ProductSlider.module.css'
 export interface ProductSliderProps extends ComponentProps<'div'> {
   products: ProductProps[]
   arrowColor?: 'white' | 'black'
+  productImgPriority?: boolean
 }
 
 export const sliderResponsiveBreakpoints = [
@@ -75,7 +76,7 @@ const productSlider = tv({
   }
 })
 
-export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderProps) => {
+export const ProductSlider = ({ products, arrowColor = 'white', productImgPriority }: ProductSliderProps) => {
   const slidesToShow = 4
   const { arrowBase, root, prevArrow, nextArrow, slider } = productSlider()
   const [loading, setLoading] = useState(true)
@@ -136,9 +137,17 @@ export const ProductSlider = ({ products, arrowColor = 'white' }: ProductSliderP
         )}
         <div className={slider({ loading })}>
           <Slider settings={settings}>
-            {products.map((item) => (
-              <Product key={item.id} {...item} setLoading={setLoading} />
-            ))}
+            {products.map((item, index) => {
+              const first4 = index < 4
+              return (
+                <Product
+                  key={item.id}
+                  {...item}
+                  imgPriority={first4 ? productImgPriority : false}
+                  setLoading={setLoading}
+                />
+              )
+            })}
           </Slider>
         </div>
       </div>

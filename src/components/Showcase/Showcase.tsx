@@ -16,6 +16,7 @@ export const Showcase = ({
   products,
   arrowColor = 'white',
   headingClass,
+  productImgPriority,
   ...rest
 }: ShowcaseProps) => {
   return (
@@ -28,7 +29,9 @@ export const Showcase = ({
         </Container>
       )}
       {highlight && <Highlight {...highlight} className='mb-8' />}
-      {products && <ProductSlider products={products} arrowColor={arrowColor} />}
+      {products && (
+        <ProductSlider products={products} productImgPriority={productImgPriority} arrowColor={arrowColor} />
+      )}
     </section>
   )
 }

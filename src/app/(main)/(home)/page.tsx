@@ -28,6 +28,7 @@ export default async function HomePage() {
             {...home.newReleasesShowcase}
             arrowColor='black'
             headingClass='xl:text-black'
+            productImgPriority
           />
         </section>
       )}
