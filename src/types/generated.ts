@@ -150,6 +150,7 @@ export type Company = {
   complement?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description: Scalars['String']['output'];
   documentId: Scalars['ID']['output'];
   email: Scalars['String']['output'];
   logoDark: UploadFile;
@@ -178,6 +179,7 @@ export type CompanyInput = {
   city?: InputMaybe<Scalars['String']['input']>;
   complement?: InputMaybe<Scalars['String']['input']>;
   country?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   logoDark?: InputMaybe<Scalars['ID']['input']>;
   logoIcon?: InputMaybe<Scalars['ID']['input']>;
@@ -2224,7 +2226,7 @@ export type ComingSoonQuery = { __typename?: 'Query', comingSoonProducts: Array<
 export type CompanyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CompanyQuery = { __typename?: 'Query', company?: { __typename?: 'Company', name: string, email: string, phone: string, street: string, number: string, neighborhood: string, city: string, zipcode: string, state: string, country: string, complement?: string, logoLight: { __typename?: 'UploadFile', url: string, width?: number, height?: number, formats?: any }, logoDark: { __typename?: 'UploadFile', url: string, width?: number, height?: number }, logoIcon: { __typename?: 'UploadFile', url: string, width?: number, height?: number }, socialLinks?: Array<{ __typename?: 'ComponentPageSocialLink', name: string, url: string }> } };
+export type CompanyQuery = { __typename?: 'Query', company?: { __typename?: 'Company', name: string, description: string, email: string, phone: string, street: string, number: string, neighborhood: string, city: string, zipcode: string, state: string, country: string, complement?: string, logoLight: { __typename?: 'UploadFile', url: string, width?: number, height?: number, formats?: any }, logoDark: { __typename?: 'UploadFile', url: string, width?: number, height?: number }, logoIcon: { __typename?: 'UploadFile', url: string, width?: number, height?: number }, socialLinks?: Array<{ __typename?: 'ComponentPageSocialLink', name: string, url: string }> } };
 
 export type OrdersQueryVariables = Exact<{
   userEmail?: InputMaybe<Scalars['String']['input']>;
@@ -2467,6 +2469,7 @@ export const CompanyDocument = gql`
     query Company {
   company {
     name
+    description
     email
     phone
     street

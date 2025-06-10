@@ -2,6 +2,7 @@ import { CompanyProps } from 'utils/fetchCompany'
 
 export const companyMock: CompanyProps = {
   name: 'Won Games',
+  description: 'Lorem ipsum dolor.',
   email: 'support@wongames.com',
   phone: '16104333002',
   street: 'Maple Street',

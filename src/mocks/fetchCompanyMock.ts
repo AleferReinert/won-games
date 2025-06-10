@@ -3,6 +3,7 @@ import { CompanyProps } from 'utils/fetchCompany'
 export async function fetchCompany(): Promise<CompanyProps> {
   return Promise.resolve({
     name: 'Mock Company',
+    description: 'Lorem ipsum dolor.',
     email: 'contato@mockcompany.com',
     phone: '+55 11 99999-9999',
     street: 'Rua Mock',

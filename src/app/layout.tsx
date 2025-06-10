@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { getServerSession } from 'next-auth'
 import { Poppins } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
+import { fetchCompany } from 'utils/fetchCompany'
 import { authOptions } from './api/auth/[...nextauth]/route'
 import './globals.css'
 import Providers from './Providers'
@@ -12,12 +13,29 @@ const poppins = Poppins({
   display: 'swap'
 })
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Won Games',
-    template: 'Won Games - %s'
-  },
-  manifest: '/manifest.json'
+export async function generateMetadata(): Promise<Metadata> {
+  const { name, description } = await fetchCompany()
+  return {
+    title: {
+      default: name,
+      template: `${name} - %s`
+    },
+    manifest: '/manifest.json',
+    description,
+    openGraph: {
+      type: 'website',
+      url: process.env.NEXTAUTH_URL,
+      title: name,
+      description,
+      images: `${process.env.NEXTAUTH_URL}/img/social-share.webp`
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: name,
+      description,
+      images: `${process.env.NEXTAUTH_URL}/img/social-share.webp`
+    }
+  }
 }
 
 export const viewport: Viewport = {

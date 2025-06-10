@@ -1,7 +1,14 @@
 User-Agent: *
 Allow: /
 Disallow: /account/
+Disallow: /cart
 Disallow: /confirm-your-email
 Disallow: /email-confirmed
+Disallow: /reset-password
 Disallow: /success
 Disallow: /wishlist
+Disallow: /*?search=
+Disallow: /*?price=
+Disallow: /*?sort=
+Disallow: /*?platforms=
+Disallow: /*?categories=

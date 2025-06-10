@@ -6,6 +6,7 @@ export const companyHandler = graphql.query<CompanyQuery>('Company', () => {
     data: {
       company: {
         name: 'Won Games',
+        description: 'Lorem ipsum dolor.',
         email: 'support@wongames.com',
         phone: '16104333002',
         street: 'Maple Street',

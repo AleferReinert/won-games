@@ -4,6 +4,7 @@ import { initializeApollo } from './apollo'
 
 export interface CompanyProps {
   name: string
+  description: string
   email: string
   phone: string
   street: string

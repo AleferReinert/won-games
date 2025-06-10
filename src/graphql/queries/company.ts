@@ -4,6 +4,7 @@ export const COMPANY = gql`
   query Company {
     company {
       name
+      description
       email
       phone
       street
