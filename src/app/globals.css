@@ -17,6 +17,7 @@
   --color-theme-gray-900: #06092b;
   --color-theme-gray-950: #030517;
   --animate-grow-from-center: grow-from-center 0.2s forwards;
+  --aspect-highlight: 3.25 / 1;
 
   @keyframes grow-from-center {
     from {

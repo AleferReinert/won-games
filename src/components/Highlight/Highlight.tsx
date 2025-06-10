@@ -31,7 +31,7 @@ export const Highlight = ({
     <div className='lg:mx-auto lg:px-4 max-w-container'>
       <div
         data-testid='HighlightComponent'
-        className={`relative flex h-[230px] justify-between mb-8 lg:h-[320px] 
+        className={`relative flex justify-between mb-8 aspect-highlight 
 					${alignment === 'right' ? 'flex-row' : 'flex-row-reverse'} 
 					`}
       >
