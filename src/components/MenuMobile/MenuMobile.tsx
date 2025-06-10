@@ -21,6 +21,7 @@ export const MenuMobile = ({ menuMobile, setMenuMobile }: MenuMobileProps) => {
     <div
       aria-label='Menu mobile'
       aria-hidden={!menuMobile}
+      inert={!menuMobile}
       data-testid='MenuMobileComponent'
       className={`transition-opacity ease-in-out duration-300 bg-zinc-50 fixed inset-0 overflow-hidden flex flex-col justify-between z-20 ${menuMobile ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
     >
