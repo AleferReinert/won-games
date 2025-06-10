@@ -11,15 +11,15 @@ export interface PriceProps extends ComponentProps<'div'> {
 const style = tv({
   slots: {
     root: 'flex font-semibold',
-    oldPrice: 'line-through text-theme-gray-500',
-    currentPrice: 'text-zinc-50 bg-theme-secondary rounded-sm'
+    oldPrice: 'line-through text-theme-gray-700',
+    currentPrice: 'text-white bg-theme-secondary rounded-sm'
   },
   variants: {
     size: {
       small: {
         root: 'gap-2',
-        oldPrice: 'text-sm h-[22px] leading-[22px]',
-        currentPrice: 'text-sm h-[22px] leading-[22px] px-2'
+        oldPrice: 'text-base h-[24px] leading-[24px]',
+        currentPrice: 'text-base h-[24px] leading-[24px] px-2'
       },
       medium: {
         root: 'gap-4',
@@ -43,11 +43,11 @@ export const Price = ({ price, promotionalPrice, size = 'small', ...props }: Pri
       <div {...props} data-testid='PriceComponent' className={`${root()} ${props.className || ''}`}>
         {promotionalPrice && (
           <div aria-label='Price' className={oldPrice()}>
-            {formatPrice(price)}
+            <span>{formatPrice(price)}</span>
           </div>
         )}
         <div aria-label={promotionalPrice ? 'Promotional price' : 'Price'} className={currentPrice()}>
-          {formatPrice(promotionalPrice || price)}
+          <span>{formatPrice(promotionalPrice || price)}</span>
         </div>
       </div>
     )

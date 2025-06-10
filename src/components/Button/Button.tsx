@@ -19,7 +19,7 @@ const button = tv({
       true: 'w-full'
     },
     size: {
-      xsmall: 'h-[22px]',
+      xsmall: 'h-[24px]',
       small: 'h-[30px] text-xs',
       medium: 'h-10 text-sm px-8',
       large: 'h-[50px] text-base px-10'

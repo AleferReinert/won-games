@@ -3,7 +3,7 @@ import { expect, within } from '@storybook/test'
 import { Price } from './Price'
 
 const meta: Meta<typeof Price> = {
-  title: 'Components/Atoms/Price',
+  title: 'Components/Price',
   component: Price,
   args: {
     price: 215
@@ -25,13 +25,13 @@ export const Default: Story = {
     const price = canvas.getByLabelText('Price')
 
     await step('Price with background secondary and color white', () => {
-      expect(price).toHaveClass('bg-theme-secondary text-zinc-50')
+      expect(price).toHaveClass('bg-theme-secondary text-white')
     })
 
     await step('Size small', () => {
       expect(price).toHaveStyle({
-        height: '22px',
-        fontSize: '14px'
+        height: '24px',
+        fontSize: '16px'
       })
     })
   }
@@ -47,17 +47,17 @@ export const Promotional: Story = {
 
     await step('Old price with color gray and line-through', () => {
       const oldPrice = canvas.getByLabelText('Price')
-      expect(oldPrice).toHaveClass('text-theme-gray-500 line-through')
+      expect(oldPrice).toHaveClass('text-theme-gray-700 line-through')
     })
 
     await step('Promotional price with background secondary and color white', () => {
-      expect(promotionalPrice).toHaveClass('bg-theme-secondary text-zinc-50')
+      expect(promotionalPrice).toHaveClass('bg-theme-secondary text-white')
     })
 
     await step('Promotional price small', () => {
       expect(promotionalPrice).toHaveStyle({
-        height: '22px',
-        fontSize: '14px'
+        height: '24px',
+        fontSize: '16px'
       })
     })
   }
