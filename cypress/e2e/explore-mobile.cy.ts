@@ -22,7 +22,7 @@ describe('Mobile: Explore page', () => {
     cy.get('@AppliedFilters').findAllByRole('button', { name: 'Remove' }).eq(2).click()
     cy.get('@AppliedFilters').findByText('Linux').should('be.visible')
     cy.get('@AppliedFilters').findByText('Mac').should('be.visible')
-    cy.get('@AppliedFilters').findByText('Windows 7').should('be.not.visible')
+    cy.get('@AppliedFilters').findByText('Windows 7').should('not.exist')
   })
 
   it('Remove one categorie when multiple are selected', () => {
@@ -41,6 +41,6 @@ describe('Mobile: Explore page', () => {
     cy.get('@AppliedFilters').findAllByRole('button', { name: 'Remove' }).eq(2).click()
     cy.get('@AppliedFilters').findByText('Action').should('be.visible')
     cy.get('@AppliedFilters').findByText('Adventure').should('be.visible')
-    cy.get('@AppliedFilters').findByText('Arcade').should('be.not.visible')
+    cy.get('@AppliedFilters').findByText('Arcade').should('not.exist')
   })
 })

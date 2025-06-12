@@ -133,26 +133,23 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
   }
 
   const removeFilterOption = (key: string, value: string) => {
-    setSelectedFilters((s) => {
-      const updatedFilters = { ...s }
-      const filterValues = updatedFilters[key]
-      if (Array.isArray(filterValues)) {
-        const updatedValues = filterValues.filter((item) => item !== value)
-        if (updatedValues.length > 0) {
-          updatedFilters[key] = updatedValues
+    setSelectedFilters((prev) => {
+      const next = { ...prev }
+      const values = next[key]
+
+      if (Array.isArray(values)) {
+        const remaining = values.filter((v) => v !== value)
+        if (remaining.length) {
+          next[key] = remaining
         } else {
-          delete updatedFilters[key]
+          delete next[key]
         }
-      } else if (filterValues === value) {
-        delete updatedFilters[key]
+      } else if (values === value) {
+        delete next[key]
       }
-      return updatedFilters
+      if (!isDesktop) handleFilter(next)
+      return next
     })
-    if (!isDesktop) {
-      setTimeout(() => {
-        handleFilter({ ...selectedFilters, [key]: undefined })
-      }, 0)
-    }
   }
 
   const removeSearchParam = () => {

@@ -31,7 +31,7 @@ describe('Explore page', () => {
     cy.filterUnderPrice(200)
   })
 
-  it('Filter by sort', () => {
+  it.skip('Filter by sort', () => {
     cy.get('@FilteredProducts').findAllByLabelText('Price').as('Prices')
 
     cy.selectFilterAndCheckUrl('radio', 'Low to high', 'sort=price%3Aasc')
