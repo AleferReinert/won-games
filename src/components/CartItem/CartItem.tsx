@@ -38,19 +38,19 @@ export const CartItem = ({
     <li data-testid='CartItemComponent' className='cursor-default list-none border-b border-theme-gray-200'>
       <div className='bg-zinc-50 p-4 md:p-6'>
         <div
-          className={`grid grid-cols-[min-content_auto] grid-rows-[auto_auto] gap-2 xs:gap-4 md:grid-rows-none md:gap-6 ${paymentInfo ? 'md:grid-cols-[min-content_1fr_min-content]' : 'md:grid-cols-[min-content_1fr]'}`}
+          className={`grid grid-cols-[min-content_auto] grid-rows-[auto_auto] gap-4 md:grid-rows-none md:gap-6 ${paymentInfo ? 'md:grid-cols-[min-content_1fr_min-content]' : 'md:grid-cols-[min-content_1fr]'}`}
         >
           <Image
             src={img ? imgSrc : ''}
             alt={img ? name : 'Image not found'}
             width={293}
             height={138}
-            className='aspect-video max-w-[94px]'
+            className='aspect-video max-w-[92px]'
           />
           <div className='flex justify-between gap-4'>
             <div className='overflow-hidden'>
               <div className='leading-6 mb-0.5 -translate-y-1 flex justify-between gap-2 md:justify-start'>
-                <h2 className='text-base overflow-hidden text-ellipsis font-bold'>{name}</h2>
+                <h2 className='text-base overflow-hidden text-ellipsis font-semibold'>{name}</h2>
               </div>
               <Price price={price} />
             </div>
@@ -79,7 +79,7 @@ export const CartItem = ({
           </div>
 
           {paymentInfo && (
-            <div className='text-theme-gray-500 text-sm leading-none flex max-w-fit flex-col gap-2 mt-4 md:justify-self-end col-span-2 md:mt-0 md:col-start-3 md:text-right md:justify-end md:mb-1'>
+            <div className='text-theme-gray-500 text-sm leading-none flex max-w-fit flex-col gap-2 md:justify-self-end col-span-2 md:mt-0 md:col-start-3 md:text-right md:justify-end md:mb-1'>
               {paymentInfo.creditCardNumber ? (
                 <CreditCard
                   img={paymentInfo.creditCardFlag}
