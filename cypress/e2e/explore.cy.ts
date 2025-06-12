@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Products page', () => {
+describe('Explore page', () => {
   beforeEach(() => {
     cy.visit('/explore')
     cy.get('[data-cy="products"]').findAllByTestId('ProductComponent').as('FilteredProducts')
