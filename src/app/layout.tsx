@@ -51,7 +51,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang='pt-br' className={poppins.className}>
       <head />
       <body className='bg-theme-gray-900 overflow-x-hidden font-sans flex flex-col justify-between h-screen'>
-        <NextTopLoader color='#f231a5' height={4} />
+        <NextTopLoader color='#f231a5' height={4} showSpinner={false} />
         <Providers session={session}>{children}</Providers>
       </body>
     </html>
