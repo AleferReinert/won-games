@@ -38,6 +38,7 @@ describe('Home page', () => {
     it('Sign in, add and remove products from wishlist', () => {
       cy.visit('/')
       cy.goToSignInPageAndLogin('johndoe@example.com', '123456')
+      cy.clearWishlist('/')
       cy.addAndRemoveProductsFromWishlist()
     })
   })

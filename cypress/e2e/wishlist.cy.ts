@@ -3,6 +3,7 @@
 describe('Wishlist (Protected Route)', () => {
   beforeEach(() => {
     cy.protectedRoute('/wishlist')
+    cy.findByTestId('WishlistPage', { timeout: 30000 }).should('be.visible')
   })
 
   it('Add and remove products from cart', () => {

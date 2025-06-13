@@ -54,6 +54,18 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
     return createWishlist({ variables: { data: { user: session?.id, products: [productId] } } })
   }
 
+  const clearWishlist = () => {
+    if (!wishlistId) return Promise.resolve()
+    return updateWishlist({
+      variables: {
+        id: wishlistId,
+        data: {
+          products: []
+        }
+      }
+    })
+  }
+
   const removeFromWishlist = (productId: string) => {
     if (!wishlistId) return Promise.resolve()
 
@@ -74,7 +86,8 @@ export const WishlistProvider = ({ children }: WishlistProviderProps) => {
         addToWishlist,
         removeFromWishlist,
         loading: loadingInitial,
-        products: wishlistProducts
+        products: wishlistProducts,
+        clearWishlist
       }}
     >
       {children}

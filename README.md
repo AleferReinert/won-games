@@ -128,6 +128,9 @@ yarn test-storybook
 Execute os testes e2e:
 
 ```bash
+# maildev precisa estar em execução para alguns testes
+npx maildev
+
 # No terminal
 yarn cy:run
 

@@ -14,7 +14,7 @@ describe('Forgot password', () => {
     cy.findByText('Invalid e-mail').should('be.visible')
   })
 
-  it.only('Valid form', () => {
+  it('Valid form', () => {
     cy.get('@EmailInput').type(fakeEmail)
     cy.get('@SendEmailButton').click()
     cy.findByText(`Check your inbox! We've sent you a reset link.`).should('be.visible')

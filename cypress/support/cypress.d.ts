@@ -138,8 +138,14 @@ declare namespace Cypress {
      */
     removeFromWishlistFromShowcase({ quantity: number }): Chainable<void>
 
-    /** Remove all products from wishlist */
-    clearWishlist(): Chainable<void>
+    /** Remove all products from wishlist
+     *
+     * Example:
+     * ```ts
+     * cy.clearWishlist('my-page')
+     * ```
+     */
+    clearWishlist(callbackUrl: string): Chainable<void>
 
     /** 1. Add products to wishlist
      *  2. Remove products from wishlist

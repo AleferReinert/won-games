@@ -8,6 +8,7 @@ export interface WishlistContextProps {
   isInWishlist: (id: string) => boolean
   addToWishlist: (id: string) => Promise<FetchResult<void>>
   removeFromWishlist: (id: string) => Promise<void | FetchResult<void>>
+  clearWishlist: () => Promise<FetchResult<void>> | Promise<void>
   loading: boolean
 }
 
@@ -16,6 +17,7 @@ export const WishlistContextDefaultValues = {
   isInWishlist: () => false,
   addToWishlist: () => Promise.resolve({} as FetchResult<void>),
   removeFromWishlist: () => Promise.resolve({} as FetchResult<void>),
+  clearWishlist: () => Promise.resolve({} as FetchResult<void>),
   loading: true
 }
 

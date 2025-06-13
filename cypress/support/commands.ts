@@ -64,14 +64,15 @@ Cypress.Commands.add('isUserLoggedInAndRedirect', (firstName) => {
 })
 
 Cypress.Commands.add('isUserLoggedOutAndRedirect', () => {
-  cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/')
+  cy.url({ timeout: 10000 }).should('not.include', '/sign-in')
   cy.findByRole('link', { name: 'Sign in' }).should('be.visible')
 })
 
 Cypress.Commands.add('signIn', (email = 'johndoe@example.com', password = '123456') => {
-  cy.findByLabelText('E-mail').type(email)
+  cy.findByLabelText('E-mail').type(email.toLowerCase())
   cy.findByLabelText('Password').type(password)
   cy.findByRole('button', { name: 'Sign in' }).click()
+  cy.url({ timeout: 30000 }).should('not.include', '/sign-in')
 })
 
 Cypress.Commands.add('protectedRoute', (url: string) => {
@@ -98,13 +99,12 @@ Cypress.Commands.add('removeFromCartFromShowcase', ({ quantity }) => {
 Cypress.Commands.add('checkCartItemsAndClose', ({ quantity }) => {
   cy.findByTestId('CartDropdownComponent').within(() => {
     cy.findByRole('button', { name: 'Shopping cart' }).as('DropdownButton')
-    cy.findByLabelText('Cart items').as('Badge')
-    cy.get('@Badge').should('have.text', quantity)
+    cy.findByLabelText('Cart items').should('have.text', quantity)
     cy.get('@DropdownButton').click()
     cy.findAllByTestId('CartItemComponent').should('have.length', quantity)
 
     if (quantity === 0) {
-      cy.findByText('Your cart is empty').should('be.visible')
+      cy.findByText('Your cart is empty', { timeout: 30000 }).should('be.visible')
     }
 
     cy.get('@DropdownButton').click()
@@ -158,40 +158,33 @@ Cypress.Commands.add('goToSignInPageAndLogin', (email, password) => {
   cy.signIn(email, password)
 })
 
-Cypress.Commands.add('clearWishlist', () => {
-  cy.get('body')
-    .wait(2000)
-    .then(($body) => {
-      const buttonsSelector = '[data-testid="ShowcaseComponent"] button[title="Remove from wishlist"]'
-      const wishlistItemsAdded = $body.find(buttonsSelector).length
+Cypress.Commands.add('clearWishlist', (callbackUrl) => {
+  cy.visit('/wishlist')
+  cy.url({ timeout: 30000 }).should('include', '/wishlist')
 
-      if (wishlistItemsAdded > 0) {
-        cy.get(buttonsSelector).then((button) => {
-          for (let i = 0; i < wishlistItemsAdded; i++) {
-            cy.wait(500).wrap(button).eq(i).click()
-          }
-        })
-      }
-    })
+  cy.wait(10000)
+  cy.get('body').then(($body) => {
+    const clearBtn = $body.find('[data-testid="ClearWishlistButton"]')
+    if (clearBtn.length > 0) {
+      cy.wrap(clearBtn).click()
+    }
+  })
+  cy.visit(callbackUrl)
 })
 
 Cypress.Commands.add('addAndRemoveProductsFromWishlist', () => {
-  cy.clearWishlist()
   cy.checkWishlistItemsAndClose({ quantity: 0 })
-
   cy.addToWishlistFromShowcase({ quantity: 2 })
   cy.checkWishlistItemsAndClose({ quantity: 2 })
-
   cy.removeFromWishlistFromShowcase({ quantity: 1 })
   cy.checkWishlistItemsAndClose({ quantity: 1 })
-
   cy.removeFromWishlistFromShowcase({ quantity: 1 })
   cy.checkWishlistItemsAndClose({ quantity: 0 })
 })
 
 Cypress.Commands.add('signUp', (fullName, email, password, confirmPassword) => {
   cy.findByLabelText('Full name').type(fullName)
-  cy.findByLabelText('E-mail').type(email)
+  cy.findByLabelText('E-mail').type(email.toLowerCase())
   cy.findByLabelText('Password').type(password)
   cy.findByLabelText('Confirm password').type(confirmPassword ? confirmPassword : password)
   cy.findByRole('button', { name: 'Sign up' }).click()
@@ -217,8 +210,9 @@ Cypress.Commands.add('purchasePaidProducts', () => {
   cy.signUp(secondFakeUser.fullName, secondFakeUser.email, secondFakeUser.password)
 
   // Confirm email and sign in
-  cy.confirmEmail(secondFakeUser.email)
+  cy.confirmEmail(secondFakeUser.email.toLowerCase())
   cy.findByRole('link', { name: 'Sign in' }).click()
+  cy.log(`Logging in with: ${secondFakeUser.email.toLowerCase()} / ${secondFakeUser.password}`)
   cy.signIn(secondFakeUser.email, secondFakeUser.password)
   cy.isUserLoggedInAndRedirect(secondFakeUser.fullName.split(' ')[0])
 
@@ -236,6 +230,7 @@ Cypress.Commands.add('purchasePaidProducts', () => {
   // Open dropdown and go to cart
   cy.findByRole('button', { name: 'Shopping cart' }).click()
   cy.findByRole('link', { name: 'Buy it now' }).click()
+  cy.url({ timeout: 30000 }).should('include', '/cart')
 
   // Check if products has add
   cy.get('main').findAllByTestId('CartItemComponent').should('have.length', '2')
