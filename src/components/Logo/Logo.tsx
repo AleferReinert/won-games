@@ -24,6 +24,7 @@ export const Logo = ({ variant = 'light', width = 200, company, ...props }: Logo
       style={{ width: width ? `${width}px` : 'auto' }}
     >
       <Image
+        priority
         src={getStrapiMedia(logo.url)}
         alt={name}
         width={logo.width}
