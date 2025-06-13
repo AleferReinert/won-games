@@ -22,7 +22,7 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
 
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { start } = useTopLoader()
+  const { start, done } = useTopLoader()
 
   const query: Record<string, string> = useMemo(() => {
     const obj: Record<string, string> = {}
@@ -109,7 +109,6 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
   }
 
   const handleFilter = (filtersToApply?: Record<string, unknown>) => {
-    start()
     const currentFilters = { ...(filtersToApply ?? selectedFilters) }
 
     const isEmptyValue = (value: unknown): boolean => {
@@ -129,7 +128,7 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
 
     const formattedFilters = currentFilters ? formatFilters(currentFilters) : {}
     const params = new URLSearchParams(formattedFilters)
-    router.push(`/explore?${params.toString()}`)
+    router.replace(`/explore?${params.toString()}`)
   }
 
   const removeFilterOption = (key: string, value: string) => {
@@ -181,6 +180,14 @@ export const FilterProvider = ({ children, filterOptions }: FilterProviderProps)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilters, isDesktop])
+
+  useEffect(() => {
+    start()
+    setTimeout(() => {
+      done()
+    }, 500)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query])
 
   return (
     <FilterContext.Provider

@@ -8,10 +8,9 @@ import { Skeleton } from 'components/Skeleton/Skeleton'
 import { UserDropdown } from 'components/UserDropdown/UserDropdown'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import { useTopLoader } from 'nextjs-toploader'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { MdOutlineSearch } from 'react-icons/md'
+import { MdOutlineClose, MdOutlineSearch } from 'react-icons/md'
 import { RiMenu2Fill } from 'react-icons/ri'
 import { CompanyProps } from 'utils/fetchCompany'
 
@@ -28,8 +27,13 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
   const { status } = useSession()
   const [menuMobile, setMenuMobile] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
-  useEffect(() => setShowSearch(false), [pathname])
-  const { start } = useTopLoader()
+  const [searchValue, setSearchValue] = useState('')
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    setShowSearch(false)
+    setSearchValue('')
+  }, [pathname, searchParams])
 
   function handleShowSearch() {
     if (!showSearch) {
@@ -39,9 +43,13 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
     setShowSearch(!showSearch)
   }
 
+  function handleButtonSearch(e: React.MouseEvent<HTMLButtonElement>) {
+    const hasQuery = searchInputRef.current?.value?.trim()
+    showSearch && hasQuery ? searchSubmit(e) : handleShowSearch()
+  }
+
   function searchSubmit(e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
-    start()
     if (searchInputRef.current?.value) {
       const currentParams = new URLSearchParams(window.location.search)
       currentParams.set('search', searchInputRef.current.value)
@@ -49,6 +57,7 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
     }
     searchInputRef.current?.blur()
     setShowSearch(false)
+    setSearchValue('')
   }
 
   const navLinks = [
@@ -101,19 +110,27 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
                   type='search'
                   placeholder='Search games...'
                   autoFocus
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
                   className={`bg-transparent z-20 border-0 border-b border-zinc-50 h-[33px] focus:outline-none
 								text-zinc-50 transition-all ease-in-out duration-300 text-base placeholder:text-zinc-50 
 								${showSearch ? 'w-full opacity-100' : 'w-0 opacity-0'}`}
                 />
               </form>
-              <button
-                title='Search'
-                aria-label='Search'
-                onClick={showSearch ? (e) => searchSubmit(e) : handleShowSearch}
-                className='cursor-pointer'
-              >
-                <MdOutlineSearch role='img' aria-hidden className='size-6 fill-zinc-50' />
-              </button>
+              {showSearch && !searchValue ? (
+                <button
+                  title='Close search'
+                  aria-label='Close search'
+                  onClick={() => setShowSearch(false)}
+                  className='cursor-pointer'
+                >
+                  <MdOutlineClose role='img' aria-hidden className='size-6 fill-zinc-50' />
+                </button>
+              ) : (
+                <button title='Search' aria-label='Search' onClick={handleButtonSearch} className='cursor-pointer'>
+                  <MdOutlineSearch role='img' aria-hidden className='size-6 fill-zinc-50' />
+                </button>
+              )}
             </div>
 
             {!hideCartDropdown && <CartDropdown />}
