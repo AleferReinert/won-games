@@ -13,6 +13,15 @@ const meta: Meta<typeof CartPage> = {
   args: {
     nextAuthSession: nextAuthSessionMock
   },
+  // decorators: (Story) => (
+  //   <CartLayout>
+  //   <CartContext.Provider value={cartContextMock}>
+  //     <MockedProvider mocks={[recommendedShowcaseResponseMock]}>
+  //       <Story />
+  //     </MockedProvider>
+  //   </CartContext.Provider>
+  //   </CartLayout>
+  // ),
   parameters: {
     layout: 'padded',
     msw: {
