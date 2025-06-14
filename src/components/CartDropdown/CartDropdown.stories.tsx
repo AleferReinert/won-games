@@ -13,7 +13,12 @@ const meta: Meta<typeof CartDropdown> = {
     <div style={{ textAlign: 'right', padding: '2rem', height: '500px' }}>
       <Story />
     </div>
-  )
+  ),
+  parameters: {
+    viewport: {
+      disable: true
+    }
+  }
 }
 
 export default meta
@@ -23,7 +28,7 @@ type Story = StoryObj<typeof CartDropdown>
 export const Empty: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    const badge = canvas.getByLabelText(/cart items/i)
+    const badge = canvas.getAllByLabelText(/cart items/i)[1]
     const emptyComponent = canvas.getByTestId('EmptyComponent')
 
     await step('Badge with 0', () => {
@@ -57,7 +62,7 @@ export const WithProducts: Story = {
     })
 
     await step('Badge with 2', () => {
-      const badge = canvas.getByLabelText(/cart items/i)
+      const badge = canvas.getAllByLabelText(/cart items/i)[0]
       expect(badge).toHaveTextContent('2')
     })
 
@@ -69,6 +74,23 @@ export const WithProducts: Story = {
     await step('Total', () => {
       const total = canvas.getByText('$218.00')
       expect(total).toBeInTheDocument()
+    })
+  }
+}
+
+export const Mobile: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'xsmall',
+      disable: false
+    }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('Has link', () => {
+      const link = canvas.getByRole('link')
+      expect(link).toHaveAttribute('href', '/cart')
     })
   }
 }
