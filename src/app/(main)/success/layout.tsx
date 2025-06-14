@@ -1,3 +1,4 @@
+import { Container } from 'components/Container/Container'
 import { Showcase } from 'components/Showcase/Showcase'
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
@@ -16,7 +17,7 @@ export default async function SuccessLayout({ children }: SuccessLayoutProps) {
 
   return (
     <>
-      {children}
+      <Container>{children}</Container>
       <Showcase {...recommendedShowcase} />
     </>
   )

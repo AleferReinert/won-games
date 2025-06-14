@@ -33,7 +33,7 @@ export const Success: Story = {
 
     await step('Description', () => {
       const description = waitFor(() =>
-        canvas.getByText('Save your payment details by email. Your game is now available for download here.')
+        canvas.getByText('Wait for your payment details by email. Your game is now available for download here.')
       )
       expect(description).toBeVisible()
     })
