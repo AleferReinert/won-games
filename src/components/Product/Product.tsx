@@ -50,13 +50,12 @@ export const Product = ({
           }
         }}
       >
-        <div className='h-[140px] w-full italic'>
+        <div className='w-full italic relative aspect-[292/137]'>
           <Image
             src={cover.url}
             alt={cover.alternativeText}
             priority={imgPriority}
-            width='292'
-            height='137'
+            fill
             onLoad={setLoading ? () => setLoading(false) : undefined}
             className='size-full object-cover bg-theme-gray-200 leading-[140px] text-center'
             sizes='(max-width: 320px) 288px, (max-width: 640px) 292px, (max-width: 768px) 356px, (max-width: 1024px) 308px, (max-width: 1280px) 278px, (max-width: 1536px) 305px, 305px'
