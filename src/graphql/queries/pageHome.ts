@@ -57,7 +57,6 @@ export const PAGE_HOME = gql`
           cover {
             url
             alternativeText
-            formats
           }
         }
       }

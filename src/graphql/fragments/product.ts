@@ -11,7 +11,6 @@ export const PRODUCT = gql`
     cover {
       url
       alternativeText
-      formats
     }
     developers {
       name

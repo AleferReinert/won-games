@@ -18,6 +18,10 @@ module.exports = withPWA({
       },
       {
         protocol: 'https',
+        hostname: 'won-games-api-production-2003.up.railway.app'
+      },
+      {
+        protocol: 'https',
         hostname: 'res.cloudinary.com'
       }
     ]
