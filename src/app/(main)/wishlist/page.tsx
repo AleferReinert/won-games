@@ -34,6 +34,7 @@ export default function WishlistPage() {
                   cover={product.cover}
                   price={product.price}
                   slug={product.slug}
+                  imgSizes='(max-width: 320px) 288px, (max-width: 640px) 292px, (max-width: 768px) 356px, (max-width: 1024px) 315px, (max-width: 1280px) 274px, (max-width: 1536px) 299px, 299px'
                 />
               )
             })

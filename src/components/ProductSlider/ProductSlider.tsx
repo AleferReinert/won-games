@@ -158,6 +158,7 @@ export const ProductSlider = ({ products, arrowColor = 'white', productImgPriori
                   key={item.id}
                   {...item}
                   imgPriority={first4 ? productImgPriority : false}
+                  imgSizes='(max-width: 320px) 261px, (max-width: 640px) 280px, (max-width: 768px) 340px, (max-width: 1024px) 308px, (max-width: 1280px) 278px, (max-width: 1536px) 305px, 305px'
                   setLoading={setLoading}
                 />
               )

@@ -18,6 +18,7 @@ export interface ProductProps extends PriceProps {
   }
   ribbonLabel?: string
   imgPriority?: boolean
+  imgSizes?: string
   setLoading?: Dispatch<SetStateAction<boolean>>
 }
 
@@ -31,6 +32,7 @@ export const Product = ({
   promotionalPrice = null,
   ribbonLabel,
   imgPriority = false,
+  imgSizes = '(max-width: 320px) 288px, (max-width: 640px) 292px, (max-width: 768px) 356px, (max-width: 1024px) 308px, (max-width: 1280px) 278px, (max-width: 1536px) 305px, 305px',
   setLoading
 }: ProductProps) => {
   const isDragging = useRef(false)
@@ -58,7 +60,7 @@ export const Product = ({
             fill
             onLoad={setLoading ? () => setLoading(false) : undefined}
             className='size-full object-cover bg-theme-gray-200 leading-[140px] text-center'
-            sizes='(max-width: 320px) 288px, (max-width: 640px) 292px, (max-width: 768px) 356px, (max-width: 1024px) 308px, (max-width: 1280px) 278px, (max-width: 1536px) 305px, 305px'
+            sizes={imgSizes}
           />
         </div>
       </Link>
