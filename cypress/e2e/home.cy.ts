@@ -4,6 +4,7 @@ describe('Home page', () => {
   describe('Unauthenticated', () => {
     beforeEach(() => {
       cy.visit('/')
+      cy.findByTestId('LoadingComponent', { timeout: 30000 }).should('not.exist')
     })
 
     it('Banner, New Releases, Most Popular, Coming Soon and Free Games', () => {

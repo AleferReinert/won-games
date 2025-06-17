@@ -14,6 +14,7 @@ export const UPDATE_WISHLIST = gql`
         cover {
           url
           alternativeText
+          formats
         }
         name
         developers {

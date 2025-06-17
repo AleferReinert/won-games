@@ -74,7 +74,7 @@ export const productMapper = (products: PageHomeQuery['newProducts'] | undefined
           promotionalPrice: promotional_price,
           ribbonLabel: ribbon_label,
           cover: {
-            url: cover ? getImageUrl(cover.url) : '/img/default/product.webp',
+            url: cover ? getImageUrl(cover.formats.small.url) : '/img/default/product.webp',
             alternativeText: cover.alternativeText || 'Game cover'
           }
         })

@@ -10,6 +10,7 @@ export const WISHLIST = gql`
         cover {
           url
           alternativeText
+					formats
         }
         name
         developers {

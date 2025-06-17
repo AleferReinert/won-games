@@ -99,8 +99,8 @@ Cypress.Commands.add('removeFromCartFromShowcase', ({ quantity }) => {
 Cypress.Commands.add('checkCartItemsAndClose', ({ quantity }) => {
   cy.findByTestId('CartDropdownComponent').within(() => {
     cy.findByRole('button', { name: 'Shopping cart' }).as('DropdownButton')
-    cy.findByLabelText('Cart items').should('have.text', quantity)
     cy.get('@DropdownButton').click()
+    cy.findAllByLabelText('Cart items').eq(0).should('have.text', quantity)
     cy.findAllByTestId('CartItemComponent').should('have.length', quantity)
 
     if (quantity === 0) {

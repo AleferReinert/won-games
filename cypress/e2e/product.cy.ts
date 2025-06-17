@@ -10,7 +10,7 @@ describe('Product page (unauthenticated)', () => {
   it('Cover, title, short description, price, add to cart button, gallery, description, categories, platforms, release date, developer, publisher, rating, coming soon and recommended products', () => {
     cy.findByTestId('cover').find('img').should('be.visible')
 
-    cy.findByLabelText('Cart items').as('CartItemsCount')
+    cy.findAllByLabelText('Cart items').eq(0).as('CartItemsCount')
     cy.findByTestId('ProductHeaderComponent').within(() => {
       cy.findByRole('heading', { level: 1 }).should('be.visible')
       cy.findByRole('paragraph').should('be.visible')
@@ -53,7 +53,7 @@ describe('Product page (unauthenticated)', () => {
   })
 
   it('Add to cart/remove from cart', () => {
-    cy.findByLabelText('Cart items').as('CartItemsBadge')
+    cy.findAllByLabelText('Cart items').eq(0).as('CartItemsBadge')
     cy.findByTestId('ProductHeaderComponent').findByRole('button', { name: 'Add to cart' }).as('AddToCartButton')
     cy.findByRole('button', { name: 'Shopping cart' }).as('ShoppingCartButton')
     cy.findByTestId('CartItemsComponent').as('CartItemsComponent')
@@ -93,6 +93,7 @@ describe('Product page (unauthenticated)', () => {
 
   it('Sign in, add and remove products from wishlist', () => {
     cy.goToSignInPageAndLogin('johndoe@example.com', '123456')
+    cy.url({ timeout: 30000 }).should('include', '/game/')
     cy.addAndRemoveProductsFromWishlist()
   })
 })

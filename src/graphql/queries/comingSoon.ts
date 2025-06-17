@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 import { HIGHLIGHT } from 'graphql/fragments/highlight'
-import { PRODUCT_ENTITY } from 'graphql/fragments/product'
+import { PRODUCT } from 'graphql/fragments/product'
 
 export const COMING_SOON = gql`
-  ${PRODUCT_ENTITY}
+  ${PRODUCT}
   ${HIGHLIGHT}
 
   query ComingSoon($currentDate: Date!) {
@@ -12,7 +12,7 @@ export const COMING_SOON = gql`
       sort: "release_date:asc"
       pagination: { start: 0, limit: 8 }
     ) {
-      ...productEntity
+      ...product
     }
     showcase: home {
       comingSoonProducts {

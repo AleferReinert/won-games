@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client'
 import { BANNER } from 'graphql/fragments/banner'
 import { HIGHLIGHT } from 'graphql/fragments/highlight'
-import { PRODUCT_ENTITY } from 'graphql/fragments/product'
+import { PRODUCT } from 'graphql/fragments/product'
 
 export const PAGE_HOME = gql`
   ${BANNER}
-  ${PRODUCT_ENTITY}
+  ${PRODUCT}
   ${HIGHLIGHT}
   query PageHome($currentDate: Date!, $pastDate: Date!, $limit: Int!) {
     banners {
@@ -16,21 +16,21 @@ export const PAGE_HOME = gql`
       sort: "release_date:desc"
       pagination: { start: 0, limit: $limit }
     ) {
-      ...productEntity
+      ...product
     }
     comingSoonProducts: products(
       filters: { release_date: { gt: $currentDate } }
       sort: "release_date:asc"
       pagination: { start: 0, limit: $limit }
     ) {
-      ...productEntity
+      ...product
     }
     freeProducts: products(
       filters: { price: { eq: 0 } }
       sort: "createdAt:desc"
       pagination: { start: 0, limit: $limit }
     ) {
-      ...productEntity
+      ...product
     }
     showcases: home {
       newProducts {
@@ -46,7 +46,6 @@ export const PAGE_HOME = gql`
         }
         products {
           documentId
-
           name
           slug
           price
@@ -58,6 +57,7 @@ export const PAGE_HOME = gql`
           cover {
             url
             alternativeText
+            formats
           }
         }
       }
