@@ -51,7 +51,7 @@ export default function ExplorePage() {
     <>
       <div
         data-cy='products'
-        className='grid gap-6 auto-rows-max md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(3,_1fr)]'
+        className='grid gap-6 auto-rows-max sm:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(3,_1fr)]'
       >
         {hasProducts &&
           products.map((product, index) => {

@@ -59,6 +59,7 @@ export const Product = ({
             height='137'
             onLoad={setLoading ? () => setLoading(false) : undefined}
             className='size-full object-cover bg-theme-gray-200 leading-[140px] text-center'
+            sizes='(max-width: 320px) 288px, (max-width: 640px) 292px, (max-width: 768px) 356px, (max-width: 1024px) 308px, (max-width: 1280px) 278px, (max-width: 1536px) 305px, 305px'
           />
         </div>
       </Link>
