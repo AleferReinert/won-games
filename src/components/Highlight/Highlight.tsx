@@ -41,8 +41,8 @@ export const Highlight = ({
           alt={background.alternativeText}
           aria-hidden={background.alternativeText ? false : true}
           className='absolute object-cover inset-0 h-full'
-          width={1268}
-          height={390}
+          fill
+          sizes='(max-width: 768px) 100vw, (max-width: 1024px) 992px, (max-width: 1280px) 1168px, (max-width: 1536px) 1268px, 1268px'
         />
         <div className='z-10 self-end flex relative'>
           {floatImg && (

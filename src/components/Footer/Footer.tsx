@@ -16,7 +16,9 @@ export const Footer = ({ company }: FooterProps) => {
   return (
     <footer className='mt-10 pb-4 pt-14 bg-zinc-50 md:[clip-path:polygon(0_0,_100%_14%,_100%_100%,_0_100%)]'>
       <Container>
-        <Logo width={107} variant='dark' company={company} />
+        <div>
+          <Logo width={107} height={32} variant='dark' company={company} />
+        </div>
         <div className='grid gap-8 mt-8 sm:grid-cols-[repeat(2,_1fr)] wrap-anywhere md:grid-cols-[repeat(4,_1fr)] md:wrap-normal'>
           <FooterColumn title='Links'>
             <nav id='resources'>

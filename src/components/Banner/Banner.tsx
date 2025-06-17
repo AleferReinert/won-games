@@ -44,6 +44,7 @@ export const Banner = ({
           src={img.url}
           alt={img.alternativeText || 'Decorative image'}
           onLoad={setLoading ? () => setLoading(false) : undefined}
+          sizes='(max-width: 1024px) 100vw, (max-width: 1280px) 1168px, (max-width: 1536px) 1268px, 1268px'
           fill
         />
       </div>

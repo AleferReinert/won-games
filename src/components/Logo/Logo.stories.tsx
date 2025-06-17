@@ -7,7 +7,9 @@ const meta: Meta<typeof Logo> = {
   title: 'Components/Atoms/Logo',
   component: Logo,
   args: {
-    company: companyMock
+    company: companyMock,
+    width: 200,
+    height: 60
   },
   parameters: {
     layout: 'padded'
@@ -29,9 +31,9 @@ export const Light: Story = {
       expect(logo.getAttribute('src')).toContain('light')
     })
 
-    await step('Width 200', () => {
+    await step('Required width and height', () => {
       const wrapper = canvas.getByTestId('LogoComponent')
-      expect(wrapper).toHaveStyle({ width: '200px' })
+      expect(wrapper).toHaveStyle({ width: '200px', height: '60px' })
     })
   }
 }
@@ -65,20 +67,6 @@ export const Icon: Story = {
     await step('Icon in src', () => {
       const logo = canvas.getByRole('img', { name: 'Won Games' })
       expect(logo.getAttribute('src')).toContain('icon')
-    })
-  }
-}
-
-export const Width: Story = {
-  args: {
-    width: 100
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement)
-
-    await step('Icon in src', () => {
-      const logo = canvas.getByRole('img', { name: 'Won Games' })
-      expect(logo).toHaveStyle({ width: '100px' })
     })
   }
 }

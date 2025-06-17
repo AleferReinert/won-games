@@ -82,11 +82,11 @@ export const Header = ({ hideCartDropdown = false, hideUserDropdown = false, com
             className={`absolute left-1/2 -translate-x-1/2 transition ease-in-out md:hidden 
 					${showSearch ? 'opacity-0 scale-0' : 'opacity-100 scale-100	'}`}
           >
-            <Logo width={58} variant='icon' company={company} />
+            <Logo width={58} height={37} variant='icon' company={company} />
           </div>
 
-          <div className='hidden md:block'>
-            <Logo width={110} company={company} />
+          <div className='hidden md:flex'>
+            <Logo width={110} height={33} company={company} />
           </div>
 
           <nav className='ml-6 flex max-md:hidden'>

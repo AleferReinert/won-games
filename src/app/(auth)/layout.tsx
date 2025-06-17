@@ -29,7 +29,9 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
           sizes={'(max-width: 1024px) 512px, (max-width: 1280px) 640px, (max-width: 1366px) 683px, 768px'}
         />
         <div className='relative z-10 grid justify-between h-full px-14 pt-14 pb-6'>
-          <Logo width={126} company={company} />
+          <div>
+            <Logo width={126} height={38} company={company} />
+          </div>
           <div>
             <Heading size='huge' className='leading-[1.1] mb-4'>
               All your favorites games in one place
@@ -53,7 +55,9 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
           />
         </Link>
         <div className='max-w-[380px] w-full mx-auto'>
-          <Logo width={200} variant='dark' company={company} className='mx-auto block' />
+          <div className='text-center'>
+            <Logo width={200} height={60} variant='dark' company={company} className='mx-auto block' />
+          </div>
           {children}
         </div>
       </main>
