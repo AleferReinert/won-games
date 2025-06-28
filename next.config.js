@@ -18,7 +18,7 @@ module.exports = withPWA({
       },
       {
         protocol: 'https',
-        hostname: 'won-games-api-production-2003.up.railway.app'
+        hostname: process.env.NEXT_PUBLIC_API_URL
       },
       {
         protocol: 'https',
